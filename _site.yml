@@ -1,0 +1,33 @@
+navbar:
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Computer Setup"
+      href: lessons/00-computer-setup.html
+    - text: "NEON Data"
+      href: NEON-data-intro.html
+    - text: "Modules"
+      menu:
+        - text: "Intro to R"
+          href: lessons/01-A-R-intro.html
+        - text: "R markdown"
+          href: lessons/01-B-Rmarkdown-intro.html
+        - text: "R workshop"
+          href: lessons/01-C-R-workshop.html
+        - text: "tidyr"
+          href: lessons/02-A-tidyr.html
+        - text: "Intro to git"
+          href: lessons/02-B-git-intro.html
+    - text: "Exercises"
+      href: exercises-guide.html
+    - text: "RStudio Workbook"
+      href: download-student-RStudio-project.html
+output_dir: "."
+exclude: ["CONTRIBUT*.md","index.md","README.md","*.db"]
+include: ["*.Rmd","LICENSE.md"]
+output:
+  html_document:
+    highlight: pygments
+    toc: true
+    toc_float:
+      collapsed: false
