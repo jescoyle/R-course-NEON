@@ -1,3 +1,7 @@
+name: "R-course-NEON"
+output_dir: "_site"
+exclude: ["README.md"]
+include: []
 navbar:
   left:
     - text: "Home"
@@ -22,12 +26,12 @@ navbar:
       href: exercises-guide.html
     - text: "RStudio Workbook"
       href: download-student-RStudio-project.html
-output_dir: "."
-exclude: ["CONTRIBUT*.md","index.md","README.md","*.db"]
-include: ["*.Rmd","LICENSE.md"]
 output:
   html_document:
     highlight: pygments
     toc: true
     toc_float:
       collapsed: false
+    include:
+      after_body: footer.html
+    css: styles.css
