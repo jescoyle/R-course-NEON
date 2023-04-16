@@ -1,7 +1,4 @@
----
-title: "Introduction to Computing in R with NEON - Semester Course"
-layout: page
----
+# Introduction to Computing in R with NEON - Semester Course
 
 This is a set of teaching materials adapted from [Data Carpentry lessons](http://datacarpentry.org/lessons) that teaches biologists basic data science and computing skills using data from the [National Ecological Observation Network](http://neonscience.org). Exercises are adapted from [Data Carpentry for Biologists](https://datacarpentry.org/semester-biology/). It is currently being developed for use in an upper division Biology course at Saint Mary's College of California beginning in August 2023. 
 
