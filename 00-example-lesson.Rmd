@@ -1,5 +1,5 @@
 ---
-layout: topic
+layout: page
 title: "Lesson Title"
 author: [Instructor and Student names]
 output: html_document

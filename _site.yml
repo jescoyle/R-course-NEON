@@ -1,5 +1,5 @@
 name: "R-course-NEON"
-output_dir: "_site"
+output_dir: "docs"
 exclude: ["README.md"]
 include: []
 navbar:
@@ -7,21 +7,21 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Computer Setup"
-      href: lessons/00-computer-setup.html
+      href: 00-computer-setup.html
     - text: "NEON Data"
       href: NEON-data-intro.html
     - text: "Modules"
       menu:
         - text: "Intro to R"
-          href: lessons/01-A-R-intro.html
+          href: 01-A-R-intro.html
         - text: "R markdown"
-          href: lessons/01-B-Rmarkdown-intro.html
+          href: 01-B-Rmarkdown-intro.html
         - text: "R workshop"
-          href: lessons/01-C-R-workshop.html
+          href: 01-C-R-workshop.html
         - text: "tidyr"
-          href: lessons/02-A-tidyr.html
+          href: 02-A-tidyr.html
         - text: "Intro to git"
-          href: lessons/02-B-git-intro.html
+          href: 02-B-git-intro.html
     - text: "Exercises"
       href: exercises-guide.html
     - text: "RStudio Workbook"

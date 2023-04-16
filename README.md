@@ -8,11 +8,11 @@ This is a set of teaching materials adapted from [Data Carpentry lessons](http:/
 
 ## Where is everything
 
-Teaching materials are stored in `exercises/` and `lessons/`. Derived datasets from NEON are stored in `data/`. Images used on pages are stored in `images/`.
+Teaching materials are stored in `exercises/` and `lessons/`. Derived datasets from NEON are stored in `data/`. Files used in the course website are in `docs/` Images used on pages are stored in `images/`.
 
 ## Re-using this repository
 
-This repository was built as an RStudio project and the course website is designed to be hosted on the main branch on GitHub Pages. **These materials are not currently ready for reuse.** This README will be updated when they become available and a LISCENCE file will be added at that time.
+This repository was built as an RStudio project and the course website is designed to be hosted from the `docs/` folder on the main branch on GitHub Pages. **These materials are not currently ready for reuse.** This README will be updated when they become available and a LISCENCE file will be added at that time.
 
 
 ## Acknowledgements

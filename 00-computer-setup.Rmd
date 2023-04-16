@@ -1,5 +1,5 @@
 ---
-layout: topic
+layout: page
 title: "Setting up your computer"
 output: html_document
 ---

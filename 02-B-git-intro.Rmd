@@ -1,5 +1,5 @@
 ---
-layout: topic
+layout: page
 title: "Introduction to git and GitHub"
 author: Jes Coyle
 output: html_document

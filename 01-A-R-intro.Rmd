@@ -1,5 +1,5 @@
 ---
-layout: topic
+layout: page
 title: "Introduction to R and RStudio"
 author: Jes & Tad
 output: html_document
