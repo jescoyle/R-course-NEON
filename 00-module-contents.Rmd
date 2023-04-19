@@ -1,0 +1,132 @@
+---
+layout: page
+title: "Module Contents"
+output: html_document
+bibliography: references.bib
+---
+
+
+This page will give an overview of modules within this tutorial and learning objectives accomplished in each. It will correspond to the computing skills checklist used in the course.
+
+## Core Modules
+
+#### Module 1. Navigating your computer
+
+- Files and directories
+  - home directory
+  - working directory
+  - use the terminal in R studio to:
+      - navigate
+      - create and delete files
+      - rename files
+  - Manual download of data from NEON and save to a class folder
+- Programs
+  - programs are files written in executable code
+  - we will learn to write small "programs" called "scripts"
+    - you can write programs to automate tasks
+    - you can write programs to make your scientific analyses reproducible
+
+
+
+#### Module 2. Why R and RStudio?
+
+*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 1, 2, 3
+
+- R is a programming language
+- RStudio is an IDE
+  - various additional functionality of RStudio
+- R can:
+  - do computations
+  - manipulate data
+  - access files on your computer or the internet
+  - make graphs
+  - create documents
+  - create apps
+  - almost anything... though it is not always the best tool for every job.
+- Why R?
+  - R has a wide user community and will always be free
+    - user contributed packages:
+      -NEONUtilities
+  - R and RStudio make it easy for anyone to reproduce your scientific analyses
+  - It is (relatively) easy to get help with (almost) anything
+
+#### Module 3. Data organization in spreadsheets
+
+*from:* [@dc-spreadsheet-lesson](https://datacarpentry.org/spreadsheet-ecology-lesson/)
+
+- Best practices in data table formatting
+  - tidy tables
+  - missing data
+  - dates
+  - text-based and avoids special characters
+  - raw data vs. derived data and README files
+- Spreadsheet program quality control features
+- Data export from spreadsheet programs
+- Text-based data tables: delimited formats
+  - typical delimiter characters
+  - white space characters: space, tab, new line
+- Metadata
+
+
+
+#### Module 4. R: Data structures and operations
+
+*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 4, 5, 6, 11
+
+- Basic data types in R
+  - vectors vs. lists
+  - dataframes vs. matrices
+  - data types: numeric, character, factor, logical
+- Reading data from a file
+- Manipulating data frames
+- Subsetting vectors and data frames
+
+
+#### Module 5. R: Controlling program flow
+
+*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episode 7
+
+
+#### Module 6. R: Simple graphs with ggplot2
+
+*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episode 8
+
+
+#### Module 7. R: Vectorization and functions
+
+*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 9, 10
+
+
+- NEON Utilities functions & reading a function help file
+
+#### Module 8. R: Complex graphs with ggplot2
+
+*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episode 8
+
+
+#### Module 9. R: Data manipulation in the tidyverse
+
+
+*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 12, 13, 14
+
+
+## Additional Modules
+
+#### Module A. Producing reports with Rmd and knitr
+
+*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episode 15
+
+
+#### Module B. R: Intro to geospatial raster data
+
+*from:* [@dc-geospatial-concepts-lesson](https://datacarpentry.org/organization-geospatial/) and [@dc-geospatial-lesson](https://datacarpentry.org/r-raster-vector-geospatial/index.html) episodes 1, 2, 3, 4
+
+
+#### Module C. Data cleaning with OpenRefine
+
+Complete the episodes in: (Data Cleaning with OpenRefine for Ecologists)[http://datacarpentry.org/OpenRefine-ecology-lesson/]
+
+
+## References
+
+

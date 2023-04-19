@@ -9,10 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Jes" />
 
 
-<title>Introduction to R</title>
+<title>Module Contents</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -49,6 +48,28 @@
 
 
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -368,30 +389,222 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Introduction to R</h1>
-<h4 class="author">Jes</h4>
+<h1 class="title toc-ignore">Module Contents</h1>
 
 </div>
 
 
-<p><strong>Suggested Reading:</strong></p>
-<blockquote>
-<p>Chapter 2 in Korner-Nievergelt et al. 2015. <em>Bayesian data
-analysis in ecology using linear models with R, BUGS, and Stan.</em>
-Elsevier. <a
-href="http://www.sciencedirect.com/science/book/9780128013700">link</a></p>
-</blockquote>
-<p>Today’s class is an optional session for students who are new to R or
-who want a more formal introduction to R’s terminology and data
-structures.</p>
-<div id="lesson-materials" class="section level3">
-<h3>Lesson Materials</h3>
-<p>We will be working through the Data Carpentry ecology lessons <a
-href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html">Introduction
-to R</a> and <a
-href="http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">Starting
-with data</a>. Rather than reproduce the lesson materials here, you can
-find them at the links listed above.</p>
+<p>This page will give an overview of modules within this tutorial and
+learning objectives accomplished in each. It will correspond to the
+computing skills checklist used in the course.</p>
+<div id="core-modules" class="section level2">
+<h2>Core Modules</h2>
+<div id="module-1.-navigating-your-computer" class="section level4">
+<h4>Module 1. Navigating your computer</h4>
+<ul>
+<li>Files and directories
+<ul>
+<li>home directory</li>
+<li>working directory</li>
+<li>use the terminal in R studio to:
+<ul>
+<li>navigate</li>
+<li>create and delete files</li>
+<li>rename files</li>
+</ul></li>
+<li>Manual download of data from NEON and save to a class folder</li>
+</ul></li>
+<li>Programs
+<ul>
+<li>programs are files written in executable code</li>
+<li>we will learn to write small “programs” called “scripts”
+<ul>
+<li>you can write programs to automate tasks</li>
+<li>you can write programs to make your scientific analyses
+reproducible</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<div id="module-2.-why-r-and-rstudio" class="section level4">
+<h4>Module 2. Why R and RStudio?</h4>
+<p><em>from:</em> <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episodes 1, 2, 3</p>
+<ul>
+<li>R is a programming language</li>
+<li>RStudio is an IDE
+<ul>
+<li>various additional functionality of RStudio</li>
+</ul></li>
+<li>R can:
+<ul>
+<li>do computations</li>
+<li>manipulate data</li>
+<li>access files on your computer or the internet</li>
+<li>make graphs</li>
+<li>create documents</li>
+<li>create apps</li>
+<li>almost anything… though it is not always the best tool for every
+job.</li>
+</ul></li>
+<li>Why R?
+<ul>
+<li>R has a wide user community and will always be free
+<ul>
+<li>user contributed packages: -NEONUtilities</li>
+</ul></li>
+<li>R and RStudio make it easy for anyone to reproduce your scientific
+analyses</li>
+<li>It is (relatively) easy to get help with (almost) anything</li>
+</ul></li>
+</ul>
+</div>
+<div id="module-3.-data-organization-in-spreadsheets"
+class="section level4">
+<h4>Module 3. Data organization in spreadsheets</h4>
+<p><em>from:</em> <a
+href="https://datacarpentry.org/spreadsheet-ecology-lesson/"><span
+class="citation">Teal et al. (2019)</span></a></p>
+<ul>
+<li>Best practices in data table formatting
+<ul>
+<li>tidy tables</li>
+<li>missing data</li>
+<li>dates</li>
+<li>text-based and avoids special characters</li>
+<li>raw data vs. derived data and README files</li>
+</ul></li>
+<li>Spreadsheet program quality control features</li>
+<li>Data export from spreadsheet programs</li>
+<li>Text-based data tables: delimited formats
+<ul>
+<li>typical delimiter characters</li>
+<li>white space characters: space, tab, new line</li>
+</ul></li>
+<li>Metadata</li>
+</ul>
+</div>
+<div id="module-4.-r-data-structures-and-operations"
+class="section level4">
+<h4>Module 4. R: Data structures and operations</h4>
+<p><em>from:</em> <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episodes 4, 5, 6,
+11</p>
+<ul>
+<li>Basic data types in R
+<ul>
+<li>vectors vs. lists</li>
+<li>dataframes vs. matrices</li>
+<li>data types: numeric, character, factor, logical</li>
+</ul></li>
+<li>Reading data from a file</li>
+<li>Manipulating data frames</li>
+<li>Subsetting vectors and data frames</li>
+</ul>
+</div>
+<div id="module-5.-r-controlling-program-flow" class="section level4">
+<h4>Module 5. R: Controlling program flow</h4>
+<p><em>from:</em> <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episode 7</p>
+</div>
+<div id="module-6.-r-simple-graphs-with-ggplot2" class="section level4">
+<h4>Module 6. R: Simple graphs with ggplot2</h4>
+<p><em>from:</em> <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episode 8</p>
+</div>
+<div id="module-7.-r-vectorization-and-functions"
+class="section level4">
+<h4>Module 7. R: Vectorization and functions</h4>
+<p><em>from:</em> <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episodes 9, 10</p>
+<ul>
+<li>NEON Utilities functions &amp; reading a function help file</li>
+</ul>
+</div>
+<div id="module-8.-r-complex-graphs-with-ggplot2"
+class="section level4">
+<h4>Module 8. R: Complex graphs with ggplot2</h4>
+<p><em>from:</em> <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episode 8</p>
+</div>
+<div id="module-9.-r-data-manipulation-in-the-tidyverse"
+class="section level4">
+<h4>Module 9. R: Data manipulation in the tidyverse</h4>
+<p><em>from:</em> <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episodes 12, 13,
+14</p>
+</div>
+</div>
+<div id="additional-modules" class="section level2">
+<h2>Additional Modules</h2>
+<div id="module-a.-producing-reports-with-rmd-and-knitr"
+class="section level4">
+<h4>Module A. Producing reports with Rmd and knitr</h4>
+<p><em>from:</em> <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episode 15</p>
+</div>
+<div id="module-b.-r-intro-to-geospatial-raster-data"
+class="section level4">
+<h4>Module B. R: Intro to geospatial raster data</h4>
+<p><em>from:</em> <a
+href="https://datacarpentry.org/organization-geospatial/"><span
+class="citation">O’Brien et al. (2019)</span></a> and <a
+href="https://datacarpentry.org/r-raster-vector-geospatial/index.html"><span
+class="citation">Stachelek et al. (2023)</span></a> episodes 1, 2, 3,
+4</p>
+</div>
+<div id="module-c.-data-cleaning-with-openrefine"
+class="section level4">
+<h4>Module C. Data cleaning with OpenRefine</h4>
+<p>Complete the episodes in: (Data Cleaning with OpenRefine for
+Ecologists)[<a
+href="http://datacarpentry.org/OpenRefine-ecology-lesson/"
+class="uri">http://datacarpentry.org/OpenRefine-ecology-lesson/</a>]</p>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-dc-geospatial-concepts-lesson" class="csl-entry">
+O’Brien, Lauren, Joseph Stachelek, Tracy Teal, Dev Paudel, Paul Miller,
+Anne Fouilloux, Chris Prener, et al. 2019. <span>“<span
+class="nocase">datacarpentry/organization-geospatial: Data Carpentry:
+Introduction to Geospatial Concepts, June 2019</span>.”</span> Zenodo.
+<a
+href="https://doi.org/10.5281/zenodo.3258814">https://doi.org/10.5281/zenodo.3258814</a>.
+</div>
+<div id="ref-dc-geospatial-lesson" class="csl-entry">
+Stachelek, Jemma, Erin Alison Becker, Drake Asberry, Matt
+Strimas-Mackey, Annajiat Alim Rasel, Angela Li, Ryan Avery, et al. 2023.
+<em><span class="nocase">datacarpentry/r-raster-vector-geospatial: Data
+Carpentry: Introduction to Geospatial Raster and Vector Data with R,
+February 2023</span></em> (version v2023.02.06). Zenodo. <a
+href="https://doi.org/10.5281/zenodo.7612769">https://doi.org/10.5281/zenodo.7612769</a>.
+</div>
+<div id="ref-dc-spreadsheet-lesson" class="csl-entry">
+Teal, Tracy, Erin Alison Becker, apawlik, Peter Hoyt, Francois
+Michonneau, Christie Bahlai, Ethan White, et al. 2019. <em><span
+class="nocase">datacarpentry/spreadsheet-ecology-lesson: Data Carpentry:
+Data Organization in Spreadsheets for Ecologists, June 2019</span></em>
+(version v2019.06.2). Zenodo. <a
+href="https://doi.org/10.5281/zenodo.3269869">https://doi.org/10.5281/zenodo.3269869</a>.
+</div>
+<div id="ref-swc-reproducible-lesson" class="csl-entry">
+Zimmerman, Naupaka, Greg Wilson, Raniere Silva, Scott Ritchie, François
+Michonneau, Jeffrey Oliver, Harriet Dashnow, et al. 2019. <span>“<span
+class="nocase">swcarpentry/r-novice-gapminder: Software Carpentry: R for
+Reproducible Scientific Analysis, June 2019</span>.”</span> Zenodo. <a
+href="https://doi.org/10.5281/zenodo.3265164">https://doi.org/10.5281/zenodo.3265164</a>.
+</div>
+</div>
 </div>
 
 <hr>

@@ -5,22 +5,28 @@ institution: Saint Mary's College of California
 output: html_document
 ---
 
-# Overview
+## Overview
 This is a self-paced tutorial adapted from [Data Carpentry](http://datacarpentry.org/) and [Software Carpentry](http://software-carpentry.org/) that teaches biologists basic data science and computing skills using  [National Ecological Observation Network](http://neonscience.org) data. It is being developed for use in an upper division Biology course at Saint Mary's College of California beginning in August 2023. **These materials are not currently ready for use.**
 
-# Organization
+## Organization
+
+### How to use this tutorial
 
 
-# Get Started
-
-## Computer set-up
-
-## Student workbook
+### Where is everything?
 
 
+## Get Started
 
-# Open Educational Resource
+### Computer set-up
 
 
-## Acknowledgements
+### Student workbook
+
+
+
+## Open Educational Resource
+
+
+### Acknowledgements
 Thank you to [Data Carpentry](http://datacarpentry.org/) and [Software Carpentry](http://software-carpentry.org/) for providing open and remixable materials for scientists learning programming and data science. This course draws heavily from the [Data Carpentry for Biologists](https://datacarpentry.org/semester-biology/) and [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/).

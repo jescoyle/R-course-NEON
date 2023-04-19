@@ -1,0 +1,7 @@
+---
+layout: page
+title: "Exercises"
+output: html_document
+---
+
+This page provides a map of which exercises meet each learning objective (or item on the computing skills checklist). It also contains a link to download a zipped folder of all exercises with each exercise as a separate R script.

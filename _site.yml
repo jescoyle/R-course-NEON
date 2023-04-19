@@ -7,11 +7,13 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Computer Setup"
-      href: 00-computer-setup.html
+      href: computer-setup.html
     - text: "NEON Data"
       href: NEON-data-intro.html
     - text: "Modules"
       menu:
+        - text: "Overview"
+          href: 00-module-contents.html
         - text: "Intro to R"
           href: 01-A-R-intro.html
         - text: "R markdown"
