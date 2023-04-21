@@ -10,20 +10,18 @@ navbar:
       href: computer-setup.html
     - text: "NEON Data"
       href: NEON-data-intro.html
-    - text: "Modules"
+    - text: "Chapters"
       menu:
         - text: "Overview"
           href: 00-module-contents.html
-        - text: "Intro to R"
-          href: 01-A-R-intro.html
-        - text: "R markdown"
-          href: 01-B-Rmarkdown-intro.html
-        - text: "R workshop"
-          href: 01-C-R-workshop.html
-        - text: "tidyr"
-          href: 02-A-tidyr.html
-        - text: "Intro to git"
-          href: 02-B-git-intro.html
+        - text: "1."
+          href: 01-.html
+        - text: "2."
+          href: 02-.html
+        - text: "3."
+          href: 03-.html
+        - text: "7. Control Flow"
+          href: 07-control-flow.html
     - text: "Exercises"
       href: exercises-guide.html
     - text: "RStudio Workbook"
@@ -37,3 +35,4 @@ output:
     include:
       after_body: footer.html
     css: styles.css
+bibliography: references.bib

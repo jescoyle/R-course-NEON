@@ -427,7 +427,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
+    Chapters
      
     <span class="caret"></span>
   </a>
@@ -436,19 +436,16 @@ div.tocify {
       <a href="00-module-contents.html">Overview</a>
     </li>
     <li>
-      <a href="01-A-R-intro.html">Intro to R</a>
+      <a href="01-.html">1.</a>
     </li>
     <li>
-      <a href="01-B-Rmarkdown-intro.html">R markdown</a>
+      <a href="02-.html">2.</a>
     </li>
     <li>
-      <a href="01-C-R-workshop.html">R workshop</a>
+      <a href="03-.html">3.</a>
     </li>
     <li>
-      <a href="02-A-tidyr.html">tidyr</a>
-    </li>
-    <li>
-      <a href="02-B-git-intro.html">Intro to git</a>
+      <a href="07-control-flow.html">7. Control Flow</a>
     </li>
   </ul>
 </li>
@@ -512,27 +509,39 @@ can be helpful to indicate which functions come from which packages.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is an R code block that will execute any code inside and show the results.</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">&quot;United States&quot;</span>)</span></code></pre></div>
-<pre><code>##          country year       pop continent lifeExp gdpPercap
-## 1  United States 1952 157553000  Americas  68.440  13990.48
-## 2  United States 1957 171984000  Americas  69.490  14847.13
-## 3  United States 1962 186538000  Americas  70.210  16173.15
-## 4  United States 1967 198712000  Americas  70.760  19530.37
-## 5  United States 1972 209896000  Americas  71.340  21806.04
-## 6  United States 1977 220239000  Americas  73.380  24072.63
-## 7  United States 1982 232187835  Americas  74.650  25009.56
-## 8  United States 1987 242803533  Americas  75.020  29884.35
-## 9  United States 1992 256894189  Americas  76.090  32003.93
-## 10 United States 1997 272911760  Americas  76.810  35767.43
-## 11 United States 2002 287675526  Americas  77.310  39097.10
-## 12 United States 2007 301139947  Americas  78.242  42951.65</code></pre>
-<p><img src="images/usa_pop_fig-1.png" width="672" /></p>
+<pre><code>         country year       pop continent lifeExp gdpPercap
+1  United States 1952 157553000  Americas  68.440  13990.48
+2  United States 1957 171984000  Americas  69.490  14847.13
+3  United States 1962 186538000  Americas  70.210  16173.15
+4  United States 1967 198712000  Americas  70.760  19530.37
+5  United States 1972 209896000  Americas  71.340  21806.04
+6  United States 1977 220239000  Americas  73.380  24072.63
+7  United States 1982 232187835  Americas  74.650  25009.56
+8  United States 1987 242803533  Americas  75.020  29884.35
+9  United States 1992 256894189  Americas  76.090  32003.93
+10 United States 1997 272911760  Americas  76.810  35767.43
+11 United States 2002 287675526  Americas  77.310  39097.10
+12 United States 2007 301139947  Americas  78.242  42951.65</code></pre>
+<p><img src="images/rmd-00-usa_pop_fig-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p><strong>Figure 1. Population growth in the United States 1952 -
 2007.</strong></p>
 <div id="section-1" class="section level3">
 <h3>Section 1</h3>
 <blockquote>
-<p><strong><em>TRY THIS:</em></strong> Include in-line exercises using
-callouts.</p>
+<p><strong><em>TRY THIS:</em></strong> What will this code do?</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<blockquote>
+<div class="accordion">
+<h3 class="toc-ignore">
+Answer
+</h3>
+<div style="background: #fff;">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a> <span class="do">## Answer to be evaluated goes here.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+</blockquote>
 </blockquote>
 </div>
 <div id="section-2" class="section level3">
