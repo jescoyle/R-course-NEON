@@ -1,0 +1,13 @@
+chp	fileName	nameShort	nameLong
+1	chp-computer-navigation	Computer navigation	Navigating your computer
+2	chp-intro-to-R	Intro to R	Intro to R and RStudio
+3	chp-spreadsheets	Spreadsheets	Data organization in spreadsheets
+4	chp-data-structures	Data structures	Data structures and operations
+5	chp-functions	Functions	Vectorization and functions
+6	chp-ggplot2-part1	Intro to ggplot2	Simple graphs with ggplot2
+7	chp-program-flow	Program flow	Controlling program flow
+8	chp-ggplot2-part2	More ggplot2	Complex graphs with ggplot2
+9	chp-tidyverse-basics	Tidy data	Data manipulation in the tidyverse
+A	chp-rmarkdown	Rmarkdown	Producing reports with Rmd and knitr
+B	chp-geospatial-raster	Raster data	Intro to geospatial raster data in R
+C	chp-openrefine	OpenRefine	Data cleaning with OpenRefine

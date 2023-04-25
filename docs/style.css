@@ -1,13 +1,24 @@
 body {
-    font-size: 15px;
+    font-size: 16px;
+    font-family: Helvetica, sans-serif;
 }
 
 p {
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 pre {
     font-size: 15px;
+}
+
+ul {
+    font-size: 1em;
+    font-family: Helvetica, sans-serif;
+}
+
+ol {
+    font-size: 1em;
+    font-family: Helvetica, sans-serif;
 }
 
 blockquote  {
@@ -60,4 +71,8 @@ blockquote p,ul,ol {
 
 .search input[type="submit"] {
     display: none;
+}
+
+a {
+  color: #4070A0;
 }

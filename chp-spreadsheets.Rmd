@@ -13,7 +13,7 @@ bibliography: references.bib
 source("setup.R")
 
 # get chapter number based on name
-chp_num <- get_chpNum("chp-computer-navigation", type = "fileName")
+chp_num <- get_chpNum("chp-spreadsheets", type = "fileName")
 chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
 
 # knitr options
@@ -31,9 +31,26 @@ set.seed(10)
 
 ## Overview 
 
+*from:* [@dc-spreadsheet-lesson](https://datacarpentry.org/spreadsheet-ecology-lesson/)
+
 ### What we will learn
 
 Brief description of the contents of this lesson. 
+
+
+- Best practices in data table formatting
+  - tidy tables
+  - missing data
+  - dates
+  - text-based and avoids special characters
+  - raw data vs. derived data and README files
+- Spreadsheet program quality control features
+- Data export from spreadsheet programs
+- Text-based data tables: delimited formats
+  - typical delimiter characters
+  - white space characters: space, tab, new line
+- Metadata
+
 
 In this lesson 
 `r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`

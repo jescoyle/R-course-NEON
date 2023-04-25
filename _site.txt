@@ -1,0 +1,32 @@
+name: "R-course-NEON"
+output_dir: "docs"
+exclude: ["README.md"]
+include: []
+navbar:
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Computer Setup"
+      href: computer-setup.html
+    - text: "NEON Data"
+      href: NEON-data-intro.html
+    - text: "Chapters"
+      menu:
+        - text: Chapter overview
+          href: 00-module-contents.html
+        chapters_menu
+    - text: "Exercises"
+      href: exercises-guide.html
+    - text: "RStudio Workbook"
+      href: download-student-RStudio-project.html
+output:
+  html_document:
+    theme: flatly
+    highlight: default
+    toc: true
+    toc_float:
+      collapsed: false
+    include:
+      after_body: footer.html
+    css: styles.css
+bibliography: references.bib

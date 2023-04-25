@@ -9,15 +9,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Adapted from XX by XX" />
 
 
-<title>Lesson Title</title>
+<title>00-lesson-template.knit</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -30,10 +29,10 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -44,115 +43,23 @@
   ul.task-list{list-style: none;}
     </style>
 
-
-
-<style type="text/css">
-  code {
-    white-space: pre;
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
   }
-  .sourceCode {
-    overflow: visible;
-  }
-</style>
-<style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
-</style>
-<script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
-(function() {
-  var sheets = document.styleSheets;
-  for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
-    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    var j = 0;
-    while (j < rules.length) {
-      var rule = rules[j];
-      // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
-        j++;
-        continue;
-      }
-      var style = rule.style.cssText;
-      // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') {
-        j++;
-        continue;
-      }
-      // replace div.sourceCode by a pre.sourceCode rule
-      sheets[i].deleteRule(j);
-      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
-    }
-  }
-})();
 </script>
 
 
 
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
 
 
 
@@ -311,76 +218,10 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-
-
-
 <style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
+.code-folding-btn { margin-bottom: 4px; }
 </style>
+
 
 
 
@@ -390,16 +231,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -433,19 +264,47 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="00-module-contents.html">Overview</a>
+      <a href="00-module-contents.html">Chapter overview</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Core lessons</li>
+    <li>
+      <a href="chp-computer-navigation.html">1. Computer navigation</a>
     </li>
     <li>
-      <a href="01-.html">1.</a>
+      <a href="chp-intro-to-R.html">2. Intro to R</a>
     </li>
     <li>
-      <a href="02-.html">2.</a>
+      <a href="chp-spreadsheets.html">3. Spreadsheets</a>
     </li>
     <li>
-      <a href="03-.html">3.</a>
+      <a href="chp-data-structures.html">4. Data structures</a>
     </li>
     <li>
-      <a href="07-control-flow.html">7. Control Flow</a>
+      <a href="chp-functions.html">5. Functions</a>
+    </li>
+    <li>
+      <a href="chp-ggplot2-part1.html">6. Intro to ggplot2</a>
+    </li>
+    <li>
+      <a href="chp-program-flow.html">7. Program flow</a>
+    </li>
+    <li>
+      <a href="chp-ggplot2-part2.html">8. More ggplot2</a>
+    </li>
+    <li>
+      <a href="chp-tidyverse.html">9. Tidy data</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supplemental lessons</li>
+    <li>
+      <a href="chp-rmarkdown.html">A. Rmarkdown</a>
+    </li>
+    <li>
+      <a href="chp-geospatial-raster.html">B. Raster data</a>
+    </li>
+    <li>
+      <a href="chp-openrefine.html">C. OpenRefine</a>
     </li>
   </ul>
 </li>
@@ -465,23 +324,34 @@ div.tocify {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
 
 
-<h1 class="title toc-ignore">Lesson Title</h1>
-<h4 class="author">Adapted from XX by XX</h4>
+
 
 </div>
 
 
+<div id="chapter-1.-navigating-your-computer"
+class="section level1 tabset">
+<h1 class="tabset">Chapter 1. Navigating your computer</h1>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <div id="what-we-will-learn" class="section level3">
 <h3>What we will learn</h3>
-<p>Brief description of the contents of this lesson including
-objectives:</p>
+<p>Brief description of the contents of this lesson.</p>
+<p>In this lesson learners will:</p>
 <ul>
-<li>Objective 1</li>
-<li>Objective 2</li>
+<li>describe the structure of the filesystem on a computer</li>
+<li>use a command line interface to navigate the file system</li>
+<li>describe the relationship between R and RStudio (an IDE)</li>
+<li>set up an RStudio project</li>
 </ul>
 </div>
 <div id="motivator" class="section level3">
@@ -493,22 +363,22 @@ this lesson.</p>
 <h3>Get set up</h3>
 <p>Describe any data sets or packages that learners need to download or
 install before proceeding.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in a data file from the data folder included with the student workbook</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/gapminder_data.csv&quot;</span>)</span></code></pre></div>
+<pre class="r"><code># Read in a data file from the data folder included with the student workbook
+dat &lt;- read.csv(&quot;data/gapminder_data.csv&quot;)</code></pre>
 <p>Make a code block that loads any packages needed for the analysis. It
 can be helpful to indicate which functions come from which packages.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load dplyr: filter</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load ggplot2: ggplot</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<pre class="r"><code># Load dplyr: filter
+library(dplyr)
+
+# Load ggplot2: ggplot
+library(ggplot2)</code></pre>
 </div>
 </div>
 <div id="lesson" class="section level2">
 <h2>Lesson</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is an R code block that will execute any code inside and show the results.</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> <span class="st">&quot;United States&quot;</span>)</span></code></pre></div>
+<pre class="r"><code># This is an R code block that will execute any code inside and show the results.
+dat %&gt;%
+  filter(country == &quot;United States&quot;)</code></pre>
 <pre><code>         country year       pop continent lifeExp gdpPercap
 1  United States 1952 157553000  Americas  68.440  13990.48
 2  United States 1957 171984000  Americas  69.490  14847.13
@@ -522,25 +392,20 @@ can be helpful to indicate which functions come from which packages.</p>
 10 United States 1997 272911760  Americas  76.810  35767.43
 11 United States 2002 287675526  Americas  77.310  39097.10
 12 United States 2007 301139947  Americas  78.242  42951.65</code></pre>
-<p><img src="images/rmd-00-usa_pop_fig-1.png" width="816" style="display: block; margin: auto;" /></p>
-<p><strong>Figure 1. Population growth in the United States 1952 -
-2007.</strong></p>
+<div class="figure" style="text-align: center">
+<img src="images/rmd-01-usa_pop_fig-1.png" alt="Fig. 1.1. Population growth in the United States 1952 - 2007." width="816" />
+<p class="caption">
+Fig. 1.1. Population growth in the United States 1952 - 2007.
+</p>
+</div>
 <div id="section-1" class="section level3">
 <h3>Section 1</h3>
 <blockquote>
-<p><strong><em>TRY THIS:</em></strong> What will this code do?</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
+<p><strong><em>CHALLENGE:</em></strong> What will this code do?</p>
+<pre class="r"><code>1 + 1</code></pre>
 <blockquote>
-<div class="accordion">
-<h3 class="toc-ignore">
-Answer
-</h3>
-<div style="background: #fff;">
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a> <span class="do">## Answer to be evaluated goes here.</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code></pre></div>
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
+<pre class="r fold-hide"><code>1 + 1
+[1] 2</code></pre>
 </blockquote>
 </blockquote>
 </div>
@@ -550,21 +415,34 @@ Answer
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
+<p>After completing these exercises, learners will be able to use a Unix
+terminal to:</p>
+<ol style="list-style-type: decimal">
+<li>navigate between directories</li>
+<li>view files in a directory</li>
+<li>make, delete, rename and move files</li>
+</ol>
 <p>Number all exercises using the module number. Include starter code in
 the /exercises folder if appropriate.</p>
-<p>0.1 Exercise 1 for module 0.</p>
-<p>0.2 Exercise 2 for module 0.</p>
+<p>1.1</p>
+<p>1.2</p>
 </div>
-<div id="further-reading" class="section level2">
-<h2>Further Reading</h2>
+<div id="sources-and-resources" class="section level2">
+<h2>Sources and Resources</h2>
+<p>This lesson was adapted from XX by Jes Coyle.</p>
+<div id="additional-resources" class="section level3">
+<h3>Additional Resources</h3>
+</div>
+<div id="cited-references" class="section level3">
+<h3>Cited References</h3>
+</div>
+</div>
 </div>
 
 <hr>
 <p>Introduction to Computing in R with NEON</p>
 
 
-</div>
-</div>
 
 </div>
 
@@ -596,36 +474,12 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-
 <script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

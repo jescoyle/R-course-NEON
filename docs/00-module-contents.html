@@ -16,7 +16,7 @@
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -33,6 +33,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -43,13 +45,23 @@
   ul.task-list{list-style: none;}
     </style>
 
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
 
 
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="style.css" type="text/css" />
 
 
 
@@ -324,25 +336,53 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Modules
+    Chapters
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="00-module-contents.html">Overview</a>
+      <a href="00-module-contents.html">Chapter overview</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Core lessons</li>
+    <li>
+      <a href="chp-computer-navigation.html">1. Computer navigation</a>
     </li>
     <li>
-      <a href="01-.html">Episode 1</a>
+      <a href="chp-intro-to-R.html">2. Intro to R</a>
     </li>
     <li>
-      <a href="02-.html">Episode 2</a>
+      <a href="chp-spreadsheets.html">3. Spreadsheets</a>
     </li>
     <li>
-      <a href="03-.html">Episode 3</a>
+      <a href="chp-data-structures.html">4. Data structures</a>
     </li>
     <li>
-      <a href="07-control-flow.html">7. Control Flow</a>
+      <a href="chp-functions.html">5. Functions</a>
+    </li>
+    <li>
+      <a href="chp-ggplot2-part1.html">6. Intro to ggplot2</a>
+    </li>
+    <li>
+      <a href="chp-program-flow.html">7. Program flow</a>
+    </li>
+    <li>
+      <a href="chp-ggplot2-part2.html">8. More ggplot2</a>
+    </li>
+    <li>
+      <a href="chp-tidyverse.html">9. Tidy data</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Supplemental lessons</li>
+    <li>
+      <a href="chp-rmarkdown.html">A. Rmarkdown</a>
+    </li>
+    <li>
+      <a href="chp-geospatial-raster.html">B. Raster data</a>
+    </li>
+    <li>
+      <a href="chp-openrefine.html">C. OpenRefine</a>
     </li>
   </ul>
 </li>
@@ -372,104 +412,47 @@ div.tocify {
 <p>This page will give an overview of episodes within this tutorial and
 learning objectives accomplished in each. It will correspond to the
 computing skills checklist used in the course.</p>
-<div id="core-episodes" class="section level2">
-<h2>Core Episodes</h2>
-<div id="episode-1.-navigating-your-computer" class="section level4">
-<h4>Episode 1. Navigating your computer</h4>
-<ul>
-<li>Files and directories
-<ul>
-<li>home directory</li>
-<li>working directory</li>
-<li>use the terminal in R studio to:
-<ul>
-<li>navigate</li>
-<li>create and delete files</li>
-<li>rename files</li>
-</ul></li>
-<li>Manual download of data from NEON and save to a class folder</li>
-</ul></li>
-<li>Programs
-<ul>
-<li>programs are files written in executable code</li>
-<li>we will learn to write small “programs” called “scripts”
-<ul>
-<li>you can write programs to automate tasks</li>
-<li>you can write programs to make your scientific analyses
-reproducible</li>
-</ul></li>
-</ul></li>
-<li>Get R and RStudio set up on your computer with the student workbook
-<ul>
-<li>describe the different windows in RStudio: today just working files
-and terminal</li>
-</ul></li>
-</ul>
+<div id="core-chapters" class="section level2">
+<h2>Core Chapters</h2>
+<div id="chapter-1.-navigating-your-computer" class="section level4">
+<h4><a href="chp-computer-navigation.html">Chapter 1. Navigating your
+computer</a></h4>
 <p><strong>Learning Objectives</strong></p>
-<p>In this lesson we will:</p>
+<p>In this lesson learners will:</p>
 <ul>
-<li>describe the structure of a computer’s file system</li>
+<li>describe the structure of the filesystem on a computer</li>
 <li>use a command line interface to navigate the file system</li>
 <li>describe the relationship between R and RStudio (an IDE)</li>
 <li>set up an RStudio project</li>
 </ul>
 <p><strong>Computational Skills</strong></p>
-<p>In this lesson students will learn to use a Unix terminal to:</p>
+<p>After completing this lesson, learners will be able to use a Unix
+terminal to:</p>
 <ol style="list-style-type: decimal">
 <li>navigate between directories</li>
 <li>view files in a directory</li>
 <li>make, delete, rename and move files</li>
 </ol>
 </div>
-<div id="episode-2.-intro-to-r-and-rstudio" class="section level4">
-<h4>Episode 2. Intro to R and RStudio</h4>
-<p><em>from:</em> <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">@swc-reproducible-lesson</span></a> episodes 1, 2,
-3</p>
-<ul>
-<li>R is a programming language</li>
-<li>RStudio is an IDE
-<ul>
-<li>various additional functionality of RStudio</li>
-</ul></li>
-<li>R can:
-<ul>
-<li>do computations</li>
-<li>manipulate data</li>
-<li>access files on your computer or the internet</li>
-<li>make graphs</li>
-<li>create documents</li>
-<li>create apps</li>
-<li>almost anything… though it is not always the best tool for every
-job.</li>
-</ul></li>
-<li>Why R?
-<ul>
-<li>R has a wide user community and will always be free
-<ul>
-<li>user contributed packages: -NEONUtilities</li>
-</ul></li>
-<li>R and RStudio make it easy for anyone to reproduce your scientific
-analyses</li>
-<li>It is (relatively) easy to get help with (almost) anything</li>
-</ul></li>
-</ul>
+<div id="chapter-2.-intro-to-r-and-rstudio" class="section level4">
+<h4><a href="chp-intro-to-R.html">Chapter 2. Intro to R and
+RStudio</a></h4>
 <p><strong>Learning Objectives</strong></p>
-<p>In this lesson we will:</p>
+<p>In this lesson learners will:</p>
 <ul>
 <li>discover why so many scientists use R</li>
 <li>describe the contents of the windows in an RStudio session</li>
+<li>install and load packages in R</li>
+<li>write and save a code script in a project folder</li>
+<li>read and view tabular data from a file</li>
 <li>use the console for mathematical calculations</li>
 <li>state the rules for assigning variables</li>
 <li>work with vectors</li>
-<li>write and save a code script in a project folder</li>
-<li>read and view tabular data from a file</li>
 <li>learn how to get help and troubleshoot error messages</li>
-<li>install and load packages in R</li>
 </ul>
 <p><strong>Computational Skills</strong></p>
-<p>In this lesson students will learn to use R and RStudio to:</p>
+<p>After completing this lesson, learners will be able to use R and
+RStudio to:</p>
 <ol style="list-style-type: decimal">
 <li>execute simple mathematical calculations</li>
 <li>assign and manipulate variables</li>
@@ -481,32 +464,12 @@ analyses</li>
 <li>access and understand a function’s documentation page</li>
 </ol>
 </div>
-<div id="episode-3.-data-organization-in-spreadsheets"
+<div id="chapter-3.-data-organization-in-spreadsheets"
 class="section level4">
-<h4>Episode 3. Data organization in spreadsheets</h4>
-<p><em>from:</em> <a
-href="https://datacarpentry.org/spreadsheet-ecology-lesson/"><span
-class="citation">@dc-spreadsheet-lesson</span></a></p>
-<ul>
-<li>Best practices in data table formatting
-<ul>
-<li>tidy tables</li>
-<li>missing data</li>
-<li>dates</li>
-<li>text-based and avoids special characters</li>
-<li>raw data vs. derived data and README files</li>
-</ul></li>
-<li>Spreadsheet program quality control features</li>
-<li>Data export from spreadsheet programs</li>
-<li>Text-based data tables: delimited formats
-<ul>
-<li>typical delimiter characters</li>
-<li>white space characters: space, tab, new line</li>
-</ul></li>
-<li>Metadata</li>
-</ul>
+<h4><a href="chp-spreadsheets.html">Chapter 3. Data organization in
+spreadsheets</a></h4>
 <p><strong>Learning Objectives</strong></p>
-<p>In this lesson we will:</p>
+<p>In this lesson learners will:</p>
 <ul>
 <li>describe best practices in working with data tables</li>
 <li>understand the structure of a text-based data table file</li>
@@ -515,7 +478,12 @@ class="citation">@dc-spreadsheet-lesson</span></a></p>
 clean data</li>
 </ul>
 <p><strong>Computational Skills</strong></p>
-<p>In this lesson students will learn to:</p>
+<dl>
+<dt>After completing this lesson, learners will be able to</dt>
+<dd>
+
+</dd>
+</dl>
 <ol style="list-style-type: decimal">
 <li>follow best practices in formatting data tables</li>
 <li>document steps of a data analysis using metadata and a README
@@ -524,90 +492,80 @@ file</li>
 software</li>
 </ol>
 </div>
-<div id="episode-4.-r-data-structures-and-operations"
+<div id="chapter-4.-data-structures-and-operations"
 class="section level4">
-<h4>Episode 4. R: Data structures and operations</h4>
-<p><em>from:</em> <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">@swc-reproducible-lesson</span></a> episodes 4, 5, 6,
-11</p>
-<ul>
-<li>Basic data types in R
-<ul>
-<li>vectors vs. lists</li>
-<li>multidimensional arrays</li>
-<li>dataframes vs. matrices</li>
-<li>data types: numeric, character, factor, logical</li>
-</ul></li>
-<li>Manipulating data frames</li>
-<li>Subsetting vectors and data frames</li>
-</ul>
+<h4><a href="chp-data-structures.html">Chapter 4. Data structures and
+operations</a></h4>
 <p><strong>Learning Objectives</strong></p>
-<p>In this lesson we will:</p>
+<p>In this lesson learners will:</p>
 <ul>
 <li>describe the main data structures and types in R</li>
 <li>manipulate and extract values from data frames using base R</li>
 </ul>
 <p><strong>Computational Skills</strong></p>
-<p>In this R lesson students will learn to:</p>
+<dl>
+<dt>After completing this lesson, learners will be able to</dt>
+<dd>
+
+</dd>
+</dl>
 <ol style="list-style-type: decimal">
-<li>differentiate between vectors, arrays, lists and data frames</li>
+<li>differentiate between vectors, arrays, lists and data frames in
+R</li>
 <li>differentiate between numeric, character, factor and logical data
-types</li>
-<li>view the structure and class of an object</li>
-<li>subset data frames and vectors</li>
+types in R</li>
+<li>view the structure and class of an object in R</li>
+<li>subset data frames and vectors in R</li>
 <li>write logical test expressions using
 <code>==</code>,<code>!=</code>, <code>&gt;</code>, <code>&lt;</code>,
 and <code>%in%</code></li>
 </ol>
 </div>
-<div id="episode-5.-r-vectorization-and-functions"
-class="section level4">
-<h4>Episode 5. R: Vectorization and functions</h4>
-<p><em>from:</em> <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">@swc-reproducible-lesson</span></a> episodes 9, 10</p>
-<ul>
-<li>NEON Utilities functions &amp; reading a function help file</li>
-</ul>
+<div id="chapter-5.-vectorization-and-functions" class="section level4">
+<h4><a href="chp-functions.html">Chapter 5. Vectorization and
+functions</a></h4>
 <p><strong>Learning Objectives</strong></p>
-<p>In this lesson we will:</p>
+<p>In this lesson learners will:</p>
 <ul>
-<li>describe what vectorized functions are and how to use them</li>
-<li>explain how functions work and define and our own functions</li>
+<li>describe what vectorized functions are and how to use them in R</li>
+<li>explain how functions work and define and our own functions in
+R</li>
 <li>explain why we should divide programs into small single-purpose
 functions</li>
 </ul>
 <p><strong>Computational Skills</strong></p>
-<p>In this lesson students will learn to use R to:</p>
+<dl>
+<dt>After completing this lesson, learners will be able to</dt>
+<dd>
+
+</dd>
+</dl>
 <ol style="list-style-type: decimal">
-<li>define and use a function with multiple arguments</li>
-<li>define default values for function arguments</li>
-<li>write checks on argument conditions within a function</li>
+<li>define and use a function with multiple arguments in R</li>
+<li>define default values for function arguments in R</li>
+<li>write checks on argument conditions within a function in R</li>
 <li>differentiate between missing values (<code>NA</code>) and empty
-values (<code>NULL</code>)</li>
-<li>source code from a script</li>
+values (<code>NULL</code>) in R</li>
+<li>use R to source code from a script</li>
 </ol>
 </div>
-<div id="episode-6.-r-simple-graphs-with-ggplot2"
-class="section level4">
-<h4>Episode 6. R: Simple graphs with ggplot2</h4>
-<p><em>from:</em> <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">@swc-reproducible-lesson</span></a> episode 8</p>
+<div id="chapter-6.-simple-graphs-with-ggplot2" class="section level4">
+<h4><a href="chp-ggplot2-part1.html">Chapter 6. Simple graphs with
+ggplot2</a></h4>
 <p><strong>Learning Objectives</strong></p>
-<p>In this lesson we will:</p>
+<p>In this lesson learners will:</p>
 <ul>
 <li>use ggplot2 to generate single-panel graphics with one data layer
 and one statistic layer</li>
-<li>manipulate the aesthetics of a plot using different colors, shapes,
-and lines</li>
+<li>manipulate the aesthetics of a ggplot using different colors,
+shapes, and lines</li>
 <li>use different geometries to change the way data is displayed in a
-plot</li>
+ggplot</li>
+<li>export graphs in a specific format and size</li>
 </ul>
 <p><strong>Computational Skills</strong></p>
-<p>In this lesson students will learn to use the ggplot2 packaged in R
-to:</p>
+<p>After completing this lesson, learners will be able to use the
+ggplot2 package in R to:</p>
 <ol style="list-style-type: decimal">
 <li>create a scatter plot with a linear regression line</li>
 <li>create a line graph</li>
@@ -615,52 +573,52 @@ to:</p>
 <li>create a stacked bar chart</li>
 <li>map aesthetics to data values</li>
 <li>write axis labels with mathematical notation</li>
+<li>export graphs to a vector-format image with specific dimensions</li>
 </ol>
 </div>
-<div id="episode-7.-r-controlling-program-flow" class="section level4">
-<h4>Episode 7. R: Controlling program flow</h4>
-<p><em>from:</em> <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">@swc-reproducible-lesson</span></a> episode 7</p>
+<div id="chapter-7.-controlling-program-flow" class="section level4">
+<h4><a href="chp-program-flow.html">Chapter 7. Controlling program
+flow</a></h4>
 <p><strong>Learning Objectives</strong></p>
-<p>In this lesson we will:</p>
+<p>In this lesson learners will:</p>
 <ul>
-<li>use conditional statements to make data-dependent decisions</li>
-<li>use loops to repeat things</li>
-<li>write expressions containing multiple logical statements</li>
+<li>use conditional statements to make data-dependent decisions in
+R</li>
+<li>use loops to repeat things in R</li>
+<li>write expressions containing multiple logical statements in R</li>
 </ul>
 <p><strong>Computational Skills</strong></p>
-<p>In this lesson students will learn to use R to:</p>
+<p>After completing this lesson, learners will be able to use R to:</p>
 <ol style="list-style-type: decimal">
-<li>executes if-else statements</li>
-<li>repeat steps using for and while loops</li>
+<li>execute if-else statements</li>
+<li>repeat steps using <code>for</code> and <code>while</code>
+loops</li>
 <li>evaluate expressions using <code>&amp;</code> (‘and’) and
 <code>|</code> (‘or’)</li>
 </ol>
 </div>
-<div id="episode-8.-r-complex-graphs-with-ggplot2"
-class="section level4">
-<h4>Episode 8. R: Complex graphs with ggplot2</h4>
-<p><em>from:</em> <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">@swc-reproducible-lesson</span></a> episode 8</p>
+<div id="chapter-8.-complex-graphs-with-ggplot2" class="section level4">
+<h4><a href="chp-ggplot2-part2.html">Chapter 8. Complex graphs with
+ggplot2</a></h4>
 <p><strong>Learning Objectives</strong></p>
-<p>In this lesson we will:</p>
+<p>In this lesson learners will:</p>
 <ul>
-<li>use ggplot2 to create multi-panel graphics with multiple data
-layers</li>
-<li>learn how position scales control the way axes are displayed</li>
-<li>learn how themes control the way plots are displayed</li>
-<li>use inclusive color palettes that are visible to people with
+<li>create multi-panel graphics with multiple data layers using
+ggplot2</li>
+<li>describe how position scales control the way axes are displayed in
+ggplot2</li>
+<li>describe how themes control the way plots are displayed in
+ggplot2</li>
+<li>select inclusive color palettes that are visible to people with
 impaired color vision</li>
-<li>change the default labels in a legend</li>
-<li>add reference lines to a plot</li>
+<li>change the default labels in a legend in ggplot2</li>
+<li>add reference lines to a plot in ggplot2</li>
 </ul>
 <p><strong>Computational Skills</strong></p>
-<p>In this lesson students will learn to use the ggplot2 package in R
-to:</p>
+<p>After completing this lesson, learners will be able to use the
+ggplot2 package in R to:</p>
 <ol style="list-style-type: decimal">
-<li>use facets to display data in separate panels of a graph</li>
+<li>display data in separate panels of a graph using facets</li>
 <li>add multiple data layers to a plot and change the order in which
 they are layered</li>
 <li>change the scale, limits and breaks on an axis</li>
@@ -670,63 +628,117 @@ they are layered</li>
 <li>add horizontal and vertical reference lines to a plot</li>
 </ol>
 </div>
-<div id="episode-9.-r-data-manipulation-in-the-tidyverse"
+<div id="chapter-9.-data-manipulation-in-the-tidyverse"
 class="section level4">
-<h4>Episode 9. R: Data manipulation in the tidyverse</h4>
-<p><em>from:</em> <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">@swc-reproducible-lesson</span></a> episodes 13 and
-14</p>
+<h4><a href="chp-tidyverse-basics.html">Chapter 9. Data manipulation in
+the tidyverse</a></h4>
 <p><strong>Learning Objectives</strong></p>
-<p>In this lesson we will:</p>
+<p>In this lesson learners will:</p>
 <ul>
-<li>differentiate between “longer” and “wider” data and explore when to
-use each format</li>
+<li>differentiate between longer and wider data formats and explore when
+to use each</li>
 <li>use functions in the dplyr and tidyr R packages to combine, subset,
 summarize and change the layout of data frames</li>
-<li>write multistep data manipulations by composing functions together
+<li>write multi-step data manipulations by composing functions together
 with pipes</li>
 </ul>
 <p><strong>Computational Skills</strong></p>
-<p>In this lesson students will learn to use R to:</p>
+<dl>
+<dt>After completing this lesson, learners will be able to</dt>
+<dd>
+
+</dd>
+</dl>
 <ol style="list-style-type: decimal">
-<li><code>join</code> two tables using a key</li>
-<li><code>select</code> columns from a table using matching
+<li>use R to <code>join</code> two tables using a key</li>
+<li>use R to <code>select</code> columns from a table using matching
 criteria</li>
-<li><code>filter</code> rows from a table</li>
-<li>create new columns using <code>mutate</code></li>
-<li>use <code>group_by</code> with <code>summarize</code> to calculate
-summary statistics across factors</li>
-<li>use <code>pivot</code> functions from the tidyr package to change
-the format of a table from long to wide or wide to long</li>
-<li>use pipes (<code>%&gt;%</code>) to compose functions</li>
+<li>use R to <code>filter</code> rows from a table</li>
+<li>use R to create new columns with <code>mutate</code></li>
+<li>use R to calculate summary statistics across factors with
+<code>group_by</code> and <code>summarize</code></li>
+<li>use R to change the format of a table from long to wide or wide to
+long with <code>pivot</code> functions from the tidyr package</li>
+<li>compose functions with pipes (<code>%&gt;%</code>)</li>
 </ol>
 </div>
 </div>
-<div id="additional-episodes" class="section level2">
-<h2>Additional Episodes</h2>
-<div id="episode-a.-producing-reports-with-rmd-and-knitr"
+<div id="supplemental-chapters" class="section level2">
+<h2>Supplemental Chapters</h2>
+<div id="chapter-a.-producing-reports-with-rmd-and-knitr"
 class="section level4">
-<h4>Episode A. Producing reports with Rmd and knitr</h4>
-<p><em>from:</em> <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">@swc-reproducible-lesson</span></a> episode 15</p>
+<h4><a href="chp-rmarkdown.html">Chapter A. Producing reports with Rmd
+and knitr</a></h4>
+<p><strong>Learning Objectives</strong></p>
+<dl>
+<dt>In this lesson</dt>
+<dd>
+
+</dd>
+</dl>
+<ul>
+<li></li>
+</ul>
+<p><strong>Computational Skills</strong></p>
+<dl>
+<dt>After completing this lesson, learners will be able to</dt>
+<dd>
+
+</dd>
+</dl>
+<ol style="list-style-type: decimal">
+<li></li>
+</ol>
 </div>
-<div id="episode-b.-r-intro-to-geospatial-raster-data"
+<div id="chapter-b.-intro-to-geospatial-raster-data-in-r"
 class="section level4">
-<h4>Episode B. R: Intro to geospatial raster data</h4>
-<p><em>from:</em> <a
-href="https://datacarpentry.org/semester-biology/"><span
-class="citation">@dc-semester-biology</span></a> Spatial Data 1
-lesson</p>
+<h4><a href="chp-geospatial-raster.html">Chapter B. Intro to geospatial
+raster data in R</a></h4>
+<p><strong>Learning Objectives</strong></p>
+<dl>
+<dt>In this lesson</dt>
+<dd>
+
+</dd>
+</dl>
+<ul>
+<li></li>
+</ul>
+<p><strong>Computational Skills</strong></p>
+<dl>
+<dt>After completing this lesson, learners will be able to</dt>
+<dd>
+
+</dd>
+</dl>
+<ol style="list-style-type: decimal">
+<li></li>
+</ol>
 </div>
-<div id="episode-c.-data-cleaning-with-openrefine"
+<div id="chapter-c.-data-cleaning-with-openrefine"
 class="section level4">
-<h4>Episode C. Data cleaning with OpenRefine</h4>
-<p>Complete the episodes in: (Data Cleaning with OpenRefine for
-Ecologists)[<a
-href="http://datacarpentry.org/OpenRefine-ecology-lesson/"
-class="uri">http://datacarpentry.org/OpenRefine-ecology-lesson/</a>]</p>
+<h4><a href="chp-openrefine.html">Chapter C. Data cleaning with
+OpenRefine</a></h4>
+<p><strong>Learning Objectives</strong></p>
+<dl>
+<dt>In this lesson</dt>
+<dd>
+
+</dd>
+</dl>
+<ul>
+<li></li>
+</ul>
+<p><strong>Computational Skills</strong></p>
+<dl>
+<dt>After completing this lesson, learners will be able to</dt>
+<dd>
+
+</dd>
+</dl>
+<ol style="list-style-type: decimal">
+<li></li>
+</ol>
 </div>
 </div>
 <div id="references" class="section level2">

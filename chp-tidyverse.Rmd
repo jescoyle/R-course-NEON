@@ -13,7 +13,7 @@ bibliography: references.bib
 source("setup.R")
 
 # get chapter number based on name
-chp_num <- get_chpNum("chp-computer-navigation", type = "fileName")
+chp_num <- get_chpNum("chp-tidyverse-basics", type = "fileName")
 chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
 
 # knitr options
@@ -30,6 +30,8 @@ set.seed(10)
 # Chapter `r chp_num`. `r get_chpName(chp_num, type = "nameLong")` {.tabset}
 
 ## Overview 
+
+*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 13 and 14
 
 ### What we will learn
 

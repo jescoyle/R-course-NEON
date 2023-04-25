@@ -11,7 +11,7 @@
 
 
 
-<title>Exercises</title>
+<title>chp-spreadsheets.knit</title>
 
 <script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,10 +29,8 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -60,6 +58,28 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -220,76 +240,10 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-
-
-
 <style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
+.code-folding-btn { margin-bottom: 4px; }
 </style>
+
 
 
 
@@ -299,16 +253,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -402,24 +346,163 @@ div.tocify {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
 
 
-<h1 class="title toc-ignore">Exercises</h1>
+
 
 </div>
 
 
-<p>This page provides a map of which exercises meet each learning
-objective (or item on the computing skills checklist). It also contains
-a link to download a zipped folder of all exercises with each exercise
-as a separate R script.</p>
+<div id="chapter-3.-data-organization-in-spreadsheets"
+class="section level1 tabset">
+<h1 class="tabset">Chapter 3. Data organization in spreadsheets</h1>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p><em>from:</em> <a
+href="https://datacarpentry.org/spreadsheet-ecology-lesson/"><span
+class="citation">Teal et al. (2019)</span></a></p>
+<div id="what-we-will-learn" class="section level3">
+<h3>What we will learn</h3>
+<p>Brief description of the contents of this lesson.</p>
+<ul>
+<li>Best practices in data table formatting
+<ul>
+<li>tidy tables</li>
+<li>missing data</li>
+<li>dates</li>
+<li>text-based and avoids special characters</li>
+<li>raw data vs. derived data and README files</li>
+</ul></li>
+<li>Spreadsheet program quality control features</li>
+<li>Data export from spreadsheet programs</li>
+<li>Text-based data tables: delimited formats
+<ul>
+<li>typical delimiter characters</li>
+<li>white space characters: space, tab, new line</li>
+</ul></li>
+<li>Metadata</li>
+</ul>
+<p>In this lesson learners will:</p>
+<ul>
+<li>describe best practices in working with data tables</li>
+<li>understand the structure of a text-based data table file</li>
+<li>use metadata to understand the contents of a data table</li>
+<li>utilize quality control features of spreadsheet software to generate
+clean data</li>
+</ul>
+</div>
+<div id="motivator" class="section level3">
+<h3>Motivator</h3>
+<p>Describe a problem that learners will be able to solve by the end of
+this lesson.</p>
+</div>
+<div id="get-set-up" class="section level3">
+<h3>Get set up</h3>
+<p>Describe any data sets or packages that learners need to download or
+install before proceeding.</p>
+<pre class="r"><code># Read in a data file from the data folder included with the student workbook
+dat &lt;- read.csv(&quot;data/gapminder_data.csv&quot;)</code></pre>
+<p>Make a code block that loads any packages needed for the analysis. It
+can be helpful to indicate which functions come from which packages.</p>
+<pre class="r"><code># Load dplyr: filter
+library(dplyr)
+
+# Load ggplot2: ggplot
+library(ggplot2)</code></pre>
+</div>
+</div>
+<div id="lesson" class="section level2">
+<h2>Lesson</h2>
+<pre class="r"><code># This is an R code block that will execute any code inside and show the results.
+dat %&gt;%
+  filter(country == &quot;United States&quot;)</code></pre>
+<pre><code>         country year       pop continent lifeExp gdpPercap
+1  United States 1952 157553000  Americas  68.440  13990.48
+2  United States 1957 171984000  Americas  69.490  14847.13
+3  United States 1962 186538000  Americas  70.210  16173.15
+4  United States 1967 198712000  Americas  70.760  19530.37
+5  United States 1972 209896000  Americas  71.340  21806.04
+6  United States 1977 220239000  Americas  73.380  24072.63
+7  United States 1982 232187835  Americas  74.650  25009.56
+8  United States 1987 242803533  Americas  75.020  29884.35
+9  United States 1992 256894189  Americas  76.090  32003.93
+10 United States 1997 272911760  Americas  76.810  35767.43
+11 United States 2002 287675526  Americas  77.310  39097.10
+12 United States 2007 301139947  Americas  78.242  42951.65</code></pre>
+<div class="figure" style="text-align: center">
+<img src="images/rmd-03-usa_pop_fig-1.png" alt="Fig. 3.1. Population growth in the United States 1952 - 2007." width="816" />
+<p class="caption">
+Fig. 3.1. Population growth in the United States 1952 - 2007.
+</p>
+</div>
+<div id="section-1" class="section level3">
+<h3>Section 1</h3>
+<blockquote>
+<p><strong><em>CHALLENGE:</em></strong> What will this code do?</p>
+<pre class="r"><code>1 + 1</code></pre>
+<blockquote>
+<pre class="r fold-hide"><code>1 + 1
+[1] 2</code></pre>
+</blockquote>
+</blockquote>
+</div>
+<div id="section-2" class="section level3">
+<h3>Section 2</h3>
+</div>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<dl>
+<dt>After completing these exercises, learners will be able to</dt>
+<dd>
+
+</dd>
+</dl>
+<ol style="list-style-type: decimal">
+<li>follow best practices in formatting data tables</li>
+<li>document steps of a data analysis using metadata and a README
+file</li>
+<li>import and export text-based data tables using spreadsheet
+software</li>
+</ol>
+<p>Number all exercises using the module number. Include starter code in
+the /exercises folder if appropriate.</p>
+<p>3.1</p>
+<p>3.2</p>
+</div>
+<div id="sources-and-resources" class="section level2">
+<h2>Sources and Resources</h2>
+<p>This lesson was adapted from XX by Jes Coyle.</p>
+<div id="additional-resources" class="section level3">
+<h3>Additional Resources</h3>
+</div>
+<div id="cited-references" class="section level3 unnumbered">
+<h3 class="unnumbered">Cited References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-dc-spreadsheet-lesson" class="csl-entry">
+Teal, Tracy, Erin Alison Becker, apawlik, Peter Hoyt, Francois
+Michonneau, Christie Bahlai, Ethan White, et al. 2019. <em><span
+class="nocase">datacarpentry/spreadsheet-ecology-lesson: Data Carpentry:
+Data Organization in Spreadsheets for Ecologists, June 2019</span></em>
+(version v2019.06.2). Zenodo. <a
+href="https://doi.org/10.5281/zenodo.3269869">https://doi.org/10.5281/zenodo.3269869</a>.
+</div>
+</div>
+</div>
+</div>
+</div>
 
 <hr>
 <p>Introduction to Computing in R with NEON</p>
 
 
-</div>
-</div>
 
 </div>
 
@@ -451,36 +534,12 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-
 <script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

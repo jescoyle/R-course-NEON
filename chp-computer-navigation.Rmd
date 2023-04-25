@@ -35,6 +35,24 @@ set.seed(10)
 
 Brief description of the contents of this lesson. 
 
+
+- Files and directories
+  - home directory
+  - working directory
+  - use the terminal in R studio to:
+      - navigate
+      - create and delete files
+      - rename files
+  - Manual download of data from NEON and save to a class folder
+- Programs
+  - programs are files written in executable code
+  - we will learn to write small "programs" called "scripts"
+    - you can write programs to automate tasks
+    - you can write programs to make your scientific analyses reproducible
+    
+- Get R and RStudio set up on your computer with the student workbook
+  - describe the different windows in RStudio: today just working files and terminal
+
 In this lesson 
 `r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`
 

@@ -12,27 +12,48 @@ navbar:
       href: NEON-data-intro.html
     - text: "Chapters"
       menu:
-        - text: "Overview"
+        - text: Chapter overview
           href: 00-module-contents.html
-        - text: "1."
-          href: 01-.html
-        - text: "2."
-          href: 02-.html
-        - text: "3."
-          href: 03-.html
-        - text: "7. Control Flow"
-          href: 07-control-flow.html
+        - text: '-------------'
+        - text: Core lessons
+        - text: 1. Computer navigation
+          href: chp-computer-navigation.html
+        - text: 2. Intro to R
+          href: chp-intro-to-R.html
+        - text: 3. Spreadsheets
+          href: chp-spreadsheets.html
+        - text: 4. Data structures
+          href: chp-data-structures.html
+        - text: 5. Functions
+          href: chp-functions.html
+        - text: 6. Intro to ggplot2
+          href: chp-ggplot2-part1.html
+        - text: 7. Program flow
+          href: chp-program-flow.html
+        - text: 8. More ggplot2
+          href: chp-ggplot2-part2.html
+        - text: 9. Tidy data
+          href: chp-tidyverse.html
+        - text: '-------------'
+        - text: Supplemental lessons
+        - text: A. Rmarkdown
+          href: chp-rmarkdown.html
+        - text: B. Raster data
+          href: chp-geospatial-raster.html
+        - text: C. OpenRefine
+          href: chp-openrefine.html
     - text: "Exercises"
       href: exercises-guide.html
     - text: "RStudio Workbook"
       href: download-student-RStudio-project.html
 output:
   html_document:
-    highlight: pygments
+    theme: flatly
+    highlight: default
     toc: true
     toc_float:
       collapsed: false
     include:
       after_body: footer.html
-    css: styles.css
+    css: style.css
 bibliography: references.bib

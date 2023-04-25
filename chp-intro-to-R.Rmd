@@ -13,7 +13,7 @@ bibliography: references.bib
 source("setup.R")
 
 # get chapter number based on name
-chp_num <- get_chpNum("chp-computer-navigation", type = "fileName")
+chp_num <- get_chpNum("chp-intro-to-R", type = "fileName")
 chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
 
 # knitr options
@@ -31,9 +31,30 @@ set.seed(10)
 
 ## Overview 
 
+*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 1, 2, 3
+
 ### What we will learn
 
 Brief description of the contents of this lesson. 
+
+
+- R is a programming language
+- RStudio is an IDE
+  - various additional functionality of RStudio
+- R can:
+  - do computations
+  - manipulate data
+  - access files on your computer or the internet
+  - make graphs
+  - create documents
+  - create apps
+  - almost anything... though it is not always the best tool for every job.
+- Why R?
+  - R has a wide user community and will always be free
+    - user contributed packages:
+      -NEONUtilities
+  - R and RStudio make it easy for anyone to reproduce your scientific analyses
+  - It is (relatively) easy to get help with (almost) anything
 
 In this lesson 
 `r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`

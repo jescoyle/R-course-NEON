@@ -31,36 +31,37 @@ opts_chunk$set(error = TRUE, tidy = FALSE, results = "markup", comment = NA,
 
 
 
-### Custom hooks to make answers fold up 
-
-## For code to be evaluated in an answer
-## Use: ```{r, answer = TRUE}
-knitr::knit_hooks$set(answer = function(before, options, envir) {
-  if (before) {
-    paste(
-      "<div class=\"accordion\">",
-      "<h4 class=\"toc-ignore\">Answer</h4>",
-      "<div style=\"background: #fff;\">",  sep = "\n")
-  } else {
-    paste("</div>", "</div>", sep = "\n")
-  }
-})
-
-
-## For text-only answers
-## Use: ```{text_answer, echo = FALSE}
-eng_text_answer <- knitr:::eng_html_asset(
-  paste(
-    "<div class=\"accordion\">",
-    "<h4 class=\"toc-ignore\">Answer</h4>",
-    "<div style=\"background: #fff;\">",
-    "<p>",  sep = "\n"),
-  paste(
-    "</div>", "</div>", "</p>", sep = "\n"
-  )
-)
-
-knitr::knit_engines$set(text_answer = eng_text_answer)
+# ### Custom hooks to make answers fold up
+# ### NOT WORKING
+# 
+# ## For code to be evaluated in an answer
+# ## Use: ```{r, answer = TRUE}
+# knitr::knit_hooks$set(answer = function(before, options, envir) {
+#   if (before) {
+#     paste(
+#       "<div class=\"accordion\">",
+#       "<h4 class=\"toc-ignore\">Answer</h4>",
+#       "<div style=\"background: #fff;\">",  sep = "\n")
+#   } else {
+#     paste("</div>", "</div>", sep = "\n")
+#   }
+# })
+# 
+# 
+# ## For text-only answers
+# ## Use: ```{text_answer, echo = FALSE}
+# eng_text_answer <- knitr:::eng_html_asset(
+#   paste(
+#     "<div class=\"accordion\">",
+#     "<h4 class=\"toc-ignore\">Answer</h4>",
+#     "<div style=\"background: #fff;\">",
+#     "<p>",  sep = "\n"),
+#   paste(
+#     "</div>", "</div>", "</p>", sep = "\n"
+#   )
+# )
+# 
+# knitr::knit_engines$set(text_answer = eng_text_answer)
 
 
 # NOT USED - SAVED IN CASE NEEDED LATER
