@@ -27,7 +27,7 @@ knitr_fig_path(paste0(chp_str, "-"))
 set.seed(10)
 ```
 
-# Chapter `r chp_num`. `r get_chpName(chp_num, type = "nameLong")` {.tabset}
+# Chapter `r chp_num`. `r get_chpName(chp_num, type.to = "nameLong")` {.tabset}
 
 ## Overview 
 
@@ -66,17 +66,17 @@ for all of these countries in under a minute!
   - almost anything... though it is not always the best tool for every job.
 
 ### Get set up
+Please ensure you have the latest version of R and RStudio installed on your machine. This is important, as some packages used in the workshop may not install correctly (or at all) if R is not up to date. 
+For instructions on installing (or updating) R and RStudio, please see [Computer Setup](computer-setup.html).
 
-Describe any data sets or packages that learners need to download or install before proceeding.
-
+Once R and RStudio are installed, you will also need to set up the Student Workbook that accompanies this text as an RStudio project. Instructions are in the first exercise from [`r get_chpName("chp-computer-navigation", type.from = "fileName")`](chp-computer-navigation.html)
 ```{r results = 'hide'}
 # Read in a data file from the data folder included with the student workbook
 dat <- read.csv("data/gapminder_data.csv")
 ```
 
 
-Please ensure you have the latest version of R and RStudio installed on your machine. This is important, as some packages used in the workshop may not install correctly (or at all) if R is not up to date. 
-For instructions on installing (or updating) R and RStudio, please see [Computer Setup](computer-setup.html).
+
 
 
 ## Lesson

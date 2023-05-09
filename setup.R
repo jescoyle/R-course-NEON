@@ -48,18 +48,20 @@ CStable <- read.delim("_computing_skills.txt")
 # A function that looks up the name of a chapter based on its number 
 # chp is a string
 # lookup is the table matching numbers to names
-# type is the column in the table corresponding to the type of name desired
+# type.to is the column in the table corresponding to the type of name desired
 #   (e.g. "fileName", "nameShort", "nameLong"
-get_chpName <- function(chp, lookup = chptable, type = "nameLong"){
+# type.from is the column in the table corresponding to the type of name given to the function
+#   (e.g. "chp" or "fileName")
+get_chpName <- function(chp, lookup = chptable, type.to = "nameLong", type.from = "chp"){
   
   # Assign row names based on the chapter numbers column
-  rownames(lookup) <- lookup$chp
+  rownames(lookup) <- lookup[, type.from]
   
   # Convert chp to string if not already
   chp <- as.character(chp)
   
   # Select the column with the name type desired for the rows given in chp
-  lookup[chp, type]
+  lookup[chp, type.to]
   
 }
 
