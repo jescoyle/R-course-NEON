@@ -21,7 +21,7 @@ This page will give an overview of episodes within this tutorial and learning ob
 
 ## Core Chapters
 
-#### [Chapter 1. `r get_chpName(1, type.to = "nameLong")`](`r paste0(get_chpName(1, type = "fileName"), ".html")`)
+#### [Chapter 1. `r get_chpName(1, type.to = "nameLong")`](`r paste0(get_chpName(1, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
@@ -36,7 +36,7 @@ After completing this lesson, learners will be able to
 `r get_LO(1, CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter 2. `r get_chpName(2, type.to = "nameLong")`](`r paste0(get_chpName(2, type = "fileName"), ".html")`)
+#### [Chapter 2. `r get_chpName(2, type.to = "nameLong")`](`r paste0(get_chpName(2, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
@@ -52,7 +52,7 @@ After completing this lesson, learners will be able to
 
 
 
-#### [Chapter 3. `r get_chpName(3, type.to = "nameLong")`](`r paste0(get_chpName(3, type = "fileName"), ".html")`)
+#### [Chapter 3. `r get_chpName(3, type.to = "nameLong")`](`r paste0(get_chpName(3, type.to = "fileName"), ".html")`)
 
 **Learning Objectives**
 
@@ -65,7 +65,7 @@ After completing this lesson, learners will be able to
 `r get_LO(3, CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter 4. `r get_chpName(4, type.to = "nameLong")`](`r paste0(get_chpName(4, type = "fileName"), ".html")`)
+#### [Chapter 4. `r get_chpName(4, type.to = "nameLong")`](`r paste0(get_chpName(4, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
@@ -79,7 +79,7 @@ In this lesson
 After completing this lesson, learners will be able to 
 `r get_LO(4, CStable, prefix = TRUE, bullet = "1.")`
 
-#### [Chapter 5. `r get_chpName(5, type.to = "nameLong")`](`r paste0(get_chpName(5, type = "fileName"), ".html")`)
+#### [Chapter 5. `r get_chpName(5, type.to = "nameLong")`](`r paste0(get_chpName(5, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
@@ -94,7 +94,7 @@ After completing this lesson, learners will be able to
 `r get_LO(5, CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter 6. `r get_chpName(6, type.to = "nameLong")`](`r paste0(get_chpName(6, type = "fileName"), ".html")`)
+#### [Chapter 6. `r get_chpName(6, type.to = "nameLong")`](`r paste0(get_chpName(6, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
@@ -110,7 +110,7 @@ After completing this lesson, learners will be able to
 `r get_LO(6, CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter 7. `r get_chpName(7, type.to = "nameLong")`](`r paste0(get_chpName(7, type = "fileName"), ".html")`)
+#### [Chapter 7. `r get_chpName(7, type.to = "nameLong")`](`r paste0(get_chpName(7, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
@@ -124,7 +124,7 @@ After completing this lesson, learners will be able to
 `r get_LO(7, CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter 8. `r get_chpName(8, type.to = "nameLong")`](`r paste0(get_chpName(8, type = "fileName"), ".html")`)
+#### [Chapter 8. `r get_chpName(8, type.to = "nameLong")`](`r paste0(get_chpName(8, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
@@ -138,7 +138,7 @@ After completing this lesson, learners will be able to
 `r get_LO(8, CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter 9. `r get_chpName(9, type.to = "nameLong")`](`r paste0(get_chpName(9, type = "fileName"), ".html")`)
+#### [Chapter 9. `r get_chpName(9, type.to = "nameLong")`](`r paste0(get_chpName(9, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
@@ -155,7 +155,7 @@ After completing this lesson, learners will be able to
 
 ## Supplemental Chapters
 
-#### [Chapter A. `r get_chpName("A", type.to = "nameLong")`](`r paste0(get_chpName("A", type = "fileName"), ".html")`)
+#### [Chapter A. `r get_chpName("A", type.to = "nameLong")`](`r paste0(get_chpName("A", type.to = "fileName"), ".html")`)
 
 **Learning Objectives**
 
@@ -169,7 +169,7 @@ After completing this lesson, learners will be able to
 `r get_LO("A", CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter B. `r get_chpName("B", type.to = "nameLong")`](`r paste0(get_chpName("B", type = "fileName"), ".html")`)
+#### [Chapter B. `r get_chpName("B", type.to = "nameLong")`](`r paste0(get_chpName("B", type.to = "fileName"), ".html")`)
 
 **Learning Objectives**
 
@@ -183,7 +183,7 @@ After completing this lesson, learners will be able to
 `r get_LO("B", CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter C. `r get_chpName("C", type.to = "nameLong")`](`r paste0(get_chpName("C", type = "fileName"), ".html")`)
+#### [Chapter C. `r get_chpName("C", type.to = "nameLong")`](`r paste0(get_chpName("C", type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
