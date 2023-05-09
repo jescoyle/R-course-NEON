@@ -42,8 +42,8 @@ get_LO<- function(chp, lookup, prefix = FALSE, bullet = "-"){
   objs_list
 }
 
-LOtable <- read.delim("_learning_objectives.txt")
-CStable <- read.delim("_computing_skills.txt")
+LOtable <- read.delim("../_learning_objectives.txt")
+CStable <- read.delim("../_computing_skills.txt")
 
 # A function that looks up the name of a chapter based on its number 
 # chp is a string
@@ -79,4 +79,4 @@ get_chpNum <- function(name, lookup = chptable, type = "fileName"){
   lookup[name, "chp"]
 }
 
-chptable <- read.delim("_chapter_names.txt")
+chptable <- read.delim("../_chapter_names.txt")
