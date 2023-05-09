@@ -35,93 +35,301 @@ set.seed(10)
 
 Brief description of the contents of this lesson. 
 
-
-- Files and directories
-  - home directory
-  - working directory
-  - use the terminal in R studio to:
-      - navigate
-      - create and delete files
-      - rename files
-  - Manual download of data from NEON and save to a class folder
-- Programs
-  - programs are files written in executable code
-  - we will learn to write small "programs" called "scripts"
-    - you can write programs to automate tasks
-    - you can write programs to make your scientific analyses reproducible
-    
-- Get R and RStudio set up on your computer with the student workbook
-  - describe the different windows in RStudio: today just working files and terminal
-
 In this lesson 
 `r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`
 
 ### Motivator
 
-Describe a problem that learners will be able to solve by the end of this lesson.
+> How much time have you wasted wondering just where that file you downloaded went or which version of a paper you were working on? Have you ever forgotten exactly what you did to make that graph for a report and now need to make it again?
+
+A modern scientist must not only learn how the natural world works- they also must be able to access and interact with the digital world through a computer. However for many scientists, a computer is a somewhat mysterious box of electronics that we learn how to interact with in a piecemeal fashion, gradually learning the tools we need to do our science. While most scientists don't need to learn how the physical hardware of their computer works, learning a little bit about how the software that is programmed into our computers is structured can make it much easier to create reproducible science in a world where all data eventually becomes digital.
+
+We're going to get to know your computer by learning to navigate the *file system* through a *command line*. In doing so, we will set up a digital project that we will use for the rest of the chapters in this book. Keeping your computer's files tidy and organized is the first step toward reproducible science and will save you time and energy. 
+
+A good project layout will ultimately make your life easier:
+
+* It will help ensure the integrity of your data;
+* It makes it simpler to share your work with someone else
+(a lab-mate, collaborator, or supervisor);
+* It makes it much easier to pick the project back up after a break.
+
+To understand how to set up a tidy project layout, we first need to understand how your computer is structured.
+
 
 ### Get set up
 
-Describe any data sets or packages that learners need to download or install before proceeding.
+We'll be using RStudio to create a self-contained, reproducible project that we will use for the rest of this book. For instructions on installing (or updating) R and RStudio, please see [Computer Setup](computer-setup.html).
 
-```{r results = 'hide'}
-# Read in a data file from the data folder included with the student workbook
-dat <- read.csv("data/gapminder_data.csv")
-```
-
-Make a code block that loads any packages needed for the analysis. It can be helpful to indicate which functions come from which packages.
-
-```{r results = 'hide', warning = FALSE, message = FALSE}
-
-# Load dplyr: filter
-library(dplyr)
-
-# Load ggplot2: ggplot
-library(ggplot2)
-
-```
 
 ## Lesson
 
+### Orientation to the RStudio user interface
 
-```{r}
-# This is an R code block that will execute any code inside and show the results.
-dat %>%
-  filter(country == "United States")
+describe the different windows in RStudio: today just working files and terminal
 
-```
+### Navigating the file system
 
+file system
 
+path
 
-```{r usa_pop_fig}
-#| echo = FALSE,
-#| fig.cap = paste0("Fig. ", chp_num, ".1. Population growth in the United States 1952 - 2007.")
+absolute path
 
-# Note that figure caption numbers are not automatic here.
+directory
 
-# Plot year vs. population size for United States
-dat %>%
-  filter(country == "United States") %>%
-  ggplot(aes(x = year, y = pop)) +
-  geom_line() +
-  labs(x = "Year", y = "Population size")
+file
 
-```
+home directory
 
-
-### Section 1
-
-
-> ***CHALLENGE:*** What will this code do?
+> #### Try this: Find your Downloads folder
+> 
+> When you download a file from the internet where does it go? Most computers have a default directory where downloaded files are saved. It can be very useful to know where this directory is located on your filesystem.
 >
-> ```r
-> 1 + 1
-> ```
-> > ```{r class.source = 'fold-hide', collapse = TRUE}
-> > 1 + 1
-> > ```
+> 1. Use the file browser on your computer (Finder on Mac or File Explorer on Windows) to locate your default Downloads folder. 
+> 2. Now use the file browser built into RStudio to find the same Downloads folder.
+> 3. Type out the absolute path to your downloads folder.
 
-### Section 2
+### Using the command line to navigate
+
+terminal = graphical user interface that provides a command line for interacting with the shell
+
+shell = program that interacts with your file system
+
+command line
+
+relative path
+
+working directory
+
+graphical user interface (GUI)
+
+/ root
+
+./
+
+../
+
+~ $HOME
+
+cd
+
+ls
+
+ls -l
+
+ls --help
+
+pwd
+
+
+> #### Try this: Navigate to your Downloads folder
+>
+> Write a command that would navigate to your Downloads folder from your Home directory.
+
+
+
+#### Working directory - FIXME
+
+Knowing R's current working directory is important because when you need to access other files (for example, to import a data file), R will look for them relative to the current working directory.
+
+Each time you create a new RStudio Project, it will create a new directory for that project. When you open an existing `.Rproj` file, it will open that project and set R's working directory to the folder that file is in.
+
+> #### Challenge 5
+> You can check the current working directory with the `getwd()` command, or by using the menus in RStudio.
+>
+> 1. In the console, type `getwd()` ("wd" is short for "working directory") and hit Enter.
+> 2. In the Files pane, double click on the `data` folder to open it (or navigate to any other folder you wish). To get the Files pane back to the current working directory, click "More" and then select "Go To Working Directory".
+>
+> You can change the working directory with `setwd()`, or by using RStudio menus.
+>
+> 1. In the console, type `setwd("data")` and hit Enter. Type `getwd()` and hit Enter to see the new working directory.
+> 2. In the menus at the top of the RStudio window, click the "Session" menu button, and then select "Set Working Directory" and then "Choose Directory".
+> 3. In the windows navigator that opens, navigate back to the project directory, and click "Open". Note that a `setwd` command will automatically appear in the console.
+{: .challenge}
+
+::: {.callout}
+> #### Tip: File does not exist errors
+>
+> When you're attempting to reference a file in your R code and you're getting errors saying the file doesn't exist, it's a good idea to check your working directory.
+> You need to either provide an absolute path to the file, or you need to make sure the file is saved in the working directory (or a subfolder of the working directory) and provide a relative path. 
+:::
+
+
+
+### Creating a self-contained project
+
+::: {.challenge}
+> #### Try this: Creating a self-contained project
+>
+> We're going to create a new project in RStudio:
+>
+> 1. Click the "File" menu button, then "New Project".
+> 2. Click "New Directory".
+> 3. Click "New Project".
+> 4. Type in the name of the directory to store your project. This can be any name using letters or numbers, but it should not have any spaces. To set up the workbook for this course, use the name "R-course-NEON"
+> 5. Click the "Create Project" button.
+:::
+
+If you completed the challenge correctly you should now be looking at a new RStudio session and in the upper right corner of the window you will see this the name of your project:
+![](images/RStudio_project_label.jpg)
+
+You will also see a mostly empty folder in the Files window. There should be one file with the name of the project: R-course-NEON.Rproj
+
+This file contains information that RStudio needs to set up your project. One thing the .Rproj file will do is set your working directory to be the same directory that the .Rproj file is located in. Let's see how this works.
+
+::: {.challenge}
+> #### Try this: Display the working directory in the Terminal and R Console
+>
+> What command should you use in the terminal to display the path of the current working directory?
+:::
+::: {.challenge}
+> #### Solution:
+>
+> ```{bash eval = FALSE, class.source = 'fold-hide'}
+>   pwd
+> ```
+:::
+::: {.challenge}
+> To display the working directory in the R Console, do the following:
+> 
+> 1. Click the Console tab next to the Terminal tab.
+> 2. This command line let's you interact with R (which we will learn more about in future chapters). Notice that the command line begins with `>`.
+> 3. Type `getwd()`.
+> 4. What do you see? How is it similar to and different from what the Terminal displays?
+> 5. How would the file path be different on someone else's computer? How would it be similar?
+:::
+
+RStudio projects are useful because they automatically open in the same working directory regardless of the computer they are located on. This means that when we start writing code, we can refer to the location of files relative to the main directory where the .Rproj file is saved and our code will work on any computer. Let's see how this might work.
+
+
+::: {.challenge}
+> #### Try this: Opening an RStudio project through the file system
+>
+> 1. Exit RStudio.
+> 2. Use your computer's file browser to navigate to the directory where you created the R-course-neon project. This should be your Desktop folder if you followed the steps above.
+> 3. Move the entire R-course-neon folder to a folder on your computer where you are saving work for this class.
+> 4. Open the R-course-neon folder and double click on the `.Rproj` file in that directory.
+> 5. Observe the Files window in RStudio. What has changed?
+> 6. Use the Terminal and the R Console to display the current working directory. What has changed?
+:::
+
+
+#### File system navigation in the terminal vs. R console
+ 
+
+
+ADD TABLE HERE
+ 
+
+### Best practices for project organization
+
+Although there is no "best" way to lay out a project, there are some general
+principles to adhere to that will make project management easier:
+
+[Good Enough Practices for Scientific Computing](https://github.com/swcarpentry/good-enough-practices-in-scientific-computing/blob/gh-pages/good-enough-practices-for-scientific-computing.pdf) gives the following recommendations for project organization:
+
+1. Put each project in its own directory, which is named after the project.
+2. Put text documents associated with the project in the `doc` directory.
+3. Put raw data and metadata in the `data` directory, and files generated during cleanup and analysis in a `results` directory.
+4. Put source for the project's scripts and programs in the `src` directory, and programs brought in from elsewhere or compiled locally in the `bin` directory.
+5. Name all files to reflect their content or function.
+
+::: {.challenge}
+> #### Try this: Set up a project's subfolders
+> 
+> Use the File window in RStudio or your computer's file browser to create the following folders inside the R-course-NEON folder:
+>
+>   * doc
+>   * data 
+>   * results
+>   * src
+:::
+::: {.solution}
+> #### Solution:
+> The Files window in RStudio should now look like this:
+> ![](images/RStudio_project_subfolders.jpg)
+:::
+
+  - Manual download of data from NEON and save to a class folder
+
+Now that we have a directory structure we can start to add files. Let's put a data file in the `data/` directory.
+
+
+> #### Challenge 3
+> Download the gapminder data from [here](https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_data.csv).
+>
+> 1. Download the file (right mouse click on the link above -> "Save link as" / "Save file as", or click on the link and after the page loads, press <kbd>Ctrl</kbd>+<kbd>S</kbd> or choose File -> "Save page as")
+> 2. Make sure it's saved under the name `gapminder_data.csv`
+> 3. Save the file in the `data/` folder within your project.
+>
+> We will load and inspect these data later.
+{: .challenge}
+
+> ## Challenge 4
+> It is useful to get some general idea about the dataset, directly from the
+> command line, before loading it into R. Understanding the dataset better
+> will come in handy when making decisions on how to load it in R. Use the command-line
+> shell to answer the following questions:
+> 1. What is the size of the file?
+> 2. How many rows of data does it contain?
+> 3. What kinds of values are stored in this file?
+>
+> > ## Solution to Challenge 4
+> >
+> > By running these commands in the shell:
+> > ```{r ch2a-sol, engine='sh'}
+> > ls -lh data/gapminder_data.csv
+> > ```
+> > The file size is 80K.
+> > ```{r ch2b-sol, engine='sh'}
+> > wc -l data/gapminder_data.csv
+> > ```
+> > There are 1705 lines. The data looks like:
+> > ```{r ch2c-sol, engine='sh'}
+> > head data/gapminder_data.csv
+> > ```
+> {: .solution}
+{: .challenge}
+
+#### Working with files on the command line
+
+cp 
+
+mkdir
+
+rm
+
+rm -r for directories (after viewing help file)
+
+make a new directory for manipulating the data
+cp a version into this directory
+remove it when done
+
+
+
+### FYI: Additional info for the curious
+
+#### More useful Unix commands
+
+head
+echo
+wc
+
+
+#### Version control
+
+It is important to use version control with projects. Go [here for a good lesson which describes using Git with RStudio](https://swcarpentry.github.io/git-novice/14-supplemental-rstudio/).
+
+
+#### What are programs?
+
+- Programs
+  - programs are files written in executable code
+  - we will learn to write small "programs" called "scripts"
+    - you can write programs to automate tasks
+    - you can write programs to make your scientific analyses reproducible
+
+Find the R program on your computer
 
 
 ## Exercises
@@ -130,18 +338,44 @@ After completing these exercises, learners will be able to
 `r get_LO(as.numeric(chp_num), CStable, prefix = TRUE, bullet = "1.")`
 
 
-Number all exercises using the module number. Include starter code in the /exercises folder if appropriate.
+Exercise **`r chp_num`.1**  is required for other work in this book.
 
-`r chp_num`.1 
+**`r chp_num`.1** Set up the Student Workbook for this course on your computer.
 
-`r chp_num`.2 
+1. Download the Student Workbook from [here](). Save this zipped file in the folder where you are saving work for this course.
+2. Unzip the folder you downloaded. Instructions for how to unzip folders are located [here for Mac]() and [here for Windows]().
+3. Open the RStudio project using the .Rproj file, then use the File window in RStudio to explore the directory structure of this project.
+4. Write out the absolute path of the initial working directory and the command you typed into the **R Console** to determine this.
+5. From the initial working directory...
+    1. Write out the relative path to the data file XXX.
+    2. Write out the relative path to the folder where you should save completed exercises.
+
+**`r chp_num`.2** Where is your Desktop directory located on your computer's file system?
+
+1. Write out the absolute path to your Desktop directory.
+2. Write out a relative path to your Desktop directory from your Home directory.
+3. What would you type into the Terminal to navigate from your Home directory to your Desktop directory?
+
+**`r chp_num`.3** From the initial working directory of the Student Workbook RStudio project...
+
+1. What would you type into the Terminal to show all files in the data directory?
+2. How would you modify this command so that the size of each file is shown?
+
+**`r chp_num`.4** From the initial working directory of the Student Workbook RStudio project, **use the Terminal to**:
+
+1. Create a new directory inside the data directory named "derived"
+2. Move a copy of the file XXX into this new "derived" folder and append today's date to the end of the file name in the format YYYY-MM-DD (e.g.: XXX_2023-05-13.csv). Remember- avoid using spaces in file names!
+3. Rename this file to add your initials to the end of the file name (e.g. XXX_2023-05-13_JRC.csv)
+4. Delete the derived directory and all of its contents.
+5. Type out the commands (in order) that you used to accomplish the prior steps. Write one command line for each of the four steps.
 
 
 
 ## Sources and Resources
 
-This lesson was adapted from XX by Jes Coyle.
+This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episode 2 by Jes Coyle.
 
 ### Additional Resources
+
 
 ### Cited References

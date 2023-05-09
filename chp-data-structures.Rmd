@@ -78,6 +78,58 @@ library(ggplot2)
 ## Lesson
 
 
+
+### Comparing things
+
+We can also do comparisons in R:
+
+```{r}
+1 == 1  # equality (note two equals signs, read as "is equal to")
+```
+
+```{r}
+1 != 2  # inequality (read as "is not equal to")
+```
+
+```{r}
+1 < 2  # less than
+```
+
+```{r}
+1 <= 1  # less than or equal to
+```
+
+```{r}
+1 > 0  # greater than
+```
+
+```{r}
+1 >= -9 # greater than or equal to
+```
+
+> ## Tip: Comparing Numbers
+>
+> A word of warning about comparing numbers: you should
+> never use `==` to compare two numbers unless they are
+> integers (a data type which can specifically represent
+> only whole numbers).
+>
+> Computers may only represent decimal numbers with a
+> certain degree of precision, so two numbers which look
+> the same when printed out by R, may actually have
+> different underlying representations and therefore be
+> different by a small margin of error (called Machine
+> numeric tolerance).
+>
+> Instead you should use the `all.equal` function.
+>
+> Further reading: [http://floating-point-gui.de/](http://floating-point-gui.de/)
+>
+{: .callout}
+
+
+
+
 ```{r}
 # This is an R code block that will execute any code inside and show the results.
 dat %>%
@@ -134,7 +186,7 @@ Number all exercises using the module number. Include starter code in the /exerc
 
 ## Sources and Resources
 
-This lesson was adapted from XX by Jes Coyle.
+This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 1 by Jes Coyle.
 
 ### Additional Resources
 

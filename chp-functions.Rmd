@@ -113,6 +113,17 @@ dat %>%
 ### Section 2
 
 
+
+#### Separate function definition and application
+
+One of the more effective ways to work with R is to start by writing the code you want to run directly in a .R script, and then running the selected lines (either using the keyboard shortcuts in RStudio or clicking the "Run" button) in the interactive R console.
+
+When your project is in its early stages, the initial .R script file usually contains many lines
+of directly executed code. As it matures, reusable chunks get pulled into their
+own functions. It's a good idea to separate these functions into two separate folders; one
+to store useful functions that you'll reuse across analyses and projects, and
+one to store the analysis scripts.
+
 ## Exercises
 
 After completing these exercises, learners will be able to 
@@ -129,7 +140,7 @@ Number all exercises using the module number. Include starter code in the /exerc
 
 ## Sources and Resources
 
-This lesson was adapted from XX by Jes Coyle.
+This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episode 2 and XXXXXXX by Jes Coyle.
 
 ### Additional Resources
 
