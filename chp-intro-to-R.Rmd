@@ -10,7 +10,7 @@ bibliography: references.bib
 
 ```{r, include = FALSE, purl = FALSE}
 # Functions and data
-source("setup.R")
+source("src/setup.R")
 
 # get chapter number based on name
 chp_num <- get_chpNum("chp-intro-to-R", type = "fileName")
@@ -70,20 +70,11 @@ Please ensure you have the latest version of R and RStudio installed on your mac
 For instructions on installing (or updating) R and RStudio, please see [Computer Setup](computer-setup.html).
 
 Once R and RStudio are installed, you will also need to set up the Student Workbook that accompanies this text as an RStudio project. Instructions are in the first exercise from [`r get_chpName("chp-computer-navigation", type.from = "fileName")`](chp-computer-navigation.html)
-```{r results = 'hide'}
-# Read in a data file from the data folder included with the student workbook
-dat <- read.csv("data/gapminder_data.csv")
-```
-
-
-
 
 
 ## Lesson
 
 ### Welcome (back) to RStudio!
-
-2	2	describe the contents of the windows in an RStudio session	learners will
 
 - R is a programming language
 - RStudio is an IDE
@@ -91,15 +82,17 @@ dat <- read.csv("data/gapminder_data.csv")
 - Lot's of other windows that show additional functionality (such as version control (see addt lesson, application building and creating documents)
 - In this lesson we will introduce the code, environment, packages and help windows.
 
-Throughout this lesson, we're going to teach you some of the fundamentals of
+We're going to learn some of the fundamentals of
 the R language as well as some best practices for organizing code for
-scientific projects that will make your life easier.
-
-We'll be using RStudio: a free, open-source R Integrated Development
-Environment (IDE). It provides a built-in editor, works on all platforms (including
+scientific projects that will make your life easier. We'll be using RStudio: a free, open-source R Integrated Development Environment (IDE).
+It provides a built-in editor, works on all platforms (including
 on servers) and provides many advantages such as integration with version
 control and project management.
 
+Let's start by opening the student workbook RStudio project that accompanies this text.
+To open an RStudio project, use your computer's file browser
+to the R-course-NEON folder you saved. Then double click on the R-course-NEON.Rproj file
+(see the lesson:[`r get_chpName("chp-computer-navigation", type.from = "fileName")`](chp-computer-navigation.html)) 
 
 **Basic layout**
 
@@ -109,13 +102,18 @@ When you first open RStudio, you will be greeted by three panels:
   * Environment/History/Connections (tabbed in upper right)
   * Files/Plots/Packages/Help/Viewer (tabbed in lower right)
 
-![RStudio layout](../fig/01-rstudio.png)
+If you opened the R-course-NEON project then your RStudio session should look like this:
 
+![RStudio layout](images/01-rstudio.png)
 
+We're going to start working in the R console to learn about some of
+the basic functionality of R. Once we start learning more complex
+code, we will introduce the Source panel and create an R script
+for saving the code that we write.
 
 ### What can R do?
 
-Almost anything though it is not always the best tool for every job. The simplist thing it can do is calculations...
+Almost anything though it is not always the best tool for every job. The simplest thing it can do is calculations...
 
 Much of your time in R will be spent in the R interactive
 console. This is where you will run all of your code, and can be a
