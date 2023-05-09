@@ -10,14 +10,14 @@ bibliography: references.bib
 
 ```{r, include = FALSE, purl = FALSE}
 # Functions and data
-source("setup.R")
+source("src/setup.R")
 
 # get chapter number based on name
-chp_num <- get_chpNum("chp-openrefine", type = "fileName")
+chp_num <- get_chpNum("chp-computer-navigation", type = "fileName")
 chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
 
 # knitr options
-source("knit-options.R")
+source("src/knit-options.R")
 knitr_fig_path(paste0(chp_str, "-"))
 
 # Silently load in the data for this lesson

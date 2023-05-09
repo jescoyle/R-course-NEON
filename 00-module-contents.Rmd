@@ -11,7 +11,7 @@ bibliography: references.bib
 source("src/setup.R")
 
 # knitr options
-source("knit-options.R")
+source("src/knit-options.R")
 knitr_fig_path(paste0("00", "-"))
 
 ```
