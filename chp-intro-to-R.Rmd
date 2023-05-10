@@ -13,7 +13,7 @@ bibliography: references.bib
 source("src/setup.R")
 
 # get chapter number based on name
-chp_num <- get_chpNum("chp-computer-navigation", type = "fileName")
+chp_num <- get_chpNum("chp-intro-to-R", type = "fileName")
 chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
 
 # knitr options
@@ -50,7 +50,7 @@ for all of these countries in under a minute!
 
 
 - Why R?
-  - R has a wide user community and will always be free
+  - R has a wide user community and will always be free (open source - what does this mean)
   - user contributed packages:
       -NEONUtilities
   - R and RStudio make it easy for anyone to reproduce your scientific analyses because your analyses are saved as code scripts rather than clicking through a graphical user interface
@@ -66,10 +66,10 @@ for all of these countries in under a minute!
   - almost anything... though it is not always the best tool for every job.
 
 ### Get set up
-Please ensure you have the latest version of R and RStudio installed on your machine. This is important, as some packages used in the workshop may not install correctly (or at all) if R is not up to date. 
+Please ensure you have the latest version of R and RStudio installed on your machine. This is important, as some packages may not install correctly (or at all) if R is not up to date. 
 For instructions on installing (or updating) R and RStudio, please see [Computer Setup](computer-setup.html).
 
-Once R and RStudio are installed, you will also need to set up the Student Workbook that accompanies this text as an RStudio project. Instructions are in the first exercise from [`r get_chpName("chp-computer-navigation", type.from = "fileName")`](chp-computer-navigation.html)
+Once R and RStudio are installed, you will also need to set up the Student Workbook that accompanies this text as an RStudio project. Instructions are in the first exercise from [`r get_chpName("chp-computer-navigation", type.from = "fileName")`](chp-computer-navigation.html).
 
 
 ## Lesson
@@ -89,10 +89,18 @@ It provides a built-in editor, works on all platforms (including
 on servers) and provides many advantages such as integration with version
 control and project management.
 
+Some notes on semantics:
+
+* R is a program that you installed on your computer that allows you to write
+code in the **R programming language**. 
+* R is a command-line program that executes code one line at a time to produce output (more on this later).
+* R code is usually written and saved in files called **scripts** which you can customize to do almost anything.
+* RStudio is a program that allows you to write R code and test it out at the same time (which is why it is called an integrated development environment). It provides a **G**raphical **U**ser **I**nterface (GUI) that makes it easier to interact with R and develop R code.
+
 Let's start by opening the student workbook RStudio project that accompanies this text.
-To open an RStudio project, use your computer's file browser
-to the R-course-NEON folder you saved. Then double click on the R-course-NEON.Rproj file
-(see the lesson:[`r get_chpName("chp-computer-navigation", type.from = "fileName")`](chp-computer-navigation.html)) 
+To open an RStudio project, use your computer's file browser to navigate 
+to the R-course-NEON-workbook folder you downloaded. Inside this folder, double click on the R-course-NEON-workbook.Rproj file 
+(see the lesson: [`r get_chpName("chp-computer-navigation", type.from = "fileName")`](chp-computer-navigation.html)) 
 
 **Basic layout**
 
@@ -102,36 +110,39 @@ When you first open RStudio, you will be greeted by three panels:
   * Environment/History/Connections (tabbed in upper right)
   * Files/Plots/Packages/Help/Viewer (tabbed in lower right)
 
-If you opened the R-course-NEON project then your RStudio session should look like this:
+If you opened the R-course-NEON-workbook project then your RStudio session should look like this:
 
 ![RStudio layout](images/01-rstudio.png)
 
 We're going to start working in the R console to learn about some of
 the basic functionality of R. Once we start learning more complex
-code, we will introduce the Source panel and create an R script
+code, we will open the Source panel and create an R script
 for saving the code that we write.
+
+The first thing you will see in the R console is a bunch
+of information, followed by a ">" and a blinking cursor. This is a
+**command-line interface**; it reads and evaluates one line of code at a time, printing out
+any results of each line to the same console window as it goes. If you type in commands at the command line, R tries to execute them, and then returns a result.
+
+For the first part of this lesson, you should type any code that you see in grey boxes
+into the command line in the R console:
+
+```{r eval = FALSE}
+type this into the command line
+```
+
+the expected output will show up in white boxes below like this:
+
+```
+expected code output
+```
+
 
 ### What can R do?
 
-Almost anything though it is not always the best tool for every job. The simplest thing it can do is calculations...
+As mentioned in the introduction, R can do almost anything, although it is not always the best tool for every job.
 
-Much of your time in R will be spent in the R interactive
-console. This is where you will run all of your code, and can be a
-useful environment to try out ideas before adding them to an R script
-file. This console in RStudio is the same as the one you would get if
-you typed in `R` in your command-line environment.
-
-The first thing you will see in the R interactive session is a bunch
-of information, followed by a ">" and a blinking cursor. In many ways
-this is similar to the shell environment you learned about during the
-shell lessons: it operates on the same idea of a "Read, evaluate,
-print loop": you type in commands, R tries to execute them, and then
-returns a result.
-
-#### Math
-
-2	6	use the console for mathematical calculations	learners will
-2	1	execute simple mathematical calculations	use R and RStudio to
+#### Arithmetic and calculations
 
 The simplest thing you could do with R is to do arithmetic:
 
@@ -141,41 +152,39 @@ The simplest thing you could do with R is to do arithmetic:
 
 And R will print out the answer, with a preceding "[1]". [1] is the index of 
 the first element of the line being printed in the console. For more information 
-on indexing vectors, see [Episode 6: Subsetting Data](https://swcarpentry.github.io/r-novice-gapminder/06-data-subsetting/index.html).
+on indexing vectors, see [`r get_chpName("chp-data-structures", type.from = "fileName")`](chp-data-structures.html).
 
 If you type in an incomplete command, R will wait for you to
-complete it. If you are familiar with Unix Shell's bash, you may recognize this  
-behavior from bash.
+complete it. For example:
 
-~~~
-> 1 +
-~~~
-{: .r}
+```{r eval = FALSE}
+1 +
+```
 
-~~~
+```
 +
-~~~
-{: .output}
+```
 
-Any time you hit return and the R session shows a "+" instead of a ">", it
-means it's waiting for you to complete the command. If you want to cancel
-a command you can hit <kbd>Esc</kbd> and RStudio will give you back the ">" prompt.
+Any time you type return and the R session shows a "+" instead of a ">", it
+means it's waiting for you to complete the command. You can either keep typing the  rest of the command:
 
-> ## Tip: Canceling commands
->
-> If you're using R from the command line instead of from within RStudio,
-> you need to use <kbd>Ctrl</kbd>+<kbd>C</kbd> instead of <kbd>Esc</kbd>
-> to cancel the command. This applies to Mac users as well!
->
-> Canceling a command isn't only useful for killing incomplete commands:
-> you can also use it to tell R to stop running code (for example if it's
-> taking much longer than you expect), or to get rid of the code you're
-> currently writing.
->
-{: .callout}
+```{r}
+1 +
+100
+```
+
+or cancel what you were doing. If you want to cancel
+a command you can type <kbd>Esc</kbd> and RStudio will give you back the ">" prompt. 
+Note that if you're using R outside of RStudio, you need to use <kbd>Ctrl</kbd>+<kbd>C</kbd>
+instead of <kbd>Esc</kbd> to cancel the command.
+
+Canceling a command isn't only useful for stopping incomplete commands:
+you can also use it to tell R to stop running code (for example if it's
+taking much longer than you expect), or to get rid of the code you're
+currently writing.
 
 When using R as a calculator, the order of operations is the same as you
-would have learned back in school.
+would have learned in math class.
 
 From highest to lowest precedence:
 
@@ -198,20 +207,6 @@ intend.
 (3 + 5) * 2
 ```
 
-This can get unwieldy when not needed, but clarifies your intentions.
-Remember that others may later read your code.
-
-```{r, eval=FALSE}
-(3 + (5 * (2 ^ 2))) # hard to read
-3 + 5 * 2 ^ 2       # clear, if you remember the rules
-3 + 5 * (2 ^ 2)     # if you forget some rules, this might help
-```
-
-
-The text after each line of code is called a
-"comment". Anything that follows after the hash (or octothorpe) symbol
-`#` is ignored by R when it executes code.
-
 Really small or large numbers get a scientific notation:
 
 ```{r}
@@ -224,17 +219,16 @@ is shorthand for `2 * 10^(-4)`.
 You can write numbers in scientific notation too:
 
 ```{r}
-5e3  # Note the lack of minus here
+5e3  
 ```
 
-### Mathematical functions
-
-R has many built in mathematical functions. To call a function,
-we can type its name, followed by open and closing parentheses.
-Functions take arguments as inputs, anything we type inside the parentheses of a function is considered an argument. Depending on the function, the number of arguments can vary from none to multiple. For example:
+R has many built in mathematical functions. To use a function,
+we can type its name, followed by open and closing parentheses
+(just like functions in math!).
+Functions take **arguments** as inputs- anything we type inside the parentheses of a function is considered an argument. Depending on the function, the number of arguments can vary from none to multiple. For example:
 
 ```{r, eval=FALSE}
-getwd() #returns an absolute filepath
+getwd() # returns an absolute file path of the current working directory
 ```
 
 doesn't require an argument, whereas for the next set of mathematical functions we will need to supply the function a value in order to compute the result.
@@ -255,12 +249,55 @@ log10(10) # base-10 logarithm
 exp(0.5) # e^(1/2)
 ```
 
+Some functions take multiple arguments that are separated by commas.
+
+```{r}
+sum(1, 2, 3) # adds all numeric arguments together
+```
+
+Did you notice the text at the end of each line of code above?
+This text is called a **comment** because it is preceded
+by a hash character (`#`). This character tells R to ignore anything that
+comes after it on the same line. Since this text is not evaluated
+we can use it to make notes about what the code does.
+You do not need to type the comments into the command line to run the code.
+
+::: {.challenge}
+> #### **Try this:** What should be the ouput for each of these commands?
+> ```{r eval = FALSE}
+> log(exp(3 + 3)) 
+> 2e-1 + 5
+> ```
+:::
+::: {.solution}
+> #### **Solution:** 
+> ```{r class.source = 'fold-hide', collapse = TRUE}
+> log(exp(3 + 3)) 
+> 2e-1 + 5
+> ```
+:::
+
+::: {.challenge}
+> #### **Try this:** What do the values `NA` and `NULL` mean?
+> 
+> Run each of these commands and try to guess what is happening.
+> ```{r eval = FALSE}
+> sum(3, NA)
+> sum(3, NULL)
+> ```
+:::
+::: {.solution}
+> #### **Solution:**
+> ```{r class.source = 'fold-hide', collapse = TRUE}
+> sum(3, NA)
+> sum(3, NULL)
+> ```
+:::
+
+`NA` is a special placeholder value that means that data is missing. `NULL` is a special value that means something does not exist. Thus, arithmetic with `NA` will by default give a `NA` result because missing values are values that we may have tried to collect, but failed to do so. In contrast, `NULL` values do not take up any space and are ignored by default in calculations. We will learn later how to ignore missing values in calculations.
 
 
-
-
-
-#### Work with saved objects in a computing environment
+#### Work with stored values in a computing environment
 
 2	7	state the rules for assigning variables	learners will
 2	8	work with vectors	learners will
@@ -271,8 +308,8 @@ exp(0.5) # e^(1/2)
 
 arrow up to prior command
 
-
-We can store values in variables using the assignment operator `<-`, like this:
+The first step toward writing code is to store values for use later. 
+We can store values using the assignment operator `<-`, like this:
 
 ```{r}
 x <- 1/40
@@ -287,31 +324,88 @@ x
 
 More precisely, the stored value is a *decimal approximation* of
 this fraction called a [floating point number](http://en.wikipedia.org/wiki/Floating_point).
+The value is stored in an **object** named `x` in the environment.
 
-Look for the `Environment` tab in the top right panel of RStudio, and you will see that `x` and its value
-have appeared. Our variable `x` can be used in place of a number in any calculation that expects a number:
+Look for the `Environment` tab in the top right panel of RStudio, and you will see that `x` and its value have appeared. The variable `x` can be used in place of a number in any calculation that expects a number:
 
 ```{r}
 log(x)
 ```
 
-Notice also that variables can be reassigned:
+Notice also that variables can be reassigned when they already exist:
 
 ```{r}
 x <- 100
 ```
 
-`x` used to contain the value 0.025 and now it has the value 100.
+`x` used to contain the value 0.025 and now it has the value 100. You can see this in the `Environment` tab in the upper right panel.
 
-Assignment values can contain the variable being assigned to:
+Assignment values can contain the variable being assigned to (watch what happens to the values of `x` and `y` in the Environment tab):
 
 ```{r}
-x <- x + 1 #notice how RStudio updates its description of x on the top right tab
+x <- x + 1 
 y <- x * 2
 ```
 
 The right hand side of the assignment can be any valid R expression.
 The right hand side is *fully evaluated* before the assignment occurs.
+
+
+::: {.challenge}
+> #### **Try this:**
+>
+> What will be the values of `y` and `z` after you run these lines of code in order?
+> ```{r eval = FALSE}
+> x <- 10
+> y <- 2*x
+> z <- x + y
+> x <- 20
+> ```
+:::
+::: {.solution}
+> #### **Solution:**
+> ```{r class.source = 'fold-hide', collapse = TRUE}
+> x <- 10
+> y <- 2*x
+> z <- x + y
+> x <- 20
+>
+> # type the variable names to print out their values
+> x
+> y 
+> z
+> ```
+:::
+
+Did you guess correctly? Even though we changed the value of `x` in the last line,
+this does not change the value of `y` or `z` because the values of these two variables were
+assigned when `x` was `10`. We would have to run the assignment of `y` and `z` again to
+update their values based on the new value of `x`:
+
+```{r}
+y <- 2*x
+z <- x + y
+
+x
+y
+z
+```
+
+::: {.challenge}
+> #### **Try this:** Is R case sensitive?
+>
+> What happens when you run this code?
+> ```{r eval = FALSE}
+> y <- 2*X
+> ```
+:::
+::: {.solution}
+> ```{r class.source = 'fold-hide', eval = FALSE}
+> Error: object 'X' not found
+> ```
+:::
+
+We've discovered a very important point about variable names- they are case sensitive! `x` is a different variable than `X`. Thus, if you try to use a variable that you have not defined in the environment, R will print out an error message saying that it can't find the variable you used.
 
 Variable names can contain letters, numbers, underscores and periods but no spaces. They
 must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore).
@@ -335,9 +429,8 @@ But this is much less common among R users.  The most important thing is to
 where it is less confusing to use `<-` than `=`, and it is the most common
 symbol used in the community. So the recommendation is to use `<-`.
 
-> ## Challenge 1
->
-> Which of the following are valid R variable names?
+::: {.challenge}
+> #### **Try this:** Which of the following are valid R variable names?
 > ```{r, eval=FALSE}
 > min_height
 > max.height
@@ -348,30 +441,27 @@ symbol used in the community. So the recommendation is to use `<-`.
 > 2widths
 > celsius2kelvin
 > ```
->
-> > ## Solution to challenge 1
-> >
-> > The following can be used as R variables:
-> > ```{r ch1pt1-sol, eval=FALSE}
-> > min_height
-> > max.height
-> > MaxLength
-> > celsius2kelvin
-> > ```
-> >
-> > The following creates a hidden variable:
-> > ```{r ch1pt2-sol, eval=FALSE}
-> > .mass
-> > ```
-> >
-> > The following will not be able to be used to create a variable
-> > ```{r ch1pt3-sol, eval=FALSE}
-> > _age
-> > min-length
-> > 2widths
-> > ```
-> {: .solution}
-{: .challenge}
+:::
+::: {.solution}
+> #### **Solution:**
+> 
+> ```{r class.source = 'fold-hide', eval=FALSE}
+> # The following can be used as R variables:
+> min_height
+> max.height
+> MaxLength
+> celsius2kelvin
+> 
+> # The following creates a hidden variable:
+> .mass
+> 
+> # The following will not be able to be used to create a variable:
+> _age
+> min-length
+> 2widths
+> ```
+:::
+
 
 
 ### Managing your environment 
@@ -456,6 +546,86 @@ rm(list <- ls())
 Notice that although rm() and ls() are similar to the shell commands rm and ls, they operate in different spaces. The Terminal window in RStudio accesses the file system on your computer. The R Console accesses objects that you create during a specific R session. Once your close R, these objects disappear forever; they are not saved on your file system.
 
 
+
+### Writing code in scripts
+  - R and RStudio make it easy for anyone to reproduce your scientific analyses because your analyses are saved as code scripts rather than clicking through a graphical user interface
+
+2	4	write and save a code script in a project folder	learners will
+
+2	5	write and save a code script	use R and RStudio to
+2	6	write comments in a code script	use R and RStudio to
+
+
+Once you open files, such as R scripts, an editor panel will also open
+in the top left.
+
+![RStudio layout with .R file open](../fig/01-rstudio-script.png)
+
+> ## R scripts
+> 
+> Any commands that you write in the R console can be saved in to a file
+> to be re-run again.  Files containing R code to be ran in this way are 
+> called R scripts.  R scripts have `.R` at the end of their names to 
+> let you know what they are.
+{: .callout}
+
+::: {.challenge}
+> #### **Try this:** Create and save a new R script
+>
+>
+>
+:::
+
+### Workflow within RStudio
+There are two main ways one can work within RStudio:
+
+1. Test and play within the interactive R console then copy code into
+a .R file to run later.
+   *  This works well when doing small tests and initially starting off.
+   *  It quickly becomes laborious
+2. Start writing in a .R file and use RStudio's short cut keys for the Run command
+to push the current line, selected lines or modified lines to the
+interactive R console.
+   * This is a great way to start; all your code is saved for later
+   * You will be able to run the file you create from within RStudio
+   or using R's `source()`  function.
+
+> #### Tip: Running segments of your code
+>
+> RStudio offers you great flexibility in running code from within the editor
+> window. There are buttons, menu choices, and keyboard shortcuts. To run the
+> current line, you can
+> 1. click on the `Run` button above the editor panel, or
+> 2. select "Run Lines" from the "Code" menu, or
+> 3. type <kbd>Ctrl</kbd>+<kbd>Return</kbd> in Windows or Linux
+> or <kbd>&#8984;</kbd>+<kbd>Return</kbd> on OS X.
+> (This shortcut can also be seen by hovering
+> the mouse over the button). To run a block of code, select it and then `Run`.
+> If you have modified a line of code within a block of code you have just run,
+> there is no need to reselect the section and `Run`, you can use the next button
+> along, `Re-run the previous region`. This will run the previous code block
+> including the modifications you have made.
+
+::: {.challenge}
+> #### **Try this:** Open and run an R script
+>
+> Open this script.
+> Run it line by line and point out the part of the R script from the prior section (e.g. read a table, assign a variable, etc)
+> Run the who thing.
+> Close it and use source() to run it from the file.
+>
+:::
+
+
+
+The text after each line of code is called a
+"comment". Anything that follows after the hash symbol
+`#` is ignored by R when it executes code.
+
+
+
+
+
 #### Reading data from files
 
 2	5	read and view tabular data from a file	learners will
@@ -463,6 +633,50 @@ Notice that although rm() and ls() are similar to the shell commands rm and ls, 
 2	7	read a data table from a file	use R and RStudio to
 
 tab complete
+
+
+### Installing and loading packages
+
+"base" R is the functionality that comes installed with R, but the powerfull thing about R is its user community who have created thousands of "packages" that increase its functionality.
+
+2	3	install and load packages in R	learners will
+
+It is possible to add functions to R by writing a package, or by
+obtaining a package written by someone else. As of this writing, there
+are over 10,000 packages available on CRAN (the comprehensive R archive
+network). R and RStudio have functionality for managing packages:
+
+* You can see what packages are installed by typing
+  `installed.packages()`
+* You can install packages by typing `install.packages("packagename")`,
+  where `packagename` is the package name, in quotes.
+* You can update installed packages by typing `update.packages()`
+* You can remove a package with `remove.packages("packagename")`
+* You can make a package available for use with `library(packagename)`
+
+Packages can also be viewed, loaded, and detached in the Packages tab of the lower right panel in RStudio. Clicking on this tab will display all of the installed packages with a checkbox next to them. If the box next to a package name is checked, the package is loaded and if it is empty, the package is not loaded. Click an empty box to load that package and click a checked box to detach that package.
+
+Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.
+
+> ## Challenge 5
+>
+> Install the following packages: `ggplot2`, `plyr`, `gapminder`
+>
+> > ## Solution to challenge 5
+> >
+> > We can use the `install.packages()` command to install the required packages.
+> > ```{r ch5-sol, eval=FALSE}
+> > install.packages("ggplot2")
+> > install.packages("plyr")
+> > install.packages("gapminder")
+> > ```
+> >
+> > An alternate solution, to install multiple packages with a single `install.packages()` command is:
+> > ```{r ch5-sol2, eval=FALSE}
+> > install.packages(c("ggplot2", "plyr", "gapminder"))
+> > ```
+> {: .solution}
+{: .challenge}
 
 
 
@@ -535,7 +749,7 @@ This is because these functions have very similar applicability and often share 
 > ## Tip: Running Examples
 >
 > From within the function help page, you can highlight code in the 
-> Examples and hit <kbd>Ctrl</kbd>+<kbd>Return</kbd> to run it in 
+> Examples and type <kbd>Ctrl</kbd>+<kbd>Return</kbd> to run it in 
 > RStudio console. This gives you a quick way to get a feel for
 > how a function works.
 {: .callout}
@@ -695,124 +909,6 @@ your issue.
 {: .challenge}
 
 
-
-
-
-### Installing and loading packages
-
-"base" R is the functionality that comes installed with R, but the powerfull thing about R is its user community who have created thousands of "packages" that increase its functionality.
-
-2	3	install and load packages in R	learners will
-
-It is possible to add functions to R by writing a package, or by
-obtaining a package written by someone else. As of this writing, there
-are over 10,000 packages available on CRAN (the comprehensive R archive
-network). R and RStudio have functionality for managing packages:
-
-* You can see what packages are installed by typing
-  `installed.packages()`
-* You can install packages by typing `install.packages("packagename")`,
-  where `packagename` is the package name, in quotes.
-* You can update installed packages by typing `update.packages()`
-* You can remove a package with `remove.packages("packagename")`
-* You can make a package available for use with `library(packagename)`
-
-Packages can also be viewed, loaded, and detached in the Packages tab of the lower right panel in RStudio. Clicking on this tab will display all of the installed packages with a checkbox next to them. If the box next to a package name is checked, the package is loaded and if it is empty, the package is not loaded. Click an empty box to load that package and click a checked box to detach that package.
-
-Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.
-
-> ## Challenge 5
->
-> Install the following packages: `ggplot2`, `plyr`, `gapminder`
->
-> > ## Solution to challenge 5
-> >
-> > We can use the `install.packages()` command to install the required packages.
-> > ```{r ch5-sol, eval=FALSE}
-> > install.packages("ggplot2")
-> > install.packages("plyr")
-> > install.packages("gapminder")
-> > ```
-> >
-> > An alternate solution, to install multiple packages with a single `install.packages()` command is:
-> > ```{r ch5-sol2, eval=FALSE}
-> > install.packages(c("ggplot2", "plyr", "gapminder"))
-> > ```
-> {: .solution}
-{: .challenge}
-
-
-
-
-
-### Writing code in scripts
-  - R and RStudio make it easy for anyone to reproduce your scientific analyses because your analyses are saved as code scripts rather than clicking through a graphical user interface
-
-2	4	write and save a code script in a project folder	learners will
-
-2	5	write and save a code script	use R and RStudio to
-2	6	write comments in a code script	use R and RStudio to
-
-
-Once you open files, such as R scripts, an editor panel will also open
-in the top left.
-
-![RStudio layout with .R file open](../fig/01-rstudio-script.png)
-
-> ## R scripts
-> 
-> Any commands that you write in the R console can be saved in to a file
-> to be re-run again.  Files containing R code to be ran in this way are 
-> called R scripts.  R scripts have `.R` at the end of their names to 
-> let you know what they are.
-{: .callout}
-
-::: {.challenge}
-> #### Try this: Create and save a new R script
->
->
->
-:::
-
-### Workflow within RStudio
-There are two main ways one can work within RStudio:
-
-1. Test and play within the interactive R console then copy code into
-a .R file to run later.
-   *  This works well when doing small tests and initially starting off.
-   *  It quickly becomes laborious
-2. Start writing in a .R file and use RStudio's short cut keys for the Run command
-to push the current line, selected lines or modified lines to the
-interactive R console.
-   * This is a great way to start; all your code is saved for later
-   * You will be able to run the file you create from within RStudio
-   or using R's `source()`  function.
-
-> #### Tip: Running segments of your code
->
-> RStudio offers you great flexibility in running code from within the editor
-> window. There are buttons, menu choices, and keyboard shortcuts. To run the
-> current line, you can
-> 1. click on the `Run` button above the editor panel, or
-> 2. select "Run Lines" from the "Code" menu, or
-> 3. hit <kbd>Ctrl</kbd>+<kbd>Return</kbd> in Windows or Linux
-> or <kbd>&#8984;</kbd>+<kbd>Return</kbd> on OS X.
-> (This shortcut can also be seen by hovering
-> the mouse over the button). To run a block of code, select it and then `Run`.
-> If you have modified a line of code within a block of code you have just run,
-> there is no need to reselect the section and `Run`, you can use the next button
-> along, `Re-run the previous region`. This will run the previous code block
-> including the modifications you have made.
-
-::: {.challenge}
-> #### Try this: Open and run an R script
->
-> Open this script.
-> Run it line by line and point out the part of the R script from the prior section (e.g. read a table, assign a variable, etc)
-> Run the who thing.
-> Close it and use source() to run it from the file.
->
-:::
 
 
 

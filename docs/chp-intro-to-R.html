@@ -365,40 +365,8 @@ class="section level1 tabset">
 <h1 class="tabset">Chapter 2. Intro to R and RStudio</h1>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<p><em>from:</em> <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">Zimmerman et al. (2019)</span></a> episodes 1, 2, 3</p>
 <div id="what-we-will-learn" class="section level3">
 <h3>What we will learn</h3>
-<p>Brief description of the contents of this lesson.</p>
-<ul>
-<li>R is a programming language</li>
-<li>RStudio is an IDE
-<ul>
-<li>various additional functionality of RStudio</li>
-</ul></li>
-<li>R can:
-<ul>
-<li>do computations</li>
-<li>manipulate data</li>
-<li>access files on your computer or the internet</li>
-<li>make graphs</li>
-<li>create documents</li>
-<li>create apps</li>
-<li>almost anything… though it is not always the best tool for every
-job.</li>
-</ul></li>
-<li>Why R?
-<ul>
-<li>R has a wide user community and will always be free
-<ul>
-<li>user contributed packages: -NEONUtilities</li>
-</ul></li>
-<li>R and RStudio make it easy for anyone to reproduce your scientific
-analyses</li>
-<li>It is (relatively) easy to get help with (almost) anything</li>
-</ul></li>
-</ul>
 <p>In this lesson learners will:</p>
 <ul>
 <li>discover why so many scientists use R</li>
@@ -412,63 +380,880 @@ analyses</li>
 <li>learn how to get help and troubleshoot error messages</li>
 </ul>
 </div>
-<div id="motivator" class="section level3">
-<h3>Motivator</h3>
-<p>Describe a problem that learners will be able to solve by the end of
-this lesson.</p>
+<div id="motivator---fixme" class="section level3">
+<h3>Motivator - FIXME</h3>
+<p>Science is a multi-step process: once you’ve designed an experiment
+and collected data, the real fun begins! This lesson will teach you how
+to start this process using R and RStudio. We will begin with raw data,
+perform exploratory analyses, and learn how to plot results graphically.
+This example starts with a dataset from <a
+href="https://www.gapminder.org">gapminder.org</a> containing population
+information for many countries through time. Can you read the data into
+R? Can you plot the population for Senegal? Can you calculate the
+average income for countries on the continent of Asia? By the end of
+these lessons you will be able to do things like plot the populations
+for all of these countries in under a minute!</p>
+<ul>
+<li>Why R?
+<ul>
+<li>R has a wide user community and will always be free (open source -
+what does this mean)</li>
+<li>user contributed packages: -NEONUtilities</li>
+<li>R and RStudio make it easy for anyone to reproduce your scientific
+analyses because your analyses are saved as code scripts rather than
+clicking through a graphical user interface</li>
+<li>It is (relatively) easy to get help with (almost) anything</li>
+</ul></li>
+<li>R can:
+<ul>
+<li>do computations</li>
+<li>manipulate data</li>
+<li>access files on your computer or the internet</li>
+<li>make graphs</li>
+<li>create documents</li>
+<li>create apps</li>
+<li>almost anything… though it is not always the best tool for every
+job.</li>
+</ul></li>
+</ul>
 </div>
 <div id="get-set-up" class="section level3">
 <h3>Get set up</h3>
-<p>Describe any data sets or packages that learners need to download or
-install before proceeding.</p>
-<pre class="r"><code># Read in a data file from the data folder included with the student workbook
-dat &lt;- read.csv(&quot;data/gapminder_data.csv&quot;)</code></pre>
-<p>Make a code block that loads any packages needed for the analysis. It
-can be helpful to indicate which functions come from which packages.</p>
-<pre class="r"><code># Load dplyr: filter
-library(dplyr)
-
-# Load ggplot2: ggplot
-library(ggplot2)</code></pre>
+<p>Please ensure you have the latest version of R and RStudio installed
+on your machine. This is important, as some packages may not install
+correctly (or at all) if R is not up to date. For instructions on
+installing (or updating) R and RStudio, please see <a
+href="computer-setup.html">Computer Setup</a>.</p>
+<p>Once R and RStudio are installed, you will also need to set up the
+Student Workbook that accompanies this text as an RStudio project.
+Instructions are in the first exercise from <a
+href="chp-computer-navigation.html">Navigating your computer</a>.</p>
 </div>
 </div>
 <div id="lesson" class="section level2">
 <h2>Lesson</h2>
-<pre class="r"><code># This is an R code block that will execute any code inside and show the results.
-dat %&gt;%
-  filter(country == &quot;United States&quot;)</code></pre>
-<pre><code>         country year       pop continent lifeExp gdpPercap
-1  United States 1952 157553000  Americas  68.440  13990.48
-2  United States 1957 171984000  Americas  69.490  14847.13
-3  United States 1962 186538000  Americas  70.210  16173.15
-4  United States 1967 198712000  Americas  70.760  19530.37
-5  United States 1972 209896000  Americas  71.340  21806.04
-6  United States 1977 220239000  Americas  73.380  24072.63
-7  United States 1982 232187835  Americas  74.650  25009.56
-8  United States 1987 242803533  Americas  75.020  29884.35
-9  United States 1992 256894189  Americas  76.090  32003.93
-10 United States 1997 272911760  Americas  76.810  35767.43
-11 United States 2002 287675526  Americas  77.310  39097.10
-12 United States 2007 301139947  Americas  78.242  42951.65</code></pre>
-<div class="figure" style="text-align: center">
-<img src="images/rmd-02-usa_pop_fig-1.png" alt="Fig. 2.1. Population growth in the United States 1952 - 2007." width="816" />
-<p class="caption">
-Fig. 2.1. Population growth in the United States 1952 - 2007.
-</p>
+<div id="welcome-back-to-rstudio" class="section level3">
+<h3>Welcome (back) to RStudio!</h3>
+<ul>
+<li>R is a programming language</li>
+<li>RStudio is an IDE</li>
+<li>Already learned about Console and Files windows</li>
+<li>Lot’s of other windows that show additional functionality (such as
+version control (see addt lesson, application building and creating
+documents)</li>
+<li>In this lesson we will introduce the code, environment, packages and
+help windows.</li>
+</ul>
+<p>We’re going to learn some of the fundamentals of the R language as
+well as some best practices for organizing code for scientific projects
+that will make your life easier. We’ll be using RStudio: a free,
+open-source R Integrated Development Environment (IDE). It provides a
+built-in editor, works on all platforms (including on servers) and
+provides many advantages such as integration with version control and
+project management.</p>
+<p>Some notes on semantics:</p>
+<ul>
+<li>R is a program that you installed on your computer that allows you
+to write code in the <strong>R programming language</strong>.</li>
+<li>R is a command-line program that executes code one line at a time to
+produce output (more on this later).</li>
+<li>R code is usually written and saved in files called
+<strong>scripts</strong> which you can customize to do almost
+anything.</li>
+<li>RStudio is a program that allows you to write R code and test it out
+at the same time (which is why it is called an integrated development
+environment). It provides a <strong>G</strong>raphical
+<strong>U</strong>ser <strong>I</strong>nterface (GUI) that makes it
+easier to interact with R and develop R code.</li>
+</ul>
+<p>Let’s start by opening the student workbook RStudio project that
+accompanies this text. To open an RStudio project, use your computer’s
+file browser to navigate to the R-course-NEON-workbook folder you
+downloaded. Inside this folder, double click on the
+R-course-NEON-workbook.Rproj file (see the lesson: <a
+href="chp-computer-navigation.html">Navigating your computer</a>)</p>
+<p><strong>Basic layout</strong></p>
+<p>When you first open RStudio, you will be greeted by three panels:</p>
+<ul>
+<li>The interactive R console/Terminal (entire left)</li>
+<li>Environment/History/Connections (tabbed in upper right)</li>
+<li>Files/Plots/Packages/Help/Viewer (tabbed in lower right)</li>
+</ul>
+<p>If you opened the R-course-NEON-workbook project then your RStudio
+session should look like this:</p>
+<div class="figure">
+<img src="images/01-rstudio.png" alt="" />
+<p class="caption">RStudio layout</p>
 </div>
-<div id="section-1" class="section level3">
-<h3>Section 1</h3>
+<p>We’re going to start working in the R console to learn about some of
+the basic functionality of R. Once we start learning more complex code,
+we will open the Source panel and create an R script for saving the code
+that we write.</p>
+<p>The first thing you will see in the R console is a bunch of
+information, followed by a “&gt;” and a blinking cursor. This is a
+<strong>command-line interface</strong>; it reads and evaluates one line
+of code at a time, printing out any results of each line to the same
+console window as it goes. If you type in commands at the command line,
+R tries to execute them, and then returns a result.</p>
+<p>For the first part of this lesson, you should type any code that you
+see in grey boxes into the command line in the R console:</p>
+<pre class="r"><code>type this into the command line</code></pre>
+<p>the expected output will show up in white boxes below like this:</p>
+<pre><code>expected code output</code></pre>
+</div>
+<div id="what-can-r-do" class="section level3">
+<h3>What can R do?</h3>
+<p>As mentioned in the introduction, R can do almost anything, although
+it is not always the best tool for every job.</p>
+<div id="arithmetic-and-calculations" class="section level4">
+<h4>Arithmetic and calculations</h4>
+<p>The simplest thing you could do with R is to do arithmetic:</p>
+<pre class="r"><code>1 + 100</code></pre>
+<pre><code>[1] 101</code></pre>
+<p>And R will print out the answer, with a preceding “[1]”. [1] is the
+index of the first element of the line being printed in the console. For
+more information on indexing vectors, see <a
+href="chp-data-structures.html">Data structures and operations</a>.</p>
+<p>If you type in an incomplete command, R will wait for you to complete
+it. For example:</p>
+<pre class="r"><code>1 +</code></pre>
+<pre><code>+</code></pre>
+<p>Any time you type return and the R session shows a “+” instead of a
+“&gt;”, it means it’s waiting for you to complete the command. You can
+either keep typing the rest of the command:</p>
+<pre class="r"><code>1 +
+100</code></pre>
+<pre><code>[1] 101</code></pre>
+<p>or cancel what you were doing. If you want to cancel a command you
+can type <kbd>Esc</kbd> and RStudio will give you back the “&gt;”
+prompt. Note that if you’re using R outside of RStudio, you need to use
+<kbd>Ctrl</kbd>+<kbd>C</kbd> instead of <kbd>Esc</kbd> to cancel the
+command.</p>
+<p>Canceling a command isn’t only useful for stopping incomplete
+commands: you can also use it to tell R to stop running code (for
+example if it’s taking much longer than you expect), or to get rid of
+the code you’re currently writing.</p>
+<p>When using R as a calculator, the order of operations is the same as
+you would have learned in math class.</p>
+<p>From highest to lowest precedence:</p>
+<ul>
+<li>Parentheses: <code>(</code>, <code>)</code></li>
+<li>Exponents: <code>^</code> or <code>**</code></li>
+<li>Multiply: <code>*</code></li>
+<li>Divide: <code>/</code></li>
+<li>Add: <code>+</code></li>
+<li>Subtract: <code>-</code></li>
+</ul>
+<pre class="r"><code>3 + 5 * 2</code></pre>
+<pre><code>[1] 13</code></pre>
+<p>Use parentheses to group operations in order to force the order of
+evaluation if it differs from the default, or to make clear what you
+intend.</p>
+<pre class="r"><code>(3 + 5) * 2</code></pre>
+<pre><code>[1] 16</code></pre>
+<p>Really small or large numbers get a scientific notation:</p>
+<pre class="r"><code>2/10000</code></pre>
+<pre><code>[1] 2e-04</code></pre>
+<p>Which is shorthand for “multiplied by <code>10^XX</code>”. So
+<code>2e-4</code> is shorthand for <code>2 * 10^(-4)</code>.</p>
+<p>You can write numbers in scientific notation too:</p>
+<pre class="r"><code>5e3  </code></pre>
+<pre><code>[1] 5000</code></pre>
+<p>R has many built in mathematical functions. To use a function, we can
+type its name, followed by open and closing parentheses (just like
+functions in math!). Functions take <strong>arguments</strong> as
+inputs- anything we type inside the parentheses of a function is
+considered an argument. Depending on the function, the number of
+arguments can vary from none to multiple. For example:</p>
+<pre class="r"><code>getwd() # returns an absolute file path of the current working directory</code></pre>
+<p>doesn’t require an argument, whereas for the next set of mathematical
+functions we will need to supply the function a value in order to
+compute the result.</p>
+<pre class="r"><code>sin(1)  # trigonometry functions</code></pre>
+<pre><code>[1] 0.841471</code></pre>
+<pre class="r"><code>log(1)  # natural logarithm</code></pre>
+<pre><code>[1] 0</code></pre>
+<pre class="r"><code>log10(10) # base-10 logarithm</code></pre>
+<pre><code>[1] 1</code></pre>
+<pre class="r"><code>exp(0.5) # e^(1/2)</code></pre>
+<pre><code>[1] 1.648721</code></pre>
+<p>Some functions take multiple arguments that are separated by
+commas.</p>
+<pre class="r"><code>sum(1, 2, 3) # adds all numeric arguments together</code></pre>
+<pre><code>[1] 6</code></pre>
+<p>Did you notice the text at the end of each line of code above? This
+text is called a <strong>comment</strong> because it is preceded by a
+hash character (<code>#</code>). This character tells R to ignore
+anything that comes after it on the same line. Since this text is not
+evaluated we can use it to make notes about what the code does. You do
+not need to type the comments into the command line to run the code.</p>
+<div class="challenge">
 <blockquote>
-<p><strong><em>CHALLENGE:</em></strong> What will this code do?</p>
-<pre class="r"><code>1 + 1</code></pre>
+<h4
+id="try-this-what-should-be-the-ouput-for-each-of-these-commands"><strong>Try
+this:</strong> What should be the ouput for each of these commands?</h4>
+<pre class="r"><code>log(exp(3 + 3)) 
+2e-1 + 5</code></pre>
+</blockquote>
+</div>
+<div class="solution">
 <blockquote>
-<pre class="r fold-hide"><code>1 + 1
-[1] 2</code></pre>
+<h4 id="solution"><strong>Solution:</strong></h4>
+<pre class="r fold-hide"><code>log(exp(3 + 3)) 
+[1] 6
+2e-1 + 5
+[1] 5.2</code></pre>
+</blockquote>
+</div>
+<div class="challenge">
+<blockquote>
+<h4 id="try-this-what-do-the-values-na-and-null-mean"><strong>Try
+this:</strong> What do the values <code>NA</code> and <code>NULL</code>
+mean?</h4>
+<p>Run each of these commands and try to guess what is happening.</p>
+<pre class="r"><code>sum(3, NA)
+sum(3, NULL)</code></pre>
+</blockquote>
+</div>
+<div class="solution">
+<blockquote>
+<h4 id="solution-1"><strong>Solution:</strong></h4>
+<pre class="r fold-hide"><code>sum(3, NA)
+[1] NA
+sum(3, NULL)
+[1] 3</code></pre>
+</blockquote>
+</div>
+<p><code>NA</code> is a special placeholder value that means that data
+is missing. <code>NULL</code> is a special value that means something
+does not exist. Thus, arithmetic with <code>NA</code> will by default
+give a <code>NA</code> result because missing values are values that we
+may have tried to collect, but failed to do so. In contrast,
+<code>NULL</code> values do not take up any space and are ignored by
+default in calculations. We will learn later how to ignore missing
+values in calculations.</p>
+</div>
+<div id="work-with-stored-values-in-a-computing-environment"
+class="section level4">
+<h4>Work with stored values in a computing environment</h4>
+<p>2 7 state the rules for assigning variables learners will 2 8 work
+with vectors learners will</p>
+<p>2 2 assign and manipulate variables use R and RStudio to 2 3 “assign,
+subset and manipulate data in a vector” use R and RStudio to 2 4 execute
+vector algebra use R and RStudio to</p>
+<p>arrow up to prior command</p>
+<p>The first step toward writing code is to store values for use later.
+We can store values using the assignment operator <code>&lt;-</code>,
+like this:</p>
+<pre class="r"><code>x &lt;- 1/40</code></pre>
+<p>Notice that assignment does not print a value. Instead, we stored it
+for later in something called a <strong>variable</strong>.
+<code>x</code> now contains the <strong>value</strong>
+<code>0.025</code>:</p>
+<pre class="r"><code>x</code></pre>
+<pre><code>[1] 0.025</code></pre>
+<p>More precisely, the stored value is a <em>decimal approximation</em>
+of this fraction called a <a
+href="http://en.wikipedia.org/wiki/Floating_point">floating point
+number</a>. The value is stored in an <strong>object</strong> named
+<code>x</code> in the environment.</p>
+<p>Look for the <code>Environment</code> tab in the top right panel of
+RStudio, and you will see that <code>x</code> and its value have
+appeared. The variable <code>x</code> can be used in place of a number
+in any calculation that expects a number:</p>
+<pre class="r"><code>log(x)</code></pre>
+<pre><code>[1] -3.688879</code></pre>
+<p>Notice also that variables can be reassigned when they already
+exist:</p>
+<pre class="r"><code>x &lt;- 100</code></pre>
+<p><code>x</code> used to contain the value 0.025 and now it has the
+value 100. You can see this in the <code>Environment</code> tab in the
+upper right panel.</p>
+<p>Assignment values can contain the variable being assigned to (watch
+what happens to the values of <code>x</code> and <code>y</code> in the
+Environment tab):</p>
+<pre class="r"><code>x &lt;- x + 1 
+y &lt;- x * 2</code></pre>
+<p>The right hand side of the assignment can be any valid R expression.
+The right hand side is <em>fully evaluated</em> before the assignment
+occurs.</p>
+<div class="challenge">
+<blockquote>
+<h4 id="try-this"><strong>Try this:</strong></h4>
+<p>What will be the values of <code>y</code> and <code>z</code> after
+you run these lines of code in order?</p>
+<pre class="r"><code>x &lt;- 10
+y &lt;- 2*x
+z &lt;- x + y
+x &lt;- 20</code></pre>
+</blockquote>
+</div>
+<div class="solution">
+<blockquote>
+<h4 id="solution-2"><strong>Solution:</strong></h4>
+<pre class="r fold-hide"><code>x &lt;- 10
+y &lt;- 2*x
+z &lt;- x + y
+x &lt;- 20
+
+# type the variable names to print out their values
+x
+[1] 20
+y 
+[1] 20
+z
+[1] 30</code></pre>
+</blockquote>
+</div>
+<p>Did you guess correctly? Even though we changed the value of
+<code>x</code> in the last line, this does not change the value of
+<code>y</code> or <code>z</code> because the values of these two
+variables were assigned when <code>x</code> was <code>10</code>. We
+would have to run the assignment of <code>y</code> and <code>z</code>
+again to update their values based on the new value of
+<code>x</code>:</p>
+<pre class="r"><code>y &lt;- 2*x
+z &lt;- x + y
+
+x</code></pre>
+<pre><code>[1] 20</code></pre>
+<pre class="r"><code>y</code></pre>
+<pre><code>[1] 40</code></pre>
+<pre class="r"><code>z</code></pre>
+<pre><code>[1] 60</code></pre>
+<div class="challenge">
+<blockquote>
+<h4 id="try-this-is-r-case-sensitive"><strong>Try this:</strong> Is R
+case sensitive?</h4>
+<p>What happens when you run this code?</p>
+<pre class="r"><code>y &lt;- 2*X</code></pre>
+</blockquote>
+</div>
+<div class="solution">
+<blockquote>
+<pre class="r fold-hide"><code>Error: object &#39;X&#39; not found</code></pre>
+</blockquote>
+</div>
+<p>We’ve discovered a very important point about variable names- they
+are case sensitive! <code>x</code> is a different variable than
+<code>X</code>. Thus, if you try to use a variable that you have not
+defined in the environment, R will print out an error message saying
+that it can’t find the variable you used.</p>
+<p>Variable names can contain letters, numbers, underscores and periods
+but no spaces. They must start with a letter or a period followed by a
+letter (they cannot start with a number nor an underscore). Variables
+beginning with a period are hidden variables. Different people use
+different conventions for long variable names, these include</p>
+<ul>
+<li>periods.between.words</li>
+<li>underscores_between_words</li>
+<li>camelCaseToSeparateWords</li>
+</ul>
+<p>What you use is up to you, but <strong>be consistent</strong>.</p>
+<p>It is also possible to use the <code>=</code> operator for
+assignment:</p>
+<pre class="r"><code>x = 1/40</code></pre>
+<p>But this is much less common among R users. The most important thing
+is to <strong>be consistent</strong> with the operator you use. There
+are occasionally places where it is less confusing to use
+<code>&lt;-</code> than <code>=</code>, and it is the most common symbol
+used in the community. So the recommendation is to use
+<code>&lt;-</code>.</p>
+<div class="challenge">
+<blockquote>
+<h4
+id="try-this-which-of-the-following-are-valid-r-variable-names"><strong>Try
+this:</strong> Which of the following are valid R variable names?</h4>
+<pre class="r"><code>min_height
+max.height
+_age
+.mass
+MaxLength
+min-length
+2widths
+celsius2kelvin</code></pre>
+</blockquote>
+</div>
+<div class="solution">
+<blockquote>
+<h4 id="solution-3"><strong>Solution:</strong></h4>
+<pre class="r fold-hide"><code># The following can be used as R variables:
+min_height
+max.height
+MaxLength
+celsius2kelvin
+
+# The following creates a hidden variable:
+.mass
+
+# The following will not be able to be used to create a variable:
+_age
+min-length
+2widths</code></pre>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="managing-your-environment" class="section level3">
+<h3>Managing your environment</h3>
+<p>There are a few useful commands you can use to interact with the R
+session.</p>
+<p><code>ls</code> will list all of the variables and functions stored
+in the global environment (your working R session):</p>
+<pre class="r"><code>ls()</code></pre>
+<pre><code> [1] &quot;chp_num&quot;        &quot;chp_str&quot;        &quot;chptable&quot;       &quot;CStable&quot;       
+ [5] &quot;gapminder&quot;      &quot;get_chpName&quot;    &quot;get_chpNum&quot;     &quot;get_LO&quot;        
+ [9] &quot;knitr_fig_path&quot; &quot;LOtable&quot;        &quot;x&quot;              &quot;y&quot;             
+[13] &quot;z&quot;             </code></pre>
+<blockquote>
+<h2 id="tip-hidden-objects">Tip: hidden objects</h2>
+<p>Like in the shell, <code>ls</code> will hide any variables or
+functions starting with a “.” by default. To list all objects, type
+<code>ls(all.names=TRUE)</code> instead</p>
+<p>{: .callout}</p>
+</blockquote>
+<p>Note here that we didn’t give any arguments to <code>ls</code>, but
+we still needed to give the parentheses to tell R to call the
+function.</p>
+<p>If we type <code>ls</code> by itself, R prints a bunch of code
+instead of a listing of objects.</p>
+<pre class="r"><code>ls</code></pre>
+<pre><code>function (name, pos = -1L, envir = as.environment(pos), all.names = FALSE, 
+    pattern, sorted = TRUE) 
+{
+    if (!missing(name)) {
+        pos &lt;- tryCatch(name, error = function(e) e)
+        if (inherits(pos, &quot;error&quot;)) {
+            name &lt;- substitute(name)
+            if (!is.character(name)) 
+                name &lt;- deparse(name)
+            warning(gettextf(&quot;%s converted to character string&quot;, 
+                sQuote(name)), domain = NA)
+            pos &lt;- name
+        }
+    }
+    all.names &lt;- .Internal(ls(envir, all.names, sorted))
+    if (!missing(pattern)) {
+        if ((ll &lt;- length(grep(&quot;[&quot;, pattern, fixed = TRUE))) &amp;&amp; 
+            ll != length(grep(&quot;]&quot;, pattern, fixed = TRUE))) {
+            if (pattern == &quot;[&quot;) {
+                pattern &lt;- &quot;\\[&quot;
+                warning(&quot;replaced regular expression pattern &#39;[&#39; by  &#39;\\\\[&#39;&quot;)
+            }
+            else if (length(grep(&quot;[^\\\\]\\[&lt;-&quot;, pattern))) {
+                pattern &lt;- sub(&quot;\\[&lt;-&quot;, &quot;\\\\\\[&lt;-&quot;, pattern)
+                warning(&quot;replaced &#39;[&lt;-&#39; by &#39;\\\\[&lt;-&#39; in regular expression pattern&quot;)
+            }
+        }
+        grep(pattern, all.names, value = TRUE)
+    }
+    else all.names
+}
+&lt;bytecode: 0x000001f10a2d9980&gt;
+&lt;environment: namespace:base&gt;</code></pre>
+<p>What’s going on here?</p>
+<p>Like everything in R, <code>ls</code> is the name of an object, and
+entering the name of an object by itself prints the contents of the
+object. The object <code>x</code> that we created earlier contains
+0.025:</p>
+<pre class="r"><code>x</code></pre>
+<pre><code>[1] 0.025</code></pre>
+<p>The object <code>ls</code> contains the R code that makes the
+<code>ls</code> function work! We’ll talk more about how functions work
+and start writing our own later.</p>
+<p>You can use <code>rm</code> to delete objects you no longer need:</p>
+<pre class="r"><code>rm(x)</code></pre>
+<p>If you have lots of things in your environment and want to delete all
+of them, you can pass the results of <code>ls</code> to the
+<code>rm</code> function:</p>
+<pre class="r"><code>rm(list = ls())</code></pre>
+<p>In this case we’ve combined the two. Like the order of operations,
+anything inside the innermost parentheses is evaluated first, and so
+on.</p>
+<p>In this case we’ve specified that the results of <code>ls</code>
+should be used for the <code>list</code> argument in <code>rm</code>.
+When assigning values to arguments by name, you <em>must</em> use the
+<code>=</code> operator!!</p>
+<p>If instead we use <code>&lt;-</code>, there will be unintended side
+effects, or you may get an error message:</p>
+<pre class="r"><code>rm(list &lt;- ls())</code></pre>
+<pre><code>Error in rm(list &lt;- ls()): ... must contain names or character strings</code></pre>
+<blockquote>
+<h2 id="tip-warnings-vs.-errors">Tip: Warnings vs. Errors</h2>
+<p>Pay attention when R does something unexpected! Errors, like above,
+are thrown when R cannot proceed with a calculation. Warnings on the
+other hand usually mean that the function has run, but it probably
+hasn’t worked as expected.</p>
+<p>In both cases, the message that R prints out usually give you clues
+how to fix a problem.</p>
+</blockquote>
+<p>Notice that although rm() and ls() are similar to the shell commands
+rm and ls, they operate in different spaces. The Terminal window in
+RStudio accesses the file system on your computer. The R Console
+accesses objects that you create during a specific R session. Once your
+close R, these objects disappear forever; they are not saved on your
+file system.</p>
+</div>
+<div id="writing-code-in-scripts" class="section level3">
+<h3>Writing code in scripts</h3>
+<ul>
+<li>R and RStudio make it easy for anyone to reproduce your scientific
+analyses because your analyses are saved as code scripts rather than
+clicking through a graphical user interface</li>
+</ul>
+<p>2 4 write and save a code script in a project folder learners
+will</p>
+<p>2 5 write and save a code script use R and RStudio to 2 6 write
+comments in a code script use R and RStudio to</p>
+<p>Once you open files, such as R scripts, an editor panel will also
+open in the top left.</p>
+<div class="figure">
+<img src="../fig/01-rstudio-script.png" alt="" />
+<p class="caption">RStudio layout with .R file open</p>
+</div>
+<blockquote>
+<h2 id="r-scripts">R scripts</h2>
+<p>Any commands that you write in the R console can be saved in to a
+file to be re-run again. Files containing R code to be ran in this way
+are called R scripts. R scripts have <code>.R</code> at the end of their
+names to let you know what they are. {: .callout}</p>
+</blockquote>
+<div class="challenge">
+<blockquote>
+<h4 id="try-this-create-and-save-a-new-r-script"><strong>Try
+this:</strong> Create and save a new R script</h4>
+</blockquote>
+</div>
+</div>
+<div id="workflow-within-rstudio" class="section level3">
+<h3>Workflow within RStudio</h3>
+<p>There are two main ways one can work within RStudio:</p>
+<ol style="list-style-type: decimal">
+<li>Test and play within the interactive R console then copy code into a
+.R file to run later.
+<ul>
+<li>This works well when doing small tests and initially starting
+off.</li>
+<li>It quickly becomes laborious</li>
+</ul></li>
+<li>Start writing in a .R file and use RStudio’s short cut keys for the
+Run command to push the current line, selected lines or modified lines
+to the interactive R console.
+<ul>
+<li>This is a great way to start; all your code is saved for later</li>
+<li>You will be able to run the file you create from within RStudio or
+using R’s <code>source()</code> function.</li>
+</ul></li>
+</ol>
+<blockquote>
+<h4 id="tip-running-segments-of-your-code">Tip: Running segments of your
+code</h4>
+<p>RStudio offers you great flexibility in running code from within the
+editor window. There are buttons, menu choices, and keyboard shortcuts.
+To run the current line, you can 1. click on the <code>Run</code> button
+above the editor panel, or 2. select “Run Lines” from the “Code” menu,
+or 3. type <kbd>Ctrl</kbd>+<kbd>Return</kbd> in Windows or Linux or
+<kbd>⌘</kbd>+<kbd>Return</kbd> on OS X. (This shortcut can also be seen
+by hovering the mouse over the button). To run a block of code, select
+it and then <code>Run</code>. If you have modified a line of code within
+a block of code you have just run, there is no need to reselect the
+section and <code>Run</code>, you can use the next button along,
+<code>Re-run the previous region</code>. This will run the previous code
+block including the modifications you have made.</p>
+</blockquote>
+<div class="challenge">
+<blockquote>
+<h4 id="try-this-open-and-run-an-r-script"><strong>Try this:</strong>
+Open and run an R script</h4>
+<p>Open this script. Run it line by line and point out the part of the R
+script from the prior section (e.g. read a table, assign a variable,
+etc) Run the who thing. Close it and use source() to run it from the
+file.</p>
+</blockquote>
+</div>
+<p>The text after each line of code is called a “comment”. Anything that
+follows after the hash symbol <code>#</code> is ignored by R when it
+executes code.</p>
+<div id="reading-data-from-files" class="section level4">
+<h4>Reading data from files</h4>
+<p>2 5 read and view tabular data from a file learners will</p>
+<p>2 7 read a data table from a file use R and RStudio to</p>
+<p>tab complete</p>
+</div>
+</div>
+<div id="installing-and-loading-packages" class="section level3">
+<h3>Installing and loading packages</h3>
+<p>“base” R is the functionality that comes installed with R, but the
+powerfull thing about R is its user community who have created thousands
+of “packages” that increase its functionality.</p>
+<p>2 3 install and load packages in R learners will</p>
+<p>It is possible to add functions to R by writing a package, or by
+obtaining a package written by someone else. As of this writing, there
+are over 10,000 packages available on CRAN (the comprehensive R archive
+network). R and RStudio have functionality for managing packages:</p>
+<ul>
+<li>You can see what packages are installed by typing
+<code>installed.packages()</code></li>
+<li>You can install packages by typing
+<code>install.packages("packagename")</code>, where
+<code>packagename</code> is the package name, in quotes.</li>
+<li>You can update installed packages by typing
+<code>update.packages()</code></li>
+<li>You can remove a package with
+<code>remove.packages("packagename")</code></li>
+<li>You can make a package available for use with
+<code>library(packagename)</code></li>
+</ul>
+<p>Packages can also be viewed, loaded, and detached in the Packages tab
+of the lower right panel in RStudio. Clicking on this tab will display
+all of the installed packages with a checkbox next to them. If the box
+next to a package name is checked, the package is loaded and if it is
+empty, the package is not loaded. Click an empty box to load that
+package and click a checked box to detach that package.</p>
+<p>Packages can be installed and updated from the Package tab with the
+Install and Update buttons at the top of the tab.</p>
+<blockquote>
+<h2 id="challenge-5">Challenge 5</h2>
+<p>Install the following packages: <code>ggplot2</code>,
+<code>plyr</code>, <code>gapminder</code></p>
+<blockquote>
+<h2 id="solution-to-challenge-5">Solution to challenge 5</h2>
+<p>We can use the <code>install.packages()</code> command to install the
+required packages.</p>
+<pre class="r"><code>install.packages(&quot;ggplot2&quot;)
+install.packages(&quot;plyr&quot;)
+install.packages(&quot;gapminder&quot;)</code></pre>
+<p>An alternate solution, to install multiple packages with a single
+<code>install.packages()</code> command is:</p>
+<pre class="r"><code>install.packages(c(&quot;ggplot2&quot;, &quot;plyr&quot;, &quot;gapminder&quot;))</code></pre>
+<p>{: .solution} {: .challenge}</p>
 </blockquote>
 </blockquote>
+<div id="getting-help" class="section level4">
+<h4>Getting help</h4>
+<p>2 9 learn how to get help and troubleshoot error messages learners
+will 2 8 access and understand a function’s documentation page use R and
+RStudio to</p>
+<p>Don’t worry about trying to remember every function in R. You can
+look them up on Google, or if you can remember the start of the
+function’s name, use the tab completion in RStudio.</p>
+<p>This is one advantage that RStudio has over R on its own, it has
+auto-completion abilities that allow you to more easily look up
+functions, their arguments, and the values that they take.</p>
+<p>Typing a <code>?</code> before the name of a command will open the
+help page for that command. When using RStudio, this will open the
+‘Help’ pane; if using R in the terminal, the help page will open in your
+browser. The help page will include a detailed description of the
+command and how it works. Scrolling to the bottom of the help page will
+usually show a collection of code examples which illustrate command
+usage. We’ll go through an example later.</p>
+<p>R, and every package, provide help files for functions. The general
+syntax to search for help on any function, “function_name”, from a
+specific function that is in a package loaded into your namespace (your
+interactive R session) is:</p>
+<pre class="r"><code>?function_name
+help(function_name)</code></pre>
+<p>For example take a look at the help file for
+<code>write.table()</code>, we will be using a similar function in an
+upcoming episode.</p>
+<pre class="r"><code>?write.table()</code></pre>
+<p>This will load up a help page in RStudio (or as plain text in R
+itself).</p>
+<p>Each help page is broken down into sections:</p>
+<ul>
+<li>Description: An extended description of what the function does.</li>
+<li>Usage: The arguments of the function and their default values (which
+can be changed).</li>
+<li>Arguments: An explanation of the data each argument is
+expecting.</li>
+<li>Details: Any important details to be aware of.</li>
+<li>Value: The data the function returns.</li>
+<li>See Also: Any related functions you might find useful.</li>
+<li>Examples: Some examples for how to use the function.</li>
+</ul>
+<p>Different functions might have different sections, but these are the
+main ones you should be aware of.</p>
+<p>Notice how related functions might call for the same help file:</p>
+<pre class="r"><code>?write.table()
+?write.csv()</code></pre>
+<p>This is because these functions have very similar applicability and
+often share the same arguments as inputs to the function, so package
+authors often choose to document them together in a single help
+file.</p>
+<blockquote>
+<h2 id="tip-running-examples">Tip: Running Examples</h2>
+<p>From within the function help page, you can highlight code in the
+Examples and type <kbd>Ctrl</kbd>+<kbd>Return</kbd> to run it in RStudio
+console. This gives you a quick way to get a feel for how a function
+works. {: .callout}</p>
+</blockquote>
+<blockquote>
+<h2 id="tip-reading-help-files">Tip: Reading Help Files</h2>
+<p>One of the most daunting aspects of R is the large number of
+functions available. It would be prohibitive, if not impossible to
+remember the correct usage for every function you use. Luckily, using
+the help files means you don’t have to remember that! {: .callout}</p>
+</blockquote>
 </div>
-<div id="section-2" class="section level3">
-<h3>Section 2</h3>
+</div>
+<div id="special-operators" class="section level3">
+<h3>Special Operators</h3>
+<p>To seek help on special operators, use quotes or backticks:</p>
+<pre class="r"><code>?&quot;&lt;-&quot;
+?`&lt;-`</code></pre>
+</div>
+<div id="getting-help-with-packages" class="section level3">
+<h3>Getting Help with Packages</h3>
+<p>Many packages come with “vignettes”: tutorials and extended example
+documentation. Without any arguments, <code>vignette()</code> will list
+all vignettes for all installed packages;
+<code>vignette(package="package-name")</code> will list all available
+vignettes for <code>package-name</code>, and
+<code>vignette("vignette-name")</code> will open the specified
+vignette.</p>
+<p>If a package doesn’t have any vignettes, you can usually find help by
+typing <code>help("package-name")</code>.</p>
+<p>RStudio also has a set of excellent <a
+href="https://rstudio.com/resources/cheatsheets/">cheatsheets</a> for
+many packages.</p>
+</div>
+<div id="when-you-remember-part-of-the-function-name"
+class="section level3">
+<h3>When You Remember Part of the Function Name</h3>
+<p>If you’re not sure what package a function is in or how it’s
+specifically spelled, you can do a fuzzy search:</p>
+<pre class="r"><code>??function_name</code></pre>
+<p>A fuzzy search is when you search for an approximate string match.
+For example, you may remember that the function to set your working
+directory includes “set” in its name. You can do a fuzzy search to help
+you identify the function:</p>
+<pre class="r"><code>??set</code></pre>
+</div>
+<div id="when-you-have-no-idea-where-to-begin" class="section level3">
+<h3>When You Have No Idea Where to Begin</h3>
+<p>If you don’t know what function or package you need to use <a
+href="http://cran.at.r-project.org/web/views">CRAN Task Views</a> is a
+specially maintained list of packages grouped into fields. This can be a
+good starting point.</p>
+</div>
+<div id="when-your-code-doesnt-work-seeking-help-from-your-peers"
+class="section level3">
+<h3>When Your Code Doesn’t Work: Seeking Help from Your Peers</h3>
+<p>If you’re having trouble using a function, 9 times out of 10, the
+answers you seek have already been answered on <a
+href="http://stackoverflow.com/">Stack Overflow</a>. You can search
+using the <code>[r]</code> tag. Please make sure to see their page on <a
+href="https://stackoverflow.com/help/how-to-ask">how to ask a good
+question.</a></p>
+<p>If you can’t find the answer, there are a few useful functions to
+help you ask your peers:</p>
+<pre class="r"><code>?dput</code></pre>
+<p>Will dump the data you’re working with into a format that can be
+copied and pasted by others into their own R session.</p>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.2.1 (2022-06-23 ucrt)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 22621)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] knitr_1.41
+
+loaded via a namespace (and not attached):
+ [1] digest_0.6.29   R6_2.5.1        lifecycle_1.0.3 jsonlite_1.8.0 
+ [5] magrittr_2.0.3  evaluate_0.15   stringi_1.7.8   cachem_1.0.6   
+ [9] rlang_1.0.6     cli_3.5.0       rstudioapi_0.13 jquerylib_0.1.4
+[13] bslib_0.4.2     vctrs_0.4.1     rmarkdown_2.19  tools_4.2.1    
+[17] stringr_1.5.0   glue_1.6.2      xfun_0.36       yaml_2.3.6     
+[21] fastmap_1.1.0   compiler_4.2.1  htmltools_0.5.4 sass_0.4.4     </code></pre>
+<p>Will print out your current version of R, as well as any packages you
+have loaded. This can be useful for others to help reproduce and debug
+your issue.</p>
+<blockquote>
+<h2 id="challenge-1">Challenge 1</h2>
+<p>Look at the help page for the <code>c</code> function. What kind of
+vector do you expect will be created if you evaluate the following:</p>
+<pre class="r"><code>c(1, 2, 3)
+c(&#39;d&#39;, &#39;e&#39;, &#39;f&#39;)
+c(1, 2, &#39;f&#39;)</code></pre>
+<blockquote>
+<h2 id="solution-to-challenge-1">Solution to Challenge 1</h2>
+<p>The <code>c()</code> function creates a vector, in which all elements
+are of the same type. In the first case, the elements are numeric, in
+the second, they are characters, and in the third they are also
+characters: the numeric values are “coerced” to be characters. {:
+.solution} {: .challenge}</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h2 id="challenge-2">Challenge 2</h2>
+<p>Look at the help for the <code>paste</code> function. You will need
+to use it later. What’s the difference between the <code>sep</code> and
+<code>collapse</code> arguments?</p>
+<blockquote>
+<h2 id="solution-to-challenge-2">Solution to Challenge 2</h2>
+<p>To look at the help for the <code>paste()</code> function, use:</p>
+<pre class="r"><code>help(&quot;paste&quot;)
+?paste</code></pre>
+<p>The difference between <code>sep</code> and <code>collapse</code> is
+a little tricky. The <code>paste</code> function accepts any number of
+arguments, each of which can be a vector of any length. The
+<code>sep</code> argument specifies the string used between concatenated
+terms — by default, a space. The result is a vector as long as the
+longest argument supplied to <code>paste</code>. In contrast,
+<code>collapse</code> specifies that after concatenation the elements
+are <em>collapsed</em> together using the given separator, the result
+being a single string.</p>
+<p>It is important to call the arguments explicitly by typing out the
+argument name e.g <code>sep = ","</code> so the function understands to
+use the “,” as a separator and not a term to concatenate. e.g. </p>
+<pre class="r"><code>paste(c(&quot;a&quot;,&quot;b&quot;), &quot;c&quot;)</code></pre>
+<pre><code>[1] &quot;a c&quot; &quot;b c&quot;</code></pre>
+<pre class="r"><code>paste(c(&quot;a&quot;,&quot;b&quot;), &quot;c&quot;, &quot;,&quot;)</code></pre>
+<pre><code>[1] &quot;a c ,&quot; &quot;b c ,&quot;</code></pre>
+<pre class="r"><code>paste(c(&quot;a&quot;,&quot;b&quot;), &quot;c&quot;, sep = &quot;,&quot;)</code></pre>
+<pre><code>[1] &quot;a,c&quot; &quot;b,c&quot;</code></pre>
+<pre class="r"><code>paste(c(&quot;a&quot;,&quot;b&quot;), &quot;c&quot;, collapse = &quot;|&quot;)</code></pre>
+<pre><code>[1] &quot;a c|b c&quot;</code></pre>
+<pre class="r"><code>paste(c(&quot;a&quot;,&quot;b&quot;), &quot;c&quot;, sep = &quot;,&quot;, collapse = &quot;|&quot;)</code></pre>
+<pre><code>[1] &quot;a,c|b,c&quot;</code></pre>
+<p>(For more information, scroll to the bottom of the
+<code>?paste</code> help page and look at the examples, or try
+<code>example('paste')</code>.) {: .solution} {: .challenge}</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h2 id="challenge-3">Challenge 3</h2>
+<p>Use help to find a function (and its associated parameters) that you
+could use to load data from a tabular file in which columns are
+delimited with “ (tab) and the decimal point is a”.” (period). This
+check for decimal separator is important, especially if you are working
+with international colleagues, because different countries have
+different conventions for the decimal point (i.e. comma vs period).
+Hint: use <code>??"read table"</code> to look up functions related to
+reading in tabular data.</p>
+<blockquote>
+<h2 id="solution-to-challenge-3">Solution to Challenge 3</h2>
+<p>The standard R function for reading tab-delimited files with a period
+decimal separator is read.delim(). You can also do this with
+<code>read.table(file, sep="\t")</code> (the period is the
+<em>default</em> decimal separator for <code>read.table()</code>),
+although you may have to change the <code>comment.char</code> argument
+as well if your data file contains hash (#) characters. {: .solution} {:
+.challenge}</p>
+</blockquote>
+</blockquote>
 </div>
 </div>
 <div id="exercises" class="section level2">
@@ -485,20 +1270,86 @@ RStudio to:</p>
 <li>read a data table from a file</li>
 <li>access and understand a function’s documentation page</li>
 </ol>
+<p>2 1 execute simple mathematical calculations use R and RStudio to 2 2
+assign and manipulate variables use R and RStudio to 2 3 “assign, subset
+and manipulate data in a vector” use R and RStudio to 2 4 execute vector
+algebra use R and RStudio to 2 5 write and save a code script use R and
+RStudio to 2 6 write comments in a code script use R and RStudio to 2 7
+read a data table from a file use R and RStudio to 2 8 access and
+understand a function’s documentation page use R and RStudio to</p>
 <p>Number all exercises using the module number. Include starter code in
 the /exercises folder if appropriate.</p>
 <p>2.1</p>
 <p>2.2</p>
+<blockquote>
+<h2 id="challenge-2-1">Challenge 2</h2>
+<p>What will be the value of each variable after each statement in the
+following program?</p>
+<pre class="r"><code>mass &lt;- 47.5
+age &lt;- 122
+mass &lt;- mass * 2.3
+age &lt;- age - 20</code></pre>
+<blockquote>
+<h2 id="solution-to-challenge-2-1">Solution to challenge 2</h2>
+<pre class="r"><code>mass &lt;- 47.5</code></pre>
+<p>This will give a value of 47.5 for the variable mass</p>
+<pre class="r"><code>age &lt;- 122</code></pre>
+<p>This will give a value of 122 for the variable age</p>
+<pre class="r"><code>mass &lt;- mass * 2.3</code></pre>
+<p>This will multiply the existing value of 47.5 by 2.3 to give a new
+value of 109.25 to the variable mass.</p>
+<pre class="r"><code>age &lt;- age - 20</code></pre>
+<p>This will subtract 20 from the existing value of 122 to give a new
+value of 102 to the variable age. {: .solution} {: .challenge}</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h2 id="challenge-4">Challenge 4</h2>
+<p>Clean up your working environment by deleting the mass and age
+variables.</p>
+<blockquote>
+<h2 id="solution-to-challenge-4">Solution to challenge 4</h2>
+<p>We can use the <code>rm</code> command to accomplish this task</p>
+<pre class="r"><code>rm(age, mass)</code></pre>
+<p>{: .solution} {: .challenge}</p>
+</blockquote>
+</blockquote>
 </div>
 <div id="sources-and-resources" class="section level2">
 <h2>Sources and Resources</h2>
-<p>This lesson was adapted from XX by Jes Coyle.</p>
+<p>This lesson was adapted from <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episodes 1 and 3 by
+Jes Coyle.</p>
+<p>This lesson utilizes data from <span class="citation">National
+Ecological Observatory Network (NEON) (2023a)</span> and <span
+class="citation">National Ecological Observatory Network (NEON)
+(2023b)</span>.</p>
 <div id="additional-resources" class="section level3">
 <h3>Additional Resources</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=kfcX5DEMAp4">#RYouWithMe:
+Basic Basics Lesson 1: An Opinionated Tour of RStudio</a></li>
+<li><a href="http://www.statmethods.net/">Quick R</a></li>
+<li><a href="http://www.rstudio.com/resources/cheatsheets/">RStudio
+cheat sheets</a></li>
+<li><a href="http://www.cookbook-r.com/">Cookbook for R</a></li>
+</ul>
 </div>
 <div id="cited-references" class="section level3 unnumbered">
 <h3 class="unnumbered">Cited References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-NEON-soilCO2" class="csl-entry">
+National Ecological Observatory Network (NEON). 2023a. <span>“Soil CO2
+Concentration (DP1.00095.001).”</span> National Ecological Observatory
+Network (NEON). <a
+href="https://doi.org/10.48443/BDGB-5V03">https://doi.org/10.48443/BDGB-5V03</a>.
+</div>
+<div id="ref-NEON-soiltemp" class="csl-entry">
+———. 2023b. <span>“Soil Temperature (DP1.00041.001).”</span> National
+Ecological Observatory Network (NEON). <a
+href="https://doi.org/10.48443/9G10-EP60">https://doi.org/10.48443/9G10-EP60</a>.
+</div>
 <div id="ref-swc-reproducible-lesson" class="csl-entry">
 Zimmerman, Naupaka, Greg Wilson, Raniere Silva, Scott Ritchie, François
 Michonneau, Jeffrey Oliver, Harriet Dashnow, et al. 2019. <span>“<span

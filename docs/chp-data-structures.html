@@ -360,9 +360,9 @@ $(document).ready(function () {
 </div>
 
 
-<div id="chapter-4.-data-structures-and-operations"
+<div id="chapter-1.-navigating-your-computer"
 class="section level1 tabset">
-<h1 class="tabset">Chapter 4. Data structures and operations</h1>
+<h1 class="tabset">Chapter 1. Navigating your computer</h1>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <p><em>from:</em> <a
@@ -385,8 +385,10 @@ class="citation">Zimmerman et al. (2019)</span></a> episodes 4, 5, 6,
 </ul>
 <p>In this lesson learners will:</p>
 <ul>
-<li>describe the main data structures and types in R</li>
-<li>manipulate and extract values from data frames using base R</li>
+<li>describe the structure of the filesystem on a computer</li>
+<li>use a command line interface to navigate the file system</li>
+<li>describe the relationship between R and RStudio (an IDE)</li>
+<li>set up an RStudio project</li>
 </ul>
 </div>
 <div id="motivator" class="section level3">
@@ -411,6 +413,36 @@ library(ggplot2)</code></pre>
 </div>
 <div id="lesson" class="section level2">
 <h2>Lesson</h2>
+<div id="comparing-things" class="section level3">
+<h3>Comparing things</h3>
+<p>We can also do comparisons in R:</p>
+<pre class="r"><code>1 == 1  # equality (note two equals signs, read as &quot;is equal to&quot;)</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>1 != 2  # inequality (read as &quot;is not equal to&quot;)</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>1 &lt; 2  # less than</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>1 &lt;= 1  # less than or equal to</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>1 &gt; 0  # greater than</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<pre class="r"><code>1 &gt;= -9 # greater than or equal to</code></pre>
+<pre><code>[1] TRUE</code></pre>
+<blockquote>
+<h2 id="tip-comparing-numbers">Tip: Comparing Numbers</h2>
+<p>A word of warning about comparing numbers: you should never use
+<code>==</code> to compare two numbers unless they are integers (a data
+type which can specifically represent only whole numbers).</p>
+<p>Computers may only represent decimal numbers with a certain degree of
+precision, so two numbers which look the same when printed out by R, may
+actually have different underlying representations and therefore be
+different by a small margin of error (called Machine numeric
+tolerance).</p>
+<p>Instead you should use the <code>all.equal</code> function.</p>
+<p>Further reading: <a
+href="http://floating-point-gui.de/">http://floating-point-gui.de/</a></p>
+<p>{: .callout}</p>
+</blockquote>
 <pre class="r"><code># This is an R code block that will execute any code inside and show the results.
 dat %&gt;%
   filter(country == &quot;United States&quot;)</code></pre>
@@ -428,10 +460,11 @@ dat %&gt;%
 11 United States 2002 287675526  Americas  77.310  39097.10
 12 United States 2007 301139947  Americas  78.242  42951.65</code></pre>
 <div class="figure" style="text-align: center">
-<img src="images/rmd-04-usa_pop_fig-1.png" alt="Fig. 4.1. Population growth in the United States 1952 - 2007." width="816" />
+<img src="images/rmd-01-usa_pop_fig-1.png" alt="Fig. 1.1. Population growth in the United States 1952 - 2007." width="816" />
 <p class="caption">
-Fig. 4.1. Population growth in the United States 1952 - 2007.
+Fig. 1.1. Population growth in the United States 1952 - 2007.
 </p>
+</div>
 </div>
 <div id="section-1" class="section level3">
 <h3>Section 1</h3>
@@ -450,31 +483,24 @@ Fig. 4.1. Population growth in the United States 1952 - 2007.
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
-<dl>
-<dt>After completing these exercises, learners will be able to</dt>
-<dd>
-
-</dd>
-</dl>
+<p>After completing these exercises, learners will be able to use a Unix
+terminal to:</p>
 <ol style="list-style-type: decimal">
-<li>differentiate between vectors, arrays, lists and data frames in
-R</li>
-<li>differentiate between numeric, character, factor and logical data
-types in R</li>
-<li>view the structure and class of an object in R</li>
-<li>subset data frames and vectors in R</li>
-<li>write logical test expressions using
-<code>==</code>,<code>!=</code>, <code>&gt;</code>, <code>&lt;</code>,
-and <code>%in%</code></li>
+<li>navigate between directories</li>
+<li>view files in a directory</li>
+<li>make, delete, rename and move files</li>
 </ol>
 <p>Number all exercises using the module number. Include starter code in
 the /exercises folder if appropriate.</p>
-<p>4.1</p>
-<p>4.2</p>
+<p>1.1</p>
+<p>1.2</p>
 </div>
 <div id="sources-and-resources" class="section level2">
 <h2>Sources and Resources</h2>
-<p>This lesson was adapted from XX by Jes Coyle.</p>
+<p>This lesson was adapted from <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episodes 1 by Jes
+Coyle.</p>
 <div id="additional-resources" class="section level3">
 <h3>Additional Resources</h3>
 </div>

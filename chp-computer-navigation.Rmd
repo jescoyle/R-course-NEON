@@ -65,7 +65,7 @@ We'll be using RStudio to create a self-contained, reproducible project that we 
 
 ### Orientation to the RStudio user interface
 
-describe the different windows in RStudio: today just working files and terminal
+describe the different panels in RStudio: today just working files and terminal
 
 ### Navigating the file system
 
@@ -81,7 +81,7 @@ file
 
 home directory
 
-> #### Try this: Find your Downloads folder
+> #### **Try this:** Find your Downloads folder
 > 
 > When you download a file from the internet where does it go? Most computers have a default directory where downloaded files are saved. It can be very useful to know where this directory is located on your filesystem.
 >
@@ -122,7 +122,7 @@ ls --help
 pwd
 
 
-> #### Try this: Navigate to your Downloads folder
+> #### **Try this:** Navigate to your Downloads folder
 >
 > Write a command that would navigate to your Downloads folder from your Home directory.
 
@@ -159,7 +159,7 @@ Each time you create a new RStudio Project, it will create a new directory for t
 ### Creating a self-contained project
 
 ::: {.challenge}
-> #### Try this: Creating a self-contained project
+> #### **Try this:** Creating a self-contained project
 >
 > We're going to create a new project in RStudio:
 >
@@ -173,17 +173,17 @@ Each time you create a new RStudio Project, it will create a new directory for t
 If you completed the challenge correctly you should now be looking at a new RStudio session and in the upper right corner of the window you will see this the name of your project:
 ![](images/RStudio_project_label.jpg)
 
-You will also see a mostly empty folder in the Files window. There should be one file with the name of the project: R-course-NEON.Rproj
+You will also see a mostly empty folder in the Files panel. There should be one file with the name of the project: R-course-NEON.Rproj
 
 This file contains information that RStudio needs to set up your project. One thing the .Rproj file will do is set your working directory to be the same directory that the .Rproj file is located in. Let's see how this works.
 
 ::: {.challenge}
-> #### Try this: Display the working directory in the Terminal and R Console
+> #### **Try this:** Display the working directory in the Terminal and R Console
 >
 > What command should you use in the terminal to display the path of the current working directory?
 :::
 ::: {.challenge}
-> #### Solution:
+> #### **Solution:**
 >
 > ```{bash eval = FALSE, class.source = 'fold-hide'}
 >   pwd
@@ -203,13 +203,13 @@ RStudio projects are useful because they automatically open in the same working 
 
 
 ::: {.challenge}
-> #### Try this: Opening an RStudio project through the file system
+> #### **Try this:** Opening an RStudio project through the file system
 >
 > 1. Exit RStudio.
 > 2. Use your computer's file browser to navigate to the directory where you created the R-course-neon project. This should be your Desktop folder if you followed the steps above.
 > 3. Move the entire R-course-neon folder to a folder on your computer where you are saving work for this class.
 > 4. Open the R-course-neon folder and double click on the `.Rproj` file in that directory.
-> 5. Observe the Files window in RStudio. What has changed?
+> 5. Observe the Files panel in RStudio. What has changed?
 > 6. Use the Terminal and the R Console to display the current working directory. What has changed?
 :::
 
@@ -235,9 +235,9 @@ principles to adhere to that will make project management easier:
 5. Name all files to reflect their content or function.
 
 ::: {.challenge}
-> #### Try this: Set up a project's subfolders
+> #### **Try this:** Set up a project's subfolders
 > 
-> Use the File window in RStudio or your computer's file browser to create the following folders inside the R-course-NEON folder:
+> Use the File panel in RStudio or your computer's file browser to create the following folders inside the R-course-NEON folder:
 >
 >   * doc
 >   * data 
@@ -245,8 +245,8 @@ principles to adhere to that will make project management easier:
 >   * src
 :::
 ::: {.solution}
-> #### Solution:
-> The Files window in RStudio should now look like this:
+> #### **Solution:**
+> The Files panel in RStudio should now look like this:
 > ![](images/RStudio_project_subfolders.jpg)
 :::
 
@@ -343,8 +343,8 @@ Exercise **`r chp_num`.1**  is required for other work in this book.
 **`r chp_num`.1** Set up the Student Workbook for this course on your computer.
 
 1. Download the Student Workbook from [here](). Save this zipped file in the folder where you are saving work for this course.
-2. Unzip the folder you downloaded. Instructions for how to unzip folders are located [here for Mac]() and [here for Windows]().
-3. Open the RStudio project using the .Rproj file, then use the File window in RStudio to explore the directory structure of this project.
+2. Unzip the folder you downloaded. The name of the folder that you unzip should be R-course-NEON-workbook. Instructions for how to unzip folders are located [here for Mac]() and [here for Windows]().
+3. Open the RStudio project using the .Rproj file, then use the File panel in RStudio to explore the directory structure of this project.
 4. Write out the absolute path of the initial working directory and the command you typed into the **R Console** to determine this.
 5. From the initial working directory...
     1. Write out the relative path to the data file XXX.

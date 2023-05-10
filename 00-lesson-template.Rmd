@@ -94,14 +94,20 @@ dat %>%
 ### Section 1
 
 
-> ***CHALLENGE:*** What will this code do?
->
-> ```r
-> 1 + 1
+::: {.challenge}
+> #### **Try this:** What should be the ouput for each of these commands?
+> ```{r eval = FALSE}
+> log(exp(3 + 3)) 
+> 2e-1 + 5
 > ```
-> > ```{r class.source = 'fold-hide', collapse = TRUE}
-> > 1 + 1
-> > ```
+:::
+::: {.solution}
+> #### **Solution:** 
+> ```{r class.source = 'fold-hide', eval = FALSE}
+> [1] 6
+> [1] 5.2
+> ```
+:::```
 
 ### Section 2
 
