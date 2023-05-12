@@ -27,13 +27,12 @@ knitr_fig_path <- function(prefix) {
 opts_chunk$set(error = TRUE, tidy = FALSE, results = "markup", comment = NA,
                fig.align = "center", fig.path = "images/rmd-",
                fig.width = 8.5, fig.height = 8.5,
-               fig.retina = 2)
-
+               fig.retina = 2,
+               cache = TRUE)
 
 
 # ### Custom hooks to make answers fold up
-# ### NOT WORKING
-# 
+# ### NOT USING
 # ## For code to be evaluated in an answer
 # ## Use: ```{r, answer = TRUE}
 # knitr::knit_hooks$set(answer = function(before, options, envir) {

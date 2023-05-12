@@ -30,7 +30,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -240,9 +239,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -315,7 +311,7 @@ $(document).ready(function () {
       <a href="chp-ggplot2-part2.html">8. More ggplot2</a>
     </li>
     <li>
-      <a href="chp-tidyverse.html">9. Tidy data</a>
+      <a href="chp-tidyverse-basics.html">9. Tidy data</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Supplemental lessons</li>
@@ -345,14 +341,6 @@ $(document).ready(function () {
 </div><!--/.navbar -->
 
 <div id="header">
-
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
 
 
 
@@ -424,7 +412,7 @@ href="computer-setup.html">Computer Setup</a>.</p>
 <div id="orientation-to-the-rstudio-user-interface"
 class="section level3">
 <h3>Orientation to the RStudio user interface</h3>
-<p>describe the different windows in RStudio: today just working files
+<p>describe the different panels in RStudio: today just working files
 and terminal</p>
 </div>
 <div id="navigating-the-file-system" class="section level3">
@@ -436,8 +424,7 @@ and terminal</p>
 <p>file</p>
 <p>home directory</p>
 <blockquote>
-<h4 id="try-this-find-your-downloads-folder">Try this: Find your
-Downloads folder</h4>
+<p><strong>Try this:</strong> Find your Downloads folder</p>
 <p>When you download a file from the internet where does it go? Most
 computers have a default directory where downloaded files are saved. It
 can be very useful to know where this directory is located on your
@@ -474,8 +461,7 @@ interacting with the shell</p>
 <p>ls –help</p>
 <p>pwd</p>
 <blockquote>
-<h4 id="try-this-navigate-to-your-downloads-folder">Try this: Navigate
-to your Downloads folder</h4>
+<p><strong>Try this:</strong> Navigate to your Downloads folder</p>
 <p>Write a command that would navigate to your Downloads folder from
 your Home directory.</p>
 </blockquote>
@@ -532,8 +518,7 @@ relative path.</p>
 <h3>Creating a self-contained project</h3>
 <div class="challenge">
 <blockquote>
-<h4 id="try-this-creating-a-self-contained-project">Try this: Creating a
-self-contained project</h4>
+<p><strong>Try this:</strong> Creating a self-contained project</p>
 <p>We’re going to create a new project in RStudio:</p>
 <ol style="list-style-type: decimal">
 <li>Click the “File” menu button, then “New Project”.</li>
@@ -550,29 +535,23 @@ set up the workbook for this course, use the name “R-course-NEON”</li>
 a new RStudio session and in the upper right corner of the window you
 will see this the name of your project: <img
 src="images/RStudio_project_label.jpg" /></p>
-<p>You will also see a mostly empty folder in the Files window. There
+<p>You will also see a mostly empty folder in the Files panel. There
 should be one file with the name of the project: R-course-NEON.Rproj</p>
 <p>This file contains information that RStudio needs to set up your
 project. One thing the .Rproj file will do is set your working directory
 to be the same directory that the .Rproj file is located in. Let’s see
 how this works.</p>
-<div class="challenge">
 <blockquote>
-<h4
-id="try-this-display-the-working-directory-in-the-terminal-and-r-console">Try
-this: Display the working directory in the Terminal and R Console</h4>
+<div class="challenge">
+<p><strong>Try this:</strong> Display the working directory in the
+Terminal and R Console</p>
 <p>What command should you use in the terminal to display the path of
 the current working directory?</p>
-</blockquote>
 </div>
-<div class="challenge">
-<blockquote>
-<h4 id="solution">Solution:</h4>
+<div class="solution">
 <pre class="bash fold-hide"><code>  pwd</code></pre>
-</blockquote>
 </div>
 <div class="challenge">
-<blockquote>
 <p>To display the working directory in the R Console, do the
 following:</p>
 <ol style="list-style-type: decimal">
@@ -586,8 +565,8 @@ Terminal displays?</li>
 <li>How would the file path be different on someone else’s computer? How
 would it be similar?</li>
 </ol>
-</blockquote>
 </div>
+</blockquote>
 <p>RStudio projects are useful because they automatically open in the
 same working directory regardless of the computer they are located on.
 This means that when we start writing code, we can refer to the location
@@ -596,8 +575,8 @@ and our code will work on any computer. Let’s see how this might
 work.</p>
 <div class="challenge">
 <blockquote>
-<h4 id="try-this-opening-an-rstudio-project-through-the-file-system">Try
-this: Opening an RStudio project through the file system</h4>
+<p><strong>Try this:</strong> Opening an RStudio project through the
+file system</p>
 <ol style="list-style-type: decimal">
 <li>Exit RStudio.</li>
 <li>Use your computer’s file browser to navigate to the directory where
@@ -607,7 +586,7 @@ folder if you followed the steps above.</li>
 where you are saving work for this class.</li>
 <li>Open the R-course-neon folder and double click on the
 <code>.Rproj</code> file in that directory.</li>
-<li>Observe the Files window in RStudio. What has changed?</li>
+<li>Observe the Files panel in RStudio. What has changed?</li>
 <li>Use the Terminal and the R Console to display the current working
 directory. What has changed?</li>
 </ol>
@@ -644,9 +623,8 @@ compiled locally in the <code>bin</code> directory.</li>
 </ol>
 <div class="challenge">
 <blockquote>
-<h4 id="try-this-set-up-a-projects-subfolders">Try this: Set up a
-project’s subfolders</h4>
-<p>Use the File window in RStudio or your computer’s file browser to
+<p><strong>Try this:</strong> Set up a project’s subfolders</p>
+<p>Use the File panel in RStudio or your computer’s file browser to
 create the following folders inside the R-course-NEON folder:</p>
 <ul>
 <li>doc</li>
@@ -658,8 +636,7 @@ create the following folders inside the R-course-NEON folder:</p>
 </div>
 <div class="solution">
 <blockquote>
-<h4 id="solution-1">Solution:</h4>
-<p>The Files window in RStudio should now look like this: <img
+<p>The Files panel in RStudio should now look like this: <img
 src="images/RStudio_project_subfolders.jpg" /></p>
 </blockquote>
 </div>
@@ -682,7 +659,7 @@ page as”)</li>
 <li>Save the file in the <code>data/</code> folder within your
 project.</li>
 </ol>
-<p>We will load and inspect these data later. {: .challenge}</p>
+<p>We will load and inspect these data later.</p>
 </blockquote>
 <blockquote>
 <h2 id="challenge-4">Challenge 4</h2>
@@ -712,7 +689,6 @@ Afghanistan,1977,14880372,Asia,38.438,786.11336
 Afghanistan,1982,12881816,Asia,39.854,978.0114388
 Afghanistan,1987,13867957,Asia,40.822,852.3959448
 Afghanistan,1992,16317921,Asia,41.674,649.3413952</code></pre>
-<p>{: .solution} {: .challenge}</p>
 </blockquote>
 </blockquote>
 <div id="working-with-files-on-the-command-line" class="section level4">
@@ -772,11 +748,12 @@ your computer.</p>
 <li>Download the Student Workbook from <a href="">here</a>. Save this
 zipped file in the folder where you are saving work for this
 course.</li>
-<li>Unzip the folder you downloaded. Instructions for how to unzip
+<li>Unzip the folder you downloaded. The name of the folder that you
+unzip should be R-course-NEON-workbook. Instructions for how to unzip
 folders are located <a href="">here for Mac</a> and <a href="">here for
 Windows</a>.</li>
 <li>Open the RStudio project using the .Rproj file, then use the File
-window in RStudio to explore the directory structure of this
+panel in RStudio to explore the directory structure of this
 project.</li>
 <li>Write out the absolute path of the initial working directory and the
 command you typed into the <strong>R Console</strong> to determine
@@ -831,8 +808,46 @@ Coyle.</p>
 <div id="additional-resources" class="section level3">
 <h3>Additional Resources</h3>
 </div>
-<div id="cited-references" class="section level3 unnumbered">
-<h3 class="unnumbered">Cited References</h3>
+<div id="cited-references" class="section level3">
+<h3>Cited References</h3>
+<pre class="js"><code>(function() {
+  var codes = document.querySelectorAll(&#39;.solution&#39;);
+  var code, i, d, s, p, h;
+  for (i = 0; i &lt; codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    d = document.createElement(&#39;details&#39;);
+    s = document.createElement(&#39;summary&#39;);
+    h = document.createElement(&#39;em&#39;);
+    s.innerText = &#39;Solution:&#39;;
+    // &lt;details&gt;&lt;summary&gt;&lt;em&gt;Solution:&lt;/em&gt;&lt;/summary&gt;&lt;/details&gt;
+    s.appendChild(h);
+    d.appendChild(s);
+    // move the code into &lt;details&gt;
+    p.replaceChild(d, code);
+    d.appendChild(code);
+  }
+})();</code></pre>
+<script type="text/javascript">
+(function() {
+  var codes = document.querySelectorAll('.solution');
+  var code, i, d, s, p, h;
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    d = document.createElement('details');
+    s = document.createElement('summary');
+    h = document.createElement('em');
+    s.innerText = 'Solution:';
+    // <details><summary><em>Solution:</em></summary></details>
+    s.appendChild(h);
+    d.appendChild(s);
+    // move the code into <details>
+    p.replaceChild(d, code);
+    d.appendChild(code);
+  }
+})();
+</script>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-swc-reproducible-lesson" class="csl-entry">
 Zimmerman, Naupaka, Greg Wilson, Raniere Silva, Scott Ritchie, François
@@ -881,11 +896,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

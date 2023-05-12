@@ -1,6 +1,6 @@
 name: "R-course-NEON"
 output_dir: "docs"
-exclude: ["README.md"]
+exclude: ["README.md", "*.java"]
 include: []
 navbar:
   left:

@@ -1,6 +1,6 @@
 name: "R-course-NEON"
 output_dir: "docs"
-exclude: ["README.md"]
+exclude: ["README.md", "*.java"]
 include: []
 navbar:
   left:
@@ -33,7 +33,7 @@ navbar:
         - text: 8. More ggplot2
           href: chp-ggplot2-part2.html
         - text: 9. Tidy data
-          href: chp-tidyverse.html
+          href: chp-tidyverse-basics.html
         - text: '-------------'
         - text: Supplemental lessons
         - text: A. Rmarkdown

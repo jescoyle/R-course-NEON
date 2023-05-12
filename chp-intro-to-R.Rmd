@@ -2,7 +2,7 @@
 title:  
 output:
   html_document:
-    code_folding: show
+    # code_folding: show
     toc: false
 bibliography: references.bib
 ---
@@ -119,24 +119,26 @@ the basic functionality of R. Once we start learning more complex
 code, we will open the Source panel and create an R script
 for saving the code that we write.
 
-The first thing you will see in the R console is a bunch
-of information, followed by a ">" and a blinking cursor. This is a
-**command-line interface**; it reads and evaluates one line of code at a time, printing out
-any results of each line to the same console window as it goes. If you type in commands at the command line, R tries to execute them, and then returns a result.
+The first thing you will see in the R console is a bunch of information, followed by a ">" and a blinking cursor. This is a **command-line interface**; it reads and evaluates one line of code at a time, printing out any results of each line to the same console window as it goes. If you type in commands at the command line, R tries to execute them, and then returns a result.
 
 For the first part of this lesson, you should type any code that you see in grey boxes
-into the command line in the R console:
+into the command line in the R console and then press enter.
 
 ```{r eval = FALSE}
 type this into the command line
 ```
 
-the expected output will show up in white boxes below like this:
+This document will show you the expected output of each command in a white boxes below like this:
 
 ```
 expected code output
 ```
+Or, the expected output may show up directly below the line of code and be preceded by a `[1]`:
 
+```{r eval = FALSE}
+type this into the command line
+[1] expected code output
+```
 
 ### What can R do?
 
@@ -262,51 +264,41 @@ comes after it on the same line. Since this text is not evaluated
 we can use it to make notes about what the code does.
 You do not need to type the comments into the command line to run the code.
 
-::: {.challenge}
-> #### **Try this:** What should be the ouput for each of these commands?
+> ::: {.challenge}
+> **Try this:** What should be the ouput for each of these commands?
 > ```{r eval = FALSE}
 > log(exp(3 + 3)) 
 > 2e-1 + 5
 > ```
-:::
-::: {.solution}
-> #### **Solution:** 
-> ```{r class.source = 'fold-hide', collapse = TRUE}
+> :::
+> ::: {.solution}
+> ```{r collapse = TRUE}
 > log(exp(3 + 3)) 
 > 2e-1 + 5
 > ```
-:::
+> :::
 
-::: {.challenge}
-> #### **Try this:** What do the values `NA` and `NULL` mean?
+> ::: {.challenge}
+> **Try this:** What do the values `NA` and `NULL` mean?
 > 
 > Run each of these commands and try to guess what is happening.
 > ```{r eval = FALSE}
 > sum(3, NA)
 > sum(3, NULL)
 > ```
-:::
-::: {.solution}
-> #### **Solution:**
-> ```{r class.source = 'fold-hide', collapse = TRUE}
+> :::
+> ::: {.solution}
+> ```{r collapse = TRUE}
 > sum(3, NA)
 > sum(3, NULL)
 > ```
-:::
+>
+> `NA` is a special placeholder value that means that data is missing. `NULL` is a special value that means something does not exist. Thus, arithmetic with `NA` will by default give a `NA` result because missing values are values that we may have tried to collect, but failed to do so. In contrast, `NULL` values do not take up any space and are ignored by default in calculations. We will learn later how to ignore missing values in calculations.
+> :::
 
-`NA` is a special placeholder value that means that data is missing. `NULL` is a special value that means something does not exist. Thus, arithmetic with `NA` will by default give a `NA` result because missing values are values that we may have tried to collect, but failed to do so. In contrast, `NULL` values do not take up any space and are ignored by default in calculations. We will learn later how to ignore missing values in calculations.
 
 
 #### Work with stored values in a computing environment
-
-2	7	state the rules for assigning variables	learners will
-2	8	work with vectors	learners will
-
-2	2	assign and manipulate variables	use R and RStudio to
-2	3	"assign, subset and manipulate data in a vector"	use R and RStudio to
-2	4	execute vector algebra	use R and RStudio to
-
-arrow up to prior command
 
 The first step toward writing code is to store values for use later. 
 We can store values using the assignment operator `<-`, like this:
@@ -351,38 +343,29 @@ The right hand side of the assignment can be any valid R expression.
 The right hand side is *fully evaluated* before the assignment occurs.
 
 
-::: {.challenge}
-> #### **Try this:**
+> ::: {.challenge}
+> **Try this:**
 >
 > What will be the values of `y` and `z` after you run these lines of code in order?
-> ```{r eval = FALSE}
+> ```{r results = "hide"}
 > x <- 10
 > y <- 2*x
 > z <- x + y
 > x <- 20
 > ```
-:::
-::: {.solution}
-> #### **Solution:**
-> ```{r class.source = 'fold-hide', collapse = TRUE}
-> x <- 10
-> y <- 2*x
-> z <- x + y
-> x <- 20
->
+> :::
+> ::: {.solution}
+> ```{r collapse = TRUE}
 > # type the variable names to print out their values
 > x
 > y 
 > z
 > ```
-:::
+> :::
 
-Did you guess correctly? Even though we changed the value of `x` in the last line,
-this does not change the value of `y` or `z` because the values of these two variables were
-assigned when `x` was `10`. We would have to run the assignment of `y` and `z` again to
-update their values based on the new value of `x`:
+Did you guess correctly? Even though we changed the value of `x` in the last line, this does not change the value of `y` or `z` because the values of these two variables were assigned when `x` was `10`. We would have to run the assignment of `y` and `z` again to update their values based on the new value of `x`:
 
-```{r}
+```{r, collapse = TRUE}
 y <- 2*x
 z <- x + y
 
@@ -391,24 +374,27 @@ y
 z
 ```
 
-::: {.challenge}
-> #### **Try this:** Is R case sensitive?
+**Time saving tip:** Instead of retyping commands that you want to run again into the console, use the up arrow key at the command prompt. Each time you press the up arrow the command line will cycle back through commands you typed previously. Use the back arrow key to edit the command before running it again.
+
+> ::: {.challenge}
+> **Try this:** Is R case sensitive?
 >
 > What happens when you run this code?
 > ```{r eval = FALSE}
 > y <- 2*X
 > ```
-:::
-::: {.solution}
-> ```{r class.source = 'fold-hide', eval = FALSE}
-> Error: object 'X' not found
+> :::
+> ::: {.solution}
+> ```{r echo = FALSE, error = TRUE}
+> y <- 2*X
 > ```
-:::
+>
+> We've discovered a very important point about variable names- they are case sensitive! `x` is a different variable than `X`. Thus, if you try to use a variable that you have not defined in the environment, R will print out an error message saying that it can't find the variable you used.
+> :::
 
-We've discovered a very important point about variable names- they are case sensitive! `x` is a different variable than `X`. Thus, if you try to use a variable that you have not defined in the environment, R will print out an error message saying that it can't find the variable you used.
 
-Variable names can contain letters, numbers, underscores and periods but no spaces. They
-must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore).
+
+**Important:** Variable names can contain letters, numbers, underscores and periods but no spaces. They must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore).
 Variables beginning with a period are hidden variables.
 Different people use different conventions for long variable names, these include
 
@@ -417,6 +403,16 @@ Different people use different conventions for long variable names, these includ
   * camelCaseToSeparateWords
 
 What you use is up to you, but **be consistent**.
+
+You should also avoid using variable names that are the same as values or functions in R (e.g., `pi`, `sum`, `c`, `names`, `data`). In general, try to use a name that is specific to what the variable represents. If you're not sure whether a name is used in R, you can use the `?` to look it up (more on this later):
+
+```{r eval = FALSE}
+?mean
+```
+```{r}
+?average
+```
+If a name already exists for a function, it will open up a Help window. If the name is available for you to use, then the console will report that it could not find any documentation.
 
 It is also possible to use the `=` operator for assignment:
 
@@ -429,8 +425,8 @@ But this is much less common among R users.  The most important thing is to
 where it is less confusing to use `<-` than `=`, and it is the most common
 symbol used in the community. So the recommendation is to use `<-`.
 
-::: {.challenge}
-> #### **Try this:** Which of the following are valid R variable names?
+> ::: {.challenge}
+> **Try this:** Which of the following are valid R variable names?
 > ```{r, eval=FALSE}
 > min_height
 > max.height
@@ -440,29 +436,138 @@ symbol used in the community. So the recommendation is to use `<-`.
 > min-length
 > 2widths
 > celsius2kelvin
+> exp
+> pi
 > ```
-:::
-::: {.solution}
-> #### **Solution:**
+> :::
+> ::: {.solution}
+> These can be used as R variables:
+> `min_height`
+> `max.height`
+> `MaxLength`
+> `celsius2kelvin`
+>  
+> This creates a hidden variable:
+> `.mass`
 > 
-> ```{r class.source = 'fold-hide', eval=FALSE}
-> # The following can be used as R variables:
-> min_height
-> max.height
-> MaxLength
-> celsius2kelvin
+> These cannot be used to create a variable:
+> `_age`
+> `min-length`
+> `2widths`
 > 
-> # The following creates a hidden variable:
-> .mass
-> 
-> # The following will not be able to be used to create a variable:
-> _age
-> min-length
-> 2widths
+> These should not be used as variable names because they already exist in R:
+> `pi`
+> `exp` 
+> :::
+
+#### Calculations on multiple stored values at once
+
+R can assign multiple values to the same object- one way to do this is using a **vector**, an ordered list of values that are of the same data type (e.g. numbers, text, TRUE/FALSE). In [`r get_chpName("chp-data-structures", type.from = "fileName")`](chp-data-structures.html) we will explain in much more detail the different types of data and objects you can create in R, but for now let's just explore how R does arithmetic with vectors.
+
+You can construct a vector using the `c()` function:
+
+```{r collapse = TRUE}
+ages <- c(18, 19, 21, 17)
+firstNames <- c("Sasha", "Everett", "Hope", "Arturo")
+
+ages
+firstNames
+```
+
+You can also put vectors together using the `c()` function:
+```{r}
+c(20, ages, 40)
+```
+
+To select an element in a list, type the **index** of the element desired inside square brackets. For example, to select the second element:
+```{r}
+firstNames[2]
+```
+
+You can select multiple elements at once by typing a vector of indices inside the square brackets:
+```{r}
+firstNames[c(3, 1)]
+```
+
+A colon `:` is a special operator that will create a vector of integers in order:
+```{r}
+1:4
+4:1
+```
+
+To make a vector with any sequence of integers, use the `seq()` function:
+```{r}
+seq(1, 10, by = 2)
+seq(0, 100, by = 10)
+```
+
+> ::: {.challenge}
+> **Try this:** Can you predict what each of the following lines of code will return?
+> ```{r eval = FALSE}
+> c("Betsy", firstNames)
+> firstNames[4:1]
+> ages[c(2, 4)]
+> ages[1, 3]
+> c(firstNames, ages)
 > ```
-:::
+> :::
+> ::: {.solution}
+> ```{r collapse = TRUE}
+> c("Betsy", firstNames)
+>
+> firstNames[4:1]
+>
+> ages[c(2, 4)]
+>
+> ```
+> ```{r collapse = TRUE, error = TRUE}
+> ages[1, 3]
+> ```
+>
+> Why did `ages[1, 3]` give an error message? Notice that `1, 3` is not a vector. In order to select elements 1 and 3 from `ages` we need to first create a vector containing the integers 1 and 3: `c(1, 3)` and then place this inside the brackets: `ages[c(1, 3)]`.
+>
+> ```{r collapse = TRUE}
+> c(firstNames, ages)
+> ```
+>
+> Notice that when we concatenated `firstNames` and `ages` all of the ages turned into text with each number surrounded by quotes. This is because all elements in a vector must have the same data type, either numbers or text, but not both. R tried to fix this by using the data type of the first vector we supplied.
+> :::
 
 
+
+
+Vectors are useful because we can use them to do multiple calculations at once. Adding or multiplying a vector by a scalar applies the operation to each element of the vector.
+```{r}
+ages + 10
+2 * ages
+ages / 2
+```
+
+Arithmetic between two vectors is conducted element by element:
+```{r}
+ages + 1:4
+ages - ages
+ages[1:2] - ages[3:4]
+```
+
+> ::: {.challenge}
+> **Try this:** 
+>
+> 1. Calculate the sum of all integers between 1 and 100.
+> 2. Calculate the difference between the sum of all odd numbers between 1 and 50 and the sum of all even numbers between 1 and 50.
+> :::
+> ::: {.solution}
+> There are lots of ways to solve this problem. Here is one way.
+> ```{r collapse = TRUE}
+> # Sum of all integers between 1 and 100
+> sum(1:100)
+> 
+> # Difference between sum of odds and evens  between 1 and 50
+> odds <- seq(1, 50, 2) # a vector with all odd numbers
+> evens <- seq(2, 50, 2) # a vector with all even numbers
+> sum(odds) - sum(evens) # calculate sum of each vector, then take the difference
+> ```
+> :::
 
 ### Managing your environment 
 
@@ -475,13 +580,12 @@ There are a few useful commands you can use to interact with the R session.
 ls()
 ```
 
-> ## Tip: hidden objects
+> #### Tip: hidden objects
 >
 > Like in the shell, `ls` will hide any variables or functions starting
 > with a "." by default. To list all objects, type `ls(all.names=TRUE)`
 > instead
 >
-{: .callout}
 
 Note here that we didn't give any arguments to `ls`, but we still
 needed to give the parentheses to tell R to call the function.
@@ -531,7 +635,7 @@ If instead we use `<-`, there will be unintended side effects, or you may get an
 rm(list <- ls())
 ```
 
-> ## Tip: Warnings vs. Errors
+> #### Tip: Warnings vs. Errors
 >
 > Pay attention when R does something unexpected! Errors, like above,
 > are thrown when R cannot proceed with a calculation. Warnings on the
@@ -540,7 +644,7 @@ rm(list <- ls())
 >
 > In both cases, the message that R prints out usually give you clues
 > how to fix a problem.
->
+
 
 
 Notice that although rm() and ls() are similar to the shell commands rm and ls, they operate in different spaces. The Terminal window in RStudio accesses the file system on your computer. The R Console accesses objects that you create during a specific R session. Once your close R, these objects disappear forever; they are not saved on your file system.
@@ -561,20 +665,20 @@ in the top left.
 
 ![RStudio layout with .R file open](../fig/01-rstudio-script.png)
 
-> ## R scripts
+> #### R scripts
 > 
 > Any commands that you write in the R console can be saved in to a file
 > to be re-run again.  Files containing R code to be ran in this way are 
 > called R scripts.  R scripts have `.R` at the end of their names to 
 > let you know what they are.
-{: .callout}
 
-::: {.challenge}
+
+> ::: {.challenge}
 > #### **Try this:** Create and save a new R script
 >
 >
 >
-:::
+> :::
 
 ### Workflow within RStudio
 There are two main ways one can work within RStudio:
@@ -606,15 +710,15 @@ interactive R console.
 > along, `Re-run the previous region`. This will run the previous code block
 > including the modifications you have made.
 
-::: {.challenge}
-> #### **Try this:** Open and run an R script
+> ::: {.challenge}
+> **Try this:** Open and run an R script
 >
 > Open this script.
 > Run it line by line and point out the part of the R script from the prior section (e.g. read a table, assign a variable, etc)
-> Run the who thing.
+> Run the whole thing.
 > Close it and use source() to run it from the file.
 >
-:::
+> :::
 
 
 
@@ -675,8 +779,7 @@ Packages can be installed and updated from the Package tab with the Install and 
 > > ```{r ch5-sol2, eval=FALSE}
 > > install.packages(c("ggplot2", "plyr", "gapminder"))
 > > ```
-> {: .solution}
-{: .challenge}
+
 
 
 
@@ -746,21 +849,20 @@ Notice how related functions might call for the same help file:
 
 This is because these functions have very similar applicability and often share the same arguments as inputs to the function, so package authors often choose to document them together in a single help file.
 
-> ## Tip: Running Examples
+> #### Tip: Running Examples
 >
 > From within the function help page, you can highlight code in the 
 > Examples and type <kbd>Ctrl</kbd>+<kbd>Return</kbd> to run it in 
 > RStudio console. This gives you a quick way to get a feel for
 > how a function works.
-{: .callout}
 
-> ## Tip: Reading Help Files
+> #### Tip: Reading Help Files
 >
 > One of the most daunting aspects of R is the large number of functions
 > available. It would be prohibitive, if not impossible to remember the
 > correct usage for every function you use. Luckily, using the help files
 > means you don't have to remember that!
-{: .callout}
+
 
 ### Special Operators
 
@@ -848,8 +950,7 @@ your issue.
 > > same type. In the first case, the elements are numeric, in the
 > > second, they are characters, and in the third they are also characters:
 > > the numeric values are "coerced" to be characters.
-> {: .solution}
-{: .challenge}
+
 
 > ## Challenge 2
 >
@@ -905,8 +1006,7 @@ your issue.
 > > separator for `read.table()`), although you may have to change
 > > the `comment.char` argument as well if your data file contains
 > > hash (#) characters.
-> {: .solution}
-{: .challenge}
+
 
 
 
@@ -973,8 +1073,7 @@ Number all exercises using the module number. Include starter code in the /exerc
 > > ```
 > > This will subtract 20 from the existing value of `r age + 20 ` to give a new value
 > > of `r age` to the variable age.
-> {: .solution}
-{: .challenge}
+
 
 
 
@@ -989,8 +1088,7 @@ Number all exercises using the module number. Include starter code in the /exerc
 > > ```{r ch4-sol}
 > > rm(age, mass)
 > > ```
-> {: .solution}
-{: .challenge}
+
 
 
 
@@ -1011,3 +1109,8 @@ This lesson utilizes data from @NEON-soilCO2 and @NEON-soiltemp.
 
 ### Cited References
 
+
+
+```{js, file = "solution_format.java"}
+
+```

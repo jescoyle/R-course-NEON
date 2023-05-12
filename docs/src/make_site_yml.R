@@ -4,7 +4,7 @@
 filelines <- readLines("_site.txt")
 
 # Read in a table defining the chapter titles
-chptable <- read.delim("chapter_names.txt")
+chptable <- read.delim("_chapter_names.txt")
 
 # Order the table by chapter number
 chptable <- chptable[order(chptable$chp), ]

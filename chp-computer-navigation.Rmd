@@ -2,7 +2,6 @@
 title:  
 output:
   html_document:
-    code_folding: show
     toc: false
 bibliography: references.bib
 ---
@@ -81,7 +80,7 @@ file
 
 home directory
 
-> #### **Try this:** Find your Downloads folder
+> **Try this:** Find your Downloads folder
 > 
 > When you download a file from the internet where does it go? Most computers have a default directory where downloaded files are saved. It can be very useful to know where this directory is located on your filesystem.
 >
@@ -122,7 +121,7 @@ ls --help
 pwd
 
 
-> #### **Try this:** Navigate to your Downloads folder
+> **Try this:** Navigate to your Downloads folder
 >
 > Write a command that would navigate to your Downloads folder from your Home directory.
 
@@ -159,7 +158,7 @@ Each time you create a new RStudio Project, it will create a new directory for t
 ### Creating a self-contained project
 
 ::: {.challenge}
-> #### **Try this:** Creating a self-contained project
+> **Try this:** Creating a self-contained project
 >
 > We're going to create a new project in RStudio:
 >
@@ -177,19 +176,18 @@ You will also see a mostly empty folder in the Files panel. There should be one 
 
 This file contains information that RStudio needs to set up your project. One thing the .Rproj file will do is set your working directory to be the same directory that the .Rproj file is located in. Let's see how this works.
 
-::: {.challenge}
-> #### **Try this:** Display the working directory in the Terminal and R Console
+> ::: {.challenge}
+> **Try this:** Display the working directory in the Terminal and R Console
 >
 > What command should you use in the terminal to display the path of the current working directory?
-:::
-::: {.challenge}
-> #### **Solution:**
+> :::
+> ::: {.solution}
 >
 > ```{bash eval = FALSE, class.source = 'fold-hide'}
 >   pwd
 > ```
-:::
-::: {.challenge}
+> :::
+> ::: {.challenge}
 > To display the working directory in the R Console, do the following:
 > 
 > 1. Click the Console tab next to the Terminal tab.
@@ -203,7 +201,7 @@ RStudio projects are useful because they automatically open in the same working 
 
 
 ::: {.challenge}
-> #### **Try this:** Opening an RStudio project through the file system
+> **Try this:** Opening an RStudio project through the file system
 >
 > 1. Exit RStudio.
 > 2. Use your computer's file browser to navigate to the directory where you created the R-course-neon project. This should be your Desktop folder if you followed the steps above.
@@ -235,7 +233,7 @@ principles to adhere to that will make project management easier:
 5. Name all files to reflect their content or function.
 
 ::: {.challenge}
-> #### **Try this:** Set up a project's subfolders
+> **Try this:** Set up a project's subfolders
 > 
 > Use the File panel in RStudio or your computer's file browser to create the following folders inside the R-course-NEON folder:
 >
@@ -245,7 +243,6 @@ principles to adhere to that will make project management easier:
 >   * src
 :::
 ::: {.solution}
-> #### **Solution:**
 > The Files panel in RStudio should now look like this:
 > ![](images/RStudio_project_subfolders.jpg)
 :::
@@ -263,7 +260,7 @@ Now that we have a directory structure we can start to add files. Let's put a da
 > 3. Save the file in the `data/` folder within your project.
 >
 > We will load and inspect these data later.
-{: .challenge}
+
 
 > ## Challenge 4
 > It is useful to get some general idea about the dataset, directly from the
@@ -288,8 +285,7 @@ Now that we have a directory structure we can start to add files. Let's put a da
 > > ```{r ch2c-sol, engine='sh'}
 > > head data/gapminder_data.csv
 > > ```
-> {: .solution}
-{: .challenge}
+
 
 #### Working with files on the command line
 
@@ -379,3 +375,8 @@ This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.gith
 
 
 ### Cited References
+
+
+```{js, file = "solution_format.java"}
+
+```

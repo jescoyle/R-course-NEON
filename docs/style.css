@@ -1,29 +1,15 @@
-body {
+body p ol ul {
     font-size: 16px;
     font-family: Helvetica, sans-serif;
 }
 
-p {
-    font-size: 1em;
-}
-
 pre {
-    font-size: 15px;
+    font-size: 0.9em;
 }
 
-ul {
-    font-size: 1em;
-    font-family: Helvetica, sans-serif;
-}
-
-ol {
-    font-size: 1em;
-    font-family: Helvetica, sans-serif;
-}
-
-blockquote  {
-    background: #efefef;
-    border-left: 5px solid #ddd;
+blockquote {
+    background: #ffffff;
+    border-left: 5px solid #4070A0;
 }
 
 .ui-state-default {
@@ -37,10 +23,6 @@ blockquote  {
 
 .ui-widget-content {
     background: #eee;
-}
-
-blockquote p,ul,ol {
-    font-size: .9em;
 }
 
 .search {

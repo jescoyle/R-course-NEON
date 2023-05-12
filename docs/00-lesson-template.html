@@ -30,7 +30,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -218,9 +217,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -293,7 +289,7 @@ $(document).ready(function () {
       <a href="chp-ggplot2-part2.html">8. More ggplot2</a>
     </li>
     <li>
-      <a href="chp-tidyverse.html">9. Tidy data</a>
+      <a href="chp-tidyverse-basics.html">9. Tidy data</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Supplemental lessons</li>
@@ -323,14 +319,6 @@ $(document).ready(function () {
 </div><!--/.navbar -->
 
 <div id="header">
-
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
 
 
 
@@ -400,14 +388,16 @@ Fig. 1.1. Population growth in the United States 1952 - 2007.
 </div>
 <div id="section-1" class="section level3">
 <h3>Section 1</h3>
+<div class="challenge">
 <blockquote>
-<p><strong><em>CHALLENGE:</em></strong> What will this code do?</p>
-<pre class="r"><code>1 + 1</code></pre>
-<blockquote>
-<pre class="r fold-hide"><code>1 + 1
-[1] 2</code></pre>
+<p><strong>Try this:</strong> What should be the ouput for each of these
+commands?</p>
+<pre class="r"><code>log(exp(3 + 3)) 
+2e-1 + 5</code></pre>
 </blockquote>
-</blockquote>
+</div>
+<p>::: {.solution} &gt; &gt; <code>&gt; [1] 6 &gt;</code> &gt; &gt;
+<code>&gt; [1] 5.2 &gt;</code> :::```</p>
 </div>
 <div id="section-2" class="section level3">
 <h3>Section 2</h3>
@@ -435,6 +425,44 @@ the /exercises folder if appropriate.</p>
 </div>
 <div id="cited-references" class="section level3">
 <h3>Cited References</h3>
+<pre class="js"><code>(function() {
+  var codes = document.querySelectorAll(&#39;.solution&#39;);
+  var code, i, d, s, p, h;
+  for (i = 0; i &lt; codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    d = document.createElement(&#39;details&#39;);
+    s = document.createElement(&#39;summary&#39;);
+    h = document.createElement(&#39;em&#39;);
+    s.innerText = &#39;Solution:&#39;;
+    // &lt;details&gt;&lt;summary&gt;&lt;em&gt;Solution:&lt;/em&gt;&lt;/summary&gt;&lt;/details&gt;
+    s.appendChild(h);
+    d.appendChild(s);
+    // move the code into &lt;details&gt;
+    p.replaceChild(d, code);
+    d.appendChild(code);
+  }
+})();</code></pre>
+<script type="text/javascript">
+(function() {
+  var codes = document.querySelectorAll('.solution');
+  var code, i, d, s, p, h;
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    d = document.createElement('details');
+    s = document.createElement('summary');
+    h = document.createElement('em');
+    s.innerText = 'Solution:';
+    // <details><summary><em>Solution:</em></summary></details>
+    s.appendChild(h);
+    d.appendChild(s);
+    // move the code into <details>
+    p.replaceChild(d, code);
+    d.appendChild(code);
+  }
+})();
+</script>
 </div>
 </div>
 </div>
@@ -474,11 +502,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
