@@ -8,25 +8,31 @@ output: html_document
 ## Overview
 This is a self-paced tutorial adapted from [Data Carpentry](http://datacarpentry.org/) and [Software Carpentry](http://software-carpentry.org/) that teaches biologists basic data science and computing skills using  [National Ecological Observation Network](http://neonscience.org) data. It is being developed for use in an upper division Biology course at Saint Mary's College of California beginning in August 2023. **These materials are not currently ready for use.**
 
+
 ## Organization
 
 ### How to use this tutorial
 
 
+
 ### Where is everything?
+
+
 
 
 ## Get Started
 
 ### Computer set-up
 
+This course requires you to have certain software installed on your computer. Follow the instructions on the [Computer Setup](computer-setup.html) to learn how to install this software before downloading the workbook.
 
 ### Student workbook
 
-
+The student workbook is a zipped folder that contains a folder with data files necessary for completing the lessons. It also contains a folder with blank exercises that accompany each lesson. Follow the instructions on the [Computer Setup](computer-setup.html) page to download the workbook.
 
 ## Open Educational Resource
 
+These materials will be published open access, but they are **(not currently ready for use or adaptation.**
 
 ### Acknowledgements
 Thank you to [Data Carpentry](http://datacarpentry.org/) and [Software Carpentry](http://software-carpentry.org/) for providing open and remixable materials for scientists learning programming and data science. This course draws heavily from the [Data Carpentry for Biologists](https://datacarpentry.org/semester-biology/) and [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/).

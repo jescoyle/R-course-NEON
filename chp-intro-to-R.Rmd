@@ -29,14 +29,13 @@ set.seed(10)
 
 # Chapter `r chp_num`. `r get_chpName(chp_num, type.to = "nameLong")` {.tabset}
 
+
+**THIS LESSON IS NOT YET READY FOR LEARNERS.**
+
 ## Overview 
 
-### What we will learn
 
-In this lesson 
-`r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`
-
-### Motivator - FIXME
+<!--### Motivator   FIX ME --> 
 
 Science is a multi-step process: once you've designed an experiment and collected
 data, the real fun begins! This lesson will teach you how to start this process using
@@ -65,8 +64,18 @@ for all of these countries in under a minute!
   - create apps
   - almost anything... though it is not always the best tool for every job.
 
-### Get set up
-Please ensure you have the latest version of R and RStudio installed on your machine. This is important, as some packages may not install correctly (or at all) if R is not up to date. 
+
+### What we will learn
+
+In this lesson 
+`r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`
+
+#### Key Terms & Commands
+
+
+### Prerequisites
+
+Check that you have the latest version of R and RStudio installed on your machine. This is important, as some packages may not install correctly (or at all) if R is not up to date. 
 For instructions on installing (or updating) R and RStudio, please see [Computer Setup](computer-setup.html).
 
 Once R and RStudio are installed, you will also need to set up the Student Workbook that accompanies this text as an RStudio project. Instructions are in the first exercise from [`r get_chpName("chp-computer-navigation", type.from = "fileName")`](chp-computer-navigation.html).
@@ -736,7 +745,84 @@ The text after each line of code is called a
 
 2	7	read a data table from a file	use R and RStudio to
 
-tab complete
+tab complete reminder
+
+
+EXTRA: you can download your own data set and read it into R
+
+
+>**Try this:** Download and save a NEON Dataset
+
+
+> [here](https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_data.csv).
+>
+> 1. Download the file (right mouse click on the link above -> "Save link as" / "Save file as", or click on the link and after the page loads, press <kbd>Ctrl</kbd>+<kbd>S</kbd> or choose File -> "Save page as")
+> 2. Make sure it's saved under the name `gapminder_data.csv`
+> 3. Save the file in the `data/` folder within your project.
+>
+> We will load and inspect these data later.
+:::
+
+> ## Challenge 4
+> It is useful to get some general idea about the dataset, directly from the
+> command line, before loading it into R. Understanding the dataset better
+> will come in handy when making decisions on how to load it in R. Use the command-line
+> shell to answer the following questions:
+> 1. What is the size of the file?
+> 2. How many rows of data does it contain?
+> 3. What kinds of values are stored in this file?
+>
+> > ## Solution to Challenge 4
+> >
+> > By running these commands in the shell:
+> > ```{r ch2a-sol, engine='sh'}
+> > ls -lh data/gapminder_data.csv
+> > ```
+> > The file size is 80K.
+> > ```{r ch2b-sol, engine='sh'}
+> > wc -l data/gapminder_data.csv
+> > ```
+> > There are 1705 lines. The data looks like:
+> > ```{r ch2c-sol, engine='sh'}
+> > head data/gapminder_data.csv
+> > ```
+
+
+
+
+
+##### Working directory - FIXME
+
+Knowing R's current working directory is important because when you need to access other files (for example, to import a data file), R will look for them relative to the current working directory.
+
+Each time you create a new RStudio Project, it will create a new directory for that project. When you open an existing `.Rproj` file, it will open that project and set R's working directory to the folder that file is in.
+
+> #### Challenge 5
+> You can check the current working directory with the `getwd()` command, or by using the menus in RStudio.
+>
+> 1. In the console, type `getwd()` ("wd" is short for "working directory") and hit Enter.
+> 2. In the Files pane, double click on the `data` folder to open it (or navigate to any other folder you wish). To get the Files pane back to the current working directory, click "More" and then select "Go To Working Directory".
+>
+> You can change the working directory with `setwd()`, or by using RStudio menus.
+>
+> 1. In the console, type `setwd("data")` and hit Enter. Type `getwd()` and hit Enter to see the new working directory.
+> 2. In the menus at the top of the RStudio window, click the "Session" menu button, and then select "Set Working Directory" and then "Choose Directory".
+> 3. In the windows navigator that opens, navigate back to the project directory, and click "Open". Note that a `setwd` command will automatically appear in the console.
+{: .challenge}
+
+::: {.callout}
+> #### Tip: File does not exist errors
+>
+> When you're attempting to reference a file in your R code and you're getting errors saying the file doesn't exist, it's a good idea to check your working directory.
+> You need to either provide an absolute path to the file, or you need to make sure the file is saved in the working directory (or a subfolder of the working directory) and provide a relative path. 
+:::
+
+
+
+
+
+
+
 
 
 ### Installing and loading packages

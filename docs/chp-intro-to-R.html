@@ -351,25 +351,10 @@ $(document).ready(function () {
 <div id="chapter-2.-intro-to-r-and-rstudio"
 class="section level1 tabset">
 <h1 class="tabset">Chapter 2. Intro to R and RStudio</h1>
+<p><strong>THIS LESSON IS NOT YET READY FOR LEARNERS.</strong></p>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<div id="what-we-will-learn" class="section level3">
-<h3>What we will learn</h3>
-<p>In this lesson learners will:</p>
-<ul>
-<li>discover why so many scientists use R</li>
-<li>describe the contents of the windows in an RStudio session</li>
-<li>install and load packages in R</li>
-<li>write and save a code script in a project folder</li>
-<li>read and view tabular data from a file</li>
-<li>use the console for mathematical calculations</li>
-<li>state the rules for assigning variables</li>
-<li>work with vectors</li>
-<li>learn how to get help and troubleshoot error messages</li>
-</ul>
-</div>
-<div id="motivator---fixme" class="section level3">
-<h3>Motivator - FIXME</h3>
+<!--### Motivator   FIX ME -->
 <p>Science is a multi-step process: once you’ve designed an experiment
 and collected data, the real fun begins! This lesson will teach you how
 to start this process using R and RStudio. We will begin with raw data,
@@ -404,11 +389,28 @@ clicking through a graphical user interface</li>
 job.</li>
 </ul></li>
 </ul>
+<div id="what-we-will-learn" class="section level3">
+<h3>What we will learn</h3>
+<p>In this lesson learners will:</p>
+<ul>
+<li>discover why so many scientists use R</li>
+<li>describe the contents of the windows in an RStudio session</li>
+<li>install and load packages in R</li>
+<li>write and save a code script in a project folder</li>
+<li>read and view tabular data from a file</li>
+<li>use the console for mathematical calculations</li>
+<li>state the rules for assigning variables</li>
+<li>work with vectors</li>
+<li>learn how to get help and troubleshoot error messages</li>
+</ul>
+<div id="key-terms-commands" class="section level4">
+<h4>Key Terms &amp; Commands</h4>
 </div>
-<div id="get-set-up" class="section level3">
-<h3>Get set up</h3>
-<p>Please ensure you have the latest version of R and RStudio installed
-on your machine. This is important, as some packages may not install
+</div>
+<div id="prerequisites" class="section level3">
+<h3>Prerequisites</h3>
+<p>Check that you have the latest version of R and RStudio installed on
+your machine. This is important, as some packages may not install
 correctly (or at all) if R is not up to date. For instructions on
 installing (or updating) R and RStudio, please see <a
 href="computer-setup.html">Computer Setup</a>.</p>
@@ -469,10 +471,7 @@ href="chp-computer-navigation.html">Navigating your computer</a>)</p>
 </ul>
 <p>If you opened the R-course-NEON-workbook project then your RStudio
 session should look like this:</p>
-<div class="figure">
-<img src="images/01-rstudio.png" alt="" />
-<p class="caption">RStudio layout</p>
-</div>
+<p><img src="images/01-rstudio.png" alt="RStudio layout" /></p>
 <p>We’re going to start working in the R console to learn about some of
 the basic functionality of R. Once we start learning more complex code,
 we will open the Source panel and create an R script for saving the code
@@ -1006,10 +1005,8 @@ will</p>
 comments in a code script use R and RStudio to</p>
 <p>Once you open files, such as R scripts, an editor panel will also
 open in the top left.</p>
-<div class="figure">
-<img src="../fig/01-rstudio-script.png" alt="" />
-<p class="caption">RStudio layout with .R file open</p>
-</div>
+<p><img src="../fig/01-rstudio-script.png"
+alt="RStudio layout with .R file open" /></p>
 <blockquote>
 <h4 id="r-scripts">R scripts</h4>
 <p>Any commands that you write in the R console can be saved in to a
@@ -1076,7 +1073,104 @@ executes code.</p>
 <h4>Reading data from files</h4>
 <p>2 5 read and view tabular data from a file learners will</p>
 <p>2 7 read a data table from a file use R and RStudio to</p>
-<p>tab complete</p>
+<p>tab complete reminder</p>
+<p>EXTRA: you can download your own data set and read it into R</p>
+<blockquote>
+<p><strong>Try this:</strong> Download and save a NEON Dataset</p>
+</blockquote>
+<blockquote>
+<p><a
+href="https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_data.csv">here</a>.</p>
+<ol style="list-style-type: decimal">
+<li>Download the file (right mouse click on the link above -&gt; “Save
+link as” / “Save file as”, or click on the link and after the page
+loads, press <kbd>Ctrl</kbd>+<kbd>S</kbd> or choose File -&gt; “Save
+page as”)</li>
+<li>Make sure it’s saved under the name
+<code>gapminder_data.csv</code></li>
+<li>Save the file in the <code>data/</code> folder within your
+project.</li>
+</ol>
+<p>We will load and inspect these data later. :::</p>
+</blockquote>
+<blockquote>
+<h2 id="challenge-4">Challenge 4</h2>
+<p>It is useful to get some general idea about the dataset, directly
+from the command line, before loading it into R. Understanding the
+dataset better will come in handy when making decisions on how to load
+it in R. Use the command-line shell to answer the following questions:
+1. What is the size of the file? 2. How many rows of data does it
+contain? 3. What kinds of values are stored in this file?</p>
+<blockquote>
+<h2 id="solution-to-challenge-4">Solution to Challenge 4</h2>
+<p>By running these commands in the shell:</p>
+<pre class="sh"><code>ls -lh data/gapminder_data.csv</code></pre>
+<pre><code>-rw-r--r-- 1 User User 80K Apr 17 10:03 data/gapminder_data.csv</code></pre>
+<p>The file size is 80K.</p>
+<pre class="sh"><code>wc -l data/gapminder_data.csv</code></pre>
+<pre><code>1705 data/gapminder_data.csv</code></pre>
+<p>There are 1705 lines. The data looks like:</p>
+<pre class="sh"><code>head data/gapminder_data.csv</code></pre>
+<pre><code>country,year,pop,continent,lifeExp,gdpPercap
+Afghanistan,1952,8425333,Asia,28.801,779.4453145
+Afghanistan,1957,9240934,Asia,30.332,820.8530296
+Afghanistan,1962,10267083,Asia,31.997,853.10071
+Afghanistan,1967,11537966,Asia,34.02,836.1971382
+Afghanistan,1972,13079460,Asia,36.088,739.9811058
+Afghanistan,1977,14880372,Asia,38.438,786.11336
+Afghanistan,1982,12881816,Asia,39.854,978.0114388
+Afghanistan,1987,13867957,Asia,40.822,852.3959448
+Afghanistan,1992,16317921,Asia,41.674,649.3413952</code></pre>
+</blockquote>
+</blockquote>
+<div id="working-directory---fixme" class="section level5">
+<h5>Working directory - FIXME</h5>
+<p>Knowing R’s current working directory is important because when you
+need to access other files (for example, to import a data file), R will
+look for them relative to the current working directory.</p>
+<p>Each time you create a new RStudio Project, it will create a new
+directory for that project. When you open an existing
+<code>.Rproj</code> file, it will open that project and set R’s working
+directory to the folder that file is in.</p>
+<blockquote>
+<h4 id="challenge-5">Challenge 5</h4>
+<p>You can check the current working directory with the
+<code>getwd()</code> command, or by using the menus in RStudio.</p>
+<ol style="list-style-type: decimal">
+<li>In the console, type <code>getwd()</code> (“wd” is short for
+“working directory”) and hit Enter.</li>
+<li>In the Files pane, double click on the <code>data</code> folder to
+open it (or navigate to any other folder you wish). To get the Files
+pane back to the current working directory, click “More” and then select
+“Go To Working Directory”.</li>
+</ol>
+<p>You can change the working directory with <code>setwd()</code>, or by
+using RStudio menus.</p>
+<ol style="list-style-type: decimal">
+<li>In the console, type <code>setwd("data")</code> and hit Enter. Type
+<code>getwd()</code> and hit Enter to see the new working
+directory.</li>
+<li>In the menus at the top of the RStudio window, click the “Session”
+menu button, and then select “Set Working Directory” and then “Choose
+Directory”.</li>
+<li>In the windows navigator that opens, navigate back to the project
+directory, and click “Open”. Note that a <code>setwd</code> command will
+automatically appear in the console. {: .challenge}</li>
+</ol>
+</blockquote>
+<div class="callout">
+<blockquote>
+<h4 id="tip-file-does-not-exist-errors">Tip: File does not exist
+errors</h4>
+<p>When you’re attempting to reference a file in your R code and you’re
+getting errors saying the file doesn’t exist, it’s a good idea to check
+your working directory. You need to either provide an absolute path to
+the file, or you need to make sure the file is saved in the working
+directory (or a subfolder of the working directory) and provide a
+relative path.</p>
+</blockquote>
+</div>
+</div>
 </div>
 </div>
 <div id="installing-and-loading-packages" class="section level3">
@@ -1111,7 +1205,7 @@ package and click a checked box to detach that package.</p>
 <p>Packages can be installed and updated from the Package tab with the
 Install and Update buttons at the top of the tab.</p>
 <blockquote>
-<h2 id="challenge-5">Challenge 5</h2>
+<h2 id="challenge-5-1">Challenge 5</h2>
 <p>Install the following packages: <code>ggplot2</code>,
 <code>plyr</code>, <code>gapminder</code></p>
 <blockquote>
@@ -1404,11 +1498,11 @@ value of 102 to the variable age.</p>
 </blockquote>
 </blockquote>
 <blockquote>
-<h2 id="challenge-4">Challenge 4</h2>
+<h2 id="challenge-4-1">Challenge 4</h2>
 <p>Clean up your working environment by deleting the mass and age
 variables.</p>
 <blockquote>
-<h2 id="solution-to-challenge-4">Solution to challenge 4</h2>
+<h2 id="solution-to-challenge-4-1">Solution to challenge 4</h2>
 <p>We can use the <code>rm</code> command to accomplish this task</p>
 <pre class="r"><code>rm(age, mass)</code></pre>
 </blockquote>

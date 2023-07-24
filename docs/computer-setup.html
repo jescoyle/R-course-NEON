@@ -409,20 +409,78 @@ div.tocify {
 </div>
 
 
-<div id="r-and-rstudio" class="section level3">
-<h3>R and RStudio</h3>
+<div id="r-and-rstudio" class="section level2">
+<h2>R and RStudio</h2>
 <p><strong>R</strong> and <strong>RStudio</strong> are separate
 downloads and installations. R is the underlying statistical computing
-environment, but using R alone is no fun. RStudio is a graphical
-integrated development environment (IDE) that makes using R much easier
-and more interactive. You need to install R before you install RStudio.
-In the sections below are the instructions for installing R and R Studio
-on your operating system.</p>
-<div id="windows" class="section level4">
-<h4>Windows</h4>
-<div id="if-you-already-have-r-and-rstudio-installed"
-class="section level5">
-<h5>If you already have R and RStudio installed</h5>
+environment, but using R alone is tricky for beginners. RStudio is a
+graphical integrated development environment (IDE) that makes using R
+much easier and more interactive. You need to install R before you
+install RStudio. In the sections below are the instructions for
+installing R and R Studio on your operating system.</p>
+<div id="if-you-dont-have-r-installed" class="section level3">
+<h3>If you don’t have R installed</h3>
+<p>If you have never used R or RStudio on your computer, then you
+probably don’t have R installed.</p>
+<ol style="list-style-type: decimal">
+<li>Visit the <a href="https://cran.r-project.org/" target="_blank">CRAN
+website</a></li>
+<li>In the first box labeled “Download and Install R”, click on the link
+for the operating system on your computer (e.g. Windows, Mac or
+Linux)</li>
+</ol>
+<div id="r-for-windows" class="section level4">
+<h4>R for Windows</h4>
+<ol style="list-style-type: decimal">
+<li>Click “base”. Then on the next page, click “Download R.x.x.x for
+Windows” (x.x.x are the version number)</li>
+<li>Save the <code>.exe</code> file to a location on your computer
+(e.g. the Downloads folder).</li>
+<li>Open and run the <code>.exe</code> file you just downloaded. This
+will install and set up R on your computer.</li>
+</ol>
+</div>
+<div id="r-for-mac" class="section level4">
+<h4>R for Mac</h4>
+<ol style="list-style-type: decimal">
+<li>Click on the <code>.pkg</code> file for the latest R version that
+will work on your computer.</li>
+<li>Save this file somewhere on your computer (e.g. Downloads)</li>
+<li>Open the downloaded <code>.pkg</code> file to install R</li>
+<li>It is also a good idea to install <a
+href="https://www.xquartz.org/">XQuartz</a>. Follow the installation
+instructions on that website. R will work without XQuartz, but you may
+find that you need it later if certain packages do not install
+properly.</li>
+</ol>
+</div>
+<div id="r-for-linux" class="section level4">
+<h4>R for Linux</h4>
+<ol style="list-style-type: decimal">
+<li>Choose your distribution of Linux.</li>
+<li>Follow the instructions on the website.</li>
+</ol>
+</div>
+<div id="rstudio-for-all-operating-systems" class="section level4">
+<h4>RStudio for all operating systems</h4>
+<ol style="list-style-type: decimal">
+<li>Go to the <a
+href="https://www.rstudio.com/products/rstudio/download/#download">RStudio
+download page</a></li>
+<li>The website should automatically detect your operating system and
+provide the correct installer download as a large button. If you need a
+different version, scroll down the page and select the installer
+download that matches your operating system.</li>
+<li>Save the file somewhere on your computer (e.g. Downloads).</li>
+<li>Open the downloaded file to launch the RStudio installer and follow
+the instructions in the prompts.</li>
+<li>Once it is installed, open RStudio to make sure it works and you
+don’t get any error messages.</li>
+</ol>
+</div>
+</div>
+<div id="if-you-do-have-r-and-rstudio-installed" class="section level3">
+<h3>If you do have R and RStudio installed</h3>
 <ul>
 <li>Open RStudio, and click on “Help” &gt; “Check for updates”. If a new
 version is available, quit RStudio, and download the latest version for
@@ -431,311 +489,60 @@ RStudio.</li>
 first thing that appears in the console indicates the version of R you
 are running. Alternatively, you can type <code>sessionInfo()</code>,
 which will also display which version of R you are running. Go on the <a
-href="https://cran.r-project.org/bin/windows/base/">CRAN website</a> and
-check whether a more recent version is available. If so, please download
-and install it. You can <a
+href="https://cran.r-project.org/">CRAN website</a> and check whether a
+more recent version is available. If so, please download and install it.
+You can <a
 href="https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f">check
 here</a> for more information on how to remove old versions from your
 system if you wish to do so.</li>
 </ul>
 </div>
-<div id="if-you-dont-have-r-and-rstudio-installed"
-class="section level5">
-<h5>If you don’t have R and RStudio installed</h5>
-<ul>
-<li>Download R from the <a
-href="http://cran.r-project.org/bin/windows/base/release.htm">CRAN
-website</a>.</li>
-<li>Run the <code>.exe</code> file that was just downloaded</li>
-<li>Go to the <a
-href="https://www.rstudio.com/products/rstudio/download/#download">RStudio
-download page</a></li>
-<li>Under <em>Installers</em> select <strong>RStudio x.yy.zzz - Windows
-XP/Vista/7/8</strong> (where x, y, and z represent version numbers)</li>
-<li>Double click the file to install it</li>
-<li>Once it’s installed, open RStudio to make sure it works and you
-don’t get any error messages.</li>
-</ul>
 </div>
-</div>
-<div id="macos" class="section level4">
-<h4>macOS</h4>
-<div id="if-you-already-have-r-and-rstudio-installed-1"
-class="section level5">
-<h5>If you already have R and RStudio installed</h5>
-<ul>
-<li>Open RStudio, and click on “Help” &gt; “Check for updates”. If a new
-version is available, quit RStudio, and download the latest version for
-RStudio.</li>
-<li>To check the version of R you are using, start RStudio and the first
-thing that appears on the terminal indicates the version of R you are
-running. Alternatively, you can type <code>sessionInfo()</code>, which
-will also display which version of R you are running. Go on the <a
-href="https://cran.r-project.org/bin/macosx/">CRAN website</a> and check
-whether a more recent version is available. If so, please download and
-install it.</li>
-</ul>
-</div>
-<div id="if-you-dont-have-r-and-rstudio-installed-1"
-class="section level5">
-<h5>If you don’t have R and RStudio installed</h5>
-<ul>
-<li>Download R from the <a
-href="http://cran.r-project.org/bin/macosx">CRAN website</a>.</li>
-<li>Select the <code>.pkg</code> file for the latest R version</li>
-<li>Double click on the downloaded file to install R</li>
-<li>It is also a good idea to install <a
-href="https://www.xquartz.org/">XQuartz</a> (needed by some
-packages)</li>
-<li>Go to the <a
-href="https://www.rstudio.com/products/rstudio/download/#download">RStudio
-download page</a></li>
-<li>Under <em>Installers</em> select <strong>RStudio x.yy.zzz - Mac OS X
-10.6+ (64-bit)</strong> (where x, y, and z represent version
-numbers)</li>
-<li>Double click the file to install RStudio</li>
-<li>Once it’s installed, open RStudio to make sure it works and you
-don’t get any error messages.</li>
-</ul>
-</div>
-</div>
-<div id="linux" class="section level4">
-<h4>Linux</h4>
-<ul>
-<li>Follow the instructions for your distribution from <a
-href="https://cloud.r-project.org/bin/linux">CRAN</a>, they provide
-information to get the most recent version of R for common
-distributions. For most distributions, you could use your package
-manager (e.g., for Debian/Ubuntu run
-<code>sudo apt-get install r-base</code>, and for Fedora
-<code>sudo yum install R</code>), but we don’t recommend this approach
-as the versions provided by this are usually out of date. In any case,
-make sure you have at least R 3.3.1.</li>
-<li>Go to the <a
-href="https://www.rstudio.com/products/rstudio/download/#download">RStudio
-download page</a></li>
-<li>Under <em>Installers</em> select the version that matches your
-distribution, and install it with your preferred method (e.g., with
-Debian/Ubuntu <code>sudo dpkg -i   rstudio-x.yy.zzz-amd64.deb</code> at
-the terminal).</li>
-<li>Once it’s installed, open RStudio to make sure it works and you
-don’t get any error messages.</li>
-</ul>
-<hr />
-</div>
-</div>
-<div id="editing-the-course-website" class="section level3">
-<h3>Editing the Course Website</h3>
-<p>The course website can be edited by changing the html files in the
-course GitHub repository located at <a
-href="https://github.com/FukamiLab/BIO202"
-class="uri">https://github.com/FukamiLab/BIO202</a>.</p>
-<div id="rules-for-structuring-your-rmd-file" class="section level4">
-<h4>Rules for structuring your Rmd file</h4>
-<p>If you follow these rules then anyone should be able to render your
-Rmd file without changing any of the code. The repository working
-directory is the working directory of thr .Rproj file and it contains
-all of the .Rmd and .html files used to make the website.</p>
-<p><strong>DO</strong></p>
-<ul>
-<li><p>Use example data files that have already been (mostly) cleaned
-and formatted. This reduces the time it takes to render the Rmd file
-after small changes.</p></li>
-<li><p>Two options for saving data:</p>
+<div id="course-workbook" class="section level2">
+<h2>Course Workbook</h2>
 <ol style="list-style-type: decimal">
-<li>Save your data files in a folder called “data/” in the repository
-working directory.
-<ul>
-<li>If you are using git to interact with the course website and you do
-not want your data to be tracked and saved on GitHub, then open the
-“.gitignore” file and add the path to your data file on a new line:
-“data/your_data_filename.csv”. Then, send the data file to Jes so she
-can add it to Canvas for other to use.</li>
-<li>If you are using git and you want your data to be tracked and saved
-on GitHub, then make sure your commit the data file and push it to the
-repository.</li>
-<li>If you are not using git, then send your data file to Jes and tell
-her whether you want it to be public (on GitHub) or not (on
-Canvas).</li>
-</ul></li>
-<li>Upload your data file directly to the data folder on our <a
-href="https://github.com/FukamiLab/BIO202/tree/master/data">GitHub
-repository</a>.</li>
-</ol></li>
-<li><p>Save images that you reference with
-<code>![caption](image_name.png)</code> inside the folder called
-“images/” and then reference them with
-<code>![caption](images/image_name.png)</code>.</p>
-<ul>
-<li>If you are using git, then make sure your commit the image file and
-push it to the repository.</li>
-<li>If you are not using git, then send your image file to Jes.</li>
-</ul></li>
-<li><p>Use file paths that are relative to the repository working
-directory. E.g. <code>read.csv("data/my_data.csv")</code> or
-<code>load("data/my_rdata.RData")</code>. Even better, read data
-directly from the GitHub repository (if the data is public):
-<code>read.csv(file.path(repo_url, "data/filename.csv"))</code>. Note
-that <code>repo_url</code> is a variable that is defined in all of the
-lesson pages.</p></li>
-<li><p>Give instructions for where to find any packages that cannot be
-installed from CRAN using <code>install.packages()</code>.</p></li>
-</ul>
-<p><strong>DO NOT</strong></p>
-<ul>
-<li>Change the working directory.</li>
-<li>Use file paths that are specific to your computer.</li>
-<li>Run analyses that take longer than ~ 2 min. If you need to run
-longer analyses, save the output as an RData file and then load it using
-<code>load("analysis_output.RData")</code>.</li>
-</ul>
-</div>
-<div id="if-you-dont-want-to-work-with-git" class="section level4">
-<h4>If you don’t want to work with git</h4>
-<div class="figure">
-<img src="images/github_workflow_with_email.png" style="width:50.0%"
-alt="" />
-<p class="caption">Workflow for editing the course website without
-git</p>
-</div>
-<ol style="list-style-type: decimal">
-<li>Go to the course GitHub repository above.</li>
-<li>Click on the .Rmd file for the lesson you want to edit.</li>
-<li>Click the Raw button in the upper right corner.</li>
-<li>When the page with text opens, download the file and save it as a
-.Rmd file. Make sure to remove any .txt extensions that may be
-automatically added.</li>
-<li>Open and edit the .Rmd file in R Studio. Use the ‘Knit’ button to
-convert the file to an html to check your changes.</li>
-<li>When you as satisfied, email the .Rmd file to Jes no later than 8 am
-on the day you present. <em>You must also email any data or image files
-that are not generated by the R code.</em></li>
+<li>Download the Student Workbook from <a href="">here</a>. Save this
+zipped file in the folder where you are saving work for this
+course.</li>
+<li>Unzip the folder you downloaded. The name of the folder that you
+unzip should be R-course-NEON-workbook. Instructions for how to unzip
+folders are located <a href="">here for Mac</a> and <a href="">here for
+Windows</a>.</li>
 </ol>
-</div>
-<div id="if-you-are-new-to-git-but-want-to-learn"
-class="section level4">
-<h4>If you are new to git, but want to learn</h4>
-<ol style="list-style-type: decimal">
-<li>Install Git on your computer using the instructions in the section
-below.</li>
-<li>Attend the Git tutorial during class on Wednesday, October 4th (week
-2). We will go over how to use git from RStudio.</li>
-<li>Use the following diagram to remember the workflow:</li>
-</ol>
-<div class="figure">
-<img src="images/github_workflow_with_rstudio.png" style="width:50.0%"
-alt="" />
-<p class="caption">Workflow for editing the course website with git in
-RStudio</p>
-</div>
-</div>
-<div id="if-you-are-familiar-with-git" class="section level4">
-<h4>If you are familiar with git</h4>
-<div class="figure">
-<img src="images/github_workflow_with_git.png" style="width:50.0%"
-alt="" />
-<p class="caption">Workflow for editing the course website with git</p>
-</div>
-<ol style="list-style-type: decimal">
-<li>If you have not aready done so, fork the repository from <a
-href="https://github.com/FukamiLab/BIO202"
-class="uri">https://github.com/FukamiLab/BIO202</a> to your account on
-GitHub. Then clone a local copy of this forked repository (from your own
-GitHub account) to your computer. This only needs to be done once.</li>
-<li>Before you start working:
-<ul>
-<li>Make sure your copy is up to date with the FukamiLab repository on
-GitHub by submitting a pull request.</li>
-<li>Make sure your local repository on your computer is up to date with
-your fork of the repository on your GitHub account using
-<code>git pull</code>.</li>
-</ul></li>
-<li>Work on the .Rmd file for your lesson in R Studio on your computer.
-Click ‘Knit’ to render your changes as an html file and view them in
-your browser. Note that any edits you make are only on your computer
-until you submit a pull request to merge your changes to the repository.
-Make sure that when you have made your last edit to the .Rmd file you
-click ‘Knit’ so that an up-to-date html file is generated. The html file
-will be the one that appears on the website.</li>
-<li>Commit the changes you make periodically to your local repository
-using <code>git commit -m "changes you made"</code>.</li>
-<li>When you are finished, push the commits from your local repository
-to your fork on your GitHub account using
-<code>git push origin master</code>.</li>
-<li>Submit a pull request on GitHub to merge the changes on your fork
-with the original BIO202 repository on FukamiLab no later than 8 am on
-the day you present. Jes or Tad will approve your pull request.</li>
-</ol>
-<p><em>If you are not sure how to do any of the steps listed above, you
-can find instructions on the <a href="02-B-git-intro.html">lesson
-page</a> for Wednesday, October 4th.</em></p>
-<hr />
-</div>
-</div>
-<div id="git" class="section level3">
-<h3>Git</h3>
-<div id="windows-1" class="section level4">
-<h4>Windows</h4>
-<ol style="list-style-type: decimal">
-<li>Download the git installer for Windows <a
-href="https://git-for-windows.github.io/">here</a>. This will install
-bash, which is a command-line shell program for interacting with files
-and programs on your computer.</li>
-<li>Run the installer that you just downloaded. Click “Next” as needed
-and when you get to the following options make sure that you:
-<ul>
-<li>Select “Use Git from the Windows Command Prompt”.</li>
-<li>Keep “Checkout Windows-style, commit Unix-style line endings”
-selected.</li>
-<li>Select “Use Windows’ default console window”.</li>
-<li>If you forgot to do any of these, rerun the installer and select the
-appropriate options.</li>
-</ul></li>
-<li>That’s it! You should now have three new programs installed in a
-folder called Git under your Program Files.</li>
-</ol>
-</div>
-<div id="macos-1" class="section level4">
-<h4>macOS</h4>
-<p>Follow the instructions below or view this <a
-href="https://www.youtube.com/watch?v=9LQhwETCdwY">video
-tutorial</a>.</p>
-<ol style="list-style-type: decimal">
-<li>Go to <a
-href="https://sourceforge.net/projects/git-osx-installer/files/">this
-list</a> and download an installer for Git.
-<ul>
-<li>If you are using OS X 10.9 and higher, choose the most recent
-version for “mavericks”.</li>
-<li>If you are using an earlier version of OS X, choose the most recent
-version for “snow leopard”.</li>
-</ul></li>
-<li>Run the installer you downloaded.</li>
-<li>After installing Git, there will not be anything in your
-/Applications folder, because Git is a command line program.</li>
-</ol>
-<p>Note: if you have OSX El Capitan you may experience some errors when
-running Git if you don’t have an updated XCODE. <a
-href="https://stackoverflow.com/questions/32893412/command-line-tools-not-working-os-x-el-capitan-macos-sierra">Here</a>
-is a description of the issue on StackOverflow and the solution is to
-open a Terminal window and type <code>xcode-select --install</code>.</p>
-</div>
-<div id="linux-1" class="section level4">
-<h4>Linux</h4>
-<p>You may already have Git installed. If not, you can try to install it
-via your distro’s package manager. For Debian/Ubuntu run
-<code>sudo apt-get install git</code> and for Fedora run
-<code>sudo yum install git</code>.</p>
-<hr />
-<blockquote>
-<p>Attribution</p>
-<p>The content of this webpage was derived from <a
-href="http://datacarpentry.org">Data Carpentry</a> and <a
-href="http://software-carpentry.org">Software Carpentry</a> materials
-(Copyright (c) Data Carpentry) under CC-3.0 Attribution License (see <a
-href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a>).</p>
-</blockquote>
-</div>
+<!-- May introduce Git in a subsequent version of this course
+
+***
+
+### Git
+
+#### Windows
+
+1. Download the git installer for Windows [here](https://git-for-windows.github.io/). This will install bash, which is a command-line shell program for interacting with files and programs on your computer.
+2. Run the installer that you just downloaded. Click "Next" as needed and when you get to the following options make sure that you:
+    + Select "Use Git from the Windows Command Prompt". 
+    + Keep "Checkout Windows-style, commit Unix-style line endings" selected.
+    + Select "Use Windows' default console window".
+    + If you forgot to do any of these, rerun the installer and select the appropriate options.
+3. That's it! You should now have three new programs installed in a folder called Git under your Program Files.
+
+#### macOS
+
+Follow the instructions below or view this [video tutorial](https://www.youtube.com/watch?v=9LQhwETCdwY).
+
+1. Go to [this list](https://sourceforge.net/projects/git-osx-installer/files/) and download an installer for Git.
+    + If you are using OS X 10.9 and higher, choose the most recent version for "mavericks".
+    + If you are using an earlier version of OS X, choose the most recent version for "snow leopard".
+2. Run the installer you downloaded.
+3. After installing Git, there will not be anything in your /Applications folder, because Git is a command line program.
+
+Note: if you have OSX El Capitan you may experience some errors when running Git if you don't have an updated XCODE. [Here](https://stackoverflow.com/questions/32893412/command-line-tools-not-working-os-x-el-capitan-macos-sierra) is a description of the issue on StackOverflow and the solution is to open a Terminal window and type `xcode-select --install`.
+
+#### Linux
+
+You may already have Git installed. If not, you can try to install it via your distro’s package manager. For Debian/Ubuntu run `sudo apt-get install git` and for Fedora run `sudo yum install git`.
+
+***
+-->
 </div>
 
 <hr>

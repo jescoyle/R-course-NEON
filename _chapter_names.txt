@@ -11,3 +11,4 @@ chp	fileName	nameShort	nameLong
 A	chp-rmarkdown	Rmarkdown	Producing reports with Rmd and knitr
 B	chp-geospatial-raster	Raster data	Intro to geospatial raster data in R
 C	chp-openrefine	OpenRefine	Data cleaning with OpenRefine
+D	chp-git	Git	Version control with Git

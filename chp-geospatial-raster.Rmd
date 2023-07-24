@@ -13,7 +13,7 @@ bibliography: references.bib
 source("src/setup.R")
 
 # get chapter number based on name
-chp_num <- get_chpNum("chp-computer-navigation", type = "fileName")
+chp_num <- get_chpNum("chp-geospatial-raster", type = "fileName")
 chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
 
 # knitr options
@@ -28,6 +28,9 @@ set.seed(10)
 ```
 
 # Chapter `r chp_num`. `r get_chpName(chp_num, type.to = "nameLong")` {.tabset}
+
+
+**THIS LESSON IS NOT YET READY FOR LEARNERS.**
 
 ## Overview 
 

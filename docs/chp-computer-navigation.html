@@ -351,21 +351,10 @@ $(document).ready(function () {
 <div id="chapter-1.-navigating-your-computer"
 class="section level1 tabset">
 <h1 class="tabset">Chapter 1. Navigating your computer</h1>
+<p><strong>THIS LESSON IS NOT YET READY FOR LEARNERS.</strong></p>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<div id="what-we-will-learn" class="section level3">
-<h3>What we will learn</h3>
-<p>Brief description of the contents of this lesson.</p>
-<p>In this lesson learners will:</p>
-<ul>
-<li>describe the structure of the filesystem on a computer</li>
-<li>use a command line interface to navigate the file system</li>
-<li>describe the relationship between R and RStudio (an IDE)</li>
-<li>set up an RStudio project</li>
-</ul>
-</div>
-<div id="motivator" class="section level3">
-<h3>Motivator</h3>
+<!--### Motivator-->
 <blockquote>
 <p>How much time have you wasted wondering just where that file you
 downloaded went or which version of a paper you were working on? Have
@@ -383,11 +372,10 @@ software that is programmed into our computers is structured can make it
 much easier to create reproducible science in a world where all data
 eventually becomes digital.</p>
 <p>We’re going to get to know your computer by learning to navigate the
-<em>file system</em> through a <em>command line</em>. In doing so, we
-will set up a digital project that we will use for the rest of the
-chapters in this book. Keeping your computer’s files tidy and organized
-is the first step toward reproducible science and will save you time and
-energy.</p>
+file system through a command line. In doing so, we will set up a
+digital project that we will use for the rest of the chapters in this
+book. Keeping your computer’s files tidy and organized is the first step
+toward reproducible science and will save you time and energy.</p>
 <p>A good project layout will ultimately make your life easier:</p>
 <ul>
 <li>It will help ensure the integrity of your data;</li>
@@ -398,13 +386,54 @@ break.</li>
 </ul>
 <p>To understand how to set up a tidy project layout, we first need to
 understand how your computer is structured.</p>
+<div id="what-we-will-learn" class="section level3">
+<h3>What we will learn</h3>
+<p>In this lesson learners will:</p>
+<ul>
+<li>describe the structure of the filesystem on a computer</li>
+<li>use a command line interface to navigate the file system</li>
+<li>describe the relationship between R and RStudio (an IDE)</li>
+<li>set up an RStudio project</li>
+</ul>
+<div id="key-terms-commands" class="section level4">
+<h4>Key Terms &amp; Commands</h4>
+<p>You will learn these key terms as you work through this lesson:</p>
+<ul>
+<li>file</li>
+<li>file system</li>
+<li>file path (relative vs. absolute)</li>
+<li>directory</li>
+<li>working directory vs. root directory</li>
+<li>terminal</li>
+</ul>
+<p>This lesson introduces the following unix-style shell commands:</p>
+<ul>
+<li><code>/</code></li>
+<li><code>./</code></li>
+<li><code>../</code></li>
+<li><code>cd</code></li>
+<li><code>ls</code></li>
+<li><code>pwd</code></li>
+<li><code>cp</code></li>
+<li><code>mkdir</code></li>
+<li><code>rm</code></li>
+</ul>
 </div>
-<div id="get-set-up" class="section level3">
-<h3>Get set up</h3>
-<p>We’ll be using RStudio to create a self-contained, reproducible
-project that we will use for the rest of this book. For instructions on
-installing (or updating) R and RStudio, please see <a
-href="computer-setup.html">Computer Setup</a>.</p>
+</div>
+<div id="prerequisites" class="section level3">
+<h3>Prerequisites</h3>
+<p>We could learn about your computer’s <strong>file system</strong>
+using applications that are already installed on your computer; e.g. the
+File Explorer on Windows or the Finder on Mac. However, we’ll be using
+RStudio to explore files on your computer because it has a built-in
+command-line environment and file viewing window that we can use from
+the same application. We’ll also be using RStudio to create a
+self-contained, reproducible project that we will use for the rest of
+this book.</p>
+<p>Before beginning this lesson, make sure that your have the latest
+version of R and RStudio (see <a href="computer-setup.html">Computer
+Setup</a>) and that you know how to open your computers default file
+browser.</p>
 </div>
 </div>
 <div id="lesson" class="section level2">
@@ -412,131 +441,230 @@ href="computer-setup.html">Computer Setup</a>.</p>
 <div id="orientation-to-the-rstudio-user-interface"
 class="section level3">
 <h3>Orientation to the RStudio user interface</h3>
-<p>describe the different panels in RStudio: today just working files
-and terminal</p>
+<p>Let’s begin by opening RStudio. Find the RStudio application on your
+computer and open it as you would any other application.</p>
+<p><strong>Basic layout</strong></p>
+<p>When you first open RStudio, you will be greeted by three panels:</p>
+<ul>
+<li>The interactive R console/Terminal (entire left)</li>
+<li>Environment/History/Connections (tabbed in upper right)</li>
+<li>Files/Plots/Packages/Help/Viewer (tabbed in lower right)</li>
+</ul>
+<p>Your RStudio session should look similar to this:</p>
+<p><img src="images/01-rstudio.png" alt="image of RStudio layout" /></p>
+<p>We will go over each of these panels as we need to use them. For this
+lesson, we will be using the <code>Files</code> and
+<code>Terminal</code> panels to learn how to navigate your computer. We
+will learn more about the <code>Console</code> and
+<code>Environment</code> panels in the <a
+href="chp-intro-to-R.html">Intro to R and RStudio</a> lesson.</p>
 </div>
 <div id="navigating-the-file-system" class="section level3">
 <h3>Navigating the file system</h3>
-<p>file system</p>
-<p>path</p>
-<p>absolute path</p>
-<p>directory</p>
-<p>file</p>
-<p>home directory</p>
+<p>A computer can do a lot of things, but one of its most basic
+functions is to store <strong>files</strong>, encoded pieces of
+information that you can interact with (e.g. documents, images,
+programs, etc…). A computer organizes these files in a hierarchical
+<strong>file system</strong> that helps the user know where to find
+them. The file system contains folders and sub-folders that allow the
+user to sort files according to their needs. The file system is
+“hierarchical” because folders and files are always contained within a
+folder at a higher level.</p>
+<p>Another name for a folder on the file system is a
+<strong>directory</strong> and there are a few special directories that
+you should know about:</p>
+<ul>
+<li>The <strong>root directory</strong> is the highest level folder on
+the file system.</li>
+<li>The <strong>working directory</strong> is the folder that you are
+currently working in.</li>
+</ul>
+<p>Open the file browser that you use to access files on your computer.
+On Mac this is usually the Finder application
+(<img src="images/macOS-high-sierra-finder-topic-icon.png" height=18, width=18>).
+On Windows this is the File Explorer application
+(<img src="images/windows10_file_explorer_icon.png" height=18, width=18>).</p>
+<p>Use your file browser to navigate to a folder where you typically
+save files for school (or work). Keep track of the sequence of folders
+that you clicked through to get there. The sequence of sub-folders used
+to navigate to a particular file or folder is called a
+<strong>path</strong> or <strong>file path</strong>. A path is an
+address that tells a computer where to find a specific file or
+directory. An <strong>absolute path</strong> is the full address of a
+file or folder starting from the root directory. On the Windows File
+Explorer, the path is shown in a bar across the top of the window. On
+the Mac Finder, the path is shown in a bar across the bottom of the
+window (if it is not there, you need to enable it by clicking View &gt;
+Show Path Bar). The <code>&gt;</code> symbol is typically used to
+separate sequential subfolders; the highest level folder is the
+left-most and the name of the folder you are currently looking at is the
+right-most.</p>
+<p>Let’s use the <code>Files</code> panel in RStudio to view the file
+system. When you first open RStudio the contents of the working
+directory are shown in the <code>Files</code> panel. The absolute path
+of the current directory you are viewing is shown in a bar across the
+top. To navigate up or down the file system and view files in different
+folders, you can click on the names of higher-level folders in the path
+or you can click on subfolders inside the the window.</p>
 <blockquote>
 <p><strong>Try this:</strong> Find your Downloads folder</p>
 <p>When you download a file from the internet where does it go? Most
 computers have a default directory where downloaded files are saved. It
-can be very useful to know where this directory is located on your
-filesystem.</p>
+can be very useful to know where this directory is located on your file
+system.</p>
 <ol style="list-style-type: decimal">
 <li>Use the file browser on your computer (Finder on Mac or File
-Explorer on Windows) to locate your default Downloads folder.</li>
+Explorer on Windows) to locate your default Downloads folder. What path
+does your file browser give for this folder?</li>
 <li>Now use the file browser built into RStudio to find the same
-Downloads folder.</li>
+Downloads folder. If you have trouble navigating using the RStudio file
+explorer, click on the three dots in the upper right corner of the
+<code>Files</code> panel to use your computer’s default file
+browser.</li>
 <li>Type out the absolute path to your downloads folder.</li>
 </ol>
 </blockquote>
 </div>
 <div id="using-the-command-line-to-navigate" class="section level3">
 <h3>Using the command line to navigate</h3>
-<p>terminal = graphical user interface that provides a command line for
-interacting with the shell</p>
-<p>shell = program that interacts with your file system</p>
-<p>command line</p>
-<p>relative path</p>
-<p>working directory</p>
-<p>graphical user interface (GUI)</p>
-<p>/ root</p>
-<p>./</p>
-<dl>
-<dt>../</dt>
-<dd>
-<p>$HOME</p>
-</dd>
-</dl>
-<p>cd</p>
-<p>ls</p>
-<p>ls -l</p>
-<p>ls –help</p>
-<p>pwd</p>
-<blockquote>
-<p><strong>Try this:</strong> Navigate to your Downloads folder</p>
-<p>Write a command that would navigate to your Downloads folder from
-your Home directory.</p>
-</blockquote>
-<div id="working-directory---fixme" class="section level4">
-<h4>Working directory - FIXME</h4>
-<p>Knowing R’s current working directory is important because when you
-need to access other files (for example, to import a data file), R will
-look for them relative to the current working directory.</p>
-<p>Each time you create a new RStudio Project, it will create a new
-directory for that project. When you open an existing
-<code>.Rproj</code> file, it will open that project and set R’s working
-directory to the folder that file is in.</p>
-<blockquote>
-<h4 id="challenge-5">Challenge 5</h4>
-<p>You can check the current working directory with the
-<code>getwd()</code> command, or by using the menus in RStudio.</p>
-<ol style="list-style-type: decimal">
-<li>In the console, type <code>getwd()</code> (“wd” is short for
-“working directory”) and hit Enter.</li>
-<li>In the Files pane, double click on the <code>data</code> folder to
-open it (or navigate to any other folder you wish). To get the Files
-pane back to the current working directory, click “More” and then select
-“Go To Working Directory”.</li>
-</ol>
-<p>You can change the working directory with <code>setwd()</code>, or by
-using RStudio menus.</p>
-<ol style="list-style-type: decimal">
-<li>In the console, type <code>setwd("data")</code> and hit Enter. Type
-<code>getwd()</code> and hit Enter to see the new working
-directory.</li>
-<li>In the menus at the top of the RStudio window, click the “Session”
-menu button, and then select “Set Working Directory” and then “Choose
-Directory”.</li>
-<li>In the windows navigator that opens, navigate back to the project
-directory, and click “Open”. Note that a <code>setwd</code> command will
-automatically appear in the console. {: .challenge}</li>
-</ol>
-</blockquote>
-<div class="callout">
-<blockquote>
-<h4 id="tip-file-does-not-exist-errors">Tip: File does not exist
-errors</h4>
-<p>When you’re attempting to reference a file in your R code and you’re
-getting errors saying the file doesn’t exist, it’s a good idea to check
-your working directory. You need to either provide an absolute path to
-the file, or you need to make sure the file is saved in the working
-directory (or a subfolder of the working directory) and provide a
-relative path.</p>
-</blockquote>
-</div>
-</div>
-</div>
-<div id="creating-a-self-contained-project" class="section level3">
-<h3>Creating a self-contained project</h3>
+<p>The first step in to learning to write programs is learning how to
+navigate the file system using text commands. A computer has a program
+called a <strong>shell</strong> that can interact with the file system
+(e.g. create, edit and delete files and directories). We will use a
+<strong>terminal</strong> to interact with this shell. The terminal
+provides a graphical window so we can see the commands that we type to
+the shell and the output these commands produce. We’re going to learn a
+few commands used in unix-style shells because these are the ones
+typically used by scientists for computing. RStudio uses a unix-style
+shell regardless of your computer’s operating system (e.g. Windows or
+Mac).</p>
+<p>Open the terminal in RStudio. It should be listed as a tab in the
+left panel. If not, use the top menu bar to select View &gt; Move Focus
+to Terminal.</p>
+<p>You should see <code>$</code> followed a blinking cursor. This is the
+<strong>command line</strong>. It is where we will type commands to tell
+the shell how to interact with the file system.</p>
+<p>The colored line of text above or to the left of the command line
+gives your username and your computer’s name as well as the path to your
+current <strong>working directory</strong>. Notice that subfolders in
+the path are separated by slashes <code>/</code>. The path also begins
+with a <code>~</code>. This denotes that the path is relative to the
+user’s <strong>home directory</strong>. A home directory is the folder
+where all of a particular user’s documents are stored. A computer can
+have multiple users who log in using different usernames. Each user will
+have a different home directory.</p>
+<p>What is the absolute path of the current working directory (the
+directory we are currently in)?</p>
+<p>Type <code>pwd</code> into the command line (stands for “present
+working directory”). Press <kbd>Enter</kbd>.</p>
+<p>The terminal will print some text with the absolute path to the
+current working directory. It will start with a <code>/</code> to denote
+the root directory and subfolders will be separated by forward slashes
+<code>/</code>.</p>
+<p>What files and folders are in this directory? To see, type
+<code>ls</code> into the command line and press <kbd>Enter</kbd> to
+“list” the files.</p>
+<p>The names of files will be in black and the names of directories will
+be in a different color and will end with a <code>/</code>.</p>
+<p>Let’s navigate into a subfolder. Type the command <code>cd</code>
+followed by the name of a subfolder to “change directories” to that
+folder. If there are spaces in the name of the folder, you need to
+surround the folder name with quotes: For example
+<code>cd Documents</code> or <code>cd "My Documents"</code>.</p>
+<p>Now what is the current working directory? Check using the
+<code>pwd</code> command.</p>
+<p>To go back up a level to the next higher directory (called the
+<strong>parent directory</strong>), use <code>../</code>:</p>
+<p><code>cd ../</code></p>
+<p>In fact, we can use <code>cd</code> to navigate to any folder by
+typing its absolute path after the <code>cd</code> command. For example:
+<code>cd "/c/Documents/My subfolder/another subfolder"</code>.</p>
+<p>FYI: You can get your file browser to display the text-based file
+path to any folder as follows:</p>
+<ul>
+<li>Windows: Click inside the file path bar. The absolute path will be
+displayed using a backslash ’' symbol between sequential subfolders. For
+example: <code>C:\Users\username</code>. You need to change the back
+slashes to forward slashes before using it in the command line.</li>
+<li>Mac: ctr+click on the file you want inside the Finder path bar.
+Select Copy as Pathname and paste it into the command line as is.</li>
+</ul>
 <div class="challenge">
 <blockquote>
-<p><strong>Try this:</strong> Creating a self-contained project</p>
-<p>We’re going to create a new project in RStudio:</p>
+<p><strong>Try this:</strong> Navigate to your Downloads folder</p>
+<ol style="list-style-type: decimal">
+<li>Write a command that would navigate directly to your Downloads
+folder no matter what directory you are currently in.</li>
+<li>Try it out from your current working directory to see if it
+works.</li>
+</ol>
+</blockquote>
+</div>
+<p>Rather than type out the full absolute path every time we need to
+navigate to a new folder, we can use a <strong>relative path</strong> to
+specify the location of a file or folder relative to the current working
+directory.</p>
+<p>The current working directory is denoted <code>./</code>, so
+<code>./Documents</code> specifies the Documents subfolder within the
+current working directory. In contrast <code>../Documents</code>
+specifies a Documents folder that is located in the next folder above
+the current working directory. So since <code>../</code> is the parent,
+<code>../Documents</code> would be a sibling directory of the current
+working directory.</p>
+<div class="challenge">
+<blockquote>
+<p><strong>Try this:</strong> Navigate to your Downloads folder</p>
+<ol style="list-style-type: decimal">
+<li>Write a command that would navigate to your Downloads folder from
+your Home directory.</li>
+<li>Navigate to your Home directory and try it out.</li>
+</ol>
+</blockquote>
+</div>
+<div class="callout-trick">
+<blockquote>
+<p><strong>HELPFUL TRICKS</strong></p>
+<p>You don’t need to type out long file path names at the command line.
+Start by typing a few letters of the file path your want, then press
+tab. If there is only one name in the current directory that starts with
+those letters, the command line will automatically complete the name for
+you. If nothing appears, try typing a few more letters and pressing tab
+again, or check to make sure your spelling is correct. This is called
+<strong>tab completion</strong> and can be used throughout RStudio.</p>
+<p>If your Terminal window gets stuck and the command line looks like
+this <code>&gt;</code> that means it is waiting for further input. If
+you didn’t mean to add anything else, you can <strong>escape</strong>
+the current command and reset the command line by typing <kbd>ctrl</kbd>
++ <kbd>c</kbd> (Windows) or <kbd>cmd</kbd> + <kbd>c</kbd> (Mac).</p>
+</blockquote>
+</div>
+</div>
+<div id="creating-an-rstudio-project" class="section level3">
+<h3>Creating an RStudio project</h3>
+<p>RStudio projects are a useful way to keep all of the files needed for
+a particular project together in one place. RStudio projects can be
+easily shared with others because they set up the RStudio session in the
+same way regardless of who opens the project.</p>
+<div class="challenge">
+<blockquote>
+<p><strong>Try this:</strong> Create a new project in RStudio</p>
 <ol style="list-style-type: decimal">
 <li>Click the “File” menu button, then “New Project”.</li>
 <li>Click “New Directory”.</li>
 <li>Click “New Project”.</li>
 <li>Type in the name of the directory to store your project. This can be
-any name using letters or numbers, but it should not have any spaces. To
-set up the workbook for this course, use the name “R-course-NEON”</li>
+any name using letters or numbers, but it should not have any spaces.
+For example, try “my-sandbox”.</li>
 <li>Click the “Create Project” button.</li>
 </ol>
 </blockquote>
 </div>
-<p>If you completed the challenge correctly you should now be looking at
-a new RStudio session and in the upper right corner of the window you
-will see this the name of your project: <img
-src="images/RStudio_project_label.jpg" /></p>
+<p>You should now be looking at a new RStudio session and in the upper
+right corner of the window you will see this the name of your project:
+<img src="images/RStudio_project_label.jpg"
+alt="image of RStudio project label" /></p>
 <p>You will also see a mostly empty folder in the Files panel. There
-should be one file with the name of the project: R-course-NEON.Rproj</p>
+should be one file with the name of the project: my-sandbox.Rproj</p>
 <p>This file contains information that RStudio needs to set up your
 project. One thing the .Rproj file will do is set your working directory
 to be the same directory that the .Rproj file is located in. Let’s see
@@ -570,9 +698,8 @@ would it be similar?</li>
 <p>RStudio projects are useful because they automatically open in the
 same working directory regardless of the computer they are located on.
 This means that when we start writing code, we can refer to the location
-of files relative to the main directory where the .Rproj file is saved
-and our code will work on any computer. Let’s see how this might
-work.</p>
+of files relative to the directory where the .Rproj file is saved and
+the code will work on any computer. Let’s see how this might work.</p>
 <div class="challenge">
 <blockquote>
 <p><strong>Try this:</strong> Opening an RStudio project through the
@@ -580,11 +707,11 @@ file system</p>
 <ol style="list-style-type: decimal">
 <li>Exit RStudio.</li>
 <li>Use your computer’s file browser to navigate to the directory where
-you created the R-course-neon project. This should be your Desktop
-folder if you followed the steps above.</li>
-<li>Move the entire R-course-neon folder to a folder on your computer
-where you are saving work for this class.</li>
-<li>Open the R-course-neon folder and double click on the
+you created the my-sandbox project. This should be your Desktop folder
+if you followed the steps above.</li>
+<li>Move the entire my-sandbox folder to a folder on your computer where
+you are saving work for this class.</li>
+<li>Open the my-sandbox folder and double click on the
 <code>.Rproj</code> file in that directory.</li>
 <li>Observe the Files panel in RStudio. What has changed?</li>
 <li>Use the Terminal and the R Console to display the current working
@@ -592,15 +719,9 @@ directory. What has changed?</li>
 </ol>
 </blockquote>
 </div>
-<div id="file-system-navigation-in-the-terminal-vs.-r-console"
-class="section level4">
-<h4>File system navigation in the terminal vs. R console</h4>
-<p>ADD TABLE HERE</p>
-</div>
-</div>
 <div id="best-practices-for-project-organization"
-class="section level3">
-<h3>Best practices for project organization</h3>
+class="section level4">
+<h4>Best practices for project organization</h4>
 <p>Although there is no “best” way to lay out a project, there are some
 general principles to adhere to that will make project management
 easier:</p>
@@ -621,113 +742,123 @@ directory.</li>
 compiled locally in the <code>bin</code> directory.</li>
 <li>Name all files to reflect their content or function.</li>
 </ol>
+<p>The workbook for this course is an RStudio project that follows these
+guidelines. If you haven’t already done so, <a
+href="computer-setup.html##Course-Workbook">set up the workbook for this
+course</a>.</p>
+<p>Close RStudio and use your computer’s file browser to navigate to the
+directory where you saved the R-course-NEON-workbook project. Open the
+project by clicking on the .Rproj file.</p>
+<p>The Files panel in RStudio should now look like this: &gt; <img
+src="images/RStudio_project_subfolders.jpg"
+alt="image of contents of R-course-NEON project folder" /></p>
+<p>The exercises folder contains files that you will use to complete the
+exercises at the end of each lesson. These are text files that you can
+edit to solve the problems described in the Exercises section. Let’s
+make a copy of each of these files so that if you make changes to them,
+you still have the original version. Although you could do this with
+your file browser, we will learn how to do this using the terminal in
+order to introduce some useful new commands.</p>
+</div>
+</div>
+<div id="working-with-files-on-the-command-line" class="section level3">
+<h3>Working with files on the command line</h3>
+<p>The terminal provides a quick way to create and remove files and
+directories. It is particularly useful to use the terminal when we need
+to work on a lot of files at once.</p>
+<p>Let’s use the terminal to create two new folders: one for copies of
+the exercises that you are working on and one for the exercise files
+once you have finished them. The command to “make a directory” is
+<code>mkdir</code> followed by the name of the folder you wish to
+create.</p>
+<p>Execute the command <code>mkdir working</code> in the terminal. (To
+“execute” a command, type it at the command prompt and press
+<kbd>Enter</kbd>.)</p>
+<p>Where did the new directory end up? It should have been created in
+the current working directory. However, it would be more logical to
+place this directory inside the exercises folder. You could navigate to
+the exercises folder and then run the <code>mkdir</code> command again,
+or you can specify the path to the new folder you wish to create.</p>
+<p>Create a new folder called working inside the exercises folder by
+executing this command in the terminal:
+<code>mkdir exercises/working</code>.</p>
 <div class="challenge">
 <blockquote>
-<p><strong>Try this:</strong> Set up a project’s subfolders</p>
-<p>Use the File panel in RStudio or your computer’s file browser to
-create the following folders inside the R-course-NEON folder:</p>
-<ul>
-<li>doc</li>
-<li>data</li>
-<li>results</li>
-<li>src</li>
-</ul>
+<p><strong>Try this:</strong> Creating new folders</p>
+<p>Use the terminal to make a new folder named “finished” inside the
+exercises folder.</p>
+<p><strong>HELPFUL TRICK:</strong> If you want to rerun a similar
+command, you don’t need to type it out again. Place your cursor at the
+command line and press the up arrow key. This will bring up the most
+recent command, If you press it again, it will go back through your
+commands one at time. When you find the one you want, you can run it
+as-is by pressing <kbd>Enter</kbd> or edit it first, then run it.</p>
 </blockquote>
 </div>
+<p>Let’s remove the working folder that we not longer need. The command
+to “remove” a file or folder is <code>rm</code>. Execute the command
+<code>rm working</code>.</p>
+<p>Oops it didn’t work! You got an error message saying that it could
+not remove working because it is a directory. We need to add an option
+to allow the function to “recursively” delete subdirectories and files
+within them. Command options are specified after the command withe a
+<code>-</code>. The command to delete the directory named working and
+all of its contents is: <code>rm -r working</code></p>
+<p>What else can the <code>rm</code> command do? Are there any other
+options? If you’re interested in learning about the functionality of a
+unix command, you can always use the internet, but there is also a
+built-in help file attached to every command. Use the
+<code>--help</code> option to access it. For example,
+<code>rm --help</code> shows us a table of the different options and
+then at the end tells us: “By default, rm does not remove directories.
+Use the –recursive (-r or -R) option to remove each listed directory,
+too, along with all of its contents.”</p>
+<p>Now let’s copy the exercises for lesson 1 into exercises/working. The
+command to copy a file is <code>cp SOURCE DEST</code>, where we replace
+<code>SOURCE</code> with the name(s) of the files to copy and
+<code>DEST</code> with the name of the directory to copy them into.</p>
+<p>First we need to know the names of the files.</p>
+<div class="{challenge}">
+<blockquote>
+<p><strong>Try this:</strong> Execute a command in the terminal that
+will list all of the files in the exercises folder.</p>
+</blockquote>
+</div>
+<blockquote>
 <div class="solution">
+<p>Your answer will depend on your current working directory (check
+using <code>pwd</code>): If your working directory is the main
+R-course-NEON-workbook folder, then type:</p>
+<pre class="bash"><code>ls exercises</code></pre>
+<p>If your working directory is the R-course-NEON-workbook/exercises
+folder, then type:</p>
+<pre class="bash"><code>ls </code></pre>
+</div>
+</blockquote>
+<p>When the list of files prints, you will see that each exercises is
+named according to its number. All of the exercises for lesson 1 start
+with 1.</p>
+<p>We will use a <strong>wildcard</strong> to select only the files that
+begin with the number 1.</p>
+<p>ls 1.*</p>
+<div class="challenge">
 <blockquote>
-<p>The Files panel in RStudio should now look like this: <img
-src="images/RStudio_project_subfolders.jpg" /></p>
+<p><strong>Try this:</strong> Copy multiple files into a directory</p>
 </blockquote>
 </div>
-<ul>
-<li>Manual download of data from NEON and save to a class folder</li>
-</ul>
-<p>Now that we have a directory structure we can start to add files.
-Let’s put a data file in the <code>data/</code> directory.</p>
-<blockquote>
-<h4 id="challenge-3">Challenge 3</h4>
-<p>Download the gapminder data from <a
-href="https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_data.csv">here</a>.</p>
-<ol style="list-style-type: decimal">
-<li>Download the file (right mouse click on the link above -&gt; “Save
-link as” / “Save file as”, or click on the link and after the page
-loads, press <kbd>Ctrl</kbd>+<kbd>S</kbd> or choose File -&gt; “Save
-page as”)</li>
-<li>Make sure it’s saved under the name
-<code>gapminder_data.csv</code></li>
-<li>Save the file in the <code>data/</code> folder within your
-project.</li>
-</ol>
-<p>We will load and inspect these data later.</p>
-</blockquote>
-<blockquote>
-<h2 id="challenge-4">Challenge 4</h2>
-<p>It is useful to get some general idea about the dataset, directly
-from the command line, before loading it into R. Understanding the
-dataset better will come in handy when making decisions on how to load
-it in R. Use the command-line shell to answer the following questions:
-1. What is the size of the file? 2. How many rows of data does it
-contain? 3. What kinds of values are stored in this file?</p>
-<blockquote>
-<h2 id="solution-to-challenge-4">Solution to Challenge 4</h2>
-<p>By running these commands in the shell:</p>
-<pre class="sh"><code>ls -lh data/gapminder_data.csv</code></pre>
-<pre><code>-rw-r--r-- 1 User User 80K Apr 17 10:03 data/gapminder_data.csv</code></pre>
-<p>The file size is 80K.</p>
-<pre class="sh"><code>wc -l data/gapminder_data.csv</code></pre>
-<pre><code>1705 data/gapminder_data.csv</code></pre>
-<p>There are 1705 lines. The data looks like:</p>
-<pre class="sh"><code>head data/gapminder_data.csv</code></pre>
-<pre><code>country,year,pop,continent,lifeExp,gdpPercap
-Afghanistan,1952,8425333,Asia,28.801,779.4453145
-Afghanistan,1957,9240934,Asia,30.332,820.8530296
-Afghanistan,1962,10267083,Asia,31.997,853.10071
-Afghanistan,1967,11537966,Asia,34.02,836.1971382
-Afghanistan,1972,13079460,Asia,36.088,739.9811058
-Afghanistan,1977,14880372,Asia,38.438,786.11336
-Afghanistan,1982,12881816,Asia,39.854,978.0114388
-Afghanistan,1987,13867957,Asia,40.822,852.3959448
-Afghanistan,1992,16317921,Asia,41.674,649.3413952</code></pre>
-</blockquote>
-</blockquote>
-<div id="working-with-files-on-the-command-line" class="section level4">
-<h4>Working with files on the command line</h4>
-<p>cp</p>
-<p>mkdir</p>
-<p>rm</p>
-<p>rm -r for directories (after viewing help file)</p>
-<p>make a new directory for manipulating the data cp a version into this
-directory remove it when done</p>
-</div>
+<p>Be careful- if you copy a file into a directory where a file with the
+same name exists, it will automatically write over the file (unless you
+use an option to tell it not to, see <code>cp --help</code> for more
+information).</p>
+<p>Rename with your initials. (use variable assignment)</p>
+<p>Open the first exercise.</p>
 </div>
 <div id="fyi-additional-info-for-the-curious" class="section level3">
 <h3>FYI: Additional info for the curious</h3>
 <div id="more-useful-unix-commands" class="section level4">
 <h4>More useful Unix commands</h4>
 <p>head echo wc</p>
-</div>
-<div id="version-control" class="section level4">
-<h4>Version control</h4>
-<p>It is important to use version control with projects. Go <a
-href="https://swcarpentry.github.io/git-novice/14-supplemental-rstudio/">here
-for a good lesson which describes using Git with RStudio</a>.</p>
-</div>
-<div id="what-are-programs" class="section level4">
-<h4>What are programs?</h4>
-<ul>
-<li>Programs
-<ul>
-<li>programs are files written in executable code</li>
-<li>we will learn to write small “programs” called “scripts”
-<ul>
-<li>you can write programs to automate tasks</li>
-<li>you can write programs to make your scientific analyses
-reproducible</li>
-</ul></li>
-</ul></li>
-</ul>
-<p>Find the R program on your computer</p>
+<p>–help</p>
 </div>
 </div>
 </div>
@@ -740,21 +871,12 @@ terminal to:</p>
 <li>view files in a directory</li>
 <li>make, delete, rename and move files</li>
 </ol>
-<p>Exercise <strong>1.1</strong> is required for other work in this
-book.</p>
-<p><strong>1.1</strong> Set up the Student Workbook for this course on
+<p><strong>1.1</strong> Explore the Student Workbook for this course on
 your computer.</p>
 <ol style="list-style-type: decimal">
-<li>Download the Student Workbook from <a href="">here</a>. Save this
-zipped file in the folder where you are saving work for this
-course.</li>
-<li>Unzip the folder you downloaded. The name of the folder that you
-unzip should be R-course-NEON-workbook. Instructions for how to unzip
-folders are located <a href="">here for Mac</a> and <a href="">here for
-Windows</a>.</li>
-<li>Open the RStudio project using the .Rproj file, then use the File
-panel in RStudio to explore the directory structure of this
-project.</li>
+<li>Open the course workbook RStudio project using the .Rproj file.</li>
+<li>Use the File panel in RStudio to explore the directory structure of
+this project.</li>
 <li>Write out the absolute path of the initial working directory and the
 command you typed into the <strong>R Console</strong> to determine
 this.</li>
@@ -803,51 +925,15 @@ prior steps. Write one command line for each of the four steps.</li>
 <h2>Sources and Resources</h2>
 <p>This lesson was adapted from <a
 href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">Zimmerman et al. (2019)</span></a> episode 2 by Jes
-Coyle.</p>
+class="citation">Zimmerman et al. (2019)</span></a> episodes 1 &amp; 2
+by Jes Coyle.</p>
 <div id="additional-resources" class="section level3">
 <h3>Additional Resources</h3>
+<p>Read more about using the Terminal in RStudio <a
+href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal-in-the-RStudio-IDE">here</a>.</p>
 </div>
-<div id="cited-references" class="section level3">
-<h3>Cited References</h3>
-<pre class="js"><code>(function() {
-  var codes = document.querySelectorAll(&#39;.solution&#39;);
-  var code, i, d, s, p, h;
-  for (i = 0; i &lt; codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    d = document.createElement(&#39;details&#39;);
-    s = document.createElement(&#39;summary&#39;);
-    h = document.createElement(&#39;em&#39;);
-    s.innerText = &#39;Solution:&#39;;
-    // &lt;details&gt;&lt;summary&gt;&lt;em&gt;Solution:&lt;/em&gt;&lt;/summary&gt;&lt;/details&gt;
-    s.appendChild(h);
-    d.appendChild(s);
-    // move the code into &lt;details&gt;
-    p.replaceChild(d, code);
-    d.appendChild(code);
-  }
-})();</code></pre>
-<script type="text/javascript">
-(function() {
-  var codes = document.querySelectorAll('.solution');
-  var code, i, d, s, p, h;
-  for (i = 0; i < codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    d = document.createElement('details');
-    s = document.createElement('summary');
-    h = document.createElement('em');
-    s.innerText = 'Solution:';
-    // <details><summary><em>Solution:</em></summary></details>
-    s.appendChild(h);
-    d.appendChild(s);
-    // move the code into <details>
-    p.replaceChild(d, code);
-    d.appendChild(code);
-  }
-})();
-</script>
+<div id="cited-references" class="section level3 unnumbered">
+<h3 class="unnumbered">Cited References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-swc-reproducible-lesson" class="csl-entry">
 Zimmerman, Naupaka, Greg Wilson, Raniere Silva, Scott Ritchie, François

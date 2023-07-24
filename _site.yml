@@ -56,4 +56,5 @@ output:
     include:
       after_body: footer.html
     css: style.css
+    fig_caption: FALSE
 bibliography: references.bib
