@@ -487,6 +487,6 @@ Read more about using the Terminal in RStudio [here](https://support.posit.co/hc
 
 
 <!-- javascript that formats solution blocks clickable hidden text -->
-```{js, file = "solution_format.java"}
+```{js, file = "format_fences.java"}
 
 ```

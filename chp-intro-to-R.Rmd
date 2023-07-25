@@ -20,9 +20,6 @@ chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
 source("src/knit-options.R")
 knitr_fig_path(paste0(chp_str, "-"))
 
-# Silently load in the data for this lesson
-gapminder <- read.csv("data/gapminder_data.csv", header = TRUE)
-
 # Silently set seed for random number generation, so we don't have to explain it
 set.seed(10)
 ```
@@ -37,16 +34,10 @@ set.seed(10)
 
 <!--### Motivator   FIX ME --> 
 
-Science is a multi-step process: once you've designed an experiment and collected
-data, the real fun begins! This lesson will teach you how to start this process using
-R and RStudio. We will begin with raw data, perform exploratory analyses, and learn
-how to plot results graphically. This example starts with a dataset from
-[gapminder.org](https://www.gapminder.org) containing population information for many
-countries through time. Can you read the data into R? Can you plot the population for
-Senegal? Can you calculate the average income for countries on the continent of Asia?
-By the end of these lessons you will be able to do things like plot the populations
-for all of these countries in under a minute!
-
+>
+>
+>
+> 
 
 - Why R?
   - R has a wide user community and will always be free (open source - what does this mean)
@@ -510,37 +501,36 @@ seq(1, 10, by = 2)
 seq(0, 100, by = 10)
 ```
 
-> ::: {.challenge}
-> **Try this:** Can you predict what each of the following lines of code will return?
-> ```{r eval = FALSE}
-> c("Betsy", firstNames)
-> firstNames[4:1]
-> ages[c(2, 4)]
-> ages[1, 3]
-> c(firstNames, ages)
-> ```
-> :::
-> ::: {.solution}
-> ```{r collapse = TRUE}
-> c("Betsy", firstNames)
->
-> firstNames[4:1]
->
-> ages[c(2, 4)]
->
-> ```
-> ```{r collapse = TRUE, error = TRUE}
-> ages[1, 3]
-> ```
->
-> Why did `ages[1, 3]` give an error message? Notice that `1, 3` is not a vector. In order to select elements 1 and 3 from `ages` we need to first create a vector containing the integers 1 and 3: `c(1, 3)` and then place this inside the brackets: `ages[c(1, 3)]`.
->
-> ```{r collapse = TRUE}
-> c(firstNames, ages)
-> ```
->
-> Notice that when we concatenated `firstNames` and `ages` all of the ages turned into text with each number surrounded by quotes. This is because all elements in a vector must have the same data type, either numbers or text, but not both. R tried to fix this by using the data type of the first vector we supplied.
-> :::
+::: {.challenge}
+Can you predict what each of the following lines of code will return?
+```{r eval = FALSE}
+c("Betsy", firstNames)
+firstNames[4:1]
+ages[c(2, 4)]
+ages[1, 3]
+c(firstNames, ages)
+```
+:::
+::: {.solution}
+```{r collapse = TRUE}
+c("Betsy", firstNames)
+
+firstNames[4:1]
+
+ages[c(2, 4)]
+
+```
+```{r collapse = TRUE, error = TRUE}
+ages[1, 3]
+```
+
+Why did `ages[1, 3]` give an error message? Notice that `1, 3` is not a vector. In order to select elements 1 and 3 from `ages` we need to first create a vector containing the integers 1 and 3: `c(1, 3)` and then place this inside the brackets: `ages[c(1, 3)]`.
+
+```{r collapse = TRUE}
+c(firstNames, ages)
+```
+Notice that when we concatenated `firstNames` and `ages` all of the ages turned into text with each number surrounded by quotes. This is because all elements in a vector must have the same data type, either numbers or text, but not both. R tried to fix this by using the data type of the first vector we supplied.
+:::
 
 
 
@@ -559,24 +549,23 @@ ages - ages
 ages[1:2] - ages[3:4]
 ```
 
-> ::: {.challenge}
-> **Try this:** 
->
-> 1. Calculate the sum of all integers between 1 and 100.
-> 2. Calculate the difference between the sum of all odd numbers between 1 and 50 and the sum of all even numbers between 1 and 50.
-> :::
-> ::: {.solution}
-> There are lots of ways to solve this problem. Here is one way.
-> ```{r collapse = TRUE}
-> # Sum of all integers between 1 and 100
-> sum(1:100)
-> 
-> # Difference between sum of odds and evens  between 1 and 50
-> odds <- seq(1, 50, 2) # a vector with all odd numbers
-> evens <- seq(2, 50, 2) # a vector with all even numbers
-> sum(odds) - sum(evens) # calculate sum of each vector, then take the difference
-> ```
-> :::
+::: {.challenge}
+Do this math in R
+1. Calculate the sum of all integers between 1 and 100.
+2. Calculate the difference between the sum of all odd numbers between 1 and 50 and the sum of all even numbers between 1 and 50.
+:::
+::: {.solution}
+There are lots of ways to solve this problem. Here is one way.
+```{r collapse = TRUE}
+# Sum of all integers between 1 and 100
+sum(1:100)
+
+# Difference between sum of odds and evens  between 1 and 50
+odds <- seq(1, 50, 2) # a vector with all odd numbers
+evens <- seq(2, 50, 2) # a vector with all even numbers
+sum(odds) - sum(evens) # calculate sum of each vector, then take the difference
+```
+:::
 
 ### Managing your environment 
 
@@ -589,12 +578,11 @@ There are a few useful commands you can use to interact with the R session.
 ls()
 ```
 
-> #### Tip: hidden objects
->
-> Like in the shell, `ls` will hide any variables or functions starting
-> with a "." by default. To list all objects, type `ls(all.names=TRUE)`
-> instead
->
+::: {.callout-trick}
+Like in the shell, `ls` will hide any variables or functions starting
+with a "." by default. To list all objects, type `ls(all.names=TRUE)`
+instead
+:::
 
 Note here that we didn't give any arguments to `ls`, but we still
 needed to give the parentheses to tell R to call the function.
@@ -644,16 +632,18 @@ If instead we use `<-`, there will be unintended side effects, or you may get an
 rm(list <- ls())
 ```
 
-> #### Tip: Warnings vs. Errors
->
-> Pay attention when R does something unexpected! Errors, like above,
-> are thrown when R cannot proceed with a calculation. Warnings on the
-> other hand usually mean that the function has run, but it probably
-> hasn't worked as expected.
->
-> In both cases, the message that R prints out usually give you clues
-> how to fix a problem.
 
+::: {.callout-tip}
+**Warnings vs. Errors**
+
+Pay attention when R does something unexpected! Errors, like above,
+occur when R cannot proceed with a calculation. Warnings on the
+other hand usually mean that the function has run, but it probably
+hasn't worked as expected.
+
+In both cases, the message that R prints out usually give you clues
+how to fix a problem.
+:::
 
 
 Notice that although rm() and ls() are similar to the shell commands rm and ls, they operate in different spaces. The Terminal window in RStudio accesses the file system on your computer. The R Console accesses objects that you create during a specific R session. Once your close R, these objects disappear forever; they are not saved on your file system.
@@ -676,14 +666,14 @@ in the top left.
 
 > #### R scripts
 > 
-> Any commands that you write in the R console can be saved in to a file
+> Any commands that you write in the R console can be saved in a file
 > to be re-run again.  Files containing R code to be ran in this way are 
 > called R scripts.  R scripts have `.R` at the end of their names to 
 > let you know what they are.
 
 
 > ::: {.challenge}
-> #### **Try this:** Create and save a new R script
+> Create and save a new R script
 >
 >
 >
@@ -751,17 +741,6 @@ tab complete reminder
 EXTRA: you can download your own data set and read it into R
 
 
->**Try this:** Download and save a NEON Dataset
-
-
-> [here](https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_data.csv).
->
-> 1. Download the file (right mouse click on the link above -> "Save link as" / "Save file as", or click on the link and after the page loads, press <kbd>Ctrl</kbd>+<kbd>S</kbd> or choose File -> "Save page as")
-> 2. Make sure it's saved under the name `gapminder_data.csv`
-> 3. Save the file in the `data/` folder within your project.
->
-> We will load and inspect these data later.
-:::
 
 > ## Challenge 4
 > It is useful to get some general idea about the dataset, directly from the
@@ -950,7 +929,7 @@ This is because these functions have very similar applicability and often share 
 > means you don't have to remember that!
 
 
-### Special Operators
+##### Special Operators
 
 To seek help on special operators, use quotes or backticks:
 
@@ -959,7 +938,7 @@ To seek help on special operators, use quotes or backticks:
 ?`<-`
 ```
 
-### Getting Help with Packages
+##### Getting Help with Packages
 
 Many packages come with "vignettes": tutorials and extended example documentation.
 Without any arguments, `vignette()` will list all vignettes for all installed packages;
@@ -973,7 +952,7 @@ RStudio also has a set of excellent
 [cheatsheets](https://rstudio.com/resources/cheatsheets/) for many packages.
 
 
-### When You Remember Part of the Function Name
+##### When You Remember Part of the Function Name
 
 If you're not sure what package a function is in or how it's specifically spelled, you can do a fuzzy search:
 
@@ -988,14 +967,14 @@ to set your working directory includes "set" in its name. You can do a fuzzy sea
 ??set
 ```
 
-### When You Have No Idea Where to Begin
+##### When You Have No Idea Where to Begin
 
 If you don't know what function or package you need to use
 [CRAN Task Views](http://cran.at.r-project.org/web/views)
 is a specially maintained list of packages grouped into
 fields. This can be a good starting point.
 
-### When Your Code Doesn't Work: Seeking Help from Your Peers
+##### When Your Code Doesn't Work: Seeking Help from Your Peers
 
 If you're having trouble using a function, 9 times out of 10,
 the answers you seek have already been answered on
@@ -1197,6 +1176,6 @@ This lesson utilizes data from @NEON-soilCO2 and @NEON-soiltemp.
 
 
 <!-- javascript that formats solution blocks clickable hidden text -->
-```{js, file = "solution_format.java"}
+```{js, file = "format_fences.java"}
 
 ```

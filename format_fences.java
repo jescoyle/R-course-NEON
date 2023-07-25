@@ -53,3 +53,20 @@
     p.appendChild(b);
   }
 })();
+
+// Format helpful tip boxes
+(function() {
+  var codes = document.querySelectorAll('.callout-trick');
+  var code, i, p, h, b;
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement('blockquote');
+    h = document.createElement('strong');
+    h.innerText = 'TIP:';
+    // <blockquote><em>TIP:</em><p></p></blockquote>
+    b.appendChild(h);
+    b.appendChild(code);
+    p.appendChild(b);
+  }
+})();
