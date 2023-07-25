@@ -358,17 +358,9 @@ class="section level1 tabset">
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <!--### Motivator   FIX ME -->
-<p>Science is a multi-step process: once you’ve designed an experiment
-and collected data, the real fun begins! This lesson will teach you how
-to start this process using R and RStudio. We will begin with raw data,
-perform exploratory analyses, and learn how to plot results graphically.
-This example starts with a dataset from <a
-href="https://www.gapminder.org">gapminder.org</a> containing population
-information for many countries through time. Can you read the data into
-R? Can you plot the population for Senegal? Can you calculate the
-average income for countries on the continent of Asia? By the end of
-these lessons you will be able to do things like plot the populations
-for all of these countries in under a minute!</p>
+<blockquote>
+
+</blockquote>
 <ul>
 <li>Why R?
 <ul>
@@ -822,10 +814,9 @@ vector of integers in order:</p>
 <pre><code>[1] 1 3 5 7 9</code></pre>
 <pre class="r"><code>seq(0, 100, by = 10)</code></pre>
 <pre><code> [1]   0  10  20  30  40  50  60  70  80  90 100</code></pre>
-<blockquote>
 <div class="challenge">
-<p><strong>Try this:</strong> Can you predict what each of the following
-lines of code will return?</p>
+<p>Can you predict what each of the following lines of code will
+return?</p>
 <pre class="r"><code>c(&quot;Betsy&quot;, firstNames)
 firstNames[4:1]
 ages[c(2, 4)]
@@ -849,14 +840,14 @@ from <code>ages</code> we need to first create a vector containing the
 integers 1 and 3: <code>c(1, 3)</code> and then place this inside the
 brackets: <code>ages[c(1, 3)]</code>.</p>
 <pre class="r"><code>c(firstNames, ages)
-[1] &quot;Sasha&quot;   &quot;Everett&quot; &quot;Hope&quot;    &quot;Arturo&quot;  &quot;18&quot;      &quot;19&quot;      &quot;21&quot;      &quot;17&quot;     </code></pre>
+[1] &quot;Sasha&quot;   &quot;Everett&quot; &quot;Hope&quot;    &quot;Arturo&quot;  &quot;18&quot;      &quot;19&quot;      &quot;21&quot;     
+[8] &quot;17&quot;     </code></pre>
 <p>Notice that when we concatenated <code>firstNames</code> and
 <code>ages</code> all of the ages turned into text with each number
 surrounded by quotes. This is because all elements in a vector must have
 the same data type, either numbers or text, but not both. R tried to fix
 this by using the data type of the first vector we supplied.</p>
 </div>
-</blockquote>
 <p>Vectors are useful because we can use them to do multiple
 calculations at once. Adding or multiplying a vector by a scalar applies
 the operation to each element of the vector.</p>
@@ -873,14 +864,10 @@ the operation to each element of the vector.</p>
 <pre><code>[1] 0 0 0 0</code></pre>
 <pre class="r"><code>ages[1:2] - ages[3:4]</code></pre>
 <pre><code>[1] -3  2</code></pre>
-<blockquote>
 <div class="challenge">
-<p><strong>Try this:</strong></p>
-<ol style="list-style-type: decimal">
-<li>Calculate the sum of all integers between 1 and 100.</li>
-<li>Calculate the difference between the sum of all odd numbers between
-1 and 50 and the sum of all even numbers between 1 and 50.</li>
-</ol>
+<p>Do this math in R 1. Calculate the sum of all integers between 1 and
+100. 2. Calculate the difference between the sum of all odd numbers
+between 1 and 50 and the sum of all even numbers between 1 and 50.</p>
 </div>
 <div class="solution">
 <p>There are lots of ways to solve this problem. Here is one way.</p>
@@ -894,7 +881,6 @@ evens &lt;- seq(2, 50, 2) # a vector with all even numbers
 sum(odds) - sum(evens) # calculate sum of each vector, then take the difference
 [1] -25</code></pre>
 </div>
-</blockquote>
 </div>
 </div>
 <div id="managing-your-environment" class="section level3">
@@ -904,16 +890,16 @@ session.</p>
 <p><code>ls</code> will list all of the variables and functions stored
 in the global environment (your working R session):</p>
 <pre class="r"><code>ls()</code></pre>
-<pre><code> [1] &quot;ages&quot;           &quot;chp_num&quot;        &quot;chp_str&quot;        &quot;chptable&quot;       &quot;CStable&quot;       
- [6] &quot;dat&quot;            &quot;evens&quot;          &quot;firstNames&quot;     &quot;gapminder&quot;      &quot;get_chpName&quot;   
-[11] &quot;get_chpNum&quot;     &quot;get_LO&quot;         &quot;knitr_fig_path&quot; &quot;LOtable&quot;        &quot;odds&quot;          
-[16] &quot;setwd_workbook&quot; &quot;x&quot;              &quot;y&quot;              &quot;z&quot;             </code></pre>
-<blockquote>
-<h4 id="tip-hidden-objects">Tip: hidden objects</h4>
+<pre><code> [1] &quot;ages&quot;           &quot;chp_num&quot;        &quot;chp_str&quot;        &quot;chptable&quot;      
+ [5] &quot;CStable&quot;        &quot;evens&quot;          &quot;firstNames&quot;     &quot;get_chpName&quot;   
+ [9] &quot;get_chpNum&quot;     &quot;get_LO&quot;         &quot;knitr_fig_path&quot; &quot;LOtable&quot;       
+[13] &quot;odds&quot;           &quot;setwd_workbook&quot; &quot;x&quot;              &quot;y&quot;             
+[17] &quot;z&quot;             </code></pre>
+<div class="callout-trick">
 <p>Like in the shell, <code>ls</code> will hide any variables or
 functions starting with a “.” by default. To list all objects, type
 <code>ls(all.names=TRUE)</code> instead</p>
-</blockquote>
+</div>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but
 we still needed to give the parentheses to tell R to call the
 function.</p>
@@ -951,7 +937,7 @@ instead of a listing of objects.</p>
     }
     else all.names
 }
-&lt;bytecode: 0x000001de60ba3bc0&gt;
+&lt;bytecode: 0x000002399faae6b0&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 <p>What’s going on here?</p>
 <p>Like everything in R, <code>ls</code> is the name of an object, and
@@ -980,15 +966,15 @@ When assigning values to arguments by name, you <em>must</em> use the
 effects, or you may get an error message:</p>
 <pre class="r"><code>rm(list &lt;- ls())</code></pre>
 <pre><code>Error in rm(list &lt;- ls()): ... must contain names or character strings</code></pre>
-<blockquote>
-<h4 id="tip-warnings-vs.-errors">Tip: Warnings vs. Errors</h4>
+<div class="callout-tip">
+<p><strong>Warnings vs. Errors</strong></p>
 <p>Pay attention when R does something unexpected! Errors, like above,
-are thrown when R cannot proceed with a calculation. Warnings on the
-other hand usually mean that the function has run, but it probably
-hasn’t worked as expected.</p>
+occur when R cannot proceed with a calculation. Warnings on the other
+hand usually mean that the function has run, but it probably hasn’t
+worked as expected.</p>
 <p>In both cases, the message that R prints out usually give you clues
 how to fix a problem.</p>
-</blockquote>
+</div>
 <p>Notice that although rm() and ls() are similar to the shell commands
 rm and ls, they operate in different spaces. The Terminal window in
 RStudio accesses the file system on your computer. The R Console
@@ -1015,15 +1001,14 @@ open in the top left.</p>
 </div>
 <blockquote>
 <h4 id="r-scripts">R scripts</h4>
-<p>Any commands that you write in the R console can be saved in to a
-file to be re-run again. Files containing R code to be ran in this way
-are called R scripts. R scripts have <code>.R</code> at the end of their
+<p>Any commands that you write in the R console can be saved in a file
+to be re-run again. Files containing R code to be ran in this way are
+called R scripts. R scripts have <code>.R</code> at the end of their
 names to let you know what they are.</p>
 </blockquote>
 <blockquote>
 <div class="challenge">
-<h4 id="try-this-create-and-save-a-new-r-script"><strong>Try
-this:</strong> Create and save a new R script</h4>
+<p>Create and save a new R script</p>
 </div>
 </blockquote>
 </div>
@@ -1075,30 +1060,13 @@ file.</p>
 <p>The text after each line of code is called a “comment”. Anything that
 follows after the hash symbol <code>#</code> is ignored by R when it
 executes code.</p>
-<div id="reading-data-from-files" class="section level4">
-<h4>Reading data from files</h4>
+</div>
+<div id="reading-data-from-files" class="section level3">
+<h3>Reading data from files</h3>
 <p>2 5 read and view tabular data from a file learners will</p>
 <p>2 7 read a data table from a file use R and RStudio to</p>
 <p>tab complete reminder</p>
 <p>EXTRA: you can download your own data set and read it into R</p>
-<blockquote>
-<p><strong>Try this:</strong> Download and save a NEON Dataset</p>
-</blockquote>
-<blockquote>
-<p><a
-href="https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_data.csv">here</a>.</p>
-<ol style="list-style-type: decimal">
-<li>Download the file (right mouse click on the link above -&gt; “Save
-link as” / “Save file as”, or click on the link and after the page
-loads, press <kbd>Ctrl</kbd>+<kbd>S</kbd> or choose File -&gt; “Save
-page as”)</li>
-<li>Make sure it’s saved under the name
-<code>gapminder_data.csv</code></li>
-<li>Save the file in the <code>data/</code> folder within your
-project.</li>
-</ol>
-<p>We will load and inspect these data later. :::</p>
-</blockquote>
 <blockquote>
 <h2 id="challenge-4">Challenge 4</h2>
 <p>It is useful to get some general idea about the dataset, directly
@@ -1129,8 +1097,8 @@ Afghanistan,1987,13867957,Asia,40.822,852.3959448
 Afghanistan,1992,16317921,Asia,41.674,649.3413952</code></pre>
 </blockquote>
 </blockquote>
-<div id="working-directory---fixme" class="section level5">
-<h5>Working directory - FIXME</h5>
+<div id="working-directory---fixme" class="section level4">
+<h4>Working directory - FIXME</h4>
 <p>Knowing R’s current working directory is important because when you
 need to access other files (for example, to import a data file), R will
 look for them relative to the current working directory.</p>
@@ -1175,7 +1143,6 @@ the file, or you need to make sure the file is saved in the working
 directory (or a subfolder of the working directory) and provide a
 relative path.</p>
 </blockquote>
-</div>
 </div>
 </div>
 </div>
@@ -1226,8 +1193,9 @@ install.packages(&quot;gapminder&quot;)</code></pre>
 <pre class="r"><code>install.packages(c(&quot;ggplot2&quot;, &quot;plyr&quot;, &quot;gapminder&quot;))</code></pre>
 </blockquote>
 </blockquote>
-<div id="getting-help" class="section level4">
-<h4>Getting help</h4>
+</div>
+<div id="getting-help" class="section level3">
+<h3>Getting help</h3>
 <p>2 9 learn how to get help and troubleshoot error messages learners
 will 2 8 access and understand a function’s documentation page use R and
 RStudio to</p>
@@ -1291,16 +1259,14 @@ functions available. It would be prohibitive, if not impossible to
 remember the correct usage for every function you use. Luckily, using
 the help files means you don’t have to remember that!</p>
 </blockquote>
-</div>
-</div>
-<div id="special-operators" class="section level3">
-<h3>Special Operators</h3>
+<div id="special-operators" class="section level4">
+<h4>Special Operators</h4>
 <p>To seek help on special operators, use quotes or backticks:</p>
 <pre class="r"><code>?&quot;&lt;-&quot;
 ?`&lt;-`</code></pre>
 </div>
-<div id="getting-help-with-packages" class="section level3">
-<h3>Getting Help with Packages</h3>
+<div id="getting-help-with-packages" class="section level4">
+<h4>Getting Help with Packages</h4>
 <p>Many packages come with “vignettes”: tutorials and extended example
 documentation. Without any arguments, <code>vignette()</code> will list
 all vignettes for all installed packages;
@@ -1315,8 +1281,8 @@ href="https://rstudio.com/resources/cheatsheets/">cheatsheets</a> for
 many packages.</p>
 </div>
 <div id="when-you-remember-part-of-the-function-name"
-class="section level3">
-<h3>When You Remember Part of the Function Name</h3>
+class="section level4">
+<h4>When You Remember Part of the Function Name</h4>
 <p>If you’re not sure what package a function is in or how it’s
 specifically spelled, you can do a fuzzy search:</p>
 <pre class="r"><code>??function_name</code></pre>
@@ -1326,16 +1292,16 @@ directory includes “set” in its name. You can do a fuzzy search to help
 you identify the function:</p>
 <pre class="r"><code>??set</code></pre>
 </div>
-<div id="when-you-have-no-idea-where-to-begin" class="section level3">
-<h3>When You Have No Idea Where to Begin</h3>
+<div id="when-you-have-no-idea-where-to-begin" class="section level4">
+<h4>When You Have No Idea Where to Begin</h4>
 <p>If you don’t know what function or package you need to use <a
 href="http://cran.at.r-project.org/web/views">CRAN Task Views</a> is a
 specially maintained list of packages grouped into fields. This can be a
 good starting point.</p>
 </div>
 <div id="when-your-code-doesnt-work-seeking-help-from-your-peers"
-class="section level3">
-<h3>When Your Code Doesn’t Work: Seeking Help from Your Peers</h3>
+class="section level4">
+<h4>When Your Code Doesn’t Work: Seeking Help from Your Peers</h4>
 <p>If you’re having trouble using a function, 9 times out of 10, the
 answers you seek have already been answered on <a
 href="http://stackoverflow.com/">Stack Overflow</a>. You can search
@@ -1355,26 +1321,25 @@ Running under: Windows 10 x64 (build 22621)
 Matrix products: default
 
 locale:
-[1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8   
-[3] LC_MONETARY=English_United States.utf8 LC_NUMERIC=C                          
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                          
 [5] LC_TIME=English_United States.utf8    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] ggplot2_3.3.6 dplyr_1.0.9   knitr_1.41   
+[1] knitr_1.41
 
 loaded via a namespace (and not attached):
- [1] highr_0.10       pillar_1.7.0     bslib_0.4.2      compiler_4.2.1   jquerylib_0.1.4 
- [6] tools_4.2.1      digest_0.6.29    jsonlite_1.8.0   evaluate_0.15    lifecycle_1.0.3 
-[11] tibble_3.1.7     gtable_0.3.0     pkgconfig_2.0.3  rlang_1.0.6      cli_3.5.0       
-[16] rstudioapi_0.13  yaml_2.3.6       xfun_0.36        fastmap_1.1.0    withr_2.5.0     
-[21] stringr_1.5.0    generics_0.1.2   vctrs_0.4.1      sass_0.4.4       grid_4.2.1      
-[26] tidyselect_1.1.2 glue_1.6.2       R6_2.5.1         fansi_1.0.3      rmarkdown_2.19  
-[31] farver_2.1.0     purrr_0.3.4      magrittr_2.0.3   scales_1.2.0     ellipsis_0.3.2  
-[36] htmltools_0.5.4  colorspace_2.0-3 labeling_0.4.2   utf8_1.2.2       stringi_1.7.8   
-[41] munsell_0.5.0    cachem_1.0.6     crayon_1.5.1    </code></pre>
+ [1] digest_0.6.29   R6_2.5.1        lifecycle_1.0.3 jsonlite_1.8.0 
+ [5] magrittr_2.0.3  evaluate_0.15   stringi_1.7.8   cachem_1.0.6   
+ [9] rlang_1.0.6     cli_3.5.0       rstudioapi_0.13 jquerylib_0.1.4
+[13] bslib_0.4.2     vctrs_0.4.1     rmarkdown_2.19  tools_4.2.1    
+[17] stringr_1.5.0   glue_1.6.2      xfun_0.36       yaml_2.3.6     
+[21] fastmap_1.1.0   compiler_4.2.1  htmltools_0.5.4 sass_0.4.4     </code></pre>
 <p>Will print out your current version of R, as well as any packages you
 have loaded. This can be useful for others to help reproduce and debug
 your issue.</p>
@@ -1450,6 +1415,7 @@ although you may have to change the <code>comment.char</code> argument
 as well if your data file contains hash (#) characters.</p>
 </blockquote>
 </blockquote>
+</div>
 </div>
 </div>
 <div id="exercises" class="section level2">
@@ -1588,6 +1554,23 @@ cheat sheets</a></li>
     b.appendChild(code);
     p.appendChild(b);
   }
+})();
+
+// Format helpful tip boxes
+(function() {
+  var codes = document.querySelectorAll(&#39;.callout-trick&#39;);
+  var code, i, p, h, b;
+  for (i = 0; i &lt; codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement(&#39;blockquote&#39;);
+    h = document.createElement(&#39;strong&#39;);
+    h.innerText = &#39;TIP:&#39;;
+    // &lt;blockquote&gt;&lt;em&gt;TIP:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
+    b.appendChild(h);
+    b.appendChild(code);
+    p.appendChild(b);
+  }
 })();</code></pre>
 <script type="text/javascript">
 // Format challenge boxes
@@ -1640,6 +1623,23 @@ cheat sheets</a></li>
     h = document.createElement('strong');
     h.innerText = 'HELPFUL TRICK:';
     // <blockquote><em>HELPFUL TRICK:</em><p></p></blockquote>
+    b.appendChild(h);
+    b.appendChild(code);
+    p.appendChild(b);
+  }
+})();
+
+// Format helpful tip boxes
+(function() {
+  var codes = document.querySelectorAll('.callout-trick');
+  var code, i, p, h, b;
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement('blockquote');
+    h = document.createElement('strong');
+    h.innerText = 'TIP:';
+    // <blockquote><em>TIP:</em><p></p></blockquote>
     b.appendChild(h);
     b.appendChild(code);
     p.appendChild(b);

@@ -56,7 +56,7 @@
 
 // Format helpful tip boxes
 (function() {
-  var codes = document.querySelectorAll('.callout-trick');
+  var codes = document.querySelectorAll('.callout-tip');
   var code, i, p, h, b;
   for (i = 0; i < codes.length; i++) {
     code = codes[i];

@@ -729,7 +729,7 @@ The text after each line of code is called a
 
 
 
-#### Reading data from files
+### Reading data from files
 
 2	5	read and view tabular data from a file	learners will
 
@@ -739,6 +739,8 @@ tab complete reminder
 
 
 EXTRA: you can download your own data set and read it into R
+
+use data/intro-to-R_dat.csv
 
 
 
@@ -770,7 +772,7 @@ EXTRA: you can download your own data set and read it into R
 
 
 
-##### Working directory - FIXME
+#### Working directory - FIXME
 
 Knowing R's current working directory is important because when you need to access other files (for example, to import a data file), R will look for them relative to the current working directory.
 
@@ -849,7 +851,7 @@ Packages can be installed and updated from the Package tab with the Install and 
 
 
 
-#### Getting help
+### Getting help
 
 2	9	learn how to get help and troubleshoot error messages	learners will
 2	8	access and understand a function's documentation page	use R and RStudio to
@@ -929,7 +931,7 @@ This is because these functions have very similar applicability and often share 
 > means you don't have to remember that!
 
 
-##### Special Operators
+#### Special Operators
 
 To seek help on special operators, use quotes or backticks:
 
@@ -938,7 +940,7 @@ To seek help on special operators, use quotes or backticks:
 ?`<-`
 ```
 
-##### Getting Help with Packages
+#### Getting Help with Packages
 
 Many packages come with "vignettes": tutorials and extended example documentation.
 Without any arguments, `vignette()` will list all vignettes for all installed packages;
@@ -952,7 +954,7 @@ RStudio also has a set of excellent
 [cheatsheets](https://rstudio.com/resources/cheatsheets/) for many packages.
 
 
-##### When You Remember Part of the Function Name
+#### When You Remember Part of the Function Name
 
 If you're not sure what package a function is in or how it's specifically spelled, you can do a fuzzy search:
 
@@ -967,14 +969,14 @@ to set your working directory includes "set" in its name. You can do a fuzzy sea
 ??set
 ```
 
-##### When You Have No Idea Where to Begin
+#### When You Have No Idea Where to Begin
 
 If you don't know what function or package you need to use
 [CRAN Task Views](http://cran.at.r-project.org/web/views)
 is a specially maintained list of packages grouped into
 fields. This can be a good starting point.
 
-##### When Your Code Doesn't Work: Seeking Help from Your Peers
+#### When Your Code Doesn't Work: Seeking Help from Your Peers
 
 If you're having trouble using a function, 9 times out of 10,
 the answers you seek have already been answered on

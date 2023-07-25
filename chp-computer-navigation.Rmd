@@ -314,7 +314,7 @@ mkdir exercises/finished
 If you want to rerun a similar command, you don't need to type it out again. Place your cursor at the command line and press the up arrow key. This will bring up the most recent command, If you press it again, it will go back through your commands one at time. When you find the one you want, you can run it as-is by pressing <kbd>Enter</kbd> or edit it first, then run it.
 :::
 
-Let's remove the working folder that we not longer need. The command to "remove" a file or folder is `rm`. 
+Let's remove the working folder that we not longer need that is not in the exercises folder. The command to "remove" a file or folder is `rm`. 
 
 ```{sh}
 rm working
@@ -414,6 +414,11 @@ Rename with your initials.  (use variable assignment)
 
 Open the first exercise.
 
+<!-- remove things made during the script rendering-->
+```{sh include = FALSE}
+rm -r exercises/finished
+rm -r exercises/working
+```
 
 ```{r include = FALSE}
 setwd_workbook(FALSE)
@@ -467,8 +472,8 @@ After completing these exercises, learners will be able to
 **`r chp_num`.4** From the initial working directory of the Student Workbook RStudio project, **use the Terminal to**:
 
 1. Create a new directory inside the data directory named "derived"
-2. Move a copy of the file XXX into this new "derived" folder and append today's date to the end of the file name in the format YYYY-MM-DD (e.g.: XXX_2023-05-13.csv). Remember- avoid using spaces in file names!
-3. Rename this file to add your initials to the end of the file name (e.g. XXX_2023-05-13_JRC.csv)
+2. Move a copy of the file intro-to-R_dat.csv into this new "derived" folder and append today's date to the end of the file name in the format YYYY-MM-DD (e.g.: intro-to-R_dat_2023-05-13.csv). Remember- avoid using spaces in file names!
+3. Rename this file to add your initials to the end of the file name (e.g. intro-to-R_dat_2023-05-13_JRC.csv)
 4. Delete the derived directory and all of its contents.
 5. Type out the commands (in order) that you used to accomplish the prior steps. Write one command line for each of the four steps.
 

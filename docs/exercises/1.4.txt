@@ -1,0 +1,11 @@
+From the initial working directory of the Student Workbook RStudio project, use the Terminal to:
+
+1. Create a new directory inside the data directory named "derived"
+
+2. Move a copy of the file intro-to-R_dat.csv into this new "derived" folder and append today's date to the end of the file name in the format YYYY-MM-DD (e.g.: intro-to-R_dat_2023-05-13.csv). Remember- avoid using spaces in file names!
+
+3. Rename this file to add your initials to the end of the file name (e.g. intro-to-R_dat_2023-05-13_JRC.csv)
+
+4. Delete the derived directory and all of its contents.
+
+5. Type out the commands (in order) that you used to accomplish the prior steps. Write one command line for each of the four steps.

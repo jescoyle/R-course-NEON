@@ -774,7 +774,6 @@ or you can specify the path to the new folder you wish to create.</p>
 <p>Create a new folder called working inside the exercises folder by
 executing this command in the terminal:</p>
 <pre class="sh"><code>mkdir exercises/working</code></pre>
-<pre><code>mkdir: cannot create directory &#39;exercises/working&#39;: File exists</code></pre>
 <p>Check the Files window to verify that you created a folder named
 working inside the exercises folder.</p>
 <div class="challenge">
@@ -784,7 +783,6 @@ exercises folder.</p>
 </div>
 <div class="solution">
 <pre class="sh"><code>mkdir exercises/finished</code></pre>
-<pre><code>mkdir: cannot create directory &#39;exercises/finished&#39;: File exists</code></pre>
 </div>
 <div class="callout-trick">
 <p>If you want to rerun a similar command, you don’t need to type it out
@@ -794,8 +792,9 @@ will go back through your commands one at time. When you find the one
 you want, you can run it as-is by pressing <kbd>Enter</kbd> or edit it
 first, then run it.</p>
 </div>
-<p>Let’s remove the working folder that we not longer need. The command
-to “remove” a file or folder is <code>rm</code>.</p>
+<p>Let’s remove the working folder that we not longer need that is not
+in the exercises folder. The command to “remove” a file or folder is
+<code>rm</code>.</p>
 <pre class="sh"><code>rm working</code></pre>
 <pre><code>rm: cannot remove &#39;working&#39;: Is a directory</code></pre>
 <p>Oops it didn’t work! You got an error message saying that it could
@@ -934,6 +933,7 @@ use an option to tell it not to, see <code>cp --help</code> for more
 information).</p>
 <p>Rename with your initials. (use variable assignment)</p>
 <p>Open the first exercise.</p>
+<!-- remove things made during the script rendering-->
 </div>
 <div id="fyi-additional-info-for-the-curious" class="section level3">
 <h3>FYI: Additional info for the curious</h3>
@@ -992,12 +992,12 @@ to</strong>:</p>
 <ol style="list-style-type: decimal">
 <li>Create a new directory inside the data directory named
 “derived”</li>
-<li>Move a copy of the file XXX into this new “derived” folder and
-append today’s date to the end of the file name in the format YYYY-MM-DD
-(e.g.: XXX_2023-05-13.csv). Remember- avoid using spaces in file
-names!</li>
+<li>Move a copy of the file intro-to-R_dat.csv into this new “derived”
+folder and append today’s date to the end of the file name in the format
+YYYY-MM-DD (e.g.: intro-to-R_dat_2023-05-13.csv). Remember- avoid using
+spaces in file names!</li>
 <li>Rename this file to add your initials to the end of the file name
-(e.g. XXX_2023-05-13_JRC.csv)</li>
+(e.g. intro-to-R_dat_2023-05-13_JRC.csv)</li>
 <li>Delete the derived directory and all of its contents.</li>
 <li>Type out the commands (in order) that you used to accomplish the
 prior steps. Write one command line for each of the four steps.</li>
@@ -1071,6 +1071,23 @@ href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-
     b.appendChild(code);
     p.appendChild(b);
   }
+})();
+
+// Format helpful tip boxes
+(function() {
+  var codes = document.querySelectorAll(&#39;.callout-tip&#39;);
+  var code, i, p, h, b;
+  for (i = 0; i &lt; codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement(&#39;blockquote&#39;);
+    h = document.createElement(&#39;strong&#39;);
+    h.innerText = &#39;TIP:&#39;;
+    // &lt;blockquote&gt;&lt;em&gt;TIP:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
+    b.appendChild(h);
+    b.appendChild(code);
+    p.appendChild(b);
+  }
 })();</code></pre>
 <script type="text/javascript">
 // Format challenge boxes
@@ -1123,6 +1140,23 @@ href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-
     h = document.createElement('strong');
     h.innerText = 'HELPFUL TRICK:';
     // <blockquote><em>HELPFUL TRICK:</em><p></p></blockquote>
+    b.appendChild(h);
+    b.appendChild(code);
+    p.appendChild(b);
+  }
+})();
+
+// Format helpful tip boxes
+(function() {
+  var codes = document.querySelectorAll('.callout-tip');
+  var code, i, p, h, b;
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement('blockquote');
+    h = document.createElement('strong');
+    h.innerText = 'TIP:';
+    // <blockquote><em>TIP:</em><p></p></blockquote>
     b.appendChild(h);
     b.appendChild(code);
     p.appendChild(b);
