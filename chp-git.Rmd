@@ -68,5 +68,7 @@ This lesson was adapted from    episodes    by Jes Coyle.
 
 ### Additional Resources
 
+Need help getting set up? See [Happy Git with R](https://happygitwithr.com/index.html).
+
 
 ### Cited References

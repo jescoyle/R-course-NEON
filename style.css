@@ -1,5 +1,16 @@
+:root {
+  --dark-blue: #4070A0;
+  --bright-blue: #38A19E;
+  --yellow: #EDD147;
+  --white: #ffffff;
+  --light-blue-grey: #ced7e0;
+  --med-grey: #ccc;
+  --light-grey: #eee;
+}
+
+
 body p ol ul {
-    font-size: 16px;
+    font-size: medium;
     font-family: Helvetica, sans-serif;
 }
 
@@ -8,21 +19,22 @@ pre {
 }
 
 blockquote {
-    background: #ffffff;
-    border-left: 5px solid #4070A0;
+    font-size: medium;
+    background: var(--white);
+    border-left: 5px solid var(--dark-blue);
 }
 
 .ui-state-default {
-    background: #ced7e0;
+    background: var(--light-blue-grey);
 }
 
 .ui-state-active {
-    border: #ccc;
-    background: #4070A0;
+    border: var(med-grey);
+    background: var(--dark-blue);
 }
 
 .ui-widget-content {
-    background: #eee;
+    background: var(--light-grey);
 }
 
 .search {
@@ -34,10 +46,10 @@ blockquote {
 
 .search input[type="text"] {
     display: none;
-    background-color: #fff;
+    background-color: var(--white);
     color: #000;
     font-size: .95em;
-    border: 1px solid #ccc;
+    border: 1px solid var(--med-grey);
     border-radius: 4px;
     float: left;
     width: 90px;
@@ -56,5 +68,9 @@ blockquote {
 }
 
 a {
-  color: #4070A0;
+  color: var(--dark-blue);
+}
+
+a:hover {
+  color: var(--bright-blue);  
 }

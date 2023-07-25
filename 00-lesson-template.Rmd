@@ -9,6 +9,7 @@ bibliography: references.bib
 
 ```{r, include = FALSE, purl = FALSE}
 # Functions and data
+getwd()
 source("src/setup.R")
 
 # get chapter number based on name
@@ -132,6 +133,8 @@ This lesson was adapted from XX by Jes Coyle.
 
 ### Cited References
 
+
+<!-- javascript that formats solution blocks clickable hidden text -->
 
 ```{js, file = "solution_format.java"}
 

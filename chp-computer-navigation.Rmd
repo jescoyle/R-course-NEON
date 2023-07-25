@@ -19,9 +19,6 @@ chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
 source("src/knit-options.R")
 knitr_fig_path(paste0("../../", chp_str, "-"))
 
-# Set the working directory for code evaluation
-setwd("./workbook/R-course-NEON-workbook/")
-
 # Silently set seed for random number generation, so we don't have to explain it
 set.seed(10)
 ```
@@ -121,13 +118,15 @@ Use your file browser to navigate to a folder where you typically save files for
 
 Let's use the `Files` panel in RStudio to view the file system. When you first open RStudio the contents of the working directory are shown in the `Files` panel. The absolute path of the current directory you are viewing is shown in a bar across the top. To navigate up or down the file system and view files in different folders, you can click on the names of higher-level folders in the path or you can click on subfolders inside the the window. 
 
-> **Try this:** Find your Downloads folder
-> 
-> When you download a file from the internet where does it go? Most computers have a default directory where downloaded files are saved. It can be very useful to know where this directory is located on your file system.
->
-> 1. Use the file browser on your computer (Finder on Mac or File Explorer on Windows) to locate your default Downloads folder. What path does your file browser give for this folder?
-> 2. Now use the file browser built into RStudio to find the same Downloads folder. If you have trouble navigating using the RStudio file explorer, click on the three dots in the upper right corner of the `Files` panel to use your computer's default file browser.
-> 3. Type out the absolute path to your downloads folder.
+::: {.challenge}
+Find your Downloads folder
+
+When you download a file from the internet where does it go? Most computers have a default directory where downloaded files are saved. It can be very useful to know where this directory is located on your file system.
+
+1. Use the file browser on your computer (Finder on Mac or File Explorer on Windows) to locate your default Downloads folder. What path does your file browser give for this folder?
+2. Now use the file browser built into RStudio to find the same Downloads folder. If you have trouble navigating using the RStudio file explorer, click on the three dots in the upper right corner of the `Files` panel to use your computer's default file browser.
+3. Type out the absolute path to your downloads folder.
+:::
 
 
 ### Using the command line to navigate
@@ -166,29 +165,30 @@ FYI: You can get your file browser to display the text-based file path to any fo
 * Mac: ctr+click on the file you want inside the Finder path bar. Select Copy as Pathname and paste it into the command line as is.
 
 ::: {.challenge}
-> **Try this:** Navigate to your Downloads folder
->
-> 1. Write a command that would navigate directly to your Downloads folder no matter what directory you are currently in.
-> 2. Try it out from your current working directory to see if it works.
+Navigate to your Downloads folder
+
+1. Write a command that would navigate directly to your Downloads folder no matter what directory you are currently in.
+2. Try it out from your current working directory to see if it works.
 :::
+
 
 Rather than type out the full absolute path every time we need to navigate to a new folder, we can use a **relative path** to specify the location of a file or folder relative to the current working directory.
 
 The current working directory is denoted `./`, so `./Documents` specifies the Documents subfolder within the current working directory. In contrast `../Documents` specifies a Documents folder that is located in the next folder above the current working directory. So since `../` is the parent, `../Documents` would be a sibling directory of the current working directory.
 
+
 ::: {.challenge}
-> **Try this:** Navigate to your Downloads folder
->
-> 1. Write a command that would navigate to your Downloads folder from your Home directory.
-> 2. Navigate to your Home directory and try it out.
+Navigate to your Downloads folder
+
+1. Write a command that would navigate to your Downloads folder from your Home directory.
+2. Navigate to your Home directory and try it out.
 :::
 
 ::: {.callout-trick}
-> **HELPFUL TRICKS**
-> 
-> You don't need to type out long file path names at the command line. Start by typing a few letters of the file path your want, then press tab. If there is only one name in the current directory that starts with those letters, the command line will automatically complete the name for you. If nothing appears, try typing a few more letters and pressing tab again, or check to make sure your spelling is correct. This is called **tab completion** and can be used throughout RStudio. 
->
-> If your Terminal window gets stuck and the command line looks like this `>` that means it is waiting for further input. If you didn't mean to add anything else, you can **escape** the current command and reset the command line by typing <kbd>ctrl</kbd> + <kbd>c</kbd> (Windows) or <kbd>cmd</kbd> + <kbd>c</kbd> (Mac).
+
+You don't need to type out long file path names at the command line. Start by typing a few letters of the file path your want, then press tab. If there is only one name in the current directory that starts with those letters, the command line will automatically complete the name for you. If nothing appears, try typing a few more letters and pressing tab again, or check to make sure your spelling is correct. This is called **tab completion** and can be used throughout RStudio. 
+
+If your Terminal window gets stuck and the command line looks like this `>` that means it is waiting for further input. If you didn't mean to add anything else, you can **escape** the current command and reset the command line by typing <kbd>ctrl</kbd> + <kbd>c</kbd> (Windows) or <kbd>cmd</kbd> + <kbd>c</kbd> (Mac).
 :::
 
 
@@ -197,13 +197,13 @@ The current working directory is denoted `./`, so `./Documents` specifies the Do
 RStudio projects are a useful way to keep all of the files needed for a particular project together in one place. RStudio projects can be easily shared with others because they set up the RStudio session in the same way regardless of who opens the project. 
 
 ::: {.challenge}
-> **Try this:** Create a new project in RStudio
->
-> 1. Click the "File" menu button, then "New Project".
-> 2. Click "New Directory".
-> 3. Click "New Project".
-> 4. Type in the name of the directory to store your project. This can be any name using letters or numbers, but it should not have any spaces. For example, try "my-sandbox".
-> 5. Click the "Create Project" button.
+Create a new project in RStudio
+
+1. Click the "File" menu button, then "New Project".
+2. Click "New Directory".
+3. Click "New Project".
+4. Type in the name of the directory to store your project. This can be any name using letters or numbers, but it should not have any spaces. For example, try "my-sandbox".
+5. Click the "Create Project" button.
 :::
 
 You should now be looking at a new RStudio session and in the upper right corner of the window you will see this the name of your project:
@@ -213,39 +213,40 @@ You will also see a mostly empty folder in the Files panel. There should be one 
 
 This file contains information that RStudio needs to set up your project. One thing the .Rproj file will do is set your working directory to be the same directory that the .Rproj file is located in. Let's see how this works.
 
-> ::: {.challenge}
-> **Try this:** Display the working directory in the Terminal and R Console
->
-> What command should you use in the terminal to display the path of the current working directory?
-> :::
-> ::: {.solution}
->
-> ```{bash eval = FALSE, class.source = 'fold-hide'}
->   pwd
-> ```
-> :::
-> ::: {.challenge}
-> To display the working directory in the R Console, do the following:
-> 
-> 1. Click the Console tab next to the Terminal tab.
-> 2. This command line let's you interact with R (which we will learn more about in future chapters). Notice that the command line begins with `>`.
-> 3. Type `getwd()`.
-> 4. What do you see? How is it similar to and different from what the Terminal displays?
-> 5. How would the file path be different on someone else's computer? How would it be similar?
+::: {.challenge}
+Display the working directory in the Terminal and R Console
+
+What command should you use in the terminal to display the path of the current working directory?
+
+:::
+::: {.solution}
+```{bash eval = FALSE}
+  pwd
+```
+:::
+
+We can also show the working directory in the R Console. Click the Console tab next to the Terminal tab. This command line let's you interact with R (which we will learn more about in future chapters). Notice that the command line begins with `>`.
+
+::: {.challenge}
+Display the working directory in the R Console.
+
+1. Type `getwd()`.
+2. What do you see? How is it similar to and different from what the Terminal displays?
+3. How would the file path be different on someone else's computer? How would it be similar?
 :::
 
 RStudio projects are useful because they automatically open in the same working directory regardless of the computer they are located on. This means that when we start writing code, we can refer to the location of files relative to the directory where the .Rproj file is saved and the code will work on any computer. Let's see how this might work.
 
 
 ::: {.challenge}
-> **Try this:** Opening an RStudio project through the file system
->
-> 1. Exit RStudio.
-> 2. Use your computer's file browser to navigate to the directory where you created the my-sandbox project. This should be your Desktop folder if you followed the steps above.
-> 3. Move the entire my-sandbox folder to a folder on your computer where you are saving work for this class.
-> 4. Open the my-sandbox folder and double click on the `.Rproj` file in that directory.
-> 5. Observe the Files panel in RStudio. What has changed?
-> 6. Use the Terminal and the R Console to display the current working directory. What has changed?
+Opening an RStudio project through the file system
+
+1. Exit RStudio.
+2. Use your computer's file browser to navigate to the directory where you created the my-sandbox project. This should be your Desktop folder if you followed the steps above.
+3. Move the entire my-sandbox folder to a folder on your computer where you are saving work for this class.
+4. Open the my-sandbox folder and double click on the `.Rproj` file in that directory.
+5. Observe the Files panel in RStudio. What has changed?
+6. Use the Terminal and the R Console to display the current working directory. What has changed?
 :::
 
 #### Best practices for project organization
@@ -272,6 +273,10 @@ The exercises folder contains files that you will use to complete the exercises 
 
 
 ### Working with files on the command line
+<!-- set the chunk working directory to the workbook to mirror what the student sees -->
+```{r include = FALSE}
+setwd_workbook(TRUE)
+```
 
 The terminal provides a quick way to create and remove files and directories. It is particularly useful to use the terminal when we need to work on a lot of files at once.
 
@@ -279,62 +284,124 @@ Let's use the terminal to create two new folders: one for copies of the exercise
 
 Execute the command `mkdir working` in the terminal. (To "execute" a command, type it at the command prompt and press <kbd>Enter</kbd>.)
 
+```{sh}
+mkdir working
+```
+
 Where did the new directory end up? It should have been created in the current working directory. However, it would be more logical to place this directory inside the exercises folder. You could navigate to the exercises folder and then run the `mkdir` command again, or you can specify the path to the new folder you wish to create.
 
-Create a new folder called working inside the exercises folder by executing this command in the terminal: `mkdir exercises/working`.
+Create a new folder called working inside the exercises folder by executing this command in the terminal:
 
-:::{.challenge}
-> **Try this:** Creating new folders
->
-> Use the terminal to make a new folder named "finished" inside the exercises folder.
->
-> **HELPFUL TRICK:** If you want to rerun a similar command, you don't need to type it out again. Place your cursor at the command line and press the up arrow key. This will bring up the most recent command, If you press it again, it will go back through your commands one at time. When you find the one you want, you can run it as-is by pressing <kbd>Enter</kbd> or edit it first, then run it.
+```{sh}
+mkdir exercises/working
+```
+
+Check the Files window to verify that you created a folder named working inside the exercises folder.
+
+::: {.challenge}
+Create a new folder
+
+Use the terminal to make a new folder named "finished" inside the exercises folder.
+:::
+::: {.solution}
+```{sh}
+mkdir exercises/finished
+```
 :::
 
-Let's remove the working folder that we not longer need. The command to "remove" a file or folder is `rm`. Execute the command `rm working`. 
 
-Oops it didn't work! You got an error message saying that it could not remove working because it is a directory. We need to add an option to allow the function to "recursively" delete subdirectories and files within them. Command options are specified after the command withe a `-`. The command to delete the directory named working and all of its contents is: `rm -r working`
+::: {.callout-trick}
+If you want to rerun a similar command, you don't need to type it out again. Place your cursor at the command line and press the up arrow key. This will bring up the most recent command, If you press it again, it will go back through your commands one at time. When you find the one you want, you can run it as-is by pressing <kbd>Enter</kbd> or edit it first, then run it.
+:::
 
-What else can the `rm` command do? Are there any other options? If you're interested in learning about the functionality of a unix command, you can always use the internet, but there is also a built-in help file attached to every command. Use the `--help` option to access it. For example, `rm --help` shows us a table of the different options and then at the end tells us: "By default, rm does not remove directories. Use the --recursive (-r or -R) option to remove each listed directory, too, along with all of its contents."
+Let's remove the working folder that we not longer need. The command to "remove" a file or folder is `rm`. 
+
+```{sh}
+rm working
+```
+
+Oops it didn't work! You got an error message saying that it could not remove working because it is a directory. We need to add an option to allow the function to "recursively" delete sub directories and files within them. Command options are specified after the command with a `-`. The command to delete the directory named working and all of its contents is:
+
+```{sh}
+rm -r working
+```
+
+
+What else can the `rm` command do? Are there any other options? If you're interested in learning about the functionality of a unix command, you can always use the internet, but there is also a built-in help file attached to every command. Use the `--help` option to access it. 
+
+
+```{sh}
+rm --help
+```
+
+
+We see a table of the different options and then at the end tells us: "By default, rm does not remove directories. Use the --recursive (-r or -R) option to remove each listed directory, too, along with all of its contents."
 
 Now let's copy the exercises for lesson 1 into exercises/working. The command to copy a file is `cp SOURCE DEST`, where we replace `SOURCE` with the name(s) of the files to copy and `DEST` with the name of the directory to copy them into.
 
 First we need to know the names of the files.
 
-:::{challenge}
-> **Try this:** Execute a command in the terminal that will list all of the files in the exercises folder.
->
+::: {.challenge}
+Use the terminal to list all of the files in the exercises folder.
+
 :::
-> ::: {.solution}
-> Your answer will depend on your current working directory (check using `pwd`):
-> If your working directory is the main R-course-NEON-workbook folder, then type:
-> ```{bash eval = FALSE}
-> ls exercises
-> ```
-> If your working directory is the R-course-NEON-workbook/exercises folder, then type:
-> ```{bash eval = FALSE}
-> ls 
-> ```
-> :::
+::: {.solution}
+Your answer will depend on your current working directory (check using `pwd`):
+
+If your working directory is the main R-course-NEON-workbook folder, then type:
+```{sh eval = FALSE}
+ls exercises
+```
+If your working directory is the R-course-NEON-workbook/exercises folder, then type:
+```{sh eval = FALSE}
+ls 
+```
+:::
 
 When the list of files prints, you will see that each exercises is named according to its number. All of the exercises for lesson 1 start with 1.
 
-We will use a **wildcard** to select only the files that begin with the number 1. 
+Let's copy one of the files from the exercises folder into the working subfolder. Note that this code assumes you are in the main R-course-NEON-workbook folder.
 
+```{sh}
+cp exercises/1.1.txt exercises/working/
+
+```
+
+Notice the `/` at the end of the name of the folder. If we had typed `cp 1.1.txt exercises/working`, it would have copied 1.1.txt into a new file named exercises and overwritten the folder named exercises.
+
+Use the Files window in RStudio to check to see that this worked. There should now be a file named 1.1.txt inside the working subfolder of the exercises folder.
+
+The real power of the terminal is that it lets us work with many files at once, instead of copying them one at a time. Let's copy all of the exercise files for lesson 1 into the working folder.
+
+We will use a **wildcard** to select only the files that begin with the number 1. The `*` symbol is used to match any character. `ls 1.*` would list all files that begin with 1. inside the current working directory. 
+
+First let's move into tho exercises folder so that we don't need to include the exercises folder in the command. Then, list all files that begin with 1.
+```{sh}
+cd exercises
+
+ls 1.*
+```
+
+Wildcards can be used with other commands and allow us to copy and move a set of files that match a particular naming pattern. 
+
+::: {.challenge}
+1. Use the terminal to check your current working directory and navigate to the exercises folder (if needed).
+2. List the files for exercises in lesson 1 (these begin with 1.).
+3. Copy these files into the working folder inside the exercises folder.
+:::
+::: {.solution}
+Commands are shown below without their output.
+```{sh eval = FALSE}
+pwd
+
+cd exercises
 
 ls 1.*
 
+cp 1.* working/
 
-
-:::{.challenge}
-> **Try this:** Copy multiple files into a directory
->
-> 
-
+```
 :::
-
-
-
 
 Be careful- if you copy a file into a directory where a file with the same name exists, it will automatically write over the file (unless you use an option to tell it not to, see `cp --help` for more information).
 
@@ -348,6 +415,9 @@ Rename with your initials.  (use variable assignment)
 Open the first exercise.
 
 
+```{r include = FALSE}
+setwd_workbook(FALSE)
+```
 
 ### FYI: Additional info for the curious
 
@@ -413,3 +483,10 @@ This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.gith
 Read more about using the Terminal in RStudio [here](https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal-in-the-RStudio-IDE).
 
 ### Cited References
+
+
+
+<!-- javascript that formats solution blocks clickable hidden text -->
+```{js, file = "solution_format.java"}
+
+```

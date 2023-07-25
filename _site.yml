@@ -1,6 +1,6 @@
 name: "R-course-NEON"
 output_dir: "docs"
-exclude: ["README.md", "*.java"]
+exclude: ["README.md", "*.java", "exercises/", "data/", "data_raw/", "src/"]
 include: []
 navbar:
   left:
@@ -42,6 +42,8 @@ navbar:
           href: chp-geospatial-raster.html
         - text: C. OpenRefine
           href: chp-openrefine.html
+        - text: D. Git
+          href: chp-git.html
     - text: "Exercises"
       href: exercises-guide.html
     - text: "RStudio Workbook"
@@ -56,5 +58,4 @@ output:
     include:
       after_body: footer.html
     css: style.css
-    fig_caption: FALSE
 bibliography: references.bib

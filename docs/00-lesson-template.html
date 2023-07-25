@@ -302,6 +302,9 @@ $(document).ready(function () {
     <li>
       <a href="chp-openrefine.html">C. OpenRefine</a>
     </li>
+    <li>
+      <a href="chp-git.html">D. Git</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -425,41 +428,116 @@ the /exercises folder if appropriate.</p>
 </div>
 <div id="cited-references" class="section level3">
 <h3>Cited References</h3>
-<pre class="js"><code>(function() {
-  var codes = document.querySelectorAll(&#39;.solution&#39;);
-  var code, i, d, s, p, h;
+<!-- javascript that formats solution blocks clickable hidden text -->
+<pre class="js"><code>// Format challenge boxes
+(function() {
+  var codes = document.querySelectorAll(&#39;.challenge&#39;);
+  var code, i, p, h, b;
   for (i = 0; i &lt; codes.length; i++) {
     code = codes[i];
     p = code.parentNode;
+    b = document.createElement(&#39;blockquote&#39;);
+    h = document.createElement(&#39;strong&#39;);
+    h.innerText = &#39;Try this:&#39;;
+    // &lt;blockquote&gt;&lt;em&gt;Try this:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
+    p.replaceChild(b, code);
+    b.appendChild(h);
+    b.appendChild(code);
+  }
+})();
+
+// Format solution boxes
+(function() {
+  var codes = document.querySelectorAll(&#39;.solution&#39;);
+  var code, i, d, s, p, h, b;
+  for (i = 0; i &lt; codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement(&#39;blockquote&#39;);
     d = document.createElement(&#39;details&#39;);
     s = document.createElement(&#39;summary&#39;);
     h = document.createElement(&#39;strong&#39;);
     h.innerText = &#39;Solution:&#39;;
-    // &lt;details&gt;&lt;summary&gt;&lt;em&gt;Solution:&lt;/em&gt;&lt;/summary&gt;&lt;/details&gt;
+    // &lt;details&gt;&lt;summary&gt;&lt;em&gt;Solution:&lt;/em&gt;&lt;/summary&gt;&lt;p&gt;code&lt;/p&gt;&lt;/details&gt;
     s.appendChild(h);
     d.appendChild(s);
+    b.appendChild(d);
     // move the code into &lt;details&gt;
-    p.replaceChild(d, code);
+    p.replaceChild(b, code);
     d.appendChild(code);
+  }
+})();
+
+// Format helpful tricks boxes
+(function() {
+  var codes = document.querySelectorAll(&#39;.callout-trick&#39;);
+  var code, i, p, h, b;
+  for (i = 0; i &lt; codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement(&#39;blockquote&#39;);
+    h = document.createElement(&#39;strong&#39;);
+    h.innerText = &#39;HELPFUL TRICK:&#39;;
+    // &lt;blockquote&gt;&lt;em&gt;HELPFUL TRICK:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
+    b.appendChild(h);
+    b.appendChild(code);
+    p.appendChild(b);
   }
 })();</code></pre>
 <script type="text/javascript">
+// Format challenge boxes
 (function() {
-  var codes = document.querySelectorAll('.solution');
-  var code, i, d, s, p, h;
+  var codes = document.querySelectorAll('.challenge');
+  var code, i, p, h, b;
   for (i = 0; i < codes.length; i++) {
     code = codes[i];
     p = code.parentNode;
+    b = document.createElement('blockquote');
+    h = document.createElement('strong');
+    h.innerText = 'Try this:';
+    // <blockquote><em>Try this:</em><p></p></blockquote>
+    p.replaceChild(b, code);
+    b.appendChild(h);
+    b.appendChild(code);
+  }
+})();
+
+// Format solution boxes
+(function() {
+  var codes = document.querySelectorAll('.solution');
+  var code, i, d, s, p, h, b;
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement('blockquote');
     d = document.createElement('details');
     s = document.createElement('summary');
     h = document.createElement('strong');
     h.innerText = 'Solution:';
-    // <details><summary><em>Solution:</em></summary></details>
+    // <details><summary><em>Solution:</em></summary><p>code</p></details>
     s.appendChild(h);
     d.appendChild(s);
+    b.appendChild(d);
     // move the code into <details>
-    p.replaceChild(d, code);
+    p.replaceChild(b, code);
     d.appendChild(code);
+  }
+})();
+
+// Format helpful tricks boxes
+(function() {
+  var codes = document.querySelectorAll('.callout-trick');
+  var code, i, p, h, b;
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement('blockquote');
+    h = document.createElement('strong');
+    h.innerText = 'HELPFUL TRICK:';
+    // <blockquote><em>HELPFUL TRICK:</em><p></p></blockquote>
+    b.appendChild(h);
+    b.appendChild(code);
+    p.appendChild(b);
   }
 })();
 </script>

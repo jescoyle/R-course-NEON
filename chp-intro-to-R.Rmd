@@ -1196,7 +1196,7 @@ This lesson utilizes data from @NEON-soilCO2 and @NEON-soiltemp.
 ### Cited References
 
 
-
+<!-- javascript that formats solution blocks clickable hidden text -->
 ```{js, file = "solution_format.java"}
 
 ```

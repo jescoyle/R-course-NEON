@@ -324,6 +324,9 @@ $(document).ready(function () {
     <li>
       <a href="chp-openrefine.html">C. OpenRefine</a>
     </li>
+    <li>
+      <a href="chp-git.html">D. Git</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -471,7 +474,10 @@ href="chp-computer-navigation.html">Navigating your computer</a>)</p>
 </ul>
 <p>If you opened the R-course-NEON-workbook project then your RStudio
 session should look like this:</p>
-<p><img src="images/01-rstudio.png" alt="RStudio layout" /></p>
+<div class="figure">
+<img src="images/01-rstudio.png" alt="" />
+<p class="caption">RStudio layout</p>
+</div>
 <p>We’re going to start working in the R console to learn about some of
 the basic functionality of R. Once we start learning more complex code,
 we will open the Source panel and create an R script for saving the code
@@ -843,8 +849,7 @@ from <code>ages</code> we need to first create a vector containing the
 integers 1 and 3: <code>c(1, 3)</code> and then place this inside the
 brackets: <code>ages[c(1, 3)]</code>.</p>
 <pre class="r"><code>c(firstNames, ages)
-[1] &quot;Sasha&quot;   &quot;Everett&quot; &quot;Hope&quot;    &quot;Arturo&quot;  &quot;18&quot;      &quot;19&quot;      &quot;21&quot;     
-[8] &quot;17&quot;     </code></pre>
+[1] &quot;Sasha&quot;   &quot;Everett&quot; &quot;Hope&quot;    &quot;Arturo&quot;  &quot;18&quot;      &quot;19&quot;      &quot;21&quot;      &quot;17&quot;     </code></pre>
 <p>Notice that when we concatenated <code>firstNames</code> and
 <code>ages</code> all of the ages turned into text with each number
 surrounded by quotes. This is because all elements in a vector must have
@@ -899,11 +904,10 @@ session.</p>
 <p><code>ls</code> will list all of the variables and functions stored
 in the global environment (your working R session):</p>
 <pre class="r"><code>ls()</code></pre>
-<pre><code> [1] &quot;ages&quot;           &quot;chp_num&quot;        &quot;chp_str&quot;        &quot;chptable&quot;      
- [5] &quot;CStable&quot;        &quot;dat&quot;            &quot;evens&quot;          &quot;firstNames&quot;    
- [9] &quot;gapminder&quot;      &quot;get_chpName&quot;    &quot;get_chpNum&quot;     &quot;get_LO&quot;        
-[13] &quot;knitr_fig_path&quot; &quot;LOtable&quot;        &quot;odds&quot;           &quot;x&quot;             
-[17] &quot;y&quot;              &quot;z&quot;             </code></pre>
+<pre><code> [1] &quot;ages&quot;           &quot;chp_num&quot;        &quot;chp_str&quot;        &quot;chptable&quot;       &quot;CStable&quot;       
+ [6] &quot;dat&quot;            &quot;evens&quot;          &quot;firstNames&quot;     &quot;gapminder&quot;      &quot;get_chpName&quot;   
+[11] &quot;get_chpNum&quot;     &quot;get_LO&quot;         &quot;knitr_fig_path&quot; &quot;LOtable&quot;        &quot;odds&quot;          
+[16] &quot;setwd_workbook&quot; &quot;x&quot;              &quot;y&quot;              &quot;z&quot;             </code></pre>
 <blockquote>
 <h4 id="tip-hidden-objects">Tip: hidden objects</h4>
 <p>Like in the shell, <code>ls</code> will hide any variables or
@@ -947,7 +951,7 @@ instead of a listing of objects.</p>
     }
     else all.names
 }
-&lt;bytecode: 0x000001ebecba99b0&gt;
+&lt;bytecode: 0x000001de60ba3bc0&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 <p>What’s going on here?</p>
 <p>Like everything in R, <code>ls</code> is the name of an object, and
@@ -1005,8 +1009,10 @@ will</p>
 comments in a code script use R and RStudio to</p>
 <p>Once you open files, such as R scripts, an editor panel will also
 open in the top left.</p>
-<p><img src="../fig/01-rstudio-script.png"
-alt="RStudio layout with .R file open" /></p>
+<div class="figure">
+<img src="../fig/01-rstudio-script.png" alt="" />
+<p class="caption">RStudio layout with .R file open</p>
+</div>
 <blockquote>
 <h4 id="r-scripts">R scripts</h4>
 <p>Any commands that you write in the R console can be saved in to a
@@ -1349,10 +1355,8 @@ Running under: Windows 10 x64 (build 22621)
 Matrix products: default
 
 locale:
-[1] LC_COLLATE=English_United States.utf8 
-[2] LC_CTYPE=English_United States.utf8   
-[3] LC_MONETARY=English_United States.utf8
-[4] LC_NUMERIC=C                          
+[1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8 LC_NUMERIC=C                          
 [5] LC_TIME=English_United States.utf8    
 
 attached base packages:
@@ -1362,17 +1366,15 @@ other attached packages:
 [1] ggplot2_3.3.6 dplyr_1.0.9   knitr_1.41   
 
 loaded via a namespace (and not attached):
- [1] highr_0.10       pillar_1.7.0     bslib_0.4.2      compiler_4.2.1  
- [5] jquerylib_0.1.4  tools_4.2.1      digest_0.6.29    jsonlite_1.8.0  
- [9] evaluate_0.15    lifecycle_1.0.3  tibble_3.1.7     gtable_0.3.0    
-[13] pkgconfig_2.0.3  rlang_1.0.6      cli_3.5.0        rstudioapi_0.13 
-[17] yaml_2.3.6       xfun_0.36        fastmap_1.1.0    withr_2.5.0     
-[21] stringr_1.5.0    generics_0.1.2   vctrs_0.4.1      sass_0.4.4      
-[25] grid_4.2.1       tidyselect_1.1.2 glue_1.6.2       R6_2.5.1        
-[29] fansi_1.0.3      rmarkdown_2.19   farver_2.1.0     purrr_0.3.4     
-[33] magrittr_2.0.3   scales_1.2.0     codetools_0.2-18 htmltools_0.5.4 
-[37] ellipsis_0.3.2   colorspace_2.0-3 labeling_0.4.2   utf8_1.2.2      
-[41] stringi_1.7.8    munsell_0.5.0    cachem_1.0.6     crayon_1.5.1    </code></pre>
+ [1] highr_0.10       pillar_1.7.0     bslib_0.4.2      compiler_4.2.1   jquerylib_0.1.4 
+ [6] tools_4.2.1      digest_0.6.29    jsonlite_1.8.0   evaluate_0.15    lifecycle_1.0.3 
+[11] tibble_3.1.7     gtable_0.3.0     pkgconfig_2.0.3  rlang_1.0.6      cli_3.5.0       
+[16] rstudioapi_0.13  yaml_2.3.6       xfun_0.36        fastmap_1.1.0    withr_2.5.0     
+[21] stringr_1.5.0    generics_0.1.2   vctrs_0.4.1      sass_0.4.4       grid_4.2.1      
+[26] tidyselect_1.1.2 glue_1.6.2       R6_2.5.1         fansi_1.0.3      rmarkdown_2.19  
+[31] farver_2.1.0     purrr_0.3.4      magrittr_2.0.3   scales_1.2.0     ellipsis_0.3.2  
+[36] htmltools_0.5.4  colorspace_2.0-3 labeling_0.4.2   utf8_1.2.2       stringi_1.7.8   
+[41] munsell_0.5.0    cachem_1.0.6     crayon_1.5.1    </code></pre>
 <p>Will print out your current version of R, as well as any packages you
 have loaded. This can be useful for others to help reproduce and debug
 your issue.</p>
@@ -1531,41 +1533,116 @@ cheat sheets</a></li>
 </div>
 <div id="cited-references" class="section level3">
 <h3>Cited References</h3>
-<pre class="js"><code>(function() {
-  var codes = document.querySelectorAll(&#39;.solution&#39;);
-  var code, i, d, s, p, h;
+<!-- javascript that formats solution blocks clickable hidden text -->
+<pre class="js"><code>// Format challenge boxes
+(function() {
+  var codes = document.querySelectorAll(&#39;.challenge&#39;);
+  var code, i, p, h, b;
   for (i = 0; i &lt; codes.length; i++) {
     code = codes[i];
     p = code.parentNode;
+    b = document.createElement(&#39;blockquote&#39;);
+    h = document.createElement(&#39;strong&#39;);
+    h.innerText = &#39;Try this:&#39;;
+    // &lt;blockquote&gt;&lt;em&gt;Try this:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
+    p.replaceChild(b, code);
+    b.appendChild(h);
+    b.appendChild(code);
+  }
+})();
+
+// Format solution boxes
+(function() {
+  var codes = document.querySelectorAll(&#39;.solution&#39;);
+  var code, i, d, s, p, h, b;
+  for (i = 0; i &lt; codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement(&#39;blockquote&#39;);
     d = document.createElement(&#39;details&#39;);
     s = document.createElement(&#39;summary&#39;);
     h = document.createElement(&#39;strong&#39;);
     h.innerText = &#39;Solution:&#39;;
-    // &lt;details&gt;&lt;summary&gt;&lt;em&gt;Solution:&lt;/em&gt;&lt;/summary&gt;&lt;/details&gt;
+    // &lt;details&gt;&lt;summary&gt;&lt;em&gt;Solution:&lt;/em&gt;&lt;/summary&gt;&lt;p&gt;code&lt;/p&gt;&lt;/details&gt;
     s.appendChild(h);
     d.appendChild(s);
+    b.appendChild(d);
     // move the code into &lt;details&gt;
-    p.replaceChild(d, code);
+    p.replaceChild(b, code);
     d.appendChild(code);
+  }
+})();
+
+// Format helpful tricks boxes
+(function() {
+  var codes = document.querySelectorAll(&#39;.callout-trick&#39;);
+  var code, i, p, h, b;
+  for (i = 0; i &lt; codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement(&#39;blockquote&#39;);
+    h = document.createElement(&#39;strong&#39;);
+    h.innerText = &#39;HELPFUL TRICK:&#39;;
+    // &lt;blockquote&gt;&lt;em&gt;HELPFUL TRICK:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
+    b.appendChild(h);
+    b.appendChild(code);
+    p.appendChild(b);
   }
 })();</code></pre>
 <script type="text/javascript">
+// Format challenge boxes
 (function() {
-  var codes = document.querySelectorAll('.solution');
-  var code, i, d, s, p, h;
+  var codes = document.querySelectorAll('.challenge');
+  var code, i, p, h, b;
   for (i = 0; i < codes.length; i++) {
     code = codes[i];
     p = code.parentNode;
+    b = document.createElement('blockquote');
+    h = document.createElement('strong');
+    h.innerText = 'Try this:';
+    // <blockquote><em>Try this:</em><p></p></blockquote>
+    p.replaceChild(b, code);
+    b.appendChild(h);
+    b.appendChild(code);
+  }
+})();
+
+// Format solution boxes
+(function() {
+  var codes = document.querySelectorAll('.solution');
+  var code, i, d, s, p, h, b;
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement('blockquote');
     d = document.createElement('details');
     s = document.createElement('summary');
     h = document.createElement('strong');
     h.innerText = 'Solution:';
-    // <details><summary><em>Solution:</em></summary></details>
+    // <details><summary><em>Solution:</em></summary><p>code</p></details>
     s.appendChild(h);
     d.appendChild(s);
+    b.appendChild(d);
     // move the code into <details>
-    p.replaceChild(d, code);
+    p.replaceChild(b, code);
     d.appendChild(code);
+  }
+})();
+
+// Format helpful tricks boxes
+(function() {
+  var codes = document.querySelectorAll('.callout-trick');
+  var code, i, p, h, b;
+  for (i = 0; i < codes.length; i++) {
+    code = codes[i];
+    p = code.parentNode;
+    b = document.createElement('blockquote');
+    h = document.createElement('strong');
+    h.innerText = 'HELPFUL TRICK:';
+    // <blockquote><em>HELPFUL TRICK:</em><p></p></blockquote>
+    b.appendChild(h);
+    b.appendChild(code);
+    p.appendChild(b);
   }
 })();
 </script>

@@ -5,3 +5,6 @@ output: html_document
 ---
 
 This page describes the contents of the RStudio project folder that can be downloaded by students from a link on this page. This project folder is called the "workbook" and contains a folder with data files and an exercises folder that contains a subfolder where students can save completed work.
+
+
+[Download the student workbook](workbook/R-course-NEON-workbook.zip)
