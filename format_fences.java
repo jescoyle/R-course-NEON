@@ -48,9 +48,9 @@
     h = document.createElement('strong');
     h.innerText = 'HELPFUL TRICK:';
     // <blockquote><em>HELPFUL TRICK:</em><p></p></blockquote>
+    p.replaceChild(b, code);
     b.appendChild(h);
     b.appendChild(code);
-    p.appendChild(b);
   }
 })();
 
@@ -65,8 +65,8 @@
     h = document.createElement('strong');
     h.innerText = 'TIP:';
     // <blockquote><em>TIP:</em><p></p></blockquote>
+    p.replaceChild(b, code);
     b.appendChild(h);
     b.appendChild(code);
-    p.appendChild(b);
   }
 })();
