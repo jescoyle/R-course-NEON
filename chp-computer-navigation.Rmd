@@ -25,11 +25,9 @@ set.seed(10)
 
 # Chapter `r chp_num`. `r get_chpName(chp_num, type.to = "nameLong")` {.tabset}
 
-**THIS LESSON IS NOT YET READY FOR LEARNERS.**
-
 ## Overview 
 
-<!--### Motivator-->
+<!-- Motivator-->
 
 > How much time have you wasted wondering just where that file you downloaded went or which version of a paper you were working on? Have you ever forgotten exactly what you did to make that graph for a report and now need to make it again?
 
@@ -100,7 +98,7 @@ Your RStudio session should look similar to this:
 
 ![image of RStudio layout](images/01-rstudio.png)
 
-We will go over each of these panels as we need to use them. For this lesson, we will be using the `Files` and `Terminal` panels to learn how to navigate your computer. We will learn more about the `Console` and `Environment` panels in the [Intro to R and RStudio](chp-intro-to-R.html) lesson.
+We will go over each of these panels as we need to use them. For this lesson, we will be using the `Files` and `Terminal` panels to learn how to navigate your computer. We will learn more about the `Console` and `Environment` panels in the [`r get_chpName("chp-intro-to-R", type.to = "nameShort", type.from = "fileName")`](chp-chp-intro-to-R.html)) lesson.
 
 
 ### Navigating the file system
@@ -155,14 +153,20 @@ Now what is the current working directory? Check using the `pwd` command.
 
 To go back up a level to the next higher directory (called the **parent directory**), use `../`: 
 
+```{sh}
 `cd ../`
+```
 
 In fact, we can use `cd` to navigate to any folder by typing its absolute path after the `cd` command. For example: `cd "/c/Documents/My subfolder/another subfolder"`. 
 
-FYI: You can get your file browser to display the text-based file path to any folder as follows:
+**IMPORTANT:** When typing commands into a command line you (usually) must copy the code exactly as it is written including all of the same spaces, spelling and capitalization. If you get an error, first check to see that you typed the correct command.
+
+::: {.callout-trick}
+You can get your file browser to display the text-based file path to any folder as follows:
 
 * Windows: Click inside the file path bar. The absolute path will be displayed using a backslash '\' symbol between sequential subfolders. For example: `C:\Users\username`. You need to change the back slashes to forward slashes before using it in the command line.
 * Mac: ctr+click on the file you want inside the Finder path bar. Select Copy as Pathname and paste it into the command line as is.
+:::
 
 ::: {.challenge}
 Navigate to your Downloads folder
@@ -391,7 +395,7 @@ Wildcards can be used with other commands and allow us to copy and move a set of
 :::
 ::: {.solution}
 Commands are shown below without their output.
-```{sh eval = FALSE}
+```{sh results = "hide"}
 pwd
 
 cd exercises
@@ -403,29 +407,48 @@ cp 1.* working/
 ```
 :::
 
-Be careful- if you copy a file into a directory where a file with the same name exists, it will automatically write over the file (unless you use an option to tell it not to, see `cp --help` for more information).
+::: {.callout-important}
+Be careful- if you copy a file into a directory where a file with the same name exists, it will automatically write over the file (unless you use an option to tell it not to, see `cp --help` for more information). **It will not warn you before doing so.**
+:::
+
+Suppose we wanted to share these files with another person who has different versions of the same files. It would be useful to change the file name to indicate which ones are yours. Let's rename all of the files with your initials. 
+
+The `cp` command would allow us to make a copy with a different name, but then we would need to delete the old version. The `mv SOURCE DEST` command allows us to "move" files from a SOURCE location to the DEST location without keeping the old version. This allows us to change the name of a file. For example, if my initials are XXX:
+
+```{sh}
+mv exercises/working/1.1.txt exercises/working/1.1_XXX.txt
+
+ls exercises/working
+```
 
 
-Rename with your initials.  (use variable assignment)
+::: {.challenge}
+1. Rename all of the lesson 1 exercises in the working folder with your initials.
+2. What trick did you (or could you) use to accomplish this quickly?
+3. What would make this process faster?
+:::
 
+Computers are really good at doing the same thing (with slight changes) over and over again. In future lessons we will learn how to automate the process of repeating the same command many times using code (see [`r get_chpName("chp-program-flow", type.to = "nameShort", type.from = "fileName")`](chp-program-flow.html)).
 
+This concludes the first lesson. To practice what you have learned, navigate to the exercises tab. Each exercise is accompanied by a file in the exercises folder. You can make your own copy of each of these files and save them in a working folder until they are complete (after which you can move them to a "finished" folder to stay organized).
 
+To open an exercise file, click on it in the Files window of RStudio. This will open a new window (called the Source window) showing you the contents of the file. Exercise files are comprised of text that you can edit and save. You can type into this window as you normally would in any text editor. To save your work click File > Save (or click the save icon <img src="images/RStudio_save_icon.jpg" height=18, width=18>). 
 
-
-Open the first exercise.
 
 <!-- remove things made during the script rendering-->
 ```{sh include = FALSE}
 rm -r exercises/finished
 rm -r exercises/working
+mv exercises/working/1.1_XXX.txt exercises/working/1.1.txt
 ```
 
 ```{r include = FALSE}
 setwd_workbook(FALSE)
 ```
 
-### FYI: Additional info for the curious
 
+<!-- WORKING HERE
+### FYI: Additional information for the curious
 
 
 #### More useful Unix commands
@@ -436,7 +459,7 @@ wc
 
 --help
 
-
+-->
 
 
 
@@ -486,6 +509,9 @@ This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.gith
 ### Additional Resources
 
 Read more about using the Terminal in RStudio [here](https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal-in-the-RStudio-IDE).
+
+For more a more in-depth introduction to using a Unix shell see the Software Carpentry lesson on [The Unix Shell](https://swcarpentry.github.io/shell-novice/).
+
 
 ### Cited References
 

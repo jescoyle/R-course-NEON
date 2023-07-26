@@ -354,10 +354,9 @@ $(document).ready(function () {
 <div id="chapter-1.-navigating-your-computer"
 class="section level1 tabset">
 <h1 class="tabset">Chapter 1. Navigating your computer</h1>
-<p><strong>THIS LESSON IS NOT YET READY FOR LEARNERS.</strong></p>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<!--### Motivator-->
+<!-- Motivator-->
 <blockquote>
 <p>How much time have you wasted wondering just where that file you
 downloaded went or which version of a paper you were working on? Have
@@ -463,7 +462,7 @@ lesson, we will be using the <code>Files</code> and
 <code>Terminal</code> panels to learn how to navigate your computer. We
 will learn more about the <code>Console</code> and
 <code>Environment</code> panels in the <a
-href="chp-intro-to-R.html">Intro to R and RStudio</a> lesson.</p>
+href="chp-chp-intro-to-R.html">Intro to R</a>) lesson.</p>
 </div>
 <div id="navigating-the-file-system" class="section level3">
 <h3>Navigating the file system</h3>
@@ -581,12 +580,17 @@ surround the folder name with quotes: For example
 <code>pwd</code> command.</p>
 <p>To go back up a level to the next higher directory (called the
 <strong>parent directory</strong>), use <code>../</code>:</p>
-<p><code>cd ../</code></p>
+<pre class="sh"><code>`cd ../`</code></pre>
 <p>In fact, we can use <code>cd</code> to navigate to any folder by
 typing its absolute path after the <code>cd</code> command. For example:
 <code>cd "/c/Documents/My subfolder/another subfolder"</code>.</p>
-<p>FYI: You can get your file browser to display the text-based file
-path to any folder as follows:</p>
+<p><strong>IMPORTANT:</strong> When typing commands into a command line
+you (usually) must copy the code exactly as it is written including all
+of the same spaces, spelling and capitalization. If you get an error,
+first check to see that you typed the correct command.</p>
+<div class="callout-trick">
+<p>You can get your file browser to display the text-based file path to
+any folder as follows:</p>
 <ul>
 <li>Windows: Click inside the file path bar. The absolute path will be
 displayed using a backslash ’' symbol between sequential subfolders. For
@@ -595,6 +599,7 @@ slashes to forward slashes before using it in the command line.</li>
 <li>Mac: ctr+click on the file you want inside the Finder path bar.
 Select Copy as Pathname and paste it into the command line as is.</li>
 </ul>
+</div>
 <div class="challenge">
 <p>Navigate to your Downloads folder</p>
 <ol style="list-style-type: decimal">
@@ -927,21 +932,68 @@ ls 1.*
 cp 1.* working/
 </code></pre>
 </div>
+<div class="callout-important">
 <p>Be careful- if you copy a file into a directory where a file with the
 same name exists, it will automatically write over the file (unless you
 use an option to tell it not to, see <code>cp --help</code> for more
-information).</p>
-<p>Rename with your initials. (use variable assignment)</p>
-<p>Open the first exercise.</p>
+information). <strong>It will not warn you before doing so.</strong></p>
+</div>
+<p>Suppose we wanted to share these files with another person who has
+different versions of the same files. It would be useful to change the
+file name to indicate which ones are yours. Let’s rename all of the
+files with your initials.</p>
+<p>The <code>cp</code> command would allow us to make a copy with a
+different name, but then we would need to delete the old version. The
+<code>mv SOURCE DEST</code> command allows us to “move” files from a
+SOURCE location to the DEST location without keeping the old version.
+This allows us to change the name of a file. For example, if my initials
+are XXX:</p>
+<pre class="sh"><code>mv exercises/working/1.1.txt exercises/working/1.1_XXX.txt
+
+ls exercises/working</code></pre>
+<pre><code>1.1_XXX.txt
+1.2.txt
+1.3.txt
+1.4.txt</code></pre>
+<div class="challenge">
+<ol style="list-style-type: decimal">
+<li>Rename all of the lesson 1 exercises in the working folder with your
+initials.</li>
+<li>What trick did you (or could you) use to accomplish this
+quickly?</li>
+<li>What would make this process faster?</li>
+</ol>
+</div>
+<p>Computers are really good at doing the same thing (with slight
+changes) over and over again. In future lessons we will learn how to
+automate the process of repeating the same command many times using code
+(see <a href="chp-program-flow.html">Program flow</a>).</p>
+<p>This concludes the first lesson. To practice what you have learned,
+navigate to the exercises tab. Each exercise is accompanied by a file in
+the exercises folder. You can make your own copy of each of these files
+and save them in a working folder until they are complete (after which
+you can move them to a “finished” folder to stay organized).</p>
+<p>To open an exercise file, click on it in the Files window of RStudio.
+This will open a new window (called the Source window) showing you the
+contents of the file. Exercise files are comprised of text that you can
+edit and save. You can type into this window as you normally would in
+any text editor. To save your work click File &gt; Save (or click the
+save icon
+<img src="images/RStudio_save_icon.jpg" height=18, width=18>).</p>
 <!-- remove things made during the script rendering-->
-</div>
-<div id="fyi-additional-info-for-the-curious" class="section level3">
-<h3>FYI: Additional info for the curious</h3>
-<div id="more-useful-unix-commands" class="section level4">
-<h4>More useful Unix commands</h4>
-<p>head echo wc</p>
-<p>–help</p>
-</div>
+<!-- WORKING HERE
+### FYI: Additional information for the curious
+
+
+#### More useful Unix commands
+
+head
+echo
+wc
+
+--help
+
+-->
 </div>
 </div>
 <div id="exercises" class="section level2">
@@ -1013,6 +1065,10 @@ by Jes Coyle.</p>
 <h3>Additional Resources</h3>
 <p>Read more about using the Terminal in RStudio <a
 href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal-in-the-RStudio-IDE">here</a>.</p>
+<p>For more a more in-depth introduction to using a Unix shell see the
+Software Carpentry lesson on <a
+href="https://swcarpentry.github.io/shell-novice/">The Unix
+Shell</a>.</p>
 </div>
 <div id="cited-references" class="section level3">
 <h3>Cited References</h3>
@@ -1067,9 +1123,9 @@ href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-
     h = document.createElement(&#39;strong&#39;);
     h.innerText = &#39;HELPFUL TRICK:&#39;;
     // &lt;blockquote&gt;&lt;em&gt;HELPFUL TRICK:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
+    p.replaceChild(b, code);
     b.appendChild(h);
     b.appendChild(code);
-    p.appendChild(b);
   }
 })();
 
@@ -1084,9 +1140,9 @@ href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-
     h = document.createElement(&#39;strong&#39;);
     h.innerText = &#39;TIP:&#39;;
     // &lt;blockquote&gt;&lt;em&gt;TIP:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
+    p.replaceChild(b, code);
     b.appendChild(h);
     b.appendChild(code);
-    p.appendChild(b);
   }
 })();</code></pre>
 <script type="text/javascript">
@@ -1140,9 +1196,9 @@ href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-
     h = document.createElement('strong');
     h.innerText = 'HELPFUL TRICK:';
     // <blockquote><em>HELPFUL TRICK:</em><p></p></blockquote>
+    p.replaceChild(b, code);
     b.appendChild(h);
     b.appendChild(code);
-    p.appendChild(b);
   }
 })();
 
@@ -1157,9 +1213,9 @@ href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-
     h = document.createElement('strong');
     h.innerText = 'TIP:';
     // <blockquote><em>TIP:</em><p></p></blockquote>
+    p.replaceChild(b, code);
     b.appendChild(h);
     b.appendChild(code);
-    p.appendChild(b);
   }
 })();
 </script>
