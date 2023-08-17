@@ -113,7 +113,123 @@ dat %>%
 > > 1 + 1
 > > ```
 
-### Section 2
+
+
+### Packages
+
+### Installing and loading packages
+
+"base" R is the functionality that comes installed with R, but the powerful thing about R is its user community who have created thousands of **packages** that increase its functionality. It is possible to add functions to R by writing a package, or by obtaining a package written by someone else. As of this writing, there are nearly 20,000 packages available on [CRAN](https://cran.r-project.org/) (the comprehensive R archive network). 
+
+Packages can also be viewed, loaded, and detached in the Packages tab of the lower right panel in RStudio. Clicking on this tab will display all of the installed packages with a checkbox next to them.
+If there is nothing listed then you do not have any packages installed. Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.
+
+Let's install the `neonUtilities` package. Click the Install button. In the pop-up that appears, type `neonUtilities`. Do not change any of the other settings, then click Install.
+
+Notice what happens in the R Console.
+
+Instead of clicking the Install button, we could have installed this packages by typing `install.packages("neonUtilities")` into the Console.
+
+Now this package should appear in the list of installed packages with an empty checkbox next to it. The empty checkbox indicates that the package is not **loaded** yet in this R session. That means we cannot use the functions in it yet. You can load and unload packages by clicking on the box next to them. Notice what happens in the Console when you check and uncheck the box next to neonUtilities:
+
+* You can make a package available for use in your R session with `library(packagename)`.
+* You can make a previously loaded package unavailable in your R session with `detach("packagename", unload = TRUE)`. This is sometimes necessary if two packages are using the same name for a function.
+
+::: {.callout-important}
+Packages only need to be installed **once**. This saves the package to a location on your computer that R can access.
+
+You need to load packages **every time** you open a new R session, if you want to be able to use the functions in them.
+:::
+
+
+::: {.callout-trick}
+You actually can use the functions in a package that is installed, but not loaded. To do this you need to type the the name of the package first, followed by two colons (::) and then the name of the function. For example: `neonUtilities::loadByProduct()`.
+:::
+
+
+::: {.challenge}
+
+Write a line of code in your new R script that will load the `neonUtilities ` package.
+
+:::
+::: {.solution}
+
+We can use the `library()` command load a packages. Notice that the name of the packages **is not** inside quotation marks. This is different from the `install.packages()` function, where the package name must be quoted.
+
+```{r eval=FALSE}
+library(neonUtilities)
+```
+
+:::
+
+
+
+#### Getting Help with Packages
+
+Many packages come with "vignettes": tutorials and extended example documentation.
+Without any arguments, `vignette()` will list all vignettes for all installed packages;
+`vignette(package="package-name")` will list all available vignettes for
+`package-name`, and `vignette("vignette-name")` will open the specified vignette.
+
+If a package doesn't have any vignettes, you can usually find help by typing
+`help("package-name")`.
+
+RStudio also has a set of excellent
+[cheatsheets](https://rstudio.com/resources/cheatsheets/) for many packages.
+
+
+#### When You Remember Part of the Function Name
+
+If you're not sure what package a function is in or how it's specifically spelled, you can do a fuzzy search:
+
+```{r, eval=FALSE}
+??function_name
+```
+
+A fuzzy search is when you search for an approximate string match. For example, you may remember that the function 
+to set your working directory includes "set" in its name. You can do a fuzzy search to help you identify the function:
+
+```{r, eval=FALSE}
+??set
+```
+
+#### When You Have No Idea Where to Begin
+
+If you don't know what function or package you need to use
+[CRAN Task Views](http://cran.at.r-project.org/web/views)
+is a specially maintained list of packages grouped into
+fields. This can be a good starting point.
+
+#### When Your Code Doesn't Work: Seeking Help from Your Peers
+
+If you're having trouble using a function, 9 times out of 10,
+the answers you seek have already been answered on
+[Stack Overflow](http://stackoverflow.com/). You can search using
+the `[r]` tag. Please make sure to see their page on 
+[how to ask a good question.](https://stackoverflow.com/help/how-to-ask)
+
+If you can't find the answer, there are a few useful functions to
+help you ask your peers:
+
+```{r, eval=FALSE}
+?dput
+```
+
+Will dump the data you're working with into a format that can
+be copied and pasted by others into their own R session.
+
+```{r}
+sessionInfo()
+```
+
+Will print out your current version of R, as well as any packages you
+have loaded. This can be useful for others to help reproduce and debug
+your issue.
+
+
+
+
+### Section 3
 
 #### What are programs?
 
@@ -136,6 +252,12 @@ of directly executed code. As it matures, reusable chunks get pulled into their
 own functions. It's a good idea to separate these functions into two separate folders; one
 to store useful functions that you'll reuse across analyses and projects, and
 one to store the analysis scripts.
+
+
+
+
+
+
 
 ## Exercises
 

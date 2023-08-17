@@ -11,7 +11,7 @@ library("knitr")
 ## global path. For instance, if we call knitr_fig_path("01-") in the
 ## first episode of the lesson, it will generate the figures in
 ## `fig/rmd-01-`
-knitr_fig_path <- function(prefix) {
+.knitr_fig_path <- function(prefix) {
     new_path <- paste0(opts_chunk$get("fig.path"),
                       prefix)
     opts_chunk$set(fig.path = new_path)
@@ -21,7 +21,7 @@ knitr_fig_path <- function(prefix) {
 # This allows example code to show what a student would see, when needed
 # x = TRUE sets the root to the workbook
 # x = FALSE sets the root back to the location of the .Rmd file
-setwd_workbook <- function(x){
+.setwd_workbook <- function(x){
   if(x){
     opts_knit$set(root.dir = "workbook/R-course-NEON-workbook")
   } else {

@@ -8,19 +8,20 @@
 
 
 # A function that prints the learning objectives for a chapter
-# chp = an integer
+# chp = an chapter file name without the "chp-"
 # lookup = dataframe with objectives
 # prefix = whether to append prefix to the beginning
-get_LO<- function(chp, lookup, prefix = FALSE, bullet = "-"){
-  
-  # order table by chapter and objective number to preserve consistency
-  lookup <- lookup[with(lookup, order(chp, objNum)), ]
+.get_LO<- function(chp, lookup, prefix = FALSE, bullet = "-"){
   
   # filter rows that pertain to this chapter
-  objs <- lookup[lookup$chp == chp, "text"]
+  objs <- lookup[lookup$chp == chp, c("objNum","text")]
+  
+  # order table by objective number to preserve consistency
+  objs <- objs[order(objs$objNum), ]
+
   
   # format as a markdown list
-  objs_list <- paste(paste(bullet, objs, sep = " "), collapse = "\n")
+  objs_list <- paste(paste(bullet, objs$text, sep = " "), collapse = "\n")
   
   # prepend prefix if all the same
   if(prefix){
@@ -43,8 +44,8 @@ get_LO<- function(chp, lookup, prefix = FALSE, bullet = "-"){
 }
 
 # Assumes setup.R is run from the root project directory
-LOtable <- read.delim("_learning_objectives.txt")
-CStable <- read.delim("_computing_skills.txt")
+.LOtable <- read.delim("_learning_objectives.txt")
+.CStable <- read.delim("_computing_skills.txt")
 
 # A function that looks up the name of a chapter based on its number 
 # chp is a string
@@ -53,9 +54,9 @@ CStable <- read.delim("_computing_skills.txt")
 #   (e.g. "fileName", "nameShort", "nameLong"
 # type.from is the column in the table corresponding to the type of name given to the function
 #   (e.g. "chp" or "fileName")
-get_chpName <- function(chp, lookup = chptable, type.to = "nameLong", type.from = "chp"){
+.get_chpName <- function(chp, lookup = .chptable, type.to = "nameLong", type.from = "chpNum"){
   
-  # Assign row names based on the chapter numbers column
+  # Assign row names based on the type.from column
   rownames(lookup) <- lookup[, type.from]
   
   # Convert chp to string if not already
@@ -68,16 +69,17 @@ get_chpName <- function(chp, lookup = chptable, type.to = "nameLong", type.from 
 
 # A function that looks up the number of a chapter based on its name
 # name is the string containing the name of the chapter
-# lookup is the table matching chaprer numbers to names
+# lookup is the table matching chapter numbers to names
 # type is the column in the table corresponding to the type of name given
 #   (e.g. "fileName", "nameShort", "nameLong"
-get_chpNum <- function(name, lookup = chptable, type = "fileName"){
+.get_chpNum <- function(name, lookup = .chptable, type = "chp"){
   
   # Assign row names based on the chapter names column
   rownames(lookup) <- lookup[, type]
   
   # Select the chp numbers column with the names given
-  lookup[name, "chp"]
+  lookup[name, "chpNum"]
 }
 
-chptable <- read.delim("_chapter_names.txt")
+.chptable <- read.delim("_chapter_names.txt")
+

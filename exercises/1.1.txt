@@ -1,12 +1,16 @@
 Explore the Student Workbook for this course on your computer.
 
 1. Open the course workbook RStudio project using the .Rproj file.
+
+
 2. Use the File panel in RStudio to explore the directory structure of this project.
-4. Write out the absolute path of the initial working directory and the command you typed into the **R Console** to determine this.
 
 
-5. From the initial working directory...
-    1. Write out the relative path to the data file XXX.
+3. Write out the absolute path of the initial working directory and the command you typed into the **R Console** to determine this.
+
+
+4. From the initial working directory...
+    1. Write out the relative path to the data file nitrate_15min_TEAK_2021-04_2021-10.csv.
 
 
     2. Write out the relative path to the folder where you should save completed exercises.

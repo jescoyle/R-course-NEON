@@ -13,36 +13,41 @@ getwd()
 source("src/setup.R")
 
 # get chapter number based on name
-chp_num <- get_chpNum("chp-computer-navigation", type = "fileName")
-chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
+.chp <- "intro-to-R"
+.chp_num <- .get_chpNum("chp-intro-to-R", type = "fileName")
+.chp_str <- ifelse(nchar(.chp_num) > 1, .chp_num, paste0("0", .chp_num))
 
 # knitr options
 source("src/knit-options.R")
-knitr_fig_path(paste0(chp_str, "-"))
-
-# Silently load in the data for this lesson
-gapminder <- read.csv("data/gapminder_data.csv", header = TRUE)
+.knitr_fig_path(paste0(chp_str, "-"))
 
 # Silently set seed for random number generation, so we don't have to explain it
 set.seed(10)
 ```
 
-# Chapter `r chp_num`. `r get_chpName(chp_num, type.to = "nameLong")` {.tabset}
+# Chapter `r .chp_num`. `r get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
 ## Overview 
 
-### What we will learn
+> MOTIVATOR
 
 Brief description of the contents of this lesson. 
 
+### What we will learn
+
+
+
 In this lesson 
-`r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`
+`r .get_LO(as.numeric(.chp_num), .LOtable, prefix = TRUE)`
 
-### Motivator
+#### Key Terms & Commands
 
-Describe a problem that learners will be able to solve by the end of this lesson.
+* term 1
+* term 2
+* `function1()`
 
-### Get set up
+
+### Prerequisites
 
 Describe any data sets or packages that learners need to download or install before proceeding.
 
@@ -51,42 +56,13 @@ Describe any data sets or packages that learners need to download or install bef
 dat <- read.csv("data/gapminder_data.csv")
 ```
 
-Make a code block that loads any packages needed for the analysis. It can be helpful to indicate which functions come from which packages.
-
-```{r results = 'hide', warning = FALSE, message = FALSE}
-
-# Load dplyr: filter
-library(dplyr)
-
-# Load ggplot2: ggplot
-library(ggplot2)
-
-```
 
 ## Lesson
 
 
 ```{r}
 # This is an R code block that will execute any code inside and show the results.
-dat %>%
-  filter(country == "United States")
-
-```
-
-
-
-```{r usa_pop_fig}
-#| echo = FALSE,
-#| fig.cap = paste0("Fig. ", chp_num, ".1. Population growth in the United States 1952 - 2007.")
-
-# Note that figure caption numbers are not automatic here.
-
-# Plot year vs. population size for United States
-dat %>%
-  filter(country == "United States") %>%
-  ggplot(aes(x = year, y = pop)) +
-  geom_line() +
-  labs(x = "Year", y = "Population size")
+5+3
 
 ```
 
@@ -100,28 +76,45 @@ dat %>%
 > log(exp(3 + 3)) 
 > 2e-1 + 5
 > ```
-:::
+
+<details><summary>**Solution:**</summary>
 ::: {.solution}
 > ```{r echo = FALSE}
 > log(exp(3 + 3)) 
 > 2e-1 + 5
 > ```
 :::```
+</details>
+:::
 
 ### Section 2
 
+Callouts are formatted in the style.css file.
+
+:::{.callout-trick}
+
+:::
+
+
+:::{.callout-tip}
+
+:::
+
+:::{.callout-important}
+
+:::
 
 ## Exercises
 
 After completing these exercises, learners will be able to 
-`r get_LO(as.numeric(chp_num), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(as.numeric(.chp_num), .CStable, prefix = TRUE, bullet = "1.")`
 
 
 Number all exercises using the module number. Include starter code in the /exercises folder if appropriate.
 
-`r chp_num`.1 
+**`r .chp_num`.1** 
 
-`r chp_num`.2 
+**`r .chp_num`.2** 
 
 
 
@@ -133,9 +126,6 @@ This lesson was adapted from XX by Jes Coyle.
 
 ### Cited References
 
+::: {#refs}
+:::
 
-<!-- javascript that formats solution blocks clickable hidden text -->
-
-```{js, file = "solution_format.java"}
-
-```

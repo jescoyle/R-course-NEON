@@ -57,6 +57,28 @@ if (window.hljs) {
 
 
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -337,12 +359,15 @@ class="section level1 tabset">
 <div id="what-we-will-learn" class="section level3">
 <h3>What we will learn</h3>
 <p>Brief description of the contents of this lesson.</p>
-<p>In this lesson learners will:</p>
+<dl>
+<dt>In this lesson</dt>
+<dd>
+
+</dd>
+</dl>
 <ul>
-<li>describe the structure of the filesystem on a computer</li>
-<li>use a command line interface to navigate the file system</li>
-<li>describe the relationship between R and RStudio (an IDE)</li>
-<li>set up an RStudio project</li>
+<li>integer(0)</li>
+<li>character(0)</li>
 </ul>
 </div>
 <div id="motivator" class="section level3">
@@ -408,12 +433,15 @@ commands?</p>
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
-<p>After completing these exercises, learners will be able to use a Unix
-terminal to:</p>
+<dl>
+<dt>After completing these exercises, learners will be able to</dt>
+<dd>
+
+</dd>
+</dl>
 <ol style="list-style-type: decimal">
-<li>navigate between directories</li>
-<li>view files in a directory</li>
-<li>make, delete, rename and move files</li>
+<li>integer(0)</li>
+<li>character(0)</li>
 </ol>
 <p>Number all exercises using the module number. Include starter code in
 the /exercises folder if appropriate.</p>
@@ -428,119 +456,10 @@ the /exercises folder if appropriate.</p>
 </div>
 <div id="cited-references" class="section level3">
 <h3>Cited References</h3>
+<div id="refs">
+
+</div>
 <!-- javascript that formats solution blocks clickable hidden text -->
-<pre class="js"><code>// Format challenge boxes
-(function() {
-  var codes = document.querySelectorAll(&#39;.challenge&#39;);
-  var code, i, p, h, b;
-  for (i = 0; i &lt; codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement(&#39;blockquote&#39;);
-    h = document.createElement(&#39;strong&#39;);
-    h.innerText = &#39;Try this:&#39;;
-    // &lt;blockquote&gt;&lt;em&gt;Try this:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
-    p.replaceChild(b, code);
-    b.appendChild(h);
-    b.appendChild(code);
-  }
-})();
-
-// Format solution boxes
-(function() {
-  var codes = document.querySelectorAll(&#39;.solution&#39;);
-  var code, i, d, s, p, h, b;
-  for (i = 0; i &lt; codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement(&#39;blockquote&#39;);
-    d = document.createElement(&#39;details&#39;);
-    s = document.createElement(&#39;summary&#39;);
-    h = document.createElement(&#39;strong&#39;);
-    h.innerText = &#39;Solution:&#39;;
-    // &lt;details&gt;&lt;summary&gt;&lt;em&gt;Solution:&lt;/em&gt;&lt;/summary&gt;&lt;p&gt;code&lt;/p&gt;&lt;/details&gt;
-    s.appendChild(h);
-    d.appendChild(s);
-    b.appendChild(d);
-    // move the code into &lt;details&gt;
-    p.replaceChild(b, code);
-    d.appendChild(code);
-  }
-})();
-
-// Format helpful tricks boxes
-(function() {
-  var codes = document.querySelectorAll(&#39;.callout-trick&#39;);
-  var code, i, p, h, b;
-  for (i = 0; i &lt; codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement(&#39;blockquote&#39;);
-    h = document.createElement(&#39;strong&#39;);
-    h.innerText = &#39;HELPFUL TRICK:&#39;;
-    // &lt;blockquote&gt;&lt;em&gt;HELPFUL TRICK:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
-    b.appendChild(h);
-    b.appendChild(code);
-    p.appendChild(b);
-  }
-})();</code></pre>
-<script type="text/javascript">
-// Format challenge boxes
-(function() {
-  var codes = document.querySelectorAll('.challenge');
-  var code, i, p, h, b;
-  for (i = 0; i < codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement('blockquote');
-    h = document.createElement('strong');
-    h.innerText = 'Try this:';
-    // <blockquote><em>Try this:</em><p></p></blockquote>
-    p.replaceChild(b, code);
-    b.appendChild(h);
-    b.appendChild(code);
-  }
-})();
-
-// Format solution boxes
-(function() {
-  var codes = document.querySelectorAll('.solution');
-  var code, i, d, s, p, h, b;
-  for (i = 0; i < codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement('blockquote');
-    d = document.createElement('details');
-    s = document.createElement('summary');
-    h = document.createElement('strong');
-    h.innerText = 'Solution:';
-    // <details><summary><em>Solution:</em></summary><p>code</p></details>
-    s.appendChild(h);
-    d.appendChild(s);
-    b.appendChild(d);
-    // move the code into <details>
-    p.replaceChild(b, code);
-    d.appendChild(code);
-  }
-})();
-
-// Format helpful tricks boxes
-(function() {
-  var codes = document.querySelectorAll('.callout-trick');
-  var code, i, p, h, b;
-  for (i = 0; i < codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement('blockquote');
-    h = document.createElement('strong');
-    h.innerText = 'HELPFUL TRICK:';
-    // <blockquote><em>HELPFUL TRICK:</em><p></p></blockquote>
-    b.appendChild(h);
-    b.appendChild(code);
-    p.appendChild(b);
-  }
-})();
-</script>
 </div>
 </div>
 </div>

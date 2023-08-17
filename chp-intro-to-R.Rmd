@@ -13,55 +13,66 @@ bibliography: references.bib
 source("src/setup.R")
 
 # get chapter number based on name
-chp_num <- get_chpNum("chp-intro-to-R", type = "fileName")
-chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
+.chp <- "intro-to-R"
+.chp_num <- .get_chpNum("chp-intro-to-R", type = "fileName")
+.chp_str <- ifelse(nchar(.chp_num) > 1, .chp_num, paste0("0", .chp_num))
 
 # knitr options
 source("src/knit-options.R")
-knitr_fig_path(paste0(chp_str, "-"))
+.knitr_fig_path(paste0(.chp_str, "-"))
 
 # Silently set seed for random number generation, so we don't have to explain it
 set.seed(10)
 ```
 
-# Chapter `r chp_num`. `r get_chpName(chp_num, type.to = "nameLong")` {.tabset}
+# Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
-
-**THIS LESSON IS NOT YET READY FOR LEARNERS.**
 
 ## Overview 
 
-
-<!--### Motivator   FIX ME --> 
-
+> Why should you learn how to use R?
 >
+> Because it can do almost anything you need as a scientist:
 >
+> R can:
 >
-> 
+>  - do computations
+>  - manipulate data
+>  - access files on your computer or the internet
+>  - make graphs
+>  - create documents
+>  - create apps
+>  - almost anything... though it is not always the best tool for every job.
+  
+R is widely used in the scientific community and will always be free to use. R is also *open source*- this means that anyone can see, modify and distribute the code for the program. The fact that R is open source means that thousands of users have contributed add-on packages that increase the functionality of the base R program. If there's an analysis you want to do or a graph you want to make, someone has probably made a package for it. All you have to do is find it and use it.
 
-- Why R?
-  - R has a wide user community and will always be free (open source - what does this mean)
-  - user contributed packages:
-      -NEONUtilities
-  - R and RStudio make it easy for anyone to reproduce your scientific analyses because your analyses are saved as code scripts rather than clicking through a graphical user interface
-  - It is (relatively) easy to get help with (almost) anything
+R also makes it easier to practice [open science](https://www.unesco.org/en/open-science) by making your scientific analyses transparent and reusable. This is because analyses are saved as code rather than a series of clicks through a user interface (like spreadsheet software). If you share this code and your data with someone, they will be able to reproduce your analyses with a single click.
 
-- R can:
-  - do computations
-  - manipulate data
-  - access files on your computer or the internet
-  - make graphs
-  - create documents
-  - create apps
-  - almost anything... though it is not always the best tool for every job.
-
+We're going to learn some of the fundamentals of the R programming language and writing our first code script. We'll be using RStudio: a free, open-source R Integrated Development Environment (IDE). It provides a built-in editor, works on all platforms (including on servers) and provides many advantages such as integration with version control and project management. We'll learn some of the basics for working with R code in RStudio.
 
 ### What we will learn
 
 In this lesson 
-`r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`
+`r .get_LO(.chp, .LOtable, prefix = TRUE)`
 
 #### Key Terms & Commands
+
+* command line
+* GUI (graphical user interface)
+* script
+* function and argument
+* vector
+* warnings vs. errors
+* ways to make vectors: `c()`, `seq()`, `:`, and `rep()`
+* variable assignment: `<-` and `=`
+* `help()` or `?`
+* `ls()` and `rm()`
+* `read.csv()`
+* `getwd()` and `setwd()`
+* `$`
+* `head()`, `nrow()`, `ncol()` and `names()`
+* `range()`, `mean()`, and `table()`
+
 
 
 ### Prerequisites
@@ -69,27 +80,16 @@ In this lesson
 Check that you have the latest version of R and RStudio installed on your machine. This is important, as some packages may not install correctly (or at all) if R is not up to date. 
 For instructions on installing (or updating) R and RStudio, please see [Computer Setup](computer-setup.html).
 
-Once R and RStudio are installed, you will also need to set up the Student Workbook that accompanies this text as an RStudio project. Instructions are in the first exercise from [`r get_chpName("chp-computer-navigation", type.from = "fileName")`](chp-computer-navigation.html).
+Once R and RStudio are installed, you will also need to set up the Student Workbook that accompanies this text as an RStudio project. Instructions are in the first exercise from [`r .get_chpName("chp-computer-navigation", type.from = "fileName")`](chp-computer-navigation.html).
 
 
 ## Lesson
 
 ### Welcome (back) to RStudio!
 
-- R is a programming language
-- RStudio is an IDE
-- Already learned about Console and Files windows
-- Lot's of other windows that show additional functionality (such as version control (see addt lesson, application building and creating documents)
-- In this lesson we will introduce the code, environment, packages and help windows.
+In [`r .get_chpName("computer-navigation", type.to = "nameShort", type.from = "chp")`]("chp-computer-navigation.html") we used RStudio to learn how to work with files on a computer, but didn't really learn much about what RStudio actually is or how it is related to the R program.
 
-We're going to learn some of the fundamentals of
-the R language as well as some best practices for organizing code for
-scientific projects that will make your life easier. We'll be using RStudio: a free, open-source R Integrated Development Environment (IDE).
-It provides a built-in editor, works on all platforms (including
-on servers) and provides many advantages such as integration with version
-control and project management.
-
-Some notes on semantics:
+Let's clarify the difference between R and RStudio:
 
 * R is a program that you installed on your computer that allows you to write
 code in the **R programming language**. 
@@ -97,10 +97,10 @@ code in the **R programming language**.
 * R code is usually written and saved in files called **scripts** which you can customize to do almost anything.
 * RStudio is a program that allows you to write R code and test it out at the same time (which is why it is called an integrated development environment). It provides a **G**raphical **U**ser **I**nterface (GUI) that makes it easier to interact with R and develop R code.
 
-Let's start by opening the student workbook RStudio project that accompanies this text.
+We will start by opening the student workbook RStudio project that accompanies this text.
 To open an RStudio project, use your computer's file browser to navigate 
 to the R-course-NEON-workbook folder you downloaded. Inside this folder, double click on the R-course-NEON-workbook.Rproj file 
-(see the lesson: [`r get_chpName("chp-computer-navigation", type.from = "fileName")`](chp-computer-navigation.html)) 
+(see the lesson: [`r .get_chpName("computer-navigation", type.to = "nameShort", type.from = "chp")`](chp-computer-navigation.html)) 
 
 **Basic layout**
 
@@ -114,10 +114,10 @@ If you opened the R-course-NEON-workbook project then your RStudio session shoul
 
 ![RStudio layout](images/01-rstudio.png)
 
-We're going to start working in the R console to learn about some of
-the basic functionality of R. Once we start learning more complex
-code, we will open the Source panel and create an R script
-for saving the code that we write.
+If you're having trouble seeing the different windows, RStudio has several [accessibility features](https://support.posit.co/hc/en-us/articles/360044226673-RStudio-Accessibility-Features) that allow you to change the size of text and simplify the layout. You may want to customize your setup now.
+
+In [`r .get_chpName("computer-navigation", type.to = "nameShort", type.from = "chp")`](chp-computer-navigation.html) we learned about the Terminal and File panels. In this lesson we're going to start working in the R console to learn about some of the basic functionality of R. Notice that the Console and Terminal tabs share the same panel. R console and Console are used interchangeably to refer to the same panel. 
+Once we start learning more complex code, we will open the Source panel and create an R script for saving the code that we write.
 
 The first thing you will see in the R console is a bunch of information, followed by a ">" and a blinking cursor. This is a **command-line interface**; it reads and evaluates one line of code at a time, printing out any results of each line to the same console window as it goes. If you type in commands at the command line, R tries to execute them, and then returns a result.
 
@@ -131,7 +131,7 @@ type this into the command line
 This document will show you the expected output of each command in a white boxes below like this:
 
 ```
-expected code output
+[1] expected code output
 ```
 Or, the expected output may show up directly below the line of code and be preceded by a `[1]`:
 
@@ -139,6 +139,8 @@ Or, the expected output may show up directly below the line of code and be prece
 type this into the command line
 [1] expected code output
 ```
+
+Let's start by demonstrating some of the basic functionality of R.
 
 ### What can R do?
 
@@ -152,9 +154,7 @@ The simplest thing you could do with R is to do arithmetic:
 1 + 100
 ```
 
-And R will print out the answer, with a preceding "[1]". [1] is the index of 
-the first element of the line being printed in the console. For more information 
-on indexing vectors, see [`r get_chpName("chp-data-structures", type.from = "fileName")`](chp-data-structures.html).
+R will print out the answer, with a preceding "[1]" because this is the first line of output.
 
 If you type in an incomplete command, R will wait for you to
 complete it. For example:
@@ -167,8 +167,7 @@ complete it. For example:
 +
 ```
 
-Any time you type return and the R session shows a "+" instead of a ">", it
-means it's waiting for you to complete the command. You can either keep typing the  rest of the command:
+Any time you press <kbd>Enter</kbd> and the R session shows a "+" instead of a ">", it means that the console is waiting for you to complete the command. You can either keep typing the rest of the command:
 
 ```{r}
 1 +
@@ -176,9 +175,7 @@ means it's waiting for you to complete the command. You can either keep typing t
 ```
 
 or cancel what you were doing. If you want to cancel
-a command you can type <kbd>Esc</kbd> and RStudio will give you back the ">" prompt. 
-Note that if you're using R outside of RStudio, you need to use <kbd>Ctrl</kbd>+<kbd>C</kbd>
-instead of <kbd>Esc</kbd> to cancel the command.
+a command you can type <kbd>Esc</kbd> and RStudio will give you back the ">" prompt.
 
 Canceling a command isn't only useful for stopping incomplete commands:
 you can also use it to tell R to stop running code (for example if it's
@@ -235,25 +232,25 @@ getwd() # returns an absolute file path of the current working directory
 
 doesn't require an argument, whereas for the next set of mathematical functions we will need to supply the function a value in order to compute the result.
 
-```{r}
+```{r collapse = TRUE}
 sin(1)  # trigonometry functions
 ```
 
-```{r}
+```{r collapse = TRUE}
 log(1)  # natural logarithm
 ```
 
-```{r}
+```{r collapse = TRUE}
 log10(10) # base-10 logarithm
 ```
 
-```{r}
+```{r collapse = TRUE}
 exp(0.5) # e^(1/2)
 ```
 
 Some functions take multiple arguments that are separated by commas.
 
-```{r}
+```{r collapse = TRUE}
 sum(1, 2, 3) # adds all numeric arguments together
 ```
 
@@ -264,39 +261,46 @@ comes after it on the same line. Since this text is not evaluated
 we can use it to make notes about what the code does.
 You do not need to type the comments into the command line to run the code.
 
-> ::: {.challenge}
-> **Try this:** What should be the ouput for each of these commands?
-> ```{r eval = FALSE}
-> log(exp(3 + 3)) 
-> 2e-1 + 5
-> ```
-> :::
-> ::: {.solution}
-> ```{r collapse = TRUE}
-> log(exp(3 + 3)) 
-> 2e-1 + 5
-> ```
-> :::
+::: {.challenge}
+What should be the output for each of these commands?
+```{r eval = FALSE}
+log(exp(3 + 3)) 
+2e-1 + 5
+```
 
-> ::: {.challenge}
-> **Try this:** What do the values `NA` and `NULL` mean?
-> 
-> Run each of these commands and try to guess what is happening.
-> ```{r eval = FALSE}
-> sum(3, NA)
-> sum(3, NULL)
-> ```
-> :::
-> ::: {.solution}
-> ```{r collapse = TRUE}
-> sum(3, NA)
-> sum(3, NULL)
-> ```
->
-> `NA` is a special placeholder value that means that data is missing. `NULL` is a special value that means something does not exist. Thus, arithmetic with `NA` will by default give a `NA` result because missing values are values that we may have tried to collect, but failed to do so. In contrast, `NULL` values do not take up any space and are ignored by default in calculations. We will learn later how to ignore missing values in calculations.
-> :::
+<details><summary>**Solution:**</summary>
+::: {.solution}
+```{r collapse = TRUE}
+log(exp(3 + 3)) 
+2e-1 + 5
+```
+:::
+</details>
 
+:::
 
+<br>
+
+::: {.challenge}
+What do the values `NA` and `NULL` mean?
+
+Run each of these commands and try to guess what is happening.
+```{r eval = FALSE}
+sum(3, NA)
+sum(3, NULL)
+```
+<details><summary>**Solution:**</summary>
+::: {.solution}
+```{r collapse = TRUE}
+sum(3, NA)
+sum(3, NULL)
+```
+`NA` is a special placeholder value that means that data is missing. `NULL` is a special value that means something does not exist. Thus, arithmetic with `NA` will by default give a `NA` result because missing values are values that we may have tried to collect, but failed to do so. In contrast, `NULL` values do not take up any space and are ignored by default in calculations. We will learn later how to ignore missing values in calculations.
+:::
+</details>
+:::
+
+<br>
 
 #### Work with stored values in a computing environment
 
@@ -310,7 +314,7 @@ x <- 1/40
 Notice that assignment does not print a value. Instead, we stored it for later
 in something called a **variable**. `x` now contains the **value** `0.025`:
 
-```{r}
+```{r collapse = TRUE}
 x
 ```
 
@@ -320,7 +324,7 @@ The value is stored in an **object** named `x` in the environment.
 
 Look for the `Environment` tab in the top right panel of RStudio, and you will see that `x` and its value have appeared. The variable `x` can be used in place of a number in any calculation that expects a number:
 
-```{r}
+```{r collapse = TRUE}
 log(x)
 ```
 
@@ -342,30 +346,31 @@ y <- x * 2
 The right hand side of the assignment can be any valid R expression.
 The right hand side is *fully evaluated* before the assignment occurs.
 
+::: {.challenge}
+What will be the values of `y` and `z` after you run these lines of code in order?
+```{r results = "hide"}
+x <- 10
+y <- 2*x
+z <- x + y
+x <- 20
+```
+<details><summary>**Solution:**</summary>
+::: {.solution}
+```{r collapse = TRUE}
+# type the variable names to print out their values
+x
+y 
+z
+```
+:::
+</details>
+:::
 
-> ::: {.challenge}
-> **Try this:**
->
-> What will be the values of `y` and `z` after you run these lines of code in order?
-> ```{r results = "hide"}
-> x <- 10
-> y <- 2*x
-> z <- x + y
-> x <- 20
-> ```
-> :::
-> ::: {.solution}
-> ```{r collapse = TRUE}
-> # type the variable names to print out their values
-> x
-> y 
-> z
-> ```
-> :::
+<br>
 
 Did you guess correctly? Even though we changed the value of `x` in the last line, this does not change the value of `y` or `z` because the values of these two variables were assigned when `x` was `10`. We would have to run the assignment of `y` and `z` again to update their values based on the new value of `x`:
 
-```{r, collapse = TRUE}
+```{r collapse = TRUE}
 y <- 2*x
 z <- x + y
 
@@ -374,27 +379,35 @@ y
 z
 ```
 
-**Time saving tip:** Instead of retyping commands that you want to run again into the console, use the up arrow key at the command prompt. Each time you press the up arrow the command line will cycle back through commands you typed previously. Use the back arrow key to edit the command before running it again.
+::: {.callout-trick}
+Instead of retyping commands that you want to run again into the console, use the up arrow key at the command prompt. Each time you press the up arrow the command line will cycle back through commands you typed previously. Use the back arrow key to edit the command before running it again.
+:::
 
-> ::: {.challenge}
-> **Try this:** Is R case sensitive?
->
-> What happens when you run this code?
-> ```{r eval = FALSE}
-> y <- 2*X
-> ```
-> :::
-> ::: {.solution}
-> ```{r echo = FALSE, error = TRUE}
-> y <- 2*X
-> ```
->
-> We've discovered a very important point about variable names- they are case sensitive! `x` is a different variable than `X`. Thus, if you try to use a variable that you have not defined in the environment, R will print out an error message saying that it can't find the variable you used.
-> :::
+::: {.challenge}
+Is R case sensitive?
+
+What happens when you run this code?
+```{r eval = FALSE}
+y <- 2*X
+```
+<details><summary>**Solution:**</summary>
+::: {.solution}
+```{r echo = FALSE, error = TRUE}
+y <- 2*X
+```
+
+We've discovered a very important point about variable names- they are case sensitive! `x` is a different variable than `X`. Thus, if you try to use a variable that you have not defined in the environment, R will print out an error message saying that it can't find the variable you used.
+:::
+</details>
+:::
+
+<br>
 
 
+::: {.callout-important}
+Variable names can contain letters, numbers, underscores and periods but no spaces. They must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore).
+:::
 
-**Important:** Variable names can contain letters, numbers, underscores and periods but no spaces. They must start with a letter or a period followed by a letter (they cannot start with a number nor an underscore).
 Variables beginning with a period are hidden variables.
 Different people use different conventions for long variable names, these include
 
@@ -414,6 +427,7 @@ You should also avoid using variable names that are the same as values or functi
 ```
 If a name already exists for a function, it will open up a Help window. If the name is available for you to use, then the console will report that it could not find any documentation.
 
+
 It is also possible to use the `=` operator for assignment:
 
 ```{r}
@@ -425,44 +439,48 @@ But this is much less common among R users.  The most important thing is to
 where it is less confusing to use `<-` than `=`, and it is the most common
 symbol used in the community. So the recommendation is to use `<-`.
 
-> ::: {.challenge}
-> **Try this:** Which of the following are valid R variable names?
-> ```{r, eval=FALSE}
-> min_height
-> max.height
-> _age
-> .mass
-> MaxLength
-> min-length
-> 2widths
-> celsius2kelvin
-> exp
-> pi
-> ```
-> :::
-> ::: {.solution}
-> These can be used as R variables:
-> `min_height`
-> `max.height`
-> `MaxLength`
-> `celsius2kelvin`
->  
-> This creates a hidden variable:
-> `.mass`
-> 
-> These cannot be used to create a variable:
-> `_age`
-> `min-length`
-> `2widths`
-> 
-> These should not be used as variable names because they already exist in R:
-> `pi`
-> `exp` 
-> :::
+::: {.challenge}
+Which of the following are valid R variable names?
+```{r eval=FALSE}
+min_height
+max.height
+_age
+.mass
+MaxLength
+min-length
+2widths
+celsius2kelvin
+exp
+pi
+```
+<details><summary>**Solution:**</summary>
+::: {.solution}
+These can be used as R variables:
+`min_height`
+`max.height`
+`MaxLength`
+`celsius2kelvin`
+
+This creates a hidden variable:
+`.mass`
+
+These cannot be used to create a variable:
+`_age`
+`min-length`
+`2widths`
+
+These should not be used as variable names because they already exist in R:
+`pi`
+`exp` 
+:::
+</details>
+:::
+
+<br>
 
 #### Calculations on multiple stored values at once
 
-R can assign multiple values to the same object- one way to do this is using a **vector**, an ordered list of values that are of the same data type (e.g. numbers, text, TRUE/FALSE). In [`r get_chpName("chp-data-structures", type.from = "fileName")`](chp-data-structures.html) we will explain in much more detail the different types of data and objects you can create in R, but for now let's just explore how R does arithmetic with vectors.
+R can assign multiple values to the same object- one way to do this is using a **vector**, an ordered list of values that are of the same data type (e.g. numbers, text, TRUE/FALSE). In [`r .get_chpName("chp-data-structures", type.from = "fileName")`](chp-data-structures.html) we will explain in much more detail the different types of data and objects you can create in R, but for now let's just explore how R does arithmetic with vectors.
 
 You can construct a vector using the `c()` function:
 
@@ -475,31 +493,40 @@ firstNames
 ```
 
 You can also put vectors together using the `c()` function:
-```{r}
+```{r collapse = TRUE}
 c(20, ages, 40)
 ```
 
 To select an element in a list, type the **index** of the element desired inside square brackets. For example, to select the second element:
-```{r}
+```{r collapse = TRUE}
 firstNames[2]
 ```
 
 You can select multiple elements at once by typing a vector of indices inside the square brackets:
-```{r}
+```{r collapse = TRUE}
 firstNames[c(3, 1)]
 ```
 
 A colon `:` is a special operator that will create a vector of integers in order:
-```{r}
+```{r collapse = TRUE}
 1:4
 4:1
 ```
 
 To make a vector with any sequence of integers, use the `seq()` function:
-```{r}
+```{r collapse = TRUE}
 seq(1, 10, by = 2)
 seq(0, 100, by = 10)
 ```
+
+To make a vector with repeated values used the `rep()` function:
+```{r collapse = TRUE}
+# What is the difference in the output of these two commands?
+rep(firstNames, 4)
+rep(firstNames, each = 4)
+
+```
+
 
 ::: {.challenge}
 Can you predict what each of the following lines of code will return?
@@ -509,8 +536,10 @@ firstNames[4:1]
 ages[c(2, 4)]
 ages[1, 3]
 c(firstNames, ages)
+rep(firstNames, ages)
+rep(ages, firstNames)
 ```
-:::
+<details><summary>**Solution:**</summary>
 ::: {.solution}
 ```{r collapse = TRUE}
 c("Betsy", firstNames)
@@ -530,10 +559,18 @@ Why did `ages[1, 3]` give an error message? Notice that `1, 3` is not a vector. 
 c(firstNames, ages)
 ```
 Notice that when we concatenated `firstNames` and `ages` all of the ages turned into text with each number surrounded by quotes. This is because all elements in a vector must have the same data type, either numbers or text, but not both. R tried to fix this by using the data type of the first vector we supplied.
+
+```{r collapse = TRUE, error = TRUE}
+rep(firstNames, 1:4)
+rep(1:4, firstNames)
+
+```
+The first example repeats each element of firstNames the number of times given in ages, so "Sasha" is repeated 1 time, "Everett" is repeated 2 times, etc. The second example causes an error because the order of arguments is not interchangeable. The first vector provided must contain the values to be repeated, while the second vector must contain integers defining the number of times to repeat each value. Use `?rep` in the Console to learn more.
+:::
+</details>
 :::
 
-
-
+<br>
 
 Vectors are useful because we can use them to do multiple calculations at once. Adding or multiplying a vector by a scalar applies the operation to each element of the vector.
 ```{r}
@@ -551,9 +588,11 @@ ages[1:2] - ages[3:4]
 
 ::: {.challenge}
 Do this math in R
+
 1. Calculate the sum of all integers between 1 and 100.
 2. Calculate the difference between the sum of all odd numbers between 1 and 50 and the sum of all even numbers between 1 and 50.
-:::
+
+<details><summary>**Solution:**</summary>
 ::: {.solution}
 There are lots of ways to solve this problem. Here is one way.
 ```{r collapse = TRUE}
@@ -566,6 +605,10 @@ evens <- seq(2, 50, 2) # a vector with all even numbers
 sum(odds) - sum(evens) # calculate sum of each vector, then take the difference
 ```
 :::
+</details>
+:::
+
+<br>
 
 ### Managing your environment 
 
@@ -578,11 +621,7 @@ There are a few useful commands you can use to interact with the R session.
 ls()
 ```
 
-::: {.callout-trick}
-Like in the shell, `ls` will hide any variables or functions starting
-with a "." by default. To list all objects, type `ls(all.names=TRUE)`
-instead
-:::
+
 
 Note here that we didn't give any arguments to `ls`, but we still
 needed to give the parentheses to tell R to call the function.
@@ -619,12 +658,11 @@ you can pass the results of `ls` to the `rm` function:
 rm(list = ls())
 ```
 
-In this case we've combined the two. Like the order of operations, anything
-inside the innermost parentheses is evaluated first, and so on.
+In this case we've composed the two function (just like in math!). Like the order of operations, anything inside the innermost parentheses is evaluated first, and so on.
 
 In this case we've specified that the results of `ls` should be used for the
 `list` argument in `rm`. When assigning values to arguments by name, you *must*
-use the `=` operator!!
+use the `=` operator and not the `<-` operator.
 
 If instead we use `<-`, there will be unintended side effects, or you may get an error message:
 
@@ -646,256 +684,388 @@ how to fix a problem.
 :::
 
 
-Notice that although rm() and ls() are similar to the shell commands rm and ls, they operate in different spaces. The Terminal window in RStudio accesses the file system on your computer. The R Console accesses objects that you create during a specific R session. Once your close R, these objects disappear forever; they are not saved on your file system.
+Notice that although `rm()` and `ls()` are similar to the shell commands `rm` and `ls`, they operate in different spaces. The Terminal window in RStudio accesses the file system on your computer. The R Console accesses objects that you create during a specific R session. Once your close R, these objects disappear forever; they are not saved on your file system.
 
 
 
-### Writing code in scripts
-  - R and RStudio make it easy for anyone to reproduce your scientific analyses because your analyses are saved as code scripts rather than clicking through a graphical user interface
+### Writing and running code in scripts
 
-2	4	write and save a code script in a project folder	learners will
+So far we have been typing all of our R code directly into the R console. The real power of using R is that we can save code into text files (called **scripts**) that make it easy for anyone to reproduce your analysis. When saving an R script we will use the file extension .R to indicate that the contents are written in the R programming language, but really it is just a text file and can be opened by any text editor (Word, Notepad, Google Docs, OpenOffice, TextEdit, etc).  
 
-2	5	write and save a code script	use R and RStudio to
-2	6	write comments in a code script	use R and RStudio to
+Let's make our first R script.
 
+::: {.challenge}
+Create a new R script.
 
-Once you open files, such as R scripts, an editor panel will also open
-in the top left.
+1. Click File > New File > R Script.
+2. The Source panel will open with a blank file like this:
 
 ![RStudio layout with .R file open](../fig/01-rstudio-script.png)
 
-> #### R scripts
-> 
-> Any commands that you write in the R console can be saved in a file
-> to be re-run again.  Files containing R code to be ran in this way are 
-> called R scripts.  R scripts have `.R` at the end of their names to 
-> let you know what they are.
+3. The file is not yet saved on your computer (notice that its name is Untitled 1 in the tab at the top of the Source panel.
+4. Save this file to your computer. Click File > Save. 
+5. Choose where to save the file on your computer. We recommend creating a new folder in your workbook named lesson-code and then saving this script as lesson_01_code.R inside that folder. You do not need to type .R at the end of the name. The .R file extension will be automatically added when you click save.
 
+:::
 
-> ::: {.challenge}
-> Create and save a new R script
->
->
->
-> :::
+From now onwards, type any code you see in this lesson into the R script you just created. This will provide a record for you to refer to and edit later.
 
-### Workflow within RStudio
-There are two main ways one can work within RStudio:
-
-1. Test and play within the interactive R console then copy code into
-a .R file to run later.
-   *  This works well when doing small tests and initially starting off.
-   *  It quickly becomes laborious
-2. Start writing in a .R file and use RStudio's short cut keys for the Run command
-to push the current line, selected lines or modified lines to the
-interactive R console.
-   * This is a great way to start; all your code is saved for later
-   * You will be able to run the file you create from within RStudio
-   or using R's `source()`  function.
-
-> #### Tip: Running segments of your code
->
-> RStudio offers you great flexibility in running code from within the editor
-> window. There are buttons, menu choices, and keyboard shortcuts. To run the
-> current line, you can
-> 1. click on the `Run` button above the editor panel, or
-> 2. select "Run Lines" from the "Code" menu, or
-> 3. type <kbd>Ctrl</kbd>+<kbd>Return</kbd> in Windows or Linux
-> or <kbd>&#8984;</kbd>+<kbd>Return</kbd> on OS X.
-> (This shortcut can also be seen by hovering
-> the mouse over the button). To run a block of code, select it and then `Run`.
-> If you have modified a line of code within a block of code you have just run,
-> there is no need to reselect the section and `Run`, you can use the next button
-> along, `Re-run the previous region`. This will run the previous code block
-> including the modifications you have made.
-
-> ::: {.challenge}
-> **Try this:** Open and run an R script
->
-> Open this script.
-> Run it line by line and point out the part of the R script from the prior section (e.g. read a table, assign a variable, etc)
-> Run the whole thing.
-> Close it and use source() to run it from the file.
->
-> :::
-
-
-
-The text after each line of code is called a
-"comment". Anything that follows after the hash symbol
-`#` is ignored by R when it executes code.
-
-
-
+We're going to write an R script that loads a data table from NEON and do some calculations on values saved in it.
 
 
 ### Reading data from files
 
-2	5	read and view tabular data from a file	learners will
+R has functions to read any text-based file. One of the most widely used formats for text-based data table is the **comma separated values** (CSV) format, where each row of the table corresponds to a row of text and values in different columns are separated by commas. We'll learn more about best practices for data organization in [`r .get_chpName("spreadsheets")`]("chp-spreadsheets.html"). For now, we will use the `read.csv()` function to read a CSV file into a data table in R. The object that is created by this function is called a **data frame** and we will learn more about this type of object in [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html). 
 
-2	7	read a data table from a file	use R and RStudio to
+Type the following into your new R script:
 
-tab complete reminder
+```{r results = "hide"}
+# Read in a data table with water temperature
+watertemp <- read.csv("data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv")
 
-
-EXTRA: you can download your own data set and read it into R
-
-use data/intro-to-R_dat.csv
-
-
-
-> ## Challenge 4
-> It is useful to get some general idea about the dataset, directly from the
-> command line, before loading it into R. Understanding the dataset better
-> will come in handy when making decisions on how to load it in R. Use the command-line
-> shell to answer the following questions:
-> 1. What is the size of the file?
-> 2. How many rows of data does it contain?
-> 3. What kinds of values are stored in this file?
->
-> > ## Solution to Challenge 4
-> >
-> > By running these commands in the shell:
-> > ```{r ch2a-sol, engine='sh'}
-> > ls -lh data/gapminder_data.csv
-> > ```
-> > The file size is 80K.
-> > ```{r ch2b-sol, engine='sh'}
-> > wc -l data/gapminder_data.csv
-> > ```
-> > There are 1705 lines. The data looks like:
-> > ```{r ch2c-sol, engine='sh'}
-> > head data/gapminder_data.csv
-> > ```
+# View the first few rows
+head(watertemp)
 
 
+# How many rows and columns are there in these data?
+nrow(watertemp)
+ncol(watertemp)
 
+# What are the names of the columns in this data table
+names(watertemp)
 
+```
 
-#### Working directory - FIXME
+Typing text in a R script does not cause the code to run in the R Console. There are several options for executing code in an R script:
+
+1. Select the code you want to execute by either:
+    * highlighting it
+    * placing your cursor on the line that you want to run
+2. Run the selected code by either:
+    * clicking on the Run button in the upper right corner of the Source window.
+    * type <kbd>Ctrl</kbd>+<kbd>Return</kbd> in Windows or Linux
+or <kbd>&#8984;</kbd>+<kbd>Return</kbd> on OS X.
+
+NOTE: To "run" code measn the same thing as to "execute" code. We can use the word "run" in informal contexts and "execute" in formal contexts.
+
+Run each line of code above from your R script.
+
+What happens? Which lines caused output to appear in the Console?
+
+The `read.csv()` function does not produce any output in the Console if everything executes correctly. However, if you now look in the Environment tab, you should see an object named `watertemp`.
+
+The `head()`, `nrow()`, `ncol()` and `names()` functions are useful ways to learn more about the size and the contents of the data. You can also see this information in the Environment window. `watertemp` has 20544 observations (or rows) and 10 variables (or columns). If you click on the blue arrow to the left of the object's name you will see the names of each of the columns followed by information about the values contained in each column. Lastly, clicking on the name of the object causes a new tab to open in the Source window that shows the data table itself (try it!)
+
+Recall that any line preceded by a `#` symbol is a **comment**. Comments are text found in code that are not executed and do not cause anything to happen. Comments are *extremely* important for anyone who will need to read your code and understand what it is doing (especially your future self!). Get in the habit of commenting every line or every short section of your code. It can be useful to include not just details of what the code does, but also include a header with your name and what the overall goal of the code is.
+
+For example, add the following to the top of your script:
+
+```{r eval = FALSE}
+## Code from the Introduction to R and RStudio lesson
+## Author: YOUR NAME HERE
+## Date: TODAYS DATE
+## Description: This code loads and explores water temperature data from the Teakettle Lake NEON site
+
+```
+
+Let's examine the `read.csv()` function more carefully. In the code above we provided the function with a single text argument containing the path to the data file. Locate this file using the Files window in RStudio.
+
+What do you think would happen if we changed the code to read:
+
+```{r eval = FALSE}
+read.csv("watertemp_30min_TECR_2021-04_2021-10.csv")
+
+```
+<details><summary>**Solution:**</summary>
+
+```{r echo = FALSE}
+watertemp <- read.csv("watertemp_30min_TECR_2021-04_2021-10.csv")
+
+```
+</details>
+
+What does this text mean? It is a warning that the function did not execute properly. "cannot open the connection" means that R could not find this file. Why couldn't R file the file? We didn't specify the location of the file relative to the current working directory.
+
+#### Working directory
 
 Knowing R's current working directory is important because when you need to access other files (for example, to import a data file), R will look for them relative to the current working directory.
 
 Each time you create a new RStudio Project, it will create a new directory for that project. When you open an existing `.Rproj` file, it will open that project and set R's working directory to the folder that file is in.
 
-> #### Challenge 5
-> You can check the current working directory with the `getwd()` command, or by using the menus in RStudio.
->
-> 1. In the console, type `getwd()` ("wd" is short for "working directory") and hit Enter.
-> 2. In the Files pane, double click on the `data` folder to open it (or navigate to any other folder you wish). To get the Files pane back to the current working directory, click "More" and then select "Go To Working Directory".
->
-> You can change the working directory with `setwd()`, or by using RStudio menus.
->
-> 1. In the console, type `setwd("data")` and hit Enter. Type `getwd()` and hit Enter to see the new working directory.
-> 2. In the menus at the top of the RStudio window, click the "Session" menu button, and then select "Set Working Directory" and then "Choose Directory".
-> 3. In the windows navigator that opens, navigate back to the project directory, and click "Open". Note that a `setwd` command will automatically appear in the console.
-{: .challenge}
+You can check the current working directory with the `getwd()` command, or by using the menus in RStudio.
 
-::: {.callout}
-> #### Tip: File does not exist errors
->
-> When you're attempting to reference a file in your R code and you're getting errors saying the file doesn't exist, it's a good idea to check your working directory.
-> You need to either provide an absolute path to the file, or you need to make sure the file is saved in the working directory (or a subfolder of the working directory) and provide a relative path. 
+::: {.challenge}
+Get and set the working directory in R.
+
+1. In the console, type `getwd()` ("wd" is short for "working directory") and press Enter.
+2. In the Files pane, double click on the `data` folder to open it (or navigate to any other folder you wish). To get the Files panel back to the current working directory, click "More" and then select "Go To Working Directory".
+3. You can change the working directory with `setwd()`, or by using RStudio menus.
+
+1. In the console, type `setwd("data")` and hit Enter. Type `getwd()` and press Enter to see the new working directory.
+2. In the menus at the top of the RStudio window, click the "Session" menu button, and then select "Set Working Directory" and then "Choose Directory".
+3. In the windows navigator that opens, navigate back to the project directory, and click "Open". Note that a `setwd` command will automatically appear in the console.
+
+Make sure to set your working directory back to the main R-course-NEON-workbook folder for the rest of the lesson.
 :::
 
+::: {.callout-tip}
+File does not exist errors
+
+When you're attempting to reference a file in your R code and you're getting errors saying the file doesn't exist, it's a good idea to first check your spelling and capitalization and then check your working directory.
+You need to either provide an absolute path to the file, or you need to make sure the file is saved in the working directory (or a subfolder of the working directory) and provide a relative path. 
+:::
+
+### Introduction to data frames
+
+Data frames are a very common way to work with data tables in R. Each row of a data frame represents one observation and each column contains a vector of data about a particular variable. In the `watertemp` data frame, each observation is a mean surface water temperature measurement from [Teakettle Creek](https://www.neonscience.org/field-sites/tecr) near Fresno, CA. Measurements come from several sensor locations on the creek and are averaged over the time period defined by the `startDateTime` and `endDateTime` columns.
+
+Let's explore these data in more detail.
+
+To view the contents of a column, use the `$` operator to extract a vector of values:
+
+```{r eval = FALSE}
+# View a column
+watertemp$surfWaterTempMean
+```
+
+You can do calculations on the values in a column using R's built-in functions:
+
+```{r}
+# Calculate the range of values
+range(watertemp$surfWaterTempMean)
+```
+
+Oops! There must be missing data in this column. Missing values are denoted by `NA` and if there are any missing values, R will not exclude them from its calculations.
+
+To omit missing values before completing a calculation, use the `na.rm = TRUE` argument: 
 
 
+```{r}
+# Calculate the range of values excluding missing values
+range(watertemp$surfWaterTempMean, na.rm = TRUE)
+```
 
 
+::: {.challenge}
+
+1. Use the `mean()` function to calculate the average surface water temperature.
+2. Use the `max()` and `min()` functions to calculate the maximum and minimum surface water temperatures.
+
+<details><summary>**Solution:**</summary>
+::: {.solution}
+
+```{r collapse = TRUE}
+# Calculate the mean surface water temperature
+mean(watertemp$surfWaterTempMean, na.rm = TRUE)
+
+# Calculate the max and min surface water temperatures
+max(watertemp$surfWaterTempMean, na.rm = TRUE)
+min(watertemp$surfWaterTempMean, na.rm = TRUE)
+
+```
+:::
+</details>
+:::
+
+We can also tabulate values in a column data using the `table()` function. This function finds all of the unique values and counts the number of times each value appears. The `HOR.VER` column is a identifier of the location of a tempereature sensor, so we can use it to determine how many different sensors are in these data.
+
+```{r}
+# How many observations are from each sensor location?
+table(watertemp$HOR.VER)
+
+```
 
 
+There are two sensors (101.1 and 101.2) and each has 10272 observations in this data table.
 
+The `finalQF` column is a quality-control variable that indicates whether data are acceptable for use. Let's determine whether all observations in these data are acceptable and have a value of 0 in the `finalQF` column.
+
+::: {.challenge}
+Use the `table()` function to determine how many observations in this data table should not be used for analysis.
+
+<details><summary>**Solution:**</summary>
+::: {.solution}
+```{r}
+# Tabulate the quality-control flag column
+table(watertemp$finalQF)
+```
+It looks like 625 observations had a quality flag = 1, so if we were to use these data, we should read the documentation to learn what that means and if these data should be omitted from the analysis.
+
+:::
+</details>
+:::
+
+Columns in a dataframe are vectors and we can do math with them in the same way that we would do math with other numeric vectors:
+
+```{r collapse = TRUE}
+# Add the expected uncertainty to the mean water temperature
+# and save it to a variable called temp_upperbound
+temp_upperbound <- watertemp$surfWaterTempMean + watertemp$surfWaterTempExpUncert
+
+# View the first 5 values in temp_upperbound
+temp_upperbound[1:5]
+
+```
+::: {.challenge}
+Calculate a lower temperature bound for each observation by subtracting the expected uncertainty from the mean temperature.
+
+<details><summary>**Solution:**</summary>
+::: {.solution}
+```{r collapse = TRUE}
+# Calculate a lower bound
+temp_lowerbound <- watertemp$surfWaterTempMean - watertemp$surfWaterTempExpUncert
+
+```
+
+:::
+</details>
+:::
+
+The data in the `watertemp` data frame provide a time series of surface water temperature in Teakettle Creek that likely fluctuates throughout the year. If we want to analyze or visualize this time series, we need a way to work with the dates as actual numeric values, rather than as text.
+
+Base R has functions for working with dates and times, but they are tricky to learn. We're going to install a widely used package called `lubridate` to work with the dates and times saved in the `startDateTime` and `endDateTime` columns.
 
 ### Installing and loading packages
 
-"base" R is the functionality that comes installed with R, but the powerfull thing about R is its user community who have created thousands of "packages" that increase its functionality.
+"base" R is the functionality that comes installed with R, but the powerful thing about R is its user community who have created thousands of **packages** that increase its functionality. As of this writing, there are nearly 20,000 packages available on [CRAN](https://cran.r-project.org/) (the comprehensive R archive network). 
 
-2	3	install and load packages in R	learners will
+Packages can be viewed, loaded, and detached in the Packages tab of the lower right panel in RStudio. Clicking on this tab will display all of the installed packages with a checkbox next to them.
+If there is nothing listed then you do not have any packages installed. Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.
 
-It is possible to add functions to R by writing a package, or by
-obtaining a package written by someone else. As of this writing, there
-are over 10,000 packages available on CRAN (the comprehensive R archive
-network). R and RStudio have functionality for managing packages:
+Let's install the `lubridate` package. Click the Install button. In the pop-up that appears, type `lubridate`. Do not change any of the other settings, then click Install.
 
-* You can see what packages are installed by typing
-  `installed.packages()`
-* You can install packages by typing `install.packages("packagename")`,
-  where `packagename` is the package name, in quotes.
-* You can update installed packages by typing `update.packages()`
-* You can remove a package with `remove.packages("packagename")`
-* You can make a package available for use with `library(packagename)`
+Notice what happens in the R Console.
 
-Packages can also be viewed, loaded, and detached in the Packages tab of the lower right panel in RStudio. Clicking on this tab will display all of the installed packages with a checkbox next to them. If the box next to a package name is checked, the package is loaded and if it is empty, the package is not loaded. Click an empty box to load that package and click a checked box to detach that package.
+Instead of clicking the Install button, we could have installed this packages by typing `install.packages("lubridate")` into the Console.
 
-Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.
+Now this package should appear in the list of installed packages with an empty checkbox next to it. The empty checkbox indicates that the package is not **loaded** yet in this R session. That means we cannot use the functions in it yet. You can load and unload packages by clicking on the box next to them. Notice what happens in the Console when you check and uncheck the box next to `lubridate`:
 
-> ## Challenge 5
->
-> Install the following packages: `ggplot2`, `plyr`, `gapminder`
->
-> > ## Solution to challenge 5
-> >
-> > We can use the `install.packages()` command to install the required packages.
-> > ```{r ch5-sol, eval=FALSE}
-> > install.packages("ggplot2")
-> > install.packages("plyr")
-> > install.packages("gapminder")
-> > ```
-> >
-> > An alternate solution, to install multiple packages with a single `install.packages()` command is:
-> > ```{r ch5-sol2, eval=FALSE}
-> > install.packages(c("ggplot2", "plyr", "gapminder"))
-> > ```
+* You can make a package available for use in your R session with `library(packagename)`.
+* You can make a previously loaded package unavailable in your R session with `detach("packagename", unload = TRUE)`. This is sometimes necessary if two packages are using the same name for a function.
+
+::: {.callout-important}
+Packages only need to be installed **once**. This saves the package to a location on your computer that R can access.
+
+You need to load packages **every time** you open a new R session, if you want to be able to use the functions in them.
+:::
+
+::: {.challenge}
+
+Write a line of code in your new R script that will load the `lubridate ` package.
+
+<details><summary>**Solution:**</summary>
+::: {.solution}
+
+We can use the `library()` command load a packages. Notice that the name of the packages **is not** inside quotation marks. This is different from the `install.packages()` function, where the package name must be quoted.
+
+```{r}
+# Load the lubridate package
+library(lubridate)
+```
+
+:::
+</details>
+:::
+
+<br>
 
 
+::: {.callout-trick}
+Getting Help with Packages
+
+Many packages come with "vignettes": tutorials and extended example documentation. Without any arguments, `vignette()` will list all vignettes for all installed packages;
+`vignette(package="package-name")` will list all available vignettes for
+`package-name`, and `vignette("vignette-name")` will open the specified vignette.
+
+If a package doesn't have any vignettes, you can usually find help by typing
+`help("package-name")`.
+
+RStudio also has a set of excellent
+[cheatsheets](https://rstudio.com/resources/cheatsheets/) for many packages.
+:::
 
 
+### Putting it all together
+Let's use what we have learned to make a graph showing how surface water temperature changes over time in Teakettle Creek.
+
+To do this we first need to convert the text in the `startDateTime` column to a format that R can interpret as have numerical values.
+```{r}
+# Convert the text to a date and time
+# This replaces the existing startDateTime column
+# ymd_hms() comes from the lubridate package
+watertemp$startDateTime <- ymd_hms(watertemp$startDateTime)
+```
+Now that R knows these values are times, we can do much more with them:
+
+```{r collapse = TRUE}
+# View the date component of each value (but only from rows 1 - 10)
+date(watertemp$startDateTime)[1:10]
+
+# What was the most recent date that data were recorded in this data set?
+max(date(watertemp$startDateTime))
+
+
+# What was the earliest date that data were recorded in this data set?
+min(date(watertemp$startDateTime))
+```
+We can also use the `plot()` function to make a scatterplot if we specify which values should be the `x` coordinate and which should be the `y` coordinate:
+
+```{r collapse = TRUE}
+# Plot the mean temperature over time
+plot(x = watertemp$startDateTime, y = watertemp$surfWaterTempMean)
+
+```
+
+::: {.callout-tip}
+Here's another way to make this same graph, which follows the format: `plot(y ~ x, data = dataframename)`:
+```{r results = "hide"}
+plot(surfWaterTempMean ~ startDateTime, data = watertemp)
+
+```
+
+In R there are usually many ways to write code that does the same thing. In general, the best choice is usually the one that is easiest to read and which involves the least repetition. Which version do you think is better here?
+
+Similarly, if we are working with several columns in the same data frame, the `with()` function can make code much more efficient and readable:
+
+```{r collapse}
+# Calculate the upper and lower bounds on temperature using the
+# mean and expected uncertainty columns in the watertemp data frame
+temp_upperbound <- with(watertemp, surfWaterTempMean + surfWaterTempExpUncert)
+temp_lowerbound <- with(watertemp, surfWaterTempMean + surfWaterTempExpUncert)
+
+```
+:::
+
+Now that you have written your first R script it is time to save your work! Click on the save icon at the top of the Source panel.
+
+::: {.callout-important}
+**R does not auto-save.** Be sure to save your work often when you are working. Consider setting a timer to remind yourself to do this.
+
+:::
+
+Close your R script by clicking on the small x on the tab next to the name of the script at the top of the Source panel. You can reopen the script using the File > Open File menus option at the top of the RStudio window or by clicking on the name of the script file in the Files panel.
 
 ### Getting help
 
-2	9	learn how to get help and troubleshoot error messages	learners will
-2	8	access and understand a function's documentation page	use R and RStudio to
+One of the most daunting aspects of R is the large number of functions
+available. It would be prohibitive, if not impossible to remember the
+correct usage for every function you use. Luckily, using the help files
+means you don't have to remember that!
 
-
-
-Don't worry about trying to remember every function in R. You
-can look them up on Google, or if you can remember the
-start of the function's name, use the tab completion in RStudio.
-
-This is one advantage that RStudio has over R on its own, it
-has auto-completion abilities that allow you to more easily
-look up functions, their arguments, and the values that they
-take.
-
-Typing a `?` before the name of a command will open the help page
-for that command. When using RStudio, this will open the 'Help' pane;
-if using R in the terminal, the help page will open in your browser.
-The help page will include a detailed description of the command and
-how it works. Scrolling to the bottom of the help page will usually
-show a collection of code examples which illustrate command usage.
-We'll go through an example later.
-
-
-
-
-R, and every package, provide help files for functions. The general syntax to search for help on any
-function, "function_name", from a specific function that is in a package loaded into your
-namespace (your interactive R session) is:
+R, and every package, provide help files for functions. The general syntax to search for help on any function, "function_name", from a specific function that is in a package loaded into the R session is:
 
 ```{r, eval=FALSE}
 ?function_name
 help(function_name)
 ```
 
-For example take a look at the help file for `write.table()`, we will be using a similar function in an upcoming episode. 
+For example take a look at the help file for `read.csv()` which we used previously to read data into R. 
 
 ```{r, eval=FALSE}
-?write.table()
+?read.csv()
 ```
 
-This will load up a help page in RStudio (or as plain text in R itself).
-
-Each help page is broken down into sections:
+This will load up a help page in RStudio. Each help page is broken down into sections:
 
  - Description: An extended description of what the function does.
  - Usage: The arguments of the function and their default values (which can be changed).
@@ -907,257 +1077,96 @@ Each help page is broken down into sections:
 
 Different functions might have different sections, but these are the main ones you should be aware of. 
 
-Notice how related functions might call for the same help file: 
+Notice how related functions might call for the same help file. This is because these functions have very similar applicability and often share the same arguments as inputs to the function, so package authors often choose to document them together in a single help file. From the help file for `read.csv` we can see that this function is actually a specific version of `read.table` where a few default arguments are set to match the format of a csv file (`header = TRUE` and `sep = ","`). 
 
 ```{r, eval=FALSE}
 ?write.table()
 ?write.csv()
 ```
 
-This is because these functions have very similar applicability and often share the same arguments as inputs to the function, so package authors often choose to document them together in a single help file.
+::: {.callout-tip}
+Running Examples
 
-> #### Tip: Running Examples
->
-> From within the function help page, you can highlight code in the 
-> Examples and type <kbd>Ctrl</kbd>+<kbd>Return</kbd> to run it in 
-> RStudio console. This gives you a quick way to get a feel for
-> how a function works.
+From within the function help page, you can highlight code in the 
+Examples and type <kbd>Ctrl</kbd>+<kbd>Return</kbd> to run it in 
+RStudio console. This gives you a quick way to get a feel for
+how a function works.
+:::
 
-> #### Tip: Reading Help Files
->
-> One of the most daunting aspects of R is the large number of functions
-> available. It would be prohibitive, if not impossible to remember the
-> correct usage for every function you use. Luckily, using the help files
-> means you don't have to remember that!
-
-
-#### Special Operators
-
-To seek help on special operators, use quotes or backticks:
-
-```{r, eval=FALSE}
-?"<-"
-?`<-`
-```
-
-#### Getting Help with Packages
-
-Many packages come with "vignettes": tutorials and extended example documentation.
-Without any arguments, `vignette()` will list all vignettes for all installed packages;
-`vignette(package="package-name")` will list all available vignettes for
-`package-name`, and `vignette("vignette-name")` will open the specified vignette.
-
-If a package doesn't have any vignettes, you can usually find help by typing
-`help("package-name")`.
-
-RStudio also has a set of excellent
-[cheatsheets](https://rstudio.com/resources/cheatsheets/) for many packages.
-
-
-#### When You Remember Part of the Function Name
-
-If you're not sure what package a function is in or how it's specifically spelled, you can do a fuzzy search:
-
-```{r, eval=FALSE}
-??function_name
-```
-
-A fuzzy search is when you search for an approximate string match. For example, you may remember that the function 
-to set your working directory includes "set" in its name. You can do a fuzzy search to help you identify the function:
-
-```{r, eval=FALSE}
-??set
-```
-
-#### When You Have No Idea Where to Begin
-
-If you don't know what function or package you need to use
-[CRAN Task Views](http://cran.at.r-project.org/web/views)
-is a specially maintained list of packages grouped into
-fields. This can be a good starting point.
-
-#### When Your Code Doesn't Work: Seeking Help from Your Peers
-
-If you're having trouble using a function, 9 times out of 10,
-the answers you seek have already been answered on
-[Stack Overflow](http://stackoverflow.com/). You can search using
-the `[r]` tag. Please make sure to see their page on 
-[how to ask a good question.](https://stackoverflow.com/help/how-to-ask)
-
-If you can't find the answer, there are a few useful functions to
-help you ask your peers:
-
-```{r, eval=FALSE}
-?dput
-```
-
-Will dump the data you're working with into a format that can
-be copied and pasted by others into their own R session.
-
-```{r}
-sessionInfo()
-```
-
-Will print out your current version of R, as well as any packages you
-have loaded. This can be useful for others to help reproduce and debug
-your issue.
-
-> ## Challenge 1
->
-> Look at the help page for the `c` function. What kind of vector do you
-> expect will be created if you evaluate the following:
-> ```{r, eval=FALSE}
-> c(1, 2, 3)
-> c('d', 'e', 'f')
-> c(1, 2, 'f')
-> ```
-> > ## Solution to Challenge 1
-> >
-> > The `c()` function creates a vector, in which all elements are of the
-> > same type. In the first case, the elements are numeric, in the
-> > second, they are characters, and in the third they are also characters:
-> > the numeric values are "coerced" to be characters.
-
-
-> ## Challenge 2
->
-> Look at the help for the `paste` function. You will need to use it later.
-> What's the difference between the `sep` and `collapse` arguments?
->
-> > ## Solution to Challenge 2
-> >
-> > To look at the help for the `paste()` function, use:
-> > ```{r, eval=FALSE}
-> > help("paste")
-> > ?paste
-> > ```
-> > The difference between `sep` and `collapse` is a little
-> > tricky. The `paste` function accepts any number of arguments, each of which
-> > can be a vector of any length. The `sep` argument specifies the string
-> > used between concatenated terms — by default, a space. The result is a
-> > vector as long as the longest argument supplied to `paste`. In contrast,
-> > `collapse` specifies that after concatenation the elements are *collapsed*
-> > together using the given separator, the result being a single string. 
-> >
-> > It is important to call the arguments explicitly by typing out the argument 
-> > name e.g `sep = ","` so the function understands to use the "," as a 
-> > separator and not a term to concatenate.
-> > e.g. 
-> > ```{r} 
-> > paste(c("a","b"), "c")
-> > paste(c("a","b"), "c", ",")
-> > paste(c("a","b"), "c", sep = ",")
-> > paste(c("a","b"), "c", collapse = "|")
-> > paste(c("a","b"), "c", sep = ",", collapse = "|")
-> > ```
-> > (For more information,
-> > scroll to the bottom of the `?paste` help page and look at the
-> > examples, or try `example('paste')`.)
-> {: .solution}
-{: .challenge}
-
-> ## Challenge 3
-> Use help to find a function (and its associated parameters) that you could
-> use to load data from a tabular file in which columns are delimited with "\t"
-> (tab) and the decimal point is a "." (period). This check for decimal
-> separator is important, especially if you are working with international
-> colleagues, because different countries have different conventions for the
-> decimal point (i.e. comma vs period).
-> Hint: use `??"read table"` to look up functions related to reading in tabular data.
-> 
-> > ## Solution to Challenge 3
-> >
-> > The standard R function for reading tab-delimited files with a period
-> > decimal separator is read.delim(). You can also do this with
-> > `read.table(file, sep="\t")` (the period is the *default* decimal
-> > separator for `read.table()`), although you may have to change
-> > the `comment.char` argument as well if your data file contains
-> > hash (#) characters.
-
-
-
-
-
-
-
-
+Don't worry about trying to remember the name of every function in R. You can look them up on Google, or if you can remember the start of the function's name, use the tab completion in RStudio. This is one advantage that RStudio has over R on its own, it has auto-completion abilities that allow you to more easily look up functions, their arguments, and the values that they take.
 
 ## Exercises
 
 After completing these exercises, learners will be able to 
-`r get_LO(as.numeric(chp_num), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
 
-2	1	execute simple mathematical calculations	use R and RStudio to
-2	2	assign and manipulate variables	use R and RStudio to
-2	3	"assign, subset and manipulate data in a vector"	use R and RStudio to
-2	4	execute vector algebra	use R and RStudio to
-2	5	write and save a code script	use R and RStudio to
-2	6	write comments in a code script	use R and RStudio to
-2	7	read a data table from a file	use R and RStudio to
-2	8	access and understand a function's documentation page	use R and RStudio to
+**`r .chp_num`.1** Create a new R script that loads water quality data from the Teakettle Creek NEON site. These data are in a CSV file named waterqual_inst_TECR_2021-04_2021-10.csv in the NEON_water folder in the data directory. Write your code as if the working directory is the main R-course-NEON-workbook project folder. Save your script as 2.1.R in the completed exercises folder.
 
-Number all exercises using the module number. Include starter code in the /exercises folder if appropriate.
+1. How many rows are in this data table?
+2. Name two columns in this data table.
 
-`r chp_num`.1 
+**`r .chp_num`.2** Create a new R script that contains the following code. Write comments that describe what each line of code below does (be specific). Write a header comment at the top of your script that includes a title, author, date and brief description of what the script does. Save your script as 2.2.R in the completed exercises folder.
 
-`r chp_num`.2 
+```{r eval = FALSE}
+library(lubridate)
 
+nitrate <- read.csv("data/NEON_water/nitrate_15min_TECR_2021-04_2021-10.csv")
 
+nitrate$startDateTime <- ymd_hms(nitrate$startDateTime)
+nitrate$endDateTime <- ymd_hms(nitrate$endDateTime)
 
+nitrate$day <- with(nitrate, date(startDateTime))
 
-> ## Challenge 2
->
-> What will be the value of each variable  after each
-> statement in the following program?
->
-> ```{r, eval=FALSE}
-> mass <- 47.5
-> age <- 122
-> mass <- mass * 2.3
-> age <- age - 20
-> ```
->
-> > ## Solution to challenge 2
-> >
-> > ```{r ch2pt1-sol}
-> > mass <- 47.5
-> > ```
-> > This will give a value of `r mass` for the variable mass
-> >
-> > ```{r ch2pt2-sol}
-> > age <- 122
-> > ```
-> > This will give a value of `r age` for the variable age
-> >
-> > ```{r ch2pt3-sol}
-> > mass <- mass * 2.3
-> > ```
-> > This will multiply the existing value of `r mass/2.3` by 2.3 to give a new value of
-> > `r mass` to the variable mass.
-> >
-> > ```{r ch2pt4-sol}
-> > age <- age - 20
-> > ```
-> > This will subtract 20 from the existing value of `r age + 20 ` to give a new value
-> > of `r age` to the variable age.
+table(nitrate$day)
+```
 
 
 
+**`r .chp_num`.3** Adapt the code in exercise 2 so that you can determine  whether every observation in the `nitrate` data frame is based on a 30-minute time period average.
 
-> ## Challenge 4
->
-> Clean up your working environment by deleting the mass and age
-> variables.
->
-> > ## Solution to challenge 4
-> >
-> > We can use the `rm` command to accomplish this task
-> > ```{r ch4-sol}
-> > rm(age, mass)
-> > ```
+HINT: You will need to calculate the difference in time between the start and end dates.
+
+**`r .chp_num`.4** 
+Run these two commmands and then look at the help for the `paste` function.
+
+`paste(1:5, 6:10, sep = "-")`
+
+`paste(1:10, collapse = "-")`
+
+1. How many elements are in each of the vectors returned by these two commands?
+2. Use the information in the help file to explain why these commands yield different results.
+
+**`r .chp_num`.5** Write code that accomplishes the following:
+1. Calculate the average of all even numbers from 1 to 100 and assign this value to a variable.
+2. Calculate the average of all odd numbers from 1 to 100 and assign this value to a different variable.
+3. Calculate the difference between the two variables you created (i.e. subtract them).
+
+**`r .chp_num`.6** Modify the script you created in this lesson so that is does the following:
+
+1. Calculate the difference between the maximum of `temp_upperbound` and the minimum of `temp_lowerbound`.
+2. Calculate a vector containing the difference between `temp_lowerbound` and `temp_upperbound`.
+3. Print only the even numbered elements of the vector you created in step 2 (e.g. elements 2, 4, 6, etc.).
+
+**`r .chp_num`.7** Write R code that calculates:
+
+1. The area of a circle with radius = 5. HINT: The variable `pi` contains the value of the number pi. Type `pi` into the console to see this.
+2. The area of circles with radii = to the numbers 1 through 100.
+3. The average of the areas of the 100 circles calculated in step 2.
 
 
+**`r .chp_num`.8** Use the following code to answer the questions:
 
+```{r eval = FALSE}
+
+dogs <- c("Alphie", "Boo", "Carter")
+
+cats <- c("Donut", "Edgar", "Felix")
+```
+
+Write one line of code for each of the following:
+
+1. Select the second name in `dogs`.
+2. Replace the first and third names in `cats` with a value that indicates the data are missing.
 
 
 
@@ -1169,15 +1178,17 @@ This lesson utilizes data from @NEON-soilCO2 and @NEON-soiltemp.
 
 ### Additional Resources
 
+* [Learn R by Posit](https://support.posit.co/hc/en-us/categories/200098757-Learn-R)
 * [#RYouWithMe: Basic Basics Lesson 1: An Opinionated Tour of RStudio](https://www.youtube.com/watch?v=kfcX5DEMAp4)
 * [Quick R](http://www.statmethods.net/)
 * [RStudio cheat sheets](http://www.rstudio.com/resources/cheatsheets/)
 * [Cookbook for R](http://www.cookbook-r.com/)
+* Read more about using the Source window to edit and execute code [here](https://support.posit.co/hc/en-us/articles/200484448-Editing-and-Executing-Code-in-the-RStudio-IDE).
 
 ### Cited References
 
+::: {#refs}
+:::
+
 
 <!-- javascript that formats solution blocks clickable hidden text -->
-```{js, file = "format_fences.java"}
-
-```

@@ -1,0 +1,10 @@
+Run these two commmands and then look at the help for the `paste` function.
+
+paste(1:5, 6:10, sep = "-")
+
+paste(1:10, collapse = "-")
+
+1. How many elements are in each of the vectors returned by these two commands?
+
+
+2. Use the information in the help file to explain why these commands yield different results.

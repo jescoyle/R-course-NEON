@@ -453,10 +453,12 @@ computer and open it as you would any other application.</p>
 <li>Files/Plots/Packages/Help/Viewer (tabbed in lower right)</li>
 </ul>
 <p>Your RStudio session should look similar to this:</p>
-<div class="figure">
-<img src="images/01-rstudio.png" alt="" />
-<p class="caption">image of RStudio layout</p>
-</div>
+<p><img src="images/01-rstudio.png" alt="image of RStudio layout" /> If
+you’re having trouble seeing the different windows, RStudio has several
+<a
+href="https://support.posit.co/hc/en-us/articles/360044226673-RStudio-Accessibility-Features">accessibility
+features</a> that allow you to change the size of text and simplify the
+layout. You may want to customize your setup now.</p>
 <p>We will go over each of these panels as we need to use them. For this
 lesson, we will be using the <code>Files</code> and
 <code>Terminal</code> panels to learn how to navigate your computer. We
@@ -675,10 +677,16 @@ how this works.</p>
 <p>Display the working directory in the Terminal and R Console</p>
 <p>What command should you use in the terminal to display the path of
 the current working directory?</p>
-</div>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
 <div class="solution">
 <pre class="bash"><code>  pwd</code></pre>
 </div>
+</details>
+</div>
+<p><br></p>
 <p>We can also show the working directory in the R Console. Click the
 Console tab next to the Terminal tab. This command line let’s you
 interact with R (which we will learn more about in future chapters).
@@ -783,12 +791,18 @@ executing this command in the terminal:</p>
 working inside the exercises folder.</p>
 <div class="challenge">
 <p>Create a new folder</p>
-<p>Use the terminal to make a new folder named “finished” inside the
-exercises folder.</p>
-</div>
+Use the terminal to make a new folder named “finished” inside the
+exercises folder.
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
 <div class="solution">
 <pre class="sh"><code>mkdir exercises/finished</code></pre>
 </div>
+</details>
+</div>
+<p><br></p>
 <div class="callout-trick">
 <p>If you want to rerun a similar command, you don’t need to type it out
 again. Place your cursor at the command line and press the up arrow key.
@@ -867,7 +881,10 @@ command to copy a file is <code>cp SOURCE DEST</code>, where we replace
 <div class="challenge">
 <p>Use the terminal to list all of the files in the exercises
 folder.</p>
-</div>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
 <div class="solution">
 <p>Your answer will depend on your current working directory (check
 using <code>pwd</code>):</p>
@@ -878,6 +895,9 @@ then type:</p>
 folder, then type:</p>
 <pre class="sh"><code>ls </code></pre>
 </div>
+</details>
+</div>
+<p><br></p>
 <p>When the list of files prints, you will see that each exercises is
 named according to its number. All of the exercises for lesson 1 start
 with 1.</p>
@@ -920,7 +940,10 @@ navigate to the exercises folder (if needed).</li>
 <li>Copy these files into the working folder inside the exercises
 folder.</li>
 </ol>
-</div>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
 <div class="solution">
 <p>Commands are shown below without their output.</p>
 <pre class="sh"><code>pwd
@@ -932,6 +955,9 @@ ls 1.*
 cp 1.* working/
 </code></pre>
 </div>
+</details>
+</div>
+<p><br></p>
 <div class="callout-important">
 <p>Be careful- if you copy a file into a directory where a file with the
 same name exists, it will automatically write over the file (unless you
@@ -1016,7 +1042,8 @@ command you typed into the <strong>R Console</strong> to determine
 this.</li>
 <li>From the initial working directory…
 <ol style="list-style-type: decimal">
-<li>Write out the relative path to the data file XXX.</li>
+<li>Write out the relative path to the data file
+nitrate_15min_TEAK_2021-04_2021-10.csv.</li>
 <li>Write out the relative path to the folder where you should save
 completed exercises.</li>
 </ol></li>
@@ -1035,8 +1062,13 @@ Student Workbook RStudio project…</p>
 <ol style="list-style-type: decimal">
 <li>What would you type into the Terminal to show all files in the data
 directory?</li>
-<li>How would you modify this command so that the size of each file is
-shown?</li>
+<li>Suppose you wanted to also show the size of each file and when it
+was modified last. What would you type to list all of the options for
+this command to find one that gives you more information about each
+file?</li>
+<li>Read the help file displayed in step 2. What command would you type
+to use a long listing format (this includes the file size and time
+modified)?</li>
 </ol>
 <p><strong>1.4</strong> From the initial working directory of the
 Student Workbook RStudio project, <strong>use the Terminal
@@ -1063,162 +1095,20 @@ class="citation">Zimmerman et al. (2019)</span></a> episodes 1 &amp; 2
 by Jes Coyle.</p>
 <div id="additional-resources" class="section level3">
 <h3>Additional Resources</h3>
-<p>Read more about using the Terminal in RStudio <a
-href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal-in-the-RStudio-IDE">here</a>.</p>
-<p>For more a more in-depth introduction to using a Unix shell see the
+<ul>
+<li><a
+href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">Using
+RStudio Projects by Posit</a></li>
+<li>Read more about using the Terminal in RStudio <a
+href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal-in-the-RStudio-IDE">here</a>.</li>
+<li>For more a more in-depth introduction to using a Unix shell see the
 Software Carpentry lesson on <a
 href="https://swcarpentry.github.io/shell-novice/">The Unix
-Shell</a>.</p>
+Shell</a>.</li>
+</ul>
 </div>
 <div id="cited-references" class="section level3">
 <h3>Cited References</h3>
-<!-- javascript that formats solution blocks clickable hidden text -->
-<pre class="js"><code>// Format challenge boxes
-(function() {
-  var codes = document.querySelectorAll(&#39;.challenge&#39;);
-  var code, i, p, h, b;
-  for (i = 0; i &lt; codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement(&#39;blockquote&#39;);
-    h = document.createElement(&#39;strong&#39;);
-    h.innerText = &#39;Try this:&#39;;
-    // &lt;blockquote&gt;&lt;em&gt;Try this:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
-    p.replaceChild(b, code);
-    b.appendChild(h);
-    b.appendChild(code);
-  }
-})();
-
-// Format solution boxes
-(function() {
-  var codes = document.querySelectorAll(&#39;.solution&#39;);
-  var code, i, d, s, p, h, b;
-  for (i = 0; i &lt; codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement(&#39;blockquote&#39;);
-    d = document.createElement(&#39;details&#39;);
-    s = document.createElement(&#39;summary&#39;);
-    h = document.createElement(&#39;strong&#39;);
-    h.innerText = &#39;Solution:&#39;;
-    // &lt;details&gt;&lt;summary&gt;&lt;em&gt;Solution:&lt;/em&gt;&lt;/summary&gt;&lt;p&gt;code&lt;/p&gt;&lt;/details&gt;
-    s.appendChild(h);
-    d.appendChild(s);
-    b.appendChild(d);
-    // move the code into &lt;details&gt;
-    p.replaceChild(b, code);
-    d.appendChild(code);
-  }
-})();
-
-// Format helpful tricks boxes
-(function() {
-  var codes = document.querySelectorAll(&#39;.callout-trick&#39;);
-  var code, i, p, h, b;
-  for (i = 0; i &lt; codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement(&#39;blockquote&#39;);
-    h = document.createElement(&#39;strong&#39;);
-    h.innerText = &#39;HELPFUL TRICK:&#39;;
-    // &lt;blockquote&gt;&lt;em&gt;HELPFUL TRICK:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
-    p.replaceChild(b, code);
-    b.appendChild(h);
-    b.appendChild(code);
-  }
-})();
-
-// Format helpful tip boxes
-(function() {
-  var codes = document.querySelectorAll(&#39;.callout-tip&#39;);
-  var code, i, p, h, b;
-  for (i = 0; i &lt; codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement(&#39;blockquote&#39;);
-    h = document.createElement(&#39;strong&#39;);
-    h.innerText = &#39;TIP:&#39;;
-    // &lt;blockquote&gt;&lt;em&gt;TIP:&lt;/em&gt;&lt;p&gt;&lt;/p&gt;&lt;/blockquote&gt;
-    p.replaceChild(b, code);
-    b.appendChild(h);
-    b.appendChild(code);
-  }
-})();</code></pre>
-<script type="text/javascript">
-// Format challenge boxes
-(function() {
-  var codes = document.querySelectorAll('.challenge');
-  var code, i, p, h, b;
-  for (i = 0; i < codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement('blockquote');
-    h = document.createElement('strong');
-    h.innerText = 'Try this:';
-    // <blockquote><em>Try this:</em><p></p></blockquote>
-    p.replaceChild(b, code);
-    b.appendChild(h);
-    b.appendChild(code);
-  }
-})();
-
-// Format solution boxes
-(function() {
-  var codes = document.querySelectorAll('.solution');
-  var code, i, d, s, p, h, b;
-  for (i = 0; i < codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement('blockquote');
-    d = document.createElement('details');
-    s = document.createElement('summary');
-    h = document.createElement('strong');
-    h.innerText = 'Solution:';
-    // <details><summary><em>Solution:</em></summary><p>code</p></details>
-    s.appendChild(h);
-    d.appendChild(s);
-    b.appendChild(d);
-    // move the code into <details>
-    p.replaceChild(b, code);
-    d.appendChild(code);
-  }
-})();
-
-// Format helpful tricks boxes
-(function() {
-  var codes = document.querySelectorAll('.callout-trick');
-  var code, i, p, h, b;
-  for (i = 0; i < codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement('blockquote');
-    h = document.createElement('strong');
-    h.innerText = 'HELPFUL TRICK:';
-    // <blockquote><em>HELPFUL TRICK:</em><p></p></blockquote>
-    p.replaceChild(b, code);
-    b.appendChild(h);
-    b.appendChild(code);
-  }
-})();
-
-// Format helpful tip boxes
-(function() {
-  var codes = document.querySelectorAll('.callout-tip');
-  var code, i, p, h, b;
-  for (i = 0; i < codes.length; i++) {
-    code = codes[i];
-    p = code.parentNode;
-    b = document.createElement('blockquote');
-    h = document.createElement('strong');
-    h.innerText = 'TIP:';
-    // <blockquote><em>TIP:</em><p></p></blockquote>
-    p.replaceChild(b, code);
-    b.appendChild(h);
-    b.appendChild(code);
-  }
-})();
-</script>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-swc-reproducible-lesson" class="csl-entry">
 Zimmerman, Naupaka, Greg Wilson, Raniere Silva, Scott Ritchie, François

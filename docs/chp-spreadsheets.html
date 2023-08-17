@@ -30,7 +30,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -240,9 +239,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -349,14 +345,6 @@ $(document).ready(function () {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 
@@ -369,30 +357,20 @@ class="section level1 tabset">
 <p><strong>THIS LESSON IS NOT YET READY FOR LEARNERS.</strong></p>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<p><em>from:</em> <a
-href="https://datacarpentry.org/spreadsheet-ecology-lesson/"><span
-class="citation">Teal et al. (2019)</span></a></p>
+<blockquote>
+<p>Good data organization is the foundation of a research project.
+Developing good habits from the start will save you A LOT of time
+later.</p>
+</blockquote>
+<p>Most researchers have data or do data entry in spreadsheets.
+Spreadsheet programs are very useful graphical interfaces for designing
+data tables and handling very basic data quality control functions.</p>
+<p>This lesson will teach you how to think about data organization and
+some practices for more effective data wrangling. Not only will this
+save time and effort, it also makes your work more accessible provides
+wider avenues for collaboration and improvement!</p>
 <div id="what-we-will-learn" class="section level3">
 <h3>What we will learn</h3>
-<p>Brief description of the contents of this lesson.</p>
-<ul>
-<li>Best practices in data table formatting
-<ul>
-<li>tidy tables</li>
-<li>missing data</li>
-<li>dates</li>
-<li>text-based and avoids special characters</li>
-<li>raw data vs. derived data and README files</li>
-</ul></li>
-<li>Spreadsheet program quality control features</li>
-<li>Data export from spreadsheet programs</li>
-<li>Text-based data tables: delimited formats
-<ul>
-<li>typical delimiter characters</li>
-<li>white space characters: space, tab, new line</li>
-</ul></li>
-<li>Metadata</li>
-</ul>
 <p>In this lesson learners will:</p>
 <ul>
 <li>describe best practices in working with data tables</li>
@@ -401,92 +379,948 @@ class="citation">Teal et al. (2019)</span></a></p>
 <li>utilize quality control features of spreadsheet software to generate
 clean data</li>
 </ul>
+<div id="key-terms-commands" class="section level4">
+<h4>Key Terms &amp; Commands</h4>
+<ul>
+<li>raw data</li>
+<li>derived data</li>
+<li>metadata</li>
+<li>header</li>
+<li>missing data</li>
+<li>null value</li>
+</ul>
 </div>
-<div id="motivator" class="section level3">
-<h3>Motivator</h3>
-<p>Describe a problem that learners will be able to solve by the end of
+</div>
+<div id="prerequisites" class="section level3">
+<h3>Prerequisites</h3>
+<p>Many spreadsheet programs are available. Since most organizations
+utilize Excel as their primary spreadsheet program, this lesson will
+make use of Excel examples. Free spreadsheet programs that can also be
+used are LibreOffice Calc, and even Google Sheets. Commands may differ a
+bit between programs, but the general idea is the same. We recommend
+using Excel to follow along in this lesson.</p>
+<p>This lesson uses the <a
+href="https://figshare.com/articles/dataset/Portal_Project_Teaching_Database/1314459">Portal
+Project Teaching Dataset</a> (<span class="citation">Ernest et al.
+(2020)</span>). The data are observations of a small mammal community in
+southern Arizona. This is a real dataset that has been simplified a
+little bit for this lesson.</p>
+<p>Before you begin this lesson, download the data by clicking <a
+href="https://ndownloader.figshare.com/files/2252083">here</a>. Save
+this file to the data folder in your R-course-NEON-workbook folder.</p>
+<p>We depart from using NEON data for this lesson because the data
+provided by NEON are already cleaned and follow best practices for data
+organization. We will revisit NEON data in the exercises that accompany
 this lesson.</p>
-</div>
-<div id="get-set-up" class="section level3">
-<h3>Get set up</h3>
-<p>Describe any data sets or packages that learners need to download or
-install before proceeding.</p>
-<pre class="r"><code># Read in a data file from the data folder included with the student workbook
-dat &lt;- read.csv(&quot;data/gapminder_data.csv&quot;)</code></pre>
-<p>Make a code block that loads any packages needed for the analysis. It
-can be helpful to indicate which functions come from which packages.</p>
-<pre class="r"><code># Load dplyr: filter
-library(dplyr)
-
-# Load ggplot2: ggplot
-library(ggplot2)</code></pre>
 </div>
 </div>
 <div id="lesson" class="section level2">
 <h2>Lesson</h2>
-<pre class="r"><code># This is an R code block that will execute any code inside and show the results.
-dat %&gt;%
-  filter(country == &quot;United States&quot;)</code></pre>
-<pre><code>         country year       pop continent lifeExp gdpPercap
-1  United States 1952 157553000  Americas  68.440  13990.48
-2  United States 1957 171984000  Americas  69.490  14847.13
-3  United States 1962 186538000  Americas  70.210  16173.15
-4  United States 1967 198712000  Americas  70.760  19530.37
-5  United States 1972 209896000  Americas  71.340  21806.04
-6  United States 1977 220239000  Americas  73.380  24072.63
-7  United States 1982 232187835  Americas  74.650  25009.56
-8  United States 1987 242803533  Americas  75.020  29884.35
-9  United States 1992 256894189  Americas  76.090  32003.93
-10 United States 1997 272911760  Americas  76.810  35767.43
-11 United States 2002 287675526  Americas  77.310  39097.10
-12 United States 2007 301139947  Americas  78.242  42951.65</code></pre>
-<div class="figure" style="text-align: center">
-<img src="images/rmd-03-usa_pop_fig-1.png" alt="Fig. 3.1. Population growth in the United States 1952 - 2007." width="816" />
-<p class="caption">
-Fig. 3.1. Population growth in the United States 1952 - 2007.
-</p>
+<div id="what-good-are-spreadsheets" class="section level3">
+<h3>What good are spreadsheets?</h3>
+<p>Spreadsheets encompass a lot of the things we need to be able to do
+as researchers. We can use them for:</p>
+<ul>
+<li>Data entry</li>
+<li>Organizing data</li>
+<li>Subsetting and sorting data</li>
+<li>Statistics</li>
+<li>Plotting and generating tables</li>
+</ul>
+<p>Spreadsheets are good for data entry, but in reality we tend to use
+spreadsheet programs for much more than data entry, even when this
+spreadscheet program is not the best tool for the job.</p>
+<p>Generating tables for reports in a spreadsheet is not optimal -
+often, when formatting a data table, we’re reporting key summary
+statistics in a way that is not really meant to be read as data, and
+often involves special formatting (merging cells, creating borders,
+making it pretty). Cutting and pasting from a spreadsheet to a document
+software (like Word) can have unpredictable results. We advise you to
+create tables within document software using the document’s own table
+editing software.</p>
+<p>You should also use caution when calculating statistics and creating
+figures in spreadsheet software. Because of the graphical, drag and drop
+nature of spreadsheet programs, it can be very difficult, if not
+impossible, to replicate your steps (much less retrace anyone else’s),
+particularly if your stats or figures require you to do more complex
+calculations. Furthermore, in doing calculations in a spreadsheet, it’s
+easy to accidentally apply a slightly different formula to multiple
+adjacent cells. When using a command-line based statistics program like
+R, it’s practically impossible to apply a calculation to one observation
+in your dataset but not another unless you’re doing it on purpose.</p>
+<p>Our recommendation: <strong>Only use spreadsheet software to enter,
+clean up and organize data.</strong> Save the data analysis for other
+programs.</p>
 </div>
-<div id="section-1" class="section level3">
-<h3>Section 1</h3>
-<blockquote>
-<p><strong><em>CHALLENGE:</em></strong> What will this code do?</p>
-<pre class="r"><code>1 + 1</code></pre>
-<blockquote>
-<pre class="r fold-hide"><code>1 + 1
-[1] 2</code></pre>
-</blockquote>
-</blockquote>
-</div>
-<div id="section-2" class="section level3">
-<h3>Section 2</h3>
-<div id="treat-data-as-read-only" class="section level4">
-<h4>Treat data as read only</h4>
-<p>This is probably the most important goal of setting up a project.
-Data is typically time consuming and/or expensive to collect. Working
-with them interactively (e.g., in Excel) where they can be modified
-means you are never sure of where the data came from, or how it has been
-modified since collection. It is therefore a good idea to treat your
+<div id="keeping-track-of-your-analyses" class="section level3">
+<h3>Keeping track of your analyses</h3>
+<p>When you’re working with spreadsheets, during data clean up or
+analyses, it’s very easy to end up with a spreadsheet that looks very
+different from the one you started with. In order to be able to
+reproduce your analyses or figure out what you did be sure to follow
+these key steps:</p>
+<p><strong>1. Never change the raw data.</strong></p>
+<p><strong>Raw data</strong> are the data that you collect during a
+research study. These are the original data that you would enter into a
+spreadsheet. Once the data are entered, it is a good idea to treat the
 data as “read-only”. This means that if you modify the data and need to
-work with it, save it as a new data table.</p>
+work with it, save it as a new data table (see step 2). Don’t modify the
+original dataset, or you will never know where you started!</p>
+<p><strong>2. Create new derived data files for analyses.</strong></p>
+<p>Once you are ready to analyze your data, create a copy of the raw
+data before you make any changes. Save this new <strong>derived
+data</strong> table with a descriptive name.</p>
+<p><strong>3. Write down the data cleaning and analysis steps in a
+separate file.</strong></p>
+<p>Keep track of the steps you took in your data clean up or analysis.
+Think of this as an electronic lab notebook: you should track these
+steps as you would any step in an experiment. We recommend that you do
+this in a plain text file stored in the same folder as the data file.
+Make sure to describe what you did to create any of the derived data
+tables.</p>
+<p>This might be an example of a spreadsheet setup:</p>
+<p><img src="images/spreadsheets/spreadsheet-setup-updated.png"
+alt="spreadsheet setup" /></p>
+<p>Put these principles in to practice today as you work through this
+lesson.</p>
 </div>
-<div id="data-cleaning" class="section level4">
-<h4>Data Cleaning</h4>
-<p>In many cases your data will be “dirty”: it will need significant
-preprocessing to get into a format R (or any other programming language)
-will find useful. This task is sometimes called “data munging”. Storing
-these scripts in a separate folder, and creating a second “read-only”
-data folder to hold the “cleaned” data sets can prevent confusion
-between the two sets.</p>
+<div id="metadata" class="section level3">
+<h3>Metadata</h3>
+<p><strong>Metadata</strong> are “data about data”. Metadata tell the
+user what each data file contains and how the data were collected. There
+are several standard formats for metadata and going into these is beyond
+the scope of this lesson. The most important feature of a metadata file
+is that it allows anyone to confidently use your data. Therefore, at a
+minimum, a meta data file must contain:</p>
+<ol style="list-style-type: decimal">
+<li>The publisher or author of the data (and how to contact them).</li>
+<li>A description of what is in the data file and how the data were
+collected.</li>
+<li>A description of any abbreviations or variable names in the data.
+That is, what do the headings on the columns mean?</li>
+<li>Where the data originally come from. For example, if downloaded from
+an online source, there should be an appropriate citation, website and
+download date.</li>
+</ol>
+<p>If data are being shared with others, then a metadata file should
+also contain information about how the data can be used. Are they under
+copyright? Are they free to re-use and re-distribute (e.g. see the <a
+href="https://creativecommons.org/licenses/">Creative Commons
+licences</a> for examples).</p>
+<p>Many data publishers include a text-based <code>README.txt</code> or
+<code>METADATA.txt</code> file with the data that contains all of this
+information. Get in the habit of writing your own metadata file when you
+create your own original data files. If you are using data downloaded
+from the internet, be sure to save the metadata files in the same
+location that you save the data so that you can easily find them
+later.</p>
+<p>If data consist of multiple files (e.g. an original raw data file and
+subsequent derived data files), the metadata files should document all
+of the files in the data set, describe their content and format, and
+describe the organizing principles of folders and subfolders. For each
+of the separate files listed, it is a good idea to document the
+manipulations or analyses that were carried out on those data. <a
+href="https://data.research.cornell.edu/content/readme">Cornell
+University’s Research Data Management Service Group</a> provides
+detailed guidelines for how to write a good README file, along with an
+adaptable template.</p>
 </div>
-<div id="treat-generated-output-as-disposable" class="section level4">
-<h4>Treat generated output as disposable</h4>
-<p>Anything generated by your scripts should be treated as disposable:
-it should all be able to be regenerated from your scripts.</p>
-<p>There are lots of different ways to manage this output. Having an
-output folder with different sub-directories for each separate analysis
-makes it easier later. Since many analyses are exploratory and don’t end
-up being used in the final project, and some of the analyses get shared
-between projects.</p>
+<div id="structure-of-tidy-data-tables" class="section level3">
+<h3>Structure of “tidy” data tables</h3>
+<p>The cardinal rule of using spreadsheet programs for data is to keep
+it “tidy”:</p>
+<ol style="list-style-type: decimal">
+<li>Put each variables in its own column. Variables are the thing you’re
+measuring, like ‘weight’ or ‘temperature’.</li>
+<li>The names of the variables belong in the top row. This is called the
+<strong>header</strong>.</li>
+<li>Put each observation in its own row. Observations are the objects
+you are studying (e.g. individual animals, study sites, etc.)</li>
+<li>The order of the rows shouldn’t matter for understanding the data.
+If the observations are in a particular order for a reason, record this
+reason in a column (e.g. time).</li>
+<li>Don’t combine multiple pieces of information in one cell. Sometimes
+it just seems like one thing, but consider whether that’s the only way
+you’ll want to be able to use or sort that data.</li>
+<li>Use text for all data. Don’t use formatting to convey important
+information.</li>
+<li>Save data in a text-based format like tab-delimited or
+comma-delimited (CSV) format. This ensures that anyone can use the data
+with any computer program.</li>
+</ol>
+<p>Following these rules will make it easy for a computer program (like
+R) to read your data (e.g. the data are
+<strong>machine-readable</strong>) as well as make it easy for humans to
+quickly understand what is in your data. See <a
+href="https://doi.org/10.1080/00031305.2017.1375989"><span
+class="citation">Broman and Woo (2018)</span></a> for additional
+guidance on these best practices.</p>
+<p>In this lesson we’ll work through the recommendations for tidy data
+using data from a survey of small mammals in a desert ecosystem.
+Different people have gone to the field and entered data into a
+spreadsheet (and made several mistakes!). Before this lesson you should
+have downloaded the Portal Project Teaching data set to your computer in
+a file named <code>survey_data_spreadsheet_messy.xls</code>.</p>
+<p>Open this file in Excel or any spreadsheet software. You can see that
+there are two tabs. Two field assistants conducted the surveys, one in
+2013 and one in 2014, and they both kept track of the data in their own
+way in tabs <code>2013</code> and <code>2014</code> of the dataset,
+respectively. Now you’re the person in charge of this project and you
+want to be able to start analyzing the data.</p>
+<p>See if you can identify each of the above problems in data table
+organization. As you identify each error, correct it and record the
+steps that you took to “clean” the data in a separate text file. You can
+open a new text file for this using Notepad (Windows) or TextEdit
+(Mac).</p>
+<div class="callout-important">
+<p>Do not forget our first piece of advice: create a new file (or tab)
+for the cleaned data, never modify your original (raw) data. Before you
+get started, save a copy of the original data and rename it as
+<code>survey_data_spreadsheet_cleaned.xls</code>.</p>
+</div>
+<p>To get started, examine the data found in all three tabs of
+<code>survey_data_spreadsheet_messy.xls</code>.</p>
+<div class="challenge">
+<p>What are the observations in these data? What should one row
+represent?</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<p>Observations are individual small mammals. Each row should represent
+one individual captured on a plot on a particular date.</p>
+</div>
+</details>
+</div>
+<p><br></p>
+<div class="challenge">
+<p>What are the variables in these data? What columns should we
+include?</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<ul>
+<li>Year</li>
+<li>Date Collected</li>
+<li>Plot</li>
+<li>Sex</li>
+<li>Weight</li>
+<li>Species</li>
+<li>Notes</li>
+</ul>
+<p>Why Notes? Did you notice the “scale not calibrated” message? We
+should keep this information with the data, but it doesn’t belong in the
+Weight column.</p>
+</div>
+</details>
+</div>
+<p><br></p>
+<p>Let’s set up a blank tidy data table where we can reorganize these
+data. Create a new tab in this workbook by clicking on the plus at the
+bottom of the window. Give it an informative name, such as “cleaned”.
+Then created a <strong>header row</strong> in row 1 with the names of
+the variables that we need to record.</p>
+</div>
+<div id="common-problems-in-data-table-organization"
+class="section level3">
+<h3>Common problems in data table organization</h3>
+<p>There are a few potential errors to be on the lookout for in your own
+data as well as data from collaborators or the Internet. If you are
+aware of the errors and the possible negative effect on downstream data
+analysis and result interpretation, it might motivate you to try and
+avoid them. Making small changes to the way you format your data in
+spreadsheets can have a great impact on efficiency and reliability when
+it comes to data cleaning and analysis.</p>
+<ul>
+<li><a href="#tables">Using multiple tables</a></li>
+<li><a href="#tabs">Using multiple tabs</a></li>
+<li><a href="#zeros">Not filling in zeros</a></li>
+<li><a href="#null">Using problematic null values</a></li>
+<li><a href="#formatting">Using formatting to convey
+information</a></li>
+<li><a href="#formatting-pretty">Using formatting to make the data sheet
+look pretty</a></li>
+<li><a href="#units">Placing comments or units in cells</a></li>
+<li><a href="#info">Entering more than one piece of information in a
+cell</a></li>
+<li><a href="#field-name">Using problematic field names</a></li>
+<li><a href="#special">Using special characters in data</a></li>
+<li><a href="#metadata">Inclusion of metadata in data table</a></li>
+<li><a href="03-dates-as-data.md">Date formatting</a></li>
+</ul>
+<div id="tables" class="section level4">
+<h4>Using multiple tables</h4>
+<p>A common strategy is creating multiple data tables within one
+spreadsheet. This confuses the computer, so don’t do this! When you
+create multiple tables within one spreadsheet, you’re drawing false
+associations between things for the computer, which sees each row as an
+observation. You’re also potentially using the same field name in
+multiple places, which will make it harder to clean your data up into a
+usable form. The example below depicts the problem:</p>
+<p><img src="images/spreadsheets/2_datasheet_example.jpg"
+alt="multiple tabs" /></p>
+<p>In the example above, the computer will see (for example) row 4 and
+assume that all columns A-AF refer to the same sample. This row actually
+represents four distinct samples (sample 1 for each of four different
+collection dates - May 29th, June 12th, June 19th, and June 26th), as
+well as some calculated summary statistics (an average (avr) and
+standard error of measurement (SEM)) for two of those samples. Other
+rows are similarly problematic.</p>
+</div>
+<div id="tabs" class="section level4">
+<h4>Using multiple tabs</h4>
+<p>But what about workbook tabs? That seems like an easy way to organize
+data, right? Well, yes and no. When you create extra tabs, you fail to
+allow the computer to see connections in the data that are there (you
+have to introduce spreadsheet application-specific functions or
+scripting to ensure this connection). Say, for instance, you make a
+separate tab for each day you take a measurement.</p>
+<p>This isn’t good practice for two reasons:</p>
+<ol style="list-style-type: decimal">
+<li>You are more likely to accidentally add inconsistencies to your data
+if each time you take a measurement, you start recording data in a new
+tab.</li>
+<li>Even if you manage to prevent all inconsistencies from creeping in,
+you will add an extra step for yourself before you analyze the data
+because you will have to combine these data into a single datatable. You
+will have to explicitly tell the computer how to combine tabs - and if
+the tabs are inconsistently formatted, you might even have to do it
+manually.</li>
+</ol>
+<p>The next time you’re entering data, and you go to create another tab
+or table, ask yourself if you could avoid adding this tab by adding
+another column to your original spreadsheet. We used multiple tabs in
+our example of a messy data file, but now you’ve seen how you can
+reorganize your data to consolidate across tabs.</p>
+<p>Your data sheet might get very long over the course of the
+experiment. This makes it harder to enter data if you can’t see your
+headers at the top of the spreadsheet. But don’t repeat your header row.
+These can easily get mixed into the data, leading to problems down the
+road.</p>
+<p>Instead you can freeze the column headers so that they remain visible
+even when you have a spreadsheet with many rows.</p>
+<p><a
+href="https://support.office.com/en-ca/article/Freeze-column-headings-for-easy-scrolling-57ccce0c-cf85-4725-9579-c5d13106ca6a">Documentation
+on how to freeze column headers in MS Excel</a></p>
+</div>
+<div id="zeros" class="section level4">
+<h4>Not filling in zeros</h4>
+<p>It might be that when you’re measuring something, it’s usually a
+zero, say the number of times a rabbit is observed in the survey. Why
+bother writing in the number zero in that column, when it’s mostly
+zeros?</p>
+<p>However, there’s a difference between a zero and a blank cell in a
+spreadsheet. To the computer, a zero is actually data. You measured or
+counted it. A blank cell means that it wasn’t measured and the computer
+will interpret it as an unknown value (otherwise known as a null
+value).</p>
+<p>The spreadsheets or statistical programs will likely mis-interpret
+blank cells that you intend to be zeros. By not entering the value of
+your observation, you are telling your computer to represent that data
+as unknown or missing (null). This can cause problems with subsequent
+calculations or analyses. For example, the average of a set of numbers
+which includes a single null value is always null (because the computer
+can’t guess the value of the missing observations). Because of this,
+it’s very important to record zeros as zeros and truly missing data as
+nulls.</p>
+</div>
+<div id="null" class="section level4">
+<h4>Using problematic null values</h4>
+<p><strong>Example</strong>: using -999, other numerical values, zero,
+or text to represent missing values. Whatever the reason, it’s a problem
+if unknown or missing data is recorded as -999, 999, or 0. Many
+statistical programs will not recognize that these are intended to
+represent missing (null) values.</p>
+<p>How these values are interpreted will depend on the software you use
+to analyze your data.</p>
+<p><strong>Solutions</strong>:</p>
+<p>A solution will depend on the final application of your data and how
+you intend to analyze it, but it is essential to use a clearly defined
+and CONSISTENT null indicator. Blank cells are the best choices for most
+applications; when working in R, <code>NA</code> may be an acceptable
+null value choice.</p>
+<p>There are a many reasons why null values get represented differently
+within a dataset. Sometimes confusing null values are automatically
+recorded from the measuring device. If that’s the case, there’s not much
+you can do, but it can be addressed in data cleaning with a tool like <a
+href="https://www.datacarpentry.org/OpenRefine-ecology-lesson/">OpenRefine</a>
+before analyzing or sharing. In other cases, null values are used to
+convey different reasons why the data is missing. This is important
+information to capture, but is actually using one column to capture two
+pieces of information. Like for <a href="#formatting">using formatting
+to convey information</a> it would be good here to create a new column
+like ‘data_missing’ and use that column to capture the different
+reasons.</p>
+<p>Whatever the reason, missing data is a problem. It is essential to
+use a clearly defined and consistent null indicator. Blanks (most
+applications) and NA (for R) are good choices. <span
+class="citation">White et al. (2013)</span> explain good choices for
+indicating null values for different software applications in their
+article: <a href="https://doi.org/10.4033/iee.2013.6b.6.f">Nine simple
+ways to make it easier to (re)use your data.</a>.</p>
+</div>
+<div id="formatting" class="section level4">
+<h4>Using formatting to convey information</h4>
+<p><strong>Example</strong>: highlighting cells, rows or columns that
+should be excluded from an analysis, leaving blank rows to indicate
+separations in data.</p>
+<p><img src="images/spreadsheets/formatting.png" alt="formatting" /></p>
+<p><strong>Solution</strong>: create a new field to encode which data
+should be excluded.</p>
+<p><img src="images/spreadsheets/good_formatting.png"
+alt="good formatting" /></p>
+</div>
+<div id="formatting-pretty" class="section level4">
+<h4>Using formatting to make the data sheet look pretty</h4>
+<p><strong>Example</strong>: merging cells.</p>
+<p><strong>Solution</strong>: If you’re not careful, formatting a
+worksheet to be more aesthetically pleasing can compromise your
+computer’s ability to see associations in the data. Merged cells will
+make your data unreadable by statistics software. Consider restructuring
+your data in such a way that you will not need to merge cells to
+organize your data.</p>
+</div>
+<div id="units" class="section level4">
+<h4>Placing comments or units in cells</h4>
+<p><strong>Example</strong>: Your data was collected, in part, by a
+summer student who you later found out was mis-identifying some of your
+species, some of the time. You want a way to note these data are
+suspect.</p>
+<p><strong>Solution</strong>: Most analysis software can’t see Excel or
+LibreOffice comments, and would be confused by comments placed within
+your data cells. As described above for formatting, create another field
+if you need to add notes to cells. Similarly, don’t include units in
+cells: ideally, all the measurements you place in one column should be
+in the same unit, but if for some reason they aren’t, create another
+field and specify the units the cell is in.</p>
+</div>
+<div id="info" class="section level4">
+<h4>Entering more than one piece of information in a cell</h4>
+<p><strong>Example</strong>: Does this table follow the tidy data
+recommendations? What problem might occur if you want to use these
+data?</p>
+<p><img src="images/spreadsheets/multiple-info.png"
+alt="multiple-info example" /></p>
+<p>Variables are in columns and observations are in rows, but two
+different pieces of information are saved in the same columns (Species
+and Sex). This would make it difficult to sort these data just by
+species or just by sex.</p>
+<p><strong>Solution:</strong> Don’t include more than one piece of
+information in a cell. This will limit the ways in which you can analyze
+your data. Here is a better way to organize these data:</p>
+<p><img src="images/spreadsheets/single-info.png"
+alt="single-info example" /></p>
+</div>
+<div id="field-name" class="section level4">
+<h4>Using problematic field names</h4>
+<p>Choose descriptive field names, but be careful not to include spaces,
+numbers, or special characters of any kind. Spaces can be misinterpreted
+by parsers that use whitespace as delimiters and some programs don’t
+like field names that are text strings that start with numbers.</p>
+<p>Underscores (<code>_</code>) are a good alternative to spaces.
+Consider writing names in camel case (like this: ExampleFileName) to
+improve readability. Remember that abbreviations that make sense at the
+moment may not be so obvious in 6 months, but don’t overdo it with names
+that are excessively long. Including the units in the field names avoids
+confusion and enables others to readily interpret your fields.</p>
+<div class="challenge">
+<p>For each example below, what is the problem with the name in the
+Avoid column? Is the name in the Good Name column better than the Good
+Alternative? If so, why?</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Good Name</th>
+<th align="center">Good Alternative</th>
+<th align="center">Avoid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Max_temp_C</td>
+<td align="center">MaxTemp</td>
+<td align="center">Maximum Temp (°C)</td>
+</tr>
+<tr class="even">
+<td align="center">Precipitation_mm</td>
+<td align="center">Precipitation</td>
+<td align="center">precmm</td>
+</tr>
+<tr class="odd">
+<td align="center">Mean_year_growth</td>
+<td align="center">MeanYearGrowth</td>
+<td align="center">Mean growth</td>
+</tr>
+<tr class="even">
+<td align="center">sex</td>
+<td align="center">sex</td>
+<td align="center">M/F</td>
+</tr>
+<tr class="odd">
+<td align="center">mass_g</td>
+<td align="center">weight</td>
+<td align="center">w.</td>
+</tr>
+<tr class="even">
+<td align="center">Observation_01</td>
+<td align="center">first_observation</td>
+<td align="center">1st observation</td>
+</tr>
+<tr class="odd">
+<td align="center">Good_data</td>
+<td align="center">Keep</td>
+<td align="center">Keep data?</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="special" class="section level4">
+<h4>Using special characters in data</h4>
+<p><strong>Example</strong>: You treat your spreadsheet program as a
+word processor when writing notes, for example copying data directly
+from Word or other applications.</p>
+<p><strong>Solution</strong>: This is a common strategy. For example,
+when writing longer text in a cell, people often include line breaks,
+em-dashes, etc in their spreadsheet. Also, when copying data in from
+applications such as Word, formatting and fancy non-standard characters
+(such as left- and right-aligned quotation marks) are included. When
+exporting this data into a coding/statistical environment or into a
+relational database, dangerous things may occur, such as lines being cut
+in half and encoding errors being thrown.</p>
+<p>General best practice is to avoid adding characters such as newlines,
+tabs, and vertical tabs. In other words, treat a text cell as if it were
+a simple web form that can only contain text and spaces.</p>
+</div>
+<div id="metadata" class="section level4">
+<h4>Inclusion of metadata in data table</h4>
+<p><strong>Example</strong>: You add a legend at the top or bottom of
+your data table explaining column meaning, units, exceptions, etc.</p>
+<p><strong>Solution</strong>: Recording data about your data
+(“metadata”) is essential. You may be on intimate terms with your
+dataset while you are collecting and analysing it, but the chances that
+you will still remember that the variable “sglmemgp” means single member
+of group, for example, or the exact algorithm you used to transform a
+variable or create a derived one, after a few months, a year, or more
+are slim.</p>
+<p>As well, there are many reasons other people may want to examine or
+use your data - to understand your findings, to verify your findings, to
+review your submitted publication, to replicate your results, to design
+a similar study, or even to archive your data for access and re-use by
+others. While digital data by definition are machine-readable,
+understanding their meaning is a job for human beings. The importance of
+documenting your data during the collection and analysis phase of your
+research cannot be overestimated, especially if your research is going
+to be part of the scholarly record.</p>
+<p>However, metadata should not be contained in the data file itself.
+Unlike a table in a paper or a supplemental file, metadata (in the form
+of legends) should not be included in a data file since this information
+is not data, and including it can disrupt how computer programs
+interpret your data file. Rather, metadata should be stored as a
+separate file in the same directory as your data file, preferably in
+plain text format with a name that clearly associates it with your data
+file. Because metadata files are free text format, they also allow you
+to encode comments, units, information about how null values are
+encoded, etc. that are important to document but can disrupt the
+formatting of your data file.</p>
+<p>Additionally, file or database level metadata describes how files
+that make up the dataset relate to each other; what format are they are
+in; and whether they supercede or are superceded by previous files. A
+folder-level readme.txt file is the classic way of accounting for all
+the files and folders in a project.</p>
+</div>
+</div>
+<div id="dates" class="section level3">
+<h3>Dates</h3>
+<p>Dates in spreadsheets can be a problem. For one thing, dates are
+stored typically in a single column. While this seems the most natural
+way to record dates, it actually is not best practice. A spreadsheet
+application will display the dates in a seemingly correct way (to a
+human observer) but how it actually handles and stores the dates may be
+problematic.</p>
+<p>In particular, DATE functions that are valid for a given spreadsheet
+program (be it LibreOffice Calc, Microsoft Excel, OpenOffice, Gnumeric,
+etc.) are usually guaranteed to be compatible only within the same
+family of products. Regardless of your spreadsheet, if you will later
+need to export the data, you are better off handling them using one of
+the solutions discussed below.</p>
+<p>One of the big problems with Excel is it can <a
+href="https://nsaunders.wordpress.com/2012/10/22/gene-name-errors-and-excel-lessons-not-learned/">turn
+things that aren’t dates into dates</a>, for example gene/protein names
+or identifiers like MAR1, DEC1, OCT4 will be changed to dates, and you
+cannot retrieve the original name or identifier (except manually). So if
+you avoid the date format overall, it’s easier to work with these types
+of data. When you must work with dates, here is how to do it
+efficiently.</p>
+<div class="callout-important">
+<p>When working with dates and time, <strong>don’t use the date
+format</strong> intrinsic to your spreadsheet program. Be sure that
+dates and times are saved in a text or numeric format.</p>
+</div>
+<div id="date-formats-in-spreadsheets" class="section level4">
+<h4>Date formats in spreadsheets</h4>
+<p>Spreadsheet programs have numerous “useful features” which allow them
+to handle dates in a variety of ways.</p>
+<p><img src="images/spreadsheets/5_excel_dates_1.jpg"
+alt="Many date formats, many ambiguities" /></p>
+<p>But these “features” often allow ambiguity to creep into your data.
+Ideally, data should be as unambiguous as possible.</p>
+<p>The main thing to know is that anything formatted as a date in Excel
+is actually stored as a number (see the last column in the above
+figure). Essentially, it counts the days from a default of December 31,
+1899, and thus stores July 2, 2014 as the serial number 41822. Times are
+handled in a similar way and are saved in the number of seconds. When
+exporting into a text-based format (such as CSV), Excel will export its
+internal date integer instead of a useful value (that is, the dates will
+be represented as integer numbers). This can potentially lead to
+problems if you use other software to manipulate the file.</p>
+<p>In the figure above, you’ll see that there are many ways that
+ambiguity creeps into the data depending on the format you chose when
+you enter your data, and if you’re not fully aware of which format
+you’re using, you can end up actually entering your data in a way that
+Excel will badly misinterpret. You may end up with errors that will be
+extremely difficult to track down and troubleshoot.</p>
+<div class="challenge">
+<p>What happens to the dates in the <code>dates</code> tab of our
+workbook if we save this sheet in Excel (in <code>csv</code> format) and
+then open the file in a plain text editor (like TextEdit or Notepad)?
+What happens to the dates if we then open the <code>csv</code> file in
+Excel?</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<ol style="list-style-type: decimal">
+<li>Click to the <code>dates</code> tab of the workbook and double-click
+on any of the values in the <code>Date collected</code> column. Notice
+that the dates display with the year 2015.</li>
+<li>Select <code>File -&gt; Save As</code> in Excel and in the drop down
+menu for file format select
+<code>CSV UTF-8 (Comma delimited) (.csv)</code>. Click
+<code>Save</code>.</li>
+<li>You will see a pop-up that says “This workbook cannot be saved in
+the selected file format because it contains multiple sheets.” Choose
+<code>Save Active Sheet</code>.</li>
+<li>Navigate to the file in your file browsers application. Right click
+and select <code>Open With</code>. Choose a plain text editor
+application and view the file. Notice that the dates display as
+month/day without any year information.</li>
+<li>Now right click on the file again and open with Excel. Notice that
+the dates display with the current year, not 2015.</li>
+</ol>
+<p>As you can see, exporting data from Excel and then importing it back
+into Excel fundamentally changed the data once again!</p>
+</div>
+</details>
+</div>
+<p><br></p>
+<div class="callout-tip">
+<p>Here’s more reasons to always save dates as text and not use the
+dates format of your spreadsheet program.</p>
+<p>Excel is unable to parse dates from before 1899-12-31, and will thus
+leave these untouched. If you’re mixing historic data from before and
+after this date, Excel will translate only the post-1900 dates into its
+internal format, thus resulting in mixed data. If you’re working with
+historic data, be extremely careful with your dates!</p>
+<p>Excel also entertains a second date system, the 1904 date system, as
+the default in Excel for Macintosh. This system will assign a different
+serial number than the <a
+href="https://support.microsoft.com/en-us/help/214330/differences-between-the-1900-and-the-1904-date-system-in-excel">1900
+date system</a>. Because of this, <a
+href="https://uc3.cdlib.org/2014/04/09/abandon-all-hope-ye-who-enter-dates-in-excel/">dates
+must be checked for accuracy when exporting data from Excel</a> (look
+for dates that are ~4 years off).</p>
+</div>
+</div>
+<div id="text-based-date-formatting" class="section level4">
+<h4>Text-based date formatting</h4>
+<p>It is much safer to store dates with YEAR, MONTH, DAY in separate
+columns or as YEAR and DAY-OF-YEAR in separate columns. Day of the year
+is 1 on Jan 1 and 365 on Dec. 31 (see this <a
+href="https://www.esrl.noaa.gov/gmd/grad/neubrew/Calendar.jsp">calendar</a>
+from NOAA). Either approach works well- choose the one that makes the
+most sense with how you want to analyze the data.</p>
+<p>If you absolutely must have the date in a single column, store it as
+text in an unambiguous format. The most standard format for dates and
+times is <code>YYYYMMDD</code> or <code>YYYY-MM-DD</code>, where
+<code>YYYY</code> is the four-digit year and <code>MM</code> and
+<code>DD</code> are two-digit representations of the month and day. For
+example, May 3rd, 2017 would be <code>2017-05-03</code>. Times can be
+saved as <code>HH:MM:SS</code>, where the hour is reported in the
+24-hour clock (e.g. 1pm is 13). If you must put dates and times together
+in one column, use <code>YYYY-MM-DD HH:MM:SS</code> or
+<code>YYYYMMDDhhmmss</code>.</p>
+<p>One benefit of following this format is that it allows date and time
+columns to be sorted in the correct order.</p>
+</div>
+</div>
+<div id="spreadsheet-program-quality-control-features"
+class="section level3">
+<h3>Spreadsheet program quality control features</h3>
+<p>When you have a tidy data table, you can use several simple
+techniques within your spreadsheet to ensure the data you enter is free
+of errors. These approaches include techniques that are implemented
+prior to entering data (quality assurance) and techniques that are used
+after entering data to check for errors (quality control).</p>
+<div id="quality-assurance" class="section level4">
+<h4>Quality Assurance</h4>
+<p>Quality assurance stops bad data from ever being entered by checking
+to see if values are valid during data entry. For example, if research
+is being conducted at sites A, B, and C, then the value V (which is
+right next to B on the keyboard) should never be entered. Likewise if
+one of the kinds of data being collected is a count, only integers
+greater than or equal to zero should be allowed.</p>
+<p>To control the kind of data entered into a spreadsheet we use Data
+Validation (Excel), to set the values that can be entered in each data
+column.</p>
+<p>1. Select the cells or column you want to validate</p>
+<p>2. On the <code>Data</code> tab select
+<code>Data Validation</code></p>
+<p><img src="images/spreadsheets/data_validation.png"
+alt="Image of Data Validation button on Data tab" /></p>
+<p>3. In the <code>Allow</code> box select the kind of data that should
+be in the column. Options include whole numbers, decimals, lists of
+items, dates, and other values.</p>
+<p><img src="images/spreadsheets/data_validation_window.png"
+alt="Image of Data Validation window" /></p>
+<p>4. After selecting an item enter any additional details. For example,
+if you’ve chosen a list of values, enter a comma-delimited or semi-colon
+list of allowable values in the <code>Source</code> box.</p>
+<p>Let’s try this out by setting the plot column in our cleaned data
+spreadsheet to only allow plot values that are integers between 1 and
+24.</p>
+<ol style="list-style-type: decimal">
+<li>Select the <code>Plot</code> column.</li>
+<li>On the <code>Data</code> tab select
+<code>Data Validation</code></li>
+<li>In the <code>Allow</code> box select <code>Whole number</code></li>
+<li>Set the minimum and maximum values to 1 and 24.</li>
+</ol>
+<p><img src="images/spreadsheets/plot_validation.png"
+alt="Image of Data Validation window for validating plot values" /></p>
+<p>Now let’s try entering a new value in the plot column that isn’t a
+valid plot. The spreadsheet stops us from entering the wrong value and
+asks us if we would like to try again.</p>
+<p><img src="images/spreadsheets/invalid_value.png"
+alt="Image of error when trying to enter invalid data" /></p>
+<p>You can also customize the resulting message to be more informative
+by entering your own message in the <code>Input Message</code> tab</p>
+<p><img src="images/spreadsheets/input_message.png"
+alt="Image of Input Message tab" /></p>
+<p>or allow invalid data to result in a warning rather than an error by
+modifying the <code>Style</code> option on the <code>Error Alert</code>
+tab.</p>
+<p><img src="images/spreadsheets/error_alert.png"
+alt="Image of Error Alert tab" /></p>
+<p>Quality assurance can make data entry easier as well as more robust.
+For example, if you use a list of options to restrict data entry, the
+spreadsheet will provide you with a drop-downlist of the available
+items. So, instead of trying to remember how to spell <em>Dipodomys
+spectabilis</em>, you can select the right option from the list.</p>
+<p><img src="images/spreadsheets/drop_down_list2.png"
+alt="Image of drop-down menu" /></p>
+</div>
+<div id="quality-control" class="section level4">
+<h4>Quality Control</h4>
+<p>Once data are entered, you can use a spreadsheet to identify values
+that may be incorrect by sorting or filtering the data. Sorting data
+will arrange all of the rows in a table according to the values found in
+one or more columns. Filtering data will only show rows where the data
+match the values selected for specific columns (e.g. Sex is “M”).</p>
+<p>To sort or filter data in a spreadsheet:</p>
+<ol style="list-style-type: decimal">
+<li>Select all of the data in the table to ensure that all of the data
+in a given row stays together. A quick way to do this is to click on the
+small triangle in the uppper left corner of the spreadsheet (between A
+and 1).</li>
+<li>Click on the Data tab.</li>
+<li>Select Sort or Filter.</li>
+<li>If you select Sort, a window will pop up asking which column you
+want to sort by and how to arrange the items (e.g. highest to lowest or
+lowest to highest). One way to QC your data is to sort by each column
+and quickly scan it from top to bottom for incorrect values.</li>
+<li>If you select Filter the header row will change to have small
+drop-down arrows. If you click on an arrow you can select the values
+that should show up in the table. Scanning the list of values available
+can be a quick way to spot incorrect values.</li>
+</ol>
+<div class="callout-important">
+<p>If your dataset is well-structured and does not contain formulas,
+sorting should never affect the integrity of your dataset. If your data
+do contain formulas, you may run into trouble. Be sure to save a
+text-only copy of your raw data before performing and quality control
+operations (see <a href="#dataexport">Data export</a> below).</p>
+</div>
+<div class="challenge">
+<p>We’ve combined all of the tables from the messy data into a single
+table in a single tab. Download this semi-cleaned data file to your
+computer: <a
+href="https://github.com/datacarpentry/spreadsheet-ecology-lesson/blob/gh-pages/data/survey_sorting_exercise.xlsx?raw=true">survey_sorting_exercise</a></p>
+<p>Once downloaded, sort the <code>Weight_grams</code> column in your
+spreadsheet program from <code>Largest to Smallest</code>.</p>
+<p>What do you notice?</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<p>Click the Sort button on the data tab in Excel. A pop-up will appear.
+Make sure you select <code>Expand the selection</code>.</p>
+<p>The following window will display, choose the column you want to sort
+as well as the sort order.</p>
+<p><img src="images/spreadsheets/sorting.png" /> {alt=‘quality_control1,
+exercise1’ .output}</p>
+<p>Notice how the incorrect values sort to the top and bottom of the
+tabular data. The cells containing no data values sort to the bottom of
+the tabular data, while the cells where the letter “g” was included can
+be found towards the top. This is a powerful way to check your data for
+outliers and incorrect values.</p>
+<p><img src="images/spreadsheets/sorting_solution_1.png" class="output"
+alt="quality_control2, exercise1" /></p>
+<p><img src="images/spreadsheets/sorting_solution_2.png" class="output"
+alt="quality_control3, exercise1" /></p>
+</div>
+</details>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="dataexport" class="section level3">
+<h3>Data export from spreadsheet programs</h3>
+<p>Storing the data you’re going to work with for your analyses in Excel
+default file format (<code>*.xls</code> or <code>*.xlsx</code> -
+depending on the Excel version) isn’t a good idea. Why?</p>
+<ul>
+<li><p>Because it is a proprietary format, and it is possible that in
+the future, technology won’t exist (or will become sufficiently rare) to
+make it inconvenient, if not impossible, to open the file.</p></li>
+<li><p>Other spreadsheet software may not be able to open files saved in
+a proprietary Excel format.</p></li>
+<li><p>Different versions of Excel may handle data differently, leading
+to inconsistencies.</p></li>
+<li><p>Finally, most data repositories don’t accept Excel format. It
+needs to be in one of the formats discussed below.</p></li>
+<li><p>The above points also apply to other formats such as open data
+formats used by LibreOffice / Open Office. These formats are not static
+and are not read the same way by different software packages.</p></li>
+</ul>
+<p>As an example of inconsistencies in data storage, do you remember how
+we talked about how Excel stores dates earlier? It turns out that there
+are multiple defaults for different versions of the software, and you
+can switch between them all. So, say you’re compiling Excel-stored data
+from multiple sources. There are dates in each file - Excel interprets
+them as their own internally consistent serial numbers. When you combine
+the data, Excel will take the serial number from the place you’re
+importing it from, and interpret it using the rule set for the version
+of Excel you’re using. Essentially, you could be adding errors to your
+data, and it wouldn’t necessarily be flagged by any data cleaning
+methods if your ranges overlap.</p>
+<p>Storing data in a universal, open, and static format will help deal
+with this problem. Try tab-delimited (tab separated values or TSV) or
+comma-delimited (comma separated values or CSV) formats. CSV files are
+plain text files where the columns are separated by commas, hence ‘comma
+separated values’ or CSV. The advantage of a CSV file over an Excel.
+file is that we can open and read a CSV file using just about any
+software, including plain text editors like TextEdit or NotePad. Data in
+a CSV file can also be easily imported into other formats and
+environments, such as R. We’re not tied to a certain version of a
+certain expensive program when we work with CSV files, so it’s a good
+format to work with for maximum portability and endurance. Most
+spreadsheet programs can save to delimited text formats like CSV easily,
+although they may give you a warning during the file export.</p>
+<p>To save a file you have opened in Excel in CSV format:</p>
+<ol style="list-style-type: decimal">
+<li>From the top menu select ‘File’ and ‘Save as’.</li>
+<li>In the ‘Format’ field, from the list, select ‘Comma Separated
+Values’ (<code>*.csv</code>).</li>
+<li>Double check the file name and the location where you want to save
+it and hit ‘Save’.</li>
+</ol>
+<p><img src="images/spreadsheets/excel-to-csv.png"
+alt="Saving an Excel file to CSV" /></p>
+<p>An important note for backwards compatibility: you can open CSV files
+in Excel!</p>
+<ol style="list-style-type: decimal">
+<li>Open Excel and click File &gt; Open.</li>
+<li>Navigate to the folder where the file is saved.</li>
+<li>Select All Files <em>.</em>.</li>
+<li>Click on the CSV file you wish to open. Excel will do the rest.</li>
+</ol>
+<div class="challenge">
+<p>What does a CSV file look like?</p>
+<ol style="list-style-type: decimal">
+<li>Follow the steps above to save your cleaned data table from this
+lesson as a new csv file in the <code>data/derived</code> directory of
+your R-course-NEON-workbook folder.</li>
+<li>Use your file browser to navigate to the location where you saved
+this file.</li>
+<li>Open the file with a text editor, such as Notepad (Windows) or
+TextEdit (Mac). You can do this by right-clicking on the files and
+selecting “Open With” (you may need to click “Choose another
+application”).</li>
+</ol>
+<p>You can also see the actual contents of a text-based data file using
+RStudio:</p>
+<ol style="list-style-type: decimal">
+<li>Use the File window in RStudio to navigate to the folder where the
+CSV file is saved.</li>
+<li>Click on the name of the CSV file then select
+<code>View file</code>.</li>
+<li>A new tab will open in the Source window.</li>
+</ol>
+</div>
+<div id="a-note-on-cross-platform-operability" class="section level4">
+<h4>A Note on Cross-platform Operability</h4>
+<p>Text files have a special line-ending character that tell the
+computer where a line ends. By default, most coding and statistical
+environments expect UNIX-style line endings (ASCII <code>LF</code>
+character) as representing line breaks. However, Windows uses an
+alternate line ending signifier (ASCII <code>CR LF</code> characters) by
+default.</p>
+<p>As such, when exporting to CSV using Excel, your data in text format
+will look like this:</p>
+<p><code>data1,data2&lt;CR&gt;&lt;LF&gt;1,2&lt;CR&gt;&lt;LF&gt;4,5&lt;CR&gt;&lt;LF&gt;</code></p>
+<p>When opening your CSV file in Excel again, it will parse it as
+follows:</p>
+<p><img src="images/spreadsheets/excel_line_endings_1.png"
+alt="Example of line endings parsed in Excel" /></p>
+<p>However, if you open your CSV file on a different system that does
+not understand the <code>CR</code> character it will interpret your CSV
+file differently. You may then see a weird character or possibly the
+string <code>CR</code> or <code>\r</code>:</p>
+<p><img src="images/spreadsheets/excel_line_endings_2.png"
+alt="Another example of line endings parsed in Excel" /></p>
+<p>Note that this happens on Excel for OSX as well as Windows. When
+exporting from Excel, be sure to save as a “Windows comma separated
+(.csv)” file.</p>
+</div>
+<div id="caveats-on-commas" class="section level4">
+<h4>Caveats on commas</h4>
+<p>In some datasets, the data values themselves may include commas (,).
+This is particularly true in countries that use commas as decimal
+separators. In that case, the software which you use (including Excel)
+will most likely incorrectly display the data in columns. This is
+because the commas which are a part of the data values will be
+interpreted as column delimiters.</p>
+<p>If you are working with data that contains commas, you likely will
+need to use another delimiter when working in a spreadsheet. In this
+case, consider using tabs as your delimiter and working with tab
+delimited files. Tab delimited files can be exported from spreadsheet
+programs in the same way as CSV files.</p>
+<div class="callout-tip">
+<p>When working with text based data files it can be helpful to use a
+more powerful text editor, such as <a
+href="https://notepad-plus-plus.org/">Notepad++</a> or <a
+href="https://www.barebones.com/products/bbedit/">BBEdit</a>. Using one
+of these editors will allow you to see whitespace characters such as
+tabs <code>\t</code> and line ending characters <code>LF</code>, which
+can be really handy when you need to troubleshoot problems with data
+formatting.</p>
+</div>
 </div>
 </div>
 </div>
@@ -499,36 +1333,75 @@ between projects.</p>
 </dd>
 </dl>
 <ol style="list-style-type: decimal">
-<li>follow best practices in formatting data tables</li>
-<li>document steps of a data analysis using metadata and a README
-file</li>
-<li>import and export text-based data tables using spreadsheet
-software</li>
+<li>integer(0)</li>
+<li>character(0)</li>
 </ol>
 <p>Number all exercises using the module number. Include starter code in
 the /exercises folder if appropriate.</p>
-<p>3.1</p>
-<p>3.2</p>
+<p><strong>3.1</strong></p>
+<ol style="list-style-type: decimal">
+<li>Submit the cleaned text-based data file
+<code>survey_data_spreadsheet_cleaned.csv</code> that you created while
+working through this lesson.</li>
+<li>Submit a text file documenting the steps you took to created the
+derived data file <code>survey_data_spreadsheet_cleaned.csv</code>. Name
+this text file 3.1.txt.</li>
+</ol>
+<p><strong>3.2</strong></p>
+<ol style="list-style-type: decimal">
+<li>Open the file <code>exercises/3.2_data.csv</code> in Excel or
+another spreadsheet program.</li>
+<li>Perform a quality control analysis on the data to identify any
+potentially missing or outlier data and record the errors that you
+found.</li>
+<li>List 3 ways that these data do not adhere to best practices in tidy
+data table formatting. How would you improve this?</li>
+<li>List 3 ways that these data do adhere to best practices in tidy data
+table formatting.</li>
+<li>What should be included in a metadata file that accompanies these
+data?</li>
+</ol>
 </div>
 <div id="sources-and-resources" class="section level2">
 <h2>Sources and Resources</h2>
 <p>This lesson was adapted from <a
 href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">Zimmerman et al. (2019)</span></a> episode 2 and
-XXXXXXX by Jes Coyle.</p>
-<div id="additional-resources" class="section level3">
-<h3>Additional Resources</h3>
-</div>
-<div id="cited-references" class="section level3 unnumbered">
-<h3 class="unnumbered">Cited References</h3>
+class="citation">Zimmerman et al. (2019)</span></a> episode 2 and <a
+href="https://datacarpentry.org/spreadsheet-ecology-lesson/"><span
+class="citation">Teal et al. (2019)</span></a> by Jes Coyle.</p>
+<p>Text on metadata adapted from the online course Research Data <a
+href="https://datalib.edina.ac.uk/mantra">MANTRA</a> by EDINA and Data
+Library, University of Edinburgh. MANTRA is licensed under a <a
+href="https://creativecommons.org/licenses/by/4.0/">Creative Commons
+Attribution 4.0 International License</a>.</p>
+<div id="cited-references" class="section level3">
+<h3>Cited References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Browman-Woo-2018" class="csl-entry">
+Broman, Karl W., and Kara H. Woo. 2018. <span>“Data Organization in
+Spreadsheets.”</span> <em>The American Statistician</em> 72 (1): 2–10.
+<a
+href="https://doi.org/10.1080/00031305.2017.1375989">https://doi.org/10.1080/00031305.2017.1375989</a>.
+</div>
+<div id="ref-Ernest2020" class="csl-entry">
+Ernest, Morgan, James Brown, Thomas Valone, and Ethan P. White. 2020.
+<span>“<span>Portal Project Teaching Database</span>,”</span> August. <a
+href="https://doi.org/10.6084/m9.figshare.1314459.v10">https://doi.org/10.6084/m9.figshare.1314459.v10</a>.
+</div>
 <div id="ref-dc-spreadsheet-lesson" class="csl-entry">
 Teal, Tracy, Erin Alison Becker, apawlik, Peter Hoyt, Francois
-Michonneau, Christie Bahlai, Ethan White, et al. 2019. <em><span
+Michonneau, Christie Bahlai, Ethan White, et al. 2019. <span>“<span
 class="nocase">datacarpentry/spreadsheet-ecology-lesson: Data Carpentry:
-Data Organization in Spreadsheets for Ecologists, June 2019</span></em>
-(version v2019.06.2). Zenodo. <a
+Data Organization in Spreadsheets for Ecologists, June
+2019</span>.”</span> Zenodo. <a
 href="https://doi.org/10.5281/zenodo.3269869">https://doi.org/10.5281/zenodo.3269869</a>.
+</div>
+<div id="ref-white_et_al_2013" class="csl-entry">
+White, Ethan, Elita Baldridge, Zachary Brym, Kenneth Locey, Daniel
+McGlinn, and Sarah Supp. 2013. <span>“Nine Simple Ways to Make It Easier
+to (Re)use Your Data.”</span> <em>Ideas in Ecology and Evolution</em> 6
+(2). <a
+href="https://doi.org/10.4033/iee.2013.6b.6.f">https://doi.org/10.4033/iee.2013.6b.6.f</a>.
 </div>
 <div id="ref-swc-reproducible-lesson" class="csl-entry">
 Zimmerman, Naupaka, Greg Wilson, Raniere Silva, Scott Ritchie, François
@@ -577,11 +1450,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

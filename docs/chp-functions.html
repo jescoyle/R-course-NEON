@@ -378,13 +378,15 @@ class="citation">Zimmerman et al. (2019)</span></a> episodes 9, 10</p>
 <ul>
 <li>NEON Utilities functions &amp; reading a function help file</li>
 </ul>
-<p>In this lesson learners will:</p>
+<dl>
+<dt>In this lesson</dt>
+<dd>
+
+</dd>
+</dl>
 <ul>
-<li>describe what vectorized functions are and how to use them in R</li>
-<li>explain how functions work and define and our own functions in
-R</li>
-<li>explain why we should divide programs into small single-purpose
-functions</li>
+<li>integer(0)</li>
+<li>character(0)</li>
 </ul>
 </div>
 <div id="motivator" class="section level3">
@@ -442,8 +444,162 @@ Fig. 5.1. Population growth in the United States 1952 - 2007.
 </blockquote>
 </blockquote>
 </div>
-<div id="section-2" class="section level3">
-<h3>Section 2</h3>
+<div id="packages" class="section level3">
+<h3>Packages</h3>
+</div>
+<div id="installing-and-loading-packages" class="section level3">
+<h3>Installing and loading packages</h3>
+<p>“base” R is the functionality that comes installed with R, but the
+powerful thing about R is its user community who have created thousands
+of <strong>packages</strong> that increase its functionality. It is
+possible to add functions to R by writing a package, or by obtaining a
+package written by someone else. As of this writing, there are nearly
+20,000 packages available on <a
+href="https://cran.r-project.org/">CRAN</a> (the comprehensive R archive
+network).</p>
+<p>Packages can also be viewed, loaded, and detached in the Packages tab
+of the lower right panel in RStudio. Clicking on this tab will display
+all of the installed packages with a checkbox next to them. If there is
+nothing listed then you do not have any packages installed. Packages can
+be installed and updated from the Package tab with the Install and
+Update buttons at the top of the tab.</p>
+<p>Let’s install the <code>neonUtilities</code> package. Click the
+Install button. In the pop-up that appears, type
+<code>neonUtilities</code>. Do not change any of the other settings,
+then click Install.</p>
+<p>Notice what happens in the R Console.</p>
+<p>Instead of clicking the Install button, we could have installed this
+packages by typing <code>install.packages("neonUtilities")</code> into
+the Console.</p>
+<p>Now this package should appear in the list of installed packages with
+an empty checkbox next to it. The empty checkbox indicates that the
+package is not <strong>loaded</strong> yet in this R session. That means
+we cannot use the functions in it yet. You can load and unload packages
+by clicking on the box next to them. Notice what happens in the Console
+when you check and uncheck the box next to neonUtilities:</p>
+<ul>
+<li>You can make a package available for use in your R session with
+<code>library(packagename)</code>.</li>
+<li>You can make a previously loaded package unavailable in your R
+session with <code>detach("packagename", unload = TRUE)</code>. This is
+sometimes necessary if two packages are using the same name for a
+function.</li>
+</ul>
+<div class="callout-important">
+<p>Packages only need to be installed <strong>once</strong>. This saves
+the package to a location on your computer that R can access.</p>
+<p>You need to load packages <strong>every time</strong> you open a new
+R session, if you want to be able to use the functions in them.</p>
+</div>
+<div class="callout-trick">
+<p>You actually can use the functions in a package that is installed,
+but not loaded. To do this you need to type the the name of the package
+first, followed by two colons (::) and then the name of the function.
+For example: <code>neonUtilities::loadByProduct()</code>.</p>
+</div>
+<div class="challenge">
+<p>Write a line of code in your new R script that will load the
+<code>neonUtilities</code> package.</p>
+</div>
+<div class="solution">
+<p>We can use the <code>library()</code> command load a packages. Notice
+that the name of the packages <strong>is not</strong> inside quotation
+marks. This is different from the <code>install.packages()</code>
+function, where the package name must be quoted.</p>
+<pre class="r"><code>library(neonUtilities)</code></pre>
+</div>
+<div id="getting-help-with-packages" class="section level4">
+<h4>Getting Help with Packages</h4>
+<p>Many packages come with “vignettes”: tutorials and extended example
+documentation. Without any arguments, <code>vignette()</code> will list
+all vignettes for all installed packages;
+<code>vignette(package="package-name")</code> will list all available
+vignettes for <code>package-name</code>, and
+<code>vignette("vignette-name")</code> will open the specified
+vignette.</p>
+<p>If a package doesn’t have any vignettes, you can usually find help by
+typing <code>help("package-name")</code>.</p>
+<p>RStudio also has a set of excellent <a
+href="https://rstudio.com/resources/cheatsheets/">cheatsheets</a> for
+many packages.</p>
+</div>
+<div id="when-you-remember-part-of-the-function-name"
+class="section level4">
+<h4>When You Remember Part of the Function Name</h4>
+<p>If you’re not sure what package a function is in or how it’s
+specifically spelled, you can do a fuzzy search:</p>
+<pre class="r"><code>??function_name</code></pre>
+<p>A fuzzy search is when you search for an approximate string match.
+For example, you may remember that the function to set your working
+directory includes “set” in its name. You can do a fuzzy search to help
+you identify the function:</p>
+<pre class="r"><code>??set</code></pre>
+</div>
+<div id="when-you-have-no-idea-where-to-begin" class="section level4">
+<h4>When You Have No Idea Where to Begin</h4>
+<p>If you don’t know what function or package you need to use <a
+href="http://cran.at.r-project.org/web/views">CRAN Task Views</a> is a
+specially maintained list of packages grouped into fields. This can be a
+good starting point.</p>
+</div>
+<div id="when-your-code-doesnt-work-seeking-help-from-your-peers"
+class="section level4">
+<h4>When Your Code Doesn’t Work: Seeking Help from Your Peers</h4>
+<p>If you’re having trouble using a function, 9 times out of 10, the
+answers you seek have already been answered on <a
+href="http://stackoverflow.com/">Stack Overflow</a>. You can search
+using the <code>[r]</code> tag. Please make sure to see their page on <a
+href="https://stackoverflow.com/help/how-to-ask">how to ask a good
+question.</a></p>
+<p>If you can’t find the answer, there are a few useful functions to
+help you ask your peers:</p>
+<pre class="r"><code>?dput</code></pre>
+<p>Will dump the data you’re working with into a format that can be
+copied and pasted by others into their own R session.</p>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.2.1 (2022-06-23 ucrt)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 22621)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=C                            
+[3] LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods  
+[7] base     
+
+other attached packages:
+[1] ggplot2_3.3.6 dplyr_1.0.9   knitr_1.41   
+
+loaded via a namespace (and not attached):
+ [1] highr_0.10       pillar_1.7.0     bslib_0.4.2     
+ [4] compiler_4.2.1   jquerylib_0.1.4  tools_4.2.1     
+ [7] digest_0.6.29    jsonlite_1.8.0   evaluate_0.15   
+[10] lifecycle_1.0.3  tibble_3.1.7     gtable_0.3.0    
+[13] pkgconfig_2.0.3  rlang_1.0.6      cli_3.5.0       
+[16] rstudioapi_0.13  yaml_2.3.6       xfun_0.36       
+[19] fastmap_1.1.0    withr_2.5.0      stringr_1.5.0   
+[22] generics_0.1.2   vctrs_0.4.1      sass_0.4.4      
+[25] grid_4.2.1       tidyselect_1.1.2 glue_1.6.2      
+[28] R6_2.5.1         fansi_1.0.3      rmarkdown_2.19  
+[31] farver_2.1.0     purrr_0.3.4      magrittr_2.0.3  
+[34] scales_1.2.0     ellipsis_0.3.2   htmltools_0.5.4 
+[37] rsconnect_0.8.29 colorspace_2.0-3 labeling_0.4.2  
+[40] utf8_1.2.2       stringi_1.7.8    munsell_0.5.0   
+[43] cachem_1.0.6     crayon_1.5.1    </code></pre>
+<p>Will print out your current version of R, as well as any packages you
+have loaded. This can be useful for others to help reproduce and debug
+your issue.</p>
+</div>
+</div>
+<div id="section-3" class="section level3">
+<h3>Section 3</h3>
 <div id="what-are-programs" class="section level4">
 <h4>What are programs?</h4>
 <p>Let’s write a small program</p>
@@ -486,12 +642,8 @@ store the analysis scripts.</p>
 </dd>
 </dl>
 <ol style="list-style-type: decimal">
-<li>define and use a function with multiple arguments in R</li>
-<li>define default values for function arguments in R</li>
-<li>write checks on argument conditions within a function in R</li>
-<li>differentiate between missing values (<code>NA</code>) and empty
-values (<code>NULL</code>) in R</li>
-<li>use R to source code from a script</li>
+<li>integer(0)</li>
+<li>character(0)</li>
 </ol>
 <p>Number all exercises using the module number. Include starter code in
 the /exercises folder if appropriate.</p>
