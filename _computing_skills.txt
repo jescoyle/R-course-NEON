@@ -13,11 +13,13 @@ intro-to-R	8	access and understand a function's documentation page	use R and RSt
 spreadsheets	1	follow best practices in formatting data tables	
 spreadsheets	2	document steps of a data analysis using metadata and a README file	
 spreadsheets	3	import and export text-based data tables using spreadsheet software	
-data-structures	1	"differentiate between vectors, arrays, lists and data frames in R"	
-data-structures	2	"differentiate between numeric, character, factor and logical data types in R"	
-data-structures	3	view the structure and class of an object in R	
-data-structures	4	subset data frames and vectors in R	
-data-structures	5	"write logical test expressions using `==`,`!=`, `>`, `<`, and `%in%` "	
+data-structures	1	"create and extract or set values in vectors, matrices and arrays in R"
+data-structures 2 "create and extract or set values in lists in R"
+data-structures 3 "create and manipulate the columns of data frames in R"
+data-structures 4 subset the rows a of data frame in R
+data-structures	5	"differentiate between numeric, character, factor and logical data types in R"	
+data-structures	6	view the structure and class of an object in R	
+data-structures	7	"write logical test expressions using `==`,`!=`, `>`, `<`, and `%in%` "	
 functions	1	define and use a function with multiple arguments in R	
 functions	2	define default values for function arguments in R	
 functions	3	write checks on argument conditions within a function in R	

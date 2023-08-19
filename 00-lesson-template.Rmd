@@ -71,21 +71,23 @@ dat <- read.csv("data/gapminder_data.csv")
 
 
 ::: {.challenge}
-> **Try this:** What should be the ouput for each of these commands?
-> ```{r eval = FALSE}
-> log(exp(3 + 3)) 
-> 2e-1 + 5
-> ```
+What should be the ouput for each of these commands?
+``{r eval = FALSE}
+log(exp(3 + 3)) 
+e-1 + 5
+```
 
 <details><summary>**Solution:**</summary>
 ::: {.solution}
-> ```{r echo = FALSE}
-> log(exp(3 + 3)) 
-> 2e-1 + 5
-> ```
+```{r echo = FALSE}
+log(exp(3 + 3)) 
+2e-1 + 5
+```
 :::```
 </details>
 :::
+
+<br>
 
 ### Section 2
 

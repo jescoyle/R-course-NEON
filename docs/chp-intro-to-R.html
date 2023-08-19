@@ -1014,7 +1014,7 @@ instead of a listing of objects.</p>
     }
     else all.names
 }
-&lt;bytecode: 0x00000245d8ca1960&gt;
+&lt;bytecode: 0x000001dc4beca120&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 <p>What’s going on here?</p>
 <p>Like everything in R, <code>ls</code> is the name of an object, and
@@ -1475,6 +1475,7 @@ plot(x = watertemp$startDateTime, y = watertemp$surfWaterTempMean)</code></pre>
 <code>plot(y ~ x, data = dataframename)</code>:</p>
 <pre class="r"><code>plot(surfWaterTempMean ~ startDateTime, data = watertemp)</code></pre>
 <p><img src="images/rmd-02-unnamed-chunk-72-1.png" width="816" style="display: block; margin: auto;" /></p>
+</div>
 <p>In R there are usually many ways to write code that does the same
 thing. In general, the best choice is usually the one that is easiest to
 read and which involves the least repetition. Which version do you think
@@ -1485,8 +1486,13 @@ efficient and readable:</p>
 <pre class="r"><code># Calculate the upper and lower bounds on temperature using the
 # mean and expected uncertainty columns in the watertemp data frame
 temp_upperbound &lt;- with(watertemp, surfWaterTempMean + surfWaterTempExpUncert)
-temp_lowerbound &lt;- with(watertemp, surfWaterTempMean + surfWaterTempExpUncert)</code></pre>
-</div>
+temp_lowerbound &lt;- with(watertemp, surfWaterTempMean - surfWaterTempExpUncert)
+
+# Print the first 10 values of each of these vectors
+temp_upperbound[1:10]</code></pre>
+<pre><code> [1] 4.308 4.184 3.992 3.785 3.606 3.447 3.311 3.210 3.122 3.045</code></pre>
+<pre class="r"><code>temp_lowerbound[1:10]</code></pre>
+<pre><code> [1] 4.032 3.908 3.716 3.509 3.330 3.171 3.035 2.934 2.846 2.769</code></pre>
 <p>Now that you have written your first R script it is time to save your
 work! Click on the save icon at the top of the Source panel.</p>
 <div class="callout-important">

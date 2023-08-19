@@ -2,9 +2,10 @@
 title:  
 output:
   html_document:
-    code_folding: show
     toc: false
 bibliography: references.bib
+nocite: |
+  @NEON-sufwaternitrate, @NEON-surfwatertemp, @NEON-surfwaterquality, @NEON-microbialcellcounts
 ---
 
 
@@ -13,76 +14,511 @@ bibliography: references.bib
 source("src/setup.R")
 
 # get chapter number based on name
-chp_num <- get_chpNum("chp-data-structures", type = "fileName")
-chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
+.chp <- "data-structures"
+.chp_num <- .get_chpNum("chp-data-structures", type = "fileName")
+.chp_str <- ifelse(nchar(.chp_num) > 1, .chp_num, paste0("0", .chp_num))
 
 # knitr options
 source("src/knit-options.R")
-knitr_fig_path(paste0(chp_str, "-"))
-
-# Silently load in the data for this lesson
-gapminder <- read.csv("data/gapminder_data.csv", header = TRUE)
+.knitr_fig_path(paste0(.chp_str, "-"))
 
 # Silently set seed for random number generation, so we don't have to explain it
 set.seed(10)
 ```
 
-# Chapter `r chp_num`. `r get_chpName(chp_num, type.to = "nameLong")` {.tabset}
+# Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
 
 **THIS LESSON IS NOT YET READY FOR LEARNERS.**
 
 ## Overview 
 
-*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 4, 5, 6, 11
+> MOTIVATOR
 
 ### What we will learn
 
-Brief description of the contents of this lesson.
-
-
-- Basic data types in R
-  - vectors vs. lists
-  - multidimensional arrays
-  - dataframes vs. matrices
-  - data types: numeric, character, factor, logical
-- Manipulating data frames
-- Subsetting vectors and data frames
-
-
 In this lesson 
-`r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`
+`r .get_LO(as.numeric(.chp_num), .LOtable, prefix = TRUE)`
 
-### Motivator
+#### Key Terms & Commands
 
-Describe a problem that learners will be able to solve by the end of this lesson.
+* data type
+* object class
+* factor and levels
+* `typeof()`, `class()`, `str()`
+* `factor()`, `levels()`
 
-### Get set up
+### Prerequisites
 
-Describe any data sets or packages that learners need to download or install before proceeding.
+Before beginning this lesson you should have completed the lessons [`r .get_chpName("computer-navigation", type.from = "chp")`](chp-computer-navigation.html) and [`r .get_chpName("intro-to-R", type.from = "chp")`](chp-intro-to-R.html).
 
-```{r results = 'hide'}
-# Read in a data file from the data folder included with the student workbook
-dat <- read.csv("data/gapminder_data.csv")
+Before you begin:
+
+1. Open the R-course-NEON-workbook RStudio project.
+2. Create a new R script named `r paste0("lesson_", .chp_str, "_code.R")` in the lesson-code folder of the student workbook.
+3. Whenever you see a box 
+
+:::{.challenge}
+```{r eval = FALSE}
+Type this code into your R script.
 ```
+:::
+4. Be sure to click Save often to save your work.
 
-Make a code block that loads any packages needed for the analysis. It can be helpful to indicate which functions come from which packages.
-
-```{r results = 'hide', warning = FALSE, message = FALSE}
-
-# Load dplyr: filter
-library(dplyr)
-
-# Load ggplot2: ggplot
-library(ggplot2)
-
-```
 
 ## Lesson
 
+In this lesson we will be using R to work with data from NEON's Teakettle Creek aquatic site. Data come from the downstream sensor location and include information on surface water temperature ([DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001)), nitrate [DP1.20033.001](https://data.neonscience.org/data-products/DP1.20033.001) and water quality ([DP1.20288.001](https://data.neonscience.org/data-products/DP1.20288.001)). Data were downloaded and summarized into a table which is located in the student workbook project: `data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv`.
+
+Let's begin by reading these data into R.
+
+:::{.challenge}
+Use the `read.csv()` function to read the `surfwater_30min_avg_TECR_2021-04_2021-10.csv` file into a data frame named `surfwater`.
+
+<details><summary>**Solution:**</summary>
+::: {.solution}
+
+```{r}
+# Load the NEON surface water data from TEAK site
+surfwater <- read.csv("data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv")
+
+```
+
+NOTE: Remember to include the relative path to the file from the project working directory. The path to the file needs to be in quotes ("").
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+### Basic data types in R
+
+In computer science, data come in several different types based on their quantitative or qualitative properties and how the computer stores their values. R uses several different **data types** which you should be aware of:
+
+* **integer** = the countable numbers (e.g. 1, 2, 3, ...)
+* **double** = numbers stored as a decimal approximation
+* **character** = text 
+* **logical** = data that can only be either `TRUE` or `FALSE` (computed and stored as `1` or `0`)
+* **complex** = a complex number with an imaginary part (e.g. `2+4i`)
+
+We can check the type of data in an object using the `typeof()` function.
+
+```{r}
+typeof(1:10)
+typeof(-3.4)
+typeof(c(TRUE, FALSE))
+```
 
 
-### Comparing things
+In the lesson [`r .get_chpName("intro-to-R", type.from = "chp")`](chp-intro-to-R.html), we learned that a **vector** is an ordered set of values that are all of the same type. We also learned that the columns of a **data frame** are vectors. Let's see how this works.
+
+In the Environment panel, click on the blue arrow next to `surfwater`. Notice that each column name appears as `$ columnname` followed by a `:` and then information about the data type of each column and the first few entries.
+
+::: {.challenge}
+
+What is the data type of the `siteID` column? What is the data type of the `pH.mean` column? How could you check?
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+Remember that to access a column of a data frame we can use the `$` symbol:
+```{r}
+# Print the type of data in the siteID column
+typeof(surfwater$siteID)
+
+# Print the type of data in the pH.mean column
+typeof(surfwater$pH.mean)
+```
+
+:::
+</details>
+:::
+
+<br>
+
+Let's explore vectors a bit more. Let's take the first 10 values in the `pH.mean` column and assign them to a new vector:
+
+```{r}
+# Select values 1 - 10 of the pH.mean column in surfwater
+pH_top10 <- surfwater$pH.mean[1:10]
+
+```
+
+Suppose we discover that the first value of this vector is invalid and need to replace it with a missing value (`NA`). Do you think this will change the type of data in the vector?
+
+```{r}
+pH_top10[1] <- NA
+
+pH_top10
+
+typeof(pH_top10)
+
+```
+The data type stays the same. Now what do you think will happen if we replace the first value with something more ambiguous:
+
+```{r eval = FALSE}
+pH_top10[1] <- "7.2 or 7.3"
+
+pH_top10
+
+typeof(pH_top10)
+```
+
+<details><summary>Answer:</summary>
+
+```{r echo = FALSE}
+pH_top10[1] <- "7.2 or 7.3"
+
+pH_top10
+
+typeof(pH_top10)
+
+```
+The vector now has type character because all elements in the vector must have the same data type and "7.2 or 7.3" is not a number.
+
+</details>
+<br>
+
+::: {.callout-tip}
+
+At some point you may come across a strange value in a vector that you thought contained numeric data:
+
+* `Inf`  = positive infinity
+* `-Inf` = negative infinity
+* `NaN` = not a number (undefined)
+
+These can be good warning signs that you calculations involve 0 or are potentially not doing what you thought they should be doing:
+
+```{r}
+x <- -4:4
+
+x
+
+x/0
+
+x/x
+
+```
+
+:::
+
+
+
+### Common data objects in R
+
+We have already learned about two ways that R stores data: vectors and data frames. Each of these is a **class** of objects. In computer science, an object's class determines what kinds of things you can do with it. For example, since vectors are ordered we can select individual elements from them using integer **indices**:
+
+```{r}
+# Print the second element in the vector
+pH_top10[2]
+
+```
+
+You can find out the class of an object using the `class()` function.
+
+```{r}
+class(pH_top10)
+
+class(surfwater$pH.mean)
+
+class(surfwater)
+
+```
+That's interesting: note that the class of a vector isn't "vector", but the type of the data stored in it.
+
+#### Factors
+
+A factor is a type of vector whose data are categorical. More specifically, the elements come from a finite set of values called **levels**. For example, in the small mammal data in lesson [`r .get_chpName("spreadsheets", type.from = "chp")`](chp-spreadsheets.html), the sex of the rodents was only male or female. Factors come up quite often in R, so it is important to understand how they store data.
+
+In the `surfwater` data frame, the `siteID` column identifies the NEON site where the data are collected. This column is currently a character vector, but it would be reasonable to convert it to a factor since there are only a finite number of distinct sites that data could come from.
+
+```{r}
+# Create a new vector containing the first 10 values of the siteID column
+sites <- surfwater$siteID[1:10]
+
+# View the contents of the vector and its class
+sites
+class(sites)
+
+# Convert to a factor
+sites <- factor(sites)
+
+# View the contents of the factor and its class
+sites
+class(sites)
+
+```
+The data now have class "factor" instead of "character" and the elements are no longer surrounded by quotes. We also see that this factor has one level (i.e. one possible value) which is `TECR`.
+
+What happens if we try to add a new element with a different value onto this factor?
+
+```{r}
+# Concatenate a new value to the end of sites
+sites2 <- c(sites, "ABCD")
+
+sites2
+class(sites2)
+```
+The factor was converted back to a character vector to match the type of data we added (`"ABCD"`). Where did the `"1"` come from? 
+
+The most important thing to remember about factors is that the values in the vector are actually integers, with each integer corresponding to a level. The labels for the levels are saved in an attribute of the factor and can be accessed using the function `levels()`.
+
+```{r}
+# Create a factor with a new set of sites
+sites <- factor(c("TECR", "TECR", "TECR", "ABCD"))
+
+# View the contents of sites
+sites
+
+
+# Print the levels of the factor
+levels(sites)
+
+# View the underlying integer values in the factor by converting it to an integer
+as.integer(sites)
+
+```
+By default, R will alphabetize a character vector before assigning levels, so even though `"TECR"` came first in the vector, `"ABCD"` comes first alphabetically and was assigned to the first level.
+
+You can change the default levels after creating a vector using the `levels()` function.
+```{r}
+# Change the levels in sites
+levels(sites) <- c("TECR", "ABCD")
+
+sites
+as.integer(sites)
+
+```
+Or, you can define the levels of a factor when you initially create it. 
+
+```{r}
+# Define a new factor containing sites names
+sites <- factor(c("TECR", "TECR", "TECR", "ABCD"), levels = c("TECR", "ABCD", "GGGG"))
+sites
+
+```
+Note that a factor can contain levels that don't actually appear in the data.
+
+Factors and their levels become important if you need to do make graphs with or do statistics on categorical data.
+
+
+#### Vectors vs. lists
+
+Vectors are great for handling data, but what if you need to combine values that are not the same data type? That's where a **list** becomes useful. A list is an ordered set of values or objects that do not need to have the same data type. You can create a list using the `list()` function.
+
+
+```{r}
+sitelist <- list("TECR", "ABCD", 7:9, 100)
+sitelist
+
+```
+`sitelist` has four elements: the first two are each character vectors with one element, the third element is an integer vector with the numbers 7 - 9, and the fourth element of the list is a numeric vector with one element (100).
+
+Vectors and lists are both one-dimensional and contain a finite number of elements, also known as their **length**.
+
+```{r}
+length(1:3)
+
+length(list(1:3))
+
+```
+Because vectors and lists are one-dimensional, we can access their elements using integer indices, but the exact way to do this differs. We use a single set of brackets `[ ]` to access the elements of a vector and a double set of brackets `[[ ]]`to access the elements of a list.
+
+```{r}
+# Access the third element of sitelist
+sitelist[[3]]
+
+# Access the first element of the vector in the third element of sitelist
+sitelist[[3]][1]
+
+```
+
+
+::: {.challenge}
+Figure out how each of these lists differ using the `length()` function:
+
+```{r}
+x <- list(1, 2, 3)
+
+y <- list(1:3)
+
+z <- list(1, 2:3)
+```
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+```{r}
+# This is a list with three elements: the numbers 1, 2, and 3
+x 
+length(x)
+
+# This is a list with one element: a vector with the numbers 1, 2 and 3
+y
+length(y)
+
+# This is a list with two elements: the number 1 is the first element and a vector with
+# the numbers 2 and 3 is the second element
+z
+length(z)
+```
+:::
+
+</details>
+
+:::
+
+<br>
+
+Whenever you lose track of what is contained in an object, it is useful to examine the object's structure using the `str()` function. Let's see how this works on one of the lists we made:
+
+```{r}
+# What is the structure of the object sitelist
+str(sitelist)
+
+```
+
+We see that it is a list with 4 elements and these elements are then summarized.
+
+#### Matrices vs. Dataframes
+
+Now that we are starting to understand the two main one-dimensional data objects in R (vectors and lists) we can talk about two-dimensional data objects. We've already seen one of these- the **data frame**. A data frame is a special type of list!
+
+A data frame is a list where each element is a vector that has the same length, but the vectors can have different data types from each other. This makes it a very flexible and useful way to work with data tables.
+
+Let's check out the structure of the `surfwater` dataframe.
+
+```{r}
+str(surfwater)
+
+```
+We can see that it is a data frame with 10272 rows and 11 columns. The names of the columns are given after the `$` symbol, along with  a preview of their contents. This is very similar in structure to the output when we used `str()` on a list. The main difference is that each element in this list has a **name** which is the name of the column.
+
+```{r}
+# What are the names of the elements in surfwater?
+names(surfwater)
+
+# What are the names of the elements in sitelist?
+names(sitelist)
+```
+
+The elements of `sitelist` don't have names, so we get `NULL`. We could assign names using the `names()` function. These then show up in the structure of the object
+
+```{r}
+# Assign names to the elements of sitelist
+names(sitelist) <- c("site1", "site2", "values1", "values2")
+
+# View the structure of the object
+str(sitelist)
+
+# Access the element named values2
+sitelist$values2
+
+```
+In summary, a data frame is a **named list**, which means that we can access its named elements using the `$` symbol: `dataframe$columnname`. However since a data frame is also just a list, you can also access columns using `[[ ]]`, though this is not commonly done.
+
+```{r}
+# Print the first 10 elements in the 3rd column of the surfwater data frame
+surfwater[[3]][1:10]
+
+```
+
+In contrast, a **matrix** is like a 2-dimensional vector- all of the elements must have the same data type. One way to make a matrix is by using the `matrix()` function:
+
+```{r}
+# Make a 2 x 3 matrix filled with the numbers 10 - 15 
+X <- matrix(10:15, nrow = 2, ncol = 3)
+
+X
+
+```
+We access the elements of a matrix using single square brackets with a comma to denote the row and column we need: `X[r, c]`.
+
+```{r}
+X[2, 3] # the element in the second row and third column
+
+X[, 2] # the second column
+
+X[1, ] # the first row
+
+X[2,] # spaces don't matter!
+X[ 2  ,   ]
+
+```
+
+We can also the same method to access elements in a dataframe.
+
+```{r}
+surfwater[2, 3] # the element in the second row and third column
+
+surfwater[1:10, 5] # the first 10 elements in the fifth column
+
+surfwater[3, ] # the third row
+
+
+```
+
+::: {.challenge}
+
+What class of object is returned by each of the commands above?
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+```{r}
+class(surfwater[2, 3]) # a character vector
+
+class(surfwater[1:10, 5]) # a numeric vector
+
+class(surfwater[3, ]) # a data frame
+
+```
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+We can append rows and columns to matrices and data frames using `rbind()` and `cbind()`.
+
+<!-- WORKING HERE -->
+
+:::{.callout-trick}
+Matrices are two dimensional objects where every element has the same data type. Matrices are a special case of an **array**, which is an n-dimensional object in which every element has the same data type. You may not need to use arrays very often, but it is useful to know they exist.
+
+Create an array using `array(data, dim)`, where data contains the values to put in the array and dim is an integer vector specifying its dimensions. Here's an example of a 3-dimensional array and how to access its elements:
+
+```{r}
+Z <- array(1:24, c(4, 3, 2))
+
+Z
+
+Z[2, 3, 1]
+```
+
+:::
+
+
+
+
+
+#### 
+
+
+
+
+### Logical comparisons
+
+
 
 We can also do comparisons in R:
 
@@ -133,63 +569,49 @@ We can also do comparisons in R:
 
 
 
-```{r}
-# This is an R code block that will execute any code inside and show the results.
-dat %>%
-  filter(country == "United States")
+### Putting it all together
 
-```
+Microbial cell counts are from [DP1.20138.001](https://data.neonscience.org/data-products/DP1.20138.001).
 
+Why such differences?
 
-
-```{r usa_pop_fig}
-#| echo = FALSE,
-#| fig.cap = paste0("Fig. ", chp_num, ".1. Population growth in the United States 1952 - 2007.")
-
-# Note that figure caption numbers are not automatic here.
-
-# Plot year vs. population size for United States
-dat %>%
-  filter(country == "United States") %>%
-  ggplot(aes(x = year, y = pop)) +
-  geom_line() +
-  labs(x = "Year", y = "Population size")
-
-```
+Suppose we want to view surface water data only from the timepoints when microbial cells were sampled.
 
 
-### Section 1
 
 
-> ***CHALLENGE:*** What will this code do?
->
-> ```r
-> 1 + 1
-> ```
-> > ```{r class.source = 'fold-hide', collapse = TRUE}
-> > 1 + 1
-> > ```
-
-### Section 2
 
 
 ## Exercises
 
 After completing these exercises, learners will be able to 
-`r get_LO(as.numeric(chp_num), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(as.numeric(.chp_num), .CStable, prefix = TRUE, bullet = "1.")`
+
+data-structures	1	"create and extract or set values in vectors, matrices and arrays in R"
+data-structures 2 "create and extract or set values in lists in R"
+data-structures 3 "create and manipulate the columns of data frames in R"
+data-structures 4 subset the rows a of data frame in R
+data-structures	5	"differentiate between numeric, character, factor and logical data types in R"	
+data-structures	6	view the structure and class of an object in R	
+data-structures	7	"write logical test expressions using `==`,`!=`, `>`, `<`, and `%in%` "	
+
+**`r .chp_num`.1** 
+
+**`r .chp_num`.2** 
 
 
-Number all exercises using the module number. Include starter code in the /exercises folder if appropriate.
 
-`r chp_num`.1 
 
-`r chp_num`.2 
+
 
 
 
 ## Sources and Resources
 
-This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 1 by Jes Coyle.
+This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 4, 5, 6, and 11 by Jes Coyle.
+
+
+
 
 ### Additional Resources
 

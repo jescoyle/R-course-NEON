@@ -1023,6 +1023,8 @@ plot(surfWaterTempMean ~ startDateTime, data = watertemp)
 
 ```
 
+:::
+
 In R there are usually many ways to write code that does the same thing. In general, the best choice is usually the one that is easiest to read and which involves the least repetition. Which version do you think is better here?
 
 Similarly, if we are working with several columns in the same data frame, the `with()` function can make code much more efficient and readable:
@@ -1031,10 +1033,14 @@ Similarly, if we are working with several columns in the same data frame, the `w
 # Calculate the upper and lower bounds on temperature using the
 # mean and expected uncertainty columns in the watertemp data frame
 temp_upperbound <- with(watertemp, surfWaterTempMean + surfWaterTempExpUncert)
-temp_lowerbound <- with(watertemp, surfWaterTempMean + surfWaterTempExpUncert)
+temp_lowerbound <- with(watertemp, surfWaterTempMean - surfWaterTempExpUncert)
+
+# Print the first 10 values of each of these vectors
+temp_upperbound[1:10]
+temp_lowerbound[1:10]
 
 ```
-:::
+
 
 Now that you have written your first R script it is time to save your work! Click on the save icon at the top of the Source panel.
 

@@ -7,7 +7,11 @@ if(!neonUtilities_isavailable){
   library("neonUtilities")
 }
 
-## NOT USING THE FOLLOWING YET ###
+# Load other packages
+library(dplyr)
+library(tidyr)
+library(lubridate)
+
 ## Surface water and community data from Teakettle Creek, NEON
 
 # Define dates for download: Defined based on when data are collected for the organismal samples
@@ -21,22 +25,22 @@ aquasite <- "TECR" # Teakettle Creek, Sierra Nevada, CA
 
 
 # Microbial cell counts in surface water
-microbe_abun <- loadByProduct(dpID = "DP1.20138.001",
+microbes <- loadByProduct(dpID = "DP1.20138.001",
                               site = aquasite,
                               startdate = startdate,
                               enddate = enddate)
 
 # Periphyton, seston and phytoplankton collection # provisional as of 7/2023, May, Aug, Sept 2021
-plankton <- loadByProduct(dpID = "DP1.20166.001",
-                          site = aquasite,
-                          startdate = startdate,
-                          enddate = enddate)
+# plankton <- loadByProduct(dpID = "DP1.20166.001",
+#                           site = aquasite,
+#                           startdate = startdate,
+#                           enddate = enddate)
 
 # Macroinvertebrate collection: May, July, Sept 2021
-inverts <- loadByProduct(dpID = "DP1.20120.001",
-                         site = aquasite,
-                         startdate = startdate,
-                         enddate = enddate)
+# inverts <- loadByProduct(dpID = "DP1.20120.001",
+#                          site = aquasite,
+#                          startdate = startdate,
+#                          enddate = enddate)
 
 
 
@@ -126,6 +130,36 @@ nitrate_15min[nitrate_15min$finalQF == 1, c("surfWaterNitrateMean", "surfWaterNi
 nitrate_15min$HOR.VER <- with(nitrate_15min, paste(horizontalPosition, verticalPosition, sep = "."))
 
 
+# Microbial cell counts
+View(microbes$variables_20138)
+
+microbe_abun <- microbes$amc_cellCounts
+
+# Check whether rawAbundance accounts for sample dilution prior to analysis
+with(microbe_abun, totalCellCount/numberOfFieldsAnalyzed*43209.88/analysisVolume) # Formula from BATELLE_epifluorProtocol_V6
+microbe_abun$rawMicrobialAbundance
+# It does not because these numbers match
+# This means the rawMicrobialAbundance values are in cells/ml of the sample that was analyzed after dilution
+# Need to multiply the abundance values by the dilution factor, then correct for preservant volume
+# as described in NEON User Guide for Surface Water Microbial Cell Count (NEON.DPI.20138)
+
+# Replace missing dilution factor values with 1
+microbe_abun$dilutionFactor[is.na(microbe_abun$dilutionFactor)] <- 1
+
+microbe_fieldsamples <- microbes$amc_fieldCellCounts[, c("cellCountSampleID", "cellCountSampleVolume", 
+                                                         "cellCountPreservantVolume")]
+
+# Merge data
+microbe_abun <- left_join(microbe_abun, microbe_fieldsamples)
+
+# Calculate microbial abundances by correcting for dilution and preservant volume
+microbe_abun$cells_ml <- with(microbe_abun, (rawMicrobialAbundance*dilutionFactor)*((cellCountSampleVolume + cellCountPreservantVolume)/cellCountSampleVolume))
+
+# Define variables to keep in the final data table
+keep_vars <- c("cellCountSampleID", "siteID", "namedLocation", "collectDate", "cells_ml", "qaqcStatus", "sampleCondition", "remarks")
+microbe_abun <- microbe_abun[, keep_vars]
+
+
 ## Save data tables
 write.csv(watertemp_30min, 
           file.path("data/NEON_water", paste0(paste("watertemp_30min", aquasite, startdate, enddate, sep = "_"), ".csv")), 
@@ -136,7 +170,106 @@ write.csv(waterqual_inst,
 write.csv(nitrate_15min, 
           file.path("data/NEON_water", paste0(paste("nitrate_15min", aquasite, startdate, enddate, sep = "_"), ".csv")), 
           row.names = FALSE)
+write.csv(microbe_abun, 
+          file.path("data/NEON_water", paste0(paste("microbe_abun", aquasite, startdate, enddate, sep = "_"), ".csv")),
+          row.names = FALSE)
 
+
+## Read back in data tables
+watertemp_30min <- read.csv( file.path("data/NEON_water", paste0(paste("watertemp_30min", aquasite, startdate, enddate, sep = "_"), ".csv")))
+waterqual_inst <- read.csv(file.path("data/NEON_water", paste0(paste("waterqual_inst", aquasite, startdate, enddate, sep = "_"), ".csv")))
+nitrate_15min <- read.csv(file.path("data/NEON_water", paste0(paste("nitrate_15min", aquasite, startdate, enddate, sep = "_"), ".csv")))
+
+
+### Create an aggregated data frame from the downstream sensor HOR.VER = 102.1
+### with water temperature, nitrate, water quality averaged every 30 mins
+
+temp <- watertemp_30min %>% 
+  filter(horizontalPosition == 102, finalQF == 0) %>%
+  select(siteID, startDateTime, endDateTime, surfWaterTempMean) %>%
+  mutate(startDateTime = ymd_hms(startDateTime),
+         endDateTime = ymd_hms(endDateTime),
+         sampleInterval = interval(startDateTime, endDateTime))
+
+# Define 30 min time intervals within the date range sampled
+n_30minutes <- interval(temp$startDateTime[1], temp$endDateTime[nrow(temp)])/dminutes(30)
+
+ints_30min <- interval(temp$startDateTime[1] + minutes(seq(0, (30*(n_30minutes-1)), 30)),
+                       temp$startDateTime[1] + minutes(seq(30, (30*n_30minutes), 30)))
+
+# Determine which 30 min time period corresponds to each temperature sample
+temp$whichInt <- sapply(temp$sampleInterval, function(x){
+  max(which(int_start(x) %within% ints_30min))
+})
+
+# Subset the nitrate data to only the samples at the sensor 2
+nitrate <- nitrate_15min %>%
+  filter(horizontalPosition == 102, finalQF == 0) %>%
+  mutate(startDateTime = ymd_hms(startDateTime),
+         endDateTime = ymd_hms(endDateTime),
+         sampleInterval = interval(startDateTime, endDateTime))
+
+
+# Determine which of the 30 min time interval samples each nitrate sample occurs within
+nitrate$whichInt <- sapply(nitrate$sampleInterval, function(x){
+  max(which(int_start(x) %within% ints_30min))
+})
+
+# Calculate average within each 30 time interval
+nitrate_mean <- nitrate %>%
+  group_by(whichInt) %>%
+  summarize(surfWaterNitrate.mean = mean(surfWaterNitrateMean, na.rm = TRUE))
+
+# Subset the water quality data to only samples at sensor 2
+waterqual <- waterqual_inst %>%
+  filter(horizontalPosition == 102) %>%
+  mutate(startDateTime = ymd_hms(startDateTime),
+         endDateTime = ymd_hms(endDateTime),
+         sampleInterval = interval(startDateTime, endDateTime))
+
+
+# Determine which of the 30 min time interval samples each water quality sample occurs within
+waterqual$whichInt <- sapply(waterqual$sampleInterval, function(x){
+  max(which(int_start(x) %within% ints_30min))
+})
+
+# Calculate average within each 30 time interval
+waterqual_mean <- waterqual %>%
+  group_by(whichInt) %>%
+  summarize(specificConductance.mean = mean(specificConductance, na.rm = TRUE),
+            dissolvedOxygen.mean = mean(dissolvedOxygen, na.rm = TRUE),
+            pH.mean = mean(pH, na.rm = TRUE),
+            chlorophyll.mean = mean(chlorophyll, na.rm = TRUE),
+            turbidity.mean = mean(turbidity, na.rm = TRUE),
+            fDOM.mean = mean(fDOM, na.rm = TRUE))
+
+## Combine all data together
+# Create data frame with time intervals
+surfwater_30min <- data.frame(whichInt = 1:length(ints_30min), sampleInterval = ints_30min)
+
+# Add on temperature data with only the necessary columns. Standardize variables names to match other data
+surfwater_30min <- temp %>%
+  transmute(whichInt, siteID,
+            surfWaterTemp.mean = surfWaterTempMean) %>%
+  right_join(surfwater_30min)
+
+# Add on nitrate and water quality data
+surfwater_30min <- surfwater_30min %>%
+  left_join(nitrate_mean) %>%
+  left_join(waterqual_mean)
+
+# Reorder columns and convert time interval to start and end time points
+surfwater_30min <- surfwater_30min %>%
+  mutate(startDateTime = as.character(int_start(sampleInterval)),
+         endDateTime = as.character(int_end(sampleInterval))) %>%
+  select(siteID, startDateTime, endDateTime, contains(".mean"))
+
+# Save
+write.csv(surfwater_30min,
+          file.path("data/NEON_water", paste0(paste("surfwater_30min_avg", aquasite, startdate, enddate, sep = "_"), ".csv")), 
+          row.names = FALSE)
+
+            
 
 
 

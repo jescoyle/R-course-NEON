@@ -30,7 +30,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -240,9 +239,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -349,14 +345,6 @@ $(document).ready(function () {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 
@@ -369,24 +357,11 @@ class="section level1 tabset">
 <p><strong>THIS LESSON IS NOT YET READY FOR LEARNERS.</strong></p>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<p><em>from:</em> <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">Zimmerman et al. (2019)</span></a> episodes 4, 5, 6,
-11</p>
+<blockquote>
+<p>MOTIVATOR</p>
+</blockquote>
 <div id="what-we-will-learn" class="section level3">
 <h3>What we will learn</h3>
-<p>Brief description of the contents of this lesson.</p>
-<ul>
-<li>Basic data types in R
-<ul>
-<li>vectors vs. lists</li>
-<li>multidimensional arrays</li>
-<li>dataframes vs. matrices</li>
-<li>data types: numeric, character, factor, logical</li>
-</ul></li>
-<li>Manipulating data frames</li>
-<li>Subsetting vectors and data frames</li>
-</ul>
 <dl>
 <dt>In this lesson</dt>
 <dd>
@@ -397,31 +372,549 @@ class="citation">Zimmerman et al. (2019)</span></a> episodes 4, 5, 6,
 <li>integer(0)</li>
 <li>character(0)</li>
 </ul>
+<div id="key-terms-commands" class="section level4">
+<h4>Key Terms &amp; Commands</h4>
+<ul>
+<li>data type</li>
+<li>object class</li>
+<li>factor and levels</li>
+<li><code>typeof()</code>, <code>class()</code>, <code>str()</code></li>
+<li><code>factor()</code>, <code>levels()</code></li>
+</ul>
 </div>
-<div id="motivator" class="section level3">
-<h3>Motivator</h3>
-<p>Describe a problem that learners will be able to solve by the end of
-this lesson.</p>
 </div>
-<div id="get-set-up" class="section level3">
-<h3>Get set up</h3>
-<p>Describe any data sets or packages that learners need to download or
-install before proceeding.</p>
-<pre class="r"><code># Read in a data file from the data folder included with the student workbook
-dat &lt;- read.csv(&quot;data/gapminder_data.csv&quot;)</code></pre>
-<p>Make a code block that loads any packages needed for the analysis. It
-can be helpful to indicate which functions come from which packages.</p>
-<pre class="r"><code># Load dplyr: filter
-library(dplyr)
-
-# Load ggplot2: ggplot
-library(ggplot2)</code></pre>
+<div id="prerequisites" class="section level3">
+<h3>Prerequisites</h3>
+<p>Before beginning this lesson you should have completed the lessons <a
+href="chp-computer-navigation.html">Navigating your computer</a> and <a
+href="chp-intro-to-R.html">Intro to R and RStudio</a>.</p>
+<p>Before you begin:</p>
+<ol style="list-style-type: decimal">
+<li>Open the R-course-NEON-workbook RStudio project.</li>
+<li>Create a new R script named lesson_04_code.R in the lesson-code
+folder of the student workbook.</li>
+<li>Whenever you see a box</li>
+</ol>
+<div class="challenge">
+<pre class="r"><code>Type this code into your R script.</code></pre>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>Be sure to click Save often to save your work.</li>
+</ol>
 </div>
 </div>
 <div id="lesson" class="section level2">
 <h2>Lesson</h2>
-<div id="comparing-things" class="section level3">
-<h3>Comparing things</h3>
+<p>In this lesson we will be using R to work with data from NEON’s
+Teakettle Creek aquatic site. Data come from the downstream sensor
+location and include information on surface water temperature (<a
+href="https://data.neonscience.org/data-products/DP1.20053.001">DP1.20053.001</a>),
+nitrate <a
+href="https://data.neonscience.org/data-products/DP1.20033.001">DP1.20033.001</a>
+and water quality (<a
+href="https://data.neonscience.org/data-products/DP1.20288.001">DP1.20288.001</a>).
+Data were downloaded and summarized into a table which is located in the
+student workbook project:
+<code>data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv</code>.</p>
+<p>Let’s begin by reading these data into R.</p>
+<div class="challenge">
+<p>Use the <code>read.csv()</code> function to read the
+<code>surfwater_30min_avg_TECR_2021-04_2021-10.csv</code> file into a
+data frame named <code>surfwater</code>.</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<pre class="r"><code># Load the NEON surface water data from TEAK site
+surfwater &lt;- read.csv(&quot;data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv&quot;)</code></pre>
+<p>NOTE: Remember to include the relative path to the file from the
+project working directory. The path to the file needs to be in quotes
+(““).</p>
+</div>
+</details>
+</div>
+<p><br></p>
+<div id="basic-data-types-in-r" class="section level3">
+<h3>Basic data types in R</h3>
+<p>In computer science, data come in several different types based on
+their quantitative or qualitative properties and how the computer stores
+their values. R uses several different <strong>data types</strong> which
+you should be aware of:</p>
+<ul>
+<li><strong>integer</strong> = the countable numbers (e.g. 1, 2, 3,
+…)</li>
+<li><strong>double</strong> = numbers stored as a decimal
+approximation</li>
+<li><strong>character</strong> = text</li>
+<li><strong>logical</strong> = data that can only be either
+<code>TRUE</code> or <code>FALSE</code> (computed and stored as
+<code>1</code> or <code>0</code>)</li>
+<li><strong>complex</strong> = a complex number with an imaginary part
+(e.g. <code>2+4i</code>)</li>
+</ul>
+<p>We can check the type of data in an object using the
+<code>typeof()</code> function.</p>
+<pre class="r"><code>typeof(1:10)</code></pre>
+<pre><code>[1] &quot;integer&quot;</code></pre>
+<pre class="r"><code>typeof(-3.4)</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<pre class="r"><code>typeof(c(TRUE, FALSE))</code></pre>
+<pre><code>[1] &quot;logical&quot;</code></pre>
+<p>In the lesson <a href="chp-intro-to-R.html">Intro to R and
+RStudio</a>, we learned that a <strong>vector</strong> is an ordered set
+of values that are all of the same type. We also learned that the
+columns of a <strong>data frame</strong> are vectors. Let’s see how this
+works.</p>
+<p>In the Environment panel, click on the blue arrow next to
+<code>surfwater</code>. Notice that each column name appears as
+<code>$ columnname</code> followed by a <code>:</code> and then
+information about the data type of each column and the first few
+entries.</p>
+<div class="challenge">
+<p>What is the data type of the <code>siteID</code> column? What is the
+data type of the <code>pH.mean</code> column? How could you check?</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<p>Remember that to access a column of a data frame we can use the
+<code>$</code> symbol:</p>
+<pre class="r"><code># Print the type of data in the siteID column
+typeof(surfwater$siteID)</code></pre>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<pre class="r"><code># Print the type of data in the pH.mean column
+typeof(surfwater$pH.mean)</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+</div>
+</details>
+</div>
+<p><br></p>
+<p>Let’s explore vectors a bit more. Let’s take the first 10 values in
+the <code>pH.mean</code> column and assign them to a new vector:</p>
+<pre class="r"><code># Select values 1 - 10 of the pH.mean column in surfwater
+pH_top10 &lt;- surfwater$pH.mean[1:10]</code></pre>
+<p>Suppose we discover that the first value of this vector is invalid
+and need to replace it with a missing value (<code>NA</code>). Do you
+think this will change the type of data in the vector?</p>
+<pre class="r"><code>pH_top10[1] &lt;- NA
+
+pH_top10</code></pre>
+<pre><code> [1]       NA 7.248333 7.240000 7.232333 7.230333 7.229333 7.229333 7.229667
+ [9] 7.227667 7.223667</code></pre>
+<pre class="r"><code>typeof(pH_top10)</code></pre>
+<pre><code>[1] &quot;double&quot;</code></pre>
+<p>The data type stays the same. Now what do you think will happen if we
+replace the first value with something more ambiguous:</p>
+<pre class="r"><code>pH_top10[1] &lt;- &quot;7.2 or 7.3&quot;
+
+pH_top10
+
+typeof(pH_top10)</code></pre>
+<details>
+<summary>
+Answer:
+</summary>
+<pre><code> [1] &quot;7.2 or 7.3&quot;       &quot;7.24833333333333&quot; &quot;7.24&quot;             &quot;7.23233333333333&quot;
+ [5] &quot;7.23033333333333&quot; &quot;7.22933333333333&quot; &quot;7.22933333333333&quot; &quot;7.22966666666667&quot;
+ [9] &quot;7.22766666666667&quot; &quot;7.22366666666667&quot;</code></pre>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<p>The vector now has type character because all elements in the vector
+must have the same data type and “7.2 or 7.3” is not a number.</p>
+</details>
+<p><br></p>
+<div class="callout-tip">
+<p>At some point you may come across a strange value in a vector that
+you thought contained numeric data:</p>
+<ul>
+<li><code>Inf</code> = positive infinity</li>
+<li><code>-Inf</code> = negative infinity</li>
+<li><code>NaN</code> = not a number (undefined)</li>
+</ul>
+<p>These can be good warning signs that you calculations involve 0 or
+are potentially not doing what you thought they should be doing:</p>
+<pre class="r"><code>x &lt;- -4:4
+
+x</code></pre>
+<pre><code>[1] -4 -3 -2 -1  0  1  2  3  4</code></pre>
+<pre class="r"><code>x/0</code></pre>
+<pre><code>[1] -Inf -Inf -Inf -Inf  NaN  Inf  Inf  Inf  Inf</code></pre>
+<pre class="r"><code>x/x</code></pre>
+<pre><code>[1]   1   1   1   1 NaN   1   1   1   1</code></pre>
+</div>
+</div>
+<div id="common-data-objects-in-r" class="section level3">
+<h3>Common data objects in R</h3>
+<p>We have already learned about two ways that R stores data: vectors
+and data frames. Each of these is a <strong>class</strong> of objects.
+In computer science, an object’s class determines what kinds of things
+you can do with it. For example, since vectors are ordered we can select
+individual elements from them using integer
+<strong>indices</strong>:</p>
+<pre class="r"><code># Print the second element in the vector
+pH_top10[2]</code></pre>
+<pre><code>[1] &quot;7.24833333333333&quot;</code></pre>
+<p>You can find out the class of an object using the
+<code>class()</code> function.</p>
+<pre class="r"><code>class(pH_top10)</code></pre>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<pre class="r"><code>class(surfwater$pH.mean)</code></pre>
+<pre><code>[1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(surfwater)</code></pre>
+<pre><code>[1] &quot;data.frame&quot;</code></pre>
+<p>That’s interesting: note that the class of a vector isn’t “vector”,
+but the type of the data stored in it.</p>
+<div id="factors" class="section level4">
+<h4>Factors</h4>
+<p>A factor is a type of vector whose data are categorical. More
+specifically, the elements come from a finite set of values called
+<strong>levels</strong>. For example, in the small mammal data in lesson
+<a href="chp-spreadsheets.html">Data organization in spreadsheets</a>,
+the sex of the rodents was only male or female. Factors come up quite
+often in R, so it is important to understand how they store data.</p>
+<p>In the <code>surfwater</code> data frame, the <code>siteID</code>
+column identifies the NEON site where the data are collected. This
+column is currently a character vector, but it would be reasonable to
+convert it to a factor since there are only a finite number of distinct
+sites that data could come from.</p>
+<pre class="r"><code># Create a new vector containing the first 10 values of the siteID column
+sites &lt;- surfwater$siteID[1:10]
+
+# View the contents of the vector and its class
+sites</code></pre>
+<pre><code> [1] &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot;</code></pre>
+<pre class="r"><code>class(sites)</code></pre>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<pre class="r"><code># Convert to a factor
+sites &lt;- factor(sites)
+
+# View the contents of the factor and its class
+sites</code></pre>
+<pre><code> [1] TECR TECR TECR TECR TECR TECR TECR TECR TECR TECR
+Levels: TECR</code></pre>
+<pre class="r"><code>class(sites)</code></pre>
+<pre><code>[1] &quot;factor&quot;</code></pre>
+<p>The data now have class “factor” instead of “character” and the
+elements are no longer surrounded by quotes. We also see that this
+factor has one level (i.e. one possible value) which is
+<code>TECR</code>.</p>
+<p>What happens if we try to add a new element with a different value
+onto this factor?</p>
+<pre class="r"><code># Concatenate a new value to the end of sites
+sites2 &lt;- c(sites, &quot;ABCD&quot;)
+
+sites2</code></pre>
+<pre><code> [1] &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;   
+[11] &quot;ABCD&quot;</code></pre>
+<pre class="r"><code>class(sites2)</code></pre>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<p>The factor was converted back to a character vector to match the type
+of data we added (<code>"ABCD"</code>). Where did the <code>"1"</code>
+come from?</p>
+<p>The most important thing to remember about factors is that the values
+in the vector are actually integers, with each integer corresponding to
+a level. The labels for the levels are saved in an attribute of the
+factor and can be accessed using the function <code>levels()</code>.</p>
+<pre class="r"><code># Create a factor with a new set of sites
+sites &lt;- factor(c(&quot;TECR&quot;, &quot;TECR&quot;, &quot;TECR&quot;, &quot;ABCD&quot;))
+
+# View the contents of sites
+sites</code></pre>
+<pre><code>[1] TECR TECR TECR ABCD
+Levels: ABCD TECR</code></pre>
+<pre class="r"><code># Print the levels of the factor
+levels(sites)</code></pre>
+<pre><code>[1] &quot;ABCD&quot; &quot;TECR&quot;</code></pre>
+<pre class="r"><code># View the underlying integer values in the factor by converting it to an integer
+as.integer(sites)</code></pre>
+<pre><code>[1] 2 2 2 1</code></pre>
+<p>By default, R will alphabetize a character vector before assigning
+levels, so even though <code>"TECR"</code> came first in the vector,
+<code>"ABCD"</code> comes first alphabetically and was assigned to the
+first level.</p>
+<p>You can change the default levels after creating a vector using the
+<code>levels()</code> function.</p>
+<pre class="r"><code># Change the levels in sites
+levels(sites) &lt;- c(&quot;TECR&quot;, &quot;ABCD&quot;)
+
+sites</code></pre>
+<pre><code>[1] ABCD ABCD ABCD TECR
+Levels: TECR ABCD</code></pre>
+<pre class="r"><code>as.integer(sites)</code></pre>
+<pre><code>[1] 2 2 2 1</code></pre>
+<p>Or, you can define the levels of a factor when you initially create
+it.</p>
+<pre class="r"><code># Define a new factor containing sites names
+sites &lt;- factor(c(&quot;TECR&quot;, &quot;TECR&quot;, &quot;TECR&quot;, &quot;ABCD&quot;), levels = c(&quot;TECR&quot;, &quot;ABCD&quot;, &quot;GGGG&quot;))
+sites</code></pre>
+<pre><code>[1] TECR TECR TECR ABCD
+Levels: TECR ABCD GGGG</code></pre>
+<p>Note that a factor can contain levels that don’t actually appear in
+the data.</p>
+<p>Factors and their levels become important if you need to do make
+graphs with or do statistics on categorical data.</p>
+</div>
+<div id="vectors-vs.-lists" class="section level4">
+<h4>Vectors vs. lists</h4>
+<p>Vectors are great for handling data, but what if you need to combine
+values that are not the same data type? That’s where a
+<strong>list</strong> becomes useful. A list is an ordered set of values
+or objects that do not need to have the same data type. You can create a
+list using the <code>list()</code> function.</p>
+<pre class="r"><code>sitelist &lt;- list(&quot;TECR&quot;, &quot;ABCD&quot;, 7:9, 100)
+sitelist</code></pre>
+<pre><code>[[1]]
+[1] &quot;TECR&quot;
+
+[[2]]
+[1] &quot;ABCD&quot;
+
+[[3]]
+[1] 7 8 9
+
+[[4]]
+[1] 100</code></pre>
+<p><code>sitelist</code> has four elements: the first two are each
+character vectors with one element, the third element is an integer
+vector with the numbers 7 - 9, and the fourth element of the list is a
+numeric vector with one element (100).</p>
+<p>Vectors and lists are both one-dimensional and contain a finite
+number of elements, also known as their <strong>length</strong>.</p>
+<pre class="r"><code>length(1:3)</code></pre>
+<pre><code>[1] 3</code></pre>
+<pre class="r"><code>length(list(1:3))</code></pre>
+<pre><code>[1] 1</code></pre>
+<p>Because vectors and lists are one-dimensional, we can access their
+elements using integer indices, but the exact way to do this differs. We
+use a single set of brackets <code>[ ]</code> to access the elements of
+a vector and a double set of brackets <code>[[ ]]</code>to access the
+elements of a list.</p>
+<pre class="r"><code># Access the third element of sitelist
+sitelist[[3]]</code></pre>
+<pre><code>[1] 7 8 9</code></pre>
+<pre class="r"><code># Access the first element of the vector in the third element of sitelist
+sitelist[[3]][1]</code></pre>
+<pre><code>[1] 7</code></pre>
+<div class="challenge">
+<p>Figure out how each of these lists differ using the
+<code>length()</code> function:</p>
+<pre class="r"><code>x &lt;- list(1, 2, 3)
+
+y &lt;- list(1:3)
+
+z &lt;- list(1, 2:3)</code></pre>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<pre class="r"><code># This is a list with three elements: the numbers 1, 2, and 3
+x </code></pre>
+<pre><code>[[1]]
+[1] 1
+
+[[2]]
+[1] 2
+
+[[3]]
+[1] 3</code></pre>
+<pre class="r"><code>length(x)</code></pre>
+<pre><code>[1] 3</code></pre>
+<pre class="r"><code># This is a list with one element: a vector with the numbers 1, 2 and 3
+y</code></pre>
+<pre><code>[[1]]
+[1] 1 2 3</code></pre>
+<pre class="r"><code>length(y)</code></pre>
+<pre><code>[1] 1</code></pre>
+<pre class="r"><code># This is a list with two elements: the number 1 is the first element and a vector with
+# the numbers 2 and 3 is the second element
+z</code></pre>
+<pre><code>[[1]]
+[1] 1
+
+[[2]]
+[1] 2 3</code></pre>
+<pre class="r"><code>length(z)</code></pre>
+<pre><code>[1] 2</code></pre>
+</div>
+</details>
+</div>
+<p><br></p>
+<p>Whenever you lose track of what is contained in an object, it is
+useful to examine the object’s structure using the <code>str()</code>
+function. Let’s see how this works on one of the lists we made:</p>
+<pre class="r"><code># What is the structure of the object sitelist
+str(sitelist)</code></pre>
+<pre><code>List of 4
+ $ : chr &quot;TECR&quot;
+ $ : chr &quot;ABCD&quot;
+ $ : int [1:3] 7 8 9
+ $ : num 100</code></pre>
+<p>We see that it is a list with 4 elements and these elements are then
+summarized.</p>
+</div>
+<div id="matrices-vs.-dataframes" class="section level4">
+<h4>Matrices vs. Dataframes</h4>
+<p>Now that we are starting to understand the two main one-dimensional
+data objects in R (vectors and lists) we can talk about two-dimensional
+data objects. We’ve already seen one of these- the <strong>data
+frame</strong>. A data frame is a special type of list!</p>
+<p>A data frame is a list where each element is a vector that has the
+same length, but the vectors can have different data types from each
+other. This makes it a very flexible and useful way to work with data
+tables.</p>
+<p>Let’s check out the structure of the <code>surfwater</code>
+dataframe.</p>
+<pre class="r"><code>str(surfwater)</code></pre>
+<pre><code>&#39;data.frame&#39;:   10272 obs. of  11 variables:
+ $ siteID                  : chr  &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; ...
+ $ startDateTime           : chr  &quot;2021-04-01 00:00:00&quot; &quot;2021-04-01 00:30:00&quot; &quot;2021-04-01 01:00:00&quot; &quot;2021-04-01 01:30:00&quot; ...
+ $ endDateTime             : chr  &quot;2021-04-01 00:30:00&quot; &quot;2021-04-01 01:00:00&quot; &quot;2021-04-01 01:30:00&quot; &quot;2021-04-01 02:00:00&quot; ...
+ $ surfWaterTemp.mean      : num  3.79 3.71 3.58 3.42 3.26 ...
+ $ surfWaterNitrate.mean   : num  2.05 2.1 2.15 2.2 2.25 2.3 2.3 2.3 2.3 2.3 ...
+ $ specificConductance.mean: num  27.4 27.4 27.3 27.4 27.4 ...
+ $ dissolvedOxygen.mean    : num  10.4 10.4 10.4 10.5 10.5 ...
+ $ pH.mean                 : num  7.25 7.25 7.24 7.23 7.23 ...
+ $ chlorophyll.mean        : num  0.692 0.732 0.77 0.814 0.806 ...
+ $ turbidity.mean          : num  0.967 1.211 1.542 1.615 1.51 ...
+ $ fDOM.mean               : num  35.3 35.7 36.2 36.7 36.9 ...</code></pre>
+<p>We can see that it is a data frame with 10272 rows and 11 columns.
+The names of the columns are given after the <code>$</code> symbol,
+along with a preview of their contents. This is very similar in
+structure to the output when we used <code>str()</code> on a list. The
+main difference is that each element in this list has a
+<strong>name</strong> which is the name of the column.</p>
+<pre class="r"><code># What are the names of the elements in surfwater?
+names(surfwater)</code></pre>
+<pre><code> [1] &quot;siteID&quot;                   &quot;startDateTime&quot;           
+ [3] &quot;endDateTime&quot;              &quot;surfWaterTemp.mean&quot;      
+ [5] &quot;surfWaterNitrate.mean&quot;    &quot;specificConductance.mean&quot;
+ [7] &quot;dissolvedOxygen.mean&quot;     &quot;pH.mean&quot;                 
+ [9] &quot;chlorophyll.mean&quot;         &quot;turbidity.mean&quot;          
+[11] &quot;fDOM.mean&quot;               </code></pre>
+<pre class="r"><code># What are the names of the elements in sitelist?
+names(sitelist)</code></pre>
+<pre><code>NULL</code></pre>
+<p>The elements of <code>sitelist</code> don’t have names, so we get
+<code>NULL</code>. We could assign names using the <code>names()</code>
+function. These then show up in the structure of the object</p>
+<pre class="r"><code># Assign names to the elements of sitelist
+names(sitelist) &lt;- c(&quot;site1&quot;, &quot;site2&quot;, &quot;values1&quot;, &quot;values2&quot;)
+
+# View the structure of the object
+str(sitelist)</code></pre>
+<pre><code>List of 4
+ $ site1  : chr &quot;TECR&quot;
+ $ site2  : chr &quot;ABCD&quot;
+ $ values1: int [1:3] 7 8 9
+ $ values2: num 100</code></pre>
+<pre class="r"><code># Access the element named values2
+sitelist$values2</code></pre>
+<pre><code>[1] 100</code></pre>
+<p>In summary, a data frame is a <strong>named list</strong>, which
+means that we can access its named elements using the <code>$</code>
+symbol: <code>dataframe$columnname</code>. However since a data frame is
+also just a list, you can also access columns using <code>[[ ]]</code>,
+though this is not commonly done.</p>
+<pre class="r"><code># Print the first 10 elements in the 3rd column of the surfwater data frame
+surfwater[[3]][1:10]</code></pre>
+<pre><code> [1] &quot;2021-04-01 00:30:00&quot; &quot;2021-04-01 01:00:00&quot; &quot;2021-04-01 01:30:00&quot;
+ [4] &quot;2021-04-01 02:00:00&quot; &quot;2021-04-01 02:30:00&quot; &quot;2021-04-01 03:00:00&quot;
+ [7] &quot;2021-04-01 03:30:00&quot; &quot;2021-04-01 04:00:00&quot; &quot;2021-04-01 04:30:00&quot;
+[10] &quot;2021-04-01 05:00:00&quot;</code></pre>
+<p>In contrast, a <strong>matrix</strong> is like a 2-dimensional
+vector- all of the elements must have the same data type. One way to
+make a matrix is by using the <code>matrix()</code> function:</p>
+<pre class="r"><code># Make a 2 x 3 matrix filled with the numbers 10 - 15 
+X &lt;- matrix(10:15, nrow = 2, ncol = 3)
+
+X</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]   10   12   14
+[2,]   11   13   15</code></pre>
+<p>We access the elements of a matrix using single square brackets with
+a comma to denote the row and column we need: <code>X[r, c]</code>.</p>
+<pre class="r"><code>X[2, 3] # the element in the second row and third column</code></pre>
+<pre><code>[1] 15</code></pre>
+<pre class="r"><code>X[, 2] # the second column</code></pre>
+<pre><code>[1] 12 13</code></pre>
+<pre class="r"><code>X[1, ] # the first row</code></pre>
+<pre><code>[1] 10 12 14</code></pre>
+<pre class="r"><code>X[2,] # spaces don&#39;t matter!</code></pre>
+<pre><code>[1] 11 13 15</code></pre>
+<pre class="r"><code>X[ 2  ,   ]</code></pre>
+<pre><code>[1] 11 13 15</code></pre>
+<p>We can also the same method to access elements in a dataframe.</p>
+<pre class="r"><code>surfwater[2, 3] # the element in the second row and third column</code></pre>
+<pre><code>[1] &quot;2021-04-01 01:00:00&quot;</code></pre>
+<pre class="r"><code>surfwater[1:10, 5] # the first 10 elements in the fifth column</code></pre>
+<pre><code> [1] 2.05 2.10 2.15 2.20 2.25 2.30 2.30 2.30 2.30 2.30</code></pre>
+<pre class="r"><code>surfwater[3, ] # the third row</code></pre>
+<pre><code>  siteID       startDateTime         endDateTime surfWaterTemp.mean
+3   TECR 2021-04-01 01:00:00 2021-04-01 01:30:00              3.582
+  surfWaterNitrate.mean specificConductance.mean dissolvedOxygen.mean pH.mean
+3                  2.15                 27.34967               10.419    7.24
+  chlorophyll.mean turbidity.mean fDOM.mean
+3        0.7696667          1.542    36.229</code></pre>
+<div class="challenge">
+<p>What class of object is returned by each of the commands above?</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<pre class="r"><code>class(surfwater[2, 3]) # a character vector</code></pre>
+<pre><code>[1] &quot;character&quot;</code></pre>
+<pre class="r"><code>class(surfwater[1:10, 5]) # a numeric vector</code></pre>
+<pre><code>[1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>class(surfwater[3, ]) # a data frame</code></pre>
+<pre><code>[1] &quot;data.frame&quot;</code></pre>
+</div>
+</details>
+</div>
+<p><br></p>
+<p>We can append rows and columns to matrices and data frames using
+<code>rbind()</code> and <code>cbind()</code>.</p>
+<!-- WORKING HERE -->
+<div class="callout-trick">
+<p>Matrices are two dimensional objects where every element has the same
+data type. Matrices are a special case of an <strong>array</strong>,
+which is an n-dimensional object in which every element has the same
+data type. You may not need to use arrays very often, but it is useful
+to know they exist.</p>
+<p>Create an array using <code>array(data, dim)</code>, where data
+contains the values to put in the array and dim is an integer vector
+specifying its dimensions. Here’s an example of a 3-dimensional array
+and how to access its elements:</p>
+<pre class="r"><code>Z &lt;- array(1:24, c(4, 3, 2))
+
+Z</code></pre>
+<pre><code>, , 1
+
+     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    2    6   10
+[3,]    3    7   11
+[4,]    4    8   12
+
+, , 2
+
+     [,1] [,2] [,3]
+[1,]   13   17   21
+[2,]   14   18   22
+[3,]   15   19   23
+[4,]   16   20   24</code></pre>
+<pre class="r"><code>Z[2, 3, 1]</code></pre>
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
+<div id="section" class="section level4">
+<h4></h4>
+</div>
+</div>
+<div id="logical-comparisons" class="section level3">
+<h3>Logical comparisons</h3>
 <p>We can also do comparisons in R:</p>
 <pre class="r"><code>1 == 1  # equality (note two equals signs, read as &quot;is equal to&quot;)</code></pre>
 <pre><code>[1] TRUE</code></pre>
@@ -450,42 +943,14 @@ tolerance).</p>
 href="http://floating-point-gui.de/">http://floating-point-gui.de/</a></p>
 <p>{: .callout}</p>
 </blockquote>
-<pre class="r"><code># This is an R code block that will execute any code inside and show the results.
-dat %&gt;%
-  filter(country == &quot;United States&quot;)</code></pre>
-<pre><code>         country year       pop continent lifeExp gdpPercap
-1  United States 1952 157553000  Americas  68.440  13990.48
-2  United States 1957 171984000  Americas  69.490  14847.13
-3  United States 1962 186538000  Americas  70.210  16173.15
-4  United States 1967 198712000  Americas  70.760  19530.37
-5  United States 1972 209896000  Americas  71.340  21806.04
-6  United States 1977 220239000  Americas  73.380  24072.63
-7  United States 1982 232187835  Americas  74.650  25009.56
-8  United States 1987 242803533  Americas  75.020  29884.35
-9  United States 1992 256894189  Americas  76.090  32003.93
-10 United States 1997 272911760  Americas  76.810  35767.43
-11 United States 2002 287675526  Americas  77.310  39097.10
-12 United States 2007 301139947  Americas  78.242  42951.65</code></pre>
-<div class="figure" style="text-align: center">
-<img src="images/rmd-04-usa_pop_fig-1.png" alt="Fig. 4.1. Population growth in the United States 1952 - 2007." width="816" />
-<p class="caption">
-Fig. 4.1. Population growth in the United States 1952 - 2007.
-</p>
 </div>
-</div>
-<div id="section-1" class="section level3">
-<h3>Section 1</h3>
-<blockquote>
-<p><strong><em>CHALLENGE:</em></strong> What will this code do?</p>
-<pre class="r"><code>1 + 1</code></pre>
-<blockquote>
-<pre class="r fold-hide"><code>1 + 1
-[1] 2</code></pre>
-</blockquote>
-</blockquote>
-</div>
-<div id="section-2" class="section level3">
-<h3>Section 2</h3>
+<div id="putting-it-all-together" class="section level3">
+<h3>Putting it all together</h3>
+<p>Microbial cell counts are from <a
+href="https://data.neonscience.org/data-products/DP1.20138.001">DP1.20138.001</a>.</p>
+<p>Why such differences?</p>
+<p>Suppose we want to view surface water data only from the timepoints
+when microbial cells were sampled.</p>
 </div>
 </div>
 <div id="exercises" class="section level2">
@@ -500,23 +965,48 @@ Fig. 4.1. Population growth in the United States 1952 - 2007.
 <li>integer(0)</li>
 <li>character(0)</li>
 </ol>
-<p>Number all exercises using the module number. Include starter code in
-the /exercises folder if appropriate.</p>
-<p>4.1</p>
-<p>4.2</p>
+<p>data-structures 1 “create and extract or set values in vectors,
+matrices and arrays in R” data-structures 2 “create and extract or set
+values in lists in R” data-structures 3 “create and manipulate the
+columns of data frames in R” data-structures 4 subset the rows a of data
+frame in R data-structures 5 “differentiate between numeric, character,
+factor and logical data types in R”<br />
+data-structures 6 view the structure and class of an object in R<br />
+data-structures 7 “write logical test expressions using
+<code>==</code>,<code>!=</code>, <code>&gt;</code>, <code>&lt;</code>,
+and <code>%in%</code>”</p>
+<p><strong>4.1</strong></p>
+<p><strong>4.2</strong></p>
 </div>
 <div id="sources-and-resources" class="section level2">
 <h2>Sources and Resources</h2>
 <p>This lesson was adapted from <a
 href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">Zimmerman et al. (2019)</span></a> episodes 1 by Jes
-Coyle.</p>
+class="citation">Zimmerman et al. (2019)</span></a> episodes 4, 5, 6,
+and 11 by Jes Coyle.</p>
 <div id="additional-resources" class="section level3">
 <h3>Additional Resources</h3>
 </div>
 <div id="cited-references" class="section level3 unnumbered">
 <h3 class="unnumbered">Cited References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-NEON-microbialcellcounts" class="csl-entry">
+National Ecological Observatory Network (NEON). 2023a. <span>“Surface
+Water Microbe Cell Count (DP1.20138.001).”</span> National Ecological
+Observatory Network (NEON). <a
+href="https://doi.org/10.48443/8AH9-H316">https://doi.org/10.48443/8AH9-H316</a>.
+</div>
+<div id="ref-NEON-surfwatertemp" class="csl-entry">
+———. 2023b. <span>“Temperature (PRT) in Surface Water
+(DP1.20053.001).”</span> National Ecological Observatory Network (NEON).
+<a
+href="https://doi.org/10.48443/33ZJ-CQ24">https://doi.org/10.48443/33ZJ-CQ24</a>.
+</div>
+<div id="ref-NEON-surfwaterquality" class="csl-entry">
+———. 2023c. <span>“Water Quality (DP1.20288.001).”</span> National
+Ecological Observatory Network (NEON). <a
+href="https://doi.org/10.48443/MPW3-3Q06">https://doi.org/10.48443/MPW3-3Q06</a>.
+</div>
 <div id="ref-swc-reproducible-lesson" class="csl-entry">
 Zimmerman, Naupaka, Greg Wilson, Raniere Silva, Scott Ritchie, François
 Michonneau, Jeffrey Oliver, Harriet Dashnow, et al. 2019. <span>“<span
@@ -564,11 +1054,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
