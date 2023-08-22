@@ -202,6 +202,8 @@ temp$whichInt <- sapply(temp$sampleInterval, function(x){
   max(which(int_start(x) %within% ints_30min))
 })
 
+any(is.na(temp$whichInt))
+
 # Subset the nitrate data to only the samples at the sensor 2
 nitrate <- nitrate_15min %>%
   filter(horizontalPosition == 102, finalQF == 0) %>%
@@ -215,6 +217,8 @@ nitrate$whichInt <- sapply(nitrate$sampleInterval, function(x){
   max(which(int_start(x) %within% ints_30min))
 })
 
+any(is.na(nitrate$whichInt))
+
 # Calculate average within each 30 time interval
 nitrate_mean <- nitrate %>%
   group_by(whichInt) %>%
@@ -227,11 +231,12 @@ waterqual <- waterqual_inst %>%
          endDateTime = ymd_hms(endDateTime),
          sampleInterval = interval(startDateTime, endDateTime))
 
-
 # Determine which of the 30 min time interval samples each water quality sample occurs within
 waterqual$whichInt <- sapply(waterqual$sampleInterval, function(x){
   max(which(int_start(x) %within% ints_30min))
 })
+
+any(is.na(waterqual$whichInt))
 
 # Calculate average within each 30 time interval
 waterqual_mean <- waterqual %>%
@@ -245,11 +250,11 @@ waterqual_mean <- waterqual %>%
 
 ## Combine all data together
 # Create data frame with time intervals
-surfwater_30min <- data.frame(whichInt = 1:length(ints_30min), sampleInterval = ints_30min)
+surfwater_30min <- data.frame(whichInt = 1:length(ints_30min), sampleInterval = ints_30min, siteID = "TECR")
 
 # Add on temperature data with only the necessary columns. Standardize variables names to match other data
 surfwater_30min <- temp %>%
-  transmute(whichInt, siteID,
+  transmute(whichInt,
             surfWaterTemp.mean = surfWaterTempMean) %>%
   right_join(surfwater_30min)
 
@@ -258,11 +263,17 @@ surfwater_30min <- surfwater_30min %>%
   left_join(nitrate_mean) %>%
   left_join(waterqual_mean)
 
+# Order by date
+surfwater_30min <- surfwater_30min %>% arrange(whichInt)
+
 # Reorder columns and convert time interval to start and end time points
 surfwater_30min <- surfwater_30min %>%
   mutate(startDateTime = as.character(int_start(sampleInterval)),
          endDateTime = as.character(int_end(sampleInterval))) %>%
   select(siteID, startDateTime, endDateTime, contains(".mean"))
+
+
+
 
 # Save
 write.csv(surfwater_30min,
