@@ -20,7 +20,14 @@ Access the chapters using the menu bar at the top of the website. Each chapter b
 
 ### Where is everything?
 
+The menu at the top of this website provides access to everything you need.
 
+* [Home](index.hmtl) takes you to this page.
+* [Computer Setup](computer-setup.html) describes how to get you computer ready to work through the lessons.
+* [NEON Data](NEON-data-intro.html) describes the National Ecological Observatory Network and which data products are used in the lessons.
+* The Chapters dropdown menu provides access to each lesson as well as an [overview](00-module-contents.html) of the contents of each lesson.
+* [Exercises](exercises-guide.html) provides links to download exercise files that accompany each lesson.
+* [RStudio Workbook](download-student-RStudo-project.html) provides a link to download an RStudio project that accompanies these lessons.
 
 
 ## Get Started
@@ -31,7 +38,7 @@ This course requires you to have certain software installed on your computer. Fo
 
 ### Student workbook
 
-The student workbook is a zipped folder that contains a folder with data files necessary for completing the lessons. It also contains a folder with blank exercises that accompany each lesson. Follow the instructions on the [Computer Setup](computer-setup.html) page to download the workbook.
+The student workbook is a zipped folder that contains a folder with data files necessary for completing the lessons. It also contains a folder with exercise files that accompany each lesson. Follow the instructions on the [Computer Setup](computer-setup.html) page to download the workbook.
 
 ## Open Educational Resource
 

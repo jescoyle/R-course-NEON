@@ -1,6 +1,0 @@
-From the initial working directory of the Student Workbook RStudio project...
-
-1. What would you type into the Terminal to show all files in the data directory?
-
-
-2. How would you modify this command so that the size of each file is shown?

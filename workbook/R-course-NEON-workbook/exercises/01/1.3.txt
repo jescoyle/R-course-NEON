@@ -1,0 +1,8 @@
+1. What would you type into the Terminal to show all files in the data directory?
+
+
+2. Suppose you wanted to also show the size of each file and when it was modified last. What would you type to list all of the options for this command to find one that gives you more information about each file?
+
+
+3. Read the help file displayed in step 2. What command would you type to use a long listing format (this includes the file size and time modified)?
+

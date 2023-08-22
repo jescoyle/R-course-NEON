@@ -1,0 +1,6 @@
+"cellCountSampleID","siteID","namedLocation","collectDate","cells_ml","qaqcStatus","sampleCondition","remarks"
+"TECR.SS.20210505.CC","TECR","TECR.AOS.S2",2021-05-05 16:40:00,173320,NA,"Other (describe in remarks)","Sample was partially frozen but was analyzable."
+"TECR.SS.20210601.CC","TECR","TECR.AOS.S2",2021-06-01 18:46:00,468586.666666667,NA,"OK",NA
+"TECR.SS.20210714.CC","TECR","TECR.AOS.S2",2021-07-14 16:20:00,458024.444444444,NA,"OK",NA
+"TECR.SS.20210803.CC","TECR","TECR.AOS.S2",2021-08-03 17:09:00,259258.888888889,NA,"OK",NA
+"TECR.SS.20210901.CC","TECR","TECR.AOS.S2",2021-09-01 17:09:00,4609055.55555556,NA,"OK",NA

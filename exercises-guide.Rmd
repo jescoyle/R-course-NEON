@@ -1,7 +1,25 @@
 ---
 layout: page
 title: "Exercises"
-output: html_document
+output: 
+  html_document:
+    toc: false
 ---
 
-This page provides a map of which exercises meet each learning objective (or item on the computing skills checklist). It also contains a link to download a zipped folder of all exercises with each exercise as a separate R script.
+```{r, include = FALSE, purl = FALSE}
+# Functions and data
+source("src/setup.R")
+
+```
+
+This page provides links to download a zipped folder of all exercise files. This is a useful way to access individual exercise files if you need to add them to the student workbook RStudio project.
+
+Chp. 1. `r .get_chpName(1, type.to = "nameLong")` exercises are [here](exercises/01/).
+
+Chp. 2. `r .get_chpName(2, type.to = "nameLong")` exercises are [here](exercises/02/).
+
+Chp. 3. `r .get_chpName(1, type.to = "nameLong")` exercises are [here](exercises/03/).
+
+Chp. 4. `r .get_chpName(1, type.to = "nameLong")` exercises are [here](exercises/04/).
+
+

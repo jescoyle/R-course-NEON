@@ -1,0 +1,12 @@
+1. Open the file `exercises/3.2_data.csv` in Excel or another spreadsheet program.
+
+2. Perform a quality control analysis on the data to identify any potentially missing or outlier data and record the errors that you found.
+
+3. List 3 ways that these data do not adhere to best practices in tidy data table formatting. How would you improve this?
+
+
+4. List 3 ways that these data do adhere to best practices in tidy data table formatting.
+
+
+5. What should be included in a metadata file that accompanies these data?
+

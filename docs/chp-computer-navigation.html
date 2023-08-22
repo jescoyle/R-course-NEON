@@ -30,8 +30,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -42,18 +40,105 @@
   ul.task-list{list-style: none;}
     </style>
 
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
   }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
 </script>
-
-
 
 
 
@@ -313,20 +398,6 @@ $(document).ready(function () {
     <li>
       <a href="chp-tidyverse-basics.html">9. Tidy data</a>
     </li>
-    <li class="divider"></li>
-    <li class="dropdown-header">Supplemental lessons</li>
-    <li>
-      <a href="chp-rmarkdown.html">A. Rmarkdown</a>
-    </li>
-    <li>
-      <a href="chp-geospatial-raster.html">B. Raster data</a>
-    </li>
-    <li>
-      <a href="chp-openrefine.html">C. OpenRefine</a>
-    </li>
-    <li>
-      <a href="chp-git.html">D. Git</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -582,7 +653,7 @@ surround the folder name with quotes: For example
 <code>pwd</code> command.</p>
 <p>To go back up a level to the next higher directory (called the
 <strong>parent directory</strong>), use <code>../</code>:</p>
-<pre class="sh"><code>`cd ../`</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="kw">`</span><span class="bu">cd</span> ../<span class="kw">`</span></span></code></pre></div>
 <p>In fact, we can use <code>cd</code> to navigate to any folder by
 typing its absolute path after the <code>cd</code> command. For example:
 <code>cd "/c/Documents/My subfolder/another subfolder"</code>.</p>
@@ -682,7 +753,8 @@ the current working directory?</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<pre class="bash"><code>  pwd</code></pre>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>  <span class="bu">pwd</span></span></code></pre></div>
 </div>
 </details>
 </div>
@@ -778,7 +850,7 @@ create.</p>
 <p>Execute the command <code>mkdir working</code> in the terminal. (To
 “execute” a command, type it at the command prompt and press
 <kbd>Enter</kbd>.)</p>
-<pre class="sh"><code>mkdir working</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">mkdir</span> working</span></code></pre></div>
 <p>Where did the new directory end up? It should have been created in
 the current working directory. However, it would be more logical to
 place this directory inside the exercises folder. You could navigate to
@@ -786,7 +858,7 @@ the exercises folder and then run the <code>mkdir</code> command again,
 or you can specify the path to the new folder you wish to create.</p>
 <p>Create a new folder called working inside the exercises folder by
 executing this command in the terminal:</p>
-<pre class="sh"><code>mkdir exercises/working</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">mkdir</span> exercises/working</span></code></pre></div>
 <p>Check the Files window to verify that you created a folder named
 working inside the exercises folder.</p>
 <div class="challenge">
@@ -798,7 +870,7 @@ exercises folder.
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<pre class="sh"><code>mkdir exercises/finished</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">mkdir</span> exercises/finished</span></code></pre></div>
 </div>
 </details>
 </div>
@@ -814,7 +886,7 @@ first, then run it.</p>
 <p>Let’s remove the working folder that we not longer need that is not
 in the exercises folder. The command to “remove” a file or folder is
 <code>rm</code>.</p>
-<pre class="sh"><code>rm working</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">rm</span> working</span></code></pre></div>
 <pre><code>rm: cannot remove &#39;working&#39;: Is a directory</code></pre>
 <p>Oops it didn’t work! You got an error message saying that it could
 not remove working because it is a directory. We need to add an option
@@ -822,13 +894,13 @@ to allow the function to “recursively” delete sub directories and files
 within them. Command options are specified after the command with a
 <code>-</code>. The command to delete the directory named working and
 all of its contents is:</p>
-<pre class="sh"><code>rm -r working</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-r</span> working</span></code></pre></div>
 <p>What else can the <code>rm</code> command do? Are there any other
 options? If you’re interested in learning about the functionality of a
 unix command, you can always use the internet, but there is also a
 built-in help file attached to every command. Use the
 <code>--help</code> option to access it.</p>
-<pre class="sh"><code>rm --help</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">rm</span> <span class="at">--help</span></span></code></pre></div>
 <pre><code>Usage: rm [OPTION]... [FILE]...
 Remove (unlink) the FILE(s).
 
@@ -890,10 +962,12 @@ folder.</p>
 using <code>pwd</code>):</p>
 <p>If your working directory is the main R-course-NEON-workbook folder,
 then type:</p>
-<pre class="sh"><code>ls exercises</code></pre>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">ls</span> exercises</span></code></pre></div>
 <p>If your working directory is the R-course-NEON-workbook/exercises
 folder, then type:</p>
-<pre class="sh"><code>ls </code></pre>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">ls</span> </span></code></pre></div>
 </div>
 </details>
 </div>
@@ -904,8 +978,8 @@ with 1.</p>
 <p>Let’s copy one of the files from the exercises folder into the
 working subfolder. Note that this code assumes you are in the main
 R-course-NEON-workbook folder.</p>
-<pre class="sh"><code>cp exercises/1.1.txt exercises/working/
-</code></pre>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">cp</span> exercises/1.1.txt exercises/working/</span></code></pre></div>
 <p>Notice the <code>/</code> at the end of the name of the folder. If we
 had typed <code>cp 1.1.txt exercises/working</code>, it would have
 copied 1.1.txt into a new file named exercises and overwritten the
@@ -923,9 +997,10 @@ inside the current working directory.</p>
 <p>First let’s move into tho exercises folder so that we don’t need to
 include the exercises folder in the command. Then, list all files that
 begin with 1.</p>
-<pre class="sh"><code>cd exercises
-
-ls 1.*</code></pre>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="bu">cd</span> exercises</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="fu">ls</span> 1.<span class="pp">*</span></span></code></pre></div>
 <pre><code>1.1.txt
 1.2.txt
 1.3.txt
@@ -946,14 +1021,14 @@ folder.</li>
 </summary>
 <div class="solution">
 <p>Commands are shown below without their output.</p>
-<pre class="sh"><code>pwd
-
-cd exercises
-
-ls 1.*
-
-cp 1.* working/
-</code></pre>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="bu">cd</span> exercises</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="fu">ls</span> 1.<span class="pp">*</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="fu">cp</span> 1.<span class="pp">*</span> working/</span></code></pre></div>
 </div>
 </details>
 </div>
@@ -974,9 +1049,10 @@ different name, but then we would need to delete the old version. The
 SOURCE location to the DEST location without keeping the old version.
 This allows us to change the name of a file. For example, if my initials
 are XXX:</p>
-<pre class="sh"><code>mv exercises/working/1.1.txt exercises/working/1.1_XXX.txt
-
-ls exercises/working</code></pre>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">mv</span> exercises/working/1.1.txt exercises/working/1.1_XXX.txt</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="fu">ls</span> exercises/working</span></code></pre></div>
 <pre><code>1.1_XXX.txt
 1.2.txt
 1.3.txt

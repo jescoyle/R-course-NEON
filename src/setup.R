@@ -33,7 +33,7 @@
     } else {
      
       # remake list and prepend a blank with a colon
-      objs_list <- paste(paste(bullet, paste(pretext, objs), sep = " "), collapse = "\n") 
+      objs_list <- paste(paste(bullet, paste(pretext, objs$text), sep = " "), collapse = "\n") 
       objs_list <- paste0(": \n\n", objs_list)
     }
   }

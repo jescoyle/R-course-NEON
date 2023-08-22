@@ -29,12 +29,7 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -45,16 +40,6 @@
   ul.task-list{list-style: none;}
     </style>
 
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
 
 
 
@@ -223,75 +208,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -299,16 +215,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -372,20 +278,6 @@ div.tocify {
     </li>
     <li>
       <a href="chp-tidyverse-basics.html">9. Tidy data</a>
-    </li>
-    <li class="divider"></li>
-    <li class="dropdown-header">Supplemental lessons</li>
-    <li>
-      <a href="chp-rmarkdown.html">A. Rmarkdown</a>
-    </li>
-    <li>
-      <a href="chp-geospatial-raster.html">B. Raster data</a>
-    </li>
-    <li>
-      <a href="chp-openrefine.html">C. OpenRefine</a>
-    </li>
-    <li>
-      <a href="chp-git.html">D. Git</a>
     </li>
   </ul>
 </li>
@@ -502,8 +394,8 @@ operations</a></h4>
 <p><strong>Learning Objectives</strong></p>
 <p>In this lesson learners will:</p>
 <ul>
-<li>describe the main data structures and types in R</li>
-<li>manipulate and extract values from data frames using base R</li>
+<li>differentiate between the main data structures and types in R</li>
+<li>manipulate and extract values from data structures using base R</li>
 </ul>
 <p><strong>Computational Skills</strong></p>
 <dl>
@@ -513,12 +405,11 @@ operations</a></h4>
 </dd>
 </dl>
 <ol style="list-style-type: decimal">
-<li>differentiate between vectors, arrays, lists and data frames in
+<li>create and extract or set values in vectors, matrices and arrays in
 R</li>
 <li>differentiate between numeric, character, factor and logical data
 types in R</li>
 <li>view the structure and class of an object in R</li>
-<li>subset data frames and vectors in R</li>
 <li>write logical test expressions using
 <code>==</code>,<code>!=</code>, <code>&gt;</code>, <code>&lt;</code>,
 and <code>%in%</code></li>
@@ -653,145 +544,97 @@ with pipes</li>
 </dd>
 </dl>
 <ol style="list-style-type: decimal">
-<li>use R to 1:7</li>
-<li>use R to c(“<code>join</code> two tables using a key”,
-“<code>select</code> columns from a table using matching criteria”,
-“<code>filter</code> rows from a table”, “create new columns with
-<code>mutate</code>”, “calculate summary statistics across factors with
-<code>group_by</code> and <code>summarize</code>”, “change the format of
-a table from long to wide or wide to long with <code>pivot</code>
-functions from the tidyr package”, “compose functions with pipes
-(<code>%&gt;%</code>)”)</li>
-<li>use R to 1:7</li>
-<li>use R to c(“<code>join</code> two tables using a key”,
-“<code>select</code> columns from a table using matching criteria”,
-“<code>filter</code> rows from a table”, “create new columns with
-<code>mutate</code>”, “calculate summary statistics across factors with
-<code>group_by</code> and <code>summarize</code>”, “change the format of
-a table from long to wide or wide to long with <code>pivot</code>
-functions from the tidyr package”, “compose functions with pipes
-(<code>%&gt;%</code>)”)</li>
-<li>use R to 1:7</li>
-<li>use R to c(“<code>join</code> two tables using a key”,
-“<code>select</code> columns from a table using matching criteria”,
-“<code>filter</code> rows from a table”, “create new columns with
-<code>mutate</code>”, “calculate summary statistics across factors with
-<code>group_by</code> and <code>summarize</code>”, “change the format of
-a table from long to wide or wide to long with <code>pivot</code>
-functions from the tidyr package”, “compose functions with pipes
-(<code>%&gt;%</code>)”)</li>
-<li>1:7</li>
+<li>use the dplyr package to <code>join</code> two tables using a
+key</li>
+<li>use the dplyr package to <code>select</code> columns from a table
+using matching criteria</li>
+<li>use the dplyr package to <code>filter</code> rows from a table</li>
+<li>use the dplyr package to create new columns with
+<code>mutate</code></li>
+<li>use the dplyr package to calculate summary statistics across factors
+with <code>group_by</code> and <code>summarize</code></li>
+<li>change the format of a table from long to wide or wide to long with
+<code>pivot</code> functions from the tidyr package</li>
+<li>use the tidyr package to compose functions with pipes
+(<code>%&gt;%</code>)</li>
 </ol>
-</div>
-</div>
-<div id="supplemental-chapters" class="section level2">
-<h2>Supplemental Chapters</h2>
-<div id="chapter-a.-producing-reports-with-rmd-and-knitr"
-class="section level4">
-<h4><a href="chp-rmarkdown.html">Chapter A. Producing reports with Rmd
-and knitr</a></h4>
-<p><strong>Learning Objectives</strong></p>
-<dl>
-<dt>In this lesson</dt>
-<dd>
+<!-- NOT USING AT THE MOMENT
 
-</dd>
-</dl>
-<ul>
-<li>integer(0)</li>
-<li>character(0)</li>
-</ul>
-<p><strong>Computational Skills</strong></p>
-<dl>
-<dt>After completing this lesson, learners will be able to</dt>
-<dd>
+## Supplemental Chapters
 
-</dd>
-</dl>
-<ol style="list-style-type: decimal">
-<li>integer(0)</li>
-<li>character(0)</li>
-</ol>
-</div>
-<div id="chapter-b.-intro-to-geospatial-raster-data-in-r"
-class="section level4">
-<h4><a href="chp-geospatial-raster.html">Chapter B. Intro to geospatial
-raster data in R</a></h4>
-<p><strong>Learning Objectives</strong></p>
-<dl>
-<dt>In this lesson</dt>
-<dd>
+#### [Chapter A. Producing reports with Rmd and knitr](chp-rmarkdown.html)
 
-</dd>
-</dl>
-<ul>
-<li>integer(0)</li>
-<li>character(0)</li>
-</ul>
-<p><strong>Computational Skills</strong></p>
-<dl>
-<dt>After completing this lesson, learners will be able to</dt>
-<dd>
+**Learning Objectives**
 
-</dd>
-</dl>
-<ol style="list-style-type: decimal">
-<li>integer(0)</li>
-<li>character(0)</li>
-</ol>
-</div>
-<div id="chapter-c.-data-cleaning-with-openrefine"
-class="section level4">
-<h4><a href="chp-openrefine.html">Chapter C. Data cleaning with
-OpenRefine</a></h4>
-<p><strong>Learning Objectives</strong></p>
-<dl>
-<dt>In this lesson</dt>
-<dd>
+In this lesson 
+: 
 
-</dd>
-</dl>
-<ul>
-<li>integer(0)</li>
-<li>character(0)</li>
-</ul>
-<p><strong>Computational Skills</strong></p>
-<dl>
-<dt>After completing this lesson, learners will be able to</dt>
-<dd>
+- 
 
-</dd>
-</dl>
-<ol style="list-style-type: decimal">
-<li>integer(0)</li>
-<li>character(0)</li>
-</ol>
-</div>
-<div id="chapter-d.-version-control-with-git" class="section level4">
-<h4><a href="chp-openrefine.html">Chapter D. Version control with
-Git</a></h4>
-<p><strong>Learning Objectives</strong></p>
-<dl>
-<dt>In this lesson</dt>
-<dd>
 
-</dd>
-</dl>
-<ul>
-<li>integer(0)</li>
-<li>character(0)</li>
-</ul>
-<p><strong>Computational Skills</strong></p>
-<dl>
-<dt>After completing this lesson, learners will be able to</dt>
-<dd>
+**Computational Skills**
 
-</dd>
-</dl>
-<ol style="list-style-type: decimal">
-<li>integer(0)</li>
-<li>character(0)</li>
-</ol>
+After completing this lesson, learners will be able to 
+: 
+
+1. 
+
+
+#### [Chapter B. Intro to geospatial raster data in R](chp-geospatial-raster.html)
+
+**Learning Objectives**
+
+In this lesson 
+: 
+
+- 
+
+
+**Computational Skills**
+
+After completing this lesson, learners will be able to 
+: 
+
+1. 
+
+
+#### [Chapter C. Data cleaning with OpenRefine](chp-openrefine.html)
+
+
+**Learning Objectives**
+
+In this lesson 
+: 
+
+- 
+
+
+**Computational Skills**
+
+After completing this lesson, learners will be able to 
+: 
+
+1. 
+
+#### [Chapter D. Version control with Git](chp-openrefine.html)
+
+
+**Learning Objectives**
+
+In this lesson 
+: 
+
+- 
+
+
+**Computational Skills**
+
+After completing this lesson, learners will be able to 
+: 
+
+1. 
+
+-->
 </div>
 </div>
 <div id="references" class="section level2">
@@ -802,8 +645,6 @@ Git</a></h4>
 <p>Introduction to Computing in R with NEON</p>
 
 
-</div>
-</div>
 
 </div>
 
@@ -836,35 +677,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

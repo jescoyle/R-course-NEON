@@ -1,7 +1,9 @@
 ---
 layout: page
 title: "Lesson Contents"
-output: html_document
+output: 
+  html_document:
+    toc: false
 bibliography: references.bib
 ---
 
@@ -12,7 +14,7 @@ source("src/setup.R")
 
 # knitr options
 source("src/knit-options.R")
-knitr_fig_path(paste0("00", "-"))
+.knitr_fig_path(paste0("00", "-"))
 
 ```
 
@@ -21,195 +23,199 @@ This page will give an overview of episodes within this tutorial and learning ob
 
 ## Core Chapters
 
-#### [Chapter 1. `r get_chpName(1, type.to = "nameLong")`](`r paste0(get_chpName(1, type.to = "fileName"), ".html")`)
+#### [Chapter 1. `r .get_chpName(1, type.to = "nameLong")`](`r paste0(.get_chpName(1, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
 
 In this lesson 
-`r get_LO(get_chpName(1, type.to = "chp"), LOtable, prefix = TRUE)`
+`r .get_LO(.get_chpName(1, type.to = "chp"), .LOtable, prefix = TRUE)`
 
 
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
-`r get_LO(get_chpName(1, type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.get_chpName(1, type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter 2. `r get_chpName(2, type.to = "nameLong")`](`r paste0(get_chpName(2, type.to = "fileName"), ".html")`)
+#### [Chapter 2. `r .get_chpName(2, type.to = "nameLong")`](`r paste0(.get_chpName(2, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
 
 In this lesson 
-`r get_LO(get_chpName(2, type.to = "chp"), LOtable, prefix = TRUE)`
+`r .get_LO(.get_chpName(2, type.to = "chp"), .LOtable, prefix = TRUE)`
 
 
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
-`r get_LO(get_chpName(2, type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.get_chpName(2, type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
 
 
 
-#### [Chapter 3. `r get_chpName(3, type.to = "nameLong")`](`r paste0(get_chpName(3, type.to = "fileName"), ".html")`)
+#### [Chapter 3. `r .get_chpName(3, type.to = "nameLong")`](`r paste0(.get_chpName(3, type.to = "fileName"), ".html")`)
 
 **Learning Objectives**
 
 In this lesson 
-`r get_LO(get_chpName(3, type.to = "chp"), LOtable, prefix = TRUE)`
+`r .get_LO(.get_chpName(3, type.to = "chp"), .LOtable, prefix = TRUE)`
 
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
-`r get_LO(get_chpName(3, type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.get_chpName(3, type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter 4. `r get_chpName(4, type.to = "nameLong")`](`r paste0(get_chpName(4, type.to = "fileName"), ".html")`)
-
-
-**Learning Objectives**
-
-In this lesson 
-`r get_LO(get_chpName(4, type.to = "chp"), LOtable, prefix = TRUE)`
-
-
-**Computational Skills**
-
-After completing this lesson, learners will be able to 
-`r get_LO(get_chpName(4, type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
-
-#### [Chapter 5. `r get_chpName(5, type.to = "nameLong")`](`r paste0(get_chpName(5, type.to = "fileName"), ".html")`)
+#### [Chapter 4. `r .get_chpName(4, type.to = "nameLong")`](`r paste0(.get_chpName(4, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
 
 In this lesson 
-`r get_LO(get_chpName(5, type.to = "chp"), LOtable, prefix = TRUE)`
+`r .get_LO(.get_chpName(4, type.to = "chp"), .LOtable, prefix = TRUE)`
 
 
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
-`r get_LO(get_chpName(5, type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.get_chpName(4, type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
 
-
-#### [Chapter 6. `r get_chpName(6, type.to = "nameLong")`](`r paste0(get_chpName(6, type.to = "fileName"), ".html")`)
+#### [Chapter 5. `r .get_chpName(5, type.to = "nameLong")`](`r paste0(.get_chpName(5, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
 
 In this lesson 
-`r get_LO(get_chpName(6, type.to = "chp"), LOtable, prefix = TRUE)`
-
+`r .get_LO(.get_chpName(5, type.to = "chp"), .LOtable, prefix = TRUE)`
 
 
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
-`r get_LO(get_chpName(6, type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.get_chpName(5, type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter 7. `r get_chpName(7, type.to = "nameLong")`](`r paste0(get_chpName(7, type.to = "fileName"), ".html")`)
+#### [Chapter 6. `r .get_chpName(6, type.to = "nameLong")`](`r paste0(.get_chpName(6, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
 
 In this lesson 
-`r get_LO(get_chpName(7, type.to = "chp"), LOtable, prefix = TRUE)`
+`r .get_LO(.get_chpName(6, type.to = "chp"), .LOtable, prefix = TRUE)`
+
+
 
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
-`r get_LO(get_chpName(7, type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.get_chpName(6, type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter 8. `r get_chpName(8, type.to = "nameLong")`](`r paste0(get_chpName(8, type.to = "fileName"), ".html")`)
+#### [Chapter 7. `r .get_chpName(7, type.to = "nameLong")`](`r paste0(.get_chpName(7, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
 
 In this lesson 
-`r get_LO(get_chpName(8, type.to = "chp"), LOtable, prefix = TRUE)`
+`r .get_LO(.get_chpName(7, type.to = "chp"), .LOtable, prefix = TRUE)`
 
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
-`r get_LO(get_chpName(8, type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.get_chpName(7, type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter 9. `r get_chpName(9, type.to = "nameLong")`](`r paste0(get_chpName(9, type.to = "fileName"), ".html")`)
+#### [Chapter 8. `r .get_chpName(8, type.to = "nameLong")`](`r paste0(.get_chpName(8, type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
 
 In this lesson 
-`r get_LO(get_chpName(9, type.to = "chp"), LOtable, prefix = TRUE)`
+`r .get_LO(.get_chpName(8, type.to = "chp"), .LOtable, prefix = TRUE)`
+
+**Computational Skills**
+
+After completing this lesson, learners will be able to 
+`r .get_LO(.get_chpName(8, type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
+
+
+#### [Chapter 9. `r .get_chpName(9, type.to = "nameLong")`](`r paste0(.get_chpName(9, type.to = "fileName"), ".html")`)
+
+
+**Learning Objectives**
+
+In this lesson 
+`r .get_LO(.get_chpName(9, type.to = "chp"), .LOtable, prefix = TRUE)`
 
 
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
-`r get_LO(get_chpName(9, type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.get_chpName(9, type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
 
+
+<!-- NOT USING AT THE MOMENT
 
 ## Supplemental Chapters
 
-#### [Chapter A. `r get_chpName("A", type.to = "nameLong")`](`r paste0(get_chpName("A", type.to = "fileName"), ".html")`)
+#### [Chapter A. `r .get_chpName("A", type.to = "nameLong")`](`r paste0(.get_chpName("A", type.to = "fileName"), ".html")`)
 
 **Learning Objectives**
 
 In this lesson 
-`r get_LO(get_chpName("A", type.to = "chp"), LOtable, prefix = TRUE)`
+`r .get_LO(.get_chpName("A", type.to = "chp"), .LOtable, prefix = TRUE)`
 
 
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
-`r get_LO(get_chpName("A", type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.get_chpName("A", type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter B. `r get_chpName("B", type.to = "nameLong")`](`r paste0(get_chpName("B", type.to = "fileName"), ".html")`)
+#### [Chapter B. `r .get_chpName("B", type.to = "nameLong")`](`r paste0(.get_chpName("B", type.to = "fileName"), ".html")`)
 
 **Learning Objectives**
 
 In this lesson 
-`r get_LO(get_chpName("B", type.to = "chp"), LOtable, prefix = TRUE)`
+`r .get_LO(.get_chpName("B", type.to = "chp"), .LOtable, prefix = TRUE)`
 
 
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
-`r get_LO(get_chpName("B", type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.get_chpName("B", type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
 
 
-#### [Chapter C. `r get_chpName("C", type.to = "nameLong")`](`r paste0(get_chpName("C", type.to = "fileName"), ".html")`)
-
-
-**Learning Objectives**
-
-In this lesson 
-`r get_LO(get_chpName("C", type.to = "chp"), LOtable, prefix = TRUE)`
-
-
-**Computational Skills**
-
-After completing this lesson, learners will be able to 
-`r get_LO(get_chpName("C", type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
-
-#### [Chapter D. `r get_chpName("D", type.to = "nameLong")`](`r paste0(get_chpName("C", type.to = "fileName"), ".html")`)
+#### [Chapter C. `r .get_chpName("C", type.to = "nameLong")`](`r paste0(.get_chpName("C", type.to = "fileName"), ".html")`)
 
 
 **Learning Objectives**
 
 In this lesson 
-`r get_LO(get_chpName("D", type.to = "chp"), LOtable, prefix = TRUE)`
+`r .get_LO(.get_chpName("C", type.to = "chp"), .LOtable, prefix = TRUE)`
 
 
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
-`r get_LO(get_chpName("D", type.to = "chp"), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.get_chpName("C", type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
+
+#### [Chapter D. `r .get_chpName("D", type.to = "nameLong")`](`r paste0(.get_chpName("C", type.to = "fileName"), ".html")`)
+
+
+**Learning Objectives**
+
+In this lesson 
+`r .get_LO(.get_chpName("D", type.to = "chp"), .LOtable, prefix = TRUE)`
+
+
+**Computational Skills**
+
+After completing this lesson, learners will be able to 
+`r .get_LO(.get_chpName("D", type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
+
+-->
 
 ## References
 

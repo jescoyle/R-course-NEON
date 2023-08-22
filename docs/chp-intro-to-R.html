@@ -30,8 +30,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -42,18 +40,105 @@
   ul.task-list{list-style: none;}
     </style>
 
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
   }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
 </script>
-
-
 
 
 
@@ -313,20 +398,6 @@ $(document).ready(function () {
     <li>
       <a href="chp-tidyverse-basics.html">9. Tidy data</a>
     </li>
-    <li class="divider"></li>
-    <li class="dropdown-header">Supplemental lessons</li>
-    <li>
-      <a href="chp-rmarkdown.html">A. Rmarkdown</a>
-    </li>
-    <li>
-      <a href="chp-geospatial-raster.html">B. Raster data</a>
-    </li>
-    <li>
-      <a href="chp-openrefine.html">C. OpenRefine</a>
-    </li>
-    <li>
-      <a href="chp-git.html">D. Git</a>
-    </li>
   </ul>
 </li>
 <li>
@@ -508,14 +579,14 @@ R tries to execute them, and then returns a result.</p>
 <p>For the first part of this lesson, you should type any code that you
 see in grey boxes into the command line in the R console and then press
 enter.</p>
-<pre class="r"><code>type this into the command line</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>type this into the command line</span></code></pre></div>
 <p>This document will show you the expected output of each command in a
 white boxes below like this:</p>
 <pre><code>[1] expected code output</code></pre>
 <p>Or, the expected output may show up directly below the line of code
 and be preceded by a <code>[1]</code>:</p>
-<pre class="r"><code>type this into the command line
-[1] expected code output</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>type this into the command line</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>[<span class="dv">1</span>] expected code output</span></code></pre></div>
 <p>Let’s start by demonstrating some of the basic functionality of
 R.</p>
 </div>
@@ -526,20 +597,20 @@ it is not always the best tool for every job.</p>
 <div id="arithmetic-and-calculations" class="section level4">
 <h4>Arithmetic and calculations</h4>
 <p>The simplest thing you could do with R is to do arithmetic:</p>
-<pre class="r"><code>1 + 100</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">100</span></span></code></pre></div>
 <pre><code>[1] 101</code></pre>
 <p>R will print out the answer, with a preceding “[1]” because this is
 the first line of output.</p>
 <p>If you type in an incomplete command, R will wait for you to complete
 it. For example:</p>
-<pre class="r"><code>1 +</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span></span></code></pre></div>
 <pre><code>+</code></pre>
 <p>Any time you press <kbd>Enter</kbd> and the R session shows a “+”
 instead of a “&gt;”, it means that the console is waiting for you to
 complete the command. You can either keep typing the rest of the
 command:</p>
-<pre class="r"><code>1 +
-100</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="dv">100</span></span></code></pre></div>
 <pre><code>[1] 101</code></pre>
 <p>or cancel what you were doing. If you want to cancel a command you
 can type <kbd>Esc</kbd> and RStudio will give you back the “&gt;”
@@ -559,20 +630,20 @@ you would have learned in math class.</p>
 <li>Add: <code>+</code></li>
 <li>Subtract: <code>-</code></li>
 </ul>
-<pre class="r"><code>3 + 5 * 2</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span> <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>[1] 13</code></pre>
 <p>Use parentheses to group operations in order to force the order of
 evaluation if it differs from the default, or to make clear what you
 intend.</p>
-<pre class="r"><code>(3 + 5) * 2</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>(<span class="dv">3</span> <span class="sc">+</span> <span class="dv">5</span>) <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>[1] 16</code></pre>
 <p>Really small or large numbers get a scientific notation:</p>
-<pre class="r"><code>2/10000</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">/</span><span class="dv">10000</span></span></code></pre></div>
 <pre><code>[1] 2e-04</code></pre>
 <p>Which is shorthand for “multiplied by <code>10^XX</code>”. So
 <code>2e-4</code> is shorthand for <code>2 * 10^(-4)</code>.</p>
 <p>You can write numbers in scientific notation too:</p>
-<pre class="r"><code>5e3  </code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fl">5e3</span>  </span></code></pre></div>
 <pre><code>[1] 5000</code></pre>
 <p>R has many built in mathematical functions. To use a function, we can
 type its name, followed by open and closing parentheses (just like
@@ -580,22 +651,22 @@ functions in math!). Functions take <strong>arguments</strong> as
 inputs- anything we type inside the parentheses of a function is
 considered an argument. Depending on the function, the number of
 arguments can vary from none to multiple. For example:</p>
-<pre class="r"><code>getwd() # returns an absolute file path of the current working directory</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="fu">getwd</span>() <span class="co"># returns an absolute file path of the current working directory</span></span></code></pre></div>
 <p>doesn’t require an argument, whereas for the next set of mathematical
 functions we will need to supply the function a value in order to
 compute the result.</p>
-<pre class="r"><code>sin(1)  # trigonometry functions
-[1] 0.841471</code></pre>
-<pre class="r"><code>log(1)  # natural logarithm
-[1] 0</code></pre>
-<pre class="r"><code>log10(10) # base-10 logarithm
-[1] 1</code></pre>
-<pre class="r"><code>exp(0.5) # e^(1/2)
-[1] 1.648721</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">sin</span>(<span class="dv">1</span>)  <span class="co"># trigonometry functions</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">0.841471</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">1</span>)  <span class="co"># natural logarithm</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">log10</span>(<span class="dv">10</span>) <span class="co"># base-10 logarithm</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fl">0.5</span>) <span class="co"># e^(1/2)</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">1.648721</span></span></code></pre></div>
 <p>Some functions take multiple arguments that are separated by
 commas.</p>
-<pre class="r"><code>sum(1, 2, 3) # adds all numeric arguments together
-[1] 6</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># adds all numeric arguments together</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">6</span></span></code></pre></div>
 <p>Did you notice the text at the end of each line of code above? This
 text is called a <strong>comment</strong> because it is preceded by a
 hash character (<code>#</code>). This character tells R to ignore
@@ -604,17 +675,17 @@ evaluated we can use it to make notes about what the code does. You do
 not need to type the comments into the command line to run the code.</p>
 <div class="challenge">
 <p>What should be the output for each of these commands?</p>
-<pre class="r"><code>log(exp(3 + 3)) 
-2e-1 + 5</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">log</span>(<span class="fu">exp</span>(<span class="dv">3</span> <span class="sc">+</span> <span class="dv">3</span>)) </span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="fl">2e-1</span> <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<pre class="r"><code>log(exp(3 + 3)) 
-[1] 6
-2e-1 + 5
-[1] 5.2</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">log</span>(<span class="fu">exp</span>(<span class="dv">3</span> <span class="sc">+</span> <span class="dv">3</span>)) </span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">6</span></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="fl">2e-1</span> <span class="sc">+</span> <span class="dv">5</span></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">5.2</span></span></code></pre></div>
 </div>
 </details>
 </div>
@@ -622,17 +693,17 @@ not need to type the comments into the command line to run the code.</p>
 <div class="challenge">
 <p>What do the values <code>NA</code> and <code>NULL</code> mean?</p>
 <p>Run each of these commands and try to guess what is happening.</p>
-<pre class="r"><code>sum(3, NA)
-sum(3, NULL)</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">3</span>, <span class="cn">NA</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">3</span>, <span class="cn">NULL</span>)</span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<pre class="r"><code>sum(3, NA)
-[1] NA
-sum(3, NULL)
-[1] 3</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">3</span>, <span class="cn">NA</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="cn">NA</span></span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">3</span>, <span class="cn">NULL</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div>
 <p><code>NA</code> is a special placeholder value that means that data
 is missing. <code>NULL</code> is a special value that means something
 does not exist. Thus, arithmetic with <code>NA</code> will by default
@@ -652,13 +723,13 @@ class="section level4">
 <p>The first step toward writing code is to store values for use later.
 We can store values using the assignment operator <code>&lt;-</code>,
 like this:</p>
-<pre class="r"><code>x &lt;- 1/40</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">40</span></span></code></pre></div>
 <p>Notice that assignment does not print a value. Instead, we stored it
 for later in something called a <strong>variable</strong>.
 <code>x</code> now contains the <strong>value</strong>
 <code>0.025</code>:</p>
-<pre class="r"><code>x
-[1] 0.025</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>x</span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">0.025</span></span></code></pre></div>
 <p>More precisely, the stored value is a <em>decimal approximation</em>
 of this fraction called a <a
 href="http://en.wikipedia.org/wiki/Floating_point">floating point
@@ -668,41 +739,41 @@ number</a>. The value is stored in an <strong>object</strong> named
 RStudio, and you will see that <code>x</code> and its value have
 appeared. The variable <code>x</code> can be used in place of a number
 in any calculation that expects a number:</p>
-<pre class="r"><code>log(x)
-[1] -3.688879</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="fu">log</span>(x)</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="sc">-</span><span class="fl">3.688879</span></span></code></pre></div>
 <p>Notice also that variables can be reassigned when they already
 exist:</p>
-<pre class="r"><code>x &lt;- 100</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">100</span></span></code></pre></div>
 <p><code>x</code> used to contain the value 0.025 and now it has the
 value 100. You can see this in the <code>Environment</code> tab in the
 upper right panel.</p>
 <p>Assignment values can contain the variable being assigned to (watch
 what happens to the values of <code>x</code> and <code>y</code> in the
 Environment tab):</p>
-<pre class="r"><code>x &lt;- x + 1 
-y &lt;- x * 2</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">1</span> </span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
 <p>The right hand side of the assignment can be any valid R expression.
 The right hand side is <em>fully evaluated</em> before the assignment
 occurs.</p>
 <div class="challenge">
 <p>What will be the values of <code>y</code> and <code>z</code> after
 you run these lines of code in order?</p>
-<pre class="r"><code>x &lt;- 10
-y &lt;- 2*x
-z &lt;- x + y
-x &lt;- 20</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>x</span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">20</span></span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<pre class="r"><code># type the variable names to print out their values
-x
-[1] 20
-y 
-[1] 20
-z
-[1] 30</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="co"># type the variable names to print out their values</span></span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>x</span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">20</span></span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a>y </span>
+<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">20</span></span>
+<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a>z</span>
+<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">30</span></span></code></pre></div>
 </div>
 </details>
 </div>
@@ -714,15 +785,15 @@ variables were assigned when <code>x</code> was <code>10</code>. We
 would have to run the assignment of <code>y</code> and <code>z</code>
 again to update their values based on the new value of
 <code>x</code>:</p>
-<pre class="r"><code>y &lt;- 2*x
-z &lt;- x + y
-
-x
-[1] 20
-y
-[1] 40
-z
-[1] 60</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>x</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a>x</span>
+<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">20</span></span>
+<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a>y</span>
+<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">40</span></span>
+<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a>z</span>
+<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">60</span></span></code></pre></div>
 <div class="callout-trick">
 <p>Instead of retyping commands that you want to run again into the
 console, use the up arrow key at the command prompt. Each time you press
@@ -733,7 +804,7 @@ again.</p>
 <div class="challenge">
 <p>Is R case sensitive?</p>
 <p>What happens when you run this code?</p>
-<pre class="r"><code>y &lt;- 2*X</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>X</span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
@@ -769,8 +840,8 @@ values or functions in R (e.g., <code>pi</code>, <code>sum</code>,
 to use a name that is specific to what the variable represents. If
 you’re not sure whether a name is used in R, you can use the
 <code>?</code> to look it up (more on this later):</p>
-<pre class="r"><code>?mean</code></pre>
-<pre class="r"><code>?average</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>?mean</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>?average</span></code></pre></div>
 <pre><code>No documentation for &#39;average&#39; in specified packages and libraries:
 you could try &#39;??average&#39;</code></pre>
 <p>If a name already exists for a function, it will open up a Help
@@ -778,7 +849,7 @@ window. If the name is available for you to use, then the console will
 report that it could not find any documentation.</p>
 <p>It is also possible to use the <code>=</code> operator for
 assignment:</p>
-<pre class="r"><code>x = 1/40</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">40</span></span></code></pre></div>
 <p>But this is much less common among R users. The most important thing
 is to <strong>be consistent</strong> with the operator you use. There
 are occasionally places where it is less confusing to use
@@ -787,16 +858,16 @@ used in the community. So the recommendation is to use
 <code>&lt;-</code>.</p>
 <div class="challenge">
 <p>Which of the following are valid R variable names?</p>
-<pre class="r"><code>min_height
-max.height
-_age
-.mass
-MaxLength
-min-length
-2widths
-celsius2kelvin
-exp
-pi</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a>min_height</span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a>max.height</span>
+<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a>_age</span>
+<span id="cb42-4"><a href="#cb42-4" tabindex="-1"></a>.mass</span>
+<span id="cb42-5"><a href="#cb42-5" tabindex="-1"></a>MaxLength</span>
+<span id="cb42-6"><a href="#cb42-6" tabindex="-1"></a>min<span class="sc">-</span>length</span>
+<span id="cb42-7"><a href="#cb42-7" tabindex="-1"></a>2widths</span>
+<span id="cb42-8"><a href="#cb42-8" tabindex="-1"></a>celsius2kelvin</span>
+<span id="cb42-9"><a href="#cb42-9" tabindex="-1"></a>exp</span>
+<span id="cb42-10"><a href="#cb42-10" tabindex="-1"></a>pi</span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
@@ -826,93 +897,93 @@ will explain in much more detail the different types of data and objects
 you can create in R, but for now let’s just explore how R does
 arithmetic with vectors.</p>
 <p>You can construct a vector using the <code>c()</code> function:</p>
-<pre class="r"><code>ages &lt;- c(18, 19, 21, 17)
-firstNames &lt;- c(&quot;Sasha&quot;, &quot;Everett&quot;, &quot;Hope&quot;, &quot;Arturo&quot;)
-
-ages
-[1] 18 19 21 17
-firstNames
-[1] &quot;Sasha&quot;   &quot;Everett&quot; &quot;Hope&quot;    &quot;Arturo&quot; </code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">19</span>, <span class="dv">21</span>, <span class="dv">17</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a>firstNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Sasha&quot;</span>, <span class="st">&quot;Everett&quot;</span>, <span class="st">&quot;Hope&quot;</span>, <span class="st">&quot;Arturo&quot;</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" tabindex="-1"></a>ages</span>
+<span id="cb43-5"><a href="#cb43-5" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">18</span> <span class="dv">19</span> <span class="dv">21</span> <span class="dv">17</span></span>
+<span id="cb43-6"><a href="#cb43-6" tabindex="-1"></a>firstNames</span>
+<span id="cb43-7"><a href="#cb43-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span> </span></code></pre></div>
 <p>You can also put vectors together using the <code>c()</code>
 function:</p>
-<pre class="r"><code>c(20, ages, 40)
-[1] 20 18 19 21 17 40</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">20</span>, ages, <span class="dv">40</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">20</span> <span class="dv">18</span> <span class="dv">19</span> <span class="dv">21</span> <span class="dv">17</span> <span class="dv">40</span></span></code></pre></div>
 <p>To select an element in a list, type the <strong>index</strong> of
 the element desired inside square brackets. For example, to select the
 second element:</p>
-<pre class="r"><code>firstNames[2]
-[1] &quot;Everett&quot;</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>firstNames[<span class="dv">2</span>]</span>
+<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Everett&quot;</span></span></code></pre></div>
 <p>You can select multiple elements at once by typing a vector of
 indices inside the square brackets:</p>
-<pre class="r"><code>firstNames[c(3, 1)]
-[1] &quot;Hope&quot;  &quot;Sasha&quot;</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a>firstNames[<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>)]</span>
+<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Hope&quot;</span>  <span class="st">&quot;Sasha&quot;</span></span></code></pre></div>
 <p>A colon <code>:</code> is a special operator that will create a
 vector of integers in order:</p>
-<pre class="r"><code>1:4
-[1] 1 2 3 4
-4:1
-[1] 4 3 2 1</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span></span>
+<span id="cb47-3"><a href="#cb47-3" tabindex="-1"></a><span class="dv">4</span><span class="sc">:</span><span class="dv">1</span></span>
+<span id="cb47-4"><a href="#cb47-4" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">4</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">1</span></span></code></pre></div>
 <p>To make a vector with any sequence of integers, use the
 <code>seq()</code> function:</p>
-<pre class="r"><code>seq(1, 10, by = 2)
-[1] 1 3 5 7 9
-seq(0, 100, by = 10)
- [1]   0  10  20  30  40  50  60  70  80  90 100</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">7</span> <span class="dv">9</span></span>
+<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>)</span>
+<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a> [<span class="dv">1</span>]   <span class="dv">0</span>  <span class="dv">10</span>  <span class="dv">20</span>  <span class="dv">30</span>  <span class="dv">40</span>  <span class="dv">50</span>  <span class="dv">60</span>  <span class="dv">70</span>  <span class="dv">80</span>  <span class="dv">90</span> <span class="dv">100</span></span></code></pre></div>
 <p>To make a vector with repeated values used the <code>rep()</code>
 function:</p>
-<pre class="r"><code># What is the difference in the output of these two commands?
-rep(firstNames, 4)
- [1] &quot;Sasha&quot;   &quot;Everett&quot; &quot;Hope&quot;    &quot;Arturo&quot;  &quot;Sasha&quot;   &quot;Everett&quot; &quot;Hope&quot;   
- [8] &quot;Arturo&quot;  &quot;Sasha&quot;   &quot;Everett&quot; &quot;Hope&quot;    &quot;Arturo&quot;  &quot;Sasha&quot;   &quot;Everett&quot;
-[15] &quot;Hope&quot;    &quot;Arturo&quot; 
-rep(firstNames, each = 4)
- [1] &quot;Sasha&quot;   &quot;Sasha&quot;   &quot;Sasha&quot;   &quot;Sasha&quot;   &quot;Everett&quot; &quot;Everett&quot; &quot;Everett&quot;
- [8] &quot;Everett&quot; &quot;Hope&quot;    &quot;Hope&quot;    &quot;Hope&quot;    &quot;Hope&quot;    &quot;Arturo&quot;  &quot;Arturo&quot; 
-[15] &quot;Arturo&quot;  &quot;Arturo&quot; </code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="co"># What is the difference in the output of these two commands?</span></span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="fu">rep</span>(firstNames, <span class="dv">4</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>   </span>
+<span id="cb49-4"><a href="#cb49-4" tabindex="-1"></a> [<span class="dv">8</span>] <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span></span>
+<span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a>[<span class="dv">15</span>] <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span> </span>
+<span id="cb49-6"><a href="#cb49-6" tabindex="-1"></a><span class="fu">rep</span>(firstNames, <span class="at">each =</span> <span class="dv">4</span>)</span>
+<span id="cb49-7"><a href="#cb49-7" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span></span>
+<span id="cb49-8"><a href="#cb49-8" tabindex="-1"></a> [<span class="dv">8</span>] <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span> </span>
+<span id="cb49-9"><a href="#cb49-9" tabindex="-1"></a>[<span class="dv">15</span>] <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span> </span></code></pre></div>
 <div class="challenge">
 <p>Can you predict what each of the following lines of code will
 return?</p>
-<pre class="r"><code>c(&quot;Betsy&quot;, firstNames)
-firstNames[4:1]
-ages[c(2, 4)]
-ages[1, 3]
-c(firstNames, ages)
-rep(firstNames, ages)
-rep(ages, firstNames)</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;Betsy&quot;</span>, firstNames)</span>
+<span id="cb50-2"><a href="#cb50-2" tabindex="-1"></a>firstNames[<span class="dv">4</span><span class="sc">:</span><span class="dv">1</span>]</span>
+<span id="cb50-3"><a href="#cb50-3" tabindex="-1"></a>ages[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</span>
+<span id="cb50-4"><a href="#cb50-4" tabindex="-1"></a>ages[<span class="dv">1</span>, <span class="dv">3</span>]</span>
+<span id="cb50-5"><a href="#cb50-5" tabindex="-1"></a><span class="fu">c</span>(firstNames, ages)</span>
+<span id="cb50-6"><a href="#cb50-6" tabindex="-1"></a><span class="fu">rep</span>(firstNames, ages)</span>
+<span id="cb50-7"><a href="#cb50-7" tabindex="-1"></a><span class="fu">rep</span>(ages, firstNames)</span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<pre class="r"><code>c(&quot;Betsy&quot;, firstNames)
-[1] &quot;Betsy&quot;   &quot;Sasha&quot;   &quot;Everett&quot; &quot;Hope&quot;    &quot;Arturo&quot; 
-
-firstNames[4:1]
-[1] &quot;Arturo&quot;  &quot;Hope&quot;    &quot;Everett&quot; &quot;Sasha&quot;  
-
-ages[c(2, 4)]
-[1] 19 17</code></pre>
-<pre class="r"><code>ages[1, 3]
-Error in ages[1, 3]: incorrect number of dimensions</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;Betsy&quot;</span>, firstNames)</span>
+<span id="cb51-2"><a href="#cb51-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Betsy&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span> </span>
+<span id="cb51-3"><a href="#cb51-3" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" tabindex="-1"></a>firstNames[<span class="dv">4</span><span class="sc">:</span><span class="dv">1</span>]</span>
+<span id="cb51-5"><a href="#cb51-5" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Sasha&quot;</span>  </span>
+<span id="cb51-6"><a href="#cb51-6" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="#cb51-7" tabindex="-1"></a>ages[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]</span>
+<span id="cb51-8"><a href="#cb51-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">19</span> <span class="dv">17</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a>ages[<span class="dv">1</span>, <span class="dv">3</span>]</span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a>Error <span class="cf">in</span> ages[<span class="dv">1</span>, <span class="dv">3</span>]<span class="sc">:</span> incorrect number of dimensions</span></code></pre></div>
 <p>Why did <code>ages[1, 3]</code> give an error message? Notice that
 <code>1, 3</code> is not a vector. In order to select elements 1 and 3
 from <code>ages</code> we need to first create a vector containing the
 integers 1 and 3: <code>c(1, 3)</code> and then place this inside the
 brackets: <code>ages[c(1, 3)]</code>.</p>
-<pre class="r"><code>c(firstNames, ages)
-[1] &quot;Sasha&quot;   &quot;Everett&quot; &quot;Hope&quot;    &quot;Arturo&quot;  &quot;18&quot;      &quot;19&quot;      &quot;21&quot;     
-[8] &quot;17&quot;     </code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="fu">c</span>(firstNames, ages)</span>
+<span id="cb53-2"><a href="#cb53-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;18&quot;</span>      <span class="st">&quot;19&quot;</span>      <span class="st">&quot;21&quot;</span>     </span>
+<span id="cb53-3"><a href="#cb53-3" tabindex="-1"></a>[<span class="dv">8</span>] <span class="st">&quot;17&quot;</span>     </span></code></pre></div>
 <p>Notice that when we concatenated <code>firstNames</code> and
 <code>ages</code> all of the ages turned into text with each number
 surrounded by quotes. This is because all elements in a vector must have
 the same data type, either numbers or text, but not both. R tried to fix
 this by using the data type of the first vector we supplied.</p>
-<pre class="r"><code>rep(firstNames, 1:4)
- [1] &quot;Sasha&quot;   &quot;Everett&quot; &quot;Everett&quot; &quot;Hope&quot;    &quot;Hope&quot;    &quot;Hope&quot;    &quot;Arturo&quot; 
- [8] &quot;Arturo&quot;  &quot;Arturo&quot;  &quot;Arturo&quot; 
-rep(1:4, firstNames)
-Warning: NAs introduced by coercion
-Error in rep(1:4, firstNames): invalid &#39;times&#39; argument</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="fu">rep</span>(firstNames, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span> </span>
+<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a> [<span class="dv">8</span>] <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span> </span>
+<span id="cb54-4"><a href="#cb54-4" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, firstNames)</span>
+<span id="cb54-5"><a href="#cb54-5" tabindex="-1"></a>Warning<span class="sc">:</span> NAs introduced by coercion</span>
+<span id="cb54-6"><a href="#cb54-6" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, firstNames)<span class="sc">:</span> invalid <span class="st">&#39;times&#39;</span> argument</span></code></pre></div>
 <p>The first example repeats each element of firstNames the number of
 times given in ages, so “Sasha” is repeated 1 time, “Everett” is
 repeated 2 times, etc. The second example causes an error because the
@@ -927,18 +998,18 @@ contain integers defining the number of times to repeat each value. Use
 <p>Vectors are useful because we can use them to do multiple
 calculations at once. Adding or multiplying a vector by a scalar applies
 the operation to each element of the vector.</p>
-<pre class="r"><code>ages + 10</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a>ages <span class="sc">+</span> <span class="dv">10</span></span></code></pre></div>
 <pre><code>[1] 28 29 31 27</code></pre>
-<pre class="r"><code>2 * ages</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a><span class="dv">2</span> <span class="sc">*</span> ages</span></code></pre></div>
 <pre><code>[1] 36 38 42 34</code></pre>
-<pre class="r"><code>ages / 2</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a>ages <span class="sc">/</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>[1]  9.0  9.5 10.5  8.5</code></pre>
 <p>Arithmetic between two vectors is conducted element by element:</p>
-<pre class="r"><code>ages + 1:4</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a>ages <span class="sc">+</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span></code></pre></div>
 <pre><code>[1] 19 21 24 21</code></pre>
-<pre class="r"><code>ages - ages</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a>ages <span class="sc">-</span> ages</span></code></pre></div>
 <pre><code>[1] 0 0 0 0</code></pre>
-<pre class="r"><code>ages[1:2] - ages[3:4]</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a>ages[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">-</span> ages[<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
 <pre><code>[1] -3  2</code></pre>
 <div class="challenge">
 <p>Do this math in R</p>
@@ -953,15 +1024,15 @@ the operation to each element of the vector.</p>
 </summary>
 <div class="solution">
 <p>There are lots of ways to solve this problem. Here is one way.</p>
-<pre class="r"><code># Sum of all integers between 1 and 100
-sum(1:100)
-[1] 5050
-
-# Difference between sum of odds and evens  between 1 and 50
-odds &lt;- seq(1, 50, 2) # a vector with all odd numbers
-evens &lt;- seq(2, 50, 2) # a vector with all even numbers
-sum(odds) - sum(evens) # calculate sum of each vector, then take the difference
-[1] -25</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a><span class="co"># Sum of all integers between 1 and 100</span></span>
+<span id="cb67-2"><a href="#cb67-2" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)</span>
+<span id="cb67-3"><a href="#cb67-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">5050</span></span>
+<span id="cb67-4"><a href="#cb67-4" tabindex="-1"></a></span>
+<span id="cb67-5"><a href="#cb67-5" tabindex="-1"></a><span class="co"># Difference between sum of odds and evens  between 1 and 50</span></span>
+<span id="cb67-6"><a href="#cb67-6" tabindex="-1"></a>odds <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">50</span>, <span class="dv">2</span>) <span class="co"># a vector with all odd numbers</span></span>
+<span id="cb67-7"><a href="#cb67-7" tabindex="-1"></a>evens <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">50</span>, <span class="dv">2</span>) <span class="co"># a vector with all even numbers</span></span>
+<span id="cb67-8"><a href="#cb67-8" tabindex="-1"></a><span class="fu">sum</span>(odds) <span class="sc">-</span> <span class="fu">sum</span>(evens) <span class="co"># calculate sum of each vector, then take the difference</span></span>
+<span id="cb67-9"><a href="#cb67-9" tabindex="-1"></a>[<span class="dv">1</span>] <span class="sc">-</span><span class="dv">25</span></span></code></pre></div>
 </div>
 </details>
 </div>
@@ -974,7 +1045,7 @@ sum(odds) - sum(evens) # calculate sum of each vector, then take the difference
 session.</p>
 <p><code>ls</code> will list all of the variables and functions stored
 in the global environment (your working R session):</p>
-<pre class="r"><code>ls()</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
 <pre><code>[1] &quot;ages&quot;       &quot;evens&quot;      &quot;firstNames&quot; &quot;odds&quot;       &quot;x&quot;         
 [6] &quot;y&quot;          &quot;z&quot;         </code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but
@@ -982,7 +1053,7 @@ we still needed to give the parentheses to tell R to call the
 function.</p>
 <p>If we type <code>ls</code> by itself, R prints a bunch of code
 instead of a listing of objects.</p>
-<pre class="r"><code>ls</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a>ls</span></code></pre></div>
 <pre><code>function (name, pos = -1L, envir = as.environment(pos), all.names = FALSE, 
     pattern, sorted = TRUE) 
 {
@@ -1014,24 +1085,24 @@ instead of a listing of objects.</p>
     }
     else all.names
 }
-&lt;bytecode: 0x000001dc4beca120&gt;
+&lt;bytecode: 0x00000286af0b6980&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 <p>What’s going on here?</p>
 <p>Like everything in R, <code>ls</code> is the name of an object, and
 entering the name of an object by itself prints the contents of the
 object. The object <code>x</code> that we created earlier contains
 0.025:</p>
-<pre class="r"><code>x</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>[1] 0.025</code></pre>
 <p>The object <code>ls</code> contains the R code that makes the
 <code>ls</code> function work! We’ll talk more about how functions work
 and start writing our own later.</p>
 <p>You can use <code>rm</code> to delete objects you no longer need:</p>
-<pre class="r"><code>rm(x)</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="fu">rm</span>(x)</span></code></pre></div>
 <p>If you have lots of things in your environment and want to delete all
 of them, you can pass the results of <code>ls</code> to the
 <code>rm</code> function:</p>
-<pre class="r"><code>rm(list = ls())</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code></pre></div>
 <p>In this case we’ve composed the two function (just like in math!).
 Like the order of operations, anything inside the innermost parentheses
 is evaluated first, and so on.</p>
@@ -1041,7 +1112,7 @@ When assigning values to arguments by name, you <em>must</em> use the
 <code>=</code> operator and not the <code>&lt;-</code> operator.</p>
 <p>If instead we use <code>&lt;-</code>, there will be unintended side
 effects, or you may get an error message:</p>
-<pre class="r"><code>rm(list &lt;- ls())</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a><span class="fu">rm</span>(list <span class="ot">&lt;-</span> <span class="fu">ls</span>())</span></code></pre></div>
 <pre><code>Error in rm(list &lt;- ls()): ... must contain names or character strings</code></pre>
 <div class="callout-tip">
 <p><strong>Warnings vs. Errors</strong></p>
@@ -1111,19 +1182,19 @@ R. The object that is created by this function is called a <strong>data
 frame</strong> and we will learn more about this type of object in <a
 href="chp-data-structures.html">Data structures and operations</a>.</p>
 <p>Type the following into your new R script:</p>
-<pre class="r"><code># Read in a data table with water temperature
-watertemp &lt;- read.csv(&quot;data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv&quot;)
-
-# View the first few rows
-head(watertemp)
-
-
-# How many rows and columns are there in these data?
-nrow(watertemp)
-ncol(watertemp)
-
-# What are the names of the columns in this data table
-names(watertemp)</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" tabindex="-1"></a><span class="co"># Read in a data table with water temperature</span></span>
+<span id="cb78-2"><a href="#cb78-2" tabindex="-1"></a>watertemp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv&quot;</span>)</span>
+<span id="cb78-3"><a href="#cb78-3" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="#cb78-4" tabindex="-1"></a><span class="co"># View the first few rows</span></span>
+<span id="cb78-5"><a href="#cb78-5" tabindex="-1"></a><span class="fu">head</span>(watertemp)</span>
+<span id="cb78-6"><a href="#cb78-6" tabindex="-1"></a></span>
+<span id="cb78-7"><a href="#cb78-7" tabindex="-1"></a></span>
+<span id="cb78-8"><a href="#cb78-8" tabindex="-1"></a><span class="co"># How many rows and columns are there in these data?</span></span>
+<span id="cb78-9"><a href="#cb78-9" tabindex="-1"></a><span class="fu">nrow</span>(watertemp)</span>
+<span id="cb78-10"><a href="#cb78-10" tabindex="-1"></a><span class="fu">ncol</span>(watertemp)</span>
+<span id="cb78-11"><a href="#cb78-11" tabindex="-1"></a></span>
+<span id="cb78-12"><a href="#cb78-12" tabindex="-1"></a><span class="co"># What are the names of the columns in this data table</span></span>
+<span id="cb78-13"><a href="#cb78-13" tabindex="-1"></a><span class="fu">names</span>(watertemp)</span></code></pre></div>
 <p>Typing text in a R script does not cause the code to run in the R
 Console. There are several options for executing code in an R
 script:</p>
@@ -1169,16 +1240,16 @@ It can be useful to include not just details of what the code does, but
 also include a header with your name and what the overall goal of the
 code is.</p>
 <p>For example, add the following to the top of your script:</p>
-<pre class="r"><code>## Code from the Introduction to R and RStudio lesson
-## Author: YOUR NAME HERE
-## Date: TODAYS DATE
-## Description: This code loads and explores water temperature data from the Teakettle Lake NEON site</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a><span class="do">## Code from the Introduction to R and RStudio lesson</span></span>
+<span id="cb79-2"><a href="#cb79-2" tabindex="-1"></a><span class="do">## Author: YOUR NAME HERE</span></span>
+<span id="cb79-3"><a href="#cb79-3" tabindex="-1"></a><span class="do">## Date: TODAYS DATE</span></span>
+<span id="cb79-4"><a href="#cb79-4" tabindex="-1"></a><span class="do">## Description: This code loads and explores water temperature data from the Teakettle Lake NEON site</span></span></code></pre></div>
 <p>Let’s examine the <code>read.csv()</code> function more carefully. In
 the code above we provided the function with a single text argument
 containing the path to the data file. Locate this file using the Files
 window in RStudio.</p>
 <p>What do you think would happen if we changed the code to read:</p>
-<pre class="r"><code>read.csv(&quot;watertemp_30min_TECR_2021-04_2021-10.csv&quot;)</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&quot;watertemp_30min_TECR_2021-04_2021-10.csv&quot;</span>)</span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
@@ -1251,20 +1322,20 @@ creek and are averaged over the time period defined by the
 <p>Let’s explore these data in more detail.</p>
 <p>To view the contents of a column, use the <code>$</code> operator to
 extract a vector of values:</p>
-<pre class="r"><code># View a column
-watertemp$surfWaterTempMean</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" tabindex="-1"></a><span class="co"># View a column</span></span>
+<span id="cb83-2"><a href="#cb83-2" tabindex="-1"></a>watertemp<span class="sc">$</span>surfWaterTempMean</span></code></pre></div>
 <p>You can do calculations on the values in a column using R’s built-in
 functions:</p>
-<pre class="r"><code># Calculate the range of values
-range(watertemp$surfWaterTempMean)</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" tabindex="-1"></a><span class="co"># Calculate the range of values</span></span>
+<span id="cb84-2"><a href="#cb84-2" tabindex="-1"></a><span class="fu">range</span>(watertemp<span class="sc">$</span>surfWaterTempMean)</span></code></pre></div>
 <pre><code>[1] NA NA</code></pre>
 <p>Oops! There must be missing data in this column. Missing values are
 denoted by <code>NA</code> and if there are any missing values, R will
 not exclude them from its calculations.</p>
 <p>To omit missing values before completing a calculation, use the
 <code>na.rm = TRUE</code> argument:</p>
-<pre class="r"><code># Calculate the range of values excluding missing values
-range(watertemp$surfWaterTempMean, na.rm = TRUE)</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" tabindex="-1"></a><span class="co"># Calculate the range of values excluding missing values</span></span>
+<span id="cb86-2"><a href="#cb86-2" tabindex="-1"></a><span class="fu">range</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>[1] -2.328 18.645</code></pre>
 <div class="challenge">
 <ol style="list-style-type: decimal">
@@ -1278,15 +1349,15 @@ calculate the maximum and minimum surface water temperatures.</li>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<pre class="r"><code># Calculate the mean surface water temperature
-mean(watertemp$surfWaterTempMean, na.rm = TRUE)
-[1] 9.949536
-
-# Calculate the max and min surface water temperatures
-max(watertemp$surfWaterTempMean, na.rm = TRUE)
-[1] 18.645
-min(watertemp$surfWaterTempMean, na.rm = TRUE)
-[1] -2.328</code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a><span class="co"># Calculate the mean surface water temperature</span></span>
+<span id="cb88-2"><a href="#cb88-2" tabindex="-1"></a><span class="fu">mean</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb88-3"><a href="#cb88-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">9.949536</span></span>
+<span id="cb88-4"><a href="#cb88-4" tabindex="-1"></a></span>
+<span id="cb88-5"><a href="#cb88-5" tabindex="-1"></a><span class="co"># Calculate the max and min surface water temperatures</span></span>
+<span id="cb88-6"><a href="#cb88-6" tabindex="-1"></a><span class="fu">max</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb88-7"><a href="#cb88-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">18.645</span></span>
+<span id="cb88-8"><a href="#cb88-8" tabindex="-1"></a><span class="fu">min</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb88-9"><a href="#cb88-9" tabindex="-1"></a>[<span class="dv">1</span>] <span class="sc">-</span><span class="fl">2.328</span></span></code></pre></div>
 </div>
 </details>
 </div>
@@ -1296,8 +1367,8 @@ values and counts the number of times each value appears. The
 <code>HOR.VER</code> column is a identifier of the location of a
 tempereature sensor, so we can use it to determine how many different
 sensors are in these data.</p>
-<pre class="r"><code># How many observations are from each sensor location?
-table(watertemp$HOR.VER)</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" tabindex="-1"></a><span class="co"># How many observations are from each sensor location?</span></span>
+<span id="cb89-2"><a href="#cb89-2" tabindex="-1"></a><span class="fu">table</span>(watertemp<span class="sc">$</span>HOR.VER)</span></code></pre></div>
 <pre><code>
 101.1 102.1 
 10272 10272 </code></pre>
@@ -1315,8 +1386,8 @@ observations in this data table should not be used for analysis.</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<pre class="r"><code># Tabulate the quality-control flag column
-table(watertemp$finalQF)</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" tabindex="-1"></a><span class="co"># Tabulate the quality-control flag column</span></span>
+<span id="cb91-2"><a href="#cb91-2" tabindex="-1"></a><span class="fu">table</span>(watertemp<span class="sc">$</span>finalQF)</span></code></pre></div>
 <pre><code>
     0     1 
 19919   625 </code></pre>
@@ -1328,13 +1399,13 @@ means and if these data should be omitted from the analysis.</p>
 </div>
 <p>Columns in a dataframe are vectors and we can do math with them in
 the same way that we would do math with other numeric vectors:</p>
-<pre class="r"><code># Add the expected uncertainty to the mean water temperature
-# and save it to a variable called temp_upperbound
-temp_upperbound &lt;- watertemp$surfWaterTempMean + watertemp$surfWaterTempExpUncert
-
-# View the first 5 values in temp_upperbound
-temp_upperbound[1:5]
-[1] 4.308 4.184 3.992 3.785 3.606</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" tabindex="-1"></a><span class="co"># Add the expected uncertainty to the mean water temperature</span></span>
+<span id="cb93-2"><a href="#cb93-2" tabindex="-1"></a><span class="co"># and save it to a variable called temp_upperbound</span></span>
+<span id="cb93-3"><a href="#cb93-3" tabindex="-1"></a>temp_upperbound <span class="ot">&lt;-</span> watertemp<span class="sc">$</span>surfWaterTempMean <span class="sc">+</span> watertemp<span class="sc">$</span>surfWaterTempExpUncert</span>
+<span id="cb93-4"><a href="#cb93-4" tabindex="-1"></a></span>
+<span id="cb93-5"><a href="#cb93-5" tabindex="-1"></a><span class="co"># View the first 5 values in temp_upperbound</span></span>
+<span id="cb93-6"><a href="#cb93-6" tabindex="-1"></a>temp_upperbound[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb93-7"><a href="#cb93-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">4.308</span> <span class="fl">4.184</span> <span class="fl">3.992</span> <span class="fl">3.785</span> <span class="fl">3.606</span></span></code></pre></div>
 <div class="challenge">
 <p>Calculate a lower temperature bound for each observation by
 subtracting the expected uncertainty from the mean temperature.</p>
@@ -1343,8 +1414,8 @@ subtracting the expected uncertainty from the mean temperature.</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<pre class="r"><code># Calculate a lower bound
-temp_lowerbound &lt;- watertemp$surfWaterTempMean - watertemp$surfWaterTempExpUncert</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" tabindex="-1"></a><span class="co"># Calculate a lower bound</span></span>
+<span id="cb94-2"><a href="#cb94-2" tabindex="-1"></a>temp_lowerbound <span class="ot">&lt;-</span> watertemp<span class="sc">$</span>surfWaterTempMean <span class="sc">-</span> watertemp<span class="sc">$</span>surfWaterTempExpUncert</span></code></pre></div>
 </div>
 </details>
 </div>
@@ -1411,8 +1482,8 @@ R session, if you want to be able to use the functions in them.</p>
 that the name of the packages <strong>is not</strong> inside quotation
 marks. This is different from the <code>install.packages()</code>
 function, where the package name must be quoted.</p>
-<pre class="r"><code># Load the lubridate package
-library(lubridate)</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" tabindex="-1"></a><span class="co"># Load the lubridate package</span></span>
+<span id="cb95-2"><a href="#cb95-2" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
 <pre><code>
 Attaching package: &#39;lubridate&#39;</code></pre>
 <pre><code>The following objects are masked from &#39;package:base&#39;:
@@ -1445,35 +1516,37 @@ water temperature changes over time in Teakettle Creek.</p>
 <p>To do this we first need to convert the text in the
 <code>startDateTime</code> column to a format that R can interpret as
 have numerical values.</p>
-<pre class="r"><code># Convert the text to a date and time
-# This replaces the existing startDateTime column
-# ymd_hms() comes from the lubridate package
-watertemp$startDateTime &lt;- ymd_hms(watertemp$startDateTime)</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" tabindex="-1"></a><span class="co"># Convert the text to a date and time</span></span>
+<span id="cb98-2"><a href="#cb98-2" tabindex="-1"></a><span class="co"># This replaces the existing startDateTime column</span></span>
+<span id="cb98-3"><a href="#cb98-3" tabindex="-1"></a><span class="co"># ymd_hms() comes from the lubridate package</span></span>
+<span id="cb98-4"><a href="#cb98-4" tabindex="-1"></a>watertemp<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(watertemp<span class="sc">$</span>startDateTime)</span></code></pre></div>
 <p>Now that R knows these values are times, we can do much more with
 them:</p>
-<pre class="r"><code># View the date component of each value (but only from rows 1 - 10)
-date(watertemp$startDateTime)[1:10]
- [1] &quot;2021-04-01&quot; &quot;2021-04-01&quot; &quot;2021-04-01&quot; &quot;2021-04-01&quot; &quot;2021-04-01&quot;
- [6] &quot;2021-04-01&quot; &quot;2021-04-01&quot; &quot;2021-04-01&quot; &quot;2021-04-01&quot; &quot;2021-04-01&quot;
-
-# What was the most recent date that data were recorded in this data set?
-max(date(watertemp$startDateTime))
-[1] &quot;2021-10-31&quot;
-
-
-# What was the earliest date that data were recorded in this data set?
-min(date(watertemp$startDateTime))
-[1] &quot;2021-04-01&quot;</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" tabindex="-1"></a><span class="co"># View the date component of each value (but only from rows 1 - 10)</span></span>
+<span id="cb99-2"><a href="#cb99-2" tabindex="-1"></a><span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb99-3"><a href="#cb99-3" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span></span>
+<span id="cb99-4"><a href="#cb99-4" tabindex="-1"></a> [<span class="dv">6</span>] <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span></span>
+<span id="cb99-5"><a href="#cb99-5" tabindex="-1"></a></span>
+<span id="cb99-6"><a href="#cb99-6" tabindex="-1"></a><span class="co"># What was the most recent date that data were recorded in this data set?</span></span>
+<span id="cb99-7"><a href="#cb99-7" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime))</span>
+<span id="cb99-8"><a href="#cb99-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;2021-10-31&quot;</span></span>
+<span id="cb99-9"><a href="#cb99-9" tabindex="-1"></a></span>
+<span id="cb99-10"><a href="#cb99-10" tabindex="-1"></a></span>
+<span id="cb99-11"><a href="#cb99-11" tabindex="-1"></a><span class="co"># What was the earliest date that data were recorded in this data set?</span></span>
+<span id="cb99-12"><a href="#cb99-12" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime))</span>
+<span id="cb99-13"><a href="#cb99-13" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;2021-04-01&quot;</span></span></code></pre></div>
 <p>We can also use the <code>plot()</code> function to make a
 scatterplot if we specify which values should be the <code>x</code>
 coordinate and which should be the <code>y</code> coordinate:</p>
-<pre class="r"><code># Plot the mean temperature over time
-plot(x = watertemp$startDateTime, y = watertemp$surfWaterTempMean)</code></pre>
+<div class="sourceCode" id="cb100"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="co"># Plot the mean temperature over time</span></span>
+<span id="cb100-2"><a href="#cb100-2" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> watertemp<span class="sc">$</span>startDateTime, <span class="at">y =</span> watertemp<span class="sc">$</span>surfWaterTempMean)</span></code></pre></div>
 <p><img src="images/rmd-02-unnamed-chunk-71-1.png" width="816" style="display: block; margin: auto;" /></p>
 <div class="callout-tip">
 <p>Here’s another way to make this same graph, which follows the format:
 <code>plot(y ~ x, data = dataframename)</code>:</p>
-<pre class="r"><code>plot(surfWaterTempMean ~ startDateTime, data = watertemp)</code></pre>
+<div class="sourceCode" id="cb101"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a><span class="fu">plot</span>(surfWaterTempMean <span class="sc">~</span> startDateTime, <span class="at">data =</span> watertemp)</span></code></pre></div>
 <p><img src="images/rmd-02-unnamed-chunk-72-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <p>In R there are usually many ways to write code that does the same
@@ -1483,15 +1556,17 @@ is better here?</p>
 <p>Similarly, if we are working with several columns in the same data
 frame, the <code>with()</code> function can make code much more
 efficient and readable:</p>
-<pre class="r"><code># Calculate the upper and lower bounds on temperature using the
-# mean and expected uncertainty columns in the watertemp data frame
-temp_upperbound &lt;- with(watertemp, surfWaterTempMean + surfWaterTempExpUncert)
-temp_lowerbound &lt;- with(watertemp, surfWaterTempMean - surfWaterTempExpUncert)
-
-# Print the first 10 values of each of these vectors
-temp_upperbound[1:10]</code></pre>
+<div class="sourceCode" id="cb102"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a><span class="co"># Calculate the upper and lower bounds on temperature using the</span></span>
+<span id="cb102-2"><a href="#cb102-2" tabindex="-1"></a><span class="co"># mean and expected uncertainty columns in the watertemp data frame</span></span>
+<span id="cb102-3"><a href="#cb102-3" tabindex="-1"></a>temp_upperbound <span class="ot">&lt;-</span> <span class="fu">with</span>(watertemp, surfWaterTempMean <span class="sc">+</span> surfWaterTempExpUncert)</span>
+<span id="cb102-4"><a href="#cb102-4" tabindex="-1"></a>temp_lowerbound <span class="ot">&lt;-</span> <span class="fu">with</span>(watertemp, surfWaterTempMean <span class="sc">-</span> surfWaterTempExpUncert)</span>
+<span id="cb102-5"><a href="#cb102-5" tabindex="-1"></a></span>
+<span id="cb102-6"><a href="#cb102-6" tabindex="-1"></a><span class="co"># Print the first 10 values of each of these vectors</span></span>
+<span id="cb102-7"><a href="#cb102-7" tabindex="-1"></a>temp_upperbound[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code> [1] 4.308 4.184 3.992 3.785 3.606 3.447 3.311 3.210 3.122 3.045</code></pre>
-<pre class="r"><code>temp_lowerbound[1:10]</code></pre>
+<div class="sourceCode" id="cb104"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a>temp_lowerbound[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code> [1] 4.032 3.908 3.716 3.509 3.330 3.171 3.035 2.934 2.846 2.769</code></pre>
 <p>Now that you have written your first R script it is time to save your
 work! Click on the save icon at the top of the Source panel.</p>
@@ -1515,11 +1590,13 @@ the help files means you don’t have to remember that!</p>
 <p>R, and every package, provide help files for functions. The general
 syntax to search for help on any function, “function_name”, from a
 specific function that is in a package loaded into the R session is:</p>
-<pre class="r"><code>?function_name
-help(function_name)</code></pre>
+<div class="sourceCode" id="cb106"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a>?function_name</span>
+<span id="cb106-2"><a href="#cb106-2" tabindex="-1"></a><span class="fu">help</span>(function_name)</span></code></pre></div>
 <p>For example take a look at the help file for <code>read.csv()</code>
 which we used previously to read data into R.</p>
-<pre class="r"><code>?read.csv()</code></pre>
+<div class="sourceCode" id="cb107"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" tabindex="-1"></a>?<span class="fu">read.csv</span>()</span></code></pre></div>
 <p>This will load up a help page in RStudio. Each help page is broken
 down into sections:</p>
 <ul>
@@ -1543,8 +1620,9 @@ help file for <code>read.csv</code> we can see that this function is
 actually a specific version of <code>read.table</code> where a few
 default arguments are set to match the format of a csv file
 (<code>header = TRUE</code> and <code>sep = ","</code>).</p>
-<pre class="r"><code>?write.table()
-?write.csv()</code></pre>
+<div class="sourceCode" id="cb108"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a>?<span class="fu">write.table</span>()</span>
+<span id="cb108-2"><a href="#cb108-2" tabindex="-1"></a>?<span class="fu">write.csv</span>()</span></code></pre></div>
 <div class="callout-tip">
 <p>Running Examples</p>
 <p>From within the function help page, you can highlight code in the
@@ -1574,39 +1652,43 @@ RStudio to:</p>
 <li>read a data table from a file</li>
 <li>access and understand a function’s documentation page</li>
 </ol>
-<p><strong>2.1</strong> Create a new R script that loads water quality
-data from the Teakettle Creek NEON site. These data are in a CSV file
-named waterqual_inst_TECR_2021-04_2021-10.csv in the NEON_water folder
-in the data directory. Write your code as if the working directory is
-the main R-course-NEON-workbook project folder. Save your script as
-2.1.R in the completed exercises folder.</p>
+<p><strong>2.1</strong></p>
+<p>Create a new R script that loads water quality data from the
+Teakettle Creek NEON site. These data are in a CSV file named
+waterqual_inst_TECR_2021-04_2021-10.csv in the NEON_water folder in the
+data directory. Write your code as if the working directory is the main
+R-course-NEON-workbook project folder. Save your script as 2.1.R in the
+completed exercises folder.</p>
 <ol style="list-style-type: decimal">
 <li>How many rows are in this data table?</li>
 <li>Name two columns in this data table.</li>
 </ol>
-<p><strong>2.2</strong> Create a new R script that contains the
-following code. Write comments that describe what each line of code
-below does (be specific). Write a header comment at the top of your
-script that includes a title, author, date and brief description of what
-the script does. Save your script as 2.2.R in the completed exercises
-folder.</p>
-<pre class="r"><code>library(lubridate)
-
-nitrate &lt;- read.csv(&quot;data/NEON_water/nitrate_15min_TECR_2021-04_2021-10.csv&quot;)
-
-nitrate$startDateTime &lt;- ymd_hms(nitrate$startDateTime)
-nitrate$endDateTime &lt;- ymd_hms(nitrate$endDateTime)
-
-nitrate$day &lt;- with(nitrate, date(startDateTime))
-
-table(nitrate$day)</code></pre>
-<p><strong>2.3</strong> Adapt the code in exercise 2 so that you can
-determine whether every observation in the <code>nitrate</code> data
-frame is based on a 30-minute time period average.</p>
+<p><strong>2.2</strong></p>
+<p>Create a new R script that contains the following code. Write
+comments that describe what each line of code below does (be specific).
+Write a header comment at the top of your script that includes a title,
+author, date and brief description of what the script does. Save your
+script as 2.2.R in the completed exercises folder.</p>
+<div class="sourceCode" id="cb109"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb109-2"><a href="#cb109-2" tabindex="-1"></a></span>
+<span id="cb109-3"><a href="#cb109-3" tabindex="-1"></a>nitrate <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/nitrate_15min_TECR_2021-04_2021-10.csv&quot;</span>)</span>
+<span id="cb109-4"><a href="#cb109-4" tabindex="-1"></a></span>
+<span id="cb109-5"><a href="#cb109-5" tabindex="-1"></a>nitrate<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(nitrate<span class="sc">$</span>startDateTime)</span>
+<span id="cb109-6"><a href="#cb109-6" tabindex="-1"></a>nitrate<span class="sc">$</span>endDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(nitrate<span class="sc">$</span>endDateTime)</span>
+<span id="cb109-7"><a href="#cb109-7" tabindex="-1"></a></span>
+<span id="cb109-8"><a href="#cb109-8" tabindex="-1"></a>nitrate<span class="sc">$</span>day <span class="ot">&lt;-</span> <span class="fu">with</span>(nitrate, <span class="fu">date</span>(startDateTime))</span>
+<span id="cb109-9"><a href="#cb109-9" tabindex="-1"></a></span>
+<span id="cb109-10"><a href="#cb109-10" tabindex="-1"></a><span class="fu">table</span>(nitrate<span class="sc">$</span>day)</span></code></pre></div>
+<p><strong>2.3</strong></p>
+<p>Adapt the code in exercise 2 so that you can determine whether every
+observation in the <code>nitrate</code> data frame is based on a
+30-minute time period average.</p>
 <p>HINT: You will need to calculate the difference in time between the
 start and end dates.</p>
-<p><strong>2.4</strong> Run these two commmands and then look at the
-help for the <code>paste</code> function.</p>
+<p><strong>2.4</strong></p>
+<p>Run these two commmands and then look at the help for the
+<code>paste</code> function.</p>
 <p><code>paste(1:5, 6:10, sep = "-")</code></p>
 <p><code>paste(1:10, collapse = "-")</code></p>
 <ol style="list-style-type: decimal">
@@ -1615,14 +1697,19 @@ commands?</li>
 <li>Use the information in the help file to explain why these commands
 yield different results.</li>
 </ol>
-<p><strong>2.5</strong> Write code that accomplishes the following: 1.
-Calculate the average of all even numbers from 1 to 100 and assign this
-value to a variable. 2. Calculate the average of all odd numbers from 1
-to 100 and assign this value to a different variable. 3. Calculate the
-difference between the two variables you created (i.e. subtract
-them).</p>
-<p><strong>2.6</strong> Modify the script you created in this lesson so
-that is does the following:</p>
+<p><strong>2.5</strong></p>
+<p>Write code that accomplishes the following:</p>
+<ol style="list-style-type: decimal">
+<li>Calculate the average of all even numbers from 1 to 100 and assign
+this value to a variable.</li>
+<li>Calculate the average of all odd numbers from 1 to 100 and assign
+this value to a different variable.</li>
+<li>Calculate the difference between the two variables you created
+(i.e. subtract them).</li>
+</ol>
+<p><strong>2.6</strong></p>
+<p>Modify the script you created in this lesson so that is does the
+following:</p>
 <ol style="list-style-type: decimal">
 <li>Calculate the difference between the maximum of
 <code>temp_upperbound</code> and the minimum of
@@ -1641,11 +1728,12 @@ step 2 (e.g. elements 2, 4, 6, etc.).</li>
 <li>The average of the areas of the 100 circles calculated in step
 2.</li>
 </ol>
-<p><strong>2.8</strong> Use the following code to answer the
-questions:</p>
-<pre class="r"><code>dogs &lt;- c(&quot;Alphie&quot;, &quot;Boo&quot;, &quot;Carter&quot;)
-
-cats &lt;- c(&quot;Donut&quot;, &quot;Edgar&quot;, &quot;Felix&quot;)</code></pre>
+<p><strong>2.8</strong></p>
+<p>Use the following code to answer the questions:</p>
+<div class="sourceCode" id="cb110"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" tabindex="-1"></a>dogs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Alphie&quot;</span>, <span class="st">&quot;Boo&quot;</span>, <span class="st">&quot;Carter&quot;</span>)</span>
+<span id="cb110-2"><a href="#cb110-2" tabindex="-1"></a></span>
+<span id="cb110-3"><a href="#cb110-3" tabindex="-1"></a>cats <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Donut&quot;</span>, <span class="st">&quot;Edgar&quot;</span>, <span class="st">&quot;Felix&quot;</span>)</span></code></pre></div>
 <p>Write one line of code for each of the following:</p>
 <ol style="list-style-type: decimal">
 <li>Select the second name in <code>dogs</code>.</li>
