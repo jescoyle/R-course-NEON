@@ -1106,12 +1106,16 @@ Don't worry about trying to remember the name of every function in R. You can lo
 After completing these exercises, learners will be able to 
 `r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
 
-**`r .chp_num`.1** Create a new R script that loads water quality data from the Teakettle Creek NEON site. These data are in a CSV file named waterqual_inst_TECR_2021-04_2021-10.csv in the NEON_water folder in the data directory. Write your code as if the working directory is the main R-course-NEON-workbook project folder. Save your script as 2.1.R in the completed exercises folder.
+**`r .chp_num`.1**
+
+Create a new R script that loads water quality data from the Teakettle Creek NEON site. These data are in a CSV file named waterqual_inst_TECR_2021-04_2021-10.csv in the NEON_water folder in the data directory. Write your code as if the working directory is the main R-course-NEON-workbook project folder. Save your script as 2.1.R in the completed exercises folder.
 
 1. How many rows are in this data table?
 2. Name two columns in this data table.
 
-**`r .chp_num`.2** Create a new R script that contains the following code. Write comments that describe what each line of code below does (be specific). Write a header comment at the top of your script that includes a title, author, date and brief description of what the script does. Save your script as 2.2.R in the completed exercises folder.
+**`r .chp_num`.2**
+
+Create a new R script that contains the following code. Write comments that describe what each line of code below does (be specific). Write a header comment at the top of your script that includes a title, author, date and brief description of what the script does. Save your script as 2.2.R in the completed exercises folder.
 
 ```{r eval = FALSE}
 library(lubridate)
@@ -1128,11 +1132,14 @@ table(nitrate$day)
 
 
 
-**`r .chp_num`.3** Adapt the code in exercise 2 so that you can determine  whether every observation in the `nitrate` data frame is based on a 30-minute time period average.
+**`r .chp_num`.3**
+
+Adapt the code in exercise 2 so that you can determine  whether every observation in the `nitrate` data frame is based on a 30-minute time period average.
 
 HINT: You will need to calculate the difference in time between the start and end dates.
 
 **`r .chp_num`.4** 
+
 Run these two commmands and then look at the help for the `paste` function.
 
 `paste(1:5, 6:10, sep = "-")`
@@ -1142,12 +1149,17 @@ Run these two commmands and then look at the help for the `paste` function.
 1. How many elements are in each of the vectors returned by these two commands?
 2. Use the information in the help file to explain why these commands yield different results.
 
-**`r .chp_num`.5** Write code that accomplishes the following:
+**`r .chp_num`.5**
+
+Write code that accomplishes the following:
+
 1. Calculate the average of all even numbers from 1 to 100 and assign this value to a variable.
 2. Calculate the average of all odd numbers from 1 to 100 and assign this value to a different variable.
 3. Calculate the difference between the two variables you created (i.e. subtract them).
 
-**`r .chp_num`.6** Modify the script you created in this lesson so that is does the following:
+**`r .chp_num`.6**
+
+Modify the script you created in this lesson so that is does the following:
 
 1. Calculate the difference between the maximum of `temp_upperbound` and the minimum of `temp_lowerbound`.
 2. Calculate a vector containing the difference between `temp_lowerbound` and `temp_upperbound`.
@@ -1160,7 +1172,9 @@ Run these two commmands and then look at the help for the `paste` function.
 3. The average of the areas of the 100 circles calculated in step 2.
 
 
-**`r .chp_num`.8** Use the following code to answer the questions:
+**`r .chp_num`.8**
+
+Use the following code to answer the questions:
 
 ```{r eval = FALSE}
 

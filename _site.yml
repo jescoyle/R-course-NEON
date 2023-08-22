@@ -1,6 +1,6 @@
 name: "R-course-NEON"
 output_dir: "docs"
-exclude: ["README.md", "*.java", "exercises/", "data/", "data_raw/", "src/"]
+exclude: ["README.md", "*.java"]
 include: []
 navbar:
   left:
@@ -34,16 +34,6 @@ navbar:
           href: chp-ggplot2-part2.html
         - text: 9. Tidy data
           href: chp-tidyverse-basics.html
-        - text: '-------------'
-        - text: Supplemental lessons
-        - text: A. Rmarkdown
-          href: chp-rmarkdown.html
-        - text: B. Raster data
-          href: chp-geospatial-raster.html
-        - text: C. OpenRefine
-          href: chp-openrefine.html
-        - text: D. Git
-          href: chp-git.html
     - text: "Exercises"
       href: exercises-guide.html
     - text: "RStudio Workbook"
@@ -51,7 +41,7 @@ navbar:
 output:
   html_document:
     theme: flatly
-    highlight: default
+    highlight: haddock
     toc: true
     toc_float:
       collapsed: false

@@ -71,20 +71,26 @@ dat <- read.csv("data/gapminder_data.csv")
 
 
 ::: {.challenge}
-What should be the ouput for each of these commands?
-``{r eval = FALSE}
+What should be the output for each of these commands?
+
+```{r eval = FALSE}
 log(exp(3 + 3)) 
 e-1 + 5
 ```
 
 <details><summary>**Solution:**</summary>
+
 ::: {.solution}
+
 ```{r echo = FALSE}
 log(exp(3 + 3)) 
 2e-1 + 5
 ```
-:::```
+
+:::
+
 </details>
+
 :::
 
 <br>
@@ -93,23 +99,23 @@ log(exp(3 + 3))
 
 Callouts are formatted in the style.css file.
 
-:::{.callout-trick}
+::: {.callout-trick}
 
 :::
 
 
-:::{.callout-tip}
+::: {.callout-tip}
 
 :::
 
-:::{.callout-important}
+::: {.callout-important}
 
 :::
 
 ## Exercises
 
 After completing these exercises, learners will be able to 
-`r .get_LO(as.numeric(.chp_num), .CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
 
 
 Number all exercises using the module number. Include starter code in the /exercises folder if appropriate.

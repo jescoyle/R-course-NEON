@@ -22,7 +22,7 @@ navbar:
 output:
   html_document:
     theme: flatly
-    highlight: default
+    highlight: haddock
     toc: true
     toc_float:
       collapsed: false

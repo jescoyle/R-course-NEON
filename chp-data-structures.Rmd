@@ -33,20 +33,31 @@ set.seed(10)
 
 ## Overview 
 
-> MOTIVATOR
+> Biology generates BIG data. But, spreadsheet programs just aren't equipped to process data tables consisting of millions of rows. Luckily, R can handle data of any size and this lesson will give you the tools the get started answering your BIG questions.
 
 ### What we will learn
 
 In this lesson 
-`r .get_LO(as.numeric(.chp_num), .LOtable, prefix = TRUE)`
+`r .get_LO(.chp, .LOtable, prefix = TRUE)`
 
 #### Key Terms & Commands
 
 * data type
 * object class
 * factor and levels
+* vector vs. list
+* matrix vs. data frame
+* indexing with `[ ]`, `[[ ]]`, `[ , ]`
 * `typeof()`, `class()`, `str()`
 * `factor()`, `levels()`
+* `matrix()`
+* `list()`
+* `names()`, `colnames()`, `rownames()`, `dimnames()`
+* `length()`, `nrow()`, `ncol()`
+* `rbind()` and `cbind()`
+* `subset()`
+* `as.numeric()`
+* `is.na()`
 
 ### Prerequisites
 
@@ -183,6 +194,16 @@ The vector now has type character because all elements in the vector must have t
 </details>
 <br>
 
+If you every come across a vector that you think should be numeric (e.g. an integer or double data type), but is interpreted as character data, you can use the `as.numeric()` function to **coerce** the vector to be a numeric data type. R will try to interpret the text as a number and if it can't it will produce `NA`. This can be useful for identifying data errors and typos. 
+
+```{r warn = TRUE}
+as.numeric(pH_top10)
+
+```
+
+The output warns us that coercing to a numeric vector created missing values. The new numeric vector shows us that the first element was not a number, but the rest of the data were. 
+
+
 ::: {.callout-tip}
 
 At some point you may come across a strange value in a vector that you thought contained numeric data:
@@ -232,7 +253,7 @@ That's interesting: note that the class of a vector isn't "vector", but the type
 
 #### Factors
 
-A factor is a type of vector whose data are categorical. More specifically, the elements come from a finite set of values called **levels**. For example, in the small mammal data in lesson [`r .get_chpName("spreadsheets", type.from = "chp")`](chp-spreadsheets.html), the sex of the rodents was only male or female. Factors come up quite often in R, so it is important to understand how they store data.
+A factor is a type of vector whose data are categorical. More specifically, the elements come from a finite set of values called **levels**. For example, in the small mammal data in lesson [`r .get_chpName("spreadsheets", type.from = "chp")`](chp-spreadsheets.html), the sex of the rodents was only male or female. Factors come up quite often in R, so it is important to understand how factors store data.
 
 In the `surfwater` data frame, the `siteID` column identifies the NEON site where the data are collected. This column is currently a character vector, but it would be reasonable to convert it to a factor since there are only a finite number of distinct sites that data could come from.
 
@@ -263,7 +284,7 @@ sites2 <- c(sites, "ABCD")
 sites2
 class(sites2)
 ```
-The factor was converted back to a character vector to match the type of data we added (`"ABCD"`). Where did the `"1"` come from? 
+The factor was converted back to a character vector to match the type of data we added (`"ABCD"`). But, where did the `"1"` come from? 
 
 The most important thing to remember about factors is that the values in the vector are actually integers, with each integer corresponding to a level. The labels for the levels are saved in an attribute of the factor and can be accessed using the function `levels()`.
 
@@ -326,7 +347,7 @@ length(1:3)
 length(list(1:3))
 
 ```
-Because vectors and lists are one-dimensional, we can access their elements using integer indices, but the exact way to do this differs. We use a single set of brackets `[ ]` to access the elements of a vector and a double set of brackets `[[ ]]`to access the elements of a list.
+Because vectors and lists are one-dimensional, we can access their elements using integer indices (e.g. the 1st, 2nd, 3rd, 4th, ... etc element). The way to index differs between vectors and lists. We use a single set of brackets `[ ]` to access the elements of a vector and a double set of brackets `[[ ]]`to access the elements of a list.
 
 ```{r}
 # Access the third element of sitelist
@@ -375,6 +396,57 @@ length(z)
 
 <br>
 
+::: {.challenge}
+
+1. Which one of these works? Why? 
+
+2. For the line that works, did it return what you expected? What would need to change?
+
+```{r eval = FALSE}
+
+sitelist[1][3]
+
+sitelist[3][1]
+
+```
+
+<details><summary>**Solution:** </summary>
+
+::: {.solution}
+
+This doesn't work because it returns a list of length 1 and we cannot select a 3rd element because it does not exist.
+```{r error = TRUE}
+sitelist[1][3]
+
+class(sitelist[1])
+length(sitelist[1])
+```
+
+This works, because `sitelist[3]` returns a list of length 1 and so selecting the 1st element returns the whole list.
+
+```{r}
+sitelist[3][1]
+
+class(sitelist[3])
+length(sitelist[3])
+
+```
+
+If we actually wanted the 1st element from the vector saved as the third element of sitelist, we would actually need to use:
+
+```{r}
+sitelist[[3]][1]
+```
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+
 Whenever you lose track of what is contained in an object, it is useful to examine the object's structure using the `str()` function. Let's see how this works on one of the lists we made:
 
 ```{r}
@@ -383,13 +455,13 @@ str(sitelist)
 
 ```
 
-We see that it is a list with 4 elements and these elements are then summarized.
+We see that it is a list with 4 elements and each of these elements are then summarized.
 
 #### Matrices vs. Dataframes
 
 Now that we are starting to understand the two main one-dimensional data objects in R (vectors and lists) we can talk about two-dimensional data objects. We've already seen one of these- the **data frame**. A data frame is a special type of list!
 
-A data frame is a list where each element is a vector that has the same length, but the vectors can have different data types from each other. This makes it a very flexible and useful way to work with data tables.
+A data frame is a list of vectors that all have the same length, but the vectors can have different data types from each other. This makes it a very flexible and useful way to work with data tables.
 
 Let's check out the structure of the `surfwater` dataframe.
 
@@ -407,7 +479,9 @@ names(surfwater)
 names(sitelist)
 ```
 
-The elements of `sitelist` don't have names, so we get `NULL`. We could assign names using the `names()` function. These then show up in the structure of the object
+The elements of `sitelist` don't have names, so we get `NULL` (an empty value). 
+
+We could assign names using the `names()` function. These then show up in the structure of the object:
 
 ```{r}
 # Assign names to the elements of sitelist
@@ -451,7 +525,7 @@ X[ 2  ,   ]
 
 ```
 
-We can also the same method to access elements in a dataframe.
+We can also the same method to access elements in a data frame.
 
 ```{r}
 surfwater[2, 3] # the element in the second row and third column
@@ -488,9 +562,92 @@ class(surfwater[3, ]) # a data frame
 
 <br>
 
+Matrices and data frames can have column and row names that make it easier to access their elements. You can set or view the column names and rownames of a matrix using `colnames()` and `rownames()`
+
+```{r}
+# Set the row names of X
+rownames(X) <- c("A", "B")
+
+# Set the column names of X
+colnames(X) <- c("one", "two", "three")
+
+# Print the contents of X
+X
+
+# View the structure of X
+str(X)
+```
+
+In a data frame, you can use `names()` or `colnames()` to access the column names.
+
+```{r}
+# View the column names of surfwater
+colnames(surfwater)
+
+```
+
+Column and row names make it easier to extract data from matrices and dataframes because you don't need to remember which row or column the data you need are in. Instead of using an integer index to access a value, you can use the name of the column(s) or row(s) in quotes.
+
+```{r}
+# Access the row named "B" in X 
+X["B", ]
+```
+
+If you want more than one column or row, supply a vector containing the column or row names.
+
+```{r}
+# Access the first 3 rows from the pH and temperature columns
+surfwater[1:3, c("pH.mean", "surfWaterTemp.mean")]
+```
+
 We can append rows and columns to matrices and data frames using `rbind()` and `cbind()`.
 
-<!-- WORKING HERE -->
+```{r}
+# Append a column of NA values to X
+cbind(X, NA)
+
+# Append the rows of X to itself
+rbind(X, X)
+
+```
+::: {.challenge}
+
+What is the contents of the matrix `X` after running the previous two lines of code?
+
+<details><summary> **Solution:**</summary>
+
+::: {.solution}
+
+```{r}
+X
+```
+
+`X` hasn't changed! This is because we did not assign the results of `cbind()` and `rbind()` to an objects so the results just printed in the console. If we actually wanted to modify the matrix `X` we would need to use the assignment operator `<-`.
+
+```{r}
+X <- cbind(X, NA)
+
+X <- rbind(X, X)
+
+X
+```
+:::
+
+</details>
+
+:::
+
+<br>
+
+`cbind()` and `rbind()` also work for data frames.
+
+```{r}
+# Make a new data frame that contains the first 5 rows of surfwater duplicated
+rbind(surfwater[1:5,], surfwater[1:5,])
+
+
+```
+
 
 :::{.callout-trick}
 Matrices are two dimensional objects where every element has the same data type. Matrices are a special case of an **array**, which is an n-dimensional object in which every element has the same data type. You may not need to use arrays very often, but it is useful to know they exist.
@@ -508,111 +665,481 @@ Z[2, 3, 1]
 :::
 
 
+#### How large are my data?
 
+RStudio has a very useful Environment panel that reports the structure and **dimensions** of any object that you create. However, sometimes you will need to use the size of your data in your code (example to follow). This is where you might want to use the functions:
 
+* `dim()` will print the dimensions of an object (number of rows, number of columns, number of higher order dimensions)
+* `dimnames()` will print the names for each dimension as a list where the first element is the row names, the second element is the column names and subsequent elements are higher order names.
+* `nrow()` or `ncol()` will print an integer with the number of rows or columns
+* `rownames()` or `colnames()` will print a character vector with the names of the rows or columns.
 
-#### 
+The first two will work on any matrix, array or data frame, whereas the row and column functions only work on 2-dimensional objects (matrices and data frames).
 
+Let's see how this might be useful if we wanted to view the last five rows of `surfwater`.
 
+```{r}
+# How many rows are in surfwater?
+N <- nrow(surfwater)
+N
+
+# Extract the last 5 rows of surfwater.
+surfwater[(N-4):N, ]
+
+```
 
 
 ### Logical comparisons
 
+Usually when we work with data, we don't know exactly which row(s) contain the values we are intersted in. For example, perhaps we want to calculate the average surface water temperature, but only for the month of August. To do this we would first need to identify the rows in `surfwater` that were measured in August (presumably using the `startDateTime` column) and then calculate the average of the values in the `surfwarterTemp.mean` column.
 
+To identify the rows from August, we need to do a **logical comparison** and test whether the dates in the `startDateTime` column come from the month of August.
 
-We can also do comparisons in R:
-
-```{r}
-1 == 1  # equality (note two equals signs, read as "is equal to")
-```
+Here are all of the basic comparison operations in R, illustrated using a vector of integers and one missing value. Comparisons will return a logical vector that is TRUE where the comparison is true, FALSE where the comparison is false.
 
 ```{r}
-1 != 2  # inequality (read as "is not equal to")
+# Create a vector x containing integers from -3 to 3 followed by a missing value
+# Note that using parentheses around this expressions causes 
+# the output of x to print to the console.
+x <- c(-3:3)
+
+
+# Which values of x are equal to 0?
+x == 1
+
+# Which values of x are less than 0?
+x < 0
+
+# Which values of x are less than or equal to 0?
+x <= 0
+
+# Which values of x are greater than or equal to 0?
+x >= 0
+
+# Which values of x are in the set of values c(1, 3, 5)?
+x %in% c(1, 3, 5)
+
+
 ```
+
+We can use the `!` operator to negate any logical comparison:
 
 ```{r}
-1 < 2  # less than
+
+# Which values of x are not equal to 0?
+x != 1
+
+# Which values of x are not less than 0?
+!(x < 0)
+
+
+# Which values of x are not in the set of values c(1, 3, 5)?
+!(x %in% c(1, 3, 5))
+
 ```
+
+We can also make more complex logical statements by combining comparisons with the boolean operators "and" (`&`) and "or" (`|`):
+
 
 ```{r}
-1 <= 1  # less than or equal to
+# Which values of x are less than -2 or greater than 1?
+(x < -2) | (x > 1)
+
+# Which values of x are less than -2 and greater than 1?
+(x < -2) & (x > 1)
+
 ```
+
+Since each of these comparisons operates **elementwise** and returns a logical vector that is the same length as `x`, we can use the output of a comparison to select elements of the vector x. Only the elements where the comparison was `TRUE` will be returned.
+
+
 
 ```{r}
-1 > 0  # greater than
+
+# Which values of x are equal to 0?
+x[x == 1]
+
+# Which values of x are less than 0?
+x[x < 0]
+
+# Which values of x are in the set of values c(1, 3, 5)?
+x[x %in% c(1, 3, 5)]
+
+# Which values of x are less than -2 and greater than 1?
+x[(x < -2) & (x > 1)]
+
 ```
+Why did the last line return `integer(0)`? Because are no elements of x that are both less than -2 and greater than 1 (that's impossible!) so `integer(0)` is an empty value.'
+
+
+### Subseting data using logical comparisons
+
+The real power of logical expressions is when we use them to subset data tables. For example, let's calculate the mean water temperature in August.
+
+First we need to create a new column in the data frame that identifies which month each measurement was taken. We do this using functions from the lubridate package (introduced in lesson [`r .get_chpName("intro-to-R", type.from = "chp")`](chp-intro-to-R.html)).
 
 ```{r}
-1 >= -9 # greater than or equal to
+# Load the lubridate package
+library(lubridate)
+
+# ymd_hms() comes from the lubridate package
+# and converts the character vector in the startDateTime column
+# into a date-time class 
+surfwater$startDateTime <- ymd_hms(surfwater$startDateTime)
+
+class(surfwater$startDateTime) 
+# POSIXct and POSIXt are the names of classes that R uses to
+# store dates and times
+
+# Create a new column that identifies the month for each observation
+surfwater$month <- month(surfwater$startDateTime)
+
 ```
 
-> ## Tip: Comparing Numbers
->
-> A word of warning about comparing numbers: you should
-> never use `==` to compare two numbers unless they are
-> integers (a data type which can specifically represent
-> only whole numbers).
->
-> Computers may only represent decimal numbers with a
-> certain degree of precision, so two numbers which look
-> the same when printed out by R, may actually have
-> different underlying representations and therefore be
-> different by a small margin of error (called Machine
-> numeric tolerance).
->
-> Instead you should use the `all.equal` function.
->
-> Further reading: [http://floating-point-gui.de/](http://floating-point-gui.de/)
->
-{: .callout}
+Click on the `surfwater` object in the Environment tab to verify that there is a new column at the end named `month`.
+
+Next we subset the data to only rows where `month == 8` since August is the 8th month.
+
+```{r}
+surfwater_Aug <- surfwater[surfwater$month == 8, ]
+
+```
 
 
+Finally we calculate the average of the values in the `surfWaterTemp.mean` column.
 
+```{r}
+mean(surfwater_Aug$surfWaterTemp.mean)
+
+```
+Ooops! There must be missing values. Use the `na.rm` argument to discard these before calculating the average.
+
+```{r}
+mean(surfwater_Aug$surfWaterTemp.mean, na.rm = TRUE)
+```
+
+
+Note that we can do both steps at once if we index the column by name at the same time that we subset the rows:
+
+```{r}
+
+mean(surfwater[surfwater$month == 8, "surfWaterTemp.mean"], na.rm = TRUE)
+
+```
+
+::: {callout-tip}
+Be careful using logical comparisons to select data when the data contain missing values `NA`. A logical comparison will be `NA` whenever data are missing and using `NA` to index a vector will return an `NA` value, which might not be what you had intended.
+
+```{r}
+y <- c("A", "B", "A", NA)
+
+y == "A"
+
+y[y == "A"]
+```
+
+:::
+
+While you can use a logical expression to directly index the rows of a dataframe (like we just did), if you have missing data in the column that you are subsetting on, it is better to use the `subset()` function, which will not return rows of missing data.
+
+Here's an example to calculate the mean dissolved oxygen content from all measurements where the surface water temperature is less than 5\deg C.
+
+```{r}
+# Here's two ways to obtain dissolved oxygen values from measurements where
+# the water temperature was less than 5 C
+
+# Bad way to do this because there are missing data in surfWaterTemp.mean
+DOvals_bad <- surfwater[surfwater$surfWaterTemp.mean < 5, 'dissolvedOxygen.mean']
+
+# Good way using subset because it drops the rows with missing  surfWaterTemp.mean first
+DOvals_good <- subset(surfwater, surfWaterTemp.mean < 5)$dissolvedOxygen.mean
+
+# Compare the number of elements in the two vectors of dissolved oxygen values
+length(DOvals_bad)
+length(DOvals_good)
+
+# Calculate the mean of the values
+mean(DOvals_good, na.rm = TRUE)
+
+```
+Using subset allows us to know that the missing values in a calculation come from missing dissolved oxygen values and not from missing temperature values. Another benefit of using `subset()` is that it is less text and easier to read.
+
+::: {.challenge}
+
+Calculate the average surface water temperature in April from measurements when the chlorophyll content (`chlorophyll.mean`) was above 0.8 g/L.
+
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+```{r}
+temp_vals <- subset(surfwater, (month == 4)&(chlorophyll.mean > .8))$surfWaterTemp
+
+mean(temp_vals)
+```
+:::
+
+</details>
+
+:::
+
+<br>
+
+#### Finding missing data
+
+It is often critical to find and examine places where data are missing before performing an analysis. While missing data are often truly missing, missing data also occur when there has been an error in data entry or a calculation has not produced the result we anticipated. Rather than immediately exclude missing data from the analysis (like we did earlier), we should probably examine it first to see why it may be missing.
+
+One of the most useful functions in R is `is.na()`. This tests whether each element of a vector is equal to a missing value (`NA`). The output of `is.na()` is a logical vector with the same length as the input vector:
+
+```{r}
+# Replace the 4th element of x as missing
+x
+x[4] <- NA
+x
+
+# Find the missing values in x
+is.na(x)
+```
+
+Since `is.na()` returns a logical vector, we can use it to subset the rows of a data frame to only data that are missing (or not missing is we use `!is.na()`).
+
+Let's find the rows of `surfwater` with missing surface water temperature values. 
+
+```{r}
+# Extract all rows with missing value in the surfWaterTemp.mean column
+missing_temp <- surfwater[is.na(surfwater$surfWaterTemp.mean), ]
+
+```
+
+Click on the new object named missing_temp in the Environment panel. Scrolling through the data shows that most of the missing values appear to occur on one of a handful of days, presumably when the sensor was malfunctioning. We can verify this by tabulating the dates when  these data were missing:
+
+```{r}
+# Extract the date from the startDateTime column
+missing_dates <- date(missing_temp$startDateTime)
+
+# Count the number occurrences of each date
+# This gives a table of the number of missing temperature measurements for each date.
+table(missing_dates)
+
+```
 
 ### Putting it all together
 
-Microbial cell counts are from [DP1.20138.001](https://data.neonscience.org/data-products/DP1.20138.001).
+In addition to nearly continuous measurements of water quality, NEON collects water samples several times per year and measures microbial abundance and diversity. How might water quality impact (or be affected by) the concentration of microbial cells in the water?
 
-Why such differences?
+We will use the data subsetting skills we ljst learned to examine water quality data from time points when surface waters were sampled for microbes. Microbial cell count data come from [DP1.20138.001](https://data.neonscience.org/data-products/DP1.20138.001).
 
-Suppose we want to view surface water data only from the timepoints when microbial cells were sampled.
+```{r}
+# Load the microbial cell count data from Teakettle Creek in 2021
+microbes <- read.csv("data/NEON_Water/microbe_abun_TECR_2021-04_2021-10.csv")
+
+# View the structure of these data
+str(microbes)
+
+```
+
+There are 5 rows of data, each corresponding to a water sample. There are several columns that give information about each of the water samples (e.g. a unique ID number, the location where the sample was collected and notes about the quality of the sample). The two columns we will need are `collectDate` to match with the measurements in `surfwater` and the `cells_ml` column which gives the number of microbial cells per ml.
+
+Which time points were water samples collected?
+
+```{r}
+microbes$collectDate
+
+```
 
 
+But wait, each row in `surfwater` represents a 30-minute average beginning at the time in the column `startDateTime` and ending in the column `endDateTime`. How can we match these up?
+
+For now we can do it manually by examining the 5 collection dates and defining a set of values to match with the `startDateTime` column which would ensure that the collection dates fall within the 30-minute time interval. We can do this because we know that each time interval begins on the hour or half hour:
+
+```{r}
+# Tabulate the number of rows that begin on a certain hour
+table(hour(surfwater$startDateTime))
+
+# Tabulate the number of rows that begin on a certain minute of the hour
+table(minute(surfwater$startDateTime))
+
+# Tabulate the number of rows that begin on a certain second of the hour
+table(second(surfwater$startDateTime))
+```
+Thus, each start date should have the form: `YYYY-MM-DD HH:00:00` or `YYYY-MM-DD HH:30:00`.
+
+```{r}
+# Define a set of startDateTimes that match the five collection
+# dates in microbes
+these_dates <- c("2021-05-05 16:30:00",
+                 "2021-06-01 18:30:00",
+                 "2021-07-14 16:00:00",
+                 "2021-08-03 17:00:00",
+                 "2021-09-01 17:00:00")
+
+# Convert to a date-time class
+these_dates <- ymd_hms(these_dates)
 
 
+# Subset surfwater to only rows whose startDateTime column
+# matches one of the dates in these_dates
+subset(surfwater, startDateTime %in% these_dates)
+```
+
+Once we have these data we can make a quick plot to compare microbial abundance to water quality. Let's look at nitrate:
+
+```{r}
+# Save the subsetted data to a new data frame
+microbe_wq_data <- subset(surfwater, startDateTime %in% these_dates)
+
+# Graph microbial cell counts (y axis) vs. nitrate concentration (x axis)
+# Specify axis labels with xlab and ylab arguments
+plot(x = microbe_wq_data$surfWaterNitrate.mean,
+     y = microbes$cells_ml,
+     xlab = "Nitrate (umol per L)",
+     ylab = "Microbial cell density (num. per ml)")
+
+```
+
+
+Congrats! You've learned a lot this lesson. Now its time to move on and practice with the Exercises.
+
+Or, if you're interested, read on for a better way to solve the date matching problem above using functions within the lubridate package.
+
+What we need to do is figure out which time interval each microbial sampling time point falls within. To do this we will use a function in the `lubridate` packages that defines a time interval class that occurs between two points in time. This time interval class will allow us to check whether each microbial sampling time point falls within each interval.
+
+```{r}
+# Convert collectDate to a date-time
+microbes$collectDate <- ymd_hms(microbes$collectDate)
+
+# Convert endDateTime to a date-time class
+surfwater$endDateTime <- ymd_hms(surfwater$endDateTime)
+
+# Define a new column in surfwater that records the time interval 
+# for each measurement
+surfwater$timeInterval <- interval(start = surfwater$startDateTime,
+                                   end = surfwater$endDateTime)
+
+```
+
+If you click on surfwater in the Environment panel, you should see a new column named timeInterval of class 'Interval'.
+
+Now we can subset the row of `surfwater` whose `timeInterval` include the first microbial water sample time.
+
+```{r}
+# Define the time point that we are interested in
+# and print the value of this_time
+(this_time <- microbes[1, "collectDate"])
+
+# Subset to rows whose time interval contains this_time
+subset(surfwater, this_time %within% timeInterval)
+
+```
 
 
 ## Exercises
 
 After completing these exercises, learners will be able to 
-`r .get_LO(as.numeric(.chp_num), .CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
 
-data-structures	1	"create and extract or set values in vectors, matrices and arrays in R"
-data-structures 2 "create and extract or set values in lists in R"
-data-structures 3 "create and manipulate the columns of data frames in R"
-data-structures 4 subset the rows a of data frame in R
-data-structures	5	"differentiate between numeric, character, factor and logical data types in R"	
-data-structures	6	view the structure and class of an object in R	
-data-structures	7	"write logical test expressions using `==`,`!=`, `>`, `<`, and `%in%` "	
 
-**`r .chp_num`.1** 
+
+**`r .chp_num`.1**
+
+Determine the class and structure of each of the following objects:
+
+```{r}
+A <- c(1, 2, 3, "4")
+
+B <- c(TRUE, FALSE, FALSE, NA)
+
+C <- factor(A)
+
+dat1 <- list(A = A, B = B, C = C)
+
+dat2 <- data.frame(A, B, C)
+```
 
 **`r .chp_num`.2** 
 
+1. What is the data type of object `A` in the code above? Why doesn't it have two data types?
+2. Write one line of code that prints the data type of the object `A`.
+
+**`r .chp_num`.3**
+
+Using object `dat2` in the code above, demonstrate two different ways to select the 3rd item in column `B`.
+
+**`r .chp_num`.4**
+
+Using object `dat2` in the code above, append a new column named `X` that is the numeric equivalent of column `A`.
+
+**`r .chp_num`.5**
+
+Using object `dat1` in the code above, demonstrate two different ways to select the 3rd item in 1st element.
+
+**`r .chp_num`.6**
+
+Using object `dat1` in code above, append a third item named `Zeros` that contains a vector with four `0`s.
+
+**`r .chp_num`.7**
+
+Using the object `C` in the code above, change the order of the levels so that the the levels are in descending numeric order (e.g. "4" is the first level and "1" is the last level).
 
 
+**`r .chp_num`.8**
 
+What class are each of the following objects? How are these classes similar? How are they different?
 
+```{r}
 
+X <- c(0, 0, 2.8, 5)
+
+Y <- matrix(X, nrow = 2, ncol = 4)
+
+Z <- array(X, dim = c(2, 4, 3))
+
+```
+
+**`r .chp_num`.9** 
+
+1. Using the objects above, write one line of code that calculates the product of the 3rd element of `X` and the second row of `Y`. 
+2. What type of object is the result?
+3. What are the dimensions of the result?
+
+**`r .chp_num`.10**
+
+Write an R script that calculates the monthly mean dissolved oxygen content of surface waters at the NEON Teakettle lake site. Use the data in the file `data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv`. 
+
+The output of your code must be a data frame with twelve rows and two columns: `month` (containing the months 1 - 12 or Jan - Dec) and `dissolvedOxygen.mean` (containing the monthly mean dissolved oxygen values). The dissolved oxygen values should only report a missing value (`NA`) if there are no dissolved oxygen data for a given month.
+
+**`r .chp_num`.11**
+
+Write an R script that calculates the monthly mean surface water temperature at the NEON Teakettle lake site. Use the data in the file `data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv`. 
+
+The output of your code must be a data frame with twelve rows and two columns: `month` (containing the months 1 - 12 or Jan - Dec) and `surfWaterTemp.mean` (containing the monthly mean dissolved oxygen values). The temperature values should only report a missing value (`NA`) if there are no temperature data for a given month.
+
+**`r .chp_num`.12**
+
+Write a script that does the following:
+
+1. Read in the data in the file `data/NEON_water/waterqual_inst_TECR_2021-04_2021-10.csv` to a data frame in R.
+2. Save the column names to a vector named `WQnames`
+3. Print the dimensions of these data (e.g. how many rows and columns).
+4. Print the last 10 rows of these data from the `fDOM` and `chlorophyll` columns.
+
+**`r .chp_num`.13**
+
+Write a script that does the following:
+
+1. Read in the data in the file `data/NEON_water/waterqual_inst_TECR_2021-04_2021-10.csv` to a data frame in R.
+2. The `QF` columns are quality flags that indicate issues with the data. A `QF = 0` indicates that the data are good. Extract all `pH` values where the `pHFinalQF` column is not equal to `0`. Save these values to a vector named `bad_pH`.
+3. What fraction of the data contain bad pH values? HINT: divide the number of values in `bad_pH` by the total number of observations in the data.
 
 
 ## Sources and Resources
 
-This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 4, 5, 6, and 11 by Jes Coyle.
+This lesson was written by Jes Coyle and inspired by [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 4, 5, and 6.
 
 
+<!--### Additional Resources-->
 
 
-### Additional Resources
 
 ### Cited References
