@@ -42,7 +42,7 @@ The student workbook is a zipped folder that contains a folder with data files n
 
 ## Open Educational Resource
 
-These materials will be published open access, but they are **(not currently ready for use or adaptation.**
+These materials will be published open access, but they are currently under development and are **not currently ready for adaptation.**
 
 ### Acknowledgements
 Thank you to [Data Carpentry](http://datacarpentry.org/) and [Software Carpentry](http://software-carpentry.org/) for providing open and remixable materials for scientists learning programming and data science. This course draws heavily from the [Data Carpentry for Biologists](https://datacarpentry.org/semester-biology/) and [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/).

@@ -9,10 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Jes Coyle" />
 
 
-<title>Introduction to Computing in R with NEON</title>
+<title>RStudio Workbook Contents</title>
 
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -30,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 
 <style type="text/css">
@@ -212,75 +208,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -288,16 +215,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -382,108 +299,23 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Introduction to Computing in R with
-NEON</h1>
-<h4 class="author">Jes Coyle</h4>
+<h1 class="title toc-ignore">RStudio Workbook Contents</h1>
 
 </div>
 
 
-<div id="overview" class="section level2">
-<h2>Overview</h2>
-<p>This is a self-paced tutorial adapted from <a
-href="http://datacarpentry.org/">Data Carpentry</a> and <a
-href="http://software-carpentry.org/">Software Carpentry</a> that
-teaches biologists basic data science and computing skills using <a
-href="http://neonscience.org">National Ecological Observation
-Network</a> data. It is being developed for use in an upper division
-Biology course at Saint Mary’s College of California beginning in August
-2023. <strong>These materials are not currently ready for
-use.</strong></p>
-</div>
-<div id="organization" class="section level2">
-<h2>Organization</h2>
-<div id="how-to-use-this-tutorial" class="section level3">
-<h3>How to use this tutorial</h3>
-<p>This book is organized into sequential chapters with content that
-builds on prior chapters. Learners who have no prior experience with R
-should start with chapter 1 and progress through the book
-sequentially.</p>
-<p>Access the chapters using the menu bar at the top of the website.
-Each chapter begins with an overview page that introduces the learning
-goals and important terms your will gain by working through the lesson.
-The Lesson tab for each chapter contains step-by-step instructions. Read
-through the lesson while running examples of code in RStudio on your own
-computer. Be sure to complete all of the challenges, as the contents of
-each challenge in the lessons build upon one another. Use the Exercises
-tab to practice the skills gained during the lesson. Most lessons were
-adapted from other sources- these are listed in the References tab along
-with other useful resources for readers wanting to learn more.</p>
-</div>
-<div id="where-is-everything" class="section level3">
-<h3>Where is everything?</h3>
-<p>The menu at the top of this website provides access to everything you
-need.</p>
-<ul>
-<li><a href="index.hmtl">Home</a> takes you to this page.</li>
-<li><a href="computer-setup.html">Computer Setup</a> describes how to
-get you computer ready to work through the lessons.</li>
-<li><a href="NEON-data-intro.html">NEON Data</a> describes the National
-Ecological Observatory Network and which data products are used in the
-lessons.</li>
-<li>The Chapters dropdown menu provides access to each lesson as well as
-an <a href="00-module-contents.html">overview</a> of the contents of
-each lesson.</li>
-<li><a href="exercises-guide.html">Exercises</a> provides links to
-download exercise files that accompany each lesson.</li>
-<li><a href="download-student-RStudo-project.html">RStudio Workbook</a>
-provides a link to download an RStudio project that accompanies these
-lessons.</li>
-</ul>
-</div>
-</div>
-<div id="get-started" class="section level2">
-<h2>Get Started</h2>
-<div id="computer-set-up" class="section level3">
-<h3>Computer set-up</h3>
-<p>This course requires you to have certain software installed on your
-computer. Follow the instructions on the <a
-href="computer-setup.html">Computer Setup</a> to learn how to install
-this software before downloading the workbook.</p>
-</div>
-<div id="student-workbook" class="section level3">
-<h3>Student workbook</h3>
-<p>The student workbook is a zipped folder that contains a folder with
-data files necessary for completing the lessons. It also contains a
-folder with exercise files that accompany each lesson. Follow the
-instructions on the <a href="computer-setup.html">Computer Setup</a>
-page to download the workbook.</p>
-</div>
-</div>
-<div id="open-educational-resource" class="section level2">
-<h2>Open Educational Resource</h2>
-<p>These materials will be published open access, but they are currently
-under development and are <strong>not currently ready for
-adaptation.</strong></p>
-<div id="acknowledgements" class="section level3">
-<h3>Acknowledgements</h3>
-<p>Thank you to <a href="http://datacarpentry.org/">Data Carpentry</a>
-and <a href="http://software-carpentry.org/">Software Carpentry</a> for
-providing open and remixable materials for scientists learning
-programming and data science. This course draws heavily from the <a
-href="https://datacarpentry.org/semester-biology/">Data Carpentry for
-Biologists</a> and <a
-href="https://swcarpentry.github.io/r-novice-gapminder/">R for
-Reproducible Scientific Analysis</a>.</p>
-</div>
-</div>
+<p>This page describes the contents of the RStudio project folder that
+can be downloaded by students from a link on this page. This project
+folder is called the “workbook” and contains a folder with data files
+and an exercises folder that contains a subfolder where students can
+save completed work.</p>
+<p><a href="workbook/R-course-NEON-workbook.zip">Download the student
+workbook</a></p>
 
 <hr>
 <p>Introduction to Computing in R with NEON</p>
 
 
-</div>
-</div>
 
 </div>
 
@@ -516,35 +348,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
