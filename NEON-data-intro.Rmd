@@ -1,11 +1,17 @@
 ---
 layout: page
 title: "Introduction to NEON"
-output: html_document
+output: 
+  html_document:
+    toc: false
 ---
 
-This page will describe NEON and the data sets used in this tutorial.
-It should include links to the NEON site and youtube channel.
+The [National Ecological Observation Network](neonscience.org) is a continental-scale network of 81 sites designed to observe environmental and ecological processes over the next 30 years. The network began construction in 2016 and began operating and publishing data in 2019. This research is funded by the National Science Foundation and all data are published online for any person to use. Read more about the design, mission and history of NEON [here](https://www.neonscience.org/about/overview). Watch [this video](https://www.youtube.com/watch?v=39YrzpxVRF8) to get a general orientation to the NEON mission.
 
 
-[Here is a cheat sheet to using the neonUtilities R package](https://www.neonscience.org/sites/default/files/cheat-sheet-neonUtilities.pdf) to download and work with NEON data sets.
+Data in this text come from sensors and samples collected at NEON aquatic sites. Watch [this video](https://youtu.be/-JXf6_9GwLI?si=HTTfICWCQkdycWBr) to learn more about the design and infrastructure at aquatic sites. Each data product published by NEON is identified by an ID number that begins with `DP1`. Chapters that use NEON data will identify these products using these identifiers, which you can use to look up documentation on the data from the [NEON Data Portal](https://data.neonscience.org/data-products/explore). You can access the page for any data product directly using the url: `https://data.neonscience.org/data-products/[type DP1 number here]`
+
+Data that accompany this text were downloaded using R with the `neonUtilities` package. NEON publishes many tutorials and user guides to software designed to work with NEON data. You can find these on the [NEON Resources](https://www.neonscience.org/resources) page. [Here is a cheat sheet to using the neonUtilities R package](https://www.neonscience.org/sites/default/files/cheat-sheet-neonUtilities.pdf) to download and work with NEON data sets.
+
+Another great (and fun!) resource is the [NEON Science YouTube channel](https://www.youtube.com/neonscience), where you can watch videos ranging from science concepts explained to software tutorials.
+
