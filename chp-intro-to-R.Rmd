@@ -700,7 +700,7 @@ Create a new R script.
 1. Click File > New File > R Script.
 2. The Source panel will open with a blank file like this:
 
-![RStudio layout with .R file open](../fig/01-rstudio-script.png)
+![RStudio layout with .R file open](./images/01-rstudio-script.png)
 
 3. The file is not yet saved on your computer (notice that its name is Untitled 1 in the tab at the top of the Source panel.
 4. Save this file to your computer. Click File > Save. 
