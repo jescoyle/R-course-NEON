@@ -27,7 +27,6 @@ set.seed(10)
 
 # Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
-**THIS LESSON IS NOT YET READY FOR LEARNERS.**
 
 ## Overview 
 

@@ -13,148 +13,841 @@ bibliography: references.bib
 source("src/setup.R")
 
 # get chapter number based on name
-chp_num <- get_chpNum("chp-functions", type = "fileName")
-chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
+.chp <- "functions"
+.chp_num <- .get_chpNum("chp-functions", type = "fileName")
+.chp_str <- ifelse(nchar(.chp_num) > 1, .chp_num, paste0("0", .chp_num))
 
 # knitr options
 source("src/knit-options.R")
-knitr_fig_path(paste0(chp_str, "-"))
-
-# Silently load in the data for this lesson
-gapminder <- read.csv("data/gapminder_data.csv", header = TRUE)
+.knitr_fig_path(paste0(.chp_str, "-"))
 
 # Silently set seed for random number generation, so we don't have to explain it
 set.seed(10)
 ```
 
-# Chapter `r chp_num`. `r get_chpName(chp_num, type.to = "nameLong")` {.tabset}
-
-
-**THIS LESSON IS NOT YET READY FOR LEARNERS.**
+# Chapter `r .chp_num`. `r get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
 ## Overview 
 
-*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 9, 10
+> Have you ever completed a complicated series of steps in an analysis only to discover that some small part of your initial data were incorrect? Oh no! Hours wasted... but not if your analyses were written in computer code that could be run on the new data with the click of a button. 
+
+
+A critical step in the scientific process is to update our models when new data become available- whether those data are corrections to prior mistakes or genuinely new information that we can used to make better predictions. Re-useable computer code is critical for automating this process and the workhorse of computer programming is the *function*.
+
+In this lesson, we'll learn how to write a function so that we can repeat
+several operations with a single command.
+
 
 
 ### What we will learn
 
-Brief description of the contents of this lesson. 
-
-
-
-- NEON Utilities functions & reading a function help file
-
 In this lesson 
-`r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`
+`r .get_LO(as.numeric(.chp_num), .LOtable, prefix = TRUE)`
 
-### Motivator
+#### Key Terms & Commands
 
-Describe a problem that learners will be able to solve by the end of this lesson.
+* function name, body and arguments
+* 
 
-### Get set up
 
-Describe any data sets or packages that learners need to download or install before proceeding.
+### Prerequisites
 
-```{r results = 'hide'}
-# Read in a data file from the data folder included with the student workbook
-dat <- read.csv("data/gapminder_data.csv")
+Before beginning this lesson you should have completed the lessons [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) and any prerequisites therein.
+
+Before you begin:
+
+1. Open the R-course-NEON-workbook RStudio project.
+2. Create a new R script named `r paste0("lesson_", .chp_str, "_code.R")` in the lesson-code folder of the student workbook.
+3. Whenever you see a box 
+
+:::{.challenge}
+```{r eval = FALSE}
+Type this code into your R script.
 ```
-
-Make a code block that loads any packages needed for the analysis. It can be helpful to indicate which functions come from which packages.
-
-```{r results = 'hide', warning = FALSE, message = FALSE}
-
-# Load dplyr: filter
-library(dplyr)
-
-# Load ggplot2: ggplot
-library(ggplot2)
-
-```
+:::
+4. Be sure to click Save often to save your work.
 
 ## Lesson
 
 
+### What is a function?
+
+Functions gather a sequence of operations into a whole, preserving it for
+ongoing use. Functions provide:
+
+* a name we can remember and invoke it by
+* relief from the need to remember the individual operations
+* a defined set of inputs and expected outputs
+
+Functions are always followed by parentheses that enclose their arguments:
+
+`function_name(argument1, argument2)`
+
+You have already met several functions in R. Do you remember what each of these functions do?
+
+```{r eval = FALSE}
+sum(1:6)
+
+mean(1:10)
+
+c(2, 4, 6)
+
+seq(2, 10, by = 2)
+
+tempdata <- read.csv("data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv")
+
+rm(tempdata)
+
+```
+
+Some functions will **return** a value or object that is either printed to the console or can be saved to a new object. Other functions perform a set of operations without returning any values or objects.
+
+::: {.challenge}
+Which of the functions above return an object? What type of object is returned?
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+```{r eval = FALSE}
+sum(1:6) # returns a single number
+
+mean(1:10) # returns a single number
+
+c(2, 4, 6) # returns a vector
+
+seq(2, 10, by = 2) # returns a vector
+
+tempdata <- read.csv("data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv") # returns a data frame (which we saved to a new object tempdata)
+
+rm(tempdata) # does not return any object
+
+```
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+The help page of a function tells us what type of object a function should return and the names of the arguments it accepts. Let's read the help file for `read.csv()`.
+
 ```{r}
-# This is an R code block that will execute any code inside and show the results.
-dat %>%
-  filter(country == "United States")
+
+?read.csv
 
 ```
 
+The Description field tells us that we should expect this function to create a data frame. In the Usage section we see several related functions for reading tabular data files. The most general version of this function is `read.table()`. The `read.csv` function can actually accept all of the same arguments as `read.table()` (because of the `...`). From this documentation page, we see that `read.csv()` is actually a shorthand for `read.table()` with a few different **default values** for arguments. Specifically:
+
+| argument | `read.table()` | `read.csv()`|
+|----------|----------------|-------------|
+| `header` | `FALSE`        | `TRUE`      |
+| `sep`    | `""`           | `","`       |
+| `quote`  | `"\"'"`        | `"\""`      |
+| `fill`   | `!blanklinesskip` | `TRUE`   |
+| `comment.char` | `"#"`    | `""`        |
+
+Farther down in the documentation, each of these arguments is described in detail. For example, the `quote` argument defines which quotation characters are used to denote text. For `read.table()`, both `"` and `'` are allowed, whereas for `read.csv()` only `"` is used. (The `\` character is used to "escape" the usual meaning of the `"` so that the `"` character itself can be specified inside a set of quotes: `" " "`.)
+
+In R, function arguments may be specified in any order, so long as the names of the arguments are used. if the argument names are not used, then the function arguments are assumed to be in the same order as shown on the help page. 
 
 
-```{r usa_pop_fig}
-#| echo = FALSE,
-#| fig.cap = paste0("Fig. ", chp_num, ".1. Population growth in the United States 1952 - 2007.")
+::: {.challenge}
+Open the help page for the function `rep()`.
 
-# Note that figure caption numbers are not automatic here.
+1. What arguments does this function take?
+2. What will be the output of each of the following:
 
-# Plot year vs. population size for United States
-dat %>%
-  filter(country == "United States") %>%
-  ggplot(aes(x = year, y = pop)) +
-  geom_line() +
-  labs(x = "Year", y = "Population size")
+```{r eval = FALSE}
+
+rep(1:3, 2)
+
+rep(1:3, each = 2)
+
+rep(length.out = 4, x = 1:3)
 
 ```
 
+<details><summary>**Solution:**</summary>
 
-### Section 1
+::: {.solution}
 
+```{r}
 
-> ***CHALLENGE:*** What will this code do?
->
-> ```r
-> 1 + 1
-> ```
-> > ```{r class.source = 'fold-hide', collapse = TRUE}
-> > 1 + 1
-> > ```
+rep(1:3, 2)
 
+rep(1:3, each = 2)
 
+rep(length.out = 4, x = 1:3)
 
-### Packages
+```
 
-### Installing and loading packages
-
-"base" R is the functionality that comes installed with R, but the powerful thing about R is its user community who have created thousands of **packages** that increase its functionality. It is possible to add functions to R by writing a package, or by obtaining a package written by someone else. As of this writing, there are nearly 20,000 packages available on [CRAN](https://cran.r-project.org/) (the comprehensive R archive network). 
-
-Packages can also be viewed, loaded, and detached in the Packages tab of the lower right panel in RStudio. Clicking on this tab will display all of the installed packages with a checkbox next to them.
-If there is nothing listed then you do not have any packages installed. Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.
-
-Let's install the `neonUtilities` package. Click the Install button. In the pop-up that appears, type `neonUtilities`. Do not change any of the other settings, then click Install.
-
-Notice what happens in the R Console.
-
-Instead of clicking the Install button, we could have installed this packages by typing `install.packages("neonUtilities")` into the Console.
-
-Now this package should appear in the list of installed packages with an empty checkbox next to it. The empty checkbox indicates that the package is not **loaded** yet in this R session. That means we cannot use the functions in it yet. You can load and unload packages by clicking on the box next to them. Notice what happens in the Console when you check and uncheck the box next to neonUtilities:
-
-* You can make a package available for use in your R session with `library(packagename)`.
-* You can make a previously loaded package unavailable in your R session with `detach("packagename", unload = TRUE)`. This is sometimes necessary if two packages are using the same name for a function.
-
-::: {.callout-important}
-Packages only need to be installed **once**. This saves the package to a location on your computer that R can access.
-
-You need to load packages **every time** you open a new R session, if you want to be able to use the functions in them.
 :::
 
+</details>
 
-::: {.callout-trick}
-You actually can use the functions in a package that is installed, but not loaded. To do this you need to type the the name of the package first, followed by two colons (::) and then the name of the function. For example: `neonUtilities::loadByProduct()`.
 :::
+
+<br>
+
+
+### Vectorization
+
+Most of R's functions are vectorized, meaning that the function will operate on all elements of a vector without needing to loop through and act on each element one at a time. This makes writing code more concise, easy to read, and less error prone.
+
+You are actually already familiar with this behavior:
+
+
+```{r}
+x <- 1:4
+x * 2
+```
+
+The multiplication happened to each element of the vector.
+
+We can also add two vectors together:
+
+```{r}
+y <- 6:9
+x + y
+```
+
+Each element of `x` was added to its corresponding element of `y`:
+
+```{r, eval=FALSE}
+x:  1  2  3  4
+    +  +  +  +
+y:  6  7  8  9
+---------------
+    7  9 11 13
+```
+
+Logical comparisons and many functions are also vectorized:
+
+```{r}
+x > 2
+
+x == 4
+
+x %in% 1:10
+```
+
+Most base functions also operate element-wise on vectors:
+
+```{r}
+x <- 1:4
+log(x)
+```
+
+Vectorized operations work element-wise on matrices:
+
+```{r}
+m <- matrix(1:12, nrow=3, ncol=4)
+m * -1
+```
+
+::: {.callout-tip}
+Element-wise vs. matrix multiplication
+
+The operator `*` gives you element-wise multiplication!
+To do real matrix multiplication, we need to use the `%*%` operator:
+
+```{r}
+m %*% matrix(1, nrow=4, ncol=1)
+matrix(1:4, nrow=1) %*% matrix(1:4, ncol=1)
+```
+
+:::
+
 
 
 ::: {.challenge}
 
-Write a line of code in your new R script that will load the `neonUtilities ` package.
+Given the following matrix:
 
-:::
+```{r}
+m <- matrix(1:12, nrow=3, ncol=4)
+m
+```
+
+Write down what you think will happen when you run:
+
+1. `m ^ -1`
+2. `m * c(1, 0, -1)`
+3. `m > c(0, 20)`
+4. `m * c(1, 0, -1, 2)`
+
+<details><summary>**Solution:**</summary>
+
 ::: {.solution}
 
-We can use the `library()` command load a packages. Notice that the name of the packages **is not** inside quotation marks. This is different from the `install.packages()` function, where the package name must be quoted.
+```{r}
+m ^ -1
+```
+
+```{r}
+m * c(1, 0, -1)
+```
+
+```{r}
+m > c(0, 20)
+```
+
+```{r}
+m * c(1, 0, -1, 2)
+```
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+
+
+::: {.challenge}
+
+We're interested in looking at the sum of the following sequence of fractions:
+
+```{r, eval=FALSE}
+x = 1/(1^2) + 1/(2^2) + 1/(3^2) + ... + 1/(n^2)
+```
+
+This would be tedious to type out, and impossible for high values of n.  Use vectorisation to compute x when n=100. What is the sum when n=10,000?
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+```{r}
+
+# Sum of the inverse squares of the numbers from 1 to 100
+sum(1/(1:100)^2)
+
+# Sum of the inverse squares of the numbers from 1 to 10000
+sum(1/(1:1e04)^2)
+
+# Sum of the inverse squares of the numbers from 1 to n
+
+n <- 10000
+sum(1/(1:n)^2)
+```
+
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+
+
+<!-- WORKING HERE -->
+
+
+
+> ## Tip: Operations on vectors of unequal length
+>
+> Operations can also be performed on vectors of unequal length, through
+> a process known as *recycling*. This process automatically repeats the smaller vector 
+> until it matches the length of the larger vector. R will provide a warning
+> if the larger vector is not a multiple of the smaller vector.
+>
+> ```{r}
+> x <- c(1, 2, 3)
+> y <- c(1, 2, 3, 4, 5, 6, 7)
+> x + y
+> ```
+>
+> Vector `x` was recycled to match the length of vector `y`
+> 
+> ```{r, eval=FALSE}
+> x:  1  2  3  1  2  3  1
+>     +  +  +  +  +  +  +
+> y:  1  2  3  4  5  6  7
+> -----------------------
+>     2  4  6  5  7  9  8
+> ```
+{: .callout}
+
+
+
+
+
+
+
+
+
+### Writing your own functions
+
+As the basic building block of most programming languages, user-defined functions constitute "programming" as much as any single abstraction can. If you have written a function, you are a computer programmer.
+
+Open a new R script file in the `src` directory of your `R-course-NEON-workbook` folder and call it `functions.R`. Recall that the `src` directory is typically used to save code scripts for analyses (if you don't have thie directory, create it). We will use this script to save functions that could be useful across several analyses.
+
+The general structure of a function is:
+
+```{r}
+my_function <- function(arguments) {
+  # perform action
+  # return value
+}
+```
+
+Let's define a function `fahr_to_kelvin()` that converts temperatures from
+Fahrenheit to Kelvin. Write this function in your `functions.R` script.
+
+```{r}
+fahr_to_kelvin <- function(temp) {
+  # Calculate temp in kelvin
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  
+  # Return the value of kelvin
+  return(kelvin)
+}
+```
+
+We define `fahr_to_kelvin()` by assigning it to the output of `function`. The list of argument names are contained within parentheses. Next, the body of the function--the statements that are executed when it runs--is contained within curly braces (`{}`). The statements in the body are indented by two spaces. This makes the code easier to read but does not affect how the code operates.
+
+It is useful to think of creating functions like writing a cookbook. First you define the "ingredients" that your function needs. In this case, we only need one ingredient to use our function: "temp". After we list our ingredients, we then say what we will do with them, in this case, we are taking our ingredient and applying a set of mathematical operators to it.
+
+When we call the function, the values we pass to it as arguments are assigned to
+those variables so that we can use them inside the function. Inside the
+function, we use a [return
+statement]({{ page.root }}/reference.html#return-statement) to send a result back to
+whoever asked for it.
+
+> ## Tip
+>
+> One feature unique to R is that the return statement is not required.
+> R automatically returns whichever variable is on the last line of the body
+> of the function. But for clarity, we will explicitly define the
+> return statement.
+{: .callout}
+
+
+Let's try running our function.
+Calling our own function is no different from calling any other function:
+
+```{r}
+# freezing point of water
+fahr_to_kelvin(32)
+```
+
+```{r}
+# boiling point of water
+fahr_to_kelvin(212)
+```
+
+
+
+ We can also obtain the same results using a function:
+> > ```{r}
+> > inverse_sum_of_squares <- function(n) {
+> >   sum(1/(1:n)^2)
+> > }
+> > inverse_sum_of_squares(100)
+> > inverse_sum_of_squares(10000)
+> > n <- 10000
+> > inverse_sum_of_squares(n)
+> > ```
+
+
+> ## Challenge 1
+>
+> Write a function called `kelvin_to_celsius()` that takes a temperature in
+> Kelvin and returns that temperature in Celsius.
+>
+> Hint: To convert from Kelvin to Celsius you subtract 273.15
+>
+> > ## Solution to challenge 1
+> >
+> > Write a function called `kelvin_to_celsius` that takes a temperature in Kelvin
+> > and returns that temperature in Celsius
+> >
+> > ```{r}
+> > kelvin_to_celsius <- function(temp) {
+> >  celsius <- temp - 273.15
+> >  return(celsius)
+> > }
+> > ```
+> {: .solution}
+{: .challenge}
+
+## Combining functions
+
+The real power of functions comes from mixing, matching and combining them
+into ever-larger chunks to get the effect we want.
+
+Let's define two functions that will convert temperature from Fahrenheit to
+Kelvin, and Kelvin to Celsius:
+
+```{r}
+fahr_to_kelvin <- function(temp) {
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}
+
+kelvin_to_celsius <- function(temp) {
+  celsius <- temp - 273.15
+  return(celsius)
+}
+```
+
+> ## Challenge 2
+>
+> Define the function to convert directly from Fahrenheit to Celsius,
+> by reusing the two functions above (or using your own functions if you
+> prefer).
+>
+>
+> > ## Solution to challenge 2
+> >
+> > Define the function to convert directly from Fahrenheit to Celsius,
+> > by reusing these two functions above
+> >
+> >
+> > ```{r}
+> > fahr_to_celsius <- function(temp) {
+> >   temp_k <- fahr_to_kelvin(temp)
+> >   result <- kelvin_to_celsius(temp_k)
+> >   return(result)
+> > }
+> > ```
+> {: .solution}
+{: .challenge}
+
+## Interlude: Defensive Programming
+
+Now that we've begun to appreciate how writing functions provides an efficient
+way to make R code re-usable and modular, we should note that it is important
+to ensure that functions only work in their intended use-cases. Checking
+function parameters is related to the concept of _defensive programming_.
+Defensive programming encourages us to frequently check conditions and throw an
+error if something is wrong. These checks are referred to as assertion
+statements because we want to assert some condition is `TRUE` before proceeding.
+They make it easier to debug because they give us a better idea of where the
+errors originate.
+
+### Checking conditions with `stopifnot()`
+
+Let's start by re-examining `fahr_to_kelvin()`, our function for converting
+temperatures from Fahrenheit to Kelvin. It was defined like so:
+
+```{r}
+fahr_to_kelvin <- function(temp) {
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}
+```
+
+For this function to work as intended, the argument `temp` must be a `numeric`
+value; otherwise, the mathematical procedure for converting between the two
+temperature scales will not work. To create an error, we can use the function
+`stop()`. For example, since the argument `temp` must be a `numeric` vector, we
+could check for this condition with an `if` statement and throw an error if the
+condition was violated. We could augment our function above like so:
+
+```{r}
+fahr_to_kelvin <- function(temp) {
+  if (!is.numeric(temp)) {
+    stop("temp must be a numeric vector.")
+  }
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}
+```
+
+If we had multiple conditions or arguments to check, it would take many lines
+of code to check all of them. Luckily R provides the convenience function
+`stopifnot()`. We can list as many requirements that should evaluate to `TRUE`;
+`stopifnot()` throws an error if it finds one that is `FALSE`. Listing these
+conditions also serves a secondary purpose as extra documentation for the
+function.
+
+Let's try out defensive programming with `stopifnot()` by adding assertions to
+check the input to our function `fahr_to_kelvin()`.
+
+We want to assert the following: `temp` is a numeric vector. We may do that like
+so:
+
+```{r}
+fahr_to_kelvin <- function(temp) {
+  stopifnot(is.numeric(temp))
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}
+```
+
+It still works when given proper input.
+
+```{r}
+# freezing point of water
+fahr_to_kelvin(temp = 32)
+```
+
+But fails instantly if given improper input.
+
+```{r}
+# Metric is a factor instead of numeric
+fahr_to_kelvin(temp = as.factor(32))
+```
+
+> ## Challenge 3
+>
+> Use defensive programming to ensure that our `fahr_to_celsius()` function
+> throws an error immediately if the argument `temp` is specified
+> inappropriately.
+>
+>
+> > ## Solution to challenge 3
+> >
+> > Extend our previous definition of the function by adding in an explicit call
+> > to `stopifnot()`. Since `fahr_to_celsius()` is a composition of two other
+> > functions, checking inside here makes adding checks to the two component
+> > functions redundant.
+> >
+> >
+> > ```{r}
+> > fahr_to_celsius <- function(temp) {
+> >   stopifnot(is.numeric(temp))
+> >   temp_k <- fahr_to_kelvin(temp)
+> >   result <- kelvin_to_celsius(temp_k)
+> >   return(result)
+> > }
+> > ```
+> {: .solution}
+{: .challenge}
+
+## More on combining functions
+
+Now, we're going to define a function that calculates the Gross Domestic Product
+of a nation from the data available in our dataset:
+
+```{r}
+# Takes a dataset and multiplies the population column
+# with the GDP per capita column.
+calcGDP <- function(dat) {
+  gdp <- dat$pop * dat$gdpPercap
+  return(gdp)
+}
+```
+
+We define `calcGDP()` by assigning it to the output of `function`. The list of
+argument names are contained within parentheses. Next, the body of the function
+-- the statements executed when you call the function -- is contained within
+curly braces (`{}`).
+
+We've indented the statements in the body by two spaces. This makes the code
+easier to read but does not affect how it operates.
+
+When we call the function, the values we pass to it are assigned to the
+arguments, which become variables inside the body of the function.
+
+Inside the function, we use the `return()` function to send back the result.
+This `return()` function is optional: R will automatically return the results of
+whatever command is executed on the last line of the function.
+
+
+```{r}
+calcGDP(head(gapminder))
+```
+
+That's not very informative. Let's add some more arguments so we can extract
+that per year and country.
+
+```{r}
+# Takes a dataset and multiplies the population column
+# with the GDP per capita column.
+calcGDP <- function(dat, year=NULL, country=NULL) {
+  if(!is.null(year)) {
+    dat <- dat[dat$year %in% year, ]
+  }
+  if (!is.null(country)) {
+    dat <- dat[dat$country %in% country,]
+  }
+  gdp <- dat$pop * dat$gdpPercap
+
+  new <- cbind(dat, gdp=gdp)
+  return(new)
+}
+```
+
+If you've been writing these functions down into a separate R script
+(a good idea!), you can load in the functions into our R session by using the
+`source()` function:
+
+```{r, eval=FALSE}
+source("functions/functions-lesson.R")
+```
+
+Ok, so there's a lot going on in this function now. In plain English, the
+function now subsets the provided data by year if the year argument isn't empty,
+then subsets the result by country if the country argument isn't empty. Then it
+calculates the GDP for whatever subset emerges from the previous two steps. The
+function then adds the GDP as a new column to the subsetted data and returns
+this as the final result. You can see that the output is much more informative
+than a vector of numbers.
+
+Let's take a look at what happens when we specify the year:
+
+```{r}
+head(calcGDP(gapminder, year=2007))
+```
+
+Or for a specific country:
+
+```{r}
+calcGDP(gapminder, country="Australia")
+```
+
+Or both:
+
+```{r}
+calcGDP(gapminder, year=2007, country="Australia")
+```
+
+Let's walk through the body of the function:
+
+``` {r, eval=FALSE}
+calcGDP <- function(dat, year=NULL, country=NULL) {
+```
+
+Here we've added two arguments, `year`, and `country`. We've set
+*default arguments* for both as `NULL` using the `=` operator
+in the function definition. This means that those arguments will
+take on those values unless the user specifies otherwise.
+
+```{r, eval=FALSE}
+  if(!is.null(year)) {
+    dat <- dat[dat$year %in% year, ]
+  }
+  if (!is.null(country)) {
+    dat <- dat[dat$country %in% country,]
+  }
+```
+
+Here, we check whether each additional argument is set to `null`, and whenever
+they're not `null` overwrite the dataset stored in `dat` with a subset given by
+the non-`null` argument.
+
+Building these conditionals into the function makes it more flexible for later.
+Now, we can use it to calculate the GDP for:
+
+ * The whole dataset;
+ * A single year;
+ * A single country;
+ * A single combination of year and country.
+
+By using `%in%` instead, we can also give multiple years or countries to those
+arguments.
+
+> ## Tip: Pass by value
+>
+> Functions in R almost always make copies of the data to operate on
+> inside of a function body. When we modify `dat` inside the function
+> we are modifying the copy of the gapminder dataset stored in `dat`,
+> not the original variable we gave as the first argument.
+>
+> This is called "pass-by-value" and it makes writing code much safer:
+> you can always be sure that whatever changes you make within the
+> body of the function, stay inside the body of the function.
+{: .callout}
+
+> ## Tip: Function scope
+>
+> Another important concept is scoping: any variables (or functions!) you
+> create or modify inside the body of a function only exist for the lifetime
+> of the function's execution. When we call `calcGDP()`, the variables `dat`,
+> `gdp` and `new` only exist inside the body of the function. Even if we
+> have variables of the same name in our interactive R session, they are
+> not modified in any way when executing a function.
+{: .callout}
+
+```{r, eval=FALSE}
+  gdp <- dat$pop * dat$gdpPercap
+  new <- cbind(dat, gdp=gdp)
+  return(new)
+}
+```
+
+Finally, we calculated the GDP on our new subset, and created a new data frame
+with that column added. This means when we call the function later we can see
+the context for the returned GDP values, which is much better than in our first
+attempt where we got a vector of numbers.
+
+> ## Challenge 4
+>
+> Test out your GDP function by calculating the GDP for New Zealand in 1987. How
+> does this differ from New Zealand's GDP in 1952?
+>
+> > ## Solution to challenge 4
+> >
+> > ```{r, eval=FALSE}
+> >   calcGDP(gapminder, year = c(1952, 1987), country = "New Zealand")
+> > ```
+> > GDP for New Zealand in 1987: 65050008703
+> >
+> > GDP for New Zealand in 1952: 21058193787
+> {: .solution}
+{: .challenge}
+
+
+> ## Challenge 5
+>
+> The `paste()` function can be used to combine text together, e.g:
+>
+> ```{r}
+> best_practice <- c("Write", "programs", "for", "people", "not", "computers")
+> paste(best_practice, collapse=" ")
+> ```
+>
+>  Write a function called `fence()` that takes two vectors as arguments, called
+> `text` and `wrapper`, and prints out the text wrapped with the `wrapper`:
+>
+> ```{r, eval=FALSE}
+> fence(text=best_practice, wrapper="***")
+> ```
+>
+> *Note:* the `paste()` function has an argument called `sep`, which specifies
+> the separator between text. The default is a space: " ". The default for
+> `paste0()` is no space "".
+>
+> > ## Solution to challenge 5
+> >
+> >  Write a function called `fence()` that takes two vectors as arguments,
+> > called `text` and `wrapper`, and prints out the text wrapped with the
+> > `wrapper`:
+> >
+> > ```{r}
+> > fence <- function(text, wrapper){
+> >   text <- c(wrapper, text, wrapper)
+> >   result <- paste(text, collapse = " ")
+> >   return(result)
+> > }
+> > best_practice <- c("Write", "programs", "for", "people", "not", "computers")
+> > fence(text=best_practice, wrapper="***")
+> > ```
+> {: .solution}
+{: .challenge}
+
+
+
+
+
+
+### Packages are groups of functions
+
+Let's install the `neonUtilities` package and learn about some of its functions. We will be using this package at the end of this lesson to aquire data directly from NEON.
+
+Click the Install button. In the pop-up that appears, type `neonUtilities`. Do not change any of the other settings, then click Install.
+
 
 ```{r eval=FALSE}
 library(neonUtilities)
@@ -163,60 +856,18 @@ library(neonUtilities)
 :::
 
 
+#### What is a package made of?
 
-#### Getting Help with Packages
-
-Many packages come with "vignettes": tutorials and extended example documentation.
-Without any arguments, `vignette()` will list all vignettes for all installed packages;
-`vignette(package="package-name")` will list all available vignettes for
-`package-name`, and `vignette("vignette-name")` will open the specified vignette.
-
-If a package doesn't have any vignettes, you can usually find help by typing
-`help("package-name")`.
-
-RStudio also has a set of excellent
-[cheatsheets](https://rstudio.com/resources/cheatsheets/) for many packages.
+When you "install" a package, what actually happens on your computer? What happens when you "update" a package.
 
 
-#### When You Remember Part of the Function Name
+Find default package installation folder.
 
-If you're not sure what package a function is in or how it's specifically spelled, you can do a fuzzy search:
+Open neonUtilities folder - notice version number
 
-```{r, eval=FALSE}
-??function_name
-```
+Notice that functions are saved as scripts with function name.
 
-A fuzzy search is when you search for an approximate string match. For example, you may remember that the function 
-to set your working directory includes "set" in its name. You can do a fuzzy search to help you identify the function:
 
-```{r, eval=FALSE}
-??set
-```
-
-#### When You Have No Idea Where to Begin
-
-If you don't know what function or package you need to use
-[CRAN Task Views](http://cran.at.r-project.org/web/views)
-is a specially maintained list of packages grouped into
-fields. This can be a good starting point.
-
-#### When Your Code Doesn't Work: Seeking Help from Your Peers
-
-If you're having trouble using a function, 9 times out of 10,
-the answers you seek have already been answered on
-[Stack Overflow](http://stackoverflow.com/). You can search using
-the `[r]` tag. Please make sure to see their page on 
-[how to ask a good question.](https://stackoverflow.com/help/how-to-ask)
-
-If you can't find the answer, there are a few useful functions to
-help you ask your peers:
-
-```{r, eval=FALSE}
-?dput
-```
-
-Will dump the data you're working with into a format that can
-be copied and pasted by others into their own R session.
 
 ```{r}
 sessionInfo()
@@ -226,34 +877,27 @@ Will print out your current version of R, as well as any packages you
 have loaded. This can be useful for others to help reproduce and debug
 your issue.
 
+### Putting it all together
 
 
 
-### Section 3
+GOAL: update water temperature data using latest release from NEON.
 
-#### What are programs?
 
-Let's write a small program
+Convert temperature to fahrenheit.
 
-- Programs
-  - programs are files written in executable code
-  - we will learn to write small "programs" called "scripts"
-    - you can write programs to automate tasks
-    - you can write programs to make your scientific analyses reproducible
 
-Find the R program on your computer
 
-#### Separate function definition and application
+::: {.callout-tip}
+**Organizing your code**
 
 One of the more effective ways to work with R is to start by writing the code you want to run directly in a .R script, and then running the selected lines (either using the keyboard shortcuts in RStudio or clicking the "Run" button) in the interactive R console.
 
 When your project is in its early stages, the initial .R script file usually contains many lines
 of directly executed code. As it matures, reusable chunks get pulled into their
-own functions. It's a good idea to separate these functions into two separate folders; one
-to store useful functions that you'll reuse across analyses and projects, and
-one to store the analysis scripts.
+own functions that are saved as separate code scripts. It's a good idea to separate these code scripts into two separate folders; one to store useful functions that you'll reuse across analyses and projects, and one to store the functions and analyses that are specific to a particular project.
 
-
+:::
 
 
 
@@ -262,21 +906,67 @@ one to store the analysis scripts.
 ## Exercises
 
 After completing these exercises, learners will be able to 
-`r get_LO(as.numeric(chp_num), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
 
 
-Number all exercises using the module number. Include starter code in the /exercises folder if appropriate.
+functions	1	define and use a function with multiple arguments in R	
+functions	2	define default values for function arguments in R	
+functions	3	write checks on argument conditions within a function in R	
+functions	4	differentiate between missing values (`NA`) and empty values (`NULL`) in R	
+functions	5	use R to source code from a script
 
-`r chp_num`.1 
+**`r .chp_num`.1** 
 
-`r chp_num`.2 
+**`r .chp_num`.2** 
 
 
 
 ## Sources and Resources
 
-This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episode 2 and XXXXXXX by Jes Coyle.
+This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 2, 9 and 10 by Jes Coyle.
+
 
 ### Additional Resources
 
 ### Cited References
+
+::: {#refs}
+:::
+
+
+
+::: {.challenge}
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+
+
+Callouts are formatted in the style.css file.
+
+::: {.callout-trick}
+
+:::
+
+
+::: {.callout-tip}
+
+:::
+
+::: {.callout-important}
+
+:::
+
+
+
+
+
