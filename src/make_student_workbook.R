@@ -30,4 +30,8 @@ zip(paste0(project_name, ".zip"), files = project_name,
     root = "workbook",
     mode = "mirror")
 
+# Zip the exercises into a separate directory
+zip("exercises.zip", files = file.path(project_name, "exercises"),
+    root = "workbook",
+    mode = "mirror")
 

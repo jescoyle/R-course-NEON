@@ -34,9 +34,7 @@ navbar:
           href: chp-ggplot2-part2.html
         - text: 9. Tidy data
           href: chp-tidyverse-basics.html
-    - text: "Exercises"
-      href: exercises-guide.html
-    - text: "RStudio Workbook"
+    - text: "RStudio Workbook & Exercises"
       href: download-student-RStudio-project.html
 output:
   html_document:
