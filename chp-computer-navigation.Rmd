@@ -350,8 +350,16 @@ What else can the `rm` command do? Are there any other options? If you're intere
 rm --help
 ```
 
+Note: if you are using a Mac, you may need to use the `man` (for "manual") command instead if you get an error about `--help` not being a recognized option.
+
+```{sh eval = FALSE}
+man rm
+```
+
 
 We see a table of the different options and then at the end tells us: "By default, rm does not remove directories. Use the --recursive (-r or -R) option to remove each listed directory, too, along with all of its contents."
+
+If you used the `man` command to view the help file, you need to exit this view in the Terminal by pressing <kbd>q</kbd>.
 
 Now let's copy the exercises for lesson 1 into exercises/working. The command to copy a file is `cp SOURCE DEST`, where we replace `SOURCE` with the name(s) of the files to copy and `DEST` with the name of the directory to copy them into.
 
@@ -378,36 +386,45 @@ ls
 
 <br>
 
-When the list of files prints, you will see that each exercises is named according to its number. All of the exercises for lesson 1 start with 1.
+When the list of files prints, you will see that the exercises are organized into folders according to the chapter (e.g. 01, 02, 03, etc). Inside each folder, each exercises is named according to its number. All of the exercises for lesson 1 start with 1.
 
-Let's copy one of the files from the exercises folder into the working subfolder. Note that this code assumes you are in the main R-course-NEON-workbook folder.
+Let's copy one of the files from the exercises folder into the working subfolder. Note that this code assumes you are in the main R-course-NEON-workbook folder. 
 
 ```{sh}
-cp exercises/1.1.txt exercises/working/
+cp exercises/01/1.1.txt exercises/working/
 
 ```
 
-Notice the `/` at the end of the name of the folder. If we had typed `cp 1.1.txt exercises/working`, it would have copied 1.1.txt into a new file named exercises and overwritten the folder named exercises.
+If you get an error about a file not found, use `pwd` to check your current working directory.
 
-Use the Files window in RStudio to check to see that this worked. There should now be a file named 1.1.txt inside the working subfolder of the exercises folder.
+Notice the `/` at the end of the name of the folder. If we had typed `cp exercises/01/1.1.txt exercises/working`, it would have copied 1.1.txt into a new file named exercises and overwritten the folder named exercises.
+
+Use the Files window in RStudio to check to see that this worked. There should now be a file named 1.1.txt inside the `working` subfolder of the `exercises` folder.
 
 The real power of the terminal is that it lets us work with many files at once, instead of copying them one at a time. Let's copy all of the exercise files for lesson 1 into the working folder.
 
 We will use a **wildcard** to select only the files that begin with the number 1. The `*` symbol is used to match any character. `ls 1.*` would list all files that begin with 1. inside the current working directory. 
 
-First let's move into tho exercises folder so that we don't need to include the exercises folder in the command. Then, list all files that begin with 1.
+First let's move into the exercises folder so that we don't need to include the exercises folder in the command. Then, list all files in the `01` folder that begin with 1.
 ```{sh}
 cd exercises
 
-ls 1.*
+ls 01/1.*
 ```
 
-Wildcards can be used with other commands and allow us to copy and move a set of files that match a particular naming pattern. 
+Wildcards can be used with other commands and allow us to copy and move a set of files that match a particular naming pattern. We can also use a wildcard to specify all files in a folder:
+
+```{sh}
+ls 01/*
+
+```
 
 ::: {.challenge}
 1. Use the terminal to check your current working directory and navigate to the exercises folder (if needed).
-2. List the files for exercises in lesson 1 (these begin with 1.).
+2. List the files for exercises in lesson 1 (these are in the 01 folder).
 3. Copy these files into the working folder inside the exercises folder.
+4. Repeat step 3 for all of the exercises for chapter 2.
+5. List all of the files in the working folder. Then just list the ones from chapter 1 (these begin with 1.)
 
 <details><summary>**Solution:**</summary>
 ::: {.solution}
@@ -417,9 +434,15 @@ pwd
 
 cd exercises
 
-ls 1.*
+ls 01/1.*
 
-cp 1.* working/
+cp 01/* working/ 
+
+cp 02/* working/
+
+ls working
+
+ls working/1.*
 
 ```
 :::

@@ -15,9 +15,7 @@ navbar:
         - text: Chapter overview
           href: 00-module-contents.html
         chapters_menu
-    - text: "Exercises"
-      href: exercises-guide.html
-    - text: "RStudio Workbook"
+    - text: "RStudio Workbook & Exercises"
       href: download-student-RStudio-project.html
 output:
   html_document:

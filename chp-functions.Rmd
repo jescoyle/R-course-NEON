@@ -351,6 +351,12 @@ sum(1/(1:n)^2)
 
 <!-- WORKING HERE -->
 
+FUNCTION TO MAKE:
+
+A tail function that gets the last n rows of a data frame
+A function that calculated uncertainty intervals from a median and expected uncertainty
+A function that calculated population growth
+
 
 
 > ## Tip: Operations on vectors of unequal length

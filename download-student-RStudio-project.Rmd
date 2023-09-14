@@ -10,3 +10,7 @@ This page describes the contents of the RStudio project folder that can be downl
 
 
 [Download the student workbook](workbook/R-course-NEON-workbook.zip)
+
+You can also just download a zipped folder containing all of the exercises:
+
+[Download the exercise files](workbook/exercises.zip)

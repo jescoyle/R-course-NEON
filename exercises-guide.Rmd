@@ -12,14 +12,16 @@ source("src/setup.R")
 
 ```
 
-This page provides links to download a zipped folder of all exercise files. This is a useful way to access individual exercise files if you need to add them to the student workbook RStudio project.
+This page provides links to all exercise files. This is a useful way to access individual exercise files if you need to add them to the student workbook RStudio project.
 
-Chp. 1. `r .get_chpName(1, type.to = "nameLong")` exercises are [here](exercises/01/).
+NOTE: THE FOLLOWING LINKS DO NOT WORK YET. If you need the exercises files, download the workbook again.
 
-Chp. 2. `r .get_chpName(2, type.to = "nameLong")` exercises are [here](exercises/02/).
+Chp. 1. `r .get_chpName(1, type.to = "nameLong")` exercises are [here](exercises/01).
 
-Chp. 3. `r .get_chpName(1, type.to = "nameLong")` exercises are [here](exercises/03/).
+Chp. 2. `r .get_chpName(2, type.to = "nameLong")` exercises are [here](exercises/02).
 
-Chp. 4. `r .get_chpName(1, type.to = "nameLong")` exercises are [here](exercises/04/).
+Chp. 3. `r .get_chpName(1, type.to = "nameLong")` exercises are [here](exercises/03).
+
+Chp. 4. `r .get_chpName(1, type.to = "nameLong")` exercises are [here](exercises/04).
 
 
