@@ -38,7 +38,7 @@ Brief description of the contents of this lesson.
 
 
 In this lesson 
-`r .get_LO(as.numeric(.chp_num), .LOtable, prefix = TRUE)`
+`r .get_LO(.chp, .LOtable, prefix = TRUE)`
 
 #### Key Terms & Commands
 

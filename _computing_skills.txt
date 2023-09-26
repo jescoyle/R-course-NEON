@@ -22,9 +22,7 @@ data-structures	6	view the structure and class of an object in R
 data-structures	7	"write logical test expressions using `==`,`!=`, `>`, `<`, and `%in%` "	
 functions	1	define and use a function with multiple arguments in R	
 functions	2	define default values for function arguments in R	
-functions	3	write checks on argument conditions within a function in R	
-functions	4	differentiate between missing values (`NA`) and empty values (`NULL`) in R	
-functions	5	use R to source code from a script	
+functions	3	use R to source code from a script	
 ggplot2-part1	1	create a scatter plot with a linear regression line	use the ggplot2 package in R to
 ggplot2-part1	2	create a line graph	use the ggplot2 package in R to
 ggplot2-part1	3	create a bar chart with error bars	use the ggplot2 package in R to
@@ -35,6 +33,7 @@ ggplot2-part1	7	export graphs to a vector-format image with specific dimensions	
 program-flow	1	execute if-else statements	use R to
 program-flow	2	repeat steps using `for` and `while` loops	use R to
 program-flow	3	evaluate expressions using `&` ('and') and `|` ('or')	use R to
+program-flow  4 write checks on argument conditions within a function in R
 ggplot2-part2	1	display data in separate panels of a graph using facets	use the ggplot2 package in R to
 ggplot2-part2	2	add multiple data layers to a plot and change the order in which they are layered	use the ggplot2 package in R to
 ggplot2-part2	3	"change the scale, limits and breaks on an axis"	use the ggplot2 package in R to

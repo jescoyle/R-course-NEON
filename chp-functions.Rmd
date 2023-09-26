@@ -2,7 +2,6 @@
 title:  
 output:
   html_document:
-    code_folding: show
     toc: false
 bibliography: references.bib
 ---
@@ -23,9 +22,12 @@ source("src/knit-options.R")
 
 # Silently set seed for random number generation, so we don't have to explain it
 set.seed(10)
+
+# Load neonUtilities
+library(neonUtilities)
 ```
 
-# Chapter `r .chp_num`. `r get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
+# Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
 ## Overview 
 
@@ -42,38 +44,66 @@ several operations with a single command.
 ### What we will learn
 
 In this lesson 
-`r .get_LO(as.numeric(.chp_num), .LOtable, prefix = TRUE)`
+`r .get_LO(.chp, .LOtable, prefix = TRUE)`
 
 #### Key Terms & Commands
 
 * function name, body and arguments
-* 
+* default values
+* vectorized
+* element-wise vs. matrix multiplication
+* vector recycling
+
 
 
 ### Prerequisites
 
-Before beginning this lesson you should have completed the lessons [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) and any prerequisites therein.
+Before beginning this lesson you should have completed the lesson [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) and any prerequisites therein.
 
 Before you begin:
 
 1. Open the R-course-NEON-workbook RStudio project.
 2. Create a new R script named `r paste0("lesson_", .chp_str, "_code.R")` in the lesson-code folder of the student workbook.
-3. Whenever you see a box 
+3. Whenever you see R code like this:
+
+```{r eval = FALSE}
+Type (or copy) this into your R script. Then run it in the Console.
+
+```
+
+4. Whenever you see a challenge like this:
 
 :::{.challenge}
+
+Try to solve the problem by writing R code into your script. Check your answer by clicking:
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
 ```{r eval = FALSE}
-Type this code into your R script.
+The code that solves the challenge will appear here.
 ```
+
+Along with an explanation.
+
 :::
-4. Be sure to click Save often to save your work.
+
+</details>
+
+:::
+
+<br>
+
+
+4. Be sure to click **Save** often to save your work.
 
 ## Lesson
 
 
 ### What is a function?
 
-Functions gather a sequence of operations into a whole, preserving it for
-ongoing use. Functions provide:
+Just like in mathematics, functions take an input and convert that input into a different output. In programming, we use functions because they can gather a sequence of operations into a whole, preserving it for ongoing use. Functions provide:
 
 * a name we can remember and invoke it by
 * relief from the need to remember the individual operations
@@ -109,18 +139,24 @@ Which of the functions above return an object? What type of object is returned?
 
 ::: {.solution}
 
-```{r eval = FALSE}
-sum(1:6) # returns a single number
+```{r}
+# returns a single number
+sum(1:6) 
 
-mean(1:10) # returns a single number
+# returns a single number
+mean(1:10) 
 
-c(2, 4, 6) # returns a vector
+# returns a vector
+c(2, 4, 6) 
 
-seq(2, 10, by = 2) # returns a vector
+# returns a vector
+seq(2, 10, by = 2) 
 
-tempdata <- read.csv("data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv") # returns a data frame (which we saved to a new object tempdata)
+# returns a data frame (which we saved to a new object tempdata)
+tempdata <- read.csv("data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv") 
 
-rm(tempdata) # does not return any object
+# does not return any object, but removes the object tempdata
+rm(tempdata) 
 
 ```
 
@@ -134,7 +170,7 @@ rm(tempdata) # does not return any object
 
 The help page of a function tells us what type of object a function should return and the names of the arguments it accepts. Let's read the help file for `read.csv()`.
 
-```{r}
+```{r eval = FALSE}
 
 ?read.csv
 
@@ -152,11 +188,11 @@ The Description field tells us that we should expect this function to create a d
 
 Farther down in the documentation, each of these arguments is described in detail. For example, the `quote` argument defines which quotation characters are used to denote text. For `read.table()`, both `"` and `'` are allowed, whereas for `read.csv()` only `"` is used. (The `\` character is used to "escape" the usual meaning of the `"` so that the `"` character itself can be specified inside a set of quotes: `" " "`.)
 
-In R, function arguments may be specified in any order, so long as the names of the arguments are used. if the argument names are not used, then the function arguments are assumed to be in the same order as shown on the help page. 
+In R, function arguments may be specified in any order, so long as the names of the arguments are used. If the argument names are not used, then the function arguments are assumed to be in the same order as shown on the help page. 
 
 
 ::: {.challenge}
-Open the help page for the function `rep()`.
+Open the help page for the function `rep()`. And these this infromation to answer the following:
 
 1. What arguments does this function take?
 2. What will be the output of each of the following:
@@ -174,6 +210,15 @@ rep(length.out = 4, x = 1:3)
 <details><summary>**Solution:**</summary>
 
 ::: {.solution}
+
+Use `?rep` to open the documentation page.
+
+The `rep()` function takes several arguments in this order:
+
+|       `x` = the vector of values to be repeated.
+|       `times` = a vector of integers giving the number of times to repeat each element of `x`
+|       `length.out` = an integer specifying the number of elements in the vector to be returned.
+|       `each` = an integer specifying the number of times to repeat each element of `x`
 
 ```{r}
 
@@ -196,7 +241,7 @@ rep(length.out = 4, x = 1:3)
 
 ### Vectorization
 
-Most of R's functions are vectorized, meaning that the function will operate on all elements of a vector without needing to loop through and act on each element one at a time. This makes writing code more concise, easy to read, and less error prone.
+Most of R's functions are vectorized, meaning that the function will operate on element of a vector (and return a vector of the same length). This makes writing code more concise, easy to read, and less error prone.
 
 You are actually already familiar with this behavior:
 
@@ -250,7 +295,7 @@ m * -1
 ```
 
 ::: {.callout-tip}
-Element-wise vs. matrix multiplication
+**Element-wise vs. matrix multiplication**
 
 The operator `*` gives you element-wise multiplication!
 To do real matrix multiplication, we need to use the `%*%` operator:
@@ -275,10 +320,15 @@ m
 
 Write down what you think will happen when you run:
 
-1. `m ^ -1`
-2. `m * c(1, 0, -1)`
-3. `m > c(0, 20)`
-4. `m * c(1, 0, -1, 2)`
+```{r eval = FALSE}
+m ^ -1
+
+m * c(1, 0, -1)
+
+m > c(0, 20)
+
+m * c(1, 0, -1, 2)
+```
 
 <details><summary>**Solution:**</summary>
 
@@ -286,17 +336,11 @@ Write down what you think will happen when you run:
 
 ```{r}
 m ^ -1
-```
 
-```{r}
 m * c(1, 0, -1)
-```
 
-```{r}
 m > c(0, 20)
-```
 
-```{r}
 m * c(1, 0, -1, 2)
 ```
 
@@ -318,7 +362,7 @@ We're interested in looking at the sum of the following sequence of fractions:
 x = 1/(1^2) + 1/(2^2) + 1/(3^2) + ... + 1/(n^2)
 ```
 
-This would be tedious to type out, and impossible for high values of n.  Use vectorisation to compute x when n=100. What is the sum when n=10,000?
+This would be tedious to type out, and impossible for high values of n.  Use vectorization to compute x when n=100. 
 
 <details><summary>**Solution:**</summary>
 
@@ -329,11 +373,8 @@ This would be tedious to type out, and impossible for high values of n.  Use vec
 # Sum of the inverse squares of the numbers from 1 to 100
 sum(1/(1:100)^2)
 
-# Sum of the inverse squares of the numbers from 1 to 10000
-sum(1/(1:1e04)^2)
-
+# Alternatively, for any n:
 # Sum of the inverse squares of the numbers from 1 to n
-
 n <- 10000
 sum(1/(1:n)^2)
 ```
@@ -348,52 +389,33 @@ sum(1/(1:n)^2)
 <br>
 
 
+::: {.callout-tip}
+**Operations on vectors of unequal length**
 
-<!-- WORKING HERE -->
+Operations can also be performed on vectors of unequal length, through a process known as **recycling**. This process automatically repeats the smaller vector until it matches the length of the larger vector. R will provide a warning if the larger vector is not a multiple of the smaller vector.
 
-FUNCTION TO MAKE:
+```{r}
+x <- c(1, 2, 3)
+y <- c(1, 2, 3, 4, 5, 6, 7)
+x + y
+```
 
-A tail function that gets the last n rows of a data frame
-A function that calculated uncertainty intervals from a median and expected uncertainty
-A function that calculated population growth
-
-
-
-> ## Tip: Operations on vectors of unequal length
->
-> Operations can also be performed on vectors of unequal length, through
-> a process known as *recycling*. This process automatically repeats the smaller vector 
-> until it matches the length of the larger vector. R will provide a warning
-> if the larger vector is not a multiple of the smaller vector.
->
-> ```{r}
-> x <- c(1, 2, 3)
-> y <- c(1, 2, 3, 4, 5, 6, 7)
-> x + y
-> ```
->
-> Vector `x` was recycled to match the length of vector `y`
-> 
-> ```{r, eval=FALSE}
-> x:  1  2  3  1  2  3  1
->     +  +  +  +  +  +  +
-> y:  1  2  3  4  5  6  7
-> -----------------------
->     2  4  6  5  7  9  8
-> ```
-{: .callout}
-
-
-
-
-
-
+Vector `x` was recycled to match the length of vector `y`
+ 
+```{r, eval=FALSE}
+ x:  1  2  3  1  2  3  1
+     +  +  +  +  +  +  +
+ y:  1  2  3  4  5  6  7
+ -----------------------
+     2  4  6  5  7  9  8
+```
+:::
 
 
 
 ### Writing your own functions
 
-As the basic building block of most programming languages, user-defined functions constitute "programming" as much as any single abstraction can. If you have written a function, you are a computer programmer.
+Functions and objects are the the basic building block of most programming languages, Therefore, if you have written a function, you are a computer programmer. Let's become programmers!
 
 Open a new R script file in the `src` directory of your `R-course-NEON-workbook` folder and call it `functions.R`. Recall that the `src` directory is typically used to save code scripts for analyses (if you don't have thie directory, create it). We will use this script to save functions that could be useful across several analyses.
 
@@ -423,529 +445,303 @@ We define `fahr_to_kelvin()` by assigning it to the output of `function`. The li
 
 It is useful to think of creating functions like writing a cookbook. First you define the "ingredients" that your function needs. In this case, we only need one ingredient to use our function: "temp". After we list our ingredients, we then say what we will do with them, in this case, we are taking our ingredient and applying a set of mathematical operators to it.
 
-When we call the function, the values we pass to it as arguments are assigned to
-those variables so that we can use them inside the function. Inside the
-function, we use a [return
-statement]({{ page.root }}/reference.html#return-statement) to send a result back to
-whoever asked for it.
+When we call the function, the values we pass to it are assigned to the arguments, which become variables inside the body of the function. We can then manipulate these variables inside the function. Inside the function, we use a return statement at the end to send a result back to the environment where the function was called. This `return()` function is optional in R (though not in most other programming languages). R will automatically return the results of whatever command is executed on the last line of the function.
 
-> ## Tip
->
-> One feature unique to R is that the return statement is not required.
-> R automatically returns whichever variable is on the last line of the body
-> of the function. But for clarity, we will explicitly define the
-> return statement.
-{: .callout}
+::: {.challenge}
+Which parts of the `fahr_to_kelvin()` function above are the **function name**, **arguments**, and **body**?
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+The function name is `fahr_to_kelvin`.
+
+The single argument is `temp`.
+
+The body is the code:
+
+```{r eval = FALSE}
+  # Calculate temp in kelvin
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  
+  # Return the value of kelvin
+  return(kelvin)
+
+
+```
+
+:::
+
+</details>
+
+:::
+
+<br>
 
 
 Let's try running our function.
 Calling our own function is no different from calling any other function:
 
 ```{r}
-# freezing point of water
+# Calculate the freezing point of water in kelvin
 fahr_to_kelvin(32)
 ```
 
 ```{r}
-# boiling point of water
+# Calculate the boiling point of water in kelvin
 fahr_to_kelvin(212)
 ```
 
+::: {.challenge}
 
+Write a function called `kelvin_to_celsius()` that takes a temperature in Kelvin and returns that temperature in Celsius.
 
- We can also obtain the same results using a function:
-> > ```{r}
-> > inverse_sum_of_squares <- function(n) {
-> >   sum(1/(1:n)^2)
-> > }
-> > inverse_sum_of_squares(100)
-> > inverse_sum_of_squares(10000)
-> > n <- 10000
-> > inverse_sum_of_squares(n)
-> > ```
+Hint: To convert from Kelvin to Celsius you subtract 273.15
 
+<details><summary>**Solution:**</summary>
 
-> ## Challenge 1
->
-> Write a function called `kelvin_to_celsius()` that takes a temperature in
-> Kelvin and returns that temperature in Celsius.
->
-> Hint: To convert from Kelvin to Celsius you subtract 273.15
->
-> > ## Solution to challenge 1
-> >
-> > Write a function called `kelvin_to_celsius` that takes a temperature in Kelvin
-> > and returns that temperature in Celsius
-> >
-> > ```{r}
-> > kelvin_to_celsius <- function(temp) {
-> >  celsius <- temp - 273.15
-> >  return(celsius)
-> > }
-> > ```
-> {: .solution}
-{: .challenge}
-
-## Combining functions
-
-The real power of functions comes from mixing, matching and combining them
-into ever-larger chunks to get the effect we want.
-
-Let's define two functions that will convert temperature from Fahrenheit to
-Kelvin, and Kelvin to Celsius:
+::: {.solution}
 
 ```{r}
-fahr_to_kelvin <- function(temp) {
-  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
-  return(kelvin)
-}
-
 kelvin_to_celsius <- function(temp) {
   celsius <- temp - 273.15
   return(celsius)
 }
 ```
 
-> ## Challenge 2
->
-> Define the function to convert directly from Fahrenheit to Celsius,
-> by reusing the two functions above (or using your own functions if you
-> prefer).
->
->
-> > ## Solution to challenge 2
-> >
-> > Define the function to convert directly from Fahrenheit to Celsius,
-> > by reusing these two functions above
-> >
-> >
-> > ```{r}
-> > fahr_to_celsius <- function(temp) {
-> >   temp_k <- fahr_to_kelvin(temp)
-> >   result <- kelvin_to_celsius(temp_k)
-> >   return(result)
-> > }
-> > ```
-> {: .solution}
-{: .challenge}
+:::
 
-## Interlude: Defensive Programming
-
-Now that we've begun to appreciate how writing functions provides an efficient
-way to make R code re-usable and modular, we should note that it is important
-to ensure that functions only work in their intended use-cases. Checking
-function parameters is related to the concept of _defensive programming_.
-Defensive programming encourages us to frequently check conditions and throw an
-error if something is wrong. These checks are referred to as assertion
-statements because we want to assert some condition is `TRUE` before proceeding.
-They make it easier to debug because they give us a better idea of where the
-errors originate.
-
-### Checking conditions with `stopifnot()`
-
-Let's start by re-examining `fahr_to_kelvin()`, our function for converting
-temperatures from Fahrenheit to Kelvin. It was defined like so:
-
-```{r}
-fahr_to_kelvin <- function(temp) {
-  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
-  return(kelvin)
-}
-```
-
-For this function to work as intended, the argument `temp` must be a `numeric`
-value; otherwise, the mathematical procedure for converting between the two
-temperature scales will not work. To create an error, we can use the function
-`stop()`. For example, since the argument `temp` must be a `numeric` vector, we
-could check for this condition with an `if` statement and throw an error if the
-condition was violated. We could augment our function above like so:
-
-```{r}
-fahr_to_kelvin <- function(temp) {
-  if (!is.numeric(temp)) {
-    stop("temp must be a numeric vector.")
-  }
-  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
-  return(kelvin)
-}
-```
-
-If we had multiple conditions or arguments to check, it would take many lines
-of code to check all of them. Luckily R provides the convenience function
-`stopifnot()`. We can list as many requirements that should evaluate to `TRUE`;
-`stopifnot()` throws an error if it finds one that is `FALSE`. Listing these
-conditions also serves a secondary purpose as extra documentation for the
-function.
-
-Let's try out defensive programming with `stopifnot()` by adding assertions to
-check the input to our function `fahr_to_kelvin()`.
-
-We want to assert the following: `temp` is a numeric vector. We may do that like
-so:
-
-```{r}
-fahr_to_kelvin <- function(temp) {
-  stopifnot(is.numeric(temp))
-  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
-  return(kelvin)
-}
-```
-
-It still works when given proper input.
-
-```{r}
-# freezing point of water
-fahr_to_kelvin(temp = 32)
-```
-
-But fails instantly if given improper input.
-
-```{r}
-# Metric is a factor instead of numeric
-fahr_to_kelvin(temp = as.factor(32))
-```
-
-> ## Challenge 3
->
-> Use defensive programming to ensure that our `fahr_to_celsius()` function
-> throws an error immediately if the argument `temp` is specified
-> inappropriately.
->
->
-> > ## Solution to challenge 3
-> >
-> > Extend our previous definition of the function by adding in an explicit call
-> > to `stopifnot()`. Since `fahr_to_celsius()` is a composition of two other
-> > functions, checking inside here makes adding checks to the two component
-> > functions redundant.
-> >
-> >
-> > ```{r}
-> > fahr_to_celsius <- function(temp) {
-> >   stopifnot(is.numeric(temp))
-> >   temp_k <- fahr_to_kelvin(temp)
-> >   result <- kelvin_to_celsius(temp_k)
-> >   return(result)
-> > }
-> > ```
-> {: .solution}
-{: .challenge}
-
-## More on combining functions
-
-Now, we're going to define a function that calculates the Gross Domestic Product
-of a nation from the data available in our dataset:
-
-```{r}
-# Takes a dataset and multiplies the population column
-# with the GDP per capita column.
-calcGDP <- function(dat) {
-  gdp <- dat$pop * dat$gdpPercap
-  return(gdp)
-}
-```
-
-We define `calcGDP()` by assigning it to the output of `function`. The list of
-argument names are contained within parentheses. Next, the body of the function
--- the statements executed when you call the function -- is contained within
-curly braces (`{}`).
-
-We've indented the statements in the body by two spaces. This makes the code
-easier to read but does not affect how it operates.
-
-When we call the function, the values we pass to it are assigned to the
-arguments, which become variables inside the body of the function.
-
-Inside the function, we use the `return()` function to send back the result.
-This `return()` function is optional: R will automatically return the results of
-whatever command is executed on the last line of the function.
-
-
-```{r}
-calcGDP(head(gapminder))
-```
-
-That's not very informative. Let's add some more arguments so we can extract
-that per year and country.
-
-```{r}
-# Takes a dataset and multiplies the population column
-# with the GDP per capita column.
-calcGDP <- function(dat, year=NULL, country=NULL) {
-  if(!is.null(year)) {
-    dat <- dat[dat$year %in% year, ]
-  }
-  if (!is.null(country)) {
-    dat <- dat[dat$country %in% country,]
-  }
-  gdp <- dat$pop * dat$gdpPercap
-
-  new <- cbind(dat, gdp=gdp)
-  return(new)
-}
-```
-
-If you've been writing these functions down into a separate R script
-(a good idea!), you can load in the functions into our R session by using the
-`source()` function:
-
-```{r, eval=FALSE}
-source("functions/functions-lesson.R")
-```
-
-Ok, so there's a lot going on in this function now. In plain English, the
-function now subsets the provided data by year if the year argument isn't empty,
-then subsets the result by country if the country argument isn't empty. Then it
-calculates the GDP for whatever subset emerges from the previous two steps. The
-function then adds the GDP as a new column to the subsetted data and returns
-this as the final result. You can see that the output is much more informative
-than a vector of numbers.
-
-Let's take a look at what happens when we specify the year:
-
-```{r}
-head(calcGDP(gapminder, year=2007))
-```
-
-Or for a specific country:
-
-```{r}
-calcGDP(gapminder, country="Australia")
-```
-
-Or both:
-
-```{r}
-calcGDP(gapminder, year=2007, country="Australia")
-```
-
-Let's walk through the body of the function:
-
-``` {r, eval=FALSE}
-calcGDP <- function(dat, year=NULL, country=NULL) {
-```
-
-Here we've added two arguments, `year`, and `country`. We've set
-*default arguments* for both as `NULL` using the `=` operator
-in the function definition. This means that those arguments will
-take on those values unless the user specifies otherwise.
-
-```{r, eval=FALSE}
-  if(!is.null(year)) {
-    dat <- dat[dat$year %in% year, ]
-  }
-  if (!is.null(country)) {
-    dat <- dat[dat$country %in% country,]
-  }
-```
-
-Here, we check whether each additional argument is set to `null`, and whenever
-they're not `null` overwrite the dataset stored in `dat` with a subset given by
-the non-`null` argument.
-
-Building these conditionals into the function makes it more flexible for later.
-Now, we can use it to calculate the GDP for:
-
- * The whole dataset;
- * A single year;
- * A single country;
- * A single combination of year and country.
-
-By using `%in%` instead, we can also give multiple years or countries to those
-arguments.
-
-> ## Tip: Pass by value
->
-> Functions in R almost always make copies of the data to operate on
-> inside of a function body. When we modify `dat` inside the function
-> we are modifying the copy of the gapminder dataset stored in `dat`,
-> not the original variable we gave as the first argument.
->
-> This is called "pass-by-value" and it makes writing code much safer:
-> you can always be sure that whatever changes you make within the
-> body of the function, stay inside the body of the function.
-{: .callout}
-
-> ## Tip: Function scope
->
-> Another important concept is scoping: any variables (or functions!) you
-> create or modify inside the body of a function only exist for the lifetime
-> of the function's execution. When we call `calcGDP()`, the variables `dat`,
-> `gdp` and `new` only exist inside the body of the function. Even if we
-> have variables of the same name in our interactive R session, they are
-> not modified in any way when executing a function.
-{: .callout}
-
-```{r, eval=FALSE}
-  gdp <- dat$pop * dat$gdpPercap
-  new <- cbind(dat, gdp=gdp)
-  return(new)
-}
-```
-
-Finally, we calculated the GDP on our new subset, and created a new data frame
-with that column added. This means when we call the function later we can see
-the context for the returned GDP values, which is much better than in our first
-attempt where we got a vector of numbers.
-
-> ## Challenge 4
->
-> Test out your GDP function by calculating the GDP for New Zealand in 1987. How
-> does this differ from New Zealand's GDP in 1952?
->
-> > ## Solution to challenge 4
-> >
-> > ```{r, eval=FALSE}
-> >   calcGDP(gapminder, year = c(1952, 1987), country = "New Zealand")
-> > ```
-> > GDP for New Zealand in 1987: 65050008703
-> >
-> > GDP for New Zealand in 1952: 21058193787
-> {: .solution}
-{: .challenge}
-
-
-> ## Challenge 5
->
-> The `paste()` function can be used to combine text together, e.g:
->
-> ```{r}
-> best_practice <- c("Write", "programs", "for", "people", "not", "computers")
-> paste(best_practice, collapse=" ")
-> ```
->
->  Write a function called `fence()` that takes two vectors as arguments, called
-> `text` and `wrapper`, and prints out the text wrapped with the `wrapper`:
->
-> ```{r, eval=FALSE}
-> fence(text=best_practice, wrapper="***")
-> ```
->
-> *Note:* the `paste()` function has an argument called `sep`, which specifies
-> the separator between text. The default is a space: " ". The default for
-> `paste0()` is no space "".
->
-> > ## Solution to challenge 5
-> >
-> >  Write a function called `fence()` that takes two vectors as arguments,
-> > called `text` and `wrapper`, and prints out the text wrapped with the
-> > `wrapper`:
-> >
-> > ```{r}
-> > fence <- function(text, wrapper){
-> >   text <- c(wrapper, text, wrapper)
-> >   result <- paste(text, collapse = " ")
-> >   return(result)
-> > }
-> > best_practice <- c("Write", "programs", "for", "people", "not", "computers")
-> > fence(text=best_practice, wrapper="***")
-> > ```
-> {: .solution}
-{: .challenge}
-
-
-
-
-
-
-### Packages are groups of functions
-
-Let's install the `neonUtilities` package and learn about some of its functions. We will be using this package at the end of this lesson to aquire data directly from NEON.
-
-Click the Install button. In the pop-up that appears, type `neonUtilities`. Do not change any of the other settings, then click Install.
-
-
-```{r eval=FALSE}
-library(neonUtilities)
-```
+</details>
 
 :::
 
-
-#### What is a package made of?
-
-When you "install" a package, what actually happens on your computer? What happens when you "update" a package.
+<br>
 
 
-Find default package installation folder.
-
-Open neonUtilities folder - notice version number
-
-Notice that functions are saved as scripts with function name.
-
-
+We can also define functions that perform operations on multiple arguments (separated by commas). Let's write a function that returns the upper and lower bounds of uncertainty around a given value.
 
 ```{r}
-sessionInfo()
+# A function that returns the lower and upper uncertainty bounds
+# around a given values as a 2-column matrix
+# Arguments:
+#   mu = a vector of values around which bounds should be calculated
+#   sigma = a vector containing the amount of uncertainty (in the same units as mu)
+
+calc_uncertainty <- function(mu, sigma) {
+  
+  # Calculate the upper bound
+  upper <- mu + sigma
+
+  # Calculate the lower bound
+  lower <- mu - sigma
+  
+  # Combine the bounds into a matrix
+  bounds <- cbind(lower, upper)
+  
+  # Return the matrix
+  return(bounds)
+}
+
 ```
 
-Will print out your current version of R, as well as any packages you
-have loaded. This can be useful for others to help reproduce and debug
-your issue.
-
-### Putting it all together
 
 
+Let's try out our function:
 
-GOAL: update water temperature data using latest release from NEON.
+```{r}
+calc_uncertainty(0, 2)
 
+calc_uncertainty(1:10, 0.5)
 
-Convert temperature to fahrenheit.
+calc_uncertainty(1:10, 1:10)
 
-
-
-::: {.callout-tip}
-**Organizing your code**
-
-One of the more effective ways to work with R is to start by writing the code you want to run directly in a .R script, and then running the selected lines (either using the keyboard shortcuts in RStudio or clicking the "Run" button) in the interactive R console.
-
-When your project is in its early stages, the initial .R script file usually contains many lines
-of directly executed code. As it matures, reusable chunks get pulled into their
-own functions that are saved as separate code scripts. It's a good idea to separate these code scripts into two separate folders; one to store useful functions that you'll reuse across analyses and projects, and one to store the functions and analyses that are specific to a particular project.
-
-:::
-
-
-
-
-
-## Exercises
-
-After completing these exercises, learners will be able to 
-`r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
-
-
-functions	1	define and use a function with multiple arguments in R	
-functions	2	define default values for function arguments in R	
-functions	3	write checks on argument conditions within a function in R	
-functions	4	differentiate between missing values (`NA`) and empty values (`NULL`) in R	
-functions	5	use R to source code from a script
-
-**`r .chp_num`.1** 
-
-**`r .chp_num`.2** 
-
-
-
-## Sources and Resources
-
-This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 2, 9 and 10 by Jes Coyle.
-
-
-### Additional Resources
-
-### Cited References
-
-::: {#refs}
-:::
-
+```
 
 
 ::: {.challenge}
 
+Modify the `calc_uncertainty()` function so that it returns a three-column matrix that includes the central value (`mu`) in addition to the upper and lower bounds.
+
+
 <details><summary>**Solution:**</summary>
 
 ::: {.solution}
+
+We added `mu` to the line where we define the `bounds` object which is returned:
+
+```{r}
+# A function that returns the lower and upper uncertainty bounds
+# around a given values as a 3-column matrix
+# Arguments:
+#   mu = a vector of values around which bounds should be calculated
+#   sigma = a vector containing the amount of uncertainty (in the same units as mu)
+
+calc_uncertainty <- function(mu, sigma) {
+  
+  # Calculate the upper bound
+  upper <- mu + sigma
+
+  # Calculate the lower bound
+  lower <- mu - sigma
+  
+  # Combine the bounds into a matrix
+  bounds <- cbind(lower, mu, upper)
+  
+  # Return the matrix
+  return(bounds)
+}
+
+```
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+### Combining functions
+
+The real power of functions comes from mixing, matching and combining them into ever-larger chunks to get the effect we want.
+
+Let's write a function that will convert from Fahrenheit to Celcius using  the two functions that we already wrote for converting Fahrenheit to Kelvin (`fahr_to_kelvin`) and Kelvin to Celsius (`kelvin_to_celcius`, see challenge above)
+
+```{r}
+fahr_to_celsius <- function(temp) {
+  
+  temp_k <- fahr_to_kelvin(temp)
+  temp_c <- kelvin_to_celsius(temp_k)
+
+  return(temp_c)
+}
+
+```
+
+::: {.challenge}
+
+Verify that our new function works by calculating the freezing and boiling points of water in Celcius.
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+```{r}
+
+# Freezing point of water
+fahr_to_celsius(32)
+
+# Boiling point of water
+fahr_to_celsius(212)
+
+```
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+### Default values
+
+Sometimes it is useful to provide default values for some of a functions arguments. These are the values that the function will use if the user does not specify a value for the argument.
+
+For example, look what happens if we call `calc_uncertainty()` without specifying `sigma`:
+
+```{r error = TRUE}
+calc_uncertainty(0)
+
+```
+
+Let's add a default value of `0` for sigma.
+
+```{r}
+# A function that returns the lower and upper uncertainty bounds
+# around a given values as a 2-column matrix
+# Arguments:
+#   mu = a vector of values around which bounds should be calculated
+#   sigma = a vector containing the amount of uncertainty (in the same units as mu)
+
+calc_uncertainty <- function(mu, sigma = 0) {
+  
+  # Calculate the upper bound
+  upper <- mu + sigma
+
+  # Calculate the lower bound
+  lower <- mu - sigma
+  
+  # Combine the bounds into a matrix
+  bounds <- cbind(lower, upper)
+  
+  # Return the matrix
+  return(bounds)
+}
+```
+
+Now let's test it:
+
+```{r}
+calc_uncertainty(1:5)
+
+```
+
+::: {.challenge}
+
+What happens when you specify `NA` or `NULL` as a default value?
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+Let's try it with the `calc_uncertainty()` function:
+
+```{r}
+calc_uncertainty_NULL <- function(mu, sigma = NULL) {
+  
+  # Calculate the upper bound
+  upper <- mu + sigma
+
+  # Calculate the lower bound
+  lower <- mu - sigma
+  
+  # Combine the bounds into a matrix
+  bounds <- cbind(lower, upper)
+  
+  # Return the matrix
+  return(bounds)
+}
+
+calc_uncertainty_NA <- function(mu, sigma = NA) {
+  
+  # Calculate the upper bound
+  upper <- mu + sigma
+
+  # Calculate the lower bound
+  lower <- mu - sigma
+  
+  # Combine the bounds into a matrix
+  bounds <- cbind(lower, upper)
+  
+  # Return the matrix
+  return(bounds)
+}
+
+```
+
+```{r}
+calc_uncertainty_NA(1:5)
+```
+
+Recall that `NA` is a special placeholder value that means that data is missing. Thus, arithmetic with `NA` will by default give a `NA` result. 
+
+```{r}
+calc_uncertainty_NULL(1:5)
+
+```
+
+`NULL` is a special value that means something does not exist. When we try to add `NULL` to `mu`, we get an empty matrix.
 
 :::
 
@@ -957,21 +753,558 @@ This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.gith
 
 
 
-Callouts are formatted in the style.css file.
+### Putting it all together
 
-::: {.callout-trick}
+Let's install the `neonUtilities` package and learn about some of its functions. We will be using this package to acquire data directly from NEON. Type the following in the Console:
+
+```{r eval=FALSE}
+install.packages("neonUtilities")
+
+library(neonUtilities)
+```
+
+Note that you only need to install the package once, but you will need to use `library()` to load the package every time you want to use it in a new R session.
+
+
+We're going to download the recent temperature data from the Teakettle Creek site in the Sierra Nevada mountains and the Sycamore Creek site in Arizona. The function `loadByProduct()` from the `neonUtilities` package is the main function for accessing NEON data in R. Let's take a look at the documentation for this function before using it:
+
+```{r eval = FALSE}
+?loadByProduct
+
+```
+
+At a minimum we must specify a data product ID (`dpID` argument), which we can get by browsing the [NEON Data Portal](https://data.neonscience.org/data-products/explore). Data product id numbers all begin with DP1. We must also specify start and end dates. If we only want certain sites, we need to specify the four-letter codes that identify each site.
+
+```{r eval = FALSE}
+
+# Define dates for download
+startdate <- "2022-09-01"
+enddate <- "2023-08-31"
+
+# Define the sites to download 
+sites <- c("TECR", "SYCA") # Teakettle Creek and Sycamore Creek
+
+# Define the data product
+dpID <- "DP1.20053.001"  # Surface water temperature
+
+# Temperature in surface water
+watertemp <- loadByProduct(dpID = dpID,
+                           site = sites,
+                           startdate = startdate,
+                           enddate = enddate)
+
+```
+You will need to allow the data to download by typing `y` in the Console when prompted.
+
+```{r include = FALSE}
+# Load previously downloaded object
+load("src/chp-functions_watertemp.RData")
+```
+
+You should now have a new object named `watertemp` in the Environment panel. It should be a list with nine elements. Let's examine its structure using the Environment panel. Click on the blue arrow next to `watertemp` to see what is contained in each of the nine elements.
+
+Alternatively you can see the names of each of these elements using:
+
+```{r}
+names(watertemp)
+```
+Most of these objects are data frames. Some contain metadata that describe variables and collection methods (`categoricalCodes_200531`, `issueLog_20053`, `science_review_flags_20053`, `sensor_positions_20053`, `variables_20053`) and two of the tables contain actual measurements (`TSW_30min` and `TSW_5min`). When working with a new data set, it is always a good idea to read the documentation before you get started. Documentation for these data can be found on [this webpage](https://data.neonscience.org/data-products/DP1.20053.001).
+
+We're going to use the `TSW_30min` table, which contains 30-minute average temperature readings. Let's save this as a separate dataframe to make it easier to work with. Remember that we use `$` to access a named element of a list.
+
+```{r}
+# Extract the temperature data from watertemp list
+TSW_30min <- watertemp$TSW_30min
+
+```
+
+Let's take a look at these data:
+
+```{r}
+# Show the first few rows
+head(TSW_30min)
+
+```
+
+It appears that each row corresponds to a temperature average between two time points (`startDateTime` and `endDateTime`) taken by a sensor at a particular location (given by the horizontal and vertical positions). From the documentation, we can learn that for these stream sites, there are two sensor locations- one upstream (`horizontalPosition` = 101 or 111) and one downstream (`horizontalPosition` = 102 or 112). There should not be any variation in the vertical position for surface water measurements.  We can verify this by tabulating the data:
+
+```{r}
+# How many unique values of horizontal and vertical position are there?
+table(TSW_30min$horizontalPosition)
+table(TSW_30min$verticalPosition)
+```
+
+
+::: {.challenge}
+Use the `table()` function to determine how many measurements there are in these data from each NEON site.
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+```{r }
+table(TSW_30min$siteID)
+```
 
 :::
 
-
-::: {.callout-tip}
+</details>
 
 :::
+
+<br>
+
+The actual temperature values are in the `surfwaterTemp` columns in degrees Celsius. Mean, minimum, and maximum values during each time period are provided. The data also include a `finalQF` column which is a "quality flag" that indicates whether the data should be used. A value of `0` in this column show that the data passed all quality control procedures.
+
+Our goal is to write a function that will calculate the average monthly surface water temperature across both sensors at a particular site in a given month. We also want our function to screen out any erroneous data (indicated by the `finalQF` column) and to be able to handle missing data appropriately.
+
+When starting a programming project, the first step is to use comments to outline what we are trying to accomplish. This may change as we work, but it can help to get a "road map" in a script first. Since we are writing a function, know that it will need a name, body and arguments, which we can put into this initial outline.
+
+```{r}
+# A function that calculates average monthly temperature
+# for each sensor at a NEON site from a dataframe of temperature
+# measurements.
+# Arguments:
+#   dat = a dataframe containing the columns we need (TBD)
+#   site = the NEON site code for the site of interest
+#   month = the month to calculate average temperature over
+#   na.rm = indicates whether NA values should be removed prior to calculation
+calc_monthly_avg <- function(dat, site, month, na.rm) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+
+  
+  # Subset the data frame to only contain observations from site
+
+  
+  
+  # Subset the data frame to only contain observations from month
+  
+  
+  # Calculate the average of the surfWaterTempMean column
+  
+  
+  
+  # Return the calculated value
+  
+}
+```
+
+Now let's start filling in the outline. You may want to revisit the [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) lesson to recall how to subset rows of a data frame based on values in its columns. We will use that to subset `dat` to only contain rows where the `finalQF` value is `0` and where the `siteID` column matches the value in the `site` argument. 
+
+```{r}
+calc_monthly_avg <- function(dat, site, month, na.rm) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+  
+
+  # Calculate the average of the surfWaterTempMean column
+  
+  
+  
+  # Return the calculated value
+  
+}
+```
+
+Note that as we progress through the function, the number of rows in `keep_dat` will keep decreasing because we are reassigning `keep_dat` back to itself after each subseting operation. 
 
 ::: {.callout-important}
 
+**What's going on inside a function?**
+
+Functions in R almost always make copies of the data to operate on inside of a function body. When we modify `dat` inside the function we are modifying the copy of dataset supplies as `dat`, not the original variable we gave as the first argument.
+
+This is called "pass-by-value" and it makes writing code much safer: you can always be sure that whatever changes you make within the body of the function, stay inside the body of the function.
+
+Another important concept is scoping: any variables (or functions!) you create or modify inside the body of a function only exist for the lifetime of the function's execution. When we call `calc_monthly_avg()`, the variables `dat`, `site`, `month` and `na.rm` only exist inside the body of the function. Even if we have variables of the same name in our interactive R session, they are not modified in any way when executing a function.
 :::
 
+Let's keep building our function. The next step is to determine the month when each observation was collected. Recall that the `lubridate` package contains useful functions for working with dates and times (see [`r .get_chpName("intro-to-R", type.from = "chp")`](intro-to-R.html)). The `ymd_hms()` function will convert the characters in the `startDateTime` column to dates. We can then use the `months()` function to extract a numeric month. 
+
+However, we want our function to work even if the user hasn't loaded the `lubridate` package. In R, you can use a function from a package without loading the package first if you specify the name of the package before the name of the function as follows: `lubridate::ymd_hms()`. Then, so long as the user has the `lubridate` package installed, they can use our function.
+
+Here's our function so far:
+
+```{r}
+calc_monthly_avg <- function(dat, site, month, na.rm) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+    # convert character to date
+    keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
+  
+    # extract month as a numeric value
+    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+    
+    # subset based on month
+    keep_dat <- subset(keep_dat, startMonth == month)
+
+  # Calculate the average of the surfWaterTempMean column
+  
+ 
+  # Return the calculated value
+  
+}
+```
+
+The last step is to calculate the average of the column in `keep_dat` that contains the mean surface water temperature measurements. We will do this using the `mean()` function and specify that the `na.rm` argument should take on the value specified in `na.rm`.
+
+```{r}
+calc_monthly_avg <- function(dat, site, month, na.rm) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+    # convert character to date
+    keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
+  
+    # extract month as a numeric value
+    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+    
+    # subset based on month
+    keep_dat <- subset(keep_dat, startMonth == month)
+
+  # Calculate the average of the surfWaterTempMean column
+    # use the na.rm value provided by the user of the function
+  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
+ 
+  # Return the calculated value
+  return(vals)
+}
+```
+
+Let's try out the function:
+
+```{r, error = TRUE}
+# Calculate monthly mean water temperature at Sycamore Creek in August
+calc_monthly_avg(TSW_30min, site = "SYCA", month = 8)
+```
+
+Oops! Why are we getting this error message? If we read carefully we can see that we failed to specify a value for the `na.rm` argument. Perhaps it would be a good idea to give the function a default value for this argument so that we can use it without specifying `na.rm` every time.
+
+
+::: {.challenge}
+Modify the `calc_monthly_avg()` function so the default value of `na.rm` is `TRUE`.
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+We only need to change the first line where the arguments are defined.
+
+```{r}
+calc_monthly_avg <- function(dat, site, month, na.rm = TRUE) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+    # convert character to date
+    keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
+  
+    # extract month as a numeric value
+    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+    
+    # subset based on month
+    keep_dat <- subset(keep_dat, startMonth == month)
+
+  # Calculate the average of the surfWaterTempMean column
+  # use the na.rm value provided by the user of the function
+  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
+ 
+  # Return the calculated value
+  return(vals)
+}
+```
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+
+Our final function assumes that `dat` has very specific column names and it would be a good idea to specify the columns we used in the documentation comment at the top of the function. 
+
+::: {.challenge}
+
+Which column names must be present in the dataframe passed to `dat` in order for the function to work correctly? 
+
+Write a comment at the top of the function that describes the columns names required by this function in the documentation of the `dat` argument.
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+`dat` must contain columns named: `finalQF`, `siteID`, `startDateTime` and `surfWaterTempMean`.
+
+In informative comment for this function could look like:
+
+```{r}
+# A function that calculates average monthly temperature
+# for each sensor at a NEON site from a dataframe of temperature
+# measurements.
+# Arguments:
+#   dat = a dataframe containing the columns: 
+#         surfWaterTempMean, startDateTime, siteID, finalQF
+#   site = the NEON site code for the site of interest
+#   month = the month to calculate average temperature over
+#   na.rm = indicates whether NA values should be removed prior to calculation
+
+```
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+
+### Organizing your code and functions
+
+Now that we have a final working version of the function, let's get organized:
+
+::: {.callout-tip}
+**Separate functions from analyses**
+
+One of the more effective ways to work with R is to start by writing the code you want to run directly in a .R script, and then running the selected lines (either using the keyboard shortcuts in RStudio or clicking the "Run" button) in the interactive R console.
+
+When your project is in its early stages, the initial .R script file usually contains many lines of directly executed code. As it matures, reusable chunks get pulled into their own functions that are saved as separate code scripts. It's a good idea to separate these code scripts into two separate folders; one to store useful functions that you'll reuse across analyses and projects, and one to store the functions and analyses that are specific to a particular project.
+
+:::
+
+
+When we started learning how to write functions in this lesson, you should have opened a new R script file in the `src` directory of your `R-course-NEON-workbook` folder and call it `functions.R`. Do this now, if you haven't already.
+
+Let's place the code for the working functions that we have created in this lesson into this script. The functions you should have are: `fahr_to_kelvin()`, `kelvin_to_celsius()`, `fahr_to_celsius()`, `calc_uncertainty()` and `calc_monthly_avg()`. Each function should be preceeded by a comment that describes what it does and what its arguments are. 
+
+
+<details><summary>**Click here to see what your script should contain**</summary>
+
+```{r}
+
+# A function that converts a vector of temperatures from
+# fahrenheit to kelvin
+fahr_to_kelvin <- function(temp) {
+  # Calculate temp in kelvin
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  
+  # Return the value of kelvin
+  return(kelvin)
+}
+
+# A function that converts a vector of temperatures from
+# kelvin to celsius
+kelvin_to_celsius <- function(temp) {
+  celsius <- temp - 273.15
+  return(celsius)
+}
+
+# A function that converts a vector of temperatures from
+# fahrenheit to celsius
+fahr_to_celsius <- function(temp) {
+  
+  temp_k <- fahr_to_kelvin(temp)
+  temp_c <- kelvin_to_celsius(temp_k)
+
+  return(temp_c)
+}
+
+# A function that returns the lower and upper uncertainty bounds
+# around a given values as a 2-column matrix
+# Arguments:
+#   mu = a vector of values around which bounds should be calculated
+#   sigma = a vector containing the amount of uncertainty (in the same units as mu)
+calc_uncertainty <- function(mu, sigma = 0) {
+  
+  # Calculate the upper bound
+  upper <- mu + sigma
+
+  # Calculate the lower bound
+  lower <- mu - sigma
+  
+  # Combine the bounds into a matrix
+  bounds <- cbind(lower, upper)
+  
+  # Return the matrix
+  return(bounds)
+}
+
+
+# A function that calculates average monthly temperature
+# for each sensor at a NEON site from a dataframe of temperature
+# measurements.
+# Arguments:
+#   dat = a dataframe containing the columns: 
+#         surfWaterTempMean, startDateTime, siteID, finalQF
+#   site = the NEON site code for the site of interest
+#   month = the month to calculate average temperature over
+#   na.rm = indicates whether NA values should be removed prior to calculation
+calc_monthly_avg <- function(dat, site, month, na.rm = TRUE) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+    # convert character to date
+    keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
+  
+    # extract month as a numeric value
+    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+    
+    # subset based on month
+    keep_dat <- subset(keep_dat, startMonth == month)
+
+  # Calculate the average of the surfWaterTempMean column
+  # use the na.rm value provided by the user of the function
+  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
+ 
+  # Return the calculated value
+  return(vals)
+}
+
+```
+
+</details>
+
+
+<br>
+
+There shouldn't be anything else in this script. Save it (and any other open work), then **close RStudio**.
+
+Open up a new RStudio session in the R-course-NEON-workbook project using the `R-course-NEON-workbook.Rproj` file. In this new session there shouldn't be anything in the Environment panel.
+
+Let's load the functions that we just created. To run an R script without opening it, use the `source()` command:
+
+```{r eval = FALSE}
+source("src/functions.R")
+```
+
+Now look in the Environment panel. What do you see?
+
+Each of the functions that were in the `functions.R` script we wrote should be available for use!
+
+Now that you're officially a programmer, its time to practice your new skills. Click on the Exercises tab at the top to finish this lesson.
+
+
+
+
+
+## Exercises
+
+After completing these exercises, learners will be able to 
+`r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
+
+Complete each of the following exercises in its own script. You will need to create a new R script for each.
+
+**`r .chp_num`.1** 
+
+Create a new version of the `calc_monthly_avg()` function which returns values in fahrenheit instead of celsius.
+
+
+**`r .chp_num`.2** 
+
+Modify the `calc_monthly_avg()` function so that the user can specify the name of the column that contains the temperatures. For example- if they want to calculate the monthly average maximum temperature from the `surfWaterTempMaximum` column, they should be able to specify this in an argument.
+
+**`r .chp_num`.3** 
+
+Modify your solution to exercise `r .chp_num`.2 so that by default the function returns the mean of the `surfWaterTempMean` column.
+
+**`r .chp_num`.4** 
+
+Use code from this lesson to write an R script that reads in the data file "data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv", then uses the `calc_uncertainty()` function to calculate upper and lower bounds around values in the `surfWaterTempMean` column based on the `surfWaterTempExpUncert` column. Your code must `source` this function from another file before it is used.
+
+**`r .chp_num`.5** 
+
+Use code from this lesson to write an R script that reads in the data file "data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv", then uses the `calc_monthly_mean()` function to calculate the mean monthly temperature for each sensor location in July. Your code must `source` this function from another file before it is used.
+
+**`r .chp_num`.6** 
+
+Modify the `calc_monthly_avg()` function so that the user can specify a vector of months and the function will calculate the average temperature across all of those months combined.
+
+Hint: Use the `%in%` operator from the [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) lesson.
+
+
+**`r .chp_num`.7** 
+
+Modify the `calc_monthly_avg()` function so that the user can specify a vector of sites and the function will calculate the average temperature across all of those sites combined.
+
+Hint: Use the `%in%` operator from the [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) lesson.
+
+**`r .chp_num`.8** 
+
+Modify your answer to exercise `r .chp_num`.6 so that by default the function will return an average from all months combined.
+
+HINT: What vector should be the default value of the `months` argument?
+
+**`r .chp_num`.9**
+```{r include = FALSE}
+myfunc <- function(x, y){
+  
+  if(typeof(x) != typeof(y)){
+    stop()
+  }
+  
+  sum(unique(x) %in% unique(y))
+}
+
+```
+
+Write a function that accepts two vectors and calculates the number of unique elements shared between them. For example if `myfunc()` is the name of your function, the following should work like this:
+
+```{r}
+x <- c("A", "A", "B")
+y <-  c("A", "A", "C")
+
+myfunc(x, y)
+
+```
+because `"A"` is the only element shared by both vectors.
+
+HINT: you will need to use functions from the [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) lesson.
+
+
+
+## Sources and Resources
+
+This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 2, 9 and 10 by Jes Coyle.
+
+
+### Cited References
+
+::: {#refs}
+:::
 
 
 
