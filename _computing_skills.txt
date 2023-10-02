@@ -14,33 +14,36 @@ spreadsheets	1	follow best practices in formatting data tables
 spreadsheets	2	document steps of a data analysis using metadata and a README file	
 spreadsheets	3	import and export text-based data tables using spreadsheet software	
 data-structures	1	"create and extract or set values in vectors, matrices and arrays in R"
-data-structures 2 "create and extract or set values in lists in R"
-data-structures 3 "create and manipulate the columns of data frames in R"
-data-structures 4 subset the rows a of data frame in R
+data-structures	2	"create and extract or set values in lists in R"
+data-structures	3	"create and manipulate the columns of data frames in R"
+data-structures	4	subset the rows a of data frame in R
 data-structures	5	"differentiate between numeric, character, factor and logical data types in R"	
 data-structures	6	view the structure and class of an object in R	
 data-structures	7	"write logical test expressions using `==`,`!=`, `>`, `<`, and `%in%` "	
 functions	1	define and use a function with multiple arguments in R	
 functions	2	define default values for function arguments in R	
-functions	3	use R to source code from a script	
-ggplot2-part1	1	create a scatter plot with a linear regression line	use the ggplot2 package in R to
+functions	3	source code from a script	use R to
+ggplot2-part1	1	create a scatter plot	use the ggplot2 package in R to
 ggplot2-part1	2	create a line graph	use the ggplot2 package in R to
-ggplot2-part1	3	create a bar chart with error bars	use the ggplot2 package in R to
-ggplot2-part1	4	create a stacked bar chart	use the ggplot2 package in R to
-ggplot2-part1	5	map aesthetics to data values	use the ggplot2 package in R to
-ggplot2-part1	6	write axis labels with mathematical notation	use the ggplot2 package in R to
-ggplot2-part1	7	export graphs to a vector-format image with specific dimensions	use the ggplot2 package in R to
+ggplot2-part1	3	create a bar chart showing a statistical summary within categories	use the ggplot2 package in R to
+ggplot2-part1	4	create a stacked bar chart showing counts within categories	use the ggplot2 package in R to
+ggplot2-part1	5	create a boxplot	use the ggplot2 package in R to
+ggplot2-part1	6	map aesthetics to data values	use the ggplot2 package in R to
+ggplot2-part1	7	write axis labels with mathematical notation	use the ggplot2 package in R to
+ggplot2-part1	8	export graphs to a vector-format image with specific dimensions	use the ggplot2 package in R to
 program-flow	1	execute if-else statements	use R to
 program-flow	2	repeat steps using `for` and `while` loops	use R to
 program-flow	3	evaluate expressions using `&` ('and') and `|` ('or')	use R to
-program-flow  4 write checks on argument conditions within a function in R
+program-flow	4	write checks on argument conditions within a function in R
 ggplot2-part2	1	display data in separate panels of a graph using facets	use the ggplot2 package in R to
 ggplot2-part2	2	add multiple data layers to a plot and change the order in which they are layered	use the ggplot2 package in R to
-ggplot2-part2	3	"change the scale, limits and breaks on an axis"	use the ggplot2 package in R to
-ggplot2-part2	4	"change the default fonts, colors, and sizes using a theme"	use the ggplot2 package in R to
-ggplot2-part2	5	change a discrete and continuous color scale	use the ggplot2 package in R to
-ggplot2-part2	6	change the text labels in a legend	use the ggplot2 package in R to
-ggplot2-part2	7	add horizontal and vertical reference lines to a plot	use the ggplot2 package in R to
+ggplot2-part2	3	add a trendline to a scatterplot using statistics	use the ggplot2 package in R to
+ggplot2-part2	4	add error bars to a bar graph	use the ggplot2 package in R to
+ggplot2-part2	5	"change the scale, limits and breaks on an axis"	use the ggplot2 package in R to
+ggplot2-part2	6	"change the default fonts, colors, and sizes using a theme"	use the ggplot2 package in R to
+ggplot2-part2	7	change a discrete and continuous color scale	use the ggplot2 package in R to
+ggplot2-part2	8	change the text labels in a legend	use the ggplot2 package in R to
+ggplot2-part2	9	add horizontal and vertical reference lines to a plot	use the ggplot2 package in R to
 tidyverse-basics	1	`join` two tables using a key	use the dplyr package to
 tidyverse-basics	2	`select` columns from a table using matching criteria	use the dplyr package to
 tidyverse-basics	3	`filter` rows from a table	use the dplyr package to

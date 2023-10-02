@@ -41,6 +41,8 @@ set.seed(10)
 In this lesson 
 `r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`
 
+Add error bars to bar graph
+
 #### Key Terms and Commands
 
 * round() and format()
