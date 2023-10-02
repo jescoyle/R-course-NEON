@@ -19,13 +19,13 @@ source("src/setup.R")
 
 # knitr options
 source("src/knit-options.R")
-.knitr_fig_path(paste0(chp_str, "-"))
+.knitr_fig_path(paste0(.chp_str, "-"))
 
 # Silently set seed for random number generation, so we don't have to explain it
 set.seed(10)
 ```
 
-# Chapter `r .chp_num`. `r get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
+# Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
 ## Overview 
 
@@ -71,21 +71,13 @@ dat <- read.csv("data/gapminder_data.csv")
 
 
 ::: {.challenge}
-What should be the output for each of these commands?
 
-```{r eval = FALSE}
-log(exp(3 + 3)) 
-e-1 + 5
-```
 
 <details><summary>**Solution:**</summary>
 
 ::: {.solution}
 
-```{r echo = FALSE}
-log(exp(3 + 3)) 
-2e-1 + 5
-```
+
 
 :::
 
