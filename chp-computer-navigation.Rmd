@@ -159,7 +159,7 @@ Now what is the current working directory? Check using the `pwd` command.
 To go back up a level to the next higher directory (called the **parent directory**), use `../`: 
 
 ```{sh}
-`cd ../`
+cd ../
 ```
 
 In fact, we can use `cd` to navigate to any folder by typing its absolute path after the `cd` command. For example: `cd "/c/Documents/My subfolder/another subfolder"`. 
