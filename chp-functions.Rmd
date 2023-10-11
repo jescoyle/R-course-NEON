@@ -4,6 +4,8 @@ output:
   html_document:
     toc: false
 bibliography: references.bib
+nocite: |
+  @NEON-surfwatertemp
 ---
 
 
