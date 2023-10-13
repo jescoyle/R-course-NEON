@@ -116,7 +116,7 @@ Along with an explanation.
 
 4. Be sure to click **Save** often to save your work.
 
-```{r results = 'hide'}
+```{r include = FALSE}
 # Load ggplot2
 library("ggplot2")
 
