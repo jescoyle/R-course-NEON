@@ -863,8 +863,8 @@ Our goal is to write a function that will calculate the average monthly surface 
 When starting a programming project, the first step is to use comments to outline what we are trying to accomplish. This may change as we work, but it can help to get a "road map" in a script first. Since we are writing a function, know that it will need a name, body and arguments, which we can put into this initial outline.
 
 ```{r}
-# A function that calculates average monthly temperature
-# for each sensor at a NEON site from a dataframe of temperature
+# A function that calculates average monthly surface water temperature
+# across both sensors at a NEON site from a dataframe of temperature
 # measurements.
 # Arguments:
 #   dat = a dataframe containing the columns we need (TBD)
@@ -1068,8 +1068,8 @@ Write a comment at the top of the function that describes the columns names requ
 In informative comment for this function could look like:
 
 ```{r}
-# A function that calculates average monthly temperature
-# for each sensor at a NEON site from a dataframe of temperature
+# A function that calculates average monthly surface water temperature
+# across both sensors at a NEON site from a dataframe of temperature
 # measurements.
 # Arguments:
 #   dat = a dataframe containing the columns: 
@@ -1160,8 +1160,8 @@ calc_uncertainty <- function(mu, sigma = 0) {
 }
 
 
-# A function that calculates average monthly temperature
-# for each sensor at a NEON site from a dataframe of temperature
+# A function that calculates average monthly surface water temperature
+# across both sensors at a NEON site from a dataframe of temperature
 # measurements.
 # Arguments:
 #   dat = a dataframe containing the columns: 

@@ -46,8 +46,8 @@ calc_uncertainty <- function(mu, sigma = 0) {
 }
 
 
-# A function that calculates average monthly temperature
-# for each sensor at a NEON site from a dataframe of temperature
+# A function that calculates average monthly surface water temperature
+# across both sensors at a NEON site from a dataframe of temperature
 # measurements.
 # Arguments:
 #   dat = a dataframe containing the columns: 
