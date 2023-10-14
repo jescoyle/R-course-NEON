@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>chp-program-flow.knit</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="computer-setup.html">Computer Setup</a>
+</li>
+<li>
+  <a href="NEON-data-intro.html">NEON Data</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Chapters
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="00-module-contents.html">Chapter overview</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Core lessons</li>
+    <li>
+      <a href="chp-computer-navigation.html">1. Computer navigation</a>
+    </li>
+    <li>
+      <a href="chp-intro-to-R.html">2. Intro to R</a>
+    </li>
+    <li>
+      <a href="chp-spreadsheets.html">3. Spreadsheets</a>
+    </li>
+    <li>
+      <a href="chp-data-structures.html">4. Data structures</a>
+    </li>
+    <li>
+      <a href="chp-functions.html">5. Functions</a>
+    </li>
+    <li>
+      <a href="chp-ggplot2-part1.html">6. Intro to ggplot2</a>
+    </li>
+    <li>
+      <a href="chp-program-flow.html">7. Program flow</a>
+    </li>
+    <li>
+      <a href="chp-ggplot2-part2.html">8. More ggplot2</a>
+    </li>
+    <li>
+      <a href="chp-tidyverse-basics.html">9. Tidy data</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="download-student-RStudio-project.html">RStudio Workbook &amp; Exercises</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="chapter-7.-controlling-program-flow"
+class="section level1 tabset">
+<h1 class="tabset">Chapter 7. Controlling program flow</h1>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<blockquote>
+<p>Suppose you have temperature measurements collected over the course
+of a year from 100 different sensors, each saved in its own data file,
+and you want to summarize the daily temperature minima and maxima for
+each sensor, but only if the sensor did not malfunction. Wouldn’t it be
+great if you had one code script that looks in a folder for the
+temperature sensor data files, detects whether the data are valid and if
+so, summarizes the data and saves this to an output file?</p>
+</blockquote>
+<p>This lesson will introduce you to a central idea in
+computer-programming- how to write flexible code that makes automated
+and repeated data-dependent decisions. The tools that we will use are
+common to most programming languages, even if the exact syntax varies.
+These fundamental elements of programming are called
+<strong>conditionals</strong> and <strong>loops</strong>.</p>
+<div id="what-we-will-learn" class="section level3">
+<h3>What we will learn</h3>
+<p>In this lesson learners will:</p>
+<ul>
+<li>use conditional statements to make data-dependent decisions in
+R</li>
+<li>use loops to repeat things in R</li>
+</ul>
+<div id="key-terms-commands" class="section level4">
+<h4>Key Terms &amp; Commands</h4>
+<ul>
+<li>if-then-else statements</li>
+<li>loops</li>
+<li>iteration</li>
+<li>boolean operators: <code>&amp;</code> and <code>|</code></li>
+<li><code>if()</code></li>
+<li><code>else()</code></li>
+<li><code>ifelse()</code></li>
+<li><code>any()</code> and <code>all()</code></li>
+<li><code>for()</code></li>
+<li><code>while()</code></li>
+<li><code>print()</code></li>
+<li><code>paste()</code></li>
+<li><code>which()</code></li>
+</ul>
+</div>
+</div>
+<div id="prerequisites" class="section level3">
+<h3>Prerequisites</h3>
+<p>Before beginning this lesson you should have completed the lesson <a
+href="chp-functions.html">Vectorization and functions</a> and any
+prerequisites therein.</p>
+<p>Before you begin:</p>
+<ol style="list-style-type: decimal">
+<li>Open the R-course-NEON-workbook RStudio project.</li>
+<li>Create a new R script named lesson_07_code.R in the lesson-code
+folder of the student workbook.</li>
+<li>Whenever you see R code like this:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">Type</span> (or copy) this into your R script. Then run it <span class="cf">in</span> the Console.</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Whenever you see a challenge like this:</li>
+</ol>
+<div class="challenge">
+<p>Try to solve the problem by writing R code into your script. Check
+your answer by clicking:</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>The code that solves the challenge will appear here.</span></code></pre></div>
+<p>Along with an explanation.</p>
+</div>
+</details>
+</div>
+<p><br></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Be sure to click <strong>Save</strong> often to save your work.</li>
+</ol>
+</div>
+</div>
+<div id="lesson" class="section level2">
+<h2>Lesson</h2>
+<p>In this lesson we are going to download and work with surface water
+temperature data <a
+href="https://data.neonscience.org/data-products/DP1.20053.001">DP1.20053.001</a>
+from four NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha
+Creek, Washington (MART), Teakettle Creek, California (TECR) and
+Sycamore Creek, Arizona (SYCA). You can see a map of these sites on the
+<a
+href="https://www.neonscience.org/field-sites/explore-field-sites">NEON
+website</a>.</p>
+<p>Recall from the lesson <a href="chp-functions.html">Vectorization and
+functions</a> that we can download data from NEON using the
+<code>loadByProduct()</code> function in the <code>neonUtilities</code>
+package. We need to specify the product ID number, sites and dates for
+which we want data and then type <code>y</code> when prompted to
+download the data at the command line.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(neonUtilities)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># Define dates for download: June 1 - Oct 31, 2021</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># but we need to start before June 1 to get the entire month of June</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>startdate <span class="ot">&lt;-</span> <span class="st">&quot;2021-05-31&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>enddate <span class="ot">&lt;-</span> <span class="st">&quot;2021-10-31&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co"># Define the sites to download </span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co"># TECR = Teakettle Creek, SYCA = Sycamore Creek</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co"># MART = Martha Creek, CARI = Caribou Creek</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;SYCA&quot;</span>, <span class="st">&quot;MART&quot;</span>, <span class="st">&quot;CARI&quot;</span>) </span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co"># Define the data product</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>dpID <span class="ot">&lt;-</span> <span class="st">&quot;DP1.20053.001&quot;</span>  <span class="co"># Surface water temperature</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co"># Temperature in surface water</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>watertemp <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> dpID,</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>                           <span class="at">site =</span> sites,</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>                           <span class="at">startdate =</span> startdate,</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>                           <span class="at">enddate =</span> enddate)</span></code></pre></div>
+<p>You should now have a new object named <code>watertemp</code> in the
+Environment panel. It should be a list with nine elements. Let’s extract
+the list element of <code>watertemp</code> that contains the data and
+save it as a separate data frame.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Extract 30 min temperature averages from watertemp</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># and save as a separate data frame</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> watertemp<span class="sc">$</span>TSW_30min</span></code></pre></div>
+<p>Now we have a data frame where each row summarizes temperature
+measurements over a 30 minute period from May - October, 2021 for the
+four sites from which we requested data (TECR, SYCA, MART, CARI).</p>
+<p>The last thing we will do to get these data ready to work with is to
+convert the <code>startDateTime</code> column to a date-time class so
+that we can use it as an actual date. We will use the
+<code>ymd_hms()</code> function from the <code>lubridate()</code>
+package for this.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Load the lubridate package</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># Convert startDateTime to a date-time class</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>TSW_30min<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(TSW_30min<span class="sc">$</span>startDateTime)</span></code></pre></div>
+<p>To get a quick summary of the data available, we can use the
+<code>table()</code> function to count the number of observations
+(e.g. rows) from each month and site. The code below uses the
+<code>with()</code> function to specify the dataframe that
+<code>table()</code> should use to find columns named
+<code>startDateTime</code> and <code>siteID</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Count the number of observations in each month and site</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">with</span>(TSW_30min, <span class="fu">table</span>(<span class="fu">months</span>(startDateTime), siteID))</span></code></pre></div>
+<pre><code>           siteID
+            CARI MART SYCA TECR
+  August    2976 2976 2976 2976
+  July      2976 3072 2976 2976
+  June      2880 5760 2880 2880
+  October   2976 2976 2976 2976
+  September 2880 2880 2880 2880</code></pre>
+<p>The <code>months()</code> function extracts the month from the
+<code>startDateTime</code> column as text. (<code>month()</code> would
+give the numeric month).</p>
+<div id="conditionals" class="section level3">
+<h3>Conditionals</h3>
+<p>A conditional statement executes different lines of code depending on
+whether or not a particular condition is true. This allows us to write
+code that performs different actions depending on the values contained
+in variables, ultimately defining the flow of a program.</p>
+<p>There are several ways to control flow in R using conditionals. The
+most commonly used approaches are the constructs:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># if</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="cf">if</span> (condition is true) {</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  perform action</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>}</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co"># if ... else</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="cf">if</span> (condition is true) {</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>  perform action</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>} <span class="cf">else</span> {  <span class="co"># that is, if the condition is false,</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>  perform alternative action</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>}</span></code></pre></div>
+<p>Say, for example, that we want the R console to print a message if a
+variable <code>x</code> has a particular value:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&gt;=</span> <span class="dv">10</span>) {</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;x is greater than or equal to 10&quot;</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>}</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>[1] 8</code></pre>
+<p>The print statement does not appear in the console because x is not
+greater than 10. To print a different message for numbers less than 10,
+we can add an <code>else</code> statement.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&gt;=</span> <span class="dv">10</span>) {</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;x is greater than or equal to 10&quot;</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;x is less than 10&quot;</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>[1] &quot;x is less than 10&quot;</code></pre>
+<p>You can also test multiple conditions by using
+<code>else if</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">8</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&gt;=</span> <span class="dv">10</span>) {</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;x is greater than or equal to 10&quot;</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">5</span>) {</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;x is greater than 5, but less than 10&quot;</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;x is less than 5&quot;</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>[1] &quot;x is greater than 5, but less than 10&quot;</code></pre>
+<div class="challenge">
+<p>Change the value of <code>x</code> to <code>3</code>
+(<code>x &lt;- 3</code>), then re-run the conditional statement above to
+verify that this works.</p>
+<p>What happens when you change the value of <code>x</code> to be
+missing (<code>NA</code>)?</p>
+</div>
+<p><strong>Important:</strong> when R evaluates the condition inside
+<code>if()</code> statements, it is looking for a logical data type,
+i.e., <code>TRUE</code> or <code>FALSE</code>. If the value inside the
+<code>if()</code> statement is anything but <code>TRUE</code> or
+<code>FALSE</code> (e.g. <code>NA</code>) the console will print an
+error message.</p>
+<div class="challenge">
+<p>The <code>finalQF</code> column in <code>TSW_30min</code> indicates
+whether the data are valid to use. It will be <code>0</code> when the
+data are good and <code>1</code> when the data could be erroneous.</p>
+<p>Use an <code>if()</code> statement to print a message that says
+whether there are any erroneous data points in
+<code>TSW_30min</code>.</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<p>There are lots of ways to solve this problem. Here’s one way to solve
+this problem using commands you already know.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="co"># First we subset TSW_30min to only contain rows where finalQF is 1</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>bad_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(TSW_30min, finalQF <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Next we count the number of rows</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>N_bad <span class="ot">&lt;-</span> <span class="fu">nrow</span>(bad_data)</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="co"># Then we use a conditional to print a message</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="co"># depending on the number of rows of bad data</span></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="cf">if</span> (N_bad <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a> <span class="fu">print</span>(<span class="st">&quot;This data contains erroneous measurements.&quot;</span>) </span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+</details>
+</div>
+<p><br></p>
+<p>When you tried the challenge above, did you try something like this
+and get a warning message?</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="cf">if</span> (TSW_30min<span class="sc">$</span>finalQF <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;This data contains erroneous measurements.&quot;</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>Error in if (TSW_30min$finalQF == 1) {: the condition has length &gt; 1</code></pre>
+<p>The <code>if()</code> function only accepts singular (of length 1)
+inputs, and therefore returns an error when you use it with a vector.
+The <code>if()</code> function will still run, but will only evaluate
+the condition in the first element of the vector. Therefore, to use the
+<code>if()</code> function, you need to make sure your input is singular
+(of length 1).</p>
+<p>To determine whether some or all of the elements of a vector are
+equal to a particular value, you can use the <code>any()</code> and
+<code>all()</code> functions.</p>
+<p><code>any()</code> tests whether any of the elements in a vector are
+<code>TRUE</code> and returns a single value of <code>TRUE</code> if at
+least one element is <code>TRUE</code>. In contrast the
+<code>all()</code> function tests whether all of the elements of a
+vector are <code>TRUE</code> and only returns the value
+<code>TRUE</code> if this is the case.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>all_F <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>some_T <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>all_T <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="fu">any</span>(all_F)</span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">any</span>(some_T)</span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">any</span>(all_T)</span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">all</span>(some_T)</span></code></pre></div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">all</span>(all_T)</span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<p>Here is a more efficient way to solve the last challenge using the
+<code>any()</code> function.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span>(TSW_30min<span class="sc">$</span>finalQF <span class="sc">==</span>  <span class="dv">1</span>)) {</span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a> <span class="fu">print</span>(<span class="st">&quot;This data contains erroneous measurements.&quot;</span>) </span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>[1] &quot;This data contains erroneous measurements.&quot;</code></pre>
+<div id="conditionals-on-vectors" class="section level4">
+<h4>Conditionals on vectors</h4>
+<p>If you need to condition across the elements of a vector, use the the
+<code>ifelse()</code> function. This function accepts both singular and
+vector inputs and is structured as follows:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># ifelse function</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a><span class="fu">ifelse</span>(condition is true, perform action, perform alternative action)</span></code></pre></div>
+<p>where the first argument is the condition or a set of conditions to
+be met, the second argument is the statement that is evaluated when the
+condition is <code>TRUE</code>, and the third statement is the statement
+that is evaluated when the condition is <code>FALSE</code>.</p>
+<p>This function will return a vector the same length as what was
+supplied to the first argument.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a><span class="fu">ifelse</span>(y <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;y is a negative number&quot;</span>, <span class="st">&quot;y is not a negative number&quot;</span>)</span></code></pre></div>
+<pre><code>[1] &quot;y is a negative number&quot;</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a><span class="fu">ifelse</span>(y <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;y is a negative number&quot;</span>, <span class="st">&quot;y is not a negative number&quot;</span>)</span></code></pre></div>
+<pre><code>[1] &quot;y is a negative number&quot;     &quot;y is a negative number&quot;    
+[3] &quot;y is not a negative number&quot; &quot;y is not a negative number&quot;
+[5] &quot;y is not a negative number&quot; &quot;y is not a negative number&quot;</code></pre>
+<p>The <code>ifelse()</code> function is particularly useful for
+creating a factor from numeric data or combining levels of a factor.</p>
+<p>For example, we could create a factor in the <code>TSW_30min</code>
+data that identifies whether a site is in Alaska or the contiguous US
+(the “lower 48”):</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="co"># Create a factor that identifies whether a site is in Alaska</span></span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a><span class="co"># e.g. the CARI site</span></span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>TSW_30min<span class="sc">$</span>siteLocation <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">ifelse</span>(TSW_30min<span class="sc">$</span>siteID <span class="sc">==</span> <span class="st">&quot;CARI&quot;</span>, <span class="st">&quot;AK&quot;</span>, <span class="st">&quot;lower48&quot;</span>))</span></code></pre></div>
+<div class="challenge">
+<p>Create a new variable in <code>TSW_30min</code> named
+<code>frozen</code> that has the value <code>"above 0"</code> if the
+minimum temperature for an observation is greater than <code>0</code>
+and “below 0” if the minimum temperature is less than or equal to
+<code>0</code>.</p>
+<p>Hint: use the <code>ifelse()</code> function on the
+<code>surfWaterTempMinimum</code> column.</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a>TSW_30min<span class="sc">$</span>frozen <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(TSW_30min<span class="sc">$</span>surfWaterTempMinimum <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;above 0&quot;</span>, <span class="st">&quot;below 0&quot;</span>)</span></code></pre></div>
+<p>We can use the <code>table()</code> function to see how many times
+each of these conditions occurred in these data.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="fu">table</span>(TSW_30min<span class="sc">$</span>frozen)</span></code></pre></div>
+<pre><code>
+above 0 below 0 
+  51312     760 </code></pre>
+</div>
+</details>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="loops" class="section level3">
+<h3>Loops</h3>
+<p><strong>Loops</strong> are a fundamental element of programming that
+allow you to repeat a set of actions multiple times. There are two main
+types:</p>
+<ul>
+<li>a <code>for</code> loop <strong>iterates</strong> over a set of
+elements, repeating the set of actions once for each element in the
+order that they are provided.</li>
+<li>a <code>while</code> loop repeats a set of actions over and over
+until a specific condition is met.</li>
+</ul>
+<div id="for-loops" class="section level4">
+<h4><code>for()</code> loops</h4>
+<p>The basic structure of a <code>for()</code> loop is:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="cf">for</span> (iterator <span class="cf">in</span> set of values) {</span>
+<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a>  do a thing</span>
+<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a>}</span></code></pre></div>
+<p>For example:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10</code></pre>
+<p>The <code>1:10</code> creates a vector of the integers <code>1</code>
+through <code>10</code>. Each time through the loop, the value of the
+object <code>i</code> will take on the next value in this vector. You
+can iterate over any other vector using any variable name:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a>mypets <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>, <span class="st">&quot;bird&quot;</span>, <span class="st">&quot;cat&quot;</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a><span class="cf">for</span> (animal <span class="cf">in</span> mypets) {</span>
+<span id="cb42-4"><a href="#cb42-4" tabindex="-1"></a>  <span class="fu">print</span>(animal)</span>
+<span id="cb42-5"><a href="#cb42-5" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>[1] &quot;cat&quot;
+[1] &quot;dog&quot;
+[1] &quot;bird&quot;
+[1] &quot;cat&quot;</code></pre>
+<p>We can use a <code>for()</code> loop nested within another
+<code>for()</code> loop to iterate over two things at once.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb44-2"><a href="#cb44-2" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)) {</span>
+<span id="cb44-3"><a href="#cb44-3" tabindex="-1"></a>    </span>
+<span id="cb44-4"><a href="#cb44-4" tabindex="-1"></a>    <span class="co"># The `paste()` function creates a character vector by </span></span>
+<span id="cb44-5"><a href="#cb44-5" tabindex="-1"></a>    <span class="co"># concatenating the vectors `i` and `j`</span></span>
+<span id="cb44-6"><a href="#cb44-6" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(i,j))</span>
+<span id="cb44-7"><a href="#cb44-7" tabindex="-1"></a>  }</span>
+<span id="cb44-8"><a href="#cb44-8" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>[1] &quot;1 a&quot;
+[1] &quot;1 b&quot;
+[1] &quot;1 c&quot;
+[1] &quot;1 d&quot;
+[1] &quot;1 e&quot;
+[1] &quot;2 a&quot;
+[1] &quot;2 b&quot;
+[1] &quot;2 c&quot;
+[1] &quot;2 d&quot;
+[1] &quot;2 e&quot;
+[1] &quot;3 a&quot;
+[1] &quot;3 b&quot;
+[1] &quot;3 c&quot;
+[1] &quot;3 d&quot;
+[1] &quot;3 e&quot;
+[1] &quot;4 a&quot;
+[1] &quot;4 b&quot;
+[1] &quot;4 c&quot;
+[1] &quot;4 d&quot;
+[1] &quot;4 e&quot;
+[1] &quot;5 a&quot;
+[1] &quot;5 b&quot;
+[1] &quot;5 c&quot;
+[1] &quot;5 d&quot;
+[1] &quot;5 e&quot;</code></pre>
+<p>We notice in the output that when the first index (<code>i</code>) is
+set to 1, the second index (<code>j</code>) iterates through its full
+set of indices. Once the indices of <code>j</code> have been iterated
+through, then <code>i</code> is incremented. This process continues
+until the last index has been used for each <code>for()</code> loop.</p>
+<p>Rather than printing the results, we could write the loop output to
+an output object, in this case a matrix.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a>output_vector <span class="ot">&lt;-</span> <span class="fu">vector</span>()</span>
+<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb46-3"><a href="#cb46-3" tabindex="-1"></a>  </span>
+<span id="cb46-4"><a href="#cb46-4" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)) {</span>
+<span id="cb46-5"><a href="#cb46-5" tabindex="-1"></a>    <span class="co"># save the result to a temporary variable temp_output</span></span>
+<span id="cb46-6"><a href="#cb46-6" tabindex="-1"></a>    temp_output <span class="ot">&lt;-</span> <span class="fu">paste</span>(i, j)</span>
+<span id="cb46-7"><a href="#cb46-7" tabindex="-1"></a>    </span>
+<span id="cb46-8"><a href="#cb46-8" tabindex="-1"></a>    <span class="co"># add temp_output to the end of output_vector</span></span>
+<span id="cb46-9"><a href="#cb46-9" tabindex="-1"></a>    output_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(output_vector, temp_output)</span>
+<span id="cb46-10"><a href="#cb46-10" tabindex="-1"></a>  }</span>
+<span id="cb46-11"><a href="#cb46-11" tabindex="-1"></a>  </span>
+<span id="cb46-12"><a href="#cb46-12" tabindex="-1"></a>}</span>
+<span id="cb46-13"><a href="#cb46-13" tabindex="-1"></a></span>
+<span id="cb46-14"><a href="#cb46-14" tabindex="-1"></a>output_vector</span></code></pre></div>
+<pre><code> [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot;
+[13] &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot;
+[25] &quot;5 e&quot;</code></pre>
+<p>This approach can be useful, but ‘growing your results’ (building the
+result object incrementally) is computationally inefficient, so avoid it
+when you are iterating through a lot of values.</p>
+<div class="callout-tip">
+<p>Don’t grow your results</p>
+<p>One of the biggest things that trips up novices and experienced R
+users alike, is building a results object (vector, list, matrix, data
+frame) as your for loop progresses. Computers are very bad at handling
+this, so your calculations can very quickly slow to a crawl. It is much
+better to define an empty results object before hand of appropriate
+dimensions, rather than initializing an empty object without dimensions.
+In most cases you will know how many output elements a loop will produce
+and can therefore determine how many elements, rows or columns the
+output object needs to have.</p>
+</div>
+<p>In the example above, we know that there should be
+<code>5 x 5 = 25</code> results. A better way to save the output would
+be to create an empty matrix with 5 rows and 5 columns, then at each
+iteration store the results in the appropriate location.</p>
+<p>For this example, the following is much more efficient.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="co"># Create an empty output object for saving results</span></span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a>output_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a><span class="co"># Define the values needed in the second for loop</span></span>
+<span id="cb48-5"><a href="#cb48-5" tabindex="-1"></a>j_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)</span>
+<span id="cb48-6"><a href="#cb48-6" tabindex="-1"></a></span>
+<span id="cb48-7"><a href="#cb48-7" tabindex="-1"></a><span class="co"># Iterate over the numbers 1 - 5</span></span>
+<span id="cb48-8"><a href="#cb48-8" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb48-9"><a href="#cb48-9" tabindex="-1"></a>  </span>
+<span id="cb48-10"><a href="#cb48-10" tabindex="-1"></a>  <span class="co"># Iterate over the numbers 1 - 5</span></span>
+<span id="cb48-11"><a href="#cb48-11" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb48-12"><a href="#cb48-12" tabindex="-1"></a>    </span>
+<span id="cb48-13"><a href="#cb48-13" tabindex="-1"></a>    <span class="co"># Select the corresponding letter</span></span>
+<span id="cb48-14"><a href="#cb48-14" tabindex="-1"></a>    temp_j_value <span class="ot">&lt;-</span> j_vector[j]</span>
+<span id="cb48-15"><a href="#cb48-15" tabindex="-1"></a>    </span>
+<span id="cb48-16"><a href="#cb48-16" tabindex="-1"></a>    <span class="co"># Save the result to a temporary variable</span></span>
+<span id="cb48-17"><a href="#cb48-17" tabindex="-1"></a>    temp_output <span class="ot">&lt;-</span> <span class="fu">paste</span>(i, temp_j_value)</span>
+<span id="cb48-18"><a href="#cb48-18" tabindex="-1"></a>    </span>
+<span id="cb48-19"><a href="#cb48-19" tabindex="-1"></a>    <span class="co"># Save the temporary variable to the appropriate</span></span>
+<span id="cb48-20"><a href="#cb48-20" tabindex="-1"></a>    <span class="co"># location in the output matrix</span></span>
+<span id="cb48-21"><a href="#cb48-21" tabindex="-1"></a>    output_matrix[i, j] <span class="ot">&lt;-</span> temp_output</span>
+<span id="cb48-22"><a href="#cb48-22" tabindex="-1"></a>  }</span>
+<span id="cb48-23"><a href="#cb48-23" tabindex="-1"></a>}</span>
+<span id="cb48-24"><a href="#cb48-24" tabindex="-1"></a></span>
+<span id="cb48-25"><a href="#cb48-25" tabindex="-1"></a>output_matrix</span></code></pre></div>
+<pre><code>     [,1]  [,2]  [,3]  [,4]  [,5] 
+[1,] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot;
+[2,] &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot;
+[3,] &quot;3 a&quot; &quot;3 b&quot; &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot;
+[4,] &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot;
+[5,] &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot; &quot;5 e&quot;</code></pre>
+<p>In general, the advice of many <code>R</code> users would be to learn
+about <code>for()</code> loops, but to avoid using <code>for()</code>
+loops unless the order of iteration is important: i.e. the calculation
+at each iteration depends on the results of previous iterations. If the
+order of iteration is not important, then you should try to use
+<strong>vectorization</strong> (see lessons <a
+href="chp-functions.html">Vectorization and functions</a> and <a
+href="chp-tidyverse.html">Data manipulation in the tidyverse</a>.</p>
+<div class="challenge">
+<p>In the lesson <a href="chp-functions.html">Vectorization and
+functions</a> we wrote a function that calculates the average monthly
+surface water temperature for a particular month at a particular
+site.</p>
+<p>It looks like this and you should have saved it in a script called
+<code>functions.R</code> in the <code>src</code> folder.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="co"># A function that calculates average monthly surface water temperature</span></span>
+<span id="cb50-2"><a href="#cb50-2" tabindex="-1"></a><span class="co"># across both sensors at a NEON site from a dataframe of temperature</span></span>
+<span id="cb50-3"><a href="#cb50-3" tabindex="-1"></a><span class="co"># measurements.</span></span>
+<span id="cb50-4"><a href="#cb50-4" tabindex="-1"></a><span class="co"># Arguments:</span></span>
+<span id="cb50-5"><a href="#cb50-5" tabindex="-1"></a><span class="co">#   dat = a dataframe containing the columns: </span></span>
+<span id="cb50-6"><a href="#cb50-6" tabindex="-1"></a><span class="co">#         surfWaterTempMean, startDateTime, siteID, finalQF</span></span>
+<span id="cb50-7"><a href="#cb50-7" tabindex="-1"></a><span class="co">#   site = the NEON site code for the site of interest</span></span>
+<span id="cb50-8"><a href="#cb50-8" tabindex="-1"></a><span class="co">#   month = the month to calculate average temperature over</span></span>
+<span id="cb50-9"><a href="#cb50-9" tabindex="-1"></a><span class="co">#   na.rm = indicates whether NA values should be removed prior to calculation</span></span>
+<span id="cb50-10"><a href="#cb50-10" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb50-11"><a href="#cb50-11" tabindex="-1"></a>  </span>
+<span id="cb50-12"><a href="#cb50-12" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
+<span id="cb50-13"><a href="#cb50-13" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
+<span id="cb50-14"><a href="#cb50-14" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb50-15"><a href="#cb50-15" tabindex="-1"></a>  </span>
+<span id="cb50-16"><a href="#cb50-16" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
+<span id="cb50-17"><a href="#cb50-17" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
+<span id="cb50-18"><a href="#cb50-18" tabindex="-1"></a>  </span>
+<span id="cb50-19"><a href="#cb50-19" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
+<span id="cb50-20"><a href="#cb50-20" tabindex="-1"></a>  <span class="co"># convert character to date</span></span>
+<span id="cb50-21"><a href="#cb50-21" tabindex="-1"></a>  keep_dat<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(keep_dat<span class="sc">$</span>startDateTime) </span>
+<span id="cb50-22"><a href="#cb50-22" tabindex="-1"></a>  </span>
+<span id="cb50-23"><a href="#cb50-23" tabindex="-1"></a>  <span class="co"># extract month as a numeric value</span></span>
+<span id="cb50-24"><a href="#cb50-24" tabindex="-1"></a>  keep_dat<span class="sc">$</span>startMonth <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">month</span>(keep_dat<span class="sc">$</span>startDateTime)</span>
+<span id="cb50-25"><a href="#cb50-25" tabindex="-1"></a>  </span>
+<span id="cb50-26"><a href="#cb50-26" tabindex="-1"></a>  <span class="co"># subset based on month</span></span>
+<span id="cb50-27"><a href="#cb50-27" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, startMonth <span class="sc">==</span> month)</span>
+<span id="cb50-28"><a href="#cb50-28" tabindex="-1"></a>  </span>
+<span id="cb50-29"><a href="#cb50-29" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
+<span id="cb50-30"><a href="#cb50-30" tabindex="-1"></a>  <span class="co"># use the na.rm value provided by the user of the function</span></span>
+<span id="cb50-31"><a href="#cb50-31" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> <span class="fu">mean</span>(keep_dat<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> na.rm)</span>
+<span id="cb50-32"><a href="#cb50-32" tabindex="-1"></a>  </span>
+<span id="cb50-33"><a href="#cb50-33" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
+<span id="cb50-34"><a href="#cb50-34" tabindex="-1"></a>  <span class="fu">return</span>(vals)</span>
+<span id="cb50-35"><a href="#cb50-35" tabindex="-1"></a>}</span></code></pre></div>
+<p>Load this function into your current R session by either running the
+code above or sourcing the <code>functions.R</code> script:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;src/functions.R&quot;</span>)</span></code></pre></div>
+<p>Using this function, write a loop that calculates the average monthly
+temperature at the Teakettle Creek site (<code>siteID == "TECR"</code>)
+in each month in the <code>TWS_30min</code> data.</p>
+<p>The loop should save the output to a vector.</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="co"># Define vector of months to iterate over</span></span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a><span class="co"># and save the length of this vector</span></span>
+<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a>use_months <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb52-4"><a href="#cb52-4" tabindex="-1"></a>N_months <span class="ot">&lt;-</span> <span class="fu">length</span>(use_months)</span>
+<span id="cb52-5"><a href="#cb52-5" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" tabindex="-1"></a><span class="co"># Define an empty vector for saving the data</span></span>
+<span id="cb52-7"><a href="#cb52-7" tabindex="-1"></a><span class="co"># that is the same length as use_months</span></span>
+<span id="cb52-8"><a href="#cb52-8" tabindex="-1"></a>mean_temp <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, N_months)</span>
+<span id="cb52-9"><a href="#cb52-9" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="#cb52-10" tabindex="-1"></a><span class="co"># Loop across months</span></span>
+<span id="cb52-11"><a href="#cb52-11" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_months) {</span>
+<span id="cb52-12"><a href="#cb52-12" tabindex="-1"></a>  </span>
+<span id="cb52-13"><a href="#cb52-13" tabindex="-1"></a>  <span class="co"># Define the month for this iteration</span></span>
+<span id="cb52-14"><a href="#cb52-14" tabindex="-1"></a>  this_month <span class="ot">&lt;-</span> use_months[i]</span>
+<span id="cb52-15"><a href="#cb52-15" tabindex="-1"></a>    </span>
+<span id="cb52-16"><a href="#cb52-16" tabindex="-1"></a>  <span class="co"># Calculate monthly mean temp</span></span>
+<span id="cb52-17"><a href="#cb52-17" tabindex="-1"></a>  <span class="co"># and save into the vector</span></span>
+<span id="cb52-18"><a href="#cb52-18" tabindex="-1"></a>  mean_temp[i] <span class="ot">&lt;-</span> <span class="fu">calc_monthly_avg</span>(<span class="at">dat =</span> TSW_30min, </span>
+<span id="cb52-19"><a href="#cb52-19" tabindex="-1"></a>                                <span class="at">site =</span> <span class="st">&quot;TECR&quot;</span>,</span>
+<span id="cb52-20"><a href="#cb52-20" tabindex="-1"></a>                                <span class="at">month =</span> this_month) </span>
+<span id="cb52-21"><a href="#cb52-21" tabindex="-1"></a>  </span>
+<span id="cb52-22"><a href="#cb52-22" tabindex="-1"></a>}</span>
+<span id="cb52-23"><a href="#cb52-23" tabindex="-1"></a> </span>
+<span id="cb52-24"><a href="#cb52-24" tabindex="-1"></a></span>
+<span id="cb52-25"><a href="#cb52-25" tabindex="-1"></a><span class="co"># Print the output</span></span>
+<span id="cb52-26"><a href="#cb52-26" tabindex="-1"></a>mean_temp</span></code></pre></div>
+<pre><code>[1] 12.303121 14.799514 13.469919 11.250528  5.806759</code></pre>
+</div>
+</details>
+</div>
+<p><br></p>
+<div class="challenge">
+<p>Update your solution to the prior challenge to write a set of nested
+loops that calculate the average water temperature for each month at
+each site in <code>TSW_30min</code>. The loop should save the output to
+a matrix.</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="co"># Define vector of months to iterate over</span></span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a><span class="co"># and save the length of this vector</span></span>
+<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a>use_months <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb54-4"><a href="#cb54-4" tabindex="-1"></a>N_months <span class="ot">&lt;-</span> <span class="fu">length</span>(use_months)</span>
+<span id="cb54-5"><a href="#cb54-5" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="#cb54-6" tabindex="-1"></a><span class="co"># Define vector of sites to iterate over</span></span>
+<span id="cb54-7"><a href="#cb54-7" tabindex="-1"></a><span class="co"># and save the length of this vector</span></span>
+<span id="cb54-8"><a href="#cb54-8" tabindex="-1"></a>use_sites <span class="ot">&lt;-</span> <span class="fu">unique</span>(TSW_30min<span class="sc">$</span>siteID)</span>
+<span id="cb54-9"><a href="#cb54-9" tabindex="-1"></a>N_sites <span class="ot">&lt;-</span> <span class="fu">length</span>(use_sites)</span>
+<span id="cb54-10"><a href="#cb54-10" tabindex="-1"></a></span>
+<span id="cb54-11"><a href="#cb54-11" tabindex="-1"></a><span class="co"># Define a matrix for saving values:</span></span>
+<span id="cb54-12"><a href="#cb54-12" tabindex="-1"></a><span class="co"># months will be the rows and sitess with be the columns</span></span>
+<span id="cb54-13"><a href="#cb54-13" tabindex="-1"></a>mean_temp <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> N_months, <span class="at">ncol =</span> N_sites)</span>
+<span id="cb54-14"><a href="#cb54-14" tabindex="-1"></a></span>
+<span id="cb54-15"><a href="#cb54-15" tabindex="-1"></a><span class="co"># Loop across months</span></span>
+<span id="cb54-16"><a href="#cb54-16" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_months) {</span>
+<span id="cb54-17"><a href="#cb54-17" tabindex="-1"></a>  </span>
+<span id="cb54-18"><a href="#cb54-18" tabindex="-1"></a>  <span class="co"># Define the month for this iteration</span></span>
+<span id="cb54-19"><a href="#cb54-19" tabindex="-1"></a>  this_month <span class="ot">&lt;-</span> use_months[i]</span>
+<span id="cb54-20"><a href="#cb54-20" tabindex="-1"></a> </span>
+<span id="cb54-21"><a href="#cb54-21" tabindex="-1"></a>  <span class="co"># Loop across sites</span></span>
+<span id="cb54-22"><a href="#cb54-22" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_sites) {</span>
+<span id="cb54-23"><a href="#cb54-23" tabindex="-1"></a>    </span>
+<span id="cb54-24"><a href="#cb54-24" tabindex="-1"></a>    <span class="co"># Define the site for this iteration</span></span>
+<span id="cb54-25"><a href="#cb54-25" tabindex="-1"></a>    this_site <span class="ot">&lt;-</span> use_sites[j]</span>
+<span id="cb54-26"><a href="#cb54-26" tabindex="-1"></a>    </span>
+<span id="cb54-27"><a href="#cb54-27" tabindex="-1"></a>    <span class="co"># Calculate monthly mean temp</span></span>
+<span id="cb54-28"><a href="#cb54-28" tabindex="-1"></a>    <span class="co"># and store in the matrix</span></span>
+<span id="cb54-29"><a href="#cb54-29" tabindex="-1"></a>    mean_temp[i, j] <span class="ot">&lt;-</span> <span class="fu">calc_monthly_avg</span>(<span class="at">dat =</span> TSW_30min, </span>
+<span id="cb54-30"><a href="#cb54-30" tabindex="-1"></a>                     <span class="at">site =</span> this_site,</span>
+<span id="cb54-31"><a href="#cb54-31" tabindex="-1"></a>                     <span class="at">month =</span> this_month) </span>
+<span id="cb54-32"><a href="#cb54-32" tabindex="-1"></a>    </span>
+<span id="cb54-33"><a href="#cb54-33" tabindex="-1"></a>  }</span>
+<span id="cb54-34"><a href="#cb54-34" tabindex="-1"></a>  </span>
+<span id="cb54-35"><a href="#cb54-35" tabindex="-1"></a>}</span>
+<span id="cb54-36"><a href="#cb54-36" tabindex="-1"></a></span>
+<span id="cb54-37"><a href="#cb54-37" tabindex="-1"></a><span class="co"># Print the output</span></span>
+<span id="cb54-38"><a href="#cb54-38" tabindex="-1"></a>mean_temp</span></code></pre></div>
+<pre><code>         [,1]      [,2]      [,3]      [,4]
+[1,] 33.50058 12.196731 12.303121 4.3959050
+[2,] 31.50993 15.253925 14.799514 5.8272940
+[3,] 26.70138 15.105474 13.469919 4.6315694
+[4,] 24.78954 12.553960 11.250528 2.6157763
+[5,] 20.36962  9.079013  5.806759 0.8040232</code></pre>
+<p>After the calculation in the loop, we could make the output more
+informative by assigning column or row names:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a><span class="fu">colnames</span>(mean_temp) <span class="ot">&lt;-</span> use_sites</span>
+<span id="cb56-2"><a href="#cb56-2" tabindex="-1"></a><span class="fu">rownames</span>(mean_temp) <span class="ot">&lt;-</span> use_months</span>
+<span id="cb56-3"><a href="#cb56-3" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" tabindex="-1"></a>mean_temp</span></code></pre></div>
+<pre><code>       SYCA      MART      TECR      CARI
+6  33.50058 12.196731 12.303121 4.3959050
+7  31.50993 15.253925 14.799514 5.8272940
+8  26.70138 15.105474 13.469919 4.6315694
+9  24.78954 12.553960 11.250528 2.6157763
+10 20.36962  9.079013  5.806759 0.8040232</code></pre>
+<p>Or, by converting it to a dataframe with a column for site.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a>mean_temp <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">month =</span> use_months, mean_temp)</span>
+<span id="cb58-2"><a href="#cb58-2" tabindex="-1"></a>mean_temp</span></code></pre></div>
+<pre><code>   month     SYCA      MART      TECR      CARI
+6      6 33.50058 12.196731 12.303121 4.3959050
+7      7 31.50993 15.253925 14.799514 5.8272940
+8      8 26.70138 15.105474 13.469919 4.6315694
+9      9 24.78954 12.553960 11.250528 2.6157763
+10    10 20.36962  9.079013  5.806759 0.8040232</code></pre>
+</div>
+</details>
+</div>
+<p><br></p>
+</div>
+<div id="while-loops" class="section level4">
+<h4><code>while()</code> loops</h4>
+<p>Sometimes you will find yourself needing to repeat an operation as
+long as a certain condition is met. You can do this with a
+<code>while()</code> loop.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="cf">while</span> (this condition is true) {</span>
+<span id="cb60-2"><a href="#cb60-2" tabindex="-1"></a>   do a thing</span>
+<span id="cb60-3"><a href="#cb60-3" tabindex="-1"></a>}</span></code></pre></div>
+<p>Here is an example of a <code>while</code> loop that adds up the
+integers until it reaches a sum that is greater than or equal to
+100.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a><span class="co"># Define the initial condition:</span></span>
+<span id="cb61-2"><a href="#cb61-2" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb61-3"><a href="#cb61-3" tabindex="-1"></a>total <span class="ot">&lt;-</span> i</span>
+<span id="cb61-4"><a href="#cb61-4" tabindex="-1"></a></span>
+<span id="cb61-5"><a href="#cb61-5" tabindex="-1"></a><span class="co"># Repeat the loop while the value of total &lt; 100.</span></span>
+<span id="cb61-6"><a href="#cb61-6" tabindex="-1"></a><span class="cf">while</span> (total <span class="sc">&lt;</span> <span class="dv">100</span>) {</span>
+<span id="cb61-7"><a href="#cb61-7" tabindex="-1"></a>  </span>
+<span id="cb61-8"><a href="#cb61-8" tabindex="-1"></a>  <span class="co"># Increment the integer by 1 and add to the total</span></span>
+<span id="cb61-9"><a href="#cb61-9" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb61-10"><a href="#cb61-10" tabindex="-1"></a>  total <span class="ot">&lt;-</span> total <span class="sc">+</span> i</span>
+<span id="cb61-11"><a href="#cb61-11" tabindex="-1"></a>  </span>
+<span id="cb61-12"><a href="#cb61-12" tabindex="-1"></a>}</span>
+<span id="cb61-13"><a href="#cb61-13" tabindex="-1"></a></span>
+<span id="cb61-14"><a href="#cb61-14" tabindex="-1"></a><span class="co"># print the total and value of i when the loop stopped</span></span>
+<span id="cb61-15"><a href="#cb61-15" tabindex="-1"></a>total</span>
+<span id="cb61-16"><a href="#cb61-16" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">105</span></span>
+<span id="cb61-17"><a href="#cb61-17" tabindex="-1"></a>i</span>
+<span id="cb61-18"><a href="#cb61-18" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">14</span></span></code></pre></div>
+<p><code>while()</code> loops will not always be appropriate. You have
+to be particularly careful that you don’t end up stuck in an infinite
+loop because the condition is always met and hence the while statement
+never terminates. If you do end up in an infinite loop, you can cancel
+the operation running in the console by typing <kbd>ESC</kbd> or
+clicking the red stop sign in the upper right corner of the console
+window.</p>
+<div class="challenge">
+<p>Write a <code>while</code> loop that prints out the difference
+between the maximum and minimum temperature values for each row of
+<code>TSW_30min</code> until the temperature difference exceeds 5
+degrees. This means that temperature fluctuated more than 5 degrees in
+that 30 minute time period. Your loop should also print out the row
+number.</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a><span class="co"># Start at row 1</span></span>
+<span id="cb62-2"><a href="#cb62-2" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb62-3"><a href="#cb62-3" tabindex="-1"></a></span>
+<span id="cb62-4"><a href="#cb62-4" tabindex="-1"></a><span class="co"># Calculate the temperature difference in row i</span></span>
+<span id="cb62-5"><a href="#cb62-5" tabindex="-1"></a>temp_diff <span class="ot">&lt;-</span> <span class="fu">with</span>(TSW_30min[i, ], surfWaterTempMaximum <span class="sc">-</span> surfWaterTempMinimum)</span>
+<span id="cb62-6"><a href="#cb62-6" tabindex="-1"></a></span>
+<span id="cb62-7"><a href="#cb62-7" tabindex="-1"></a><span class="co"># Repeat the loop until the difference is greater than 5</span></span>
+<span id="cb62-8"><a href="#cb62-8" tabindex="-1"></a><span class="cf">while</span>(temp_diff <span class="sc">&lt;=</span> <span class="dv">5</span>){</span>
+<span id="cb62-9"><a href="#cb62-9" tabindex="-1"></a>  </span>
+<span id="cb62-10"><a href="#cb62-10" tabindex="-1"></a>  <span class="co"># Print the temperature difference and the row number</span></span>
+<span id="cb62-11"><a href="#cb62-11" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;row:&quot;</span>, i, <span class="st">&quot;difference:&quot;</span>, temp_diff))</span>
+<span id="cb62-12"><a href="#cb62-12" tabindex="-1"></a>  </span>
+<span id="cb62-13"><a href="#cb62-13" tabindex="-1"></a>  <span class="co"># Increment the row by 1 and recalculate the difference</span></span>
+<span id="cb62-14"><a href="#cb62-14" tabindex="-1"></a>  i <span class="ot">&lt;-</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb62-15"><a href="#cb62-15" tabindex="-1"></a>  temp_diff <span class="ot">&lt;-</span> <span class="fu">with</span>(TSW_30min[i, ], surfWaterTempMaximum <span class="sc">-</span> surfWaterTempMinimum)</span>
+<span id="cb62-16"><a href="#cb62-16" tabindex="-1"></a>  </span>
+<span id="cb62-17"><a href="#cb62-17" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+</details>
+</div>
+<p><br></p>
+<p>While loops are rarely the best solution to a problem. Here is a more
+efficient way to identify the first time a row exceeds a five degree
+difference between the maximum and minimum temperature values.</p>
+<p>To do this we use the <code>which()</code> function. This function
+gives the indices of a boolean vector that are true.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a><span class="fu">which</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>[1] 1 2 4</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a><span class="fu">which</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">30</span> <span class="sc">&gt;</span> <span class="dv">27</span>)</span></code></pre></div>
+<pre><code>[1]  9 10 11</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a><span class="fu">which</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;c&quot;</span>, <span class="st">&quot;a&quot;</span>))</span></code></pre></div>
+<pre><code>[1] 1 3</code></pre>
+<p>We can use <code>which()</code> to find the first index of a row with
+a temperature difference greater than 5 degrees, then calculate the
+temperature difference from all rows less than this index.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" tabindex="-1"></a><span class="co"># Calculate the difference in temperatures</span></span>
+<span id="cb69-2"><a href="#cb69-2" tabindex="-1"></a>tempdiff <span class="ot">&lt;-</span> <span class="fu">with</span>(TSW_30min, surfWaterTempMaximum <span class="sc">-</span> surfWaterTempMinimum)</span>
+<span id="cb69-3"><a href="#cb69-3" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="#cb69-4" tabindex="-1"></a><span class="co"># Which rows of TSW_30min have a temperature range &gt;= 5?</span></span>
+<span id="cb69-5"><a href="#cb69-5" tabindex="-1"></a>gt5 <span class="ot">&lt;-</span> <span class="fu">which</span>(tempdiff <span class="sc">&gt;=</span> <span class="dv">5</span>)</span>
+<span id="cb69-6"><a href="#cb69-6" tabindex="-1"></a></span>
+<span id="cb69-7"><a href="#cb69-7" tabindex="-1"></a><span class="co"># What is the smallest index in gt5?</span></span>
+<span id="cb69-8"><a href="#cb69-8" tabindex="-1"></a>first_gt5 <span class="ot">&lt;-</span> <span class="fu">min</span>(gt5)</span>
+<span id="cb69-9"><a href="#cb69-9" tabindex="-1"></a></span>
+<span id="cb69-10"><a href="#cb69-10" tabindex="-1"></a><span class="co"># Return the temperature difference for all rows preceding first_gt5</span></span>
+<span id="cb69-11"><a href="#cb69-11" tabindex="-1"></a>tempdiff[<span class="dv">1</span><span class="sc">:</span>(first_gt5<span class="dv">-1</span>)]</span></code></pre></div>
+<pre><code> [1] 1.104 1.332 1.458 1.716 1.734 1.210 1.664 1.544 1.164 0.635 0.079 0.277
+[13] 0.783 0.946 0.914 0.772 0.605 0.561 0.600 0.400 0.521 0.396 0.482 0.473
+[25] 0.420 0.156 1.584 2.424 4.248 2.697 3.350</code></pre>
+<p>You could even return this result as a dataframe:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">row =</span> <span class="dv">1</span><span class="sc">:</span>(first_gt5<span class="dv">-1</span>), </span>
+<span id="cb71-2"><a href="#cb71-2" tabindex="-1"></a>           <span class="at">temp_difference =</span> tempdiff[<span class="dv">1</span><span class="sc">:</span>(first_gt5<span class="dv">-1</span>)])</span></code></pre></div>
+<pre><code>   row temp_difference
+1    1           1.104
+2    2           1.332
+3    3           1.458
+4    4           1.716
+5    5           1.734
+6    6           1.210
+7    7           1.664
+8    8           1.544
+9    9           1.164
+10  10           0.635
+11  11           0.079
+12  12           0.277
+13  13           0.783
+14  14           0.946
+15  15           0.914
+16  16           0.772
+17  17           0.605
+18  18           0.561
+19  19           0.600
+20  20           0.400
+21  21           0.521
+22  22           0.396
+23  23           0.482
+24  24           0.473
+25  25           0.420
+26  26           0.156
+27  27           1.584
+28  28           2.424
+29  29           4.248
+30  30           2.697
+31  31           3.350</code></pre>
+</div>
+</div>
+<div id="putting-it-all-together" class="section level3">
+<h3>Putting it all together</h3>
+<p>We’re going to write a script that plots the average monthly
+temperature for each NEON site in <code>TSW_30min</code>, but only if
+less than 10% of the data are erroneous. Our script will automatically
+save each plot to a file in an output folder.</p>
+<p>We should start by creating a new R script with a descriptive name
+and saving it in the <code>src</code> folder. Create a new R script in
+your <code>src</code> folder named <code>plot_monthly_temp.R</code>. In
+this script use comments to outlines what we are trying to do:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" tabindex="-1"></a><span class="co"># Define vector of months in TSW_30min</span></span>
+<span id="cb73-2"><a href="#cb73-2" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="#cb73-3" tabindex="-1"></a><span class="co"># Define vector of sites in TSW_30min</span></span>
+<span id="cb73-4"><a href="#cb73-4" tabindex="-1"></a></span>
+<span id="cb73-5"><a href="#cb73-5" tabindex="-1"></a><span class="co"># Define a matrix for saving values</span></span>
+<span id="cb73-6"><a href="#cb73-6" tabindex="-1"></a></span>
+<span id="cb73-7"><a href="#cb73-7" tabindex="-1"></a></span>
+<span id="cb73-8"><a href="#cb73-8" tabindex="-1"></a><span class="co"># Loop through each month in TSW_30min</span></span>
+<span id="cb73-9"><a href="#cb73-9" tabindex="-1"></a><span class="cf">for</span> (     ) {</span>
+<span id="cb73-10"><a href="#cb73-10" tabindex="-1"></a>  </span>
+<span id="cb73-11"><a href="#cb73-11" tabindex="-1"></a>  <span class="co"># Loop through each site in TSW_30 min</span></span>
+<span id="cb73-12"><a href="#cb73-12" tabindex="-1"></a>  <span class="cf">for</span> (    ) {</span>
+<span id="cb73-13"><a href="#cb73-13" tabindex="-1"></a></span>
+<span id="cb73-14"><a href="#cb73-14" tabindex="-1"></a>      <span class="co"># Determine the fraction of erroneous data</span></span>
+<span id="cb73-15"><a href="#cb73-15" tabindex="-1"></a>      <span class="co"># finalQF != 0</span></span>
+<span id="cb73-16"><a href="#cb73-16" tabindex="-1"></a>  </span>
+<span id="cb73-17"><a href="#cb73-17" tabindex="-1"></a>      <span class="co"># If the fraction is &lt; 0.1</span></span>
+<span id="cb73-18"><a href="#cb73-18" tabindex="-1"></a>      <span class="co"># Calculate the monthly mean temperature</span></span>
+<span id="cb73-19"><a href="#cb73-19" tabindex="-1"></a>    </span>
+<span id="cb73-20"><a href="#cb73-20" tabindex="-1"></a>      <span class="co"># Save values into the matrix</span></span>
+<span id="cb73-21"><a href="#cb73-21" tabindex="-1"></a></span>
+<span id="cb73-22"><a href="#cb73-22" tabindex="-1"></a>  </span>
+<span id="cb73-23"><a href="#cb73-23" tabindex="-1"></a>  }</span>
+<span id="cb73-24"><a href="#cb73-24" tabindex="-1"></a>  </span>
+<span id="cb73-25"><a href="#cb73-25" tabindex="-1"></a>}</span>
+<span id="cb73-26"><a href="#cb73-26" tabindex="-1"></a></span>
+<span id="cb73-27"><a href="#cb73-27" tabindex="-1"></a><span class="co"># Convert the matrix into a dataframe</span></span>
+<span id="cb73-28"><a href="#cb73-28" tabindex="-1"></a></span>
+<span id="cb73-29"><a href="#cb73-29" tabindex="-1"></a><span class="co"># For each site</span></span>
+<span id="cb73-30"><a href="#cb73-30" tabindex="-1"></a><span class="co"># Plot monthly mean temperature versus month</span></span>
+<span id="cb73-31"><a href="#cb73-31" tabindex="-1"></a></span>
+<span id="cb73-32"><a href="#cb73-32" tabindex="-1"></a><span class="co"># Save the plot to a file in the results folder</span></span></code></pre></div>
+<p>We have already done most of this. The code below aggregates code we
+have already written in the lesson above.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="co"># Source our functions script that contains the </span></span>
+<span id="cb74-2"><a href="#cb74-2" tabindex="-1"></a><span class="co"># calc_monthly_avg() function</span></span>
+<span id="cb74-3"><a href="#cb74-3" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;src/functions.R&quot;</span>)</span>
+<span id="cb74-4"><a href="#cb74-4" tabindex="-1"></a></span>
+<span id="cb74-5"><a href="#cb74-5" tabindex="-1"></a><span class="co"># Define vector of months in TSW_30min</span></span>
+<span id="cb74-6"><a href="#cb74-6" tabindex="-1"></a>use_months <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">month</span>(TSW_30min<span class="sc">$</span>startDateTime))</span>
+<span id="cb74-7"><a href="#cb74-7" tabindex="-1"></a>N_months <span class="ot">&lt;-</span> <span class="fu">length</span>(use_months)</span>
+<span id="cb74-8"><a href="#cb74-8" tabindex="-1"></a></span>
+<span id="cb74-9"><a href="#cb74-9" tabindex="-1"></a><span class="co"># Define vector of sites in TSW_30min</span></span>
+<span id="cb74-10"><a href="#cb74-10" tabindex="-1"></a>use_sites <span class="ot">&lt;-</span> <span class="fu">unique</span>(TSW_30min<span class="sc">$</span>siteID)</span>
+<span id="cb74-11"><a href="#cb74-11" tabindex="-1"></a>N_sites <span class="ot">&lt;-</span> <span class="fu">length</span>(use_sites)</span>
+<span id="cb74-12"><a href="#cb74-12" tabindex="-1"></a></span>
+<span id="cb74-13"><a href="#cb74-13" tabindex="-1"></a><span class="co"># Define a matrix for saving values:</span></span>
+<span id="cb74-14"><a href="#cb74-14" tabindex="-1"></a><span class="co"># months will be the rows and sitess with be the columns</span></span>
+<span id="cb74-15"><a href="#cb74-15" tabindex="-1"></a>mean_temp <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> N_months, <span class="at">ncol =</span> N_sites)</span>
+<span id="cb74-16"><a href="#cb74-16" tabindex="-1"></a></span>
+<span id="cb74-17"><a href="#cb74-17" tabindex="-1"></a><span class="co"># Loop through each month in TSW_30min</span></span>
+<span id="cb74-18"><a href="#cb74-18" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_months) {</span>
+<span id="cb74-19"><a href="#cb74-19" tabindex="-1"></a>  </span>
+<span id="cb74-20"><a href="#cb74-20" tabindex="-1"></a>  <span class="co"># Define this month</span></span>
+<span id="cb74-21"><a href="#cb74-21" tabindex="-1"></a>  this_month <span class="ot">&lt;-</span> use_months[i]</span>
+<span id="cb74-22"><a href="#cb74-22" tabindex="-1"></a>  </span>
+<span id="cb74-23"><a href="#cb74-23" tabindex="-1"></a>  <span class="co"># Loop through each site in TSW_30 min</span></span>
+<span id="cb74-24"><a href="#cb74-24" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_sites) {</span>
+<span id="cb74-25"><a href="#cb74-25" tabindex="-1"></a>    </span>
+<span id="cb74-26"><a href="#cb74-26" tabindex="-1"></a>      <span class="co"># Define this site</span></span>
+<span id="cb74-27"><a href="#cb74-27" tabindex="-1"></a>      this_site <span class="ot">&lt;-</span> use_sites[j]</span>
+<span id="cb74-28"><a href="#cb74-28" tabindex="-1"></a>    </span>
+<span id="cb74-29"><a href="#cb74-29" tabindex="-1"></a>      <span class="co"># Determine the fraction of erroneous data</span></span>
+<span id="cb74-30"><a href="#cb74-30" tabindex="-1"></a>      <span class="co"># finalQF != 0</span></span>
+<span id="cb74-31"><a href="#cb74-31" tabindex="-1"></a>      </span>
+<span id="cb74-32"><a href="#cb74-32" tabindex="-1"></a>      </span>
+<span id="cb74-33"><a href="#cb74-33" tabindex="-1"></a>  </span>
+<span id="cb74-34"><a href="#cb74-34" tabindex="-1"></a>      <span class="co"># If the fraction is &lt; 0.1</span></span>
+<span id="cb74-35"><a href="#cb74-35" tabindex="-1"></a>      <span class="co"># Calculate the monthly mean temperature</span></span>
+<span id="cb74-36"><a href="#cb74-36" tabindex="-1"></a>      this_temp <span class="ot">&lt;-</span> <span class="fu">calc_monthly_avg</span>(<span class="at">dat =</span> TSW_30min, </span>
+<span id="cb74-37"><a href="#cb74-37" tabindex="-1"></a>                     <span class="at">site =</span> this_site,</span>
+<span id="cb74-38"><a href="#cb74-38" tabindex="-1"></a>                     <span class="at">month =</span> this_month) </span>
+<span id="cb74-39"><a href="#cb74-39" tabindex="-1"></a>      </span>
+<span id="cb74-40"><a href="#cb74-40" tabindex="-1"></a>    </span>
+<span id="cb74-41"><a href="#cb74-41" tabindex="-1"></a>      <span class="co"># Save values into the matrix</span></span>
+<span id="cb74-42"><a href="#cb74-42" tabindex="-1"></a>      mean_temp[i, j] <span class="ot">&lt;-</span> this_temp</span>
+<span id="cb74-43"><a href="#cb74-43" tabindex="-1"></a>    </span>
+<span id="cb74-44"><a href="#cb74-44" tabindex="-1"></a>  }</span>
+<span id="cb74-45"><a href="#cb74-45" tabindex="-1"></a>  </span>
+<span id="cb74-46"><a href="#cb74-46" tabindex="-1"></a>}</span>
+<span id="cb74-47"><a href="#cb74-47" tabindex="-1"></a></span>
+<span id="cb74-48"><a href="#cb74-48" tabindex="-1"></a><span class="co"># Convert the matrix into a dataframe</span></span>
+<span id="cb74-49"><a href="#cb74-49" tabindex="-1"></a></span>
+<span id="cb74-50"><a href="#cb74-50" tabindex="-1"></a><span class="co"># For each site</span></span>
+<span id="cb74-51"><a href="#cb74-51" tabindex="-1"></a><span class="co"># Plot monthly mean temperature versus month</span></span>
+<span id="cb74-52"><a href="#cb74-52" tabindex="-1"></a></span>
+<span id="cb74-53"><a href="#cb74-53" tabindex="-1"></a><span class="co"># Save the plot to a file in the results folder</span></span></code></pre></div>
+<p>All we need to do is determine the percentage of erroneous data in
+each month and site. There are several approaches to doing this:</p>
+<ol style="list-style-type: decimal">
+<li>We could subset <code>TSW_30min</code> inside the two loops and then
+look for erroneous data in each subset.</li>
+<li>We could tabulate the number of erroneous data points in each month
+and site before using the loop, then select the appropriate element from
+this table inside the loop.</li>
+</ol>
+<p>We should select the option that requires the least number of
+computations. This would be option 2, because it doesn’t require
+subsetting the data 20 times (<code>N_months x N_sites</code>). Let’s
+see how this works:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" tabindex="-1"></a><span class="co"># Tabulate TSW_30min by month, site and value of finalQF</span></span>
+<span id="cb75-2"><a href="#cb75-2" tabindex="-1"></a>QF_tab <span class="ot">&lt;-</span> <span class="fu">with</span>(TSW_30min, <span class="fu">table</span>(<span class="fu">month</span>(startDateTime), siteID, finalQF))</span>
+<span id="cb75-3"><a href="#cb75-3" tabindex="-1"></a></span>
+<span id="cb75-4"><a href="#cb75-4" tabindex="-1"></a><span class="fu">dim</span>(QF_tab)</span></code></pre></div>
+<pre><code>[1] 5 4 2</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" tabindex="-1"></a><span class="fu">dimnames</span>(QF_tab)</span></code></pre></div>
+<pre><code>[[1]]
+[1] &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot;
+
+$siteID
+[1] &quot;CARI&quot; &quot;MART&quot; &quot;SYCA&quot; &quot;TECR&quot;
+
+$finalQF
+[1] &quot;0&quot; &quot;1&quot;</code></pre>
+<p>We can see that QF_tab is a 3-dimensional array because we tabulated
+by 3 variables. The first dimension is the month, the second dimension
+is the site and the third dimension is the value of
+<code>finalQF</code>. We can see the values stores in the array
+here:</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a>QF_tab</span></code></pre></div>
+<pre><code>, , finalQF = 0
+
+    siteID
+     CARI MART SYCA TECR
+  6  2179 2803 2686 2735
+  7  2861 2837 2482 2860
+  8  2947 2918  993 2942
+  9  2740 2796 1161 2765
+  10 1424 2913 1722 2805
+
+, , finalQF = 1
+
+    siteID
+     CARI MART SYCA TECR
+  6   701 2957  194  145
+  7   115  235  494  116
+  8    29   58 1983   34
+  9   140   84 1719  115
+  10 1552   63 1254  171</code></pre>
+<p>Thus if we specify an index in the third dimension we can select
+either the number of good or erroneous data points:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" tabindex="-1"></a><span class="co"># Number of good data points</span></span>
+<span id="cb81-2"><a href="#cb81-2" tabindex="-1"></a>QF_tab[ , , <span class="dv">1</span>]</span></code></pre></div>
+<pre><code>    siteID
+     CARI MART SYCA TECR
+  6  2179 2803 2686 2735
+  7  2861 2837 2482 2860
+  8  2947 2918  993 2942
+  9  2740 2796 1161 2765
+  10 1424 2913 1722 2805</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" tabindex="-1"></a><span class="co"># Number of erroneous data points</span></span>
+<span id="cb83-2"><a href="#cb83-2" tabindex="-1"></a>QF_tab[ , , <span class="dv">2</span>]</span></code></pre></div>
+<pre><code>    siteID
+     CARI MART SYCA TECR
+  6   701 2957  194  145
+  7   115  235  494  116
+  8    29   58 1983   34
+  9   140   84 1719  115
+  10 1552   63 1254  171</code></pre>
+<div class="challenge">
+<p>Use mathematical operations on QF_tab to make a table containing the
+fraction of erroneous data points for each site and month ( = num
+erroneous points / total number of points). Remember that arithmetic on
+vectors, matrices and array occurs element-wise.</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" tabindex="-1"></a><span class="co"># Calculate the fraction of erroneous data points</span></span>
+<span id="cb85-2"><a href="#cb85-2" tabindex="-1"></a>QF_frac <span class="ot">&lt;-</span> QF_tab[ , , <span class="dv">2</span>] <span class="sc">/</span> (QF_tab[ , , <span class="dv">1</span>] <span class="sc">+</span> QF_tab[ , , <span class="dv">2</span>])</span></code></pre></div>
+</div>
+</details>
+</div>
+<p><br></p>
+<p>Now if we calculate this table containing the fraction of erroneous
+data points before the loop, we can select elements from it within the
+loop to decide whether to proceed with calculating mean temperature in a
+given month and site.</p>
+<pre><code>    siteID
+            CARI        MART        SYCA        TECR
+  6  0.243402778 0.513368056 0.067361111 0.050347222
+  7  0.038642473 0.076497396 0.165994624 0.038978495
+  8  0.009744624 0.019489247 0.666330645 0.011424731
+  9  0.048611111 0.029166667 0.596875000 0.039930556
+  10 0.521505376 0.021169355 0.421370968 0.057459677</code></pre>
+<p>We need to be careful to use names (e.g. “6”) rather than numeric
+indices to select the row and column from <code>QF_frac</code>, since
+the order of rows and columns is not necessarily the same as the order
+in <code>use_months</code> and <code>use_sites</code>.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" tabindex="-1"></a>QF_frac[<span class="st">&quot;6&quot;</span>, <span class="st">&quot;CARI&quot;</span>]</span></code></pre></div>
+<pre><code>[1] 0.2434028</code></pre>
+<p>That means that we need to convert <code>use_month</code> to a
+character before using it to select a row from <code>QF_frac</code>.
+Otherwise, this will happen:</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" tabindex="-1"></a>QF_frac[<span class="dv">6</span>, <span class="st">&quot;CARI&quot;</span>]</span></code></pre></div>
+<pre><code>Error in `[.default`(QF_frac, 6, &quot;CARI&quot;): subscript out of bounds</code></pre>
+<p>Here’s our code so far:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" tabindex="-1"></a><span class="co"># Source our functions script that contains the </span></span>
+<span id="cb91-2"><a href="#cb91-2" tabindex="-1"></a><span class="co"># calc_monthly_avg() function</span></span>
+<span id="cb91-3"><a href="#cb91-3" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;src/functions.R&quot;</span>)</span>
+<span id="cb91-4"><a href="#cb91-4" tabindex="-1"></a></span>
+<span id="cb91-5"><a href="#cb91-5" tabindex="-1"></a><span class="co"># Define vector of months in TSW_30min</span></span>
+<span id="cb91-6"><a href="#cb91-6" tabindex="-1"></a>use_months <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">month</span>(TSW_30min<span class="sc">$</span>startDateTime))</span>
+<span id="cb91-7"><a href="#cb91-7" tabindex="-1"></a>N_months <span class="ot">&lt;-</span> <span class="fu">length</span>(use_months)</span>
+<span id="cb91-8"><a href="#cb91-8" tabindex="-1"></a></span>
+<span id="cb91-9"><a href="#cb91-9" tabindex="-1"></a><span class="co"># Define vector of sites in TSW_30min</span></span>
+<span id="cb91-10"><a href="#cb91-10" tabindex="-1"></a>use_sites <span class="ot">&lt;-</span> <span class="fu">unique</span>(TSW_30min<span class="sc">$</span>siteID)</span>
+<span id="cb91-11"><a href="#cb91-11" tabindex="-1"></a>N_sites <span class="ot">&lt;-</span> <span class="fu">length</span>(use_sites)</span>
+<span id="cb91-12"><a href="#cb91-12" tabindex="-1"></a></span>
+<span id="cb91-13"><a href="#cb91-13" tabindex="-1"></a><span class="co"># Define a matrix for saving values:</span></span>
+<span id="cb91-14"><a href="#cb91-14" tabindex="-1"></a><span class="co"># months will be the rows and sitess with be the columns</span></span>
+<span id="cb91-15"><a href="#cb91-15" tabindex="-1"></a>mean_temp <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> N_months, <span class="at">ncol =</span> N_sites)</span>
+<span id="cb91-16"><a href="#cb91-16" tabindex="-1"></a></span>
+<span id="cb91-17"><a href="#cb91-17" tabindex="-1"></a><span class="co"># Tabulate TSW_30min by month, site and value of finalQF</span></span>
+<span id="cb91-18"><a href="#cb91-18" tabindex="-1"></a><span class="co">#  and calculate the fraction of erroneous data points</span></span>
+<span id="cb91-19"><a href="#cb91-19" tabindex="-1"></a>QF_tab <span class="ot">&lt;-</span> <span class="fu">with</span>(TSW_30min, <span class="fu">table</span>(<span class="fu">month</span>(startDateTime), siteID, finalQF))</span>
+<span id="cb91-20"><a href="#cb91-20" tabindex="-1"></a>QF_frac <span class="ot">&lt;-</span> QF_tab[ , , <span class="dv">2</span>] <span class="sc">/</span> (QF_tab[ , , <span class="dv">1</span>] <span class="sc">+</span> QF_tab[ , , <span class="dv">2</span>])</span>
+<span id="cb91-21"><a href="#cb91-21" tabindex="-1"></a></span>
+<span id="cb91-22"><a href="#cb91-22" tabindex="-1"></a><span class="co"># Loop through each month in TSW_30min</span></span>
+<span id="cb91-23"><a href="#cb91-23" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_months) {</span>
+<span id="cb91-24"><a href="#cb91-24" tabindex="-1"></a>  </span>
+<span id="cb91-25"><a href="#cb91-25" tabindex="-1"></a>  <span class="co"># Define this month</span></span>
+<span id="cb91-26"><a href="#cb91-26" tabindex="-1"></a>  this_month <span class="ot">&lt;-</span> use_months[i]</span>
+<span id="cb91-27"><a href="#cb91-27" tabindex="-1"></a>  </span>
+<span id="cb91-28"><a href="#cb91-28" tabindex="-1"></a>  <span class="co"># Loop through each site in TSW_30 min</span></span>
+<span id="cb91-29"><a href="#cb91-29" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_sites) {</span>
+<span id="cb91-30"><a href="#cb91-30" tabindex="-1"></a>    </span>
+<span id="cb91-31"><a href="#cb91-31" tabindex="-1"></a>      <span class="co"># Define this site</span></span>
+<span id="cb91-32"><a href="#cb91-32" tabindex="-1"></a>      this_site <span class="ot">&lt;-</span> use_sites[j]</span>
+<span id="cb91-33"><a href="#cb91-33" tabindex="-1"></a>    </span>
+<span id="cb91-34"><a href="#cb91-34" tabindex="-1"></a>      <span class="co"># Determine the fraction of erroneous data</span></span>
+<span id="cb91-35"><a href="#cb91-35" tabindex="-1"></a>      this_frac <span class="ot">&lt;-</span> QF_frac[<span class="fu">as.character</span>(this_month), this_site]</span>
+<span id="cb91-36"><a href="#cb91-36" tabindex="-1"></a>      </span>
+<span id="cb91-37"><a href="#cb91-37" tabindex="-1"></a>      </span>
+<span id="cb91-38"><a href="#cb91-38" tabindex="-1"></a>      <span class="co"># If the fraction is &lt; 0.1</span></span>
+<span id="cb91-39"><a href="#cb91-39" tabindex="-1"></a>      <span class="cf">if</span> (this_frac <span class="sc">&lt;</span> <span class="fl">0.1</span>) {</span>
+<span id="cb91-40"><a href="#cb91-40" tabindex="-1"></a>        </span>
+<span id="cb91-41"><a href="#cb91-41" tabindex="-1"></a>        <span class="co"># Calculate the monthly mean temperature</span></span>
+<span id="cb91-42"><a href="#cb91-42" tabindex="-1"></a>        this_temp <span class="ot">&lt;-</span> <span class="fu">calc_monthly_avg</span>(<span class="at">dat =</span> TSW_30min, </span>
+<span id="cb91-43"><a href="#cb91-43" tabindex="-1"></a>                       <span class="at">site =</span> this_site,</span>
+<span id="cb91-44"><a href="#cb91-44" tabindex="-1"></a>                       <span class="at">month =</span> this_month) </span>
+<span id="cb91-45"><a href="#cb91-45" tabindex="-1"></a>      </span>
+<span id="cb91-46"><a href="#cb91-46" tabindex="-1"></a>        <span class="co"># Save values into the matrix</span></span>
+<span id="cb91-47"><a href="#cb91-47" tabindex="-1"></a>        mean_temp[i, j] <span class="ot">&lt;-</span> this_temp</span>
+<span id="cb91-48"><a href="#cb91-48" tabindex="-1"></a>        </span>
+<span id="cb91-49"><a href="#cb91-49" tabindex="-1"></a>      } <span class="co"># else the NA value will stay in the matrix</span></span>
+<span id="cb91-50"><a href="#cb91-50" tabindex="-1"></a> </span>
+<span id="cb91-51"><a href="#cb91-51" tabindex="-1"></a>  }</span>
+<span id="cb91-52"><a href="#cb91-52" tabindex="-1"></a>  </span>
+<span id="cb91-53"><a href="#cb91-53" tabindex="-1"></a>}</span>
+<span id="cb91-54"><a href="#cb91-54" tabindex="-1"></a></span>
+<span id="cb91-55"><a href="#cb91-55" tabindex="-1"></a><span class="co"># Define dimension names for mean_temp based on</span></span>
+<span id="cb91-56"><a href="#cb91-56" tabindex="-1"></a><span class="co"># the order of months and sites in use_months and use_sites</span></span>
+<span id="cb91-57"><a href="#cb91-57" tabindex="-1"></a><span class="fu">rownames</span>(mean_temp) <span class="ot">&lt;-</span> use_months</span>
+<span id="cb91-58"><a href="#cb91-58" tabindex="-1"></a><span class="fu">colnames</span>(mean_temp) <span class="ot">&lt;-</span> use_sites</span>
+<span id="cb91-59"><a href="#cb91-59" tabindex="-1"></a></span>
+<span id="cb91-60"><a href="#cb91-60" tabindex="-1"></a><span class="co"># Convert the matrix into a dataframe</span></span>
+<span id="cb91-61"><a href="#cb91-61" tabindex="-1"></a></span>
+<span id="cb91-62"><a href="#cb91-62" tabindex="-1"></a><span class="co"># For each site</span></span>
+<span id="cb91-63"><a href="#cb91-63" tabindex="-1"></a><span class="co"># Plot monthly mean temperature versus month</span></span>
+<span id="cb91-64"><a href="#cb91-64" tabindex="-1"></a></span>
+<span id="cb91-65"><a href="#cb91-65" tabindex="-1"></a><span class="co"># Save the plot to a file in the results folder</span></span></code></pre></div>
+<p>This code will run, but isn’t plotting a figure yet. We can check the
+values calculated in the loop for mean temperature and see that the ones
+where <code>QF_frac</code> were greater than <code>0.1</code> remained
+as missing (<code>NA</code>).</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" tabindex="-1"></a>mean_temp</span></code></pre></div>
+<pre><code>       SYCA      MART      TECR     CARI
+6  33.50058        NA 12.303121       NA
+7        NA 15.253925 14.799514 5.827294
+8        NA 15.105474 13.469919 4.631569
+9        NA 12.553960 11.250528 2.615776
+10       NA  9.079013  5.806759       NA</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" tabindex="-1"></a>QF_frac</span></code></pre></div>
+<pre><code>    siteID
+            CARI        MART        SYCA        TECR
+  6  0.243402778 0.513368056 0.067361111 0.050347222
+  7  0.038642473 0.076497396 0.165994624 0.038978495
+  8  0.009744624 0.019489247 0.666330645 0.011424731
+  9  0.048611111 0.029166667 0.596875000 0.039930556
+  10 0.521505376 0.021169355 0.421370968 0.057459677</code></pre>
+<p>The last step is to create a plot and save it to a file for each
+site. We will use the <code>plot()</code> function in base R for this.
+Recall that for the <code>plot()</code> function we need to supply
+arguments <code>x</code> and <code>y</code> that each contain a vector
+of values that the function will use to create a scatter plot.</p>
+<div class="challenge">
+<p>Fill in the three blanks in the code below so that it will execute
+properly. This code should create a graph of mean monthly temperature
+for each site and save that graph as a file with the name of the site in
+the file name.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a><span class="co"># Convert the matrix into a dataframe</span></span>
+<span id="cb96-2"><a href="#cb96-2" tabindex="-1"></a>mean_temp_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">month =</span> use_months, mean_temp)</span>
+<span id="cb96-3"><a href="#cb96-3" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="#cb96-4" tabindex="-1"></a><span class="co"># For each site</span></span>
+<span id="cb96-5"><a href="#cb96-5" tabindex="-1"></a><span class="cf">for</span> (this_site <span class="cf">in</span> use_sites) {</span>
+<span id="cb96-6"><a href="#cb96-6" tabindex="-1"></a>  </span>
+<span id="cb96-7"><a href="#cb96-7" tabindex="-1"></a>  <span class="co"># Define the file name for this plot using the site in this iteration</span></span>
+<span id="cb96-8"><a href="#cb96-8" tabindex="-1"></a>  this_filename <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;results/mean_monthly_temp_&quot;</span>, ___________,<span class="st">&quot;.pdf&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb96-9"><a href="#cb96-9" tabindex="-1"></a>  </span>
+<span id="cb96-10"><a href="#cb96-10" tabindex="-1"></a>  <span class="co"># Open a new graphics device to save the plot</span></span>
+<span id="cb96-11"><a href="#cb96-11" tabindex="-1"></a>  <span class="fu">pdf</span>(this_filename, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">width =</span> <span class="dv">4</span>)</span>
+<span id="cb96-12"><a href="#cb96-12" tabindex="-1"></a>  </span>
+<span id="cb96-13"><a href="#cb96-13" tabindex="-1"></a>  <span class="co"># Plot monthly mean temperature versus month</span></span>
+<span id="cb96-14"><a href="#cb96-14" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">x =</span> ___________, </span>
+<span id="cb96-15"><a href="#cb96-15" tabindex="-1"></a>       <span class="at">y =</span> mean_temp_df[, _________],</span>
+<span id="cb96-16"><a href="#cb96-16" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;Month&quot;</span>, </span>
+<span id="cb96-17"><a href="#cb96-17" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="st">&quot;Mean temperature&quot;</span><span class="sc">~</span>(degree<span class="sc">*</span>C)))</span>
+<span id="cb96-18"><a href="#cb96-18" tabindex="-1"></a>  </span>
+<span id="cb96-19"><a href="#cb96-19" tabindex="-1"></a>  <span class="co"># Close the graphics device (save the plot file)</span></span>
+<span id="cb96-20"><a href="#cb96-20" tabindex="-1"></a>  <span class="fu">dev.off</span>()</span>
+<span id="cb96-21"><a href="#cb96-21" tabindex="-1"></a>  </span>
+<span id="cb96-22"><a href="#cb96-22" tabindex="-1"></a>}</span></code></pre></div>
+<p>Once you solve this challenge, append this code to the end of your
+script.</p>
+</div>
+<p><br></p>
+<details>
+<summary>
+Click here to show what your final script should look like.
+</summary>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" tabindex="-1"></a><span class="co"># Source our functions script that contains the </span></span>
+<span id="cb97-2"><a href="#cb97-2" tabindex="-1"></a><span class="co"># calc_monthly_avg() function</span></span>
+<span id="cb97-3"><a href="#cb97-3" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;src/functions.R&quot;</span>)</span>
+<span id="cb97-4"><a href="#cb97-4" tabindex="-1"></a></span>
+<span id="cb97-5"><a href="#cb97-5" tabindex="-1"></a><span class="co"># Define vector of months in TSW_30min</span></span>
+<span id="cb97-6"><a href="#cb97-6" tabindex="-1"></a>use_months <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">month</span>(TSW_30min<span class="sc">$</span>startDateTime))</span>
+<span id="cb97-7"><a href="#cb97-7" tabindex="-1"></a>N_months <span class="ot">&lt;-</span> <span class="fu">length</span>(use_months)</span>
+<span id="cb97-8"><a href="#cb97-8" tabindex="-1"></a></span>
+<span id="cb97-9"><a href="#cb97-9" tabindex="-1"></a><span class="co"># Define vector of sites in TSW_30min</span></span>
+<span id="cb97-10"><a href="#cb97-10" tabindex="-1"></a>use_sites <span class="ot">&lt;-</span> <span class="fu">unique</span>(TSW_30min<span class="sc">$</span>siteID)</span>
+<span id="cb97-11"><a href="#cb97-11" tabindex="-1"></a>N_sites <span class="ot">&lt;-</span> <span class="fu">length</span>(use_sites)</span>
+<span id="cb97-12"><a href="#cb97-12" tabindex="-1"></a></span>
+<span id="cb97-13"><a href="#cb97-13" tabindex="-1"></a><span class="co"># Define a matrix for saving values:</span></span>
+<span id="cb97-14"><a href="#cb97-14" tabindex="-1"></a><span class="co"># months will be the rows and sitess with be the columns</span></span>
+<span id="cb97-15"><a href="#cb97-15" tabindex="-1"></a>mean_temp <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> N_months, <span class="at">ncol =</span> N_sites)</span>
+<span id="cb97-16"><a href="#cb97-16" tabindex="-1"></a></span>
+<span id="cb97-17"><a href="#cb97-17" tabindex="-1"></a><span class="co"># Tabulate TSW_30min by month, site and value of finalQF</span></span>
+<span id="cb97-18"><a href="#cb97-18" tabindex="-1"></a><span class="co">#  and calculate the fraction of erroneous data points</span></span>
+<span id="cb97-19"><a href="#cb97-19" tabindex="-1"></a>QF_tab <span class="ot">&lt;-</span> <span class="fu">with</span>(TSW_30min, <span class="fu">table</span>(<span class="fu">month</span>(startDateTime), siteID, finalQF))</span>
+<span id="cb97-20"><a href="#cb97-20" tabindex="-1"></a>QF_frac <span class="ot">&lt;-</span> QF_tab[ , , <span class="dv">2</span>] <span class="sc">/</span> (QF_tab[ , , <span class="dv">1</span>] <span class="sc">+</span> QF_tab[ , , <span class="dv">2</span>])</span>
+<span id="cb97-21"><a href="#cb97-21" tabindex="-1"></a></span>
+<span id="cb97-22"><a href="#cb97-22" tabindex="-1"></a><span class="co"># Loop through each month in TSW_30min</span></span>
+<span id="cb97-23"><a href="#cb97-23" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_months) {</span>
+<span id="cb97-24"><a href="#cb97-24" tabindex="-1"></a>  </span>
+<span id="cb97-25"><a href="#cb97-25" tabindex="-1"></a>  <span class="co"># Define this month</span></span>
+<span id="cb97-26"><a href="#cb97-26" tabindex="-1"></a>  this_month <span class="ot">&lt;-</span> use_months[i]</span>
+<span id="cb97-27"><a href="#cb97-27" tabindex="-1"></a>  </span>
+<span id="cb97-28"><a href="#cb97-28" tabindex="-1"></a>  <span class="co"># Loop through each site in TSW_30 min</span></span>
+<span id="cb97-29"><a href="#cb97-29" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N_sites) {</span>
+<span id="cb97-30"><a href="#cb97-30" tabindex="-1"></a>    </span>
+<span id="cb97-31"><a href="#cb97-31" tabindex="-1"></a>      <span class="co"># Define this site</span></span>
+<span id="cb97-32"><a href="#cb97-32" tabindex="-1"></a>      this_site <span class="ot">&lt;-</span> use_sites[j]</span>
+<span id="cb97-33"><a href="#cb97-33" tabindex="-1"></a>    </span>
+<span id="cb97-34"><a href="#cb97-34" tabindex="-1"></a>      <span class="co"># Determine the fraction of erroneous data</span></span>
+<span id="cb97-35"><a href="#cb97-35" tabindex="-1"></a>      this_frac <span class="ot">&lt;-</span> QF_frac[<span class="fu">as.character</span>(this_month), this_site]</span>
+<span id="cb97-36"><a href="#cb97-36" tabindex="-1"></a>      </span>
+<span id="cb97-37"><a href="#cb97-37" tabindex="-1"></a>      </span>
+<span id="cb97-38"><a href="#cb97-38" tabindex="-1"></a>      <span class="co"># If the fraction is &lt; 0.1</span></span>
+<span id="cb97-39"><a href="#cb97-39" tabindex="-1"></a>      <span class="cf">if</span> (this_frac <span class="sc">&lt;</span> <span class="fl">0.1</span>) {</span>
+<span id="cb97-40"><a href="#cb97-40" tabindex="-1"></a>        </span>
+<span id="cb97-41"><a href="#cb97-41" tabindex="-1"></a>        <span class="co"># Calculate the monthly mean temperature</span></span>
+<span id="cb97-42"><a href="#cb97-42" tabindex="-1"></a>        this_temp <span class="ot">&lt;-</span> <span class="fu">calc_monthly_avg</span>(<span class="at">dat =</span> TSW_30min, </span>
+<span id="cb97-43"><a href="#cb97-43" tabindex="-1"></a>                       <span class="at">site =</span> this_site,</span>
+<span id="cb97-44"><a href="#cb97-44" tabindex="-1"></a>                       <span class="at">month =</span> this_month) </span>
+<span id="cb97-45"><a href="#cb97-45" tabindex="-1"></a>      </span>
+<span id="cb97-46"><a href="#cb97-46" tabindex="-1"></a>        <span class="co"># Save values into the matrix</span></span>
+<span id="cb97-47"><a href="#cb97-47" tabindex="-1"></a>        mean_temp[i, j] <span class="ot">&lt;-</span> this_temp</span>
+<span id="cb97-48"><a href="#cb97-48" tabindex="-1"></a>        </span>
+<span id="cb97-49"><a href="#cb97-49" tabindex="-1"></a>      } <span class="co"># else the NA value will stay in the matrix</span></span>
+<span id="cb97-50"><a href="#cb97-50" tabindex="-1"></a> </span>
+<span id="cb97-51"><a href="#cb97-51" tabindex="-1"></a>  }</span>
+<span id="cb97-52"><a href="#cb97-52" tabindex="-1"></a>  </span>
+<span id="cb97-53"><a href="#cb97-53" tabindex="-1"></a>}</span>
+<span id="cb97-54"><a href="#cb97-54" tabindex="-1"></a></span>
+<span id="cb97-55"><a href="#cb97-55" tabindex="-1"></a><span class="co"># Define dimension names for mean_temp based on</span></span>
+<span id="cb97-56"><a href="#cb97-56" tabindex="-1"></a><span class="co"># the order of months and sites in use_months and use_sites</span></span>
+<span id="cb97-57"><a href="#cb97-57" tabindex="-1"></a><span class="fu">rownames</span>(mean_temp) <span class="ot">&lt;-</span> use_months</span>
+<span id="cb97-58"><a href="#cb97-58" tabindex="-1"></a><span class="fu">colnames</span>(mean_temp) <span class="ot">&lt;-</span> use_sites</span>
+<span id="cb97-59"><a href="#cb97-59" tabindex="-1"></a></span>
+<span id="cb97-60"><a href="#cb97-60" tabindex="-1"></a><span class="co"># Convert the matrix into a dataframe</span></span>
+<span id="cb97-61"><a href="#cb97-61" tabindex="-1"></a>mean_temp_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">month =</span> use_months, mean_temp)</span>
+<span id="cb97-62"><a href="#cb97-62" tabindex="-1"></a></span>
+<span id="cb97-63"><a href="#cb97-63" tabindex="-1"></a><span class="co"># For each site</span></span>
+<span id="cb97-64"><a href="#cb97-64" tabindex="-1"></a><span class="cf">for</span> (this_site <span class="cf">in</span> use_sites) {</span>
+<span id="cb97-65"><a href="#cb97-65" tabindex="-1"></a>  </span>
+<span id="cb97-66"><a href="#cb97-66" tabindex="-1"></a>  <span class="co"># Define the file name for this plot</span></span>
+<span id="cb97-67"><a href="#cb97-67" tabindex="-1"></a>  this_filename <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;results/mean_monthly_temp_&quot;</span>, this_site,<span class="st">&quot;.pdf&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb97-68"><a href="#cb97-68" tabindex="-1"></a>  </span>
+<span id="cb97-69"><a href="#cb97-69" tabindex="-1"></a>  <span class="co"># Open a new graphics device to save the plot</span></span>
+<span id="cb97-70"><a href="#cb97-70" tabindex="-1"></a>  <span class="fu">pdf</span>(this_filename, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">width =</span> <span class="dv">4</span>)</span>
+<span id="cb97-71"><a href="#cb97-71" tabindex="-1"></a>  </span>
+<span id="cb97-72"><a href="#cb97-72" tabindex="-1"></a>  <span class="co"># Plot monthly mean temperature versus month</span></span>
+<span id="cb97-73"><a href="#cb97-73" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">x =</span> mean_temp_df<span class="sc">$</span>month, </span>
+<span id="cb97-74"><a href="#cb97-74" tabindex="-1"></a>       <span class="at">y =</span> mean_temp_df[, this_site],</span>
+<span id="cb97-75"><a href="#cb97-75" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">&quot;Month&quot;</span>, </span>
+<span id="cb97-76"><a href="#cb97-76" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="st">&quot;Mean temperature&quot;</span><span class="sc">~</span>(degree<span class="sc">*</span>C)))</span>
+<span id="cb97-77"><a href="#cb97-77" tabindex="-1"></a>  </span>
+<span id="cb97-78"><a href="#cb97-78" tabindex="-1"></a>  <span class="co"># Close the graphics device (save the plot file)</span></span>
+<span id="cb97-79"><a href="#cb97-79" tabindex="-1"></a>  <span class="fu">dev.off</span>()</span>
+<span id="cb97-80"><a href="#cb97-80" tabindex="-1"></a>  </span>
+<span id="cb97-81"><a href="#cb97-81" tabindex="-1"></a>}</span></code></pre></div>
+</details>
+</div>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<p>After completing these exercises, learners will be able to use R
+to:</p>
+<ol style="list-style-type: decimal">
+<li>execute if-else statements</li>
+<li>repeat steps using <code>for</code> and <code>while</code>
+loops</li>
+</ol>
+<p>Save each of these exercises in a new R script named with the
+exercise number.</p>
+<p><strong>7.1</strong></p>
+<p>Use the <code>ifelse()</code> function on the <code>TSW_30min</code>
+data frame to create a factor with two levels that records the
+temperature difference between the maximum and minimum temperature
+values for each row as follows:</p>
+<div class="line-block">                low: <span
+class="math inline">\(\le\)</span> 0.5 °C difference</div>
+<div class="line-block">                high: <span
+class="math inline">\(&gt;\)</span> 0.5 °C difference</div>
+<p><br></p>
+<p>Create a table showing the number of observations from each site that
+occur at each level of this factor.</p>
+<p>Your code should produce this output:</p>
+<pre><code>              siteID
+temp_diff_fact  CARI  MART  SYCA  TECR
+          low  12882 14334  4966 13978
+          high   407   115  5020   370</code></pre>
+<p><strong>7.2</strong></p>
+<p>Use the <code>ifelse()</code> function on the <code>TSW_30min</code>
+data frame to create a factor with three levels that records the
+temperature difference between then maximum and minimum temperature
+values for each row as follows:</p>
+<div class="line-block">                low: <span
+class="math inline">\(\le\)</span> 0.5 °C difference</div>
+<div class="line-block">                medium: <span
+class="math inline">\(&gt;\)</span> 0.5 °C and <span
+class="math inline">\(\le\)</span> 2 °C difference</div>
+<div class="line-block">                high: <span
+class="math inline">\(&gt;\)</span> 2 °C difference</div>
+<p><br></p>
+<p>Create a table showing the number of observations from each site and
+month that occur at each level of this factor.</p>
+<p>Your code should produce this output:</p>
+<pre><code>, , siteID = CARI
+
+    temp_diff_fact
+      low medium high
+  6  2452    324   82
+  7  2878      0    1
+  8  2966      0    0
+  9  2880      0    0
+  10 1706      0    0
+
+, , siteID = MART
+
+    temp_diff_fact
+      low medium high
+  6  2803     13    0
+  7  2792     70    0
+  8  2920     31    0
+  9  2856      1    0
+  10 2963      0    0
+
+, , siteID = SYCA
+
+    temp_diff_fact
+      low medium high
+  6   490   1709  584
+  7  1275   1166  316
+  8   816    278  225
+  9  1023    252    0
+  10 1362    478   12
+
+, , siteID = TECR
+
+    temp_diff_fact
+      low medium high
+  6  2639    104    0
+  7  2838     42    0
+  8  2908     56    0
+  9  2778      7    0
+  10 2815    146   15</code></pre>
+<p><strong>7.3</strong></p>
+<p>Write a <code>for()</code> loop that iterates over the sites in
+<code>TSW_30min</code> and prints the number of erroneous data points.
+The loop should print both the site name and the number of rows with
+<code>finalQF == 1</code>, like this:</p>
+<pre><code>[1] &quot;Site SYCA has 5644 bad data points.&quot;
+[1] &quot;Site MART has 3397 bad data points.&quot;
+[1] &quot;Site TECR has 581 bad data points.&quot;
+[1] &quot;Site CARI has 2537 bad data points.&quot;</code></pre>
+<p><strong>7.4</strong></p>
+<p>Solve exercise 7.3 without subsetting <code>TSW_30min</code> inside
+the for loop.</p>
+<p><strong>7.5</strong></p>
+<p>Each row of <code>TSW_30min</code> aggregates 30 minutes of data from
+a sensor that collects temperature measurements once per second. This
+means that there should be <code>60 x 30 = 1800</code> measurements used
+for each row in this data frame. The number of measurements actually
+used is recorded in the <code>surfWaterTempNumPts</code> column.</p>
+<p>A. Fill in the blanks in the code below to write a
+<code>while()</code> loop that finds the first row of
+<code>TSW_30min</code> where fewer than 1800 measurements were used. The
+loop should print out only the number of the first row where this occurs
+and not all of the preceeding rows.</p>
+<div class="sourceCode" id="cb101"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb101-2"><a href="#cb101-2" tabindex="-1"></a></span>
+<span id="cb101-3"><a href="#cb101-3" tabindex="-1"></a><span class="cf">while</span> ( _________  <span class="sc">==</span> <span class="dv">1800</span> ) {</span>
+<span id="cb101-4"><a href="#cb101-4" tabindex="-1"></a>  </span>
+<span id="cb101-5"><a href="#cb101-5" tabindex="-1"></a>  i <span class="ot">&lt;-</span> ____________</span>
+<span id="cb101-6"><a href="#cb101-6" tabindex="-1"></a>  </span>
+<span id="cb101-7"><a href="#cb101-7" tabindex="-1"></a>  <span class="cf">if</span> ( _______________ ) {</span>
+<span id="cb101-8"><a href="#cb101-8" tabindex="-1"></a>    </span>
+<span id="cb101-9"><a href="#cb101-9" tabindex="-1"></a>    <span class="fu">print</span>( ______________ )</span>
+<span id="cb101-10"><a href="#cb101-10" tabindex="-1"></a>    </span>
+<span id="cb101-11"><a href="#cb101-11" tabindex="-1"></a>  }</span>
+<span id="cb101-12"><a href="#cb101-12" tabindex="-1"></a>  </span>
+<span id="cb101-13"><a href="#cb101-13" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>[1] 204</code></pre>
+<p>B. Write code that gives the same output as above without using a
+<code>while()</code> loop.</p>
+<p><br></p>
+<p>The following questions involve modifying the
+<code>calc_monthly_avg()</code> from the <a
+href="chp-functions.html">Vectorization and functions</a> lesson. The
+code of this function is below. Copy it into your R script and modify it
+as directed. Verify that your new function works using the
+<code>TSW_30min</code> data frame from this lesson.</p>
+<div class="sourceCode" id="cb103"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" tabindex="-1"></a><span class="co"># A function that calculates average monthly surface water temperature</span></span>
+<span id="cb103-2"><a href="#cb103-2" tabindex="-1"></a><span class="co"># across both sensors at a NEON site from a dataframe of temperature</span></span>
+<span id="cb103-3"><a href="#cb103-3" tabindex="-1"></a><span class="co"># measurements.</span></span>
+<span id="cb103-4"><a href="#cb103-4" tabindex="-1"></a><span class="co"># Arguments:</span></span>
+<span id="cb103-5"><a href="#cb103-5" tabindex="-1"></a><span class="co">#   dat = a dataframe containing the columns: </span></span>
+<span id="cb103-6"><a href="#cb103-6" tabindex="-1"></a><span class="co">#         surfWaterTempMean, startDateTime, siteID, finalQF</span></span>
+<span id="cb103-7"><a href="#cb103-7" tabindex="-1"></a><span class="co">#   site = the NEON site code for the site of interest</span></span>
+<span id="cb103-8"><a href="#cb103-8" tabindex="-1"></a><span class="co">#   month = the month to calculate average temperature over</span></span>
+<span id="cb103-9"><a href="#cb103-9" tabindex="-1"></a><span class="co">#   na.rm = indicates whether NA values should be removed prior to calculation</span></span>
+<span id="cb103-10"><a href="#cb103-10" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb103-11"><a href="#cb103-11" tabindex="-1"></a>  </span>
+<span id="cb103-12"><a href="#cb103-12" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
+<span id="cb103-13"><a href="#cb103-13" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
+<span id="cb103-14"><a href="#cb103-14" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb103-15"><a href="#cb103-15" tabindex="-1"></a>  </span>
+<span id="cb103-16"><a href="#cb103-16" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
+<span id="cb103-17"><a href="#cb103-17" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
+<span id="cb103-18"><a href="#cb103-18" tabindex="-1"></a>  </span>
+<span id="cb103-19"><a href="#cb103-19" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
+<span id="cb103-20"><a href="#cb103-20" tabindex="-1"></a>  <span class="co"># convert character to date</span></span>
+<span id="cb103-21"><a href="#cb103-21" tabindex="-1"></a>  keep_dat<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(keep_dat<span class="sc">$</span>startDateTime) </span>
+<span id="cb103-22"><a href="#cb103-22" tabindex="-1"></a>  </span>
+<span id="cb103-23"><a href="#cb103-23" tabindex="-1"></a>  <span class="co"># extract month as a numeric value</span></span>
+<span id="cb103-24"><a href="#cb103-24" tabindex="-1"></a>  keep_dat<span class="sc">$</span>startMonth <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">month</span>(keep_dat<span class="sc">$</span>startDateTime)</span>
+<span id="cb103-25"><a href="#cb103-25" tabindex="-1"></a>  </span>
+<span id="cb103-26"><a href="#cb103-26" tabindex="-1"></a>  <span class="co"># subset based on month</span></span>
+<span id="cb103-27"><a href="#cb103-27" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, startMonth <span class="sc">==</span> month)</span>
+<span id="cb103-28"><a href="#cb103-28" tabindex="-1"></a>  </span>
+<span id="cb103-29"><a href="#cb103-29" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
+<span id="cb103-30"><a href="#cb103-30" tabindex="-1"></a>  <span class="co"># use the na.rm value provided by the user of the function</span></span>
+<span id="cb103-31"><a href="#cb103-31" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> <span class="fu">mean</span>(keep_dat<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> na.rm)</span>
+<span id="cb103-32"><a href="#cb103-32" tabindex="-1"></a>  </span>
+<span id="cb103-33"><a href="#cb103-33" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
+<span id="cb103-34"><a href="#cb103-34" tabindex="-1"></a>  <span class="fu">return</span>(vals)</span>
+<span id="cb103-35"><a href="#cb103-35" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>7.6</strong></p>
+<p>Modify the <code>calc_monthly_avg()</code> function to return
+temperature values in fahrenheit or kelvin, based on an argument
+provided to the function. By default the function should return values
+in Celsius.</p>
+<p>HINT: Use a conditional statement.</p>
+<p><strong>7.7</strong></p>
+<p>Create a new function <code>calc_monthly_summary()</code> based on
+the <code>calc_monthly_avg()</code> function that will return the the
+max, min or mean temperature values for a given month and site, based on
+an argument provided to the function. By default the function should
+return the mean values.</p>
+<p>HINT: Use a conditional statement.</p>
+<p><strong>7.8</strong></p>
+<p>Modify the <code>calc_monthly_avg()</code> function so that the user
+can specify an argument for which sensors the average should be
+calculated from: “upper” (corresponding to horizontal position 101 or
+111), “lower” (corresponding to horizontal position 102 or 112) or
+“both” (aggregating data from both sensors). The default value should be
+“both”.</p>
+<p>HINT: Use a conditional statement.</p>
+</div>
+<div id="sources-and-resources" class="section level2">
+<h2>Sources and Resources</h2>
+<p>This lesson was adapted from <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episodes 7 and 10 by
+Jes Coyle.</p>
+<!-- ### Additional Resources -->
+<div id="cited-references" class="section level3">
+<h3>Cited References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-NEON-surfwatertemp" class="csl-entry">
+National Ecological Observatory Network (NEON). 2023. <span>“Temperature
+(PRT) in Surface Water (DP1.20053.001).”</span> National Ecological
+Observatory Network (NEON). <a
+href="https://doi.org/10.48443/33ZJ-CQ24">https://doi.org/10.48443/33ZJ-CQ24</a>.
+</div>
+<div id="ref-swc-reproducible-lesson" class="csl-entry">
+Zimmerman, Naupaka, Greg Wilson, Raniere Silva, Scott Ritchie, François
+Michonneau, Jeffrey Oliver, Harriet Dashnow, et al. 2019. <span>“<span
+class="nocase">swcarpentry/r-novice-gapminder: Software Carpentry: R for
+Reproducible Scientific Analysis, June 2019</span>.”</span> Zenodo. <a
+href="https://doi.org/10.5281/zenodo.3265164">https://doi.org/10.5281/zenodo.3265164</a>.
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr>
+<p>Introduction to Computing in R with NEON</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

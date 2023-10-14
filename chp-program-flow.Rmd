@@ -99,34 +99,10 @@ Along with an explanation.
 
 4. Be sure to click **Save** often to save your work.
 
-```{r results = 'hide'}
-# Load ggplot2
-library("ggplot2")
-
-# Set theme options
-# ggplot theme options
-theme_set(theme_gray(base_size = 30))
-update_geom_defaults("point", aes(size = 3))
-
-
-# Read in a data file from the data folder included with the student workbook
-
-```
-
 
 ## Lesson
 
-
-program-flow	1	use conditional statements to make data-dependent decisions in R	learners will
-program-flow	2	use loops to repeat things in R	learners will
-program-flow	3	write expressions containing multiple logical statements in R	learners will
-
-program-flow	1	execute if-else statements	use R to
-program-flow	2	repeat steps using `for` and `while` loops	use R to
-program-flow	3	evaluate expressions using `&` ('and') and `|` ('or')	use R to
-program-flow	4	write checks on argument conditions within a function in R
-
-In this lesson we are going to download and work with surface water temperature data  (DP1.20053/001)[https://data.neonscience.org/data-products/DP1.20053.001] from four NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha Creek, Washington (MART), Teakettle Creek, California (TECR) and Sycamore Creek, Arizona (SYCA). You can see a map of these sites on the (NEON website)[https://www.neonscience.org/field-sites/explore-field-sites].
+In this lesson we are going to download and work with surface water temperature data  [DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001) from four NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha Creek, Washington (MART), Teakettle Creek, California (TECR) and Sycamore Creek, Arizona (SYCA). You can see a map of these sites on the [NEON website](https://www.neonscience.org/field-sites/explore-field-sites).
 
 Recall from the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) that we can download data from NEON using the `loadByProduct()` function in the `neonUtilities` package. We need to specify the product ID number, sites and dates for which we want data and then type `y` when prompted to download the data at the command line.
 
@@ -153,7 +129,7 @@ watertemp <- loadByProduct(dpID = dpID,
                            enddate = enddate)
 
 ```
-```{r include = FALSE}
+```{r include = FALSE, message = FALSE}
 # Load neonUtilities package
 library(neonUtilities)
 
@@ -175,7 +151,7 @@ Now we have a data frame where each row summarizes temperature measurements over
 
 The last thing we will do to get these data ready to work with is to convert the `startDateTime` column to a date-time class so that we can use it as an actual date. We will use the `ymd_hms()` function from the `lubridate()` package for this.
 
-```{r}
+```{r message = FALSE}
 # Load the lubridate package
 library(lubridate)
 
@@ -329,7 +305,7 @@ all(some_T)
 all(all_T)
 ```
 
-Here is a more efficient way to solve this challenge above using the `any()` function. 
+Here is a more efficient way to solve the last challenge using the `any()` function. 
 
 ```{r}
 if (any(TSW_30min$finalQF ==  1)) {
@@ -338,12 +314,9 @@ if (any(TSW_30min$finalQF ==  1)) {
 ```
 
 
+#### Conditionals on vectors
 
-:::{.callout-tip}
-
-Use the `ifelse()` function on vectors.
-
-`R` accepts both `if()` and `else if()` statements structured as outlined above, but also statements using `R`'s built-in `ifelse()` function. This function accepts both singular and vector inputs and is structured as follows:
+If you need to condition across the elements of a vector, use the the `ifelse()` function. This function accepts both singular and vector inputs and is structured as follows:
 
 ```{r, eval = FALSE}
 # ifelse function
@@ -352,6 +325,8 @@ ifelse(condition is true, perform action, perform alternative action)
 ```
 
 where the first argument is the condition or a set of conditions to be met, the second argument is the statement that is evaluated when the condition is `TRUE`, and the third statement  is the statement that is evaluated when the condition is `FALSE`.
+
+This function will return a vector the same length as what was supplied to the first argument.
 
 ```{r}
 y <- -3
@@ -378,7 +353,7 @@ TSW_30min$siteLocation <- factor(ifelse(TSW_30min$siteID == "CARI", "AK", "lower
 
 ::: {.challenge}
 
-Create a new variable in `TSW_30min` named `frozen` that has the value `"above 0"` if the minimum temperature for an observation is greater than `0` and "below 0" if the mean temperature is less than or equal to `0`.
+Create a new variable in `TSW_30min` named `frozen` that has the value `"above 0"` if the minimum temperature for an observation is greater than `0` and "below 0" if the minimum temperature is less than or equal to `0`.
 
 Hint: use the `ifelse()` function on the `surfWaterTempMinimum` column.
 
@@ -465,43 +440,56 @@ We notice in the output that when the first index (`i`) is set to 1, the second 
 Rather than printing the results, we could write the loop output to an output object, in this case a matrix.
 
 ```{r}
-output_matrix <- matrix()
+output_vector <- vector()
 for (i in 1:5) {
+  
   for (j in c('a', 'b', 'c', 'd', 'e')) {
     # save the result to a temporary variable temp_output
     temp_output <- paste(i, j)
     
-    # add temp_output to the end of temp_row
-    temp_row <- c(temp_row, temp_output)
+    # add temp_output to the end of output_vector
+    output_vector <- c(output_vector, temp_output)
   }
   
-  # add temp_row onto the bottom of output_matrix
-  output_matrix <- rbind(output_matrix, temp_row)
 }
+
 output_vector
 ```
 
 This approach can be useful, but 'growing your results' (building the result object incrementally) is computationally inefficient, so avoid it when you are iterating through a lot of values.
 
-:::{.callout-tip}
+::: {.callout-tip}
 Don't grow your results
 
-One of the biggest things that trips up novices and experienced R users alike, is building a results object (vector, list, matrix, data frame) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It's much better to define an empty results object before hand of appropriate dimensions, rather than initializing an empty object without dimensions.
+One of the biggest things that trips up novices and experienced R users alike, is building a results object (vector, list, matrix, data frame) as your for loop progresses. Computers are very bad at handling this, so your calculations can very quickly slow to a crawl. It is much better to define an empty results object before hand of appropriate dimensions, rather than initializing an empty object without dimensions. In most cases you will know how many output elements a loop will produce and can therefore determine how many elements, rows or columns the output object needs to have.
 
-So if you know the end result will be stored in a matrix like above, create an empty matrix with 5 row and 5 columns, then at each iteration store the results in the appropriate location.
+:::
 
-{: .callout}
+In the example above, we know that there should be `5 x 5 = 25` results. A better way to save the output would be to create an empty matrix with 5 rows and 5 columns, then at each iteration store the results in the appropriate location.
 
-A better way is to define your (empty) output object before filling in the values.
-For this example, it looks more involved, but is still more efficient.
+For this example, the following is much more efficient.
 
 ```{r}
+# Create an empty output object for saving results
 output_matrix <- matrix(nrow = 5, ncol = 5)
+
+# Define the values needed in the second for loop
 j_vector <- c('a', 'b', 'c', 'd', 'e')
+
+# Iterate over the numbers 1 - 5
 for (i in 1:5) {
+  
+  # Iterate over the numbers 1 - 5
   for (j in 1:5) {
+    
+    # Select the corresponding letter
     temp_j_value <- j_vector[j]
+    
+    # Save the result to a temporary variable
     temp_output <- paste(i, temp_j_value)
+    
+    # Save the temporary variable to the appropriate
+    # location in the output matrix
     output_matrix[i, j] <- temp_output
   }
 }
@@ -515,13 +503,13 @@ In general, the advice of many `R` users would be to learn about `for()` loops, 
 
 ::: {.challenge}
 
-In the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) we wrote a function that calculate the average 
+In the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) we wrote a function that calculates the average monthly surface water temperature for a particular month at a particular site.
 
-It looks like this (and you should have saved it in a script called `functions.R` in the `src` folder.
+It looks like this and you should have saved it in a script called `functions.R` in the `src` folder.
 
 ```{r}
-# A function that calculates average monthly temperature
-# for each sensor at a NEON site from a dataframe of temperature
+# A function that calculates average monthly surface water temperature
+# across both sensors at a NEON site from a dataframe of temperature
 # measurements.
 # Arguments:
 #   dat = a dataframe containing the columns: 
@@ -704,9 +692,9 @@ while (this condition is true) {
 }
 ```
 
-Here is and example of a `while` loop that adds up the integers until it reaches a sum that is greater than or equal to 100.
+Here is an example of a `while` loop that adds up the integers until it reaches a sum that is greater than or equal to 100.
 
-```{r}
+```{r collapse = TRUE}
 # Define the initial condition:
 i <- 1
 total <- i
@@ -727,7 +715,7 @@ i
 ```
 
 
-`while()` loops will not always be appropriate. You have to be particularly careful that you don't end up stuck in an infinite loop because your condition is always met and hence the while statement never terminates.
+`while()` loops will not always be appropriate. You have to be particularly careful that you don't end up stuck in an infinite loop because the condition is always met and hence the while statement never terminates. If you do end up in an infinite loop, you can cancel the operation running in the console by typing <kbd>ESC</kbd> or clicking the red stop sign in the upper right corner of the console window.
 
 
 
@@ -744,7 +732,7 @@ Write a `while` loop that prints out the difference between the maximum and mini
 i <- 1
 
 # Calculate the temperature difference in row i
-temp_diff <- TSW_30min[i, "surfWaterTempMaximum"] - TSW_30min[i, "surfWaterTempMinimum"]
+temp_diff <- with(TSW_30min[i, ], surfWaterTempMaximum - surfWaterTempMinimum)
 
 # Repeat the loop until the difference is greater than 5
 while(temp_diff <= 5){
@@ -754,7 +742,7 @@ while(temp_diff <= 5){
   
   # Increment the row by 1 and recalculate the difference
   i <- i + 1
-  temp_diff <- TSW_30min[i, "surfWaterTempMaximum"] - TSW_30min[i, "surfWaterTempMinimum"]
+  temp_diff <- with(TSW_30min[i, ], surfWaterTempMaximum - surfWaterTempMinimum)
   
 }
 
@@ -944,7 +932,7 @@ QF_tab[ , , 2]
 
 ::: {.challenge}
 
-Use mathematical operations on QF_tab to make a table containing the fraction of erroneous data points for each site and month ( = num erroneous points / total number of points).
+Use mathematical operations on QF_tab to make a table containing the fraction of erroneous data points for each site and month ( = num erroneous points / total number of points). Remember that arithmetic on vectors, matrices and array occurs element-wise.
 
 
 <details><summary>**Solution:**</summary>
@@ -967,6 +955,10 @@ QF_frac <- QF_tab[ , , 2] / (QF_tab[ , , 1] + QF_tab[ , , 2])
 
 Now if we calculate this table containing the fraction of erroneous data points before the loop, we can select elements from it within the loop to decide whether to proceed with calculating mean temperature in a given month and site.
 
+```{r echo = FALSE}
+QF_frac
+```
+
 We need to be careful to use names (e.g. "6") rather than numeric indices to select the row and column from `QF_frac`, since the order of rows and columns is not necessarily the same as the order in `use_months` and `use_sites`.
 
 ```{r}
@@ -981,7 +973,7 @@ QF_frac[6, "CARI"]
 
 Here's our code so far:
 
-```{r}
+```{r eval = FALSE}
 # Source our functions script that contains the 
 # calc_monthly_avg() function
 source("src/functions.R")
@@ -1036,6 +1028,11 @@ for (i in 1:N_months) {
   
 }
 
+# Define dimension names for mean_temp based on
+# the order of months and sites in use_months and use_sites
+rownames(mean_temp) <- use_months
+colnames(mean_temp) <- use_sites
+
 # Convert the matrix into a dataframe
 
 # For each site
@@ -1044,7 +1041,65 @@ for (i in 1:N_months) {
 # Save the plot to a file in the results folder
 ```
 
-This code will run, but isn't plotting a figure yet. We can check the values calculated in the loop for mean temperature and wee that the ones where `QF_frac` were greater than `0.1` remained as missing (`NA`).
+```{r echo = FALSE}
+# Define vector of months in TSW_30min
+use_months <- unique(month(TSW_30min$startDateTime))
+N_months <- length(use_months)
+
+# Define vector of sites in TSW_30min
+use_sites <- unique(TSW_30min$siteID)
+N_sites <- length(use_sites)
+
+# Define a matrix for saving values:
+# months will be the rows and sitess with be the columns
+mean_temp <- matrix(NA, nrow = N_months, ncol = N_sites)
+
+# Tabulate TSW_30min by month, site and value of finalQF
+#  and calculate the fraction of erroneous data points
+QF_tab <- with(TSW_30min, table(month(startDateTime), siteID, finalQF))
+QF_frac <- QF_tab[ , , 2] / (QF_tab[ , , 1] + QF_tab[ , , 2])
+
+# Loop through each month in TSW_30min
+for (i in 1:N_months) {
+  
+  # Define this month
+  this_month <- use_months[i]
+  
+  # Loop through each site in TSW_30 min
+  for (j in 1:N_sites) {
+    
+      # Define this site
+      this_site <- use_sites[j]
+    
+      # Determine the fraction of erroneous data
+      this_frac <- QF_frac[as.character(this_month), this_site]
+      
+      
+      # If the fraction is < 0.1
+      if (this_frac < 0.1) {
+        
+        # Calculate the monthly mean temperature
+        this_temp <- calc_monthly_avg(dat = TSW_30min, 
+                       site = this_site,
+                       month = this_month) 
+      
+        # Save values into the matrix
+        mean_temp[i, j] <- this_temp
+        
+      } # else the NA value will stay in the matrix
+ 
+  }
+  
+}
+
+# Define dimension names for mean_temp based on
+# the order of months and sites in use_months and use_sites
+rownames(mean_temp) <- use_months
+colnames(mean_temp) <- use_sites
+
+```
+
+This code will run, but isn't plotting a figure yet. We can check the values calculated in the loop for mean temperature and see that the ones where `QF_frac` were greater than `0.1` remained as missing (`NA`).
 
 ```{r}
 mean_temp
@@ -1052,15 +1107,14 @@ mean_temp
 QF_frac
 ```
 
-The last step is to create a plot and save it to a file. We will use the `plot()` function in base R for this.
+The last step is to create a plot and save it to a file for each site. We will use the `plot()` function in base R for this. Recall that for the `plot()` function we need to supply arguments `x` and `y` that each contain a vector of values that the function will use to create a scatter plot.
 
 ::: {.challenge}
 
-Fill in the three blanks in the code below so that it will execute properly.
+Fill in the three blanks in the code below so that it will execute properly. This code should create a graph of mean monthly temperature for each site and save that graph as a file with the name of the site in the file name.
 
-```{r}
+```{r eval = FALSE}
 # Convert the matrix into a dataframe
-colnames(mean_temp) <- use_sites
 mean_temp_df <- data.frame(month = use_months, mean_temp)
 
 # For each site
@@ -1148,8 +1202,12 @@ for (i in 1:N_months) {
   
 }
 
-# Convert the matrix into a dataframe
+# Define dimension names for mean_temp based on
+# the order of months and sites in use_months and use_sites
+rownames(mean_temp) <- use_months
 colnames(mean_temp) <- use_sites
+
+# Convert the matrix into a dataframe
 mean_temp_df <- data.frame(month = use_months, mean_temp)
 
 # For each site
@@ -1183,48 +1241,335 @@ for (this_site in use_sites) {
 After completing these exercises, learners will be able to 
 `r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
 
-
-Number all exercises using the module number. Include starter code in the /exercises folder if appropriate.
+Save each of these exercises in a new R script named with the exercise number.
 
 **`r .chp_num`.1** 
 
+Use the `ifelse()` function on the `TSW_30min` data frame to create a factor with two levels that records the temperature difference between the maximum and minimum temperature values for each row as follows:
+
+|                 low: $\le$ 0.5 &deg;C difference
+
+|                 high: $>$ 0.5 &deg;C difference
+
+<br>
+
+Create a table showing the number of observations from each site that occur at each level of this factor. 
+
+Your code should produce this output:
+
+```{r echo = FALSE}
+
+TSW_30min$temp_diff <- with(TSW_30min, surfWaterTempMaximum - surfWaterTempMinimum)
+TSW_30min$temp_diff_fact <- ifelse(TSW_30min$temp_diff <= 0.5, "low", "high")
+TSW_30min$temp_diff_fact <- factor(TSW_30min$temp_diff_fact, levels = c("low", "high"))
+
+with(TSW_30min, table(temp_diff_fact, siteID))
+
+```
+
 **`r .chp_num`.2** 
 
+Use the `ifelse()` function on the `TSW_30min` data frame to create a factor with three levels that records the temperature difference between then maximum and minimum temperature values for each row as follows:
+
+|                 low: $\le$ 0.5 &deg;C difference
+
+|                 medium: $>$ 0.5 &deg;C and $\le$ 2 &deg;C difference
+
+|                 high: $>$ 2 &deg;C difference
+
+<br>
+
+Create a table showing the number of observations from each site and month that occur at each level of this factor. 
+
+Your code should produce this output:
+
+```{r echo = FALSE}
+
+TSW_30min$temp_diff <- with(TSW_30min, surfWaterTempMaximum - surfWaterTempMinimum)
+TSW_30min$temp_diff_fact <- ifelse(TSW_30min$temp_diff <= 0.5, "low",
+                                   ifelse(TSW_30min$temp_diff <= 2, "medium", "high"))
+TSW_30min$temp_diff_fact <- factor(TSW_30min$temp_diff_fact, levels = c("low", "medium", "high"))
+
+with(TSW_30min, table(month(startDateTime), temp_diff_fact, siteID))
+
+```
+
+**`r .chp_num`.3** 
+
+Write a `for()` loop that iterates over the sites in `TSW_30min` and prints the number of erroneous data points. The loop should print both the site name and the number of rows with `finalQF == 1`, like this:
+
+```{r echo = FALSE}
+QF_tab <- with(TSW_30min, table(siteID, finalQF))
+
+for(i in unique(TSW_30min$siteID)){
+  
+   print(paste("Site", i, "has", QF_tab[i, "1"], "bad data points."))
+  
+}
+
+```
+
+**`r .chp_num`.4** 
+
+Solve exercise `r .chp_num`.3 without subsetting `TSW_30min` inside the for loop.
+
+**`r .chp_num`.5** 
+
+Each row of `TSW_30min` aggregates 30 minutes of data from a sensor that collects temperature measurements once per second. This means that there should be `60 x 30 = 1800` measurements used for each row in this data frame. The number of measurements actually used is recorded in the `surfWaterTempNumPts` column. 
+
+A. Fill in the blanks in the code below to write a `while()` loop that finds the first row of `TSW_30min` where fewer than 1800 measurements were used. The loop should print out only the number of the first row where this occurs and not all of the preceeding rows. 
+
+```{r eval = FALSE}
+i <- 1
+
+while ( _________  == 1800 ) {
+  
+  i <- ____________
+  
+  if ( _______________ ) {
+    
+    print( ______________ )
+    
+  }
+  
+}
+
+
+```
+
+```{r echo = FALSE}
+i <- 1
+
+while (TSW_30min[i, "surfWaterTempNumPts"] == 1800) {
+  
+  i <- i + 1
+  
+  if (TSW_30min[i, "surfWaterTempNumPts"] != 1800) {
+    print(i)
+  }
+  
+}
+
+
+```
+
+B. Write code that gives the same output as above without using a `while()` loop.
+
+```{r include = FALSE}
+
+min(which(TSW_30min$surfWaterTempNumPts != 1800))
+
+
+```
 
 
 
-Modify the `calc_monthly_avg()` function to return temperature values in fahrenheit or kelvin, based on an argument provided to the function.
+<br>
 
-Modify the calc_monthly_avg() function to return the max, min or mean temperature values, based on an argument provided to the function.
+The following questions involve modifying the `calc_monthly_avg()` from the [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) lesson. The code of this function is below. Copy it into your R script and modify it as directed. Verify that your new function works using the `TSW_30min` data frame from this lesson.
+
+```{r eval = FALSE}
+# A function that calculates average monthly surface water temperature
+# across both sensors at a NEON site from a dataframe of temperature
+# measurements.
+# Arguments:
+#   dat = a dataframe containing the columns: 
+#         surfWaterTempMean, startDateTime, siteID, finalQF
+#   site = the NEON site code for the site of interest
+#   month = the month to calculate average temperature over
+#   na.rm = indicates whether NA values should be removed prior to calculation
+calc_monthly_avg <- function(dat, site, month, na.rm = TRUE) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+  # convert character to date
+  keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
+  
+  # extract month as a numeric value
+  keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+  
+  # subset based on month
+  keep_dat <- subset(keep_dat, startMonth == month)
+  
+  # Calculate the average of the surfWaterTempMean column
+  # use the na.rm value provided by the user of the function
+  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
+  
+  # Return the calculated value
+  return(vals)
+}
+
+```
+
+**`r .chp_num`.6** 
+
+Modify the `calc_monthly_avg()` function to return temperature values in fahrenheit or kelvin, based on an argument provided to the function. By default the function should return values in Celsius. 
+
+HINT: Use a conditional statement.
+
+```{r include = FALSE}
+calc_monthly_avg <- function(dat, site, month, units = "C", na.rm = TRUE) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+  # convert character to date
+  keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
+  
+  # extract month as a numeric value
+  keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+  
+  # subset based on month
+  keep_dat <- subset(keep_dat, startMonth == month)
+  
+  # Calculate the average of the surfWaterTempMean column
+  # use the na.rm value provided by the user of the function
+  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
+  
+  # Convert to Kelvin or Fahrenheit
+  if (units == "F") {
+    
+    vals <- vals * (9/5) + 32
+      
+  } else if (units == "K") {
+    
+    vals <- vals + 273.15
+    
+  }
+  
+  # Return the calculated value
+  return(vals)
+}
+
+```
 
 
+**`r .chp_num`.7** 
+
+Create a new function `calc_monthly_summary()` based on the `calc_monthly_avg()` function that will return the the max, min or mean temperature values for a given month and site, based on an argument provided to the function. By default the function should return the mean values.  
+
+HINT: Use a conditional statement.
+
+```{r include = FALSE}
+calc_monthly_summary <- function(dat, site, month, stat = "mean", na.rm = TRUE) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+  # convert character to date
+  keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
+  
+  # extract month as a numeric value
+  keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+  
+  # subset based on month
+  keep_dat <- subset(keep_dat, startMonth == month)
+  
+  # Convert to Kelvin or Fahrenheit
+  if (stat == "min") {
+    
+    # Calculate the average of the surfWaterTempMean column
+    # use the na.rm value provided by the user of the function
+    vals <- min(keep_dat$surfWaterTempMean, na.rm = na.rm)
+      
+  } else if (stat == "max") {
+    
+    # Calculate the average of the surfWaterTempMean column
+    # use the na.rm value provided by the user of the function
+    vals <- max(keep_dat$surfWaterTempMean, na.rm = na.rm)
+    
+  } else if (stat == "mean") {
+    
+    # Calculate the average of the surfWaterTempMean column
+    # use the na.rm value provided by the user of the function
+    vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
+    
+  }
+  
+  # Calculate the average of the surfWaterTempMean column
+  # use the na.rm value provided by the user of the function
+  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
+  
+  # Return the calculated value
+  return(vals)
+}
+
+```
+
+**`r .chp_num`.8** 
+
+Modify the `calc_monthly_avg()` function so that the user can specify an argument for which sensors the average should be calculated from: "upper" (corresponding to horizontal position 101 or 111), "lower" (corresponding to horizontal position 102 or 112) or "both" (aggregating data from both sensors). The default value should be "both".
+
+HINT: Use a conditional statement.
+
+```{r include = FALSE}
+calc_monthly_summary <- function(dat, site, month, sensor = "both", na.rm = TRUE) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+  # convert character to date
+  keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
+  
+  # extract month as a numeric value
+  keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+  
+  # subset based on month
+  keep_dat <- subset(keep_dat, startMonth == month)
+  
+  # Convert to Kelvin or Fahrenheit
+  if (sensor == "lower") {
+    
+    # Subset to the lower sensor
+    keep_dat <- subset(keep_dat, horizontalPosition %in% c(101, 111))
+      
+  } else if (sensor == "upper") {
+    
+    # Subset to the upper sensor
+    keep_dat <- subset(keep_dat, horizontalPosition %in% c(102, 112))
+    
+  } 
+  
+  # Calculate the average of the surfWaterTempMean column
+  # use the na.rm value provided by the user of the function
+  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
+  
+  # Return the calculated value
+  return(vals)
+}
+
+```
 
 
-Modify the `calc_monthly_avg()` function from the [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) lesson so that the user can specify which sensors the average should be calculated from: "Upper" (corresponding to horizontal position 101 or 111), "Lower" (corresponding to horizontal position 102 or 112) or "Both". The default value should be "Both".
 
 ## Sources and Resources
 
 This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 7 and 10  by Jes Coyle.
 
-### Additional Resources
+<!-- ### Additional Resources -->
 
 ### Cited References
 
 ::: {#refs}
-:::
-
-
-Callouts are formatted in the style.css file.
-
-::: {.callout-trick}
-
-:::
-
-
-::: {.callout-tip}
-
-:::
-
-::: {.callout-important}
-
 :::
