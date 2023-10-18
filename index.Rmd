@@ -40,6 +40,12 @@ This course requires you to have certain software installed on your computer. Fo
 
 The student workbook is a zipped folder that contains a folder with data files necessary for completing the lessons. It also contains a folder with exercise files that accompany each lesson. Follow the instructions on the [Computer Setup](computer-setup.html) page to download the workbook.
 
+### Order of chapters
+
+The chapters are arranged in a progression with later chapters generally requirement knowledge from earlier chapters. Readers who wish to skip chapters should consult the following flow chart which shows how contents of the chapters depend on each other:
+
+
+
 ## Open Educational Resource
 
 These materials will be published open access, but they are currently under development and are **not currently ready for adaptation.**

@@ -30,10 +30,10 @@ navbar:
           href: chp-ggplot2-part1.html
         - text: 7. Program flow
           href: chp-program-flow.html
-        - text: 8. More ggplot2
-          href: chp-ggplot2-part2.html
-        - text: 9. Tidy data
+        - text: 8. Tidy data
           href: chp-tidyverse-basics.html
+        - text: 9. More ggplot2
+          href: chp-ggplot2-part2.html
     - text: "RStudio Workbook & Exercises"
       href: download-student-RStudio-project.html
 output:

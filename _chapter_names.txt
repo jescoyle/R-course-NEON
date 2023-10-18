@@ -6,8 +6,8 @@ chpNum	chp	fileName	nameShort	nameLong
 5	functions	chp-functions	Functions	Vectorization and functions
 6	ggplot2-part1	chp-ggplot2-part1	Intro to ggplot2	Simple graphs with ggplot2
 7	program-flow	chp-program-flow	Program flow	Controlling program flow
-8	ggplot2-part2	chp-ggplot2-part2	More ggplot2	Complex graphs with ggplot2
-9	tidyverse-basics	chp-tidyverse-basics	Tidy data	Data manipulation in the tidyverse
+8	tidyverse-basics	chp-tidyverse-basics	Tidy data	Data manipulation in the tidyverse
+9	ggplot2-part2	chp-ggplot2-part2	More ggplot2	Complex graphs with ggplot2
 A	rmarkdown	chp-rmarkdown	Rmarkdown	Producing reports with Rmd and knitr
 B	geospatial-raster	chp-geospatial-raster	Raster data	Intro to geospatial raster data in R
 C	openrefine	chp-openrefine	OpenRefine	Data cleaning with OpenRefine
