@@ -2,7 +2,6 @@
 title:  
 output:
   html_document:
-    code_folding: show
     toc: false
 bibliography: references.bib
 ---
@@ -10,130 +9,282 @@ bibliography: references.bib
 
 ```{r, include = FALSE, purl = FALSE}
 # Functions and data
+getwd()
 source("src/setup.R")
 
 # get chapter number based on name
-chp_num <- get_chpNum("chp-ggplot2-part2", type = "fileName")
-chp_str <- ifelse(nchar(chp_num) > 1, chp_num, paste0("0", chp_num))
+.chp <- "ggplot2-part2"
+.chp_num <- .get_chpNum("ggplot2-part2", type = "fileName")
+.chp_str <- ifelse(nchar(.chp_num) > 1, .chp_num, paste0("0", .chp_num))
 
 # knitr options
 source("src/knit-options.R")
-knitr_fig_path(paste0(chp_str, "-"))
-
-# Silently load in the data for this lesson
-gapminder <- read.csv("data/gapminder_data.csv", header = TRUE)
+.knitr_fig_path(paste0(.chp_str, "-"))
 
 # Silently set seed for random number generation, so we don't have to explain it
 set.seed(10)
 ```
 
-# Chapter `r chp_num`. `r get_chpName(chp_num, type.to = "nameLong")` {.tabset}
-
-
-**THIS LESSON IS NOT YET READY FOR LEARNERS.**
+# Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
 ## Overview 
 
-*from:* [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episode 8
+> MOTIVATOR
+
+Brief description of the contents of this lesson. 
 
 ### What we will learn
 
 In this lesson 
-`r get_LO(as.numeric(chp_num), LOtable, prefix = TRUE)`
+`r .get_LO(.chp, .LOtable, prefix = TRUE)`
 
-Add error bars to bar graph
+#### Key Terms & Commands
 
-#### Key Terms and Commands
+* `round()`
+* `format()`
 
-* round() and format()
-* paste()
 
-### Motivator
+### Prerequisites
 
-Describe a problem that learners will be able to solve by the end of this lesson.
+Before beginning this lesson you should have completed the lesson [`r .get_chpName("ggplot2-part1", type.from = "chp")`](chp-ggplot2-part1.html) and any prerequisites therein.
 
-### Get set up
+Before you begin:
 
-Describe any data sets or packages that learners need to download or install before proceeding.
+1. Open the R-course-NEON-workbook RStudio project.
+2. Create a new R script named `r paste0("lesson_", .chp_str, "_code.R")` in the lesson-code folder of the student workbook.
+3. Whenever you see R code like this:
 
-```{r results = 'hide'}
+```{r eval = FALSE}
+Type (or copy) this into your R script. Then run it in the Console.
+
+```
+
+4. Whenever you see a challenge like this:
+
+:::{.challenge}
+
+Try to solve the problem by writing R code into your script. Check your answer by clicking:
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+```{r eval = FALSE}
+The code that solves the challenge will appear here.
+```
+
+Along with an explanation.
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+
+4. Be sure to click **Save** often to save your work.
+
+```{r include = FALSE}
+# Load ggplot2
+library("ggplot2")
+
+# Set theme options
+# ggplot theme options
+theme_set(theme_gray(base_size = 30))
+update_geom_defaults("point", aes(size = 3))
+
+
 # Read in a data file from the data folder included with the student workbook
-dat <- read.csv("data/gapminder_data.csv")
-```
-
-Make a code block that loads any packages needed for the analysis. It can be helpful to indicate which functions come from which packages.
-
-```{r results = 'hide', warning = FALSE, message = FALSE}
-
-# Load dplyr: filter
-library(dplyr)
-
-# Load ggplot2: ggplot
-library(ggplot2)
 
 ```
+
 
 ## Lesson
 
+As in lesson [`r .get_chpName("program-flow", type.from = "chp")`](chp-program-flow.html), we are going to download and work with surface data  from four NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha Creek, Washington (MART), Teakettle Creek, California (TECR) and Sycamore Creek, Arizona (SYCA). You can see a map of these sites on the [NEON website](https://www.neonscience.org/field-sites/explore-field-sites). However in this lesson we will be working with chemical properties of plankton  ([[DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001) ](https://data.neonscience.org/data-products/DP1.20053.001)). 
+
+We will download data from NEON using the `loadByProduct()` function in the `neonUtilities` package. We need to specify the product ID number, sites and dates for which we want data and then type `y` when prompted to download the data at the command line.
+
+```{r eval = FALSE}
+library(neonUtilities)
+
+# Define dates for download: June 1 - Oct 31, 2021
+# but we need to start before June 1 to get the entire month of June
+startdate <- "2021-05-31"
+enddate <- "2021-10-31"
+
+# Define the sites to download 
+# TECR = Teakettle Creek, SYCA = Sycamore Creek
+# MART = Martha Creek, CARI = Caribou Creek
+sites <- c("TECR", "SYCA", "MART", "CARI") 
+
+# Define the data product
+dpID <- "DP1.20053.001"  # Surface water temperature
+
+# Temperature in surface water
+watertemp <- loadByProduct(dpID = dpID,
+                           site = sites,
+                           startdate = startdate,
+                           enddate = enddate)
+
+```
+```{r include = FALSE, message = FALSE}
+# Load neonUtilities package
+library(neonUtilities)
+
+# Load previously downloaded object
+#save(watertemp, file = "src/chp-program-flow_watertemp.RData")
+load("src/chp-program-flow_watertemp.RData")
+```
+
+You should now have a new object named `watertemp` in the Environment panel. It should be a list with nine elements. Let's extract the list element of `watertemp` that contains the data and save it as a separate data frame.
 
 ```{r}
-# This is an R code block that will execute any code inside and show the results.
-dat %>%
-  filter(country == "United States")
+# Extract 30 min temperature averages from watertemp
+# and save as a separate data frame
+TSW_30min <- watertemp$TSW_30min
 
 ```
 
+Now we have a data frame where each row summarizes temperature measurements over a 30 minute period from May - October, 2021 for the four sites from which we requested data (TECR, SYCA, MART, CARI).
 
+The last thing we will do to get these data ready to work with is to convert the `startDateTime` column to a date-time class so that we can use it as an actual date. We will use the `ymd_hms()` function from the `lubridate()` package for this.
 
-```{r usa_pop_fig}
-#| echo = FALSE,
-#| fig.cap = paste0("Fig. ", chp_num, ".1. Population growth in the United States 1952 - 2007.")
+```{r message = FALSE}
+# Load the lubridate package
+library(lubridate)
 
-# Note that figure caption numbers are not automatic here.
-
-# Plot year vs. population size for United States
-dat %>%
-  filter(country == "United States") %>%
-  ggplot(aes(x = year, y = pop)) +
-  geom_line() +
-  labs(x = "Year", y = "Population size")
+# Convert startDateTime to a date-time class
+TSW_30min$startDateTime <- ymd_hms(TSW_30min$startDateTime)
 
 ```
 
+### Adding layers
 
-### Section 1
+
+add horizontal and vertical reference lines to a plot
+
+add multiple data layers to a plot and change the order in which they are layered	
 
 
-> ***CHALLENGE:*** What will this code do?
->
-> ```r
-> 1 + 1
-> ```
-> > ```{r class.source = 'fold-hide', collapse = TRUE}
-> > 1 + 1
-> > ```
+#### Statistical summaries
+
+add a trendline to a scatterplot using statistics
+
+add error bars to a bar graph
+
+### Manipulating the axes
+
+
+
+#### Position scales
+
+describe how position scales control the way axes are displayed in ggplot2
+"change the scale, limits and breaks on an axis"
+
+#### Axis labels
+
+
+### Manipulating the legend
+
+#### Text labels
+
+change the default labels in a legend (using factor levels or other method)
+
+#### Color palettes for data
+
+select inclusive color palettes that are visible to people with impaired  color vision
+change a discrete and continuous color scale
+
+### Multi-panel plots
+
+display data in separate panels of a graph using facets
+
+
+### Themes
+
+
+describe how themes control the way plots are displayed in ggplot2
+"change the default fonts, colors, and sizes using a theme
+
+
+
+
+
+
+
+
+
+
+
+::: {.challenge}
+
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+
+
+:::
+
+</details>
+
+:::
+
+<br>
 
 ### Section 2
 
+Callouts are formatted in the style.css file.
+
+::: {.callout-trick}
+
+:::
+
+
+::: {.callout-tip}
+
+:::
+
+::: {.callout-important}
+
+:::
 
 ## Exercises
 
 After completing these exercises, learners will be able to 
-`r get_LO(as.numeric(chp_num), CStable, prefix = TRUE, bullet = "1.")`
+`r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
 
 
-Number all exercises using the module number. Include starter code in the /exercises folder if appropriate.
+ggplot2-part2	1	display data in separate panels of a graph using facets	use the ggplot2 package in R to
+ggplot2-part2	2	add multiple data layers to a plot and change the order in which they are layered	use the ggplot2 package in R to
+ggplot2-part2	3	add a trendline to a scatterplot using statistics	use the ggplot2 package in R to
+ggplot2-part2	4	add error bars to a bar graph	use the ggplot2 package in R to
+ggplot2-part2	5	"change the scale, limits and breaks on an axis"	use the ggplot2 package in R to
+ggplot2-part2	6	"change the default fonts, colors, and sizes using a theme"	use the ggplot2 package in R to
+ggplot2-part2	7	change a discrete and continuous color scale	use the ggplot2 package in R to
+ggplot2-part2	8	change the text labels in a legend	use the ggplot2 package in R to
+ggplot2-part2	9	add horizontal and vertical reference lines to a plot	use the ggplot2 package in R to
 
-`r chp_num`.1 
 
-`r chp_num`.2 
+
+**`r .chp_num`.1** 
+
+**`r .chp_num`.2** 
 
 
 
 ## Sources and Resources
 
-This lesson was adapted from XX by Jes Coyle.
+This lesson was written by Jes Coyle and adapted from  [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episode 8.
 
 ### Additional Resources
 
 ### Cited References
+
+::: {#refs}
+:::
+
