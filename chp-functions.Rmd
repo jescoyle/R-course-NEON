@@ -775,7 +775,7 @@ We're going to download the recent temperature data from the Teakettle Creek sit
 
 ```
 
-At a minimum we must specify a data product ID (`dpID` argument), which we can get by browsing the [NEON Data Portal](https://data.neonscience.org/data-products/explore). Data product id numbers all begin with DP1. We must also specify start and end dates. If we only want certain sites, we need to specify the four-letter codes that identify each site.
+At a minimum we must specify a data product ID (`dpID` argument), which we can get by browsing the [NEON Data Portal](https://data.neonscience.org/data-products/explore). Data product id numbers all begin with DP1. We must also specify start and end dates. If we only want certain sites, we need to specify the four-letter codes that identify each site. Since we are requesting new data that is "provisional" we also need to include the argument `include.provisional = TRUE`.
 
 ```{r eval = FALSE}
 
@@ -793,7 +793,8 @@ dpID <- "DP1.20053.001"  # Surface water temperature
 watertemp <- loadByProduct(dpID = dpID,
                            site = sites,
                            startdate = startdate,
-                           enddate = enddate)
+                           enddate = enddate,
+                           include.provisional = TRUE)
 
 ```
 You will need to allow the data to download by typing `y` in the Console when prompted.
