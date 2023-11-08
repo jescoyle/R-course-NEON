@@ -35,6 +35,6 @@ ggplot2-part2	3	describe how themes control the way plots are displayed in ggplo
 ggplot2-part2	4	select inclusive color palettes that are visible to people with impaired  color vision	learners will
 ggplot2-part2	5	change the default labels in a legend in ggplot2	learners will
 ggplot2-part2	6	add reference lines to a plot in ggplot2	learners will
-tidyverse	1	differentiate between longer and wider data formats and explore when to use each	learners will
-tidyverse	2	"use functions in the dplyr and tidyr R packages to combine, subset, summarize and change the layout of data frames"	learners will
-tidyverse	3	write multi-step data manipulations by composing functions together with pipes	learners will
+tidyverse-basics	1	differentiate between longer and wider data formats and explore when to use each	learners will
+tidyverse-basics	2	"use functions in the dplyr and tidyr R packages to combine, subset, summarize and change the layout of data frames"	learners will
+tidyverse-basics	3	write multi-step data manipulations by composing functions together with pipes	learners will

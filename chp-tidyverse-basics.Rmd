@@ -16,8 +16,8 @@ getwd()
 source("src/setup.R")
 
 # get chapter number based on name
-.chp <- "tidyverse"
-.chp_num <- .get_chpNum("chp-tidyverse", type = "fileName")
+.chp <- "tidyverse-basics"
+.chp_num <- .get_chpNum("chp-tidyverse-basics", type = "fileName")
 .chp_str <- ifelse(nchar(.chp_num) > 1, .chp_num, paste0("0", .chp_num))
 
 # knitr options
