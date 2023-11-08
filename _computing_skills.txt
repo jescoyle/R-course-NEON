@@ -43,10 +43,10 @@ ggplot2-part2	6	"change the default fonts, colors, and sizes using a theme"	use 
 ggplot2-part2	7	change a discrete and continuous color scale	use the ggplot2 package in R to
 ggplot2-part2	8	change the text labels in a legend	use the ggplot2 package in R to
 ggplot2-part2	9	add horizontal and vertical reference lines to a plot	use the ggplot2 package in R to
-tidyverse-basics	1	`join` two tables using a key	use the dplyr package to
-tidyverse-basics	2	`select` columns from a table using matching criteria	use the dplyr package to
-tidyverse-basics	3	`filter` rows from a table	use the dplyr package to
-tidyverse-basics	4	create new columns with `mutate`	use the dplyr package to
-tidyverse-basics	5	calculate summary statistics across factors with `group_by` and `summarize`	use the dplyr package to
-tidyverse-basics	6	change the format of a table from long to wide or wide to long with `pivot` functions from the tidyr package	
-tidyverse-basics	7	compose functions with pipes (`%>%`)	use the tidyr package to
+tidyverse	1	`join` two tables using a key	use the dplyr package to
+tidyverse	2	`select` columns from a table using matching criteria	use the dplyr package to
+tidyverse	3	`filter` rows from a table	use the dplyr package to
+tidyverse	4	create new columns with `mutate`	use the dplyr package to
+tidyverse	5	calculate summary statistics across factors with `group_by` and `summarize`	use the dplyr package to
+tidyverse	6	change the format of a table from long to wide or wide to long with `pivot` functions from the tidyr package	
+tidyverse	7	compose functions with pipes (`%>%`)	use the tidyr package to
