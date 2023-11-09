@@ -1,5 +1,11 @@
 ### This script conducts an analysis described in Chp. 8. Data manipulation in the tidyverse.
 
+### Load required packages
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(lubridate)
 
 ### Goal 1: Compare the total number of macroinvertebrate taxa at found at each site.
 
@@ -55,6 +61,13 @@
 ## inv_fieldData and inv_taxonomyProcessed (saved as inv_taxa)
 ## Use surface water temperature data from TSW_30min
 
+ # Extract surface water temperature measurements
+ # averaged over 30 min periods
+ TSW_30min <- watertemp_list$TSW_30min
+ 
+ # Filter the temperature data to good observations
+ TSW_30min_good <- filter(TSW_30min, finalQF == 0)
+ 
 ## Use inverts_taxa to calculate the total abundance of
 ## macroinvertebrates in each sample from each site 
  inverts_bysample <- inv_taxa %>%
@@ -85,11 +98,8 @@
 ## collected on the same date at the same site. 
 
  # Make a column that extracts the date from collectDate
- # First need to convert collectDate to a date-time class
- # Then extract just the date portion
  inverts_bysample <- inverts_bysample %>%
-   mutate(collectDate = ymd_hms(collectDate),
-          collect_day = date(collectDate))
+   mutate(collect_day = date(collectDate))
  # Note: we could have combined this step with the last
  # step and created  two columns with one `mutate()`.
 
@@ -105,7 +115,7 @@
 ## Calculate average temperature across both sensors for 
 ## each time point at each site and save this in a new table
 
- TSW_avg <- TSW_30min %>%
+ TSW_avg <- TSW_30min_good %>%
    group_by(siteID, startDateTime) %>%
    summarize(temp_avg_C = mean(surfWaterTempMean),
              n_obs = n()) # keep track of the number of measurements averaged
@@ -113,9 +123,6 @@
 
 ## Graph macroinvertebrate density and temperature over time 
 ## for the four sites.
-
- # Convert startDateTime to a date-time class
- TSW_avg$startDateTime <- ymd_hms(TSW_avg$startDateTime)
 
  # Temperature vs. time colored by site
  TSW_avg %>% 

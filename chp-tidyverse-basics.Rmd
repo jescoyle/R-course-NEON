@@ -489,7 +489,7 @@ inverts %>%
 
 to show the following:
 
-```{r echo = FALSE}
+```{r echo = FALSE, message = FALSE}
 inverts %>% 
   filter(siteID == "MART", scientificName == "Afghanurus sp.") %>%
   select(sampleID, scientificName, sizeClass, estimatedTotalCount) %>%
@@ -604,9 +604,7 @@ In either case we need columns in the temperature data that will allow us to wor
 
 #### Use **`mutate()`** to calculate new columns 
 
-Recall from prior lessons that we can use the `ymd_hms()` function from the `lubridate` package to convert the `startDateTime` and `endDateTime` columns in `TSW_30min` to a date-time class from which we can then extract temporal information. 
-
-Load the `lubridate()` package so that we have access to these functions:
+Recall from prior lessons that we can use  functions in the `lubridate` package to work with dates and times. Load the `lubridate()` package so that we have access to these functions:
 
 ```{r message = FALSE}
 library(lubridate)
@@ -614,33 +612,27 @@ library(lubridate)
 
 In base R we used `$` to create a new column in a data frame:
 
-```{r}
-# Set the startDateTime column to be a date-time class
-TSW_30min$startDateTime <- ymd_hms(TSW_30min$startDateTime)
-
+```{r eval = FALSE}
 # Save the month as a new column
 TSW_30min$month <- month(TSW_30min$startDateTime)
 
 ```
 
-These same operations can be accomplished using the `mutate()` function, but they can be done in one operation:
+This same operations can be accomplished using the `mutate()` function, but they can be done in one operation:
 
-```{r}
+```{r eval = FALSE}
 TSW_30min <- mutate(TSW_30min, 
-                    startDateTime = ymd_hms(startDateTime),
                     month = month(TSW_30min$startDateTime) )
 ```
 
 We reassigned the output of `mutate()` back to the same data object `TSW_30min` so that the changes we made would be saved.
 
 We can add as many new columns as we'd like inside the `mutate()` function. Here's an example that uses `ifelse()` to identify summer months.
-```{r}
+```{r warning = FALSE}
 TSW_30min <- mutate(TSW_30min, 
-                    startDateTime = ymd_hms(startDateTime),
                     month = month(TSW_30min$startDateTime),
                     season = ifelse(month>5 & month<9, "summer", "not summer") )
 ```
-
 
 ::: {.challenge}
 
@@ -651,8 +643,6 @@ HINT: Use the `date()` function on `startDateTime`.
 <details><summary>**Solution:**</summary>
 
 ::: {.solution}
-
-Assuming that you already have converted `startDateTime` to a date-time class, the following should work: 
 
 ```{r}
 TSW_30min <- mutate(TSW_30min, 
@@ -683,8 +673,7 @@ Create a table named `invert_samples` based on `inv_fieldData` that contains inf
 invert_samples <- inv_fieldData %>%
   select(siteID, sampleID, collectDate, boutNumber, 
          habitatType, samplerType, substratumSizeClass, benthicArea) %>%
-  mutate(collectDate = ymd_hms(collectDate),
-         collect_ymd = date(collectDate))
+  mutate(collect_ymd = date(collectDate))
 ```
 
 
@@ -962,7 +951,7 @@ We've nearly finished Goal 1. Here's all of the code together that accomplishes 
                                startdate = startdate,
                                enddate = enddate)
 
-## Extract two tables from this download:
+## Extract three tables from this download:
 
  # Extract invertebrate collections
  # inv_fieldData = when and where the invertebrate samples were collected
@@ -971,7 +960,7 @@ We've nearly finished Goal 1. Here's all of the code together that accomplishes 
  # Extract taxonomic information
  # inv_taxonomyProcessed = which taxa were collected in each sample
  inv_taxa <- inverts_list$inv_taxonomyProcessed
-
+ 
 ```
 ```{r}
 ## Use the `inv_taxonomyProcessed` table to count the number of unique
@@ -1018,8 +1007,13 @@ We are also nearly done with the second goal as well. Let's see how far we can g
 ## Start with macroinvertebrate data tables
 ## inv_fieldData and inv_taxonomyProcessed (saved as inv_taxa)
 ## Use surface water temperature data from TSW_30min
+ 
+ # Extract surface water temperature measurements
+ # averaged over 30 min periods
+ TSW_30min <- watertemp_list$TSW_30min
 
-
+ # Filter the temperature data to good observations
+ TSW_30min_good <- filter(TSW_30min, finalQF == 0)
 
 ## Use inverts_taxa to calculate the total abundance of
 ## macroinvertebrates in each sample from each site 
@@ -1052,11 +1046,8 @@ inverts_bysample <- inv_taxa %>%
   
   
   # Make a column that extracts the date from collectDate
-  # First need to convert collectDate to a date-time class
-  # Then extract just the date portion
   inverts_bysample <- inverts_bysample %>%
-    mutate(collectDate = ymd_hms(collectDate),
-           collect_day = date(collectDate))
+    mutate(collect_day = date(collectDate))
   # Note: we could have combined this step with the last
   # step and created  two columns with one `mutate()`.
   
@@ -1072,7 +1063,7 @@ inverts_bysample <- inv_taxa %>%
 ## Calculate average temperature across both sensors for 
 ## each time point at each site and save this in a new table
   
-  TSW_avg <- TSW_30min %>%
+  TSW_avg <- TSW_30min_good %>%
     group_by(siteID, startDateTime) %>%
     summarize(temp_avg_C = mean(surfWaterTempMean),
               n_obs = n()) # keep track of the number of measurements averaged
@@ -1080,9 +1071,6 @@ inverts_bysample <- inv_taxa %>%
   
 ## Graph macroinvertebrate density and temperature over time 
 ## for the four sites.
-  
-  # Convert startDateTime to a date-time class
-  TSW_avg$startDateTime <- ymd_hms(TSW_avg$startDateTime)
   
   # Temperature vs. time colored by site
   TSW_avg %>% 
@@ -1271,7 +1259,7 @@ Use the `TSW_30min` data to calculate average monthly mean surface water tempera
 
 ```{r echo = FALSE, message=FALSE}
 solution.3 <- TSW_30min %>%  
-  mutate(month = month(ymd_hms(startDateTime))) %>%
+  mutate(month = month(startDateTime)) %>%
   group_by(siteID, month) %>%
   summarize(temp_avg_C = mean(surfWaterTempMean, na.rm = TRUE))
 
@@ -1296,7 +1284,7 @@ Use the `TSW_30min` data to calculate average, minimum and maximum monthly surfa
 ```{r echo = FALSE}
 TSW_30min %>%
   filter(siteID == "CARI") %>%
-  mutate(month = month(ymd_hms(startDateTime))) %>%
+  mutate(month = month(startDateTime)) %>%
   group_by(month) %>%
   summarize(temp_avg_C = mean(surfWaterTempMean, na.rm = TRUE),
             temp_min_C = min(surfWaterTempMinimum, na.rm = TRUE),
@@ -1314,7 +1302,7 @@ Your solution should use pipes to compose functions and result in exactly this t
 
 ```{r echo = FALSE, message = FALSE, warning  = FALSE}
 solution.6 <- TSW_30min %>%
-  mutate(week = week(ymd_hms(startDateTime))) %>%
+  mutate(week = week(startDateTime)) %>%
   group_by(siteID, week) %>%
   summarize(temp_avg_C = mean(surfWaterTempMean, na.rm = TRUE),
             temp_min_C = min(surfWaterTempMinimum, na.rm = TRUE),
