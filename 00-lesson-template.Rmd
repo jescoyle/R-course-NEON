@@ -104,6 +104,11 @@ Callouts are formatted in the style.css file.
 
 :::
 
+## Synthesis
+
+### Putting it all together
+
+
 ## Exercises
 
 After completing these exercises, learners will be able to 

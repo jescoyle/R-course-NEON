@@ -13,7 +13,7 @@
 
 <title>chp-tidyverse-basics.knit</title>
 
-<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -51,6 +51,7 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -147,6 +148,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -419,9 +421,9 @@ $(document).ready(function () {
 </div>
 
 
-<div id="chapter-8.-data-manipulation-in-the-tidyverse"
+<div id="chapter-7.-data-manipulation-in-the-tidyverse"
 class="section level1 tabset">
-<h1 class="tabset">Chapter 8. Data manipulation in the tidyverse</h1>
+<h1 class="tabset">Chapter 7. Data manipulation in the tidyverse</h1>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <blockquote>
@@ -436,20 +438,22 @@ certain observations (rows) or variables (columns), we often group the
 data by a certain variable(s), or we even calculate summary statistics.
 Base R has functions for most kinds of data table manipulation, but the
 methods are sometimes idiosyncratic and difficult to learn.</p>
-<p>Enter the <a
-href="https://www.tidyverse.org/"><code>tidyverse</code></a>, a set of
-packages designed to work together and follow general rules of data
-science. We have already met one <a
-href="https://www.tidyverse.org/packages/#core-tidyverse">core
-package</a> in this universe- <a
-href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> and
-another for working with dates- <a
-href="https://lubridate.tidyverse.org/"><code>lubridate</code></a>. In
-this lesson we will meet two more: <a
-href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>, a package
-for manipulating and summarizing data within one table and <a
-href="https://tidyr.tidyverse.org/"><code>tidyr</code></a>, a package
-for reformatting and combining data tables.</p>
+<p>Enter the <a href="https://www.tidyverse.org/"
+target="_blank"><code>tidyverse</code></a>, a set of packages designed
+to work together and follow general rules of data science. We have
+already met one <a
+href="https://www.tidyverse.org/packages/#core-tidyverse"
+target="_blank">core package</a> in this universe- <a
+href="https://ggplot2.tidyverse.org/"
+target="_blank"><code>ggplot2</code></a> and another for working with
+dates- <a href="https://lubridate.tidyverse.org/"
+target="_blank"><code>lubridate</code></a>. In this lesson we will meet
+two more: <a href="https://dplyr.tidyverse.org/"
+target="_blank"><code>dplyr</code></a>, a package for manipulating and
+summarizing data within one table and <a
+href="https://tidyr.tidyverse.org/"
+target="_blank"><code>tidyr</code></a>, a package for reformatting and
+combining data tables.</p>
 <div id="what-we-will-learn" class="section level3">
 <h3>What we will learn</h3>
 <p>In this lesson learners will:</p>
@@ -490,11 +494,11 @@ href="chp-program-flow.html">Controlling program flow</a>.</p>
 <p>Before you begin:</p>
 <ol style="list-style-type: decimal">
 <li>Open the R-course-NEON-workbook RStudio project.</li>
-<li>Create a new R script named lesson_08_code.R in the lesson-code
+<li>Create a new R script named lesson_07_code.R in the lesson-code
 folder of the student workbook.</li>
 <li>Whenever you see R code like this:</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Type</span> (or copy) this into your R script. Then run it <span class="cf">in</span> the Console.</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">Type</span> (or copy) this into your R script. Then run it <span class="cf">in</span> the Console.</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Whenever you see a challenge like this:</li>
 </ol>
@@ -506,7 +510,7 @@ your answer by clicking:</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>The code that solves the challenge will appear here.</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>The code that solves the challenge will appear here.</span></code></pre></div>
 <p>Along with an explanation.</p>
 </div>
 </details>
@@ -523,54 +527,55 @@ your answer by clicking:</p>
 diversity at three NEON aquatic sites: Caribou Creek, Alaska (CARI),
 Martha Creek, Washington (MART), and Teakettle Creek, California (TECR).
 You can see a map of these sites on the <a
-href="https://www.neonscience.org/field-sites/explore-field-sites">NEON
-website</a>. Our goal is to evaluate which site has the highest summer
-macroinvertebrate diversity and determine whether macroinvertebrate
-abundance is related to water temperature over the course of the
-summer.</p>
-<p>Just like in the lesson <a href="chp-program-flow.html">Controlling
-program flow</a>, we are going to download and work with data from NEON
-aquatic sites: However in this lesson we will be working with
-macroinvertebrate collections (<a
-href="https://data.neonscience.org/data-products/DP1.20120.001">DP1.20120.001</a>)
-in addition to surface water temperature data (<a
-href="https://data.neonscience.org/data-products/DP1.20053.001">DP1.20053.001</a>).</p>
-<p>We will download data from NEON using the
-<code>loadByProduct()</code> function in the <code>neonUtilities</code>
-package. We need to specify the product ID number, sites and dates for
-which we want data and then type <code>y</code> when prompted to
-download the data at the command line.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(neonUtilities)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define dates for download: June 1 - Oct 31, 2021</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># but we need to start before June 1 to get the entire month of June</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>startdate <span class="ot">&lt;-</span> <span class="st">&quot;2021-05-31&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>enddate <span class="ot">&lt;-</span> <span class="st">&quot;2021-10-31&quot;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the sites to download </span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># TECR = Teakettle Creek,  MART = Martha Creek, CARI = Caribou Creek</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;MART&quot;</span>, <span class="st">&quot;CARI&quot;</span>) </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Macroinvertebrate observations</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>inverts_list <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> <span class="st">&quot;DP1.20120.001&quot;</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                               <span class="at">site =</span> sites,</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                               <span class="at">startdate =</span> startdate,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                               <span class="at">enddate =</span> enddate)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperature in surface water</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>watertemp_list <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> <span class="st">&quot;DP1.20053.001&quot;</span>,</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                               <span class="at">site =</span> sites,</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                               <span class="at">startdate =</span> startdate,</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                               <span class="at">enddate =</span> enddate)</span></code></pre></div>
+href="https://www.neonscience.org/field-sites/explore-field-sites"
+target="_blank">NEON website</a>. Our goal is to evaluate which site has
+the highest summer macroinvertebrate diversity.</p>
+<p>We are going to download and work with data from NEON aquatic sites.
+In this lesson we will be working with macroinvertebrate collections (<a
+href="https://data.neonscience.org/data-products/DP1.20120.001"
+target="_blank">DP1.20120.001</a>) in addition to surface water
+temperature data (<a
+href="https://data.neonscience.org/data-products/DP1.20053.001"
+target="_blank">DP1.20053.001</a>).</p>
+<p>Recall from the lesson <a href="chp-functions.html">Vectorization and
+functions</a> that we can download data from NEON using the
+<code>loadByProduct()</code> function in the <a
+href="https://www.neonscience.org/resources/learning-hub/tutorials/neondatastackr"
+target="_blank"><code>neonUtilities</code></a> package. We need to
+specify the product ID number, sites and dates for which we want data
+and then type <code>y</code> when prompted to download the data at the
+command line.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(neonUtilities)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># Define dates for download: June 1 - Oct 31, 2021</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># but we need to start before June 1 to get the entire month of June</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>startdate <span class="ot">&lt;-</span> <span class="st">&quot;2021-05-31&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>enddate <span class="ot">&lt;-</span> <span class="st">&quot;2021-10-31&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co"># Define the sites to download </span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co"># TECR = Teakettle Creek,  MART = Martha Creek, CARI = Caribou Creek</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;MART&quot;</span>, <span class="st">&quot;CARI&quot;</span>) </span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co"># Macroinvertebrate observations</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>inverts_list <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> <span class="st">&quot;DP1.20120.001&quot;</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>                               <span class="at">site =</span> sites,</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>                               <span class="at">startdate =</span> startdate,</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>                               <span class="at">enddate =</span> enddate)</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co"># Temperature in surface water</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>watertemp_list <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> <span class="st">&quot;DP1.20053.001&quot;</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>                               <span class="at">site =</span> sites,</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>                               <span class="at">startdate =</span> startdate,</span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>                               <span class="at">enddate =</span> enddate)</span></code></pre></div>
 <p>You should now have a two new objects named <code>inverts_list</code>
 and <code>watertemp_list</code> in the Environment panel.
 <code>watertemp_list</code> is the same object we downloaded in lesson
 <a href="chp-program-flow.html">Controlling program flow</a>. Let’s
 extract the data frame that contains 30-minute temperature averages from
 it.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract 30 min temperature averages </span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and save as a separate data frame</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> watertemp_list<span class="sc">$</span>TSW_30min</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Extract 30 min temperature averages </span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># and save as a separate data frame</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> watertemp_list<span class="sc">$</span>TSW_30min</span></code></pre></div>
 <p><code>inverts_list</code> should be a list with nine elements. To
 learn what these objects contain we should read the NEON User Guide to
 Aquatic Macroinvertebrate Collection on the <a
@@ -629,11 +634,11 @@ about which taxa were collected in each sample</li>
 this lesson.</p>
 <p>Let’s extract each of these data frames from the downloaded list
 objects into separate data frame objects.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract invertebrate collections</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>inv_fieldData <span class="ot">&lt;-</span> inverts_list<span class="sc">$</span>inv_fieldData</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract taxonomic information</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>inv_taxa <span class="ot">&lt;-</span> inverts_list<span class="sc">$</span>inv_taxonomyProcessed</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Extract invertebrate collections</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>inv_fieldData <span class="ot">&lt;-</span> inverts_list<span class="sc">$</span>inv_fieldData</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># Extract taxonomic information</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>inv_taxa <span class="ot">&lt;-</span> inverts_list<span class="sc">$</span>inv_taxonomyProcessed</span></code></pre></div>
 <p>Now we have a three data frames. Click on each one in the Environment
 panel to see what they contain:</p>
 <ul>
@@ -669,9 +674,9 @@ demonstrate how to use pipes (<code>%&gt;%</code>) to combine them.</p>
 <code>inv_taxa</code> data frame.</p>
 <p>If you have have not installed this package earlier, please do
 so:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;dplyr&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&#39;dplyr&#39;</span>)</span></code></pre></div>
 <p>Now let’s load the package:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
 <pre><code>
 Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>The following objects are masked from &#39;package:stats&#39;:
@@ -698,13 +703,13 @@ want to operate on. After the name of the dataframe, we can write the
 name of each column to keep. These column names are <strong>not</strong>
 quoted. As in any function, arguments can be broken across lines, so
 long as there is a comma at the end of each line.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>inverts <span class="ot">&lt;-</span> <span class="fu">select</span>(inv_taxa, siteID, sampleID, </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                  scientificName, taxonRank, phylum, class, order, family, genus,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                  sizeClass, estimatedTotalCount)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>inverts <span class="ot">&lt;-</span> <span class="fu">select</span>(inv_taxa, siteID, sampleID, </span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>                  scientificName, taxonRank, phylum, class, order, family, genus,</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>                  sizeClass, estimatedTotalCount)</span></code></pre></div>
 <p><img src="images/13-dplyr-fig1.png" style="width:50.0%" /></p>
 <p>If we want to remove columns we can use a minus sign (<code>-</code>)
 in front of the column name.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>inverts_notaxa <span class="ot">&lt;-</span> <span class="fu">select</span>(inverts, <span class="sc">-</span>phylum, <span class="sc">-</span>class, <span class="sc">-</span>order, <span class="sc">-</span>family, <span class="sc">-</span>genus)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>inverts_notaxa <span class="ot">&lt;-</span> <span class="fu">select</span>(inverts, <span class="sc">-</span>phylum, <span class="sc">-</span>class, <span class="sc">-</span>order, <span class="sc">-</span>family, <span class="sc">-</span>genus)</span></code></pre></div>
 <p>In the Environment panel, click on <code>inverts</code> and
 <code>inverts_notaxa</code> to compare the columns present in these data
 frames.</p>
@@ -715,9 +720,9 @@ functions; it takes the output of the first function and passes it to
 the first input in the second function.</p>
 <p>Since the pipes grammar is unlike anything we’ve seen in R before,
 let’s repeat what we’ve done above using pipes.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>inverts <span class="ot">&lt;-</span> inv_taxa <span class="sc">%&gt;%</span> <span class="fu">select</span>(siteID, sampleID, scientificName, </span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                               taxonRank, phylum, class, order, family, genus,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                               sizeClass, estimatedTotalCount)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>inverts <span class="ot">&lt;-</span> inv_taxa <span class="sc">%&gt;%</span> <span class="fu">select</span>(siteID, sampleID, scientificName, </span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>                               taxonRank, phylum, class, order, family, genus,</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>                               sizeClass, estimatedTotalCount)</span></code></pre></div>
 <p>To help you understand why we wrote that in that way, let’s walk
 through it step by step. First we summon the <code>inv_taxa</code> data
 frame and pass it on, using the pipe symbol <code>%&gt;%</code>, to the
@@ -734,32 +739,32 @@ it received that from the previous pipe.</p>
 only insects. Insects are in the class Insecta. Previously we learned
 that we could subset the rows of a data frame using the base R function
 <code>subset()</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>insects <span class="ot">&lt;-</span> <span class="fu">subset</span>(inverts, class <span class="sc">==</span> <span class="st">&quot;Insecta&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>insects <span class="ot">&lt;-</span> <span class="fu">subset</span>(inverts, class <span class="sc">==</span> <span class="st">&quot;Insecta&quot;</span>)</span></code></pre></div>
 <p>Here’s how to do the same operation using <code>filter()</code> from
 the <code>dplyr</code> package.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>insects <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span> <span class="fu">filter</span>(class <span class="sc">==</span> <span class="st">&quot;Insecta&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>insects <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span> <span class="fu">filter</span>(class <span class="sc">==</span> <span class="st">&quot;Insecta&quot;</span>)</span></code></pre></div>
 <p>Or, if we don’t need the intermediate <code>inverts</code> data
 frame, we could have performed both operations at once using a pipe:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>insects <span class="ot">&lt;-</span> inv_taxa <span class="sc">%&gt;%</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(siteID, sampleID, scientificName, </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>         taxonRank, phylum, class, order, family, genus,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>         sizeClass, estimatedTotalCount) <span class="sc">%&gt;%</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(class <span class="sc">==</span> <span class="st">&quot;Insecta&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>insects <span class="ot">&lt;-</span> inv_taxa <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>  <span class="fu">select</span>(siteID, sampleID, scientificName, </span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>         taxonRank, phylum, class, order, family, genus,</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>         sizeClass, estimatedTotalCount) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>    <span class="fu">filter</span>(class <span class="sc">==</span> <span class="st">&quot;Insecta&quot;</span>)</span></code></pre></div>
 <p>Notice that for these two functions, the order in which we do them
 doesn’t matter. We could have written:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>insects <span class="ot">&lt;-</span> inv_taxa <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(class <span class="sc">==</span> <span class="st">&quot;Insecta&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(siteID, sampleID, scientificName, </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         taxonRank, order, family, genus,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>         sizeClass, estimatedTotalCount)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>insects <span class="ot">&lt;-</span> inv_taxa <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>  <span class="fu">filter</span>(class <span class="sc">==</span> <span class="st">&quot;Insecta&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>  <span class="fu">select</span>(siteID, sampleID, scientificName, </span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>         taxonRank, order, family, genus,</span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>         sizeClass, estimatedTotalCount)</span></code></pre></div>
 <p>Actually- writing the operations in this order means that we no
 longer need the columns for phylum and class, since <code>insects</code>
 should all belong to the same order, Insecta.</p>
 <p>The <code>filter()</code> function can be used with multiple filters,
 each provided as an argument and separated by commas:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>insects_big_MART <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(class <span class="sc">==</span> <span class="st">&quot;Insecta&quot;</span>, sizeClass <span class="sc">&gt;=</span> <span class="dv">4</span>, siteID <span class="sc">==</span> <span class="st">&quot;MART&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>siteID, <span class="sc">-</span>phylum, <span class="sc">-</span>class)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>insects_big_MART <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>  <span class="fu">filter</span>(class <span class="sc">==</span> <span class="st">&quot;Insecta&quot;</span>, sizeClass <span class="sc">&gt;=</span> <span class="dv">4</span>, siteID <span class="sc">==</span> <span class="st">&quot;MART&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>siteID, <span class="sc">-</span>phylum, <span class="sc">-</span>class)</span></code></pre></div>
 <div class="challenge">
 <p>What do you think the code above did? Check your guess by clicking on
 the <code>insects</code> object in the Environment panel.</p>
@@ -805,9 +810,9 @@ filtering step.</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>arachnids_CARI <span class="ot">&lt;-</span> inv_taxa <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(class <span class="sc">==</span> <span class="st">&quot;Arachnida&quot;</span>, siteID <span class="sc">==</span> <span class="st">&quot;CARI&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sampleID, scientificName, sizeClass, estimatedTotalCount)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>arachnids_CARI <span class="ot">&lt;-</span> inv_taxa <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>  <span class="fu">filter</span>(class <span class="sc">==</span> <span class="st">&quot;Arachnida&quot;</span>, siteID <span class="sc">==</span> <span class="st">&quot;CARI&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>  <span class="fu">select</span>(sampleID, scientificName, sizeClass, estimatedTotalCount)</span></code></pre></div>
 <p><strong>Note:</strong> The order of operations is very important in
 this case. If we used <code>select()</code> first, <code>filter()</code>
 would not be able to find the variables <code>class</code> or
@@ -823,8 +828,8 @@ inside the <code>select()</code> and <code>filter()</code> functions to
 choose columns in the dataframe, so long as the preceeding code
 specifies a data source.</p>
 <p>For example, if you have typed the following</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>inv_taxa <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>inv_taxa <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>  <span class="fu">filter</span>(</span></code></pre></div>
 <p>pressing <kbd>tab</kbd> when your cursor is inside the open
 parentheses will bring up a list of all of the columns in
 <code>inv_taxa</code> that you can select from.</p>
@@ -839,9 +844,9 @@ groups</h4>
 invertebrate taxon found in each sample. We know that some taxa can
 occur in multiple size classes- for example, let’s look at the mayfly
 taxon <em>Afghanurus sp.</em> found at the Martha Creek site:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>inverts <span class="sc">%&gt;%</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(siteID <span class="sc">==</span> <span class="st">&quot;MART&quot;</span>, scientificName <span class="sc">==</span> <span class="st">&quot;Afghanurus sp.&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sampleID, scientificName, sizeClass, estimatedTotalCount)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>inverts <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="fu">filter</span>(siteID <span class="sc">==</span> <span class="st">&quot;MART&quot;</span>, scientificName <span class="sc">==</span> <span class="st">&quot;Afghanurus sp.&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="fu">select</span>(sampleID, scientificName, sizeClass, estimatedTotalCount)</span></code></pre></div>
 <pre><code>                sampleID scientificName sizeClass estimatedTotalCount
 1   MART.20210728.HESS.6 Afghanurus sp.         4                   1
 2   MART.20210728.HESS.6 Afghanurus sp.         5                   1
@@ -861,7 +866,7 @@ size class, then we would need to add these two counts together.</p>
 <p>The <code>group_by()</code> function is used to divide a data frame
 into subsets based on a set of criteria.</p>
 <p>Here is the structure of a regular data frame:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(inverts)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">str</span>(inverts)</span></code></pre></div>
 <pre><code>&#39;data.frame&#39;:   3045 obs. of  11 variables:
  $ siteID             : chr  &quot;MART&quot; &quot;MART&quot; &quot;MART&quot; &quot;MART&quot; ...
  $ sampleID           : chr  &quot;MART.20210728.HESS.7&quot; &quot;MART.20210728.SURBER.2&quot; &quot;MART.20210728.HESS.6&quot; &quot;MART.20210728.HESS.6&quot; ...
@@ -875,8 +880,8 @@ into subsets based on a set of criteria.</p>
  $ sizeClass          : num  3 2 3 4 5 9 1 1 1 3 ...
  $ estimatedTotalCount: num  2 1 3 1 2 2 1 72 1 2 ...</code></pre>
 <p>Here is the structure of a grouped data frame:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(inverts <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(siteID))</span></code></pre></div>
-<pre><code>gropd_df [3,045 x 11] (S3: grouped_df/tbl_df/tbl/data.frame)
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">str</span>(inverts <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(siteID))</span></code></pre></div>
+<pre><code>gropd_df [3,045 × 11] (S3: grouped_df/tbl_df/tbl/data.frame)
  $ siteID             : chr [1:3045] &quot;MART&quot; &quot;MART&quot; &quot;MART&quot; &quot;MART&quot; ...
  $ sampleID           : chr [1:3045] &quot;MART.20210728.HESS.7&quot; &quot;MART.20210728.SURBER.2&quot; &quot;MART.20210728.HESS.6&quot; &quot;MART.20210728.HESS.6&quot; ...
  $ scientificName     : chr [1:3045] &quot;Orthocladius sp.&quot; &quot;Parorthocladius sp.&quot; &quot;Sialis sp.&quot; &quot;Afghanurus sp.&quot; ...
@@ -888,7 +893,7 @@ into subsets based on a set of criteria.</p>
  $ genus              : chr [1:3045] &quot;Orthocladius&quot; &quot;Parorthocladius&quot; &quot;Sialis&quot; &quot;Afghanurus&quot; ...
  $ sizeClass          : num [1:3045] 3 2 3 4 5 9 1 1 1 3 ...
  $ estimatedTotalCount: num [1:3045] 2 1 3 1 2 2 1 72 1 2 ...
- - attr(*, &quot;groups&quot;)= tibble [3 x 2] (S3: tbl_df/tbl/data.frame)
+ - attr(*, &quot;groups&quot;)= tibble [3 × 2] (S3: tbl_df/tbl/data.frame)
   ..$ siteID: chr [1:3] &quot;CARI&quot; &quot;MART&quot; &quot;TECR&quot;
   ..$ .rows : list&lt;int&gt; [1:3] 
   .. ..$ : int [1:694] 2352 2353 2354 2355 2356 2357 2358 2359 2360 2361 ...
@@ -913,13 +918,13 @@ allow us split the <code>inverts</code> data frame into multiple pieces,
 then run functions on each piece separately (e.g. <code>mean()</code> or
 <code>sum()</code>). The output will bring the summaries back together
 into a single data frame.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the total abundance of all inverts sampled at each site</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>inverts_bysite <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID) <span class="sc">%&gt;%</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount))</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>inverts_bysite</span></code></pre></div>
-<pre><code># A tibble: 3 x 2
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a><span class="co"># Calculate the total abundance of all inverts sampled at each site</span></span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>inverts_bysite <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount))</span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>inverts_bysite</span></code></pre></div>
+<pre><code># A tibble: 3 × 2
   siteID total
   &lt;chr&gt;  &lt;dbl&gt;
 1 CARI    3780
@@ -932,12 +937,12 @@ taxon in each sample?</p>
 <p>The function <code>group_by()</code> allows us to group by multiple
 variables. Let’s group by <code>siteID</code> and
 <code>sampleID</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>inverts_bysample <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID, sampleID) <span class="sc">%&gt;%</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount))</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>inverts_bysample</span></code></pre></div>
-<pre><code># A tibble: 48 x 3
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>inverts_bysample <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID, sampleID) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount))</span>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>inverts_bysample</span></code></pre></div>
+<pre><code># A tibble: 48 × 3
 # Groups:   siteID [3]
    siteID sampleID                total
    &lt;chr&gt;  &lt;chr&gt;                   &lt;dbl&gt;
@@ -951,7 +956,7 @@ variables. Let’s group by <code>siteID</code> and
  8 CARI   CARI.20210701.SURBER.3    355
  9 CARI   CARI.20210826.KICKNET.1    50
 10 CARI   CARI.20210826.KICKNET.2    44
-# i 38 more rows</code></pre>
+# ℹ 38 more rows</code></pre>
 <p>Now we have the total abundance across all taxa within each sample,
 but by keeping <code>siteID</code> in the <code>group_by()</code>
 function, it is also returned in the output.</p>
@@ -964,9 +969,9 @@ the total number of individuals in each taxon
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>inverts_bytaxa <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID, sampleID, scientificName) <span class="sc">%&gt;%</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount))</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>inverts_bytaxa <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID, sampleID, scientificName) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount))</span></code></pre></div>
 <p>Click on <code>inverts_bytaxa</code> in the Environment panel to
 verify that this worked. You should see a four column data frame with
 2024 rows.</p>
@@ -999,7 +1004,7 @@ number of individuals.</p>
 7 MART.20210728.SURBER.4 Afghanurus sp.         2                   9
 8 MART.20210728.SURBER.5 Afghanurus sp.         3                   1</code></pre>
 <p>to show the following:</p>
-<pre><code># A tibble: 6 x 4
+<pre><code># A tibble: 6 × 4
 # Groups:   scientificName [1]
   scientificName sampleID               total size_mean
   &lt;chr&gt;          &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;
@@ -1013,14 +1018,14 @@ number of individuals.</p>
 product of the <code>sizeClass</code> and
 <code>estimatedTotalCount</code> columns, then divide by the total
 number of individuals.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>inverts_bytaxa <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID, sampleID, scientificName) <span class="sc">%&gt;%</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount),</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">size_mean =</span> <span class="fu">sum</span>(sizeClass<span class="sc">*</span>estimatedTotalCount)<span class="sc">/</span>total)</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co"># view the first 10 rows</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>inverts_bytaxa[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span></code></pre></div>
-<pre><code># A tibble: 10 x 5
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>inverts_bytaxa <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID, sampleID, scientificName) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount),</span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a>            <span class="at">size_mean =</span> <span class="fu">sum</span>(sizeClass<span class="sc">*</span>estimatedTotalCount)<span class="sc">/</span>total)</span>
+<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a><span class="co"># view the first 10 rows</span></span>
+<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a>inverts_bytaxa[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span></code></pre></div>
+<pre><code># A tibble: 10 × 5
 # Groups:   siteID, sampleID [1]
    siteID sampleID                scientificName                 total size_mean
    &lt;chr&gt;  &lt;chr&gt;                   &lt;chr&gt;                          &lt;dbl&gt;     &lt;dbl&gt;
@@ -1061,29 +1066,29 @@ with pipes.</p>
 <div class="solution">
 <p>Here is one way to solve the problem with each step as a separate
 line of code:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the temperature data to good observations</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>TSW_30min_good <span class="ot">&lt;-</span> <span class="fu">filter</span>(TSW_30min, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Group the good data by site then summarize by calculating </span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># mean, minimum and maximum of the temperature variables</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>TSW_bysite <span class="ot">&lt;-</span> <span class="fu">group_by</span>(TSW_30min_good, siteID) <span class="sc">%&gt;%</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">temp_mean =</span> <span class="fu">mean</span>(surfWaterTempMean),</span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">temp_min =</span> <span class="fu">min</span>(surfWaterTempMinimum),</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">temp_max =</span> <span class="fu">max</span>(surfWaterTempMaximum)</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co"># Filter the temperature data to good observations</span></span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a>TSW_30min_good <span class="ot">&lt;-</span> <span class="fu">filter</span>(TSW_30min, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="co"># Group the good data by site then summarize by calculating </span></span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="co"># mean, minimum and maximum of the temperature variables</span></span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a>TSW_bysite <span class="ot">&lt;-</span> <span class="fu">group_by</span>(TSW_30min_good, siteID) <span class="sc">%&gt;%</span></span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">temp_mean =</span> <span class="fu">mean</span>(surfWaterTempMean),</span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a>            <span class="at">temp_min =</span> <span class="fu">min</span>(surfWaterTempMinimum),</span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a>            <span class="at">temp_max =</span> <span class="fu">max</span>(surfWaterTempMaximum)</span>
+<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Here’s how to solve this problem without creating an intermediate
 data frame:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the temperature data to good observations</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>TSW_bysite <span class="ot">&lt;-</span> TSW_30min <span class="sc">%&gt;%</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(finalQF <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(siteID) <span class="sc">%&gt;%</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">temp_mean =</span> <span class="fu">mean</span>(surfWaterTempMean),</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">temp_min =</span> <span class="fu">min</span>(surfWaterTempMinimum),</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">temp_max =</span> <span class="fu">max</span>(surfWaterTempMaximum)</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>TSW_bysite</span></code></pre></div>
-<pre><code># A tibble: 3 x 4
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="co"># Filter the temperature data to good observations</span></span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>TSW_bysite <span class="ot">&lt;-</span> TSW_30min <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>  <span class="fu">filter</span>(finalQF <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a>  <span class="fu">group_by</span>(siteID) <span class="sc">%&gt;%</span></span>
+<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">temp_mean =</span> <span class="fu">mean</span>(surfWaterTempMean),</span>
+<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a>            <span class="at">temp_min =</span> <span class="fu">min</span>(surfWaterTempMinimum),</span>
+<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a>            <span class="at">temp_max =</span> <span class="fu">max</span>(surfWaterTempMaximum)</span>
+<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a>  )</span>
+<span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a>TSW_bysite</span></code></pre></div>
+<pre><code># A tibble: 3 × 4
   siteID temp_mean temp_min temp_max
   &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 1 CARI        3.97   -0.313    163. 
@@ -1101,13 +1106,13 @@ might be coming from. In the code below, the <code>starts_with()</code>
 selector inside the <code>select()</code> function looks for any column
 names in <code>TWS_30min</code> that begin with
 <code>surfWaterTempM</code> and will select all columns that match.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter TSW_30min to rows where max temp seems too high</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Only print useful columns</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>TSW_30min <span class="sc">%&gt;%</span> </span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(surfWaterTempMaximum <span class="sc">&gt;</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(siteID, horizontalPosition, startDateTime, </span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;surfWaterTempM&quot;</span>), </span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>         finalQF)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="co"># Filter TSW_30min to rows where max temp seems too high</span></span>
+<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a><span class="co"># Only print useful columns</span></span>
+<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a>TSW_30min <span class="sc">%&gt;%</span> </span>
+<span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a>  <span class="fu">filter</span>(surfWaterTempMaximum <span class="sc">&gt;</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb39-5"><a href="#cb39-5" tabindex="-1"></a>  <span class="fu">select</span>(siteID, horizontalPosition, startDateTime, </span>
+<span id="cb39-6"><a href="#cb39-6" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;surfWaterTempM&quot;</span>), </span>
+<span id="cb39-7"><a href="#cb39-7" tabindex="-1"></a>         finalQF)</span></code></pre></div>
 <pre><code>  siteID horizontalPosition       startDateTime surfWaterTempMean
 1   CARI                101 2021-06-08 02:00:00             6.089
   surfWaterTempMinimum surfWaterTempMaximum finalQF
@@ -1118,11 +1123,11 @@ summarized every 5 minutes. These data are in the <code>TSW_5min</code>
 element of this list. So, instead of pulling this data frame out and
 saving it as a new object, we could use a pipe to extract and manipulate
 it:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>watertemp_list<span class="sc">$</span>TSW_5min <span class="sc">%&gt;%</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(siteID <span class="sc">==</span> <span class="st">&quot;CARI&quot;</span>, horizontalPosition <span class="sc">==</span> <span class="dv">101</span>, surfWaterTempMaximum <span class="sc">&gt;</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(siteID, horizontalPosition, startDateTime, </span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;surfWaterTempM&quot;</span>), </span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>         finalQF)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a>watertemp_list<span class="sc">$</span>TSW_5min <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a>  <span class="fu">filter</span>(siteID <span class="sc">==</span> <span class="st">&quot;CARI&quot;</span>, horizontalPosition <span class="sc">==</span> <span class="dv">101</span>, surfWaterTempMaximum <span class="sc">&gt;</span> <span class="dv">30</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a>  <span class="fu">select</span>(siteID, horizontalPosition, startDateTime, </span>
+<span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">&quot;surfWaterTempM&quot;</span>), </span>
+<span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a>         finalQF)</span></code></pre></div>
 <pre><code>  siteID horizontalPosition       startDateTime surfWaterTempMean
 1   CARI                101 2021-06-08 02:25:00             6.878
   surfWaterTempMinimum surfWaterTempMaximum finalQF
@@ -1155,25 +1160,25 @@ columns</h4>
 <code>lubridate</code> package to work with dates and times. Load the
 <code>lubridate()</code> package so that we have access to these
 functions:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
 <p>In base R we used <code>$</code> to create a new column in a data
 frame:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the month as a new column</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>TSW_30min<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(TSW_30min<span class="sc">$</span>startDateTime)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="co"># Save the month as a new column</span></span>
+<span id="cb44-2"><a href="#cb44-2" tabindex="-1"></a>TSW_30min<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(TSW_30min<span class="sc">$</span>startDateTime)</span></code></pre></div>
 <p>This same operations can be accomplished using the
 <code>mutate()</code> function, but they can be done in one
 operation:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> <span class="fu">mutate</span>(TSW_30min, </span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">month =</span> <span class="fu">month</span>(TSW_30min<span class="sc">$</span>startDateTime) )</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> <span class="fu">mutate</span>(TSW_30min, </span>
+<span id="cb45-2"><a href="#cb45-2" tabindex="-1"></a>                    <span class="at">month =</span> <span class="fu">month</span>(TSW_30min<span class="sc">$</span>startDateTime) )</span></code></pre></div>
 <p>We reassigned the output of <code>mutate()</code> back to the same
 data object <code>TSW_30min</code> so that the changes we made would be
 saved.</p>
 <p>We can add as many new columns as we’d like inside the
 <code>mutate()</code> function. Here’s an example that uses
 <code>ifelse()</code> to identify summer months.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> <span class="fu">mutate</span>(TSW_30min, </span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">month =</span> <span class="fu">month</span>(TSW_30min<span class="sc">$</span>startDateTime),</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">season =</span> <span class="fu">ifelse</span>(month<span class="sc">&gt;</span><span class="dv">5</span> <span class="sc">&amp;</span> month<span class="sc">&lt;</span><span class="dv">9</span>, <span class="st">&quot;summer&quot;</span>, <span class="st">&quot;not summer&quot;</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> <span class="fu">mutate</span>(TSW_30min, </span>
+<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a>                    <span class="at">month =</span> <span class="fu">month</span>(TSW_30min<span class="sc">$</span>startDateTime),</span>
+<span id="cb46-3"><a href="#cb46-3" tabindex="-1"></a>                    <span class="at">season =</span> <span class="fu">ifelse</span>(month<span class="sc">&gt;</span><span class="dv">5</span> <span class="sc">&amp;</span> month<span class="sc">&lt;</span><span class="dv">9</span>, <span class="st">&quot;summer&quot;</span>, <span class="st">&quot;not summer&quot;</span>) )</span></code></pre></div>
 <div class="challenge">
 <p>Add a column to <code>TSW_30min</code> that identifies the date of
 the start of the time interval for each observation.</p>
@@ -1184,8 +1189,8 @@ the start of the time interval for each observation.</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> <span class="fu">mutate</span>(TSW_30min, </span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">date =</span> <span class="fu">date</span>(startDateTime))</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> <span class="fu">mutate</span>(TSW_30min, </span>
+<span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a>                    <span class="at">date =</span> <span class="fu">date</span>(startDateTime))</span></code></pre></div>
 </div>
 </details>
 </div>
@@ -1209,11 +1214,11 @@ both the collection data and time (as found in the original
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a table that contains relevant info about each invert sample</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>invert_samples <span class="ot">&lt;-</span> inv_fieldData <span class="sc">%&gt;%</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(siteID, sampleID, collectDate, boutNumber, </span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>         habitatType, samplerType, substratumSizeClass, benthicArea) <span class="sc">%&gt;%</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">collect_ymd =</span> <span class="fu">date</span>(collectDate))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="co"># Create a table that contains relevant info about each invert sample</span></span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a>invert_samples <span class="ot">&lt;-</span> inv_fieldData <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a>  <span class="fu">select</span>(siteID, sampleID, collectDate, boutNumber, </span>
+<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a>         habitatType, samplerType, substratumSizeClass, benthicArea) <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href="#cb48-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">collect_ymd =</span> <span class="fu">date</span>(collectDate))</span></code></pre></div>
 </div>
 </details>
 </div>
@@ -1227,14 +1232,14 @@ values found in the <code>habitatType</code> columns within each group.
 Applying the <code>length()</code> function to the output of
 <code>unique()</code> counts how many distinct values there are, which
 gives the number of distinct habitat types sampled.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group the samples by collection date and site</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Tally the number of samples and count the number</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of distinct types of habitat</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>invert_samples <span class="sc">%&gt;%</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(siteID, collect_ymd) <span class="sc">%&gt;%</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_samples =</span> <span class="fu">n</span>(),</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_habitats =</span> <span class="fu">length</span>(<span class="fu">unique</span>(habitatType)))</span></code></pre></div>
-<pre><code># A tibble: 6 x 4
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="co"># Group the samples by collection date and site</span></span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="co"># Tally the number of samples and count the number</span></span>
+<span id="cb49-3"><a href="#cb49-3" tabindex="-1"></a><span class="co"># of distinct types of habitat</span></span>
+<span id="cb49-4"><a href="#cb49-4" tabindex="-1"></a>invert_samples <span class="sc">%&gt;%</span></span>
+<span id="cb49-5"><a href="#cb49-5" tabindex="-1"></a>  <span class="fu">group_by</span>(siteID, collect_ymd) <span class="sc">%&gt;%</span></span>
+<span id="cb49-6"><a href="#cb49-6" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_samples =</span> <span class="fu">n</span>(),</span>
+<span id="cb49-7"><a href="#cb49-7" tabindex="-1"></a>            <span class="at">num_habitats =</span> <span class="fu">length</span>(<span class="fu">unique</span>(habitatType)))</span></code></pre></div>
+<pre><code># A tibble: 6 × 4
 # Groups:   siteID [3]
   siteID collect_ymd num_samples num_habitats
   &lt;chr&gt;  &lt;date&gt;            &lt;int&gt;        &lt;int&gt;
@@ -1259,7 +1264,7 @@ summarizes across all taxa collected. It should have columns:</p>
 <code>estimatedTotalCount</code> column</li>
 </ul>
 <p>Your code should generate this table and it will have 48 rows:</p>
-<pre><code># A tibble: 8 x 3
+<pre><code># A tibble: 8 × 3
   sampleID                num_taxa abundance
   &lt;chr&gt;                      &lt;int&gt;     &lt;dbl&gt;
 1 CARI.20210701.KICKNET.1       31       184
@@ -1275,12 +1280,12 @@ summarizes across all taxa collected. It should have columns:</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a table that summarizes the abundance and diversity</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co"># of macroinvertebrates in each sample</span></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>inverts_bysample <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span> </span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sampleID) <span class="sc">%&gt;%</span></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_taxa =</span> <span class="fu">length</span>(<span class="fu">unique</span>(scientificName)),</span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">abundance =</span> <span class="fu">sum</span>(estimatedTotalCount))</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="co"># Create a table that summarizes the abundance and diversity</span></span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a><span class="co"># of macroinvertebrates in each sample</span></span>
+<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a>inverts_bysample <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span> </span>
+<span id="cb52-4"><a href="#cb52-4" tabindex="-1"></a>  <span class="fu">group_by</span>(sampleID) <span class="sc">%&gt;%</span></span>
+<span id="cb52-5"><a href="#cb52-5" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_taxa =</span> <span class="fu">length</span>(<span class="fu">unique</span>(scientificName)),</span>
+<span id="cb52-6"><a href="#cb52-6" tabindex="-1"></a>            <span class="at">abundance =</span> <span class="fu">sum</span>(estimatedTotalCount))</span></code></pre></div>
 </div>
 </details>
 </div>
@@ -1359,12 +1364,12 @@ containing the columns which should be used as the keys.</p>
 <p>Let’s join the <code>invert_samples</code> and
 <code>inverts_bysample</code> data frames by the <code>sampleID</code>
 column.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Join all rows in invert_samples to matches in inverts_bysample</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># use the sampleID column as the key to match rows</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">left_join</span>(invert_samples, inverts_bysample, <span class="at">by =</span> <span class="st">&quot;sampleID&quot;</span>)</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co"># View the first few rows</span></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(samples)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="co"># Join all rows in invert_samples to matches in inverts_bysample</span></span>
+<span id="cb53-2"><a href="#cb53-2" tabindex="-1"></a><span class="co"># use the sampleID column as the key to match rows</span></span>
+<span id="cb53-3"><a href="#cb53-3" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">left_join</span>(invert_samples, inverts_bysample, <span class="at">by =</span> <span class="st">&quot;sampleID&quot;</span>)</span>
+<span id="cb53-4"><a href="#cb53-4" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="#cb53-5" tabindex="-1"></a><span class="co"># View the first few rows</span></span>
+<span id="cb53-6"><a href="#cb53-6" tabindex="-1"></a><span class="fu">head</span>(samples)</span></code></pre></div>
 <pre><code>  siteID               sampleID         collectDate boutNumber habitatType
 1   MART   MART.20210728.HESS.8 2021-07-28 17:33:00          2        pool
 2   MART MART.20210728.SURBER.5 2021-07-28 17:33:00          2      riffle
@@ -1388,15 +1393,15 @@ sample.</p>
 <p>Suppose we want to compare which taxa are found at each of the three
 sites across all samples collected at each. Let’s summarize the total
 number of individuals counted from each taxon at each site.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the total number of individuals sampled </span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co"># from each taxon at each site</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>inverts_bytaxa_bysite <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID, scientificName) <span class="sc">%&gt;%</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount))</span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="co"># view the data frame</span></span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>inverts_bytaxa_bysite</span></code></pre></div>
-<pre><code># A tibble: 434 x 3
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a><span class="co"># Calculate the total number of individuals sampled </span></span>
+<span id="cb55-2"><a href="#cb55-2" tabindex="-1"></a><span class="co"># from each taxon at each site</span></span>
+<span id="cb55-3"><a href="#cb55-3" tabindex="-1"></a>inverts_bytaxa_bysite <span class="ot">&lt;-</span> inverts <span class="sc">%&gt;%</span></span>
+<span id="cb55-4"><a href="#cb55-4" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID, scientificName) <span class="sc">%&gt;%</span></span>
+<span id="cb55-5"><a href="#cb55-5" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount))</span>
+<span id="cb55-6"><a href="#cb55-6" tabindex="-1"></a></span>
+<span id="cb55-7"><a href="#cb55-7" tabindex="-1"></a><span class="co"># view the data frame</span></span>
+<span id="cb55-8"><a href="#cb55-8" tabindex="-1"></a>inverts_bytaxa_bysite</span></code></pre></div>
+<pre><code># A tibble: 434 × 3
 # Groups:   siteID [3]
    siteID scientificName     total
    &lt;chr&gt;  &lt;chr&gt;              &lt;dbl&gt;
@@ -1410,7 +1415,7 @@ number of individuals counted from each taxon at each site.</p>
  8 CARI   Boreochlus sp.         1
  9 CARI   Brillia sp.            7
 10 CARI   Capniidae sp.         96
-# i 424 more rows</code></pre>
+# ℹ 424 more rows</code></pre>
 <p>This data table is organized in <strong>long format</strong> because
 each column represents a distinct variable. However, if we want to
 compare which taxa are at each site, it would be more convenient see the
@@ -1418,10 +1423,10 @@ abundance of each taxon at each site side-by-side, with one column from
 each site. This format is called <strong>wide format</strong>.</p>
 <p>The <code>tidyr</code> package has functions for manipulating the
 format of data. Let’s install and load it:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the tidyr package</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the tidyr package</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a><span class="co"># Install the tidyr package</span></span>
+<span id="cb57-2"><a href="#cb57-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a><span class="co"># Load the tidyr package</span></span>
+<span id="cb58-2"><a href="#cb58-2" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code></pre></div>
 <p>The function to convert from long format to wide format is
 <code>pivot_wider()</code>. In addition to the data table (as the first
 argument), we need to provide the function with at least two
@@ -1433,15 +1438,15 @@ arguments:</p>
 <strong>values</strong> that we want to show up in these columns</li>
 </ul>
 <p>Here’s how this works in our example:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a site x taxon table that gives</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co"># abundance of each taxon at each site</span></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>siteBytaxa_abun <span class="ot">&lt;-</span> inverts_bytaxa_bysite <span class="sc">%&gt;%</span> </span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> siteID,</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> total)</span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View the data frame</span></span>
-<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>siteBytaxa_abun</span></code></pre></div>
-<pre><code># A tibble: 265 x 4
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a><span class="co"># Create a site x taxon table that gives</span></span>
+<span id="cb59-2"><a href="#cb59-2" tabindex="-1"></a><span class="co"># abundance of each taxon at each site</span></span>
+<span id="cb59-3"><a href="#cb59-3" tabindex="-1"></a>siteBytaxa_abun <span class="ot">&lt;-</span> inverts_bytaxa_bysite <span class="sc">%&gt;%</span> </span>
+<span id="cb59-4"><a href="#cb59-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> siteID,</span>
+<span id="cb59-5"><a href="#cb59-5" tabindex="-1"></a>              <span class="at">values_from =</span> total)</span>
+<span id="cb59-6"><a href="#cb59-6" tabindex="-1"></a></span>
+<span id="cb59-7"><a href="#cb59-7" tabindex="-1"></a><span class="co"># View the data frame</span></span>
+<span id="cb59-8"><a href="#cb59-8" tabindex="-1"></a>siteBytaxa_abun</span></code></pre></div>
+<pre><code># A tibble: 265 × 4
    scientificName      CARI  MART  TECR
    &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
  1 Aeolosoma sp.          4    NA    37
@@ -1454,21 +1459,21 @@ arguments:</p>
  8 Boreochlus sp.         1    NA    16
  9 Brillia sp.            7    52   177
 10 Capniidae sp.         96   149    NA
-# i 255 more rows</code></pre>
+# ℹ 255 more rows</code></pre>
 <p>By default, if a taxon was missing at a site, the function filled in
 <code>NA</code>. Since this is a table of abundances, we could change
 this behavior and specify that missing values be set to zero using the
 <code>values_fill</code> argument.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a site x taxon table that gives</span></span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="co"># abundance of each taxon at each site</span></span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>siteBytaxa_abun <span class="ot">&lt;-</span> inverts_bytaxa_bysite <span class="sc">%&gt;%</span> </span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> siteID,</span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> total,</span>
-<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
-<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="co"># View the dataframe</span></span>
-<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>siteBytaxa_abun</span></code></pre></div>
-<pre><code># A tibble: 265 x 4
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a><span class="co"># Create a site x taxon table that gives</span></span>
+<span id="cb61-2"><a href="#cb61-2" tabindex="-1"></a><span class="co"># abundance of each taxon at each site</span></span>
+<span id="cb61-3"><a href="#cb61-3" tabindex="-1"></a>siteBytaxa_abun <span class="ot">&lt;-</span> inverts_bytaxa_bysite <span class="sc">%&gt;%</span> </span>
+<span id="cb61-4"><a href="#cb61-4" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> siteID,</span>
+<span id="cb61-5"><a href="#cb61-5" tabindex="-1"></a>              <span class="at">values_from =</span> total,</span>
+<span id="cb61-6"><a href="#cb61-6" tabindex="-1"></a>              <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb61-7"><a href="#cb61-7" tabindex="-1"></a></span>
+<span id="cb61-8"><a href="#cb61-8" tabindex="-1"></a><span class="co"># View the dataframe</span></span>
+<span id="cb61-9"><a href="#cb61-9" tabindex="-1"></a>siteBytaxa_abun</span></code></pre></div>
+<pre><code># A tibble: 265 × 4
    scientificName      CARI  MART  TECR
    &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
  1 Aeolosoma sp.          4     0    37
@@ -1481,14 +1486,14 @@ this behavior and specify that missing values be set to zero using the
  8 Boreochlus sp.         1     0    16
  9 Brillia sp.            7    52   177
 10 Capniidae sp.         96   149     0
-# i 255 more rows</code></pre>
+# ℹ 255 more rows</code></pre>
 <p>This table makes it easy to quickly view which taxa are more abundant
 at different sites:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which taxa are present at all three sites</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and most abundant at Caribou Creek?</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>siteBytaxa_abun <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CARI <span class="sc">&gt;</span> <span class="dv">0</span>, MART <span class="sc">&gt;</span> <span class="dv">0</span>, TECR <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>                           CARI <span class="sc">&gt;</span> MART, CARI <span class="sc">&gt;</span> TECR)</span></code></pre></div>
-<pre><code># A tibble: 5 x 4
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a><span class="co"># Which taxa are present at all three sites</span></span>
+<span id="cb63-2"><a href="#cb63-2" tabindex="-1"></a><span class="co"># and most abundant at Caribou Creek?</span></span>
+<span id="cb63-3"><a href="#cb63-3" tabindex="-1"></a>siteBytaxa_abun <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CARI <span class="sc">&gt;</span> <span class="dv">0</span>, MART <span class="sc">&gt;</span> <span class="dv">0</span>, TECR <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb63-4"><a href="#cb63-4" tabindex="-1"></a>                           CARI <span class="sc">&gt;</span> MART, CARI <span class="sc">&gt;</span> TECR)</span></code></pre></div>
+<pre><code># A tibble: 5 × 4
   scientificName                  CARI  MART  TECR
   &lt;chr&gt;                          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1 Cricotopus/Orthocladius sp.       40    31    10
@@ -1509,8 +1514,12 @@ are incredibly powerful tools for reshaping data. Check out the help
 page on them for more info by typing <code>?pivot_longer</code>.</p>
 </div>
 </div>
+</div>
+<div id="synthesis" class="section level2">
+<h2>Synthesis</h2>
 <div id="putting-it-all-together" class="section level3">
 <h3>Putting it all together</h3>
+<p><em>!UPDATE THIS TO NOT USE A LOOP!</em></p>
 <p>Before beginning an analysis, it can be extremely useful to map out
 the steps ahead of time. This will make it easier to translate the
 analysis to code.</p>
@@ -1567,49 +1576,49 @@ already.</p>
 <p>We’ve nearly finished Goal 1. Here’s all of the code together that
 accomplishes this analysis, copy-pasted and slightly modified from early
 parts of this lesson:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Goal 1: Compare the total number of macroinvertebrate taxa at found at each site.</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Start with the macroinvertebrates data downloaded from NEON.</span></span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a> startdate <span class="ot">&lt;-</span> <span class="st">&quot;2021-05-31&quot;</span></span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a> enddate <span class="ot">&lt;-</span> <span class="st">&quot;2021-10-31&quot;</span></span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a> <span class="co"># Define the sites to download </span></span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a> <span class="co"># TECR = Teakettle Creek,  MART = Martha Creek, CARI = Caribou Creek</span></span>
-<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a> sites <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;MART&quot;</span>, <span class="st">&quot;CARI&quot;</span>) </span>
-<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a> <span class="co"># Macroinvertebrate observations</span></span>
-<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a> inverts_list <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> <span class="st">&quot;DP1.20120.001&quot;</span>,</span>
-<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a>                               <span class="at">site =</span> sites,</span>
-<span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a>                               <span class="at">startdate =</span> startdate,</span>
-<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a>                               <span class="at">enddate =</span> enddate)</span>
-<span id="cb65-16"><a href="#cb65-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-17"><a href="#cb65-17" aria-hidden="true" tabindex="-1"></a> <span class="co"># Temperature in surface water</span></span>
-<span id="cb65-18"><a href="#cb65-18" aria-hidden="true" tabindex="-1"></a> watertemp_list <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> <span class="st">&quot;DP1.20053.001&quot;</span>,</span>
-<span id="cb65-19"><a href="#cb65-19" aria-hidden="true" tabindex="-1"></a>                               <span class="at">site =</span> sites,</span>
-<span id="cb65-20"><a href="#cb65-20" aria-hidden="true" tabindex="-1"></a>                               <span class="at">startdate =</span> startdate,</span>
-<span id="cb65-21"><a href="#cb65-21" aria-hidden="true" tabindex="-1"></a>                               <span class="at">enddate =</span> enddate)</span>
-<span id="cb65-22"><a href="#cb65-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-23"><a href="#cb65-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Extract three tables from this download:</span></span>
-<span id="cb65-24"><a href="#cb65-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-25"><a href="#cb65-25" aria-hidden="true" tabindex="-1"></a> <span class="co"># Extract invertebrate collections</span></span>
-<span id="cb65-26"><a href="#cb65-26" aria-hidden="true" tabindex="-1"></a> <span class="co"># inv_fieldData = when and where the invertebrate samples were collected</span></span>
-<span id="cb65-27"><a href="#cb65-27" aria-hidden="true" tabindex="-1"></a> inv_fieldData <span class="ot">&lt;-</span> inverts_list<span class="sc">$</span>inv_fieldData</span>
-<span id="cb65-28"><a href="#cb65-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-29"><a href="#cb65-29" aria-hidden="true" tabindex="-1"></a> <span class="co"># Extract taxonomic information</span></span>
-<span id="cb65-30"><a href="#cb65-30" aria-hidden="true" tabindex="-1"></a> <span class="co"># inv_taxonomyProcessed = which taxa were collected in each sample</span></span>
-<span id="cb65-31"><a href="#cb65-31" aria-hidden="true" tabindex="-1"></a> inv_taxa <span class="ot">&lt;-</span> inverts_list<span class="sc">$</span>inv_taxonomyProcessed</span></code></pre></div>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Use the `inv_taxonomyProcessed` table to count the number of unique</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="do">## taxa found at each site, combining across all of the samples from </span></span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="do">## each site (which were collected at different locations and on two </span></span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="do">## separate sampling dates).</span></span>
-<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a> inverts_bysite <span class="ot">&lt;-</span> inv_taxa <span class="sc">%&gt;%</span> </span>
-<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">group_by</span>(siteID) <span class="sc">%&gt;%</span></span>
-<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summarize</span>(<span class="at">num_taxa =</span> <span class="fu">length</span>(<span class="fu">unique</span>(scientificName)))</span>
-<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a> <span class="co"># Output a table comparing these values.</span></span>
-<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a> inverts_bysite</span></code></pre></div>
-<pre><code># A tibble: 3 x 2
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a><span class="do">### Goal 1: Compare the total number of macroinvertebrate taxa at found at each site.</span></span>
+<span id="cb65-2"><a href="#cb65-2" tabindex="-1"></a></span>
+<span id="cb65-3"><a href="#cb65-3" tabindex="-1"></a><span class="do">## Start with the macroinvertebrates data downloaded from NEON.</span></span>
+<span id="cb65-4"><a href="#cb65-4" tabindex="-1"></a> startdate <span class="ot">&lt;-</span> <span class="st">&quot;2021-05-31&quot;</span></span>
+<span id="cb65-5"><a href="#cb65-5" tabindex="-1"></a> enddate <span class="ot">&lt;-</span> <span class="st">&quot;2021-10-31&quot;</span></span>
+<span id="cb65-6"><a href="#cb65-6" tabindex="-1"></a></span>
+<span id="cb65-7"><a href="#cb65-7" tabindex="-1"></a> <span class="co"># Define the sites to download </span></span>
+<span id="cb65-8"><a href="#cb65-8" tabindex="-1"></a> <span class="co"># TECR = Teakettle Creek,  MART = Martha Creek, CARI = Caribou Creek</span></span>
+<span id="cb65-9"><a href="#cb65-9" tabindex="-1"></a> sites <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;MART&quot;</span>, <span class="st">&quot;CARI&quot;</span>) </span>
+<span id="cb65-10"><a href="#cb65-10" tabindex="-1"></a></span>
+<span id="cb65-11"><a href="#cb65-11" tabindex="-1"></a> <span class="co"># Macroinvertebrate observations</span></span>
+<span id="cb65-12"><a href="#cb65-12" tabindex="-1"></a> inverts_list <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> <span class="st">&quot;DP1.20120.001&quot;</span>,</span>
+<span id="cb65-13"><a href="#cb65-13" tabindex="-1"></a>                               <span class="at">site =</span> sites,</span>
+<span id="cb65-14"><a href="#cb65-14" tabindex="-1"></a>                               <span class="at">startdate =</span> startdate,</span>
+<span id="cb65-15"><a href="#cb65-15" tabindex="-1"></a>                               <span class="at">enddate =</span> enddate)</span>
+<span id="cb65-16"><a href="#cb65-16" tabindex="-1"></a></span>
+<span id="cb65-17"><a href="#cb65-17" tabindex="-1"></a> <span class="co"># Temperature in surface water</span></span>
+<span id="cb65-18"><a href="#cb65-18" tabindex="-1"></a> watertemp_list <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> <span class="st">&quot;DP1.20053.001&quot;</span>,</span>
+<span id="cb65-19"><a href="#cb65-19" tabindex="-1"></a>                               <span class="at">site =</span> sites,</span>
+<span id="cb65-20"><a href="#cb65-20" tabindex="-1"></a>                               <span class="at">startdate =</span> startdate,</span>
+<span id="cb65-21"><a href="#cb65-21" tabindex="-1"></a>                               <span class="at">enddate =</span> enddate)</span>
+<span id="cb65-22"><a href="#cb65-22" tabindex="-1"></a></span>
+<span id="cb65-23"><a href="#cb65-23" tabindex="-1"></a><span class="do">## Extract three tables from this download:</span></span>
+<span id="cb65-24"><a href="#cb65-24" tabindex="-1"></a></span>
+<span id="cb65-25"><a href="#cb65-25" tabindex="-1"></a> <span class="co"># Extract invertebrate collections</span></span>
+<span id="cb65-26"><a href="#cb65-26" tabindex="-1"></a> <span class="co"># inv_fieldData = when and where the invertebrate samples were collected</span></span>
+<span id="cb65-27"><a href="#cb65-27" tabindex="-1"></a> inv_fieldData <span class="ot">&lt;-</span> inverts_list<span class="sc">$</span>inv_fieldData</span>
+<span id="cb65-28"><a href="#cb65-28" tabindex="-1"></a></span>
+<span id="cb65-29"><a href="#cb65-29" tabindex="-1"></a> <span class="co"># Extract taxonomic information</span></span>
+<span id="cb65-30"><a href="#cb65-30" tabindex="-1"></a> <span class="co"># inv_taxonomyProcessed = which taxa were collected in each sample</span></span>
+<span id="cb65-31"><a href="#cb65-31" tabindex="-1"></a> inv_taxa <span class="ot">&lt;-</span> inverts_list<span class="sc">$</span>inv_taxonomyProcessed</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" tabindex="-1"></a><span class="do">## Use the `inv_taxonomyProcessed` table to count the number of unique</span></span>
+<span id="cb66-2"><a href="#cb66-2" tabindex="-1"></a><span class="do">## taxa found at each site, combining across all of the samples from </span></span>
+<span id="cb66-3"><a href="#cb66-3" tabindex="-1"></a><span class="do">## each site (which were collected at different locations and on two </span></span>
+<span id="cb66-4"><a href="#cb66-4" tabindex="-1"></a><span class="do">## separate sampling dates).</span></span>
+<span id="cb66-5"><a href="#cb66-5" tabindex="-1"></a></span>
+<span id="cb66-6"><a href="#cb66-6" tabindex="-1"></a> inverts_bysite <span class="ot">&lt;-</span> inv_taxa <span class="sc">%&gt;%</span> </span>
+<span id="cb66-7"><a href="#cb66-7" tabindex="-1"></a>   <span class="fu">group_by</span>(siteID) <span class="sc">%&gt;%</span></span>
+<span id="cb66-8"><a href="#cb66-8" tabindex="-1"></a>   <span class="fu">summarize</span>(<span class="at">num_taxa =</span> <span class="fu">length</span>(<span class="fu">unique</span>(scientificName)))</span>
+<span id="cb66-9"><a href="#cb66-9" tabindex="-1"></a></span>
+<span id="cb66-10"><a href="#cb66-10" tabindex="-1"></a> <span class="co"># Output a table comparing these values.</span></span>
+<span id="cb66-11"><a href="#cb66-11" tabindex="-1"></a> inverts_bysite</span></code></pre></div>
+<pre><code># A tibble: 3 × 2
   siteID num_taxa
   &lt;chr&gt;     &lt;int&gt;
 1 CARI         92
@@ -1619,199 +1628,16 @@ parts of this lesson:</p>
 samples, as we did before) we put <code>group_by(siteID)</code> instead
 of <code>group_by(sampleID)</code>.</p>
 <p>A bar graph is a good choice for displaying these data:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the ggplot2 package (if not already loaded)</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a bar graph </span></span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>inverts_bysite <span class="sc">%&gt;%</span></span>
-<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> siteID, <span class="at">y =</span> num_taxa)) <span class="sc">+</span></span>
-<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;NEON site code&quot;</span>, </span>
-<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">&quot;Num. macroinvertebrate taxa&quot;</span>)</span></code></pre></div>
-<p><img src="images/rmd-08-unnamed-chunk-51-1.png" width="50%" style="display: block; margin: auto;" /></p>
-<p><em><strong>Goal 2: Macroinvertebrate abundance
-vs. temperature</strong></em></p>
-<p>We are also nearly done with the second goal as well. Let’s see how
-far we can get using functions that we have already learned.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Goal 2: Plot macroinvertebrate abundance and temperature over time</span></span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Start with macroinvertebrate data tables</span></span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="do">## inv_fieldData and inv_taxonomyProcessed (saved as inv_taxa)</span></span>
-<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Use surface water temperature data from TSW_30min</span></span>
-<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a> <span class="co"># Extract surface water temperature measurements</span></span>
-<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a> <span class="co"># averaged over 30 min periods</span></span>
-<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a> TSW_30min <span class="ot">&lt;-</span> watertemp_list<span class="sc">$</span>TSW_30min</span>
-<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a> <span class="co"># Filter the temperature data to good observations</span></span>
-<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a> TSW_30min_good <span class="ot">&lt;-</span> <span class="fu">filter</span>(TSW_30min, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Use inverts_taxa to calculate the total abundance of</span></span>
-<span id="cb69-15"><a href="#cb69-15" aria-hidden="true" tabindex="-1"></a><span class="do">## macroinvertebrates in each sample from each site </span></span>
-<span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a>inverts_bysample <span class="ot">&lt;-</span> inv_taxa <span class="sc">%&gt;%</span></span>
-<span id="cb69-17"><a href="#cb69-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID, sampleID) <span class="sc">%&gt;%</span></span>
-<span id="cb69-18"><a href="#cb69-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount))</span>
-<span id="cb69-19"><a href="#cb69-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-20"><a href="#cb69-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Join inverts_bysample with inv_fieldData to determine the </span></span>
-<span id="cb69-21"><a href="#cb69-21" aria-hidden="true" tabindex="-1"></a><span class="do">## dates which each sample was collected and the amount of area sampled.</span></span>
-<span id="cb69-22"><a href="#cb69-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-23"><a href="#cb69-23" aria-hidden="true" tabindex="-1"></a> <span class="co"># Since we don&#39;t need all the columns, we can just select the columns</span></span>
-<span id="cb69-24"><a href="#cb69-24" aria-hidden="true" tabindex="-1"></a> <span class="co"># of interest before joining.</span></span>
-<span id="cb69-25"><a href="#cb69-25" aria-hidden="true" tabindex="-1"></a> field_cols <span class="ot">&lt;-</span> inv_fieldData <span class="sc">%&gt;%</span> </span>
-<span id="cb69-26"><a href="#cb69-26" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(sampleID, collectDate, benthicArea)</span>
-<span id="cb69-27"><a href="#cb69-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-28"><a href="#cb69-28" aria-hidden="true" tabindex="-1"></a> <span class="co"># Join the invertebrate abundance with field data columns</span></span>
-<span id="cb69-29"><a href="#cb69-29" aria-hidden="true" tabindex="-1"></a> <span class="co"># left_join keeps all rows in inverts_bysample</span></span>
-<span id="cb69-30"><a href="#cb69-30" aria-hidden="true" tabindex="-1"></a> inverts_bysample <span class="ot">&lt;-</span> <span class="fu">left_join</span>(inverts_bysample, field_cols, <span class="at">by =</span> <span class="st">&quot;sampleID&quot;</span>)</span>
-<span id="cb69-31"><a href="#cb69-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-32"><a href="#cb69-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-33"><a href="#cb69-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Control for variability in abundance based on the amount </span></span>
-<span id="cb69-34"><a href="#cb69-34" aria-hidden="true" tabindex="-1"></a><span class="do">## of area sampled by calculating density = abundance / area`</span></span>
-<span id="cb69-35"><a href="#cb69-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb69-36"><a href="#cb69-36" aria-hidden="true" tabindex="-1"></a>  inverts_bysample <span class="ot">&lt;-</span> inverts_bysample <span class="sc">%&gt;%</span></span>
-<span id="cb69-37"><a href="#cb69-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">density_per_m2 =</span> total <span class="sc">/</span> benthicArea)</span>
-<span id="cb69-38"><a href="#cb69-38" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb69-39"><a href="#cb69-39" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb69-40"><a href="#cb69-40" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate average macroinvertebrate density across all samples </span></span>
-<span id="cb69-41"><a href="#cb69-41" aria-hidden="true" tabindex="-1"></a><span class="do">## collected on the same date at the same site. </span></span>
-<span id="cb69-42"><a href="#cb69-42" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb69-43"><a href="#cb69-43" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb69-44"><a href="#cb69-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Make a column that extracts the date from collectDate</span></span>
-<span id="cb69-45"><a href="#cb69-45" aria-hidden="true" tabindex="-1"></a>  inverts_bysample <span class="ot">&lt;-</span> inverts_bysample <span class="sc">%&gt;%</span></span>
-<span id="cb69-46"><a href="#cb69-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">collect_day =</span> <span class="fu">date</span>(collectDate))</span>
-<span id="cb69-47"><a href="#cb69-47" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Note: we could have combined this step with the last</span></span>
-<span id="cb69-48"><a href="#cb69-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># step and created  two columns with one `mutate()`.</span></span>
-<span id="cb69-49"><a href="#cb69-49" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb69-50"><a href="#cb69-50" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Summarize the samples by date and site</span></span>
-<span id="cb69-51"><a href="#cb69-51" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate average macroinvertebrate density</span></span>
-<span id="cb69-52"><a href="#cb69-52" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate number of samples averaged </span></span>
-<span id="cb69-53"><a href="#cb69-53" aria-hidden="true" tabindex="-1"></a>  inverts_bysite <span class="ot">&lt;-</span> inverts_bysample <span class="sc">%&gt;%</span></span>
-<span id="cb69-54"><a href="#cb69-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID, collect_day) <span class="sc">%&gt;%</span></span>
-<span id="cb69-55"><a href="#cb69-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">density_per_m2 =</span> <span class="fu">mean</span>(density_per_m2),</span>
-<span id="cb69-56"><a href="#cb69-56" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_samples =</span> <span class="fu">n</span>()) </span>
-<span id="cb69-57"><a href="#cb69-57" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb69-58"><a href="#cb69-58" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb69-59"><a href="#cb69-59" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate average temperature across both sensors for </span></span>
-<span id="cb69-60"><a href="#cb69-60" aria-hidden="true" tabindex="-1"></a><span class="do">## each time point at each site and save this in a new table</span></span>
-<span id="cb69-61"><a href="#cb69-61" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb69-62"><a href="#cb69-62" aria-hidden="true" tabindex="-1"></a>  TSW_avg <span class="ot">&lt;-</span> TSW_30min_good <span class="sc">%&gt;%</span></span>
-<span id="cb69-63"><a href="#cb69-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siteID, startDateTime) <span class="sc">%&gt;%</span></span>
-<span id="cb69-64"><a href="#cb69-64" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">temp_avg_C =</span> <span class="fu">mean</span>(surfWaterTempMean),</span>
-<span id="cb69-65"><a href="#cb69-65" aria-hidden="true" tabindex="-1"></a>              <span class="at">n_obs =</span> <span class="fu">n</span>()) <span class="co"># keep track of the number of measurements averaged</span></span>
-<span id="cb69-66"><a href="#cb69-66" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb69-67"><a href="#cb69-67" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb69-68"><a href="#cb69-68" aria-hidden="true" tabindex="-1"></a><span class="do">## Graph macroinvertebrate density and temperature over time </span></span>
-<span id="cb69-69"><a href="#cb69-69" aria-hidden="true" tabindex="-1"></a><span class="do">## for the four sites.</span></span>
-<span id="cb69-70"><a href="#cb69-70" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb69-71"><a href="#cb69-71" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Temperature vs. time colored by site</span></span>
-<span id="cb69-72"><a href="#cb69-72" aria-hidden="true" tabindex="-1"></a>  TSW_avg <span class="sc">%&gt;%</span> </span>
-<span id="cb69-73"><a href="#cb69-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> startDateTime, <span class="at">y =</span> temp_avg_C, <span class="at">color =</span> siteID)) <span class="sc">+</span></span>
-<span id="cb69-74"><a href="#cb69-74" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb69-75"><a href="#cb69-75" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Date&quot;</span>,</span>
-<span id="cb69-76"><a href="#cb69-76" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">&quot;Surface water temperature&quot;</span><span class="sc">~</span>(degree<span class="sc">*</span>C)),</span>
-<span id="cb69-77"><a href="#cb69-77" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">&quot;NEON Site&quot;</span>)</span></code></pre></div>
-<p><img src="images/rmd-08-unnamed-chunk-52-1.png" width="50%" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Macroinvertebrate density vs. time</span></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  inverts_bysite <span class="sc">%&gt;%</span> </span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> collect_day, <span class="at">y =</span> density_per_m2, <span class="at">color =</span> siteID)) <span class="sc">+</span></span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Date&quot;</span>,</span>
-<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">&quot;Macroinvertebrate density (num. per&quot;</span><span class="sc">~</span>m<span class="sc">^</span><span class="dv">2</span>),</span>
-<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">&quot;NEON Site&quot;</span>)</span></code></pre></div>
-<p><img src="images/rmd-08-unnamed-chunk-52-2.png" width="50%" style="display: block; margin: auto;" /></p>
-<p>The graph in the last step gave us a warning that rows of data were
-omitted due to missing values. That’s what we wanted to have happen, so
-we don’t need to try to address this warning.</p>
-<p>We are almost done with the analysis- the last two steps require that
-we match up temperature measurements with the dates when
-macroinvertebrates were sampled.</p>
-<p>Let’s match macroinvertebrate samples in the
-<code>inverts_bysite</code> table to an average of temperatures measured
-for a three day period before each sample was collected.</p>
-<p>First we need to calculate average temperatures over the three-day
-periods of time before each <code>collect_day</code> in
-<code>inverts_bysite</code>. To do this we will use functions from the
-<code>lubridate</code> package to define a set of time intervals that
-correspond to each of the collection dates.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define 3 day time intervals before each collection date</span></span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>inverts_bysite<span class="sc">$</span>temp_interval <span class="ot">&lt;-</span> <span class="fu">interval</span>(<span class="at">end =</span> inverts_bysite<span class="sc">$</span>collect_day,</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">start =</span> inverts_bysite<span class="sc">$</span>collect_day <span class="sc">-</span> <span class="fu">ddays</span>(<span class="dv">3</span>))</span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine inverts_bysite</span></span>
-<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>inverts_bysite</span></code></pre></div>
-<pre><code># A tibble: 6 x 5
-# Groups:   siteID [3]
-  siteID collect_day density_per_m2 n_samples temp_interval                 
-  &lt;chr&gt;  &lt;date&gt;               &lt;dbl&gt;     &lt;int&gt; &lt;Interval&gt;                    
-1 CARI   2021-07-01           2925.         8 2021-06-28 UTC--2021-07-01 UTC
-2 CARI   2021-08-26            701.         8 2021-08-23 UTC--2021-08-26 UTC
-3 MART   2021-07-28           8635.         8 2021-07-25 UTC--2021-07-28 UTC
-4 MART   2021-09-27           4698.         8 2021-09-24 UTC--2021-09-27 UTC
-5 TECR   2021-07-27          63478.         8 2021-07-24 UTC--2021-07-27 UTC
-6 TECR   2021-09-15          19571.         8 2021-09-12 UTC--2021-09-15 UTC</code></pre>
-<p>Next we need to calculate the average temperature at each site within
-the three-day time intervals that we defined. This sounds like a good
-use for a <code>for</code> loop! We learned about <code>for</code> loops
-in <a href="chp-program-flow.html">Controlling program flow</a>.
-Although there are vectorized ways to accomplish this (see the
-<code>purrr</code> package), a <code>for</code> loop will work fine
-here.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Join inverts_bysite with temperature data that corresponds to the</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="do">## date when samples were collected.</span></span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a> <span class="co"># Define a vector to hold the average temperatures</span></span>
-<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a> <span class="co"># There will be one for each row in inverts_bysite</span></span>
-<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a> N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(inverts_bysite)</span>
-<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a> avg_temp <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, N) </span>
-<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a> <span class="co"># Loop through each row in inverts_bysite</span></span>
-<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>N){</span>
-<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb73-12"><a href="#cb73-12" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Define the time interval and site for this row</span></span>
-<span id="cb73-13"><a href="#cb73-13" aria-hidden="true" tabindex="-1"></a>   this_interval <span class="ot">&lt;-</span> inverts_bysite<span class="sc">$</span>temp_interval[i]</span>
-<span id="cb73-14"><a href="#cb73-14" aria-hidden="true" tabindex="-1"></a>   this_site <span class="ot">&lt;-</span> inverts_bysite<span class="sc">$</span>siteID[i]</span>
-<span id="cb73-15"><a href="#cb73-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb73-16"><a href="#cb73-16" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Get all rows from TWS_avg within the time interval for this row</span></span>
-<span id="cb73-17"><a href="#cb73-17" aria-hidden="true" tabindex="-1"></a>   use_temps <span class="ot">&lt;-</span> <span class="fu">filter</span>(TSW_avg, </span>
-<span id="cb73-18"><a href="#cb73-18" aria-hidden="true" tabindex="-1"></a>                       startDateTime <span class="sc">%within%</span> this_interval,</span>
-<span id="cb73-19"><a href="#cb73-19" aria-hidden="true" tabindex="-1"></a>                       siteID <span class="sc">==</span> this_site)</span>
-<span id="cb73-20"><a href="#cb73-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb73-21"><a href="#cb73-21" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Calculate the average temperature and save it in avg_temp</span></span>
-<span id="cb73-22"><a href="#cb73-22" aria-hidden="true" tabindex="-1"></a>   <span class="co"># remove any missing values</span></span>
-<span id="cb73-23"><a href="#cb73-23" aria-hidden="true" tabindex="-1"></a>   avg_temp[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(use_temps<span class="sc">$</span>temp_avg_C, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb73-24"><a href="#cb73-24" aria-hidden="true" tabindex="-1"></a> }</span>
-<span id="cb73-25"><a href="#cb73-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-26"><a href="#cb73-26" aria-hidden="true" tabindex="-1"></a> <span class="co"># Add avg_temp as a new column in inverts_bysite</span></span>
-<span id="cb73-27"><a href="#cb73-27" aria-hidden="true" tabindex="-1"></a> inverts_bysite<span class="sc">$</span>temp_avg_3day <span class="ot">&lt;-</span> avg_temp</span>
-<span id="cb73-28"><a href="#cb73-28" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb73-29"><a href="#cb73-29" aria-hidden="true" tabindex="-1"></a> <span class="co"># View the data</span></span>
-<span id="cb73-30"><a href="#cb73-30" aria-hidden="true" tabindex="-1"></a> inverts_bysite</span></code></pre></div>
-<pre><code># A tibble: 6 x 6
-# Groups:   siteID [3]
-  siteID collect_day density_per_m2 n_samples temp_interval                 
-  &lt;chr&gt;  &lt;date&gt;               &lt;dbl&gt;     &lt;int&gt; &lt;Interval&gt;                    
-1 CARI   2021-07-01           2925.         8 2021-06-28 UTC--2021-07-01 UTC
-2 CARI   2021-08-26            701.         8 2021-08-23 UTC--2021-08-26 UTC
-3 MART   2021-07-28           8635.         8 2021-07-25 UTC--2021-07-28 UTC
-4 MART   2021-09-27           4698.         8 2021-09-24 UTC--2021-09-27 UTC
-5 TECR   2021-07-27          63478.         8 2021-07-24 UTC--2021-07-27 UTC
-6 TECR   2021-09-15          19571.         8 2021-09-12 UTC--2021-09-15 UTC
-# i 1 more variable: temp_avg_3day &lt;dbl&gt;</code></pre>
-<p>Now that we have macroinvertebrate abundance and temperature in the
-same data frame, we’re ready to move on to the last step.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Graph macroinvertebrate density versus water temperature as a scatterplot.</span></span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Connect points from the same site with arrows pointing from the </span></span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="do">## first to the second sample.</span></span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>inverts_bysite <span class="sc">%&gt;%</span></span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> temp_avg_3day, <span class="at">y =</span> density_per_m2)) <span class="sc">+</span> </span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> siteID)) <span class="sc">+</span> </span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="st">&quot;Surface water temperature&quot;</span><span class="sc">~</span>(degree<span class="sc">*</span>C)),</span>
-<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">&quot;Macroinvertebrate density (num. per&quot;</span><span class="sc">~</span>m<span class="sc">^</span><span class="dv">2</span>),</span>
-<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">&quot;NEON Site&quot;</span>)</span></code></pre></div>
-<p><img src="images/rmd-08-unnamed-chunk-55-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="co"># Load the ggplot2 package (if not already loaded)</span></span>
+<span id="cb68-2"><a href="#cb68-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb68-3"><a href="#cb68-3" tabindex="-1"></a></span>
+<span id="cb68-4"><a href="#cb68-4" tabindex="-1"></a><span class="co"># Make a bar graph </span></span>
+<span id="cb68-5"><a href="#cb68-5" tabindex="-1"></a>inverts_bysite <span class="sc">%&gt;%</span></span>
+<span id="cb68-6"><a href="#cb68-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> siteID, <span class="at">y =</span> num_taxa)) <span class="sc">+</span></span>
+<span id="cb68-7"><a href="#cb68-7" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb68-8"><a href="#cb68-8" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;NEON site code&quot;</span>, </span>
+<span id="cb68-9"><a href="#cb68-9" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">&quot;Num. macroinvertebrate taxa&quot;</span>)</span></code></pre></div>
+<p><img src="images/rmd-07-unnamed-chunk-51-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>Success! Now go apply what you learned in the exercises.</p>
 </div>
 <div id="other-useful-functions" class="section level3">
@@ -1820,76 +1646,44 @@ same data frame, we’re ready to move on to the last step.</p>
 about:</p>
 <p>The <code>rename()</code> function can be used to rename columns in a
 dataframe.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>inverts_bysite <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">site =</span> siteID)</span></code></pre></div>
-<pre><code># A tibble: 6 x 6
-# Groups:   site [3]
-  site  collect_day density_per_m2 n_samples temp_interval                 
-  &lt;chr&gt; &lt;date&gt;               &lt;dbl&gt;     &lt;int&gt; &lt;Interval&gt;                    
-1 CARI  2021-07-01           2925.         8 2021-06-28 UTC--2021-07-01 UTC
-2 CARI  2021-08-26            701.         8 2021-08-23 UTC--2021-08-26 UTC
-3 MART  2021-07-28           8635.         8 2021-07-25 UTC--2021-07-28 UTC
-4 MART  2021-09-27           4698.         8 2021-09-24 UTC--2021-09-27 UTC
-5 TECR  2021-07-27          63478.         8 2021-07-24 UTC--2021-07-27 UTC
-6 TECR  2021-09-15          19571.         8 2021-09-12 UTC--2021-09-15 UTC
-# i 1 more variable: temp_avg_3day &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" tabindex="-1"></a>inverts_bysite <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">site =</span> siteID)</span></code></pre></div>
+<pre><code># A tibble: 3 × 2
+  site  num_taxa
+  &lt;chr&gt;    &lt;int&gt;
+1 CARI        92
+2 MART       160
+3 TECR       182</code></pre>
 <p>The <code>arrange()</code> function will reorder the rows of a data
 frame according to the values in one or more columns.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>inverts_bysite <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(density_per_m2)</span></code></pre></div>
-<pre><code># A tibble: 6 x 6
-# Groups:   siteID [3]
-  siteID collect_day density_per_m2 n_samples temp_interval                 
-  &lt;chr&gt;  &lt;date&gt;               &lt;dbl&gt;     &lt;int&gt; &lt;Interval&gt;                    
-1 CARI   2021-08-26            701.         8 2021-08-23 UTC--2021-08-26 UTC
-2 CARI   2021-07-01           2925.         8 2021-06-28 UTC--2021-07-01 UTC
-3 MART   2021-09-27           4698.         8 2021-09-24 UTC--2021-09-27 UTC
-4 MART   2021-07-28           8635.         8 2021-07-25 UTC--2021-07-28 UTC
-5 TECR   2021-09-15          19571.         8 2021-09-12 UTC--2021-09-15 UTC
-6 TECR   2021-07-27          63478.         8 2021-07-24 UTC--2021-07-27 UTC
-# i 1 more variable: temp_avg_3day &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" tabindex="-1"></a>inverts_bysite <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(density_per_m2)</span></code></pre></div>
+<pre><code>Error in `arrange()`:
+ℹ In argument: `..1 = density_per_m2`.
+Caused by error:
+! object &#39;density_per_m2&#39; not found</code></pre>
 <p>You can use the <code>desc()</code> function inside
 <code>arrange()</code> to put value in descending order.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>inverts_bysite <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(collect_day))</span></code></pre></div>
-<pre><code># A tibble: 6 x 6
-# Groups:   siteID [3]
-  siteID collect_day density_per_m2 n_samples temp_interval                 
-  &lt;chr&gt;  &lt;date&gt;               &lt;dbl&gt;     &lt;int&gt; &lt;Interval&gt;                    
-1 MART   2021-09-27           4698.         8 2021-09-24 UTC--2021-09-27 UTC
-2 TECR   2021-09-15          19571.         8 2021-09-12 UTC--2021-09-15 UTC
-3 CARI   2021-08-26            701.         8 2021-08-23 UTC--2021-08-26 UTC
-4 MART   2021-07-28           8635.         8 2021-07-25 UTC--2021-07-28 UTC
-5 TECR   2021-07-27          63478.         8 2021-07-24 UTC--2021-07-27 UTC
-6 CARI   2021-07-01           2925.         8 2021-06-28 UTC--2021-07-01 UTC
-# i 1 more variable: temp_avg_3day &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" tabindex="-1"></a>inverts_bysite <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(collect_day))</span></code></pre></div>
+<pre><code>Error in `arrange()`:
+ℹ In argument: `..1 = collect_day`.
+Caused by error:
+! object &#39;collect_day&#39; not found</code></pre>
 <p>You can also arrange rows by multiple columns.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>inverts_bysite <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(siteID, <span class="fu">desc</span>(collect_day))</span></code></pre></div>
-<pre><code># A tibble: 6 x 6
-# Groups:   siteID [3]
-  siteID collect_day density_per_m2 n_samples temp_interval                 
-  &lt;chr&gt;  &lt;date&gt;               &lt;dbl&gt;     &lt;int&gt; &lt;Interval&gt;                    
-1 CARI   2021-08-26            701.         8 2021-08-23 UTC--2021-08-26 UTC
-2 CARI   2021-07-01           2925.         8 2021-06-28 UTC--2021-07-01 UTC
-3 MART   2021-09-27           4698.         8 2021-09-24 UTC--2021-09-27 UTC
-4 MART   2021-07-28           8635.         8 2021-07-25 UTC--2021-07-28 UTC
-5 TECR   2021-09-15          19571.         8 2021-09-12 UTC--2021-09-15 UTC
-6 TECR   2021-07-27          63478.         8 2021-07-24 UTC--2021-07-27 UTC
-# i 1 more variable: temp_avg_3day &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" tabindex="-1"></a>inverts_bysite <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(siteID, <span class="fu">desc</span>(collect_day))</span></code></pre></div>
+<pre><code>Error in `arrange()`:
+ℹ In argument: `..2 = collect_day`.
+Caused by error:
+! object &#39;collect_day&#39; not found</code></pre>
 <p>Instead of the <code>table()</code> function, you can used the
 <code>count()</code> function to tabulate the number of observations in
 groups within one or more columns.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>inverts_bysample <span class="sc">%&gt;%</span></span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(siteID, collectDate)</span></code></pre></div>
-<pre><code># A tibble: 6 x 3
-# Groups:   siteID [3]
-  siteID collectDate             n
-  &lt;chr&gt;  &lt;dttm&gt;              &lt;int&gt;
-1 CARI   2021-07-01 19:27:00     8
-2 CARI   2021-08-26 20:56:00     8
-3 MART   2021-07-28 17:33:00     8
-4 MART   2021-09-27 18:01:00     8
-5 TECR   2021-07-27 15:41:00     8
-6 TECR   2021-09-15 17:29:00     8</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>inv_taxa <span class="sc">%&gt;%</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(siteID, phylum)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" tabindex="-1"></a>inverts_bysample <span class="sc">%&gt;%</span></span>
+<span id="cb77-2"><a href="#cb77-2" tabindex="-1"></a>  <span class="fu">count</span>(siteID, collectDate)</span></code></pre></div>
+<pre><code>Error in `count()`:
+! Must group by variables found in `.data`.
+Column `siteID` is not found.
+Column `collectDate` is not found.</code></pre>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a>inv_taxa <span class="sc">%&gt;%</span></span>
+<span id="cb79-2"><a href="#cb79-2" tabindex="-1"></a>  <span class="fu">count</span>(siteID, phylum)</span></code></pre></div>
 <pre><code>   siteID          phylum    n
 1    CARI        Annelida  156
 2    CARI      Arthropoda  515
@@ -1908,10 +1702,13 @@ groups within one or more columns.</p>
 15   TECR        Mollusca   11
 16   TECR        Nematoda   26
 17   TECR Platyhelminthes    3</code></pre>
+<p><em>!UPDATE THIS TO ADD THE stackByTable() functions</em></p>
 </div>
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
+<p><em>!UPDATE THIS TO USE THE NEW SYNETHSIS &amp; MAKE NEW
+SCRIPT!</em></p>
 <dl>
 <dt>After completing these exercises, learners will be able to</dt>
 <dd>
@@ -1934,15 +1731,12 @@ with <code>group_by</code> and <code>summarize</code></li>
 (<code>%&gt;%</code>)</li>
 </ol>
 <p>Before completing any of these exercises, open a new R session and
-run the code that corresponds to the “Putting it all together” analysis
-at the end of the lesson. You can download an R script that contains all
-of this code by clicking <a
-href="exercises/08/analysis_code.R">here</a>. This script is also in the
-exercises folder. Exercises assume that you have created the objects
-defined during this analysis.</p>
+run the code that corresponds to the Synthesis section. This script is
+also in the exercises folder. Exercises assume that you have created the
+objects defined during this analysis.</p>
 <p>Solve these exercises using tidyverse functions you learned in this
 lesson.</p>
-<p><strong>8.1</strong></p>
+<p><strong>7.1</strong></p>
 <p>Create a new table from <code>inv_taxa</code> that contains all of
 the same rows, but only these columns: <code>siteID</code>,
 <code>sampleID</code>, <code>genus</code>,
@@ -1955,17 +1749,17 @@ the same rows, but only these columns: <code>siteID</code>,
 4   MART   MART.20210728.HESS.6      Afghanurus             sp.
 5   MART MART.20210728.SURBER.3     Rhyacophila     betteni gr.
 6   MART   MART.20210728.HESS.7            &lt;NA&gt;             sp.</code></pre>
-<p><strong>8.2</strong></p>
+<p><strong>7.2</strong></p>
 <p>Create a new table from <code>TSW_30min</code> that only contains
 observations from the Caribou Creek site (CARI) where the minimum
 surface water temperature was greater than 10 degrees Celsius.</p>
 <p>The resulting data frame should have 148 rows.</p>
-<p><strong>8.3</strong></p>
+<p><strong>7.3</strong></p>
 <p>Use the <code>TSW_30min</code> data to calculate average monthly mean
 surface water temperature at each of the three sites. Your solution
 should use pipes to compose functions and result in exactly this
 table:</p>
-<pre><code># A tibble: 15 x 3
+<pre><code># A tibble: 15 × 3
 # Groups:   siteID [3]
    siteID month temp_avg_C
    &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;
@@ -1984,10 +1778,10 @@ table:</p>
 13 TECR       8     13.5  
 14 TECR       9     11.3  
 15 TECR      10      5.56 </code></pre>
-<p><strong>8.4</strong></p>
-<p>Convert the data frame in exercise 8.3 to wide format where values
+<p><strong>7.4</strong></p>
+<p>Convert the data frame in exercise 7.3 to wide format where values
 for each site are in separate columns, like this:</p>
-<pre><code># A tibble: 5 x 4
+<pre><code># A tibble: 5 × 4
   month  CARI  MART  TECR
   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1     6 5.27  12.2  12.3 
@@ -1995,12 +1789,12 @@ for each site are in separate columns, like this:</p>
 3     8 4.63  15.1  13.5 
 4     9 2.48  12.6  11.3 
 5    10 0.646  9.07  5.56</code></pre>
-<p><strong>8.5</strong></p>
+<p><strong>7.5</strong></p>
 <p>Use the <code>TSW_30min</code> data to calculate average, minimum and
 maximum monthly surface water temperature at the Caribou Creek site
 (CARI). Your solution should use pipes to compose functions and result
 in exactly this table:</p>
-<pre><code># A tibble: 5 x 4
+<pre><code># A tibble: 5 × 4
   month temp_avg_C temp_min_C temp_max_C
   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
 1     6      5.27       0.75      163.  
@@ -2008,14 +1802,14 @@ in exactly this table:</p>
 3     8      4.63       1.76        9.06
 4     9      2.48      -0.292       5.88
 5    10      0.646     -0.313       2.05</code></pre>
-<p><strong>8.6</strong> Use the <code>TSW_30min</code> data to calculate
+<p><strong>7.6</strong> Use the <code>TSW_30min</code> data to calculate
 average, minimum and maximum weekly surface water temperature at each
 site.</p>
 <p>The <code>week()</code> function can extract the week of the year
 from a date-time object.</p>
 <p>Your solution should use pipes to compose functions and result in
 exactly this table:</p>
-<pre><code># A tibble: 69 x 5
+<pre><code># A tibble: 69 × 5
 # Groups:   siteID [3]
    siteID  week temp_avg_C temp_min_C temp_max_C
    &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
@@ -2029,11 +1823,11 @@ exactly this table:</p>
  8 CARI      29       6.36       3.51       9.18
  9 CARI      30       5.95       3.85       9.18
 10 CARI      31       6.09       3.74       9.06
-# i 59 more rows</code></pre>
-<p><strong>8.7</strong></p>
+# ℹ 59 more rows</code></pre>
+<p><strong>7.7</strong></p>
 <p><code>inverts_bysite</code> summarizes macroinvertebrate abundance at
 each site for each of the collection events. The table you created in
-exercise 8.3 summarizes monthly mean surface water temperature at each
+exercise 7.3 summarizes monthly mean surface water temperature at each
 site. Create a table that joins these two data frames and shows
 macroinvertebrate abundance and average monthly temperature at each of
 the collection dates for each site.</p>
@@ -2042,22 +1836,16 @@ keys to join the two tables. You can extract the month from the
 <code>collect_day</code> column using the function <code>month()</code>
 from the <code>lubridate</code> package.</p>
 <p>Your final table should look exactly like this:</p>
-<pre><code># A tibble: 6 x 5
-# Groups:   siteID [3]
-  siteID month collect_day density_per_m2 temp_avg_C
-  &lt;chr&gt;  &lt;dbl&gt; &lt;date&gt;               &lt;dbl&gt;      &lt;dbl&gt;
-1 CARI       7 2021-07-01           2925.       5.83
-2 CARI       8 2021-08-26            701.       4.63
-3 MART       7 2021-07-28           8635.      15.3 
-4 MART       9 2021-09-27           4698.      12.6 
-5 TECR       7 2021-07-27          63478.      14.8 
-6 TECR       9 2021-09-15          19571.      11.3 </code></pre>
-<p><strong>8.8</strong></p>
+<pre><code>Error in `mutate()`:
+ℹ In argument: `month = month(collect_day)`.
+Caused by error:
+! object &#39;collect_day&#39; not found</code></pre>
+<p><strong>7.8</strong></p>
 <p>Use <code>inv_taxa</code> to make a table that compares the total
 abundance of different macroinvertebrate phyla in each size class from
 each sample across all sites.</p>
 <p>Your results should look like this:</p>
-<pre><code># A tibble: 537 x 5
+<pre><code># A tibble: 537 × 5
 # Groups:   siteID, sampleID, phylum [144]
    siteID sampleID                phylum     sizeClass total
    &lt;chr&gt;  &lt;chr&gt;                   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;
@@ -2071,28 +1859,28 @@ each sample across all sites.</p>
  8 CARI   CARI.20210701.KICKNET.1 Arthropoda         5     7
  9 CARI   CARI.20210701.KICKNET.1 Arthropoda         6     8
 10 CARI   CARI.20210701.KICKNET.1 Arthropoda         7     5
-# i 527 more rows</code></pre>
-<p><strong>8.9</strong></p>
-<p>Join the table you created in exercise 8.8 with the
+# ℹ 527 more rows</code></pre>
+<p><strong>7.9</strong></p>
+<p>Join the table you created in exercise 7.8 with the
 <code>benthicArea</code> column from <code>inv_fieldData</code>. Then
 calculate the density (<code>= total / benthicArea</code>) of each
 phylum in each size class for each sample.</p>
 <p>Your results should look like this:</p>
-<pre><code># A tibble: 537 x 7
+<pre><code># A tibble: 537 × 7
 # Groups:   siteID, sampleID, phylum [144]
    siteID sampleID             phylum sizeClass total benthicArea density_per_m2
    &lt;chr&gt;  &lt;chr&gt;                &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
- 1 CARI   CARI.20210701.KICKN~ Annel~         3     3        0.25             12
- 2 CARI   CARI.20210701.KICKN~ Annel~         5     3        0.25             12
- 3 CARI   CARI.20210701.KICKN~ Annel~         6     1        0.25              4
- 4 CARI   CARI.20210701.KICKN~ Arthr~         1    15        0.25             60
- 5 CARI   CARI.20210701.KICKN~ Arthr~         2    54        0.25            216
- 6 CARI   CARI.20210701.KICKN~ Arthr~         3    66        0.25            264
- 7 CARI   CARI.20210701.KICKN~ Arthr~         4    17        0.25             68
- 8 CARI   CARI.20210701.KICKN~ Arthr~         5     7        0.25             28
- 9 CARI   CARI.20210701.KICKN~ Arthr~         6     8        0.25             32
-10 CARI   CARI.20210701.KICKN~ Arthr~         7     5        0.25             20
-# i 527 more rows</code></pre>
+ 1 CARI   CARI.20210701.KICKN… Annel…         3     3        0.25             12
+ 2 CARI   CARI.20210701.KICKN… Annel…         5     3        0.25             12
+ 3 CARI   CARI.20210701.KICKN… Annel…         6     1        0.25              4
+ 4 CARI   CARI.20210701.KICKN… Arthr…         1    15        0.25             60
+ 5 CARI   CARI.20210701.KICKN… Arthr…         2    54        0.25            216
+ 6 CARI   CARI.20210701.KICKN… Arthr…         3    66        0.25            264
+ 7 CARI   CARI.20210701.KICKN… Arthr…         4    17        0.25             68
+ 8 CARI   CARI.20210701.KICKN… Arthr…         5     7        0.25             28
+ 9 CARI   CARI.20210701.KICKN… Arthr…         6     8        0.25             32
+10 CARI   CARI.20210701.KICKN… Arthr…         7     5        0.25             20
+# ℹ 527 more rows</code></pre>
 </div>
 <div id="sources-and-resources" class="section level2">
 <h2>Sources and Resources</h2>
@@ -2129,7 +1917,8 @@ cheatsheet</a></li>
 </div>
 <div id="cited-references" class="section level3">
 <h3>Cited References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 <div id="ref-NEON-macroinvertebrates" class="csl-entry">
 National Ecological Observatory Network (NEON). 2023a.
 <span>“Macroinvertebrate Collection (DP1.20120.001).”</span> National

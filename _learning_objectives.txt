@@ -38,3 +38,4 @@ ggplot2-part2	6	add reference lines to a plot in ggplot2	learners will
 tidyverse-basics	1	differentiate between longer and wider data formats and explore when to use each	learners will
 tidyverse-basics	2	"use functions in the dplyr and tidyr R packages to combine, subset, summarize and change the layout of data frames"	learners will
 tidyverse-basics	3	write multi-step data manipulations by composing functions together with pipes	learners will
+example-analysis  1 combine skills from multiple lessons to analyse and visualize data from multiple sources

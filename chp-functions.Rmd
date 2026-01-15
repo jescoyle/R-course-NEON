@@ -754,6 +754,7 @@ calc_uncertainty_NULL(1:5)
 <br>
 
 
+## Synthesis
 
 ### Putting it all together
 
@@ -768,7 +769,7 @@ library(neonUtilities)
 Note that you only need to install the package once, but you will need to use `library()` to load the package every time you want to use it in a new R session.
 
 
-We're going to download the recent temperature data from the Teakettle Creek site in the Sierra Nevada mountains and the Sycamore Creek site in Arizona. The function `loadByProduct()` from the `neonUtilities` package is the main function for accessing NEON data in R. Let's take a look at the documentation for this function before using it:
+We're going to download the recent temperature data from the Teakettle Creek site in the Sierra Nevada mountains and the Sycamore Creek site in Arizona. The function `loadByProduct()` from the [`neonUtilities`](https://www.neonscience.org/resources/learning-hub/tutorials/neondatastackr){target = "_blank"} package is the main function for accessing NEON data in R. Let's take a look at the documentation for this function before using it:
 
 ```{r eval = FALSE}
 ?loadByProduct

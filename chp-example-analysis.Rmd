@@ -1,0 +1,262 @@
+---
+title:  
+output:
+  html_document:
+    toc: false
+bibliography: references.bib
+nocite: |
+  @NEON-surfwatertemp
+---
+
+```{r, include = FALSE, purl = FALSE}
+# Functions and data
+getwd()
+source("src/setup.R")
+
+# get chapter number based on name
+.chp <- "program-flow"
+.chp_num <- .get_chpNum("chp-program-flow", type = "fileName")
+.chp_str <- ifelse(nchar(.chp_num) > 1, .chp_num, paste0("0", .chp_num))
+
+# knitr options
+source("src/knit-options.R")
+.knitr_fig_path(paste0(.chp_str, "-"))
+
+# Silently set seed for random number generation, so we don't have to explain it
+set.seed(10)
+```
+
+# Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
+
+## Overview 
+
+### What we will learn
+
+In this lesson we will practice skills from all core lessons to conduct an analysis on NEON data.
+
+### Prerequisites
+
+Before beginning this lesson you should have completed the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) and any prerequisites therein.
+
+Before you begin:
+
+1. Open the R-course-NEON-workbook RStudio project.
+2. Create a new R script named `r paste0("lesson_", .chp_str, "_code.R")` in the lesson-code folder of the student workbook.
+3. Whenever you see R code like this:
+
+```{r eval = FALSE}
+Type (or copy) this into your R script. Then run it in the Console.
+
+```
+
+4. Whenever you see a challenge like this:
+
+:::{.challenge}
+
+Try to solve the problem by writing R code into your script. Check your answer by clicking:
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+```{r eval = FALSE}
+The code that solves the challenge will appear here.
+```
+
+Along with an explanation.
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+
+4. Be sure to click **Save** often to save your work.
+
+
+## Lesson
+
+In this lesson we will be working on an analysis of macroinvertebrate diversity at three NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha Creek, Washington (MART), and Teakettle Creek, California (TECR). You can see a map of these sites on the [NEON website](https://www.neonscience.org/field-sites/explore-field-sites). Our goal is to evaluate which site has the highest summer macroinvertebrate diversity and determine whether macroinvertebrate abundance is related to water temperature over the course of the summer.
+
+Before beginning an analysis, it can be extremely useful to map out the steps ahead of time. This will make it easier to translate the analysis to code.
+
+Let's list our goals for analyzing macroinvertebrate diversity and what we need to do to accomplish each:
+
+**Goal 1:** Compare the total number of macroinvertebrate taxa at found at each site.
+
+1. Start with the macroinvertebrates data downloaded from NEON.
+2. Extract two tables from this download:
+    * `inv_fieldData` contains data on when and where the invertebrate samples were collected
+    * `inv_taxonomyProcessed` contains taxonomic information about which taxa were collected in each sample
+3. Use the `inv_taxonomyProcessed` table to count the number of unique taxa found at each site, combining across all of the samples from each site (which were collected at different locations and on two separate sampling dates).
+4. Output a table comparing these values.
+
+
+
+_**Goal 2: Macroinvertebrate abundance vs. temperature**_
+
+We are also nearly done with the second goal as well. Let's see how far we can get using functions that we have already learned.
+
+
+```{r message = FALSE, collapse = TRUE, fig.width = 10, out.width = "50%"} 
+### Goal 2: Plot macroinvertebrate abundance and temperature over time
+
+## Start with macroinvertebrate data tables
+## inv_fieldData and inv_taxonomyProcessed (saved as inv_taxa)
+## Use surface water temperature data from TSW_30min
+ 
+ # Extract surface water temperature measurements
+ # averaged over 30 min periods
+ TSW_30min <- watertemp_list$TSW_30min
+
+ # Filter the temperature data to good observations
+ TSW_30min_good <- filter(TSW_30min, finalQF == 0)
+
+## Use inverts_taxa to calculate the total abundance of
+## macroinvertebrates in each sample from each site 
+inverts_bysample <- inv_taxa %>%
+    group_by(siteID, sampleID) %>%
+    summarize(total = sum(estimatedTotalCount))
+
+## Join inverts_bysample with inv_fieldData to determine the 
+## dates which each sample was collected and the amount of area sampled.
+
+ # Since we don't need all the columns, we can just select the columns
+ # of interest before joining.
+ field_cols <- inv_fieldData %>% 
+   select(sampleID, collectDate, benthicArea)
+
+ # Join the invertebrate abundance with field data columns
+ # left_join keeps all rows in inverts_bysample
+ inverts_bysample <- left_join(inverts_bysample, field_cols, by = "sampleID")
+
+
+## Control for variability in abundance based on the amount 
+## of area sampled by calculating density = abundance / area`
+
+  inverts_bysample <- inverts_bysample %>%
+    mutate(density_per_m2 = total / benthicArea)
+ 
+ 
+## Calculate average macroinvertebrate density across all samples 
+## collected on the same date at the same site. 
+  
+  
+  # Make a column that extracts the date from collectDate
+  inverts_bysample <- inverts_bysample %>%
+    mutate(collect_day = date(collectDate))
+  # Note: we could have combined this step with the last
+  # step and created  two columns with one `mutate()`.
+  
+  # Summarize the samples by date and site
+  # calculate average macroinvertebrate density
+  # calculate number of samples averaged 
+  inverts_bysite <- inverts_bysample %>%
+    group_by(siteID, collect_day) %>%
+    summarize(density_per_m2 = mean(density_per_m2),
+              n_samples = n()) 
+    
+  
+## Calculate average temperature across both sensors for 
+## each time point at each site and save this in a new table
+  
+  TSW_avg <- TSW_30min_good %>%
+    group_by(siteID, startDateTime) %>%
+    summarize(temp_avg_C = mean(surfWaterTempMean),
+              n_obs = n()) # keep track of the number of measurements averaged
+  
+  
+## Graph macroinvertebrate density and temperature over time 
+## for the four sites.
+  
+  # Temperature vs. time colored by site
+  TSW_avg %>% 
+    ggplot(aes(x = startDateTime, y = temp_avg_C, color = siteID)) +
+    geom_line() +
+    labs(x = "Date",
+         y = expression("Surface water temperature"~(degree*C)),
+         color = "NEON Site")
+  
+  # Macroinvertebrate density vs. time
+  inverts_bysite %>% 
+    ggplot(aes(x = collect_day, y = density_per_m2, color = siteID)) +
+    geom_point() +
+    geom_line() +
+    labs(x = "Date",
+         y = expression("Macroinvertebrate density (num. per"~m^2),
+         color = "NEON Site")
+  
+```
+
+The graph in the last step gave us a warning that rows of data were omitted due to missing values. That's what we wanted to have happen, so we don't need to try to address this warning.
+
+We are almost done with the analysis- the last two steps require that we match up temperature measurements with the dates when macroinvertebrates were sampled.
+
+Let's match macroinvertebrate samples in the `inverts_bysite` table to an average of temperatures measured for a three day period before each sample was collected.
+
+First we need to calculate average temperatures over the three-day periods of time before each `collect_day` in `inverts_bysite`. To do this we will use functions from the `lubridate` package to define a set of time intervals that correspond to each of the collection dates.
+
+```{r}
+# Define 3 day time intervals before each collection date
+inverts_bysite$temp_interval <- interval(end = inverts_bysite$collect_day,
+                                         start = inverts_bysite$collect_day - ddays(3))
+
+# Examine inverts_bysite
+inverts_bysite
+```
+
+Next we need to calculate the average temperature at each site within the three-day time intervals that we defined. This sounds like a good use for a `for` loop! We learned about `for` loops in [`r .get_chpName("program-flow", type.from = "chp")`](chp-program-flow.html). Although there are vectorized ways to accomplish this (see the `purrr` package), a `for` loop will work fine here.
+
+```{r}
+## Join inverts_bysite with temperature data that corresponds to the
+## date when samples were collected.
+
+ # Define a vector to hold the average temperatures
+ # There will be one for each row in inverts_bysite
+ N <- nrow(inverts_bysite)
+ avg_temp <- rep(NA, N) 
+
+ # Loop through each row in inverts_bysite
+ for(i in 1:N){
+  
+   # Define the time interval and site for this row
+   this_interval <- inverts_bysite$temp_interval[i]
+   this_site <- inverts_bysite$siteID[i]
+  
+   # Get all rows from TWS_avg within the time interval for this row
+   use_temps <- filter(TSW_avg, 
+                       startDateTime %within% this_interval,
+                       siteID == this_site)
+  
+   # Calculate the average temperature and save it in avg_temp
+   # remove any missing values
+   avg_temp[i] <- mean(use_temps$temp_avg_C, na.rm = TRUE)
+ }
+
+ # Add avg_temp as a new column in inverts_bysite
+ inverts_bysite$temp_avg_3day <- avg_temp
+ 
+ # View the data
+ inverts_bysite
+
+```
+
+Now that we have macroinvertebrate abundance and temperature in the same data frame, we're ready to move on to the last step.
+
+
+```{r fig.width = 10, out.width = "50%"}
+## Graph macroinvertebrate density versus water temperature as a scatterplot.
+## Connect points from the same site with arrows pointing from the 
+## first to the second sample.
+
+inverts_bysite %>%
+  ggplot(aes(x = temp_avg_3day, y = density_per_m2)) + 
+    geom_point(aes(color = siteID)) + 
+    labs(x = expression("Surface water temperature"~(degree*C)),
+         y = expression("Macroinvertebrate density (num. per"~m^2),
+         color = "NEON Site")
+```
+

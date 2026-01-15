@@ -46,7 +46,7 @@ update_geom_defaults("point", aes(size = 3))
 
 Manipulation of data tables can mean many things; we often select certain observations (rows) or variables (columns), we often group the data by a certain variable(s), or we even calculate summary statistics. Base R has functions for most kinds of data table manipulation, but the methods are sometimes idiosyncratic and difficult to learn.
 
-Enter the [`tidyverse`](https://www.tidyverse.org/), a set of packages designed to work together and follow general rules of data science. We have already met one [core package](https://www.tidyverse.org/packages/#core-tidyverse) in this universe- [`ggplot2`](https://ggplot2.tidyverse.org/) and another for working with dates- [`lubridate`](https://lubridate.tidyverse.org/). In this lesson we will meet two more: [`dplyr`](https://dplyr.tidyverse.org/), a package for manipulating and summarizing data within one table and [`tidyr`](https://tidyr.tidyverse.org/), a package for reformatting and combining data tables.
+Enter the [`tidyverse`](https://www.tidyverse.org/){target="_blank"}, a set of packages designed to work together and follow general rules of data science. We have already met one [core package](https://www.tidyverse.org/packages/#core-tidyverse){target="_blank"} in this universe- [`ggplot2`](https://ggplot2.tidyverse.org/){target="_blank"} and another for working with dates- [`lubridate`](https://lubridate.tidyverse.org/){target="_blank"}. In this lesson we will meet two more: [`dplyr`](https://dplyr.tidyverse.org/){target="_blank"}, a package for manipulating and summarizing data within one table and [`tidyr`](https://tidyr.tidyverse.org/){target="_blank"}, a package for reformatting and combining data tables.
 
 
 ### What we will learn
@@ -118,12 +118,12 @@ Along with an explanation.
 
 ## Lesson
 
-In this lesson we will be working on an analysis of macroinvertebrate diversity at three NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha Creek, Washington (MART), and Teakettle Creek, California (TECR). You can see a map of these sites on the [NEON website](https://www.neonscience.org/field-sites/explore-field-sites). Our goal is to evaluate which site has the highest summer macroinvertebrate diversity and determine whether macroinvertebrate abundance is related to water temperature over the course of the summer.
+In this lesson we will be working on an analysis of macroinvertebrate diversity at three NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha Creek, Washington (MART), and Teakettle Creek, California (TECR). You can see a map of these sites on the [NEON website](https://www.neonscience.org/field-sites/explore-field-sites){target="_blank"}. Our goal is to evaluate which site has the highest summer macroinvertebrate diversity.
 
 
-Just like in the lesson [`r .get_chpName("program-flow", type.from = "chp")`](chp-program-flow.html), we are going to download and work with data from NEON aquatic sites:  However in this lesson we will be working with macroinvertebrate collections ([DP1.20120.001](https://data.neonscience.org/data-products/DP1.20120.001)) in addition to surface water temperature data ([DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001)). 
+We are going to download and work with data from NEON aquatic sites. In this lesson we will be working with macroinvertebrate collections ([DP1.20120.001](https://data.neonscience.org/data-products/DP1.20120.001){target="_blank"}) in addition to surface water temperature data ([DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001){target="_blank"}). 
 
-We will download data from NEON using the `loadByProduct()` function in the `neonUtilities` package. We need to specify the product ID number, sites and dates for which we want data and then type `y` when prompted to download the data at the command line.
+Recall from the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) that we can download data from NEON using the `loadByProduct()` function in the [`neonUtilities`](https://www.neonscience.org/resources/learning-hub/tutorials/neondatastackr){target="_blank"} package. We need to specify the product ID number, sites and dates for which we want data and then type `y` when prompted to download the data at the command line.
 
 ```{r eval = FALSE}
 library(neonUtilities)
@@ -891,8 +891,11 @@ While long format data are generally easier to work with computationally, someti
 :::
 
 
+## Synthesis
 
 ### Putting it all together
+
+*!UPDATE THIS TO NOT USE A LOOP!*
 
 Before beginning an analysis, it can be extremely useful to map out the steps ahead of time. This will make it easier to translate the analysis to code.
 
@@ -996,170 +999,6 @@ inverts_bysite %>%
 
 ```
 
-_**Goal 2: Macroinvertebrate abundance vs. temperature**_
-
-We are also nearly done with the second goal as well. Let's see how far we can get using functions that we have already learned.
-
-
-```{r message = FALSE, collapse = TRUE, fig.width = 10, out.width = "50%"} 
-### Goal 2: Plot macroinvertebrate abundance and temperature over time
-
-## Start with macroinvertebrate data tables
-## inv_fieldData and inv_taxonomyProcessed (saved as inv_taxa)
-## Use surface water temperature data from TSW_30min
- 
- # Extract surface water temperature measurements
- # averaged over 30 min periods
- TSW_30min <- watertemp_list$TSW_30min
-
- # Filter the temperature data to good observations
- TSW_30min_good <- filter(TSW_30min, finalQF == 0)
-
-## Use inverts_taxa to calculate the total abundance of
-## macroinvertebrates in each sample from each site 
-inverts_bysample <- inv_taxa %>%
-    group_by(siteID, sampleID) %>%
-    summarize(total = sum(estimatedTotalCount))
-
-## Join inverts_bysample with inv_fieldData to determine the 
-## dates which each sample was collected and the amount of area sampled.
-
- # Since we don't need all the columns, we can just select the columns
- # of interest before joining.
- field_cols <- inv_fieldData %>% 
-   select(sampleID, collectDate, benthicArea)
-
- # Join the invertebrate abundance with field data columns
- # left_join keeps all rows in inverts_bysample
- inverts_bysample <- left_join(inverts_bysample, field_cols, by = "sampleID")
-
-
-## Control for variability in abundance based on the amount 
-## of area sampled by calculating density = abundance / area`
-
-  inverts_bysample <- inverts_bysample %>%
-    mutate(density_per_m2 = total / benthicArea)
- 
- 
-## Calculate average macroinvertebrate density across all samples 
-## collected on the same date at the same site. 
-  
-  
-  # Make a column that extracts the date from collectDate
-  inverts_bysample <- inverts_bysample %>%
-    mutate(collect_day = date(collectDate))
-  # Note: we could have combined this step with the last
-  # step and created  two columns with one `mutate()`.
-  
-  # Summarize the samples by date and site
-  # calculate average macroinvertebrate density
-  # calculate number of samples averaged 
-  inverts_bysite <- inverts_bysample %>%
-    group_by(siteID, collect_day) %>%
-    summarize(density_per_m2 = mean(density_per_m2),
-              n_samples = n()) 
-    
-  
-## Calculate average temperature across both sensors for 
-## each time point at each site and save this in a new table
-  
-  TSW_avg <- TSW_30min_good %>%
-    group_by(siteID, startDateTime) %>%
-    summarize(temp_avg_C = mean(surfWaterTempMean),
-              n_obs = n()) # keep track of the number of measurements averaged
-  
-  
-## Graph macroinvertebrate density and temperature over time 
-## for the four sites.
-  
-  # Temperature vs. time colored by site
-  TSW_avg %>% 
-    ggplot(aes(x = startDateTime, y = temp_avg_C, color = siteID)) +
-    geom_line() +
-    labs(x = "Date",
-         y = expression("Surface water temperature"~(degree*C)),
-         color = "NEON Site")
-  
-  # Macroinvertebrate density vs. time
-  inverts_bysite %>% 
-    ggplot(aes(x = collect_day, y = density_per_m2, color = siteID)) +
-    geom_point() +
-    geom_line() +
-    labs(x = "Date",
-         y = expression("Macroinvertebrate density (num. per"~m^2),
-         color = "NEON Site")
-  
-```
-
-The graph in the last step gave us a warning that rows of data were omitted due to missing values. That's what we wanted to have happen, so we don't need to try to address this warning.
-
-We are almost done with the analysis- the last two steps require that we match up temperature measurements with the dates when macroinvertebrates were sampled.
-
-Let's match macroinvertebrate samples in the `inverts_bysite` table to an average of temperatures measured for a three day period before each sample was collected.
-
-First we need to calculate average temperatures over the three-day periods of time before each `collect_day` in `inverts_bysite`. To do this we will use functions from the `lubridate` package to define a set of time intervals that correspond to each of the collection dates.
-
-```{r}
-# Define 3 day time intervals before each collection date
-inverts_bysite$temp_interval <- interval(end = inverts_bysite$collect_day,
-                                         start = inverts_bysite$collect_day - ddays(3))
-
-# Examine inverts_bysite
-inverts_bysite
-```
-
-Next we need to calculate the average temperature at each site within the three-day time intervals that we defined. This sounds like a good use for a `for` loop! We learned about `for` loops in [`r .get_chpName("program-flow", type.from = "chp")`](chp-program-flow.html). Although there are vectorized ways to accomplish this (see the `purrr` package), a `for` loop will work fine here.
-
-```{r}
-## Join inverts_bysite with temperature data that corresponds to the
-## date when samples were collected.
-
- # Define a vector to hold the average temperatures
- # There will be one for each row in inverts_bysite
- N <- nrow(inverts_bysite)
- avg_temp <- rep(NA, N) 
-
- # Loop through each row in inverts_bysite
- for(i in 1:N){
-  
-   # Define the time interval and site for this row
-   this_interval <- inverts_bysite$temp_interval[i]
-   this_site <- inverts_bysite$siteID[i]
-  
-   # Get all rows from TWS_avg within the time interval for this row
-   use_temps <- filter(TSW_avg, 
-                       startDateTime %within% this_interval,
-                       siteID == this_site)
-  
-   # Calculate the average temperature and save it in avg_temp
-   # remove any missing values
-   avg_temp[i] <- mean(use_temps$temp_avg_C, na.rm = TRUE)
- }
-
- # Add avg_temp as a new column in inverts_bysite
- inverts_bysite$temp_avg_3day <- avg_temp
- 
- # View the data
- inverts_bysite
-
-```
-
-Now that we have macroinvertebrate abundance and temperature in the same data frame, we're ready to move on to the last step.
-
-
-```{r fig.width = 10, out.width = "50%"}
-## Graph macroinvertebrate density versus water temperature as a scatterplot.
-## Connect points from the same site with arrows pointing from the 
-## first to the second sample.
-
-inverts_bysite %>%
-  ggplot(aes(x = temp_avg_3day, y = density_per_m2)) + 
-    geom_point(aes(color = siteID)) + 
-    labs(x = expression("Surface water temperature"~(degree*C)),
-         y = expression("Macroinvertebrate density (num. per"~m^2),
-         color = "NEON Site")
-```
-
 
 
 Success! Now go apply what you learned in the exercises.
@@ -1214,16 +1053,19 @@ inv_taxa %>%
 ```
 
 
-
+*!UPDATE THIS TO ADD THE stackByTable() functions*
 
 
 ## Exercises
+
+*!UPDATE THIS TO USE THE NEW SYNETHSIS & MAKE NEW SCRIPT!*
+
 
 After completing these exercises, learners will be able to 
 `r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
 
 
-Before completing any of these exercises, open a new R session and run the code that corresponds to the "Putting it all together" analysis at the end of  the lesson. You can download an R script that contains all of this code by clicking [here](exercises/08/analysis_code.R). This script is also in the exercises folder. Exercises assume that you have created the objects defined during this analysis.
+Before completing any of these exercises, open a new R session and run the code that corresponds to the Synthesis section. This script is also in the exercises folder. Exercises assume that you have created the objects defined during this analysis.
 
 
 Solve these exercises using tidyverse functions you learned in this lesson.

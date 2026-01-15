@@ -984,6 +984,7 @@ RStudio also has a set of excellent
 [cheatsheets](https://rstudio.com/resources/cheatsheets/) for many packages.
 :::
 
+## Synthesis
 
 ### Putting it all together
 Let's use what we have learned to make a graph showing how surface water temperature changes over time in Teakettle Creek.

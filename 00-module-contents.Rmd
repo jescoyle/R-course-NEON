@@ -149,10 +149,14 @@ In this lesson
 `r .get_LO(.get_chpName(9, type.to = "chp"), .LOtable, prefix = TRUE)`
 
 
+<!-- NOT USING AT THE MOMENT
+
 **Computational Skills**
 
 After completing this lesson, learners will be able to 
 `r .get_LO(.get_chpName(9, type.to = "chp"), .CStable, prefix = TRUE, bullet = "1.")`
+
+-->
 
 
 <!-- NOT USING AT THE MOMENT

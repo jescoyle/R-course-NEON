@@ -104,6 +104,7 @@ Along with an explanation.
 
 In this lesson we are going to download and work with surface water temperature data  [DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001) from four NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha Creek, Washington (MART), Teakettle Creek, California (TECR) and Sycamore Creek, Arizona (SYCA). You can see a map of these sites on the [NEON website](https://www.neonscience.org/field-sites/explore-field-sites).
 
+
 Recall from the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) that we can download data from NEON using the `loadByProduct()` function in the `neonUtilities` package. We need to specify the product ID number, sites and dates for which we want data and then type `y` when prompted to download the data at the command line.
 
 ```{r eval = FALSE}
@@ -794,7 +795,7 @@ data.frame(row = 1:(first_gt5-1),
 ```
 
 
-
+## Synthesis
 
 ### Putting it all together
 
@@ -1560,6 +1561,8 @@ calc_monthly_summary <- function(dat, site, month, sensor = "both", na.rm = TRUE
 }
 
 ```
+
+
 
 
 
