@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ## Overview
-This is a self-paced tutorial adapted from [Data Carpentry](http://datacarpentry.org/) and [Software Carpentry](http://software-carpentry.org/) that teaches biologists basic data science and computing skills using  [National Ecological Observation Network](http://neonscience.org) data. It is being developed for use in an upper division Biology course at Saint Mary's College of California beginning in August 2023. **These materials are not currently ready for use.**
+This is a self-paced tutorial adapted from [Data Carpentry](http://datacarpentry.org/){target="_blank" rel="noopener noreferrer"} and [Software Carpentry](http://software-carpentry.org/){target="_blank" rel="noopener noreferrer"} that teaches biologists basic data science and computing skills using  [National Ecological Observation Network](http://neonscience.org){target="_blank" rel="noopener noreferrer"} data. It was developed for use in an upper division Biology course at Saint Mary's College of California. 
 
 
 ## Organization
@@ -48,7 +48,7 @@ The chapters are arranged in a progression with later chapters generally require
 
 ## Open Educational Resource
 
-These materials will be published open access, but they are currently under development and are **not currently ready for adaptation.**
+These materials will be published open access, but they are currently under development and are **not currently ready for adaptation.** The book will likely be converted to a Quarto document when relased for the public.
 
 ### Acknowledgements
-Thank you to [Data Carpentry](http://datacarpentry.org/) and [Software Carpentry](http://software-carpentry.org/) for providing open and remixable materials for scientists learning programming and data science. This course draws heavily from the [Data Carpentry for Biologists](https://datacarpentry.org/semester-biology/) and [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/).
+Thank you to [Data Carpentry](http://datacarpentry.org/){target="_blank" rel="noopener noreferrer"} and [Software Carpentry](http://software-carpentry.org/){target="_blank" rel="noopener noreferrer"} for providing open and remixable materials for scientists learning programming and data science. This course draws heavily from the [Data Carpentry for Biologists](https://datacarpentry.org/semester-biology/){target="_blank" rel="noopener noreferrer"} and [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/){target="_blank" rel="noopener noreferrer"}.
