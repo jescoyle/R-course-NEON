@@ -26,7 +26,7 @@ If you have never used R or RStudio on your computer, then you probably don't ha
 1. Click on the `.pkg` file for the latest R version that will work on your computer.
 2. Save this file somewhere on your computer (e.g. Downloads)
 3. Open the downloaded `.pkg` file to install R
-4. It is also a good idea to install [XQuartz](https://www.xquartz.org/). Follow the installation instructions on that website. R will work without XQuartz, but you may find that you need it later if certain packages do not install properly.
+4. It is also a good idea to install [XQuartz](https://www.xquartz.org/){target="_blank"}. Follow the installation instructions on that website. R will work without XQuartz, but you may find that you need it later if certain packages do not install properly.
   
 #### R for Linux
  
@@ -35,7 +35,7 @@ If you have never used R or RStudio on your computer, then you probably don't ha
 
 #### RStudio for all operating systems
 
-1. Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
+1. Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download){target="_blank"}
 2. The website should automatically detect your operating system and provide the correct installer download as a large button. If you need a different version, scroll down the page and select the installer download that matches your operating system.
 3. Save the file somewhere on your computer (e.g. Downloads).
 4. Open the downloaded file to launch the RStudio installer and follow the instructions in the prompts.
@@ -50,15 +50,15 @@ If you have never used R or RStudio on your computer, then you probably don't ha
   that appears in the console indicates the version of R you are
   running. Alternatively, you can type `sessionInfo()`, which will also display
   which version of R you are running. Go on
-  the [CRAN website](https://cran.r-project.org/) and check
+  the [CRAN website](https://cran.r-project.org/){target="_blank"} and check
   whether a more recent version is available. If so, please download and install
-  it. You can [check here](https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f) for more information on how to remove old versions from your system if you wish to do so.
+  it. You can [check here](https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f){target="_blank"} for more information on how to remove old versions from your system if you wish to do so.
 
 ## Course Workbook
 
 
 1. Download the Student Workbook from [here](workbook/R-course-NEON-workbook.zip). Save this zipped file in the folder where you are saving work for this course.
-2. Unzip the folder you downloaded. The name of the folder that you unzip should be R-course-NEON-workbook. Instructions for how to unzip folders are located [here for Mac](https://support.apple.com/guide/mac-help/zip-and-unzip-files-and-folders-on-mac-mchlp2528/) and [here for Windows](https://support.microsoft.com/en-us/windows/zip-and-unzip-files-f6dde0a7-0fec-8294-e1d3-703ed85e7ebc).
+2. Unzip the folder you downloaded. The name of the folder that you unzip should be R-course-NEON-workbook. Instructions for how to unzip folders are located [here for Mac](https://support.apple.com/guide/mac-help/zip-and-unzip-files-and-folders-on-mac-mchlp2528/){target="_blank"} and [here for Windows](https://support.microsoft.com/en-us/windows/zip-and-unzip-files-f6dde0a7-0fec-8294-e1d3-703ed85e7ebc){target="_blank"}.
 
 
 <!-- May introduce Git in a subsequent version of this course
