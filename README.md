@@ -9,7 +9,7 @@ Teaching materials are stored in `exercises/` and `lessons/`. Derived datasets f
 
 ## Re-using this repository
 
-This repository was built as an RStudio project and the course website is designed to be hosted from the `docs/` folder on the main branch on GitHub Pages. **These materials are not currently ready for reuse.** This README will be updated when they become available and a LISCENCE file will be added at that time.
+This repository was built as an RStudio project and the course website is designed to be hosted from the `docs/` folder on the main branch on GitHub Pages.
 
 
 ## Acknowledgements
