@@ -13,7 +13,7 @@
 
 <title>chp-data-structures.knit</title>
 
-<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -51,6 +51,7 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -147,6 +148,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -475,7 +477,7 @@ folder of the student workbook.</li>
 <li>Whenever you see a box</li>
 </ol>
 <div class="challenge">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Type this code into your R script.</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>Type this code into your R script.</span></code></pre></div>
 </div>
 <ol start="4" style="list-style-type: decimal">
 <li>Be sure to click Save often to save your work.</li>
@@ -505,8 +507,8 @@ data frame named <code>surfwater</code>.</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the NEON surface water data from TEAK site</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>surfwater <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Load the NEON surface water data from TEAK site</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>surfwater <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv&quot;</span>)</span></code></pre></div>
 <p>NOTE: Remember to include the relative path to the file from the
 project working directory. The path to the file needs to be in quotes
 (““).</p>
@@ -534,11 +536,11 @@ approximation</li>
 </ul>
 <p>We can check the type of data in an object using the
 <code>typeof()</code> function.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>[1] &quot;integer&quot;</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="sc">-</span><span class="fl">3.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">typeof</span>(<span class="sc">-</span><span class="fl">3.4</span>)</span></code></pre></div>
 <pre><code>[1] &quot;double&quot;</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">typeof</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>))</span></code></pre></div>
 <pre><code>[1] &quot;logical&quot;</code></pre>
 <p>In the lesson <a href="chp-intro-to-R.html">Intro to R and
 RStudio</a>, we learned that a <strong>vector</strong> is an ordered set
@@ -560,11 +562,11 @@ data type of the <code>pH.mean</code> column? How could you check?</p>
 <div class="solution">
 <p>Remember that to access a column of a data frame we can use the
 <code>$</code> symbol:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the type of data in the siteID column</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(surfwater<span class="sc">$</span>siteID)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Print the type of data in the siteID column</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">typeof</span>(surfwater<span class="sc">$</span>siteID)</span></code></pre></div>
 <pre><code>[1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the type of data in the pH.mean column</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(surfwater<span class="sc">$</span>pH.mean)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Print the type of data in the pH.mean column</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">typeof</span>(surfwater<span class="sc">$</span>pH.mean)</span></code></pre></div>
 <pre><code>[1] &quot;double&quot;</code></pre>
 </div>
 </details>
@@ -572,32 +574,33 @@ data type of the <code>pH.mean</code> column? How could you check?</p>
 <p><br></p>
 <p>Let’s explore vectors a bit more. Let’s take the first 10 values in
 the <code>pH.mean</code> column and assign them to a new vector:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select values 1 - 10 of the pH.mean column in surfwater</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pH_top10 <span class="ot">&lt;-</span> surfwater<span class="sc">$</span>pH.mean[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Select values 1 - 10 of the pH.mean column in surfwater</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>pH_top10 <span class="ot">&lt;-</span> surfwater<span class="sc">$</span>pH.mean[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <p>Suppose we discover that the first value of this vector is invalid
 and need to replace it with a missing value (<code>NA</code>). Do you
 think this will change the type of data in the vector?</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pH_top10[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>pH_top10</span></code></pre></div>
-<pre><code> [1]       NA 7.248333 7.240000 7.232333 7.230333 7.229333 7.229333 7.229667
- [9] 7.227667 7.223667</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(pH_top10)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>pH_top10[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>pH_top10</span></code></pre></div>
+<pre><code> [1]       NA 7.248333 7.240000 7.232333 7.230333 7.229333
+ [7] 7.229333 7.229667 7.227667 7.223667</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">typeof</span>(pH_top10)</span></code></pre></div>
 <pre><code>[1] &quot;double&quot;</code></pre>
 <p>The data type stays the same. Now what do you think will happen if we
 replace the first value with something more ambiguous:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pH_top10[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;7.2 or 7.3&quot;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>pH_top10</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(pH_top10)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>pH_top10[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;7.2 or 7.3&quot;</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>pH_top10</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="fu">typeof</span>(pH_top10)</span></code></pre></div>
 <details>
 <summary>
 Answer:
 </summary>
-<pre><code> [1] &quot;7.2 or 7.3&quot;       &quot;7.24833333333333&quot; &quot;7.24&quot;             &quot;7.23233333333333&quot;
- [5] &quot;7.23033333333333&quot; &quot;7.22933333333333&quot; &quot;7.22933333333333&quot; &quot;7.22966666666667&quot;
- [9] &quot;7.22766666666667&quot; &quot;7.22366666666667&quot;</code></pre>
+<pre><code> [1] &quot;7.2 or 7.3&quot;       &quot;7.24833333333333&quot; &quot;7.24&quot;            
+ [4] &quot;7.23233333333333&quot; &quot;7.23033333333333&quot; &quot;7.22933333333333&quot;
+ [7] &quot;7.22933333333333&quot; &quot;7.22966666666667&quot; &quot;7.22766666666667&quot;
+[10] &quot;7.22366666666667&quot;</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <p>The vector now has type character because all elements in the vector
 must have the same data type and “7.2 or 7.3” is not a number.</p>
@@ -610,10 +613,10 @@ data, you can use the <code>as.numeric()</code> function to
 to interpret the text as a number and if it can’t it will produce
 <code>NA</code>. This can be useful for identifying data errors and
 typos.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(pH_top10)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">as.numeric</span>(pH_top10)</span></code></pre></div>
 <pre><code>Warning: NAs introduced by coercion</code></pre>
-<pre><code> [1]       NA 7.248333 7.240000 7.232333 7.230333 7.229333 7.229333 7.229667
- [9] 7.227667 7.223667</code></pre>
+<pre><code> [1]       NA 7.248333 7.240000 7.232333 7.230333 7.229333
+ [7] 7.229333 7.229667 7.227667 7.223667</code></pre>
 <p>The output warns us that coercing to a numeric vector created missing
 values. The new numeric vector shows us that the first element was not a
 number, but the rest of the data were.</p>
@@ -627,13 +630,13 @@ you thought contained numeric data:</p>
 </ul>
 <p>These can be good warning signs that you calculations involve 0 or
 are potentially not doing what you thought they should be doing:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">4</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>[1] -4 -3 -2 -1  0  1  2  3  4</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">/</span><span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>x<span class="sc">/</span><span class="dv">0</span></span></code></pre></div>
 <pre><code>[1] -Inf -Inf -Inf -Inf  NaN  Inf  Inf  Inf  Inf</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">/</span>x</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>x<span class="sc">/</span>x</span></code></pre></div>
 <pre><code>[1]   1   1   1   1 NaN   1   1   1   1</code></pre>
 </div>
 </div>
@@ -645,16 +648,16 @@ In computer science, an object’s class determines what kinds of things
 you can do with it. For example, since vectors are ordered we can select
 individual elements from them using integer
 <strong>indices</strong>:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the second element in the vector</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pH_top10[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="co"># Print the second element in the vector</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>pH_top10[<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>[1] &quot;7.24833333333333&quot;</code></pre>
 <p>You can find out the class of an object using the
 <code>class()</code> function.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(pH_top10)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="fu">class</span>(pH_top10)</span></code></pre></div>
 <pre><code>[1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(surfwater<span class="sc">$</span>pH.mean)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="fu">class</span>(surfwater<span class="sc">$</span>pH.mean)</span></code></pre></div>
 <pre><code>[1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(surfwater)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu">class</span>(surfwater)</span></code></pre></div>
 <pre><code>[1] &quot;data.frame&quot;</code></pre>
 <p>That’s interesting: note that the class of a vector isn’t “vector”,
 but the type of the data stored in it.</p>
@@ -671,22 +674,23 @@ column identifies the NEON site where the data are collected. This
 column is currently a character vector, but it would be reasonable to
 convert it to a factor since there are only a finite number of distinct
 sites that data could come from.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new vector containing the first 10 values of the siteID column</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>sites <span class="ot">&lt;-</span> surfwater<span class="sc">$</span>siteID[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the contents of the vector and its class</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>sites</span></code></pre></div>
-<pre><code> [1] &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot;</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sites)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="co"># Create a new vector containing the first 10 values of the siteID column</span></span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a>sites <span class="ot">&lt;-</span> surfwater<span class="sc">$</span>siteID[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a><span class="co"># View the contents of the vector and its class</span></span>
+<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a>sites</span></code></pre></div>
+<pre><code> [1] &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot;
+ [9] &quot;TECR&quot; &quot;TECR&quot;</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="fu">class</span>(sites)</span></code></pre></div>
 <pre><code>[1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to a factor</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">factor</span>(sites)</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the contents of the factor and its class</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>sites</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a><span class="co"># Convert to a factor</span></span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">factor</span>(sites)</span>
+<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" tabindex="-1"></a><span class="co"># View the contents of the factor and its class</span></span>
+<span id="cb42-5"><a href="#cb42-5" tabindex="-1"></a>sites</span></code></pre></div>
 <pre><code> [1] TECR TECR TECR TECR TECR TECR TECR TECR TECR TECR
 Levels: TECR</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sites)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="fu">class</span>(sites)</span></code></pre></div>
 <pre><code>[1] &quot;factor&quot;</code></pre>
 <p>The data now have class “factor” instead of “character” and the
 elements are no longer surrounded by quotes. We also see that this
@@ -694,13 +698,13 @@ factor has one level (i.e. one possible value) which is
 <code>TECR</code>.</p>
 <p>What happens if we try to add a new element with a different value
 onto this factor?</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate a new value to the end of sites</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>sites2 <span class="ot">&lt;-</span> <span class="fu">c</span>(sites, <span class="st">&quot;ABCD&quot;</span>)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>sites2</span></code></pre></div>
-<pre><code> [1] &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;   
-[11] &quot;ABCD&quot;</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sites2)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="co"># Concatenate a new value to the end of sites</span></span>
+<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a>sites2 <span class="ot">&lt;-</span> <span class="fu">c</span>(sites, <span class="st">&quot;ABCD&quot;</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" tabindex="-1"></a>sites2</span></code></pre></div>
+<pre><code> [1] &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;   
+ [9] &quot;1&quot;    &quot;1&quot;    &quot;ABCD&quot;</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="fu">class</span>(sites2)</span></code></pre></div>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <p>The factor was converted back to a character vector to match the type
 of data we added (<code>"ABCD"</code>). But, where did the
@@ -709,18 +713,18 @@ of data we added (<code>"ABCD"</code>). But, where did the
 in the vector are actually integers, with each integer corresponding to
 a level. The labels for the levels are saved in an attribute of the
 factor and can be accessed using the function <code>levels()</code>.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a factor with a new set of sites</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;ABCD&quot;</span>))</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the contents of sites</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>sites</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="co"># Create a factor with a new set of sites</span></span>
+<span id="cb50-2"><a href="#cb50-2" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;ABCD&quot;</span>))</span>
+<span id="cb50-3"><a href="#cb50-3" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" tabindex="-1"></a><span class="co"># View the contents of sites</span></span>
+<span id="cb50-5"><a href="#cb50-5" tabindex="-1"></a>sites</span></code></pre></div>
 <pre><code>[1] TECR TECR TECR ABCD
 Levels: ABCD TECR</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the levels of the factor</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sites)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="co"># Print the levels of the factor</span></span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a><span class="fu">levels</span>(sites)</span></code></pre></div>
 <pre><code>[1] &quot;ABCD&quot; &quot;TECR&quot;</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View the underlying integer values in the factor by converting it to an integer</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(sites)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="co"># View the underlying integer values in the factor by converting it to an integer</span></span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a><span class="fu">as.integer</span>(sites)</span></code></pre></div>
 <pre><code>[1] 2 2 2 1</code></pre>
 <p>By default, R will alphabetize a character vector before assigning
 levels, so even though <code>"TECR"</code> came first in the vector,
@@ -728,19 +732,19 @@ levels, so even though <code>"TECR"</code> came first in the vector,
 first level.</p>
 <p>You can change the default levels after creating a vector using the
 <code>levels()</code> function.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change the levels in sites</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(sites) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;ABCD&quot;</span>)</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>sites</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a><span class="co"># Change the levels in sites</span></span>
+<span id="cb56-2"><a href="#cb56-2" tabindex="-1"></a><span class="fu">levels</span>(sites) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;ABCD&quot;</span>)</span>
+<span id="cb56-3"><a href="#cb56-3" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" tabindex="-1"></a>sites</span></code></pre></div>
 <pre><code>[1] ABCD ABCD ABCD TECR
 Levels: TECR ABCD</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.integer</span>(sites)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a><span class="fu">as.integer</span>(sites)</span></code></pre></div>
 <pre><code>[1] 2 2 2 1</code></pre>
 <p>Or, you can define the levels of a factor when you initially create
 it.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a new factor containing sites names</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;ABCD&quot;</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;ABCD&quot;</span>, <span class="st">&quot;GGGG&quot;</span>))</span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>sites</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="co"># Define a new factor containing sites names</span></span>
+<span id="cb60-2"><a href="#cb60-2" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;ABCD&quot;</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;ABCD&quot;</span>, <span class="st">&quot;GGGG&quot;</span>))</span>
+<span id="cb60-3"><a href="#cb60-3" tabindex="-1"></a>sites</span></code></pre></div>
 <pre><code>[1] TECR TECR TECR ABCD
 Levels: TECR ABCD GGGG</code></pre>
 <p>Note that a factor can contain levels that don’t actually appear in
@@ -755,8 +759,8 @@ values that are not the same data type? That’s where a
 <strong>list</strong> becomes useful. A list is an ordered set of values
 or objects that do not need to have the same data type. You can create a
 list using the <code>list()</code> function.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>sitelist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;ABCD&quot;</span>, <span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">100</span>)</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>sitelist</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a>sitelist <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;ABCD&quot;</span>, <span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>, <span class="dv">100</span>)</span>
+<span id="cb62-2"><a href="#cb62-2" tabindex="-1"></a>sitelist</span></code></pre></div>
 <pre><code>[[1]]
 [1] &quot;TECR&quot;
 
@@ -774,9 +778,9 @@ vector with the numbers 7 - 9, and the fourth element of the list is a
 numeric vector with one element (100).</p>
 <p>Vectors and lists are both one-dimensional and contain a finite
 number of elements, also known as their <strong>length</strong>.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" tabindex="-1"></a><span class="fu">length</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>[1] 3</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code></pre></div>
 <pre><code>[1] 1</code></pre>
 <p>Because vectors and lists are one-dimensional, we can access their
 elements using integer indices (e.g. the 1st, 2nd, 3rd, 4th, … etc
@@ -784,27 +788,27 @@ element). The way to index differs between vectors and lists. We use a
 single set of brackets <code>[ ]</code> to access the elements of a
 vector and a double set of brackets <code>[[ ]]</code>to access the
 elements of a list.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access the third element of sitelist</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>sitelist[[<span class="dv">3</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="co"># Access the third element of sitelist</span></span>
+<span id="cb68-2"><a href="#cb68-2" tabindex="-1"></a>sitelist[[<span class="dv">3</span>]]</span></code></pre></div>
 <pre><code>[1] 7 8 9</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access the first element of the vector in the third element of sitelist</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>sitelist[[<span class="dv">3</span>]][<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="co"># Access the first element of the vector in the third element of sitelist</span></span>
+<span id="cb70-2"><a href="#cb70-2" tabindex="-1"></a>sitelist[[<span class="dv">3</span>]][<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>[1] 7</code></pre>
 <div class="challenge">
 <p>Figure out how each of these lists differ using the
 <code>length()</code> function:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb72-2"><a href="#cb72-2" tabindex="-1"></a></span>
+<span id="cb72-3"><a href="#cb72-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb72-4"><a href="#cb72-4" tabindex="-1"></a></span>
+<span id="cb72-5"><a href="#cb72-5" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a list with three elements: the numbers 1, 2, and 3</span></span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>x </span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" tabindex="-1"></a><span class="co"># This is a list with three elements: the numbers 1, 2, and 3</span></span>
+<span id="cb73-2"><a href="#cb73-2" tabindex="-1"></a>x </span></code></pre></div>
 <pre><code>[[1]]
 [1] 1
 
@@ -813,23 +817,23 @@ elements of a list.</p>
 
 [[3]]
 [1] 3</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" tabindex="-1"></a><span class="fu">length</span>(x)</span></code></pre></div>
 <pre><code>[1] 3</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a list with one element: a vector with the numbers 1, 2 and 3</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" tabindex="-1"></a><span class="co"># This is a list with one element: a vector with the numbers 1, 2 and 3</span></span>
+<span id="cb77-2"><a href="#cb77-2" tabindex="-1"></a>y</span></code></pre></div>
 <pre><code>[[1]]
 [1] 1 2 3</code></pre>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a><span class="fu">length</span>(y)</span></code></pre></div>
 <pre><code>[1] 1</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a list with two elements: the number 1 is the first element and a vector with</span></span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the numbers 2 and 3 is the second element</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" tabindex="-1"></a><span class="co"># This is a list with two elements: the number 1 is the first element and a vector with</span></span>
+<span id="cb81-2"><a href="#cb81-2" tabindex="-1"></a><span class="co"># the numbers 2 and 3 is the second element</span></span>
+<span id="cb81-3"><a href="#cb81-3" tabindex="-1"></a>z</span></code></pre></div>
 <pre><code>[[1]]
 [1] 1
 
 [[2]]
 [1] 2 3</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" tabindex="-1"></a><span class="fu">length</span>(z)</span></code></pre></div>
 <pre><code>[1] 2</code></pre>
 </div>
 </details>
@@ -841,9 +845,9 @@ elements of a list.</p>
 <li><p>For the line that works, did it return what you expected? What
 would need to change?</p></li>
 </ol>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>sitelist[<span class="dv">1</span>][<span class="dv">3</span>]</span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>sitelist[<span class="dv">3</span>][<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" tabindex="-1"></a>sitelist[<span class="dv">1</span>][<span class="dv">3</span>]</span>
+<span id="cb85-2"><a href="#cb85-2" tabindex="-1"></a></span>
+<span id="cb85-3"><a href="#cb85-3" tabindex="-1"></a>sitelist[<span class="dv">3</span>][<span class="dv">1</span>]</span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
@@ -851,25 +855,25 @@ would need to change?</p></li>
 <div class="solution">
 <p>This doesn’t work because it returns a list of length 1 and we cannot
 select a 3rd element because it does not exist.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>sitelist[<span class="dv">1</span>][<span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" tabindex="-1"></a>sitelist[<span class="dv">1</span>][<span class="dv">3</span>]</span></code></pre></div>
 <pre><code>[[1]]
 NULL</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sitelist[<span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a><span class="fu">class</span>(sitelist[<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>[1] &quot;list&quot;</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(sitelist[<span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" tabindex="-1"></a><span class="fu">length</span>(sitelist[<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>[1] 1</code></pre>
 <p>This works, because <code>sitelist[3]</code> returns a list of length
 1 and so selecting the 1st element returns the whole list.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>sitelist[<span class="dv">3</span>][<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" tabindex="-1"></a>sitelist[<span class="dv">3</span>][<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>[[1]]
 [1] 7 8 9</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(sitelist[<span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" tabindex="-1"></a><span class="fu">class</span>(sitelist[<span class="dv">3</span>])</span></code></pre></div>
 <pre><code>[1] &quot;list&quot;</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(sitelist[<span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a><span class="fu">length</span>(sitelist[<span class="dv">3</span>])</span></code></pre></div>
 <pre><code>[1] 1</code></pre>
 <p>If we actually wanted the 1st element from the vector saved as the
 third element of sitelist, we would actually need to use:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>sitelist[[<span class="dv">3</span>]][<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" tabindex="-1"></a>sitelist[[<span class="dv">3</span>]][<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>[1] 7</code></pre>
 </div>
 </details>
@@ -879,8 +883,8 @@ third element of sitelist, we would actually need to use:</p>
 useful to examine the object’s structure using the <code>str()</code>
 function. Let’s see how this works on one of the lists we made:</p>
 <div class="sourceCode" id="cb100"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the structure of the object sitelist</span></span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sitelist)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="co"># What is the structure of the object sitelist</span></span>
+<span id="cb100-2"><a href="#cb100-2" tabindex="-1"></a><span class="fu">str</span>(sitelist)</span></code></pre></div>
 <pre><code>List of 4
  $ : chr &quot;TECR&quot;
  $ : chr &quot;ABCD&quot;
@@ -901,7 +905,7 @@ a very flexible and useful way to work with data tables.</p>
 <p>Let’s check out the structure of the <code>surfwater</code>
 dataframe.</p>
 <div class="sourceCode" id="cb102"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(surfwater)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" tabindex="-1"></a><span class="fu">str</span>(surfwater)</span></code></pre></div>
 <pre><code>&#39;data.frame&#39;:   10272 obs. of  11 variables:
  $ siteID                  : chr  &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; ...
  $ startDateTime           : chr  &quot;2021-04-01 00:00:00&quot; &quot;2021-04-01 00:30:00&quot; &quot;2021-04-01 01:00:00&quot; &quot;2021-04-01 01:30:00&quot; ...
@@ -921,8 +925,8 @@ structure to the output when we used <code>str()</code> on a list. The
 main difference is that each element in this list has a
 <strong>name</strong> which is the name of the column.</p>
 <div class="sourceCode" id="cb104"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What are the names of the elements in surfwater?</span></span>
-<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(surfwater)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a><span class="co"># What are the names of the elements in surfwater?</span></span>
+<span id="cb104-2"><a href="#cb104-2" tabindex="-1"></a><span class="fu">names</span>(surfwater)</span></code></pre></div>
 <pre><code> [1] &quot;siteID&quot;                   &quot;startDateTime&quot;           
  [3] &quot;endDateTime&quot;              &quot;surfWaterTemp.mean&quot;      
  [5] &quot;surfWaterNitrate.mean&quot;    &quot;specificConductance.mean&quot;
@@ -930,27 +934,27 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb1
  [9] &quot;chlorophyll.mean&quot;         &quot;turbidity.mean&quot;          
 [11] &quot;fDOM.mean&quot;               </code></pre>
 <div class="sourceCode" id="cb106"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What are the names of the elements in sitelist?</span></span>
-<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sitelist)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a><span class="co"># What are the names of the elements in sitelist?</span></span>
+<span id="cb106-2"><a href="#cb106-2" tabindex="-1"></a><span class="fu">names</span>(sitelist)</span></code></pre></div>
 <pre><code>NULL</code></pre>
 <p>The elements of <code>sitelist</code> don’t have names, so we get
 <code>NULL</code> (an empty value).</p>
 <p>We could assign names using the <code>names()</code> function. These
 then show up in the structure of the object:</p>
 <div class="sourceCode" id="cb108"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign names to the elements of sitelist</span></span>
-<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sitelist) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;site1&quot;</span>, <span class="st">&quot;site2&quot;</span>, <span class="st">&quot;values1&quot;</span>, <span class="st">&quot;values2&quot;</span>)</span>
-<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the structure of the object</span></span>
-<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sitelist)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a><span class="co"># Assign names to the elements of sitelist</span></span>
+<span id="cb108-2"><a href="#cb108-2" tabindex="-1"></a><span class="fu">names</span>(sitelist) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;site1&quot;</span>, <span class="st">&quot;site2&quot;</span>, <span class="st">&quot;values1&quot;</span>, <span class="st">&quot;values2&quot;</span>)</span>
+<span id="cb108-3"><a href="#cb108-3" tabindex="-1"></a></span>
+<span id="cb108-4"><a href="#cb108-4" tabindex="-1"></a><span class="co"># View the structure of the object</span></span>
+<span id="cb108-5"><a href="#cb108-5" tabindex="-1"></a><span class="fu">str</span>(sitelist)</span></code></pre></div>
 <pre><code>List of 4
  $ site1  : chr &quot;TECR&quot;
  $ site2  : chr &quot;ABCD&quot;
  $ values1: int [1:3] 7 8 9
  $ values2: num 100</code></pre>
 <div class="sourceCode" id="cb110"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access the element named values2</span></span>
-<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>sitelist<span class="sc">$</span>values2</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" tabindex="-1"></a><span class="co"># Access the element named values2</span></span>
+<span id="cb110-2"><a href="#cb110-2" tabindex="-1"></a>sitelist<span class="sc">$</span>values2</span></code></pre></div>
 <pre><code>[1] 100</code></pre>
 <p>In summary, a data frame is a <strong>named list</strong>, which
 means that we can access its named elements using the <code>$</code>
@@ -958,53 +962,56 @@ symbol: <code>dataframe$columnname</code>. However since a data frame is
 also just a list, you can also access columns using <code>[[ ]]</code>,
 though this is not commonly done.</p>
 <div class="sourceCode" id="cb112"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the first 10 elements in the 3rd column of the surfwater data frame</span></span>
-<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>surfwater[[<span class="dv">3</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
-<pre><code> [1] &quot;2021-04-01 00:30:00&quot; &quot;2021-04-01 01:00:00&quot; &quot;2021-04-01 01:30:00&quot;
- [4] &quot;2021-04-01 02:00:00&quot; &quot;2021-04-01 02:30:00&quot; &quot;2021-04-01 03:00:00&quot;
- [7] &quot;2021-04-01 03:30:00&quot; &quot;2021-04-01 04:00:00&quot; &quot;2021-04-01 04:30:00&quot;
-[10] &quot;2021-04-01 05:00:00&quot;</code></pre>
+class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" tabindex="-1"></a><span class="co"># Print the first 10 elements in the 3rd column of the surfwater data frame</span></span>
+<span id="cb112-2"><a href="#cb112-2" tabindex="-1"></a>surfwater[[<span class="dv">3</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code> [1] &quot;2021-04-01 00:30:00&quot; &quot;2021-04-01 01:00:00&quot;
+ [3] &quot;2021-04-01 01:30:00&quot; &quot;2021-04-01 02:00:00&quot;
+ [5] &quot;2021-04-01 02:30:00&quot; &quot;2021-04-01 03:00:00&quot;
+ [7] &quot;2021-04-01 03:30:00&quot; &quot;2021-04-01 04:00:00&quot;
+ [9] &quot;2021-04-01 04:30:00&quot; &quot;2021-04-01 05:00:00&quot;</code></pre>
 <p>In contrast, a <strong>matrix</strong> is like a 2-dimensional
 vector- all of the elements must have the same data type. One way to
 make a matrix is by using the <code>matrix()</code> function:</p>
 <div class="sourceCode" id="cb114"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a 2 x 3 matrix filled with the numbers 10 - 15 </span></span>
-<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">15</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>X</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a><span class="co"># Make a 2 x 3 matrix filled with the numbers 10 - 15 </span></span>
+<span id="cb114-2"><a href="#cb114-2" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">15</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb114-3"><a href="#cb114-3" tabindex="-1"></a></span>
+<span id="cb114-4"><a href="#cb114-4" tabindex="-1"></a>X</span></code></pre></div>
 <pre><code>     [,1] [,2] [,3]
 [1,]   10   12   14
 [2,]   11   13   15</code></pre>
 <p>We access the elements of a matrix using single square brackets with
 a comma to denote the row and column we need: <code>X[r, c]</code>.</p>
 <div class="sourceCode" id="cb116"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>X[<span class="dv">2</span>, <span class="dv">3</span>] <span class="co"># the element in the second row and third column</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a>X[<span class="dv">2</span>, <span class="dv">3</span>] <span class="co"># the element in the second row and third column</span></span></code></pre></div>
 <pre><code>[1] 15</code></pre>
 <div class="sourceCode" id="cb118"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>X[, <span class="dv">2</span>] <span class="co"># the second column</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" tabindex="-1"></a>X[, <span class="dv">2</span>] <span class="co"># the second column</span></span></code></pre></div>
 <pre><code>[1] 12 13</code></pre>
 <div class="sourceCode" id="cb120"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>X[<span class="dv">1</span>, ] <span class="co"># the first row</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" tabindex="-1"></a>X[<span class="dv">1</span>, ] <span class="co"># the first row</span></span></code></pre></div>
 <pre><code>[1] 10 12 14</code></pre>
 <div class="sourceCode" id="cb122"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>X[<span class="dv">2</span>,] <span class="co"># spaces don&#39;t matter!</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" tabindex="-1"></a>X[<span class="dv">2</span>,] <span class="co"># spaces don&#39;t matter!</span></span></code></pre></div>
 <pre><code>[1] 11 13 15</code></pre>
 <div class="sourceCode" id="cb124"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>X[ <span class="dv">2</span>  ,   ]</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" tabindex="-1"></a>X[ <span class="dv">2</span>  ,   ]</span></code></pre></div>
 <pre><code>[1] 11 13 15</code></pre>
 <p>We can also the same method to access elements in a data frame.</p>
 <div class="sourceCode" id="cb126"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>surfwater[<span class="dv">2</span>, <span class="dv">3</span>] <span class="co"># the element in the second row and third column</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" tabindex="-1"></a>surfwater[<span class="dv">2</span>, <span class="dv">3</span>] <span class="co"># the element in the second row and third column</span></span></code></pre></div>
 <pre><code>[1] &quot;2021-04-01 01:00:00&quot;</code></pre>
 <div class="sourceCode" id="cb128"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>] <span class="co"># the first 10 elements in the fifth column</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" tabindex="-1"></a>surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>] <span class="co"># the first 10 elements in the fifth column</span></span></code></pre></div>
 <pre><code> [1] 2.05 2.10 2.15 2.20 2.25 2.30 2.30 2.30 2.30 2.30</code></pre>
 <div class="sourceCode" id="cb130"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>surfwater[<span class="dv">3</span>, ] <span class="co"># the third row</span></span></code></pre></div>
-<pre><code>  siteID       startDateTime         endDateTime surfWaterTemp.mean
-3   TECR 2021-04-01 01:00:00 2021-04-01 01:30:00              3.582
-  surfWaterNitrate.mean specificConductance.mean dissolvedOxygen.mean pH.mean
-3                  2.15                 27.34967               10.419    7.24
+class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" tabindex="-1"></a>surfwater[<span class="dv">3</span>, ] <span class="co"># the third row</span></span></code></pre></div>
+<pre><code>  siteID       startDateTime         endDateTime
+3   TECR 2021-04-01 01:00:00 2021-04-01 01:30:00
+  surfWaterTemp.mean surfWaterNitrate.mean
+3              3.582                  2.15
+  specificConductance.mean dissolvedOxygen.mean pH.mean
+3                 27.34967               10.419    7.24
   chlorophyll.mean turbidity.mean fDOM.mean
 3        0.7696667          1.542    36.229</code></pre>
 <div class="challenge">
@@ -1015,13 +1022,13 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb1
 </summary>
 <div class="solution">
 <div class="sourceCode" id="cb132"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(surfwater[<span class="dv">2</span>, <span class="dv">3</span>]) <span class="co"># a character vector</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" tabindex="-1"></a><span class="fu">class</span>(surfwater[<span class="dv">2</span>, <span class="dv">3</span>]) <span class="co"># a character vector</span></span></code></pre></div>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <div class="sourceCode" id="cb134"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>]) <span class="co"># a numeric vector</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" tabindex="-1"></a><span class="fu">class</span>(surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">5</span>]) <span class="co"># a numeric vector</span></span></code></pre></div>
 <pre><code>[1] &quot;numeric&quot;</code></pre>
 <div class="sourceCode" id="cb136"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(surfwater[<span class="dv">3</span>, ]) <span class="co"># a data frame</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" tabindex="-1"></a><span class="fu">class</span>(surfwater[<span class="dv">3</span>, ]) <span class="co"># a data frame</span></span></code></pre></div>
 <pre><code>[1] &quot;data.frame&quot;</code></pre>
 </div>
 </details>
@@ -1032,20 +1039,20 @@ easier to access their elements. You can set or view the column names
 and rownames of a matrix using <code>colnames()</code> and
 <code>rownames()</code></p>
 <div class="sourceCode" id="cb138"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the row names of X</span></span>
-<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(X) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)</span>
-<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-4"><a href="#cb138-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the column names of X</span></span>
-<span id="cb138-5"><a href="#cb138-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>)</span>
-<span id="cb138-6"><a href="#cb138-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb138-7"><a href="#cb138-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the contents of X</span></span>
-<span id="cb138-8"><a href="#cb138-8" aria-hidden="true" tabindex="-1"></a>X</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" tabindex="-1"></a><span class="co"># Set the row names of X</span></span>
+<span id="cb138-2"><a href="#cb138-2" tabindex="-1"></a><span class="fu">rownames</span>(X) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)</span>
+<span id="cb138-3"><a href="#cb138-3" tabindex="-1"></a></span>
+<span id="cb138-4"><a href="#cb138-4" tabindex="-1"></a><span class="co"># Set the column names of X</span></span>
+<span id="cb138-5"><a href="#cb138-5" tabindex="-1"></a><span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>)</span>
+<span id="cb138-6"><a href="#cb138-6" tabindex="-1"></a></span>
+<span id="cb138-7"><a href="#cb138-7" tabindex="-1"></a><span class="co"># Print the contents of X</span></span>
+<span id="cb138-8"><a href="#cb138-8" tabindex="-1"></a>X</span></code></pre></div>
 <pre><code>  one two three
 A  10  12    14
 B  11  13    15</code></pre>
 <div class="sourceCode" id="cb140"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View the structure of X</span></span>
-<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(X)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" tabindex="-1"></a><span class="co"># View the structure of X</span></span>
+<span id="cb140-2"><a href="#cb140-2" tabindex="-1"></a><span class="fu">str</span>(X)</span></code></pre></div>
 <pre><code> int [1:2, 1:3] 10 11 12 13 14 15
  - attr(*, &quot;dimnames&quot;)=List of 2
   ..$ : chr [1:2] &quot;A&quot; &quot;B&quot;
@@ -1053,8 +1060,8 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb1
 <p>In a data frame, you can use <code>names()</code> or
 <code>colnames()</code> to access the column names.</p>
 <div class="sourceCode" id="cb142"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View the column names of surfwater</span></span>
-<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(surfwater)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" tabindex="-1"></a><span class="co"># View the column names of surfwater</span></span>
+<span id="cb142-2"><a href="#cb142-2" tabindex="-1"></a><span class="fu">colnames</span>(surfwater)</span></code></pre></div>
 <pre><code> [1] &quot;siteID&quot;                   &quot;startDateTime&quot;           
  [3] &quot;endDateTime&quot;              &quot;surfWaterTemp.mean&quot;      
  [5] &quot;surfWaterNitrate.mean&quot;    &quot;specificConductance.mean&quot;
@@ -1066,15 +1073,15 @@ dataframes because you don’t need to remember which row or column the
 data you need are in. Instead of using an integer index to access a
 value, you can use the name of the column(s) or row(s) in quotes.</p>
 <div class="sourceCode" id="cb144"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access the row named &quot;B&quot; in X </span></span>
-<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>X[<span class="st">&quot;B&quot;</span>, ]</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" tabindex="-1"></a><span class="co"># Access the row named &quot;B&quot; in X </span></span>
+<span id="cb144-2"><a href="#cb144-2" tabindex="-1"></a>X[<span class="st">&quot;B&quot;</span>, ]</span></code></pre></div>
 <pre><code>  one   two three 
    11    13    15 </code></pre>
 <p>If you want more than one column or row, supply a vector containing
 the column or row names.</p>
 <div class="sourceCode" id="cb146"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Access the first 3 rows from the pH and temperature columns</span></span>
-<span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a>surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">&quot;pH.mean&quot;</span>, <span class="st">&quot;surfWaterTemp.mean&quot;</span>)]</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" tabindex="-1"></a><span class="co"># Access the first 3 rows from the pH and temperature columns</span></span>
+<span id="cb146-2"><a href="#cb146-2" tabindex="-1"></a>surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">&quot;pH.mean&quot;</span>, <span class="st">&quot;surfWaterTemp.mean&quot;</span>)]</span></code></pre></div>
 <pre><code>   pH.mean surfWaterTemp.mean
 1 7.252000              3.792
 2 7.248333              3.712
@@ -1082,14 +1089,14 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="#cb1
 <p>We can append rows and columns to matrices and data frames using
 <code>rbind()</code> and <code>cbind()</code>.</p>
 <div class="sourceCode" id="cb148"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Append a column of NA values to X</span></span>
-<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(X, <span class="cn">NA</span>)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" tabindex="-1"></a><span class="co"># Append a column of NA values to X</span></span>
+<span id="cb148-2"><a href="#cb148-2" tabindex="-1"></a><span class="fu">cbind</span>(X, <span class="cn">NA</span>)</span></code></pre></div>
 <pre><code>  one two three   
 A  10  12    14 NA
 B  11  13    15 NA</code></pre>
 <div class="sourceCode" id="cb150"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Append the rows of X to itself</span></span>
-<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(X, X)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" tabindex="-1"></a><span class="co"># Append the rows of X to itself</span></span>
+<span id="cb150-2"><a href="#cb150-2" tabindex="-1"></a><span class="fu">rbind</span>(X, X)</span></code></pre></div>
 <pre><code>  one two three
 A  10  12    14
 B  11  13    15
@@ -1104,7 +1111,7 @@ previous two lines of code?</p>
 </summary>
 <div class="solution">
 <div class="sourceCode" id="cb152"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>X</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" tabindex="-1"></a>X</span></code></pre></div>
 <pre><code>  one two three
 A  10  12    14
 B  11  13    15</code></pre>
@@ -1114,11 +1121,11 @@ so the results just printed in the console. If we actually wanted to
 modify the matrix <code>X</code> we would need to use the assignment
 operator <code>&lt;-</code>.</p>
 <div class="sourceCode" id="cb154"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X, <span class="cn">NA</span>)</span>
-<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb154-3"><a href="#cb154-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rbind</span>(X, X)</span>
-<span id="cb154-4"><a href="#cb154-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb154-5"><a href="#cb154-5" aria-hidden="true" tabindex="-1"></a>X</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(X, <span class="cn">NA</span>)</span>
+<span id="cb154-2"><a href="#cb154-2" tabindex="-1"></a></span>
+<span id="cb154-3"><a href="#cb154-3" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rbind</span>(X, X)</span>
+<span id="cb154-4"><a href="#cb154-4" tabindex="-1"></a></span>
+<span id="cb154-5"><a href="#cb154-5" tabindex="-1"></a>X</span></code></pre></div>
 <pre><code>  one two three   
 A  10  12    14 NA
 B  11  13    15 NA
@@ -1131,30 +1138,41 @@ B  11  13    15 NA</code></pre>
 <p><code>cbind()</code> and <code>rbind()</code> also work for data
 frames.</p>
 <div class="sourceCode" id="cb156"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a new data frame that contains the first 5 rows of surfwater duplicated</span></span>
-<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,], surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div>
-<pre><code>   siteID       startDateTime         endDateTime surfWaterTemp.mean
-1    TECR 2021-04-01 00:00:00 2021-04-01 00:30:00              3.792
-2    TECR 2021-04-01 00:30:00 2021-04-01 01:00:00              3.712
-3    TECR 2021-04-01 01:00:00 2021-04-01 01:30:00              3.582
-4    TECR 2021-04-01 01:30:00 2021-04-01 02:00:00              3.423
-5    TECR 2021-04-01 02:00:00 2021-04-01 02:30:00              3.258
-6    TECR 2021-04-01 00:00:00 2021-04-01 00:30:00              3.792
-7    TECR 2021-04-01 00:30:00 2021-04-01 01:00:00              3.712
-8    TECR 2021-04-01 01:00:00 2021-04-01 01:30:00              3.582
-9    TECR 2021-04-01 01:30:00 2021-04-01 02:00:00              3.423
-10   TECR 2021-04-01 02:00:00 2021-04-01 02:30:00              3.258
-   surfWaterNitrate.mean specificConductance.mean dissolvedOxygen.mean  pH.mean
-1                   2.05                 27.39500             10.36000 7.252000
-2                   2.10                 27.35267             10.38167 7.248333
-3                   2.15                 27.34967             10.41900 7.240000
-4                   2.20                 27.36433             10.46733 7.232333
-5                   2.25                 27.38633             10.51767 7.230333
-6                   2.05                 27.39500             10.36000 7.252000
-7                   2.10                 27.35267             10.38167 7.248333
-8                   2.15                 27.34967             10.41900 7.240000
-9                   2.20                 27.36433             10.46733 7.232333
-10                  2.25                 27.38633             10.51767 7.230333
+class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" tabindex="-1"></a><span class="co"># Make a new data frame that contains the first 5 rows of surfwater duplicated</span></span>
+<span id="cb156-2"><a href="#cb156-2" tabindex="-1"></a><span class="fu">rbind</span>(surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,], surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div>
+<pre><code>   siteID       startDateTime         endDateTime
+1    TECR 2021-04-01 00:00:00 2021-04-01 00:30:00
+2    TECR 2021-04-01 00:30:00 2021-04-01 01:00:00
+3    TECR 2021-04-01 01:00:00 2021-04-01 01:30:00
+4    TECR 2021-04-01 01:30:00 2021-04-01 02:00:00
+5    TECR 2021-04-01 02:00:00 2021-04-01 02:30:00
+6    TECR 2021-04-01 00:00:00 2021-04-01 00:30:00
+7    TECR 2021-04-01 00:30:00 2021-04-01 01:00:00
+8    TECR 2021-04-01 01:00:00 2021-04-01 01:30:00
+9    TECR 2021-04-01 01:30:00 2021-04-01 02:00:00
+10   TECR 2021-04-01 02:00:00 2021-04-01 02:30:00
+   surfWaterTemp.mean surfWaterNitrate.mean
+1               3.792                  2.05
+2               3.712                  2.10
+3               3.582                  2.15
+4               3.423                  2.20
+5               3.258                  2.25
+6               3.792                  2.05
+7               3.712                  2.10
+8               3.582                  2.15
+9               3.423                  2.20
+10              3.258                  2.25
+   specificConductance.mean dissolvedOxygen.mean  pH.mean
+1                  27.39500             10.36000 7.252000
+2                  27.35267             10.38167 7.248333
+3                  27.34967             10.41900 7.240000
+4                  27.36433             10.46733 7.232333
+5                  27.38633             10.51767 7.230333
+6                  27.39500             10.36000 7.252000
+7                  27.35267             10.38167 7.248333
+8                  27.34967             10.41900 7.240000
+9                  27.36433             10.46733 7.232333
+10                 27.38633             10.51767 7.230333
    chlorophyll.mean turbidity.mean fDOM.mean
 1         0.6916667      0.9673333  35.25833
 2         0.7323333      1.2106667  35.74600
@@ -1177,9 +1195,9 @@ contains the values to put in the array and dim is an integer vector
 specifying its dimensions. Here’s an example of a 3-dimensional array
 and how to access its elements:</p>
 <div class="sourceCode" id="cb158"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>))</span>
-<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb158-3"><a href="#cb158-3" aria-hidden="true" tabindex="-1"></a>Z</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">24</span>, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>))</span>
+<span id="cb158-2"><a href="#cb158-2" tabindex="-1"></a></span>
+<span id="cb158-3"><a href="#cb158-3" tabindex="-1"></a>Z</span></code></pre></div>
 <pre><code>, , 1
 
      [,1] [,2] [,3]
@@ -1196,7 +1214,7 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="#cb1
 [3,]   15   19   23
 [4,]   16   20   24</code></pre>
 <div class="sourceCode" id="cb160"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a>Z[<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>]</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" tabindex="-1"></a>Z[<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>]</span></code></pre></div>
 <pre><code>[1] 10</code></pre>
 </div>
 </div>
@@ -1224,31 +1242,37 @@ the row and column functions only work on 2-dimensional objects
 <p>Let’s see how this might be useful if we wanted to view the last five
 rows of <code>surfwater</code>.</p>
 <div class="sourceCode" id="cb162"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many rows are in surfwater?</span></span>
-<span id="cb162-2"><a href="#cb162-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(surfwater)</span>
-<span id="cb162-3"><a href="#cb162-3" aria-hidden="true" tabindex="-1"></a>N</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" tabindex="-1"></a><span class="co"># How many rows are in surfwater?</span></span>
+<span id="cb162-2"><a href="#cb162-2" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(surfwater)</span>
+<span id="cb162-3"><a href="#cb162-3" tabindex="-1"></a>N</span></code></pre></div>
 <pre><code>[1] 10272</code></pre>
 <div class="sourceCode" id="cb164"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the last 5 rows of surfwater.</span></span>
-<span id="cb164-2"><a href="#cb164-2" aria-hidden="true" tabindex="-1"></a>surfwater[(N<span class="dv">-4</span>)<span class="sc">:</span>N, ]</span></code></pre></div>
-<pre><code>      siteID       startDateTime         endDateTime surfWaterTemp.mean
-10268   TECR 2021-10-31 21:30:00 2021-10-31 22:00:00              4.615
-10269   TECR 2021-10-31 22:00:00 2021-10-31 22:30:00              4.650
-10270   TECR 2021-10-31 22:30:00 2021-10-31 23:00:00              4.629
-10271   TECR 2021-10-31 23:00:00 2021-10-31 23:30:00              4.629
-10272   TECR 2021-10-31 23:30:00 2021-11-01 00:00:00              4.641
-      surfWaterNitrate.mean specificConductance.mean dissolvedOxygen.mean
-10268                  2.90                       NA                   NA
-10269                  2.90                       NA                   NA
-10270                  2.85                       NA                   NA
-10271                  2.85                       NA                   NA
-10272                  2.90                       NA                   NA
-      pH.mean chlorophyll.mean turbidity.mean fDOM.mean
-10268      NA               NA             NA        NA
-10269      NA               NA             NA        NA
-10270      NA               NA             NA        NA
-10271      NA               NA             NA        NA
-10272      NA               NA             NA        NA</code></pre>
+class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" tabindex="-1"></a><span class="co"># Extract the last 5 rows of surfwater.</span></span>
+<span id="cb164-2"><a href="#cb164-2" tabindex="-1"></a>surfwater[(N<span class="dv">-4</span>)<span class="sc">:</span>N, ]</span></code></pre></div>
+<pre><code>      siteID       startDateTime         endDateTime
+10268   TECR 2021-10-31 21:30:00 2021-10-31 22:00:00
+10269   TECR 2021-10-31 22:00:00 2021-10-31 22:30:00
+10270   TECR 2021-10-31 22:30:00 2021-10-31 23:00:00
+10271   TECR 2021-10-31 23:00:00 2021-10-31 23:30:00
+10272   TECR 2021-10-31 23:30:00 2021-11-01 00:00:00
+      surfWaterTemp.mean surfWaterNitrate.mean
+10268              4.615                  2.90
+10269              4.650                  2.90
+10270              4.629                  2.85
+10271              4.629                  2.85
+10272              4.641                  2.90
+      specificConductance.mean dissolvedOxygen.mean pH.mean
+10268                       NA                   NA      NA
+10269                       NA                   NA      NA
+10270                       NA                   NA      NA
+10271                       NA                   NA      NA
+10272                       NA                   NA      NA
+      chlorophyll.mean turbidity.mean fDOM.mean
+10268               NA             NA        NA
+10269               NA             NA        NA
+10270               NA             NA        NA
+10271               NA             NA        NA
+10272               NA             NA        NA</code></pre>
 </div>
 </div>
 <div id="logical-comparisons" class="section level3">
@@ -1268,55 +1292,55 @@ using a vector of integers and one missing value. Comparisons will
 return a logical vector that is TRUE where the comparison is true, FALSE
 where the comparison is false.</p>
 <div class="sourceCode" id="cb166"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a vector x containing integers from -3 to 3 followed by a missing value</span></span>
-<span id="cb166-2"><a href="#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that using parentheses around this expressions causes </span></span>
-<span id="cb166-3"><a href="#cb166-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the output of x to print to the console.</span></span>
-<span id="cb166-4"><a href="#cb166-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb166-5"><a href="#cb166-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb166-6"><a href="#cb166-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb166-7"><a href="#cb166-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are equal to 0?</span></span>
-<span id="cb166-8"><a href="#cb166-8" aria-hidden="true" tabindex="-1"></a>x <span class="sc">==</span> <span class="dv">1</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" tabindex="-1"></a><span class="co"># Create a vector x containing integers from -3 to 3 followed by a missing value</span></span>
+<span id="cb166-2"><a href="#cb166-2" tabindex="-1"></a><span class="co"># Note that using parentheses around this expressions causes </span></span>
+<span id="cb166-3"><a href="#cb166-3" tabindex="-1"></a><span class="co"># the output of x to print to the console.</span></span>
+<span id="cb166-4"><a href="#cb166-4" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb166-5"><a href="#cb166-5" tabindex="-1"></a></span>
+<span id="cb166-6"><a href="#cb166-6" tabindex="-1"></a></span>
+<span id="cb166-7"><a href="#cb166-7" tabindex="-1"></a><span class="co"># Which values of x are equal to 0?</span></span>
+<span id="cb166-8"><a href="#cb166-8" tabindex="-1"></a>x <span class="sc">==</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>[1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
 <div class="sourceCode" id="cb168"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are less than 0?</span></span>
-<span id="cb168-2"><a href="#cb168-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&lt;</span> <span class="dv">0</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="#cb168-1" tabindex="-1"></a><span class="co"># Which values of x are less than 0?</span></span>
+<span id="cb168-2"><a href="#cb168-2" tabindex="-1"></a>x <span class="sc">&lt;</span> <span class="dv">0</span></span></code></pre></div>
 <pre><code>[1]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE</code></pre>
 <div class="sourceCode" id="cb170"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are less than or equal to 0?</span></span>
-<span id="cb170-2"><a href="#cb170-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&lt;=</span> <span class="dv">0</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" tabindex="-1"></a><span class="co"># Which values of x are less than or equal to 0?</span></span>
+<span id="cb170-2"><a href="#cb170-2" tabindex="-1"></a>x <span class="sc">&lt;=</span> <span class="dv">0</span></span></code></pre></div>
 <pre><code>[1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE</code></pre>
 <div class="sourceCode" id="cb172"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are greater than or equal to 0?</span></span>
-<span id="cb172-2"><a href="#cb172-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;=</span> <span class="dv">0</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" tabindex="-1"></a><span class="co"># Which values of x are greater than or equal to 0?</span></span>
+<span id="cb172-2"><a href="#cb172-2" tabindex="-1"></a>x <span class="sc">&gt;=</span> <span class="dv">0</span></span></code></pre></div>
 <pre><code>[1] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE</code></pre>
 <div class="sourceCode" id="cb174"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are in the set of values c(1, 3, 5)?</span></span>
-<span id="cb174-2"><a href="#cb174-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" tabindex="-1"></a><span class="co"># Which values of x are in the set of values c(1, 3, 5)?</span></span>
+<span id="cb174-2"><a href="#cb174-2" tabindex="-1"></a>x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>[1] FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE</code></pre>
 <p>We can use the <code>!</code> operator to negate any logical
 comparison:</p>
 <div class="sourceCode" id="cb176"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are not equal to 0?</span></span>
-<span id="cb176-2"><a href="#cb176-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">!=</span> <span class="dv">1</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" tabindex="-1"></a><span class="co"># Which values of x are not equal to 0?</span></span>
+<span id="cb176-2"><a href="#cb176-2" tabindex="-1"></a>x <span class="sc">!=</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>[1]  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE</code></pre>
 <div class="sourceCode" id="cb178"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are not less than 0?</span></span>
-<span id="cb178-2"><a href="#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" tabindex="-1"></a><span class="co"># Which values of x are not less than 0?</span></span>
+<span id="cb178-2"><a href="#cb178-2" tabindex="-1"></a><span class="sc">!</span>(x <span class="sc">&lt;</span> <span class="dv">0</span>)</span></code></pre></div>
 <pre><code>[1] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE</code></pre>
 <div class="sourceCode" id="cb180"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are not in the set of values c(1, 3, 5)?</span></span>
-<span id="cb180-2"><a href="#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>))</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" tabindex="-1"></a><span class="co"># Which values of x are not in the set of values c(1, 3, 5)?</span></span>
+<span id="cb180-2"><a href="#cb180-2" tabindex="-1"></a><span class="sc">!</span>(x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>))</span></code></pre></div>
 <pre><code>[1]  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE</code></pre>
 <p>We can also make more complex logical statements by combining
 comparisons with the boolean operators “and” (<code>&amp;</code>) and
 “or” (<code>|</code>):</p>
 <div class="sourceCode" id="cb182"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are less than -2 or greater than 1?</span></span>
-<span id="cb182-2"><a href="#cb182-2" aria-hidden="true" tabindex="-1"></a>(x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">2</span>) <span class="sc">|</span> (x <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1" tabindex="-1"></a><span class="co"># Which values of x are less than -2 or greater than 1?</span></span>
+<span id="cb182-2"><a href="#cb182-2" tabindex="-1"></a>(x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">2</span>) <span class="sc">|</span> (x <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>[1]  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE</code></pre>
 <div class="sourceCode" id="cb184"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are less than -2 and greater than 1?</span></span>
-<span id="cb184-2"><a href="#cb184-2" aria-hidden="true" tabindex="-1"></a>(x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">2</span>) <span class="sc">&amp;</span> (x <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="#cb184-1" tabindex="-1"></a><span class="co"># Which values of x are less than -2 and greater than 1?</span></span>
+<span id="cb184-2"><a href="#cb184-2" tabindex="-1"></a>(x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">2</span>) <span class="sc">&amp;</span> (x <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>[1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
 <p>Since each of these comparisons operates <strong>elementwise</strong>
 and returns a logical vector that is the same length as <code>x</code>,
@@ -1324,20 +1348,20 @@ we can use the output of a comparison to select elements of the vector
 x. Only the elements where the comparison was <code>TRUE</code> will be
 returned.</p>
 <div class="sourceCode" id="cb186"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are equal to 0?</span></span>
-<span id="cb186-2"><a href="#cb186-2" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">==</span> <span class="dv">1</span>]</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="#cb186-1" tabindex="-1"></a><span class="co"># Which values of x are equal to 0?</span></span>
+<span id="cb186-2"><a href="#cb186-2" tabindex="-1"></a>x[x <span class="sc">==</span> <span class="dv">1</span>]</span></code></pre></div>
 <pre><code>[1] 1</code></pre>
 <div class="sourceCode" id="cb188"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are less than 0?</span></span>
-<span id="cb188-2"><a href="#cb188-2" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">&lt;</span> <span class="dv">0</span>]</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="#cb188-1" tabindex="-1"></a><span class="co"># Which values of x are less than 0?</span></span>
+<span id="cb188-2"><a href="#cb188-2" tabindex="-1"></a>x[x <span class="sc">&lt;</span> <span class="dv">0</span>]</span></code></pre></div>
 <pre><code>[1] -3 -2 -1</code></pre>
 <div class="sourceCode" id="cb190"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are in the set of values c(1, 3, 5)?</span></span>
-<span id="cb190-2"><a href="#cb190-2" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="#cb190-1" tabindex="-1"></a><span class="co"># Which values of x are in the set of values c(1, 3, 5)?</span></span>
+<span id="cb190-2"><a href="#cb190-2" tabindex="-1"></a>x[x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span></code></pre></div>
 <pre><code>[1] 1 3</code></pre>
 <div class="sourceCode" id="cb192"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Which values of x are less than -2 and greater than 1?</span></span>
-<span id="cb192-2"><a href="#cb192-2" aria-hidden="true" tabindex="-1"></a>x[(x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">2</span>) <span class="sc">&amp;</span> (x <span class="sc">&gt;</span> <span class="dv">1</span>)]</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="#cb192-1" tabindex="-1"></a><span class="co"># Which values of x are less than -2 and greater than 1?</span></span>
+<span id="cb192-2"><a href="#cb192-2" tabindex="-1"></a>x[(x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">2</span>) <span class="sc">&amp;</span> (x <span class="sc">&gt;</span> <span class="dv">1</span>)]</span></code></pre></div>
 <pre><code>integer(0)</code></pre>
 <p>Why did the last line return <code>integer(0)</code>? Because are no
 elements of x that are both less than -2 and greater than 1 (that’s
@@ -1354,48 +1378,43 @@ identifies which month each measurement was taken. We do this using
 functions from the lubridate package (introduced in lesson <a
 href="chp-intro-to-R.html">Intro to R and RStudio</a>).</p>
 <div class="sourceCode" id="cb194"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the lubridate package</span></span>
-<span id="cb194-2"><a href="#cb194-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
-<pre><code>
-Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>The following objects are masked from &#39;package:base&#39;:
-
-    date, intersect, setdiff, union</code></pre>
-<div class="sourceCode" id="cb197"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ymd_hms() comes from the lubridate package</span></span>
-<span id="cb197-2"><a href="#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and converts the character vector in the startDateTime column</span></span>
-<span id="cb197-3"><a href="#cb197-3" aria-hidden="true" tabindex="-1"></a><span class="co"># into a date-time class </span></span>
-<span id="cb197-4"><a href="#cb197-4" aria-hidden="true" tabindex="-1"></a>surfwater<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(surfwater<span class="sc">$</span>startDateTime)</span>
-<span id="cb197-5"><a href="#cb197-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb197-6"><a href="#cb197-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(surfwater<span class="sc">$</span>startDateTime) </span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="#cb194-1" tabindex="-1"></a><span class="co"># Load the lubridate package</span></span>
+<span id="cb194-2"><a href="#cb194-2" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb194-3"><a href="#cb194-3" tabindex="-1"></a></span>
+<span id="cb194-4"><a href="#cb194-4" tabindex="-1"></a><span class="co"># ymd_hms() comes from the lubridate package</span></span>
+<span id="cb194-5"><a href="#cb194-5" tabindex="-1"></a><span class="co"># and converts the character vector in the startDateTime column</span></span>
+<span id="cb194-6"><a href="#cb194-6" tabindex="-1"></a><span class="co"># into a date-time class </span></span>
+<span id="cb194-7"><a href="#cb194-7" tabindex="-1"></a>surfwater<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(surfwater<span class="sc">$</span>startDateTime)</span>
+<span id="cb194-8"><a href="#cb194-8" tabindex="-1"></a></span>
+<span id="cb194-9"><a href="#cb194-9" tabindex="-1"></a><span class="fu">class</span>(surfwater<span class="sc">$</span>startDateTime) </span></code></pre></div>
 <pre><code>[1] &quot;POSIXct&quot; &quot;POSIXt&quot; </code></pre>
-<div class="sourceCode" id="cb199"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="co"># POSIXct and POSIXt are the names of classes that R uses to</span></span>
-<span id="cb199-2"><a href="#cb199-2" aria-hidden="true" tabindex="-1"></a><span class="co"># store dates and times</span></span>
-<span id="cb199-3"><a href="#cb199-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-4"><a href="#cb199-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new column that identifies the month for each observation</span></span>
-<span id="cb199-5"><a href="#cb199-5" aria-hidden="true" tabindex="-1"></a>surfwater<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(surfwater<span class="sc">$</span>startDateTime)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="#cb196-1" tabindex="-1"></a><span class="co"># POSIXct and POSIXt are the names of classes that R uses to</span></span>
+<span id="cb196-2"><a href="#cb196-2" tabindex="-1"></a><span class="co"># store dates and times</span></span>
+<span id="cb196-3"><a href="#cb196-3" tabindex="-1"></a></span>
+<span id="cb196-4"><a href="#cb196-4" tabindex="-1"></a><span class="co"># Create a new column that identifies the month for each observation</span></span>
+<span id="cb196-5"><a href="#cb196-5" tabindex="-1"></a>surfwater<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(surfwater<span class="sc">$</span>startDateTime)</span></code></pre></div>
 <p>Click on the <code>surfwater</code> object in the Environment tab to
 verify that there is a new column at the end named
 <code>month</code>.</p>
 <p>Next we subset the data to only rows where <code>month == 8</code>
 since August is the 8th month.</p>
-<div class="sourceCode" id="cb200"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="#cb200-1" aria-hidden="true" tabindex="-1"></a>surfwater_Aug <span class="ot">&lt;-</span> surfwater[surfwater<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">8</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" tabindex="-1"></a>surfwater_Aug <span class="ot">&lt;-</span> surfwater[surfwater<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">8</span>, ]</span></code></pre></div>
 <p>Finally we calculate the average of the values in the
 <code>surfWaterTemp.mean</code> column.</p>
-<div class="sourceCode" id="cb201"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(surfwater_Aug<span class="sc">$</span>surfWaterTemp.mean)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="#cb198-1" tabindex="-1"></a><span class="fu">mean</span>(surfwater_Aug<span class="sc">$</span>surfWaterTemp.mean)</span></code></pre></div>
 <pre><code>[1] NA</code></pre>
 <p>Ooops! There must be missing values. Use the <code>na.rm</code>
 argument to discard these before calculating the average.</p>
-<div class="sourceCode" id="cb203"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(surfwater_Aug<span class="sc">$</span>surfWaterTemp.mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="#cb200-1" tabindex="-1"></a><span class="fu">mean</span>(surfwater_Aug<span class="sc">$</span>surfWaterTemp.mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>[1] 13.14276</code></pre>
 <p>Note that we can do both steps at once if we index the column by name
 at the same time that we subset the rows:</p>
-<div class="sourceCode" id="cb205"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(surfwater[surfwater<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">8</span>, <span class="st">&quot;surfWaterTemp.mean&quot;</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="#cb202-1" tabindex="-1"></a><span class="fu">mean</span>(surfwater[surfwater<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">8</span>, <span class="st">&quot;surfWaterTemp.mean&quot;</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>[1] 13.14276</code></pre>
 <div class="{callout-tip}">
 <p>Be careful using logical comparisons to select data when the data
@@ -1403,13 +1422,13 @@ contain missing values <code>NA</code>. A logical comparison will be
 <code>NA</code> whenever data are missing and using <code>NA</code> to
 index a vector will return an <code>NA</code> value, which might not be
 what you had intended.</p>
-<div class="sourceCode" id="cb207"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="#cb207-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="cn">NA</span>)</span>
-<span id="cb207-2"><a href="#cb207-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb207-3"><a href="#cb207-3" aria-hidden="true" tabindex="-1"></a>y <span class="sc">==</span> <span class="st">&quot;A&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="#cb204-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="cn">NA</span>)</span>
+<span id="cb204-2"><a href="#cb204-2" tabindex="-1"></a></span>
+<span id="cb204-3"><a href="#cb204-3" tabindex="-1"></a>y <span class="sc">==</span> <span class="st">&quot;A&quot;</span></span></code></pre></div>
 <pre><code>[1]  TRUE FALSE  TRUE    NA</code></pre>
-<div class="sourceCode" id="cb209"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="#cb209-1" aria-hidden="true" tabindex="-1"></a>y[y <span class="sc">==</span> <span class="st">&quot;A&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="#cb206-1" tabindex="-1"></a>y[y <span class="sc">==</span> <span class="st">&quot;A&quot;</span>]</span></code></pre></div>
 <pre><code>[1] &quot;A&quot; &quot;A&quot; NA </code></pre>
 </div>
 <p>While you can use a logical expression to directly index the rows of
@@ -1420,25 +1439,25 @@ data.</p>
 <p>Here’s an example to calculate the mean dissolved oxygen content from
 all measurements where the surface water temperature is less than
 5C.</p>
-<div class="sourceCode" id="cb211"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here&#39;s two ways to obtain dissolved oxygen values from measurements where</span></span>
-<span id="cb211-2"><a href="#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the water temperature was less than 5 C</span></span>
-<span id="cb211-3"><a href="#cb211-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb211-4"><a href="#cb211-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad way to do this because there are missing data in surfWaterTemp.mean</span></span>
-<span id="cb211-5"><a href="#cb211-5" aria-hidden="true" tabindex="-1"></a>DOvals_bad <span class="ot">&lt;-</span> surfwater[surfwater<span class="sc">$</span>surfWaterTemp.mean <span class="sc">&lt;</span> <span class="dv">5</span>, <span class="st">&#39;dissolvedOxygen.mean&#39;</span>]</span>
-<span id="cb211-6"><a href="#cb211-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb211-7"><a href="#cb211-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Good way using subset because it drops the rows with missing  surfWaterTemp.mean first</span></span>
-<span id="cb211-8"><a href="#cb211-8" aria-hidden="true" tabindex="-1"></a>DOvals_good <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, surfWaterTemp.mean <span class="sc">&lt;</span> <span class="dv">5</span>)<span class="sc">$</span>dissolvedOxygen.mean</span>
-<span id="cb211-9"><a href="#cb211-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb211-10"><a href="#cb211-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the number of elements in the two vectors of dissolved oxygen values</span></span>
-<span id="cb211-11"><a href="#cb211-11" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(DOvals_bad)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="#cb208-1" tabindex="-1"></a><span class="co"># Here&#39;s two ways to obtain dissolved oxygen values from measurements where</span></span>
+<span id="cb208-2"><a href="#cb208-2" tabindex="-1"></a><span class="co"># the water temperature was less than 5 C</span></span>
+<span id="cb208-3"><a href="#cb208-3" tabindex="-1"></a></span>
+<span id="cb208-4"><a href="#cb208-4" tabindex="-1"></a><span class="co"># Bad way to do this because there are missing data in surfWaterTemp.mean</span></span>
+<span id="cb208-5"><a href="#cb208-5" tabindex="-1"></a>DOvals_bad <span class="ot">&lt;-</span> surfwater[surfwater<span class="sc">$</span>surfWaterTemp.mean <span class="sc">&lt;</span> <span class="dv">5</span>, <span class="st">&#39;dissolvedOxygen.mean&#39;</span>]</span>
+<span id="cb208-6"><a href="#cb208-6" tabindex="-1"></a></span>
+<span id="cb208-7"><a href="#cb208-7" tabindex="-1"></a><span class="co"># Good way using subset because it drops the rows with missing  surfWaterTemp.mean first</span></span>
+<span id="cb208-8"><a href="#cb208-8" tabindex="-1"></a>DOvals_good <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, surfWaterTemp.mean <span class="sc">&lt;</span> <span class="dv">5</span>)<span class="sc">$</span>dissolvedOxygen.mean</span>
+<span id="cb208-9"><a href="#cb208-9" tabindex="-1"></a></span>
+<span id="cb208-10"><a href="#cb208-10" tabindex="-1"></a><span class="co"># Compare the number of elements in the two vectors of dissolved oxygen values</span></span>
+<span id="cb208-11"><a href="#cb208-11" tabindex="-1"></a><span class="fu">length</span>(DOvals_bad)</span></code></pre></div>
 <pre><code>[1] 2112</code></pre>
-<div class="sourceCode" id="cb213"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(DOvals_good)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="#cb210-1" tabindex="-1"></a><span class="fu">length</span>(DOvals_good)</span></code></pre></div>
 <pre><code>[1] 1670</code></pre>
-<div class="sourceCode" id="cb215"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the mean of the values</span></span>
-<span id="cb215-2"><a href="#cb215-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(DOvals_good, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="#cb212-1" tabindex="-1"></a><span class="co"># Calculate the mean of the values</span></span>
+<span id="cb212-2"><a href="#cb212-2" tabindex="-1"></a><span class="fu">mean</span>(DOvals_good, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>[1] 10.37565</code></pre>
 <p>Using subset allows us to know that the missing values in a
 calculation come from missing dissolved oxygen values and not from
@@ -1453,10 +1472,10 @@ measurements when the chlorophyll content
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb217"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="#cb217-1" aria-hidden="true" tabindex="-1"></a>temp_vals <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, (month <span class="sc">==</span> <span class="dv">4</span>)<span class="sc">&amp;</span>(chlorophyll.mean <span class="sc">&gt;</span> .<span class="dv">8</span>))<span class="sc">$</span>surfWaterTemp</span>
-<span id="cb217-2"><a href="#cb217-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb217-3"><a href="#cb217-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(temp_vals)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="#cb214-1" tabindex="-1"></a>temp_vals <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, (month <span class="sc">==</span> <span class="dv">4</span>)<span class="sc">&amp;</span>(chlorophyll.mean <span class="sc">&gt;</span> .<span class="dv">8</span>))<span class="sc">$</span>surfWaterTemp</span>
+<span id="cb214-2"><a href="#cb214-2" tabindex="-1"></a></span>
+<span id="cb214-3"><a href="#cb214-3" tabindex="-1"></a><span class="fu">mean</span>(temp_vals)</span></code></pre></div>
 <pre><code>[1] 3.711597</code></pre>
 </div>
 </details>
@@ -1475,49 +1494,49 @@ missing.</p>
 tests whether each element of a vector is equal to a missing value
 (<code>NA</code>). The output of <code>is.na()</code> is a logical
 vector with the same length as the input vector:</p>
-<div class="sourceCode" id="cb219"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace the 4th element of x as missing</span></span>
-<span id="cb219-2"><a href="#cb219-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="#cb216-1" tabindex="-1"></a><span class="co"># Replace the 4th element of x as missing</span></span>
+<span id="cb216-2"><a href="#cb216-2" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>[1] -3 -2 -1  0  1  2  3</code></pre>
-<div class="sourceCode" id="cb221"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="#cb221-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb221-2"><a href="#cb221-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="#cb218-1" tabindex="-1"></a>x[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb218-2"><a href="#cb218-2" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>[1] -3 -2 -1 NA  1  2  3</code></pre>
-<div class="sourceCode" id="cb223"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the missing values in x</span></span>
-<span id="cb223-2"><a href="#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="#cb220-1" tabindex="-1"></a><span class="co"># Find the missing values in x</span></span>
+<span id="cb220-2"><a href="#cb220-2" tabindex="-1"></a><span class="fu">is.na</span>(x)</span></code></pre></div>
 <pre><code>[1] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE</code></pre>
 <p>Since <code>is.na()</code> returns a logical vector, we can use it to
 subset the rows of a data frame to only data that are missing (or not
 missing is we use <code>!is.na()</code>).</p>
 <p>Let’s find the rows of <code>surfwater</code> with missing surface
 water temperature values.</p>
-<div class="sourceCode" id="cb225"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract all rows with missing value in the surfWaterTemp.mean column</span></span>
-<span id="cb225-2"><a href="#cb225-2" aria-hidden="true" tabindex="-1"></a>missing_temp <span class="ot">&lt;-</span> surfwater[<span class="fu">is.na</span>(surfwater<span class="sc">$</span>surfWaterTemp.mean), ]</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="#cb222-1" tabindex="-1"></a><span class="co"># Extract all rows with missing value in the surfWaterTemp.mean column</span></span>
+<span id="cb222-2"><a href="#cb222-2" tabindex="-1"></a>missing_temp <span class="ot">&lt;-</span> surfwater[<span class="fu">is.na</span>(surfwater<span class="sc">$</span>surfWaterTemp.mean), ]</span></code></pre></div>
 <p>Click on the new object named missing_temp in the Environment panel.
 Scrolling through the data shows that most of the missing values appear
 to occur on one of a handful of days, presumably when the sensor was
 malfunctioning. We can verify this by tabulating the dates when these
 data were missing:</p>
-<div class="sourceCode" id="cb226"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the date from the startDateTime column</span></span>
-<span id="cb226-2"><a href="#cb226-2" aria-hidden="true" tabindex="-1"></a>missing_dates <span class="ot">&lt;-</span> <span class="fu">date</span>(missing_temp<span class="sc">$</span>startDateTime)</span>
-<span id="cb226-3"><a href="#cb226-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-4"><a href="#cb226-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Count the number occurrences of each date</span></span>
-<span id="cb226-5"><a href="#cb226-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This gives a table of the number of missing temperature measurements for each date.</span></span>
-<span id="cb226-6"><a href="#cb226-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(missing_dates)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="#cb223-1" tabindex="-1"></a><span class="co"># Extract the date from the startDateTime column</span></span>
+<span id="cb223-2"><a href="#cb223-2" tabindex="-1"></a>missing_dates <span class="ot">&lt;-</span> <span class="fu">date</span>(missing_temp<span class="sc">$</span>startDateTime)</span>
+<span id="cb223-3"><a href="#cb223-3" tabindex="-1"></a></span>
+<span id="cb223-4"><a href="#cb223-4" tabindex="-1"></a><span class="co"># Count the number occurrences of each date</span></span>
+<span id="cb223-5"><a href="#cb223-5" tabindex="-1"></a><span class="co"># This gives a table of the number of missing temperature measurements for each date.</span></span>
+<span id="cb223-6"><a href="#cb223-6" tabindex="-1"></a><span class="fu">table</span>(missing_dates)</span></code></pre></div>
 <pre><code>missing_dates
-2021-04-20 2021-04-26 2021-04-28 2021-04-29 2021-05-04 2021-05-13 2021-05-18 
-         1          1          8          2          4          1          5 
-2021-06-02 2021-06-19 2021-06-20 2021-06-21 2021-07-01 2021-07-20 2021-07-21 
-         5         42         47         46          6          6         44 
-2021-07-26 2021-08-04 2021-08-17 2021-08-18 2021-08-24 2021-08-31 2021-09-01 
-         2          3          2          4          1          3          2 
-2021-09-07 2021-09-08 2021-09-09 2021-09-14 2021-10-25 2021-10-26 2021-10-27 
-        13         32          3          5          1          9         48 
-2021-10-28 2021-10-29 
-        48         48 </code></pre>
+2021-04-20 2021-04-26 2021-04-28 2021-04-29 2021-05-04 2021-05-13 
+         1          1          8          2          4          1 
+2021-05-18 2021-06-02 2021-06-19 2021-06-20 2021-06-21 2021-07-01 
+         5          5         42         47         46          6 
+2021-07-20 2021-07-21 2021-07-26 2021-08-04 2021-08-17 2021-08-18 
+         6         44          2          3          2          4 
+2021-08-24 2021-08-31 2021-09-01 2021-09-07 2021-09-08 2021-09-09 
+         1          3          2         13         32          3 
+2021-09-14 2021-10-25 2021-10-26 2021-10-27 2021-10-28 2021-10-29 
+         5          1          9         48         48         48 </code></pre>
 </div>
 </div>
 <div id="putting-it-all-together" class="section level3">
@@ -1530,12 +1549,12 @@ by) the concentration of microbial cells in the water?</p>
 water quality data from time points when surface waters were sampled for
 microbes. Microbial cell count data come from <a
 href="https://data.neonscience.org/data-products/DP1.20138.001">DP1.20138.001</a>.</p>
-<div class="sourceCode" id="cb228"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the microbial cell count data from Teakettle Creek in 2021</span></span>
-<span id="cb228-2"><a href="#cb228-2" aria-hidden="true" tabindex="-1"></a>microbes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_Water/microbe_abun_TECR_2021-04_2021-10.csv&quot;</span>)</span>
-<span id="cb228-3"><a href="#cb228-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb228-4"><a href="#cb228-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View the structure of these data</span></span>
-<span id="cb228-5"><a href="#cb228-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(microbes)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="#cb225-1" tabindex="-1"></a><span class="co"># Load the microbial cell count data from Teakettle Creek in 2021</span></span>
+<span id="cb225-2"><a href="#cb225-2" tabindex="-1"></a>microbes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_Water/microbe_abun_TECR_2021-04_2021-10.csv&quot;</span>)</span>
+<span id="cb225-3"><a href="#cb225-3" tabindex="-1"></a></span>
+<span id="cb225-4"><a href="#cb225-4" tabindex="-1"></a><span class="co"># View the structure of these data</span></span>
+<span id="cb225-5"><a href="#cb225-5" tabindex="-1"></a><span class="fu">str</span>(microbes)</span></code></pre></div>
 <pre><code>&#39;data.frame&#39;:   5 obs. of  8 variables:
  $ cellCountSampleID: chr  &quot;TECR.SS.20210505.CC&quot; &quot;TECR.SS.20210601.CC&quot; &quot;TECR.SS.20210714.CC&quot; &quot;TECR.SS.20210803.CC&quot; ...
  $ siteID           : chr  &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; ...
@@ -1553,10 +1572,11 @@ will need are <code>collectDate</code> to match with the measurements in
 <code>surfwater</code> and the <code>cells_ml</code> column which gives
 the number of microbial cells per ml.</p>
 <p>Which time points were water samples collected?</p>
-<div class="sourceCode" id="cb230"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="#cb230-1" aria-hidden="true" tabindex="-1"></a>microbes<span class="sc">$</span>collectDate</span></code></pre></div>
-<pre><code>[1] &quot;2021-05-05 16:40:00&quot; &quot;2021-06-01 18:46:00&quot; &quot;2021-07-14 16:20:00&quot;
-[4] &quot;2021-08-03 17:09:00&quot; &quot;2021-09-01 17:09:00&quot;</code></pre>
+<div class="sourceCode" id="cb227"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="#cb227-1" tabindex="-1"></a>microbes<span class="sc">$</span>collectDate</span></code></pre></div>
+<pre><code>[1] &quot;2021-05-05 16:40:00&quot; &quot;2021-06-01 18:46:00&quot;
+[3] &quot;2021-07-14 16:20:00&quot; &quot;2021-08-03 17:09:00&quot;
+[5] &quot;2021-09-01 17:09:00&quot;</code></pre>
 <p>But wait, each row in <code>surfwater</code> represents a 30-minute
 average beginning at the time in the column <code>startDateTime</code>
 and ending in the column <code>endDateTime</code>. How can we match
@@ -1566,75 +1586,81 @@ defining a set of values to match with the <code>startDateTime</code>
 column which would ensure that the collection dates fall within the
 30-minute time interval. We can do this because we know that each time
 interval begins on the hour or half hour:</p>
-<div class="sourceCode" id="cb232"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain hour</span></span>
-<span id="cb232-2"><a href="#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">hour</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="#cb229-1" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain hour</span></span>
+<span id="cb229-2"><a href="#cb229-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">hour</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
 <pre><code>
-  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19 
-428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 
- 20  21  22  23 
-428 428 428 428 </code></pre>
-<div class="sourceCode" id="cb234"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain minute of the hour</span></span>
-<span id="cb234-2"><a href="#cb234-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">minute</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
+  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15 
+428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 
+ 16  17  18  19  20  21  22  23 
+428 428 428 428 428 428 428 428 </code></pre>
+<div class="sourceCode" id="cb231"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="#cb231-1" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain minute of the hour</span></span>
+<span id="cb231-2"><a href="#cb231-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">minute</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
 <pre><code>
    0   30 
 5136 5136 </code></pre>
-<div class="sourceCode" id="cb236"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain second of the hour</span></span>
-<span id="cb236-2"><a href="#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">second</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="#cb233-1" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain second of the hour</span></span>
+<span id="cb233-2"><a href="#cb233-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">second</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
 <pre><code>
     0 
 10272 </code></pre>
 <p>Thus, each start date should have the form:
 <code>YYYY-MM-DD HH:00:00</code> or
 <code>YYYY-MM-DD HH:30:00</code>.</p>
-<div class="sourceCode" id="cb238"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a set of startDateTimes that match the five collection</span></span>
-<span id="cb238-2"><a href="#cb238-2" aria-hidden="true" tabindex="-1"></a><span class="co"># dates in microbes</span></span>
-<span id="cb238-3"><a href="#cb238-3" aria-hidden="true" tabindex="-1"></a>these_dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;2021-05-05 16:30:00&quot;</span>,</span>
-<span id="cb238-4"><a href="#cb238-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;2021-06-01 18:30:00&quot;</span>,</span>
-<span id="cb238-5"><a href="#cb238-5" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;2021-07-14 16:00:00&quot;</span>,</span>
-<span id="cb238-6"><a href="#cb238-6" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;2021-08-03 17:00:00&quot;</span>,</span>
-<span id="cb238-7"><a href="#cb238-7" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;2021-09-01 17:00:00&quot;</span>)</span>
-<span id="cb238-8"><a href="#cb238-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-9"><a href="#cb238-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to a date-time class</span></span>
-<span id="cb238-10"><a href="#cb238-10" aria-hidden="true" tabindex="-1"></a>these_dates <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(these_dates)</span>
-<span id="cb238-11"><a href="#cb238-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-12"><a href="#cb238-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-13"><a href="#cb238-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset surfwater to only rows whose startDateTime column</span></span>
-<span id="cb238-14"><a href="#cb238-14" aria-hidden="true" tabindex="-1"></a><span class="co"># matches one of the dates in these_dates</span></span>
-<span id="cb238-15"><a href="#cb238-15" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(surfwater, startDateTime <span class="sc">%in%</span> these_dates)</span></code></pre></div>
-<pre><code>     siteID       startDateTime         endDateTime surfWaterTemp.mean
-1666   TECR 2021-05-05 16:30:00 2021-05-05 17:00:00              7.302
-2966   TECR 2021-06-01 18:30:00 2021-06-01 19:00:00             11.505
-5025   TECR 2021-07-14 16:00:00 2021-07-14 16:30:00             13.994
-5987   TECR 2021-08-03 17:00:00 2021-08-03 17:30:00             13.062
-7379   TECR 2021-09-01 17:00:00 2021-09-01 17:30:00             10.850
-     surfWaterNitrate.mean specificConductance.mean dissolvedOxygen.mean
-1666                   1.5                 33.16967                 9.44
-2966                   1.0                       NA                   NA
-5025                   2.7                       NA                   NA
-5987                   2.8                       NA                   NA
-7379                   0.8                       NA                   NA
-      pH.mean chlorophyll.mean turbidity.mean fDOM.mean month
-1666 7.400667            0.513       1.008667  25.43667     5
-2966       NA               NA             NA        NA     6
-5025       NA               NA             NA        NA     7
-5987       NA               NA             NA        NA     8
-7379       NA               NA             NA        NA     9</code></pre>
+<div class="sourceCode" id="cb235"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="#cb235-1" tabindex="-1"></a><span class="co"># Define a set of startDateTimes that match the five collection</span></span>
+<span id="cb235-2"><a href="#cb235-2" tabindex="-1"></a><span class="co"># dates in microbes</span></span>
+<span id="cb235-3"><a href="#cb235-3" tabindex="-1"></a>these_dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;2021-05-05 16:30:00&quot;</span>,</span>
+<span id="cb235-4"><a href="#cb235-4" tabindex="-1"></a>                 <span class="st">&quot;2021-06-01 18:30:00&quot;</span>,</span>
+<span id="cb235-5"><a href="#cb235-5" tabindex="-1"></a>                 <span class="st">&quot;2021-07-14 16:00:00&quot;</span>,</span>
+<span id="cb235-6"><a href="#cb235-6" tabindex="-1"></a>                 <span class="st">&quot;2021-08-03 17:00:00&quot;</span>,</span>
+<span id="cb235-7"><a href="#cb235-7" tabindex="-1"></a>                 <span class="st">&quot;2021-09-01 17:00:00&quot;</span>)</span>
+<span id="cb235-8"><a href="#cb235-8" tabindex="-1"></a></span>
+<span id="cb235-9"><a href="#cb235-9" tabindex="-1"></a><span class="co"># Convert to a date-time class</span></span>
+<span id="cb235-10"><a href="#cb235-10" tabindex="-1"></a>these_dates <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(these_dates)</span>
+<span id="cb235-11"><a href="#cb235-11" tabindex="-1"></a></span>
+<span id="cb235-12"><a href="#cb235-12" tabindex="-1"></a></span>
+<span id="cb235-13"><a href="#cb235-13" tabindex="-1"></a><span class="co"># Subset surfwater to only rows whose startDateTime column</span></span>
+<span id="cb235-14"><a href="#cb235-14" tabindex="-1"></a><span class="co"># matches one of the dates in these_dates</span></span>
+<span id="cb235-15"><a href="#cb235-15" tabindex="-1"></a><span class="fu">subset</span>(surfwater, startDateTime <span class="sc">%in%</span> these_dates)</span></code></pre></div>
+<pre><code>     siteID       startDateTime         endDateTime
+1666   TECR 2021-05-05 16:30:00 2021-05-05 17:00:00
+2966   TECR 2021-06-01 18:30:00 2021-06-01 19:00:00
+5025   TECR 2021-07-14 16:00:00 2021-07-14 16:30:00
+5987   TECR 2021-08-03 17:00:00 2021-08-03 17:30:00
+7379   TECR 2021-09-01 17:00:00 2021-09-01 17:30:00
+     surfWaterTemp.mean surfWaterNitrate.mean
+1666              7.302                   1.5
+2966             11.505                   1.0
+5025             13.994                   2.7
+5987             13.062                   2.8
+7379             10.850                   0.8
+     specificConductance.mean dissolvedOxygen.mean  pH.mean
+1666                 33.16967                 9.44 7.400667
+2966                       NA                   NA       NA
+5025                       NA                   NA       NA
+5987                       NA                   NA       NA
+7379                       NA                   NA       NA
+     chlorophyll.mean turbidity.mean fDOM.mean month
+1666            0.513       1.008667  25.43667     5
+2966               NA             NA        NA     6
+5025               NA             NA        NA     7
+5987               NA             NA        NA     8
+7379               NA             NA        NA     9</code></pre>
 <p>Once we have these data we can make a quick plot to compare microbial
 abundance to water quality. Let’s look at nitrate:</p>
-<div class="sourceCode" id="cb240"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the subsetted data to a new data frame</span></span>
-<span id="cb240-2"><a href="#cb240-2" aria-hidden="true" tabindex="-1"></a>microbe_wq_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, startDateTime <span class="sc">%in%</span> these_dates)</span>
-<span id="cb240-3"><a href="#cb240-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb240-4"><a href="#cb240-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Graph microbial cell counts (y axis) vs. nitrate concentration (x axis)</span></span>
-<span id="cb240-5"><a href="#cb240-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify axis labels with xlab and ylab arguments</span></span>
-<span id="cb240-6"><a href="#cb240-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> microbe_wq_data<span class="sc">$</span>surfWaterNitrate.mean,</span>
-<span id="cb240-7"><a href="#cb240-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> microbes<span class="sc">$</span>cells_ml,</span>
-<span id="cb240-8"><a href="#cb240-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Nitrate (umol per L)&quot;</span>,</span>
-<span id="cb240-9"><a href="#cb240-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Microbial cell density (num. per ml)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="#cb237-1" tabindex="-1"></a><span class="co"># Save the subsetted data to a new data frame</span></span>
+<span id="cb237-2"><a href="#cb237-2" tabindex="-1"></a>microbe_wq_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, startDateTime <span class="sc">%in%</span> these_dates)</span>
+<span id="cb237-3"><a href="#cb237-3" tabindex="-1"></a></span>
+<span id="cb237-4"><a href="#cb237-4" tabindex="-1"></a><span class="co"># Graph microbial cell counts (y axis) vs. nitrate concentration (x axis)</span></span>
+<span id="cb237-5"><a href="#cb237-5" tabindex="-1"></a><span class="co"># Specify axis labels with xlab and ylab arguments</span></span>
+<span id="cb237-6"><a href="#cb237-6" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> microbe_wq_data<span class="sc">$</span>surfWaterNitrate.mean,</span>
+<span id="cb237-7"><a href="#cb237-7" tabindex="-1"></a>     <span class="at">y =</span> microbes<span class="sc">$</span>cells_ml,</span>
+<span id="cb237-8"><a href="#cb237-8" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Nitrate (umol per L)&quot;</span>,</span>
+<span id="cb237-9"><a href="#cb237-9" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Microbial cell density (num. per ml)&quot;</span>)</span></code></pre></div>
 <p><img src="images/rmd-04-unnamed-chunk-66-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p>Congrats! You’ve learned a lot this lesson. Now its time to move on
 and practice with the Exercises.</p>
@@ -1646,36 +1672,38 @@ the <code>lubridate</code> packages that defines a time interval class
 that occurs between two points in time. This time interval class will
 allow us to check whether each microbial sampling time point falls
 within each interval.</p>
-<div class="sourceCode" id="cb241"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert collectDate to a date-time</span></span>
-<span id="cb241-2"><a href="#cb241-2" aria-hidden="true" tabindex="-1"></a>microbes<span class="sc">$</span>collectDate <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(microbes<span class="sc">$</span>collectDate)</span>
-<span id="cb241-3"><a href="#cb241-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb241-4"><a href="#cb241-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert endDateTime to a date-time class</span></span>
-<span id="cb241-5"><a href="#cb241-5" aria-hidden="true" tabindex="-1"></a>surfwater<span class="sc">$</span>endDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(surfwater<span class="sc">$</span>endDateTime)</span>
-<span id="cb241-6"><a href="#cb241-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb241-7"><a href="#cb241-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a new column in surfwater that records the time interval </span></span>
-<span id="cb241-8"><a href="#cb241-8" aria-hidden="true" tabindex="-1"></a><span class="co"># for each measurement</span></span>
-<span id="cb241-9"><a href="#cb241-9" aria-hidden="true" tabindex="-1"></a>surfwater<span class="sc">$</span>timeInterval <span class="ot">&lt;-</span> <span class="fu">interval</span>(<span class="at">start =</span> surfwater<span class="sc">$</span>startDateTime,</span>
-<span id="cb241-10"><a href="#cb241-10" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">end =</span> surfwater<span class="sc">$</span>endDateTime)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="#cb238-1" tabindex="-1"></a><span class="co"># Convert collectDate to a date-time</span></span>
+<span id="cb238-2"><a href="#cb238-2" tabindex="-1"></a>microbes<span class="sc">$</span>collectDate <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(microbes<span class="sc">$</span>collectDate)</span>
+<span id="cb238-3"><a href="#cb238-3" tabindex="-1"></a></span>
+<span id="cb238-4"><a href="#cb238-4" tabindex="-1"></a><span class="co"># Convert endDateTime to a date-time class</span></span>
+<span id="cb238-5"><a href="#cb238-5" tabindex="-1"></a>surfwater<span class="sc">$</span>endDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(surfwater<span class="sc">$</span>endDateTime)</span>
+<span id="cb238-6"><a href="#cb238-6" tabindex="-1"></a></span>
+<span id="cb238-7"><a href="#cb238-7" tabindex="-1"></a><span class="co"># Define a new column in surfwater that records the time interval </span></span>
+<span id="cb238-8"><a href="#cb238-8" tabindex="-1"></a><span class="co"># for each measurement</span></span>
+<span id="cb238-9"><a href="#cb238-9" tabindex="-1"></a>surfwater<span class="sc">$</span>timeInterval <span class="ot">&lt;-</span> <span class="fu">interval</span>(<span class="at">start =</span> surfwater<span class="sc">$</span>startDateTime,</span>
+<span id="cb238-10"><a href="#cb238-10" tabindex="-1"></a>                                   <span class="at">end =</span> surfwater<span class="sc">$</span>endDateTime)</span></code></pre></div>
 <p>If you click on surfwater in the Environment panel, you should see a
 new column named timeInterval of class ‘Interval’.</p>
 <p>Now we can subset the row of <code>surfwater</code> whose
 <code>timeInterval</code> include the first microbial water sample
 time.</p>
-<div class="sourceCode" id="cb242"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the time point that we are interested in</span></span>
-<span id="cb242-2"><a href="#cb242-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and print the value of this_time</span></span>
-<span id="cb242-3"><a href="#cb242-3" aria-hidden="true" tabindex="-1"></a>(this_time <span class="ot">&lt;-</span> microbes[<span class="dv">1</span>, <span class="st">&quot;collectDate&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="#cb239-1" tabindex="-1"></a><span class="co"># Define the time point that we are interested in</span></span>
+<span id="cb239-2"><a href="#cb239-2" tabindex="-1"></a><span class="co"># and print the value of this_time</span></span>
+<span id="cb239-3"><a href="#cb239-3" tabindex="-1"></a>(this_time <span class="ot">&lt;-</span> microbes[<span class="dv">1</span>, <span class="st">&quot;collectDate&quot;</span>])</span></code></pre></div>
 <pre><code>[1] &quot;2021-05-05 16:40:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb244"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset to rows whose time interval contains this_time</span></span>
-<span id="cb244-2"><a href="#cb244-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(surfwater, this_time <span class="sc">%within%</span> timeInterval)</span></code></pre></div>
-<pre><code>     siteID       startDateTime         endDateTime surfWaterTemp.mean
-1666   TECR 2021-05-05 16:30:00 2021-05-05 17:00:00              7.302
-     surfWaterNitrate.mean specificConductance.mean dissolvedOxygen.mean
-1666                   1.5                 33.16967                 9.44
-      pH.mean chlorophyll.mean turbidity.mean fDOM.mean month
-1666 7.400667            0.513       1.008667  25.43667     5
+<div class="sourceCode" id="cb241"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="#cb241-1" tabindex="-1"></a><span class="co"># Subset to rows whose time interval contains this_time</span></span>
+<span id="cb241-2"><a href="#cb241-2" tabindex="-1"></a><span class="fu">subset</span>(surfwater, this_time <span class="sc">%within%</span> timeInterval)</span></code></pre></div>
+<pre><code>     siteID       startDateTime         endDateTime
+1666   TECR 2021-05-05 16:30:00 2021-05-05 17:00:00
+     surfWaterTemp.mean surfWaterNitrate.mean
+1666              7.302                   1.5
+     specificConductance.mean dissolvedOxygen.mean  pH.mean
+1666                 33.16967                 9.44 7.400667
+     chlorophyll.mean turbidity.mean fDOM.mean month
+1666            0.513       1.008667  25.43667     5
                                          timeInterval
 1666 2021-05-05 16:30:00 UTC--2021-05-05 17:00:00 UTC</code></pre>
 </div>
@@ -1706,16 +1734,16 @@ and <code>%in%</code></li>
 <p><strong>4.1</strong></p>
 <p>Determine the class and structure of each of the following
 objects:</p>
-<div class="sourceCode" id="cb246"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="#cb246-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&quot;4&quot;</span>)</span>
-<span id="cb246-2"><a href="#cb246-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb246-3"><a href="#cb246-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">NA</span>)</span>
-<span id="cb246-4"><a href="#cb246-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb246-5"><a href="#cb246-5" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">factor</span>(A)</span>
-<span id="cb246-6"><a href="#cb246-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb246-7"><a href="#cb246-7" aria-hidden="true" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">A =</span> A, <span class="at">B =</span> B, <span class="at">C =</span> C)</span>
-<span id="cb246-8"><a href="#cb246-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb246-9"><a href="#cb246-9" aria-hidden="true" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(A, B, C)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="#cb243-1" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&quot;4&quot;</span>)</span>
+<span id="cb243-2"><a href="#cb243-2" tabindex="-1"></a></span>
+<span id="cb243-3"><a href="#cb243-3" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">NA</span>)</span>
+<span id="cb243-4"><a href="#cb243-4" tabindex="-1"></a></span>
+<span id="cb243-5"><a href="#cb243-5" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">factor</span>(A)</span>
+<span id="cb243-6"><a href="#cb243-6" tabindex="-1"></a></span>
+<span id="cb243-7"><a href="#cb243-7" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">A =</span> A, <span class="at">B =</span> B, <span class="at">C =</span> C)</span>
+<span id="cb243-8"><a href="#cb243-8" tabindex="-1"></a></span>
+<span id="cb243-9"><a href="#cb243-9" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(A, B, C)</span></code></pre></div>
 <p><strong>4.2</strong></p>
 <ol style="list-style-type: decimal">
 <li>What is the data type of object <code>A</code> in the code above?
@@ -1744,12 +1772,12 @@ of the levels so that the the levels are in descending numeric order
 <p><strong>4.8</strong></p>
 <p>What class are each of the following objects? How are these classes
 similar? How are they different?</p>
-<div class="sourceCode" id="cb247"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="#cb247-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">2.8</span>, <span class="dv">5</span>)</span>
-<span id="cb247-2"><a href="#cb247-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb247-3"><a href="#cb247-3" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(X, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb247-4"><a href="#cb247-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb247-5"><a href="#cb247-5" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">array</span>(X, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="#cb244-1" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">2.8</span>, <span class="dv">5</span>)</span>
+<span id="cb244-2"><a href="#cb244-2" tabindex="-1"></a></span>
+<span id="cb244-3"><a href="#cb244-3" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(X, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb244-4"><a href="#cb244-4" tabindex="-1"></a></span>
+<span id="cb244-5"><a href="#cb244-5" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">array</span>(X, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>))</span></code></pre></div>
 <p><strong>4.9</strong></p>
 <ol style="list-style-type: decimal">
 <li>Using the objects above, write one line of code that calculates the
@@ -1816,7 +1844,8 @@ class="citation">Zimmerman et al. (2019)</span></a> episodes 4, 5, and
 <!--### Additional Resources-->
 <div id="cited-references" class="section level3 unnumbered">
 <h3 class="unnumbered">Cited References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 <div id="ref-NEON-microbialcellcounts" class="csl-entry">
 National Ecological Observatory Network (NEON). 2023a. <span>“Surface
 Water Microbe Cell Count (DP1.20138.001).”</span> National Ecological

@@ -11,7 +11,7 @@
 
 
 
-<title>Exercises</title>
+<title>00-lesson-template.knit</title>
 
 <script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -42,9 +42,129 @@
 
 
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -296,24 +416,125 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Exercises</h1>
 
 </div>
 
 
-<p>This page provides links to all exercise files. This is a useful way
-to access individual exercise files if you need to add them to the
-student workbook RStudio project.</p>
-<p>NOTE: THE FOLLOWING LINKS DO NOT WORK YET. If you need the exercises
-files, download the workbook again.</p>
-<p>Chp. 1. Navigating your computer exercises are <a
-href="exercises/01">here</a>.</p>
-<p>Chp. 2. Intro to R and RStudio exercises are <a
-href="exercises/02">here</a>.</p>
-<p>Chp. 3. Navigating your computer exercises are <a
-href="exercises/03">here</a>.</p>
-<p>Chp. 4. Navigating your computer exercises are <a
-href="exercises/04">here</a>.</p>
+<div id="chapter-2.-intro-to-r-and-rstudio"
+class="section level1 tabset">
+<h1 class="tabset">Chapter 2. Intro to R and RStudio</h1>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<blockquote>
+<p>MOTIVATOR</p>
+</blockquote>
+<p>Brief description of the contents of this lesson.</p>
+<div id="what-we-will-learn" class="section level3">
+<h3>What we will learn</h3>
+<p>In this lesson learners will:</p>
+<ul>
+<li>discover why so many scientists use R</li>
+<li>describe the contents of the windows in an RStudio session</li>
+<li>install and load packages in R</li>
+<li>write and save a code script in a project folder</li>
+<li>read and view tabular data from a file</li>
+<li>use the console for mathematical calculations</li>
+<li>state the rules for assigning variables</li>
+<li>work with vectors</li>
+<li>learn how to get help and troubleshoot error messages</li>
+</ul>
+<div id="key-terms-commands" class="section level4">
+<h4>Key Terms &amp; Commands</h4>
+<ul>
+<li>term 1</li>
+<li>term 2</li>
+<li><code>function1()</code></li>
+</ul>
+</div>
+</div>
+<div id="prerequisites" class="section level3">
+<h3>Prerequisites</h3>
+<p>Describe any data sets or packages that learners need to download or
+install before proceeding.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Read in a data file from the data folder included with the student workbook</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/gapminder_data.csv&quot;</span>)</span></code></pre></div>
+<pre><code>Warning in file(file, &quot;rt&quot;): cannot open file
+&#39;data/gapminder_data.csv&#39;: No such file or directory</code></pre>
+<pre><code>Error in file(file, &quot;rt&quot;): cannot open the connection</code></pre>
+</div>
+</div>
+<div id="lesson" class="section level2">
+<h2>Lesson</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># This is an R code block that will execute any code inside and show the results.</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="dv">5</span><span class="sc">+</span><span class="dv">3</span></span></code></pre></div>
+<pre><code>[1] 8</code></pre>
+<div id="section-1" class="section level3">
+<h3>Section 1</h3>
+<div class="challenge">
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+
+</div>
+</details>
+</div>
+<p><br></p>
+</div>
+<div id="section-2" class="section level3">
+<h3>Section 2</h3>
+<p>Callouts are formatted in the style.css file.</p>
+<div class="callout-trick">
+
+</div>
+<div class="callout-tip">
+
+</div>
+<div class="callout-important">
+
+</div>
+</div>
+</div>
+<div id="synthesis" class="section level2">
+<h2>Synthesis</h2>
+<div id="putting-it-all-together" class="section level3">
+<h3>Putting it all together</h3>
+</div>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<p>After completing these exercises, learners will be able to use R and
+RStudio to:</p>
+<ol style="list-style-type: decimal">
+<li>execute simple mathematical calculations</li>
+<li>assign and manipulate variables</li>
+<li>assign, subset and manipulate data in a vector</li>
+<li>execute vector algebra</li>
+<li>write and save a code script</li>
+<li>write comments in a code script</li>
+<li>read a data table from a file</li>
+<li>access and understand a function’s documentation page</li>
+</ol>
+<p>Number all exercises using the module number. Include starter code in
+the /exercises folder if appropriate.</p>
+<p><strong>2.1</strong></p>
+<p><strong>2.2</strong></p>
+</div>
+<div id="sources-and-resources" class="section level2">
+<h2>Sources and Resources</h2>
+<p>This lesson was adapted from XX by Jes Coyle.</p>
+<div id="additional-resources" class="section level3">
+<h3>Additional Resources</h3>
+</div>
+<div id="cited-references" class="section level3">
+<h3>Cited References</h3>
+<div id="refs">
+
+</div>
+</div>
+</div>
+</div>
 
 <hr>
 <p>Introduction to Computing in R with NEON</p>

@@ -421,9 +421,9 @@ $(document).ready(function () {
 </div>
 
 
-<div id="chapter-7.-controlling-program-flow"
+<div id="chapter-8.-controlling-program-flow"
 class="section level1 tabset">
-<h1 class="tabset">Chapter 7. Controlling program flow</h1>
+<h1 class="tabset">Chapter 8. Controlling program flow</h1>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <blockquote>
@@ -476,7 +476,7 @@ prerequisites therein.</p>
 <p>Before you begin:</p>
 <ol style="list-style-type: decimal">
 <li>Open the R-course-NEON-workbook RStudio project.</li>
-<li>Create a new R script named lesson_07_code.R in the lesson-code
+<li>Create a new R script named lesson_08_code.R in the lesson-code
 folder of the student workbook.</li>
 <li>Whenever you see R code like this:</li>
 </ol>
@@ -871,9 +871,9 @@ an output object, in this case a matrix.</p>
 <span id="cb47-12"><a href="#cb47-12" tabindex="-1"></a>}</span>
 <span id="cb47-13"><a href="#cb47-13" tabindex="-1"></a></span>
 <span id="cb47-14"><a href="#cb47-14" tabindex="-1"></a>output_vector</span></code></pre></div>
-<pre><code> [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot;
-[13] &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot;
-[25] &quot;5 e&quot;</code></pre>
+<pre><code> [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot;
+[11] &quot;3 a&quot; &quot;3 b&quot; &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot;
+[21] &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot; &quot;5 e&quot;</code></pre>
 <p>This approach can be useful, but ‘growing your results’ (building the
 result object incrementally) is computationally inefficient, so avoid it
 when you are iterating through a lot of values.</p>
@@ -1192,9 +1192,10 @@ temperature difference from all rows less than this index.</p>
 <span id="cb70-9"><a href="#cb70-9" tabindex="-1"></a></span>
 <span id="cb70-10"><a href="#cb70-10" tabindex="-1"></a><span class="co"># Return the temperature difference for all rows preceding first_gt5</span></span>
 <span id="cb70-11"><a href="#cb70-11" tabindex="-1"></a>tempdiff[<span class="dv">1</span><span class="sc">:</span>(first_gt5<span class="dv">-1</span>)]</span></code></pre></div>
-<pre><code> [1] 1.104 1.332 1.458 1.716 1.734 1.210 1.664 1.544 1.164 0.635 0.079 0.277
-[13] 0.783 0.946 0.914 0.772 0.605 0.561 0.600 0.400 0.521 0.396 0.482 0.473
-[25] 0.420 0.156 1.584 2.424 4.248 2.697 3.350</code></pre>
+<pre><code> [1] 1.104 1.332 1.458 1.716 1.734 1.210 1.664 1.544 1.164 0.635
+[11] 0.079 0.277 0.783 0.946 0.914 0.772 0.605 0.561 0.600 0.400
+[21] 0.521 0.396 0.482 0.473 0.420 0.156 1.584 2.424 4.248 2.697
+[31] 3.350</code></pre>
 <p>You could even return this result as a dataframe:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">row =</span> <span class="dv">1</span><span class="sc">:</span>(first_gt5<span class="dv">-1</span>), </span>
 <span id="cb72-2"><a href="#cb72-2" tabindex="-1"></a>           <span class="at">temp_difference =</span> tempdiff[<span class="dv">1</span><span class="sc">:</span>(first_gt5<span class="dv">-1</span>)])</span></code></pre></div>
@@ -1232,6 +1233,9 @@ temperature difference from all rows less than this index.</p>
 31  31           3.350</code></pre>
 </div>
 </div>
+</div>
+<div id="synthesis" class="section level2">
+<h2>Synthesis</h2>
 <div id="putting-it-all-together" class="section level3">
 <h3>Putting it all together</h3>
 <p>We’re going to write a script that plots the average monthly
@@ -1661,7 +1665,7 @@ loops</li>
 </ol>
 <p>Save each of these exercises in a new R script named with the
 exercise number.</p>
-<p><strong>7.1</strong></p>
+<p><strong>8.1</strong></p>
 <p>Use the <code>ifelse()</code> function on the <code>TSW_30min</code>
 data frame to create a factor with two levels that records the
 temperature difference between the maximum and minimum temperature
@@ -1678,7 +1682,7 @@ occur at each level of this factor.</p>
 temp_diff_fact  CARI  MART  SYCA  TECR
           low  12882 14334  4966 13978
           high   407   115  5020   370</code></pre>
-<p><strong>7.2</strong></p>
+<p><strong>8.2</strong></p>
 <p>Use the <code>ifelse()</code> function on the <code>TSW_30min</code>
 data frame to create a factor with three levels that records the
 temperature difference between then maximum and minimum temperature
@@ -1733,7 +1737,7 @@ month that occur at each level of this factor.</p>
   8  2846     56    0
   9  2720      7    0
   10 2757    142   15</code></pre>
-<p><strong>7.3</strong></p>
+<p><strong>8.3</strong></p>
 <p>Write a <code>for()</code> loop that iterates over the sites in
 <code>TSW_30min</code> and prints the number of erroneous data points.
 The loop should print both the site name and the number of rows with
@@ -1742,10 +1746,10 @@ The loop should print both the site name and the number of rows with
 [1] &quot;Site MART has 3397 bad data points.&quot;
 [1] &quot;Site TECR has 581 bad data points.&quot;
 [1] &quot;Site CARI has 2537 bad data points.&quot;</code></pre>
-<p><strong>7.4</strong></p>
-<p>Solve exercise 7.3 without subsetting <code>TSW_30min</code> inside
+<p><strong>8.4</strong></p>
+<p>Solve exercise 8.3 without subsetting <code>TSW_30min</code> inside
 the for loop.</p>
-<p><strong>7.5</strong></p>
+<p><strong>8.5</strong></p>
 <p>Each row of <code>TSW_30min</code> aggregates 30 minutes of data from
 a sensor that collects temperature measurements once per second. This
 means that there should be <code>60 x 30 = 1800</code> measurements used
@@ -1816,20 +1820,20 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb1
 <span id="cb105-33"><a href="#cb105-33" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
 <span id="cb105-34"><a href="#cb105-34" tabindex="-1"></a>  <span class="fu">return</span>(vals)</span>
 <span id="cb105-35"><a href="#cb105-35" tabindex="-1"></a>}</span></code></pre></div>
-<p><strong>7.6</strong></p>
+<p><strong>8.6</strong></p>
 <p>Modify the <code>calc_monthly_avg()</code> function to return
 temperature values in fahrenheit or kelvin, based on an argument
 provided to the function. By default the function should return values
 in Celsius.</p>
 <p>HINT: Use a conditional statement.</p>
-<p><strong>7.7</strong></p>
+<p><strong>8.7</strong></p>
 <p>Create a new function <code>calc_monthly_summary()</code> based on
 the <code>calc_monthly_avg()</code> function that will return the the
 max, min or mean temperature values for a given month and site, based on
 an argument provided to the function. By default the function should
 return the mean values.</p>
 <p>HINT: Use a conditional statement.</p>
-<p><strong>7.8</strong></p>
+<p><strong>8.8</strong></p>
 <p>Modify the <code>calc_monthly_avg()</code> function so that the user
 can specify an argument for which sensors the average should be
 calculated from: “upper” (corresponding to horizontal position 101 or

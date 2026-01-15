@@ -13,7 +13,7 @@
 
 <title>chp-functions.knit</title>
 
-<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -51,6 +51,7 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -147,6 +148,7 @@ code span.wa { color: #008000; font-weight: bold; } /* Warning */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -472,7 +474,7 @@ any prerequisites therein.</p>
 folder of the student workbook.</li>
 <li>Whenever you see R code like this:</li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Type</span> (or copy) this into your R script. Then run it <span class="cf">in</span> the Console.</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">Type</span> (or copy) this into your R script. Then run it <span class="cf">in</span> the Console.</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Whenever you see a challenge like this:</li>
 </ol>
@@ -484,7 +486,7 @@ your answer by clicking:</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>The code that solves the challenge will appear here.</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>The code that solves the challenge will appear here.</span></code></pre></div>
 <p>Along with an explanation.</p>
 </div>
 </details>
@@ -513,17 +515,17 @@ arguments:</p>
 <p><code>function_name(argument1, argument2)</code></p>
 <p>You have already met several functions in R. Do you remember what
 each of these functions do?</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>tempdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv&quot;</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(tempdata)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>tempdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv&quot;</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="fu">rm</span>(tempdata)</span></code></pre></div>
 <p>Some functions will <strong>return</strong> a value or object that is
 either printed to the console or can be saved to a new object. Other
 functions perform a set of operations without returning any values or
@@ -536,23 +538,23 @@ returned?</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># returns a single number</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># returns a single number</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) </span></code></pre></div>
 <pre><code>[1] 21</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># returns a single number</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># returns a single number</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) </span></code></pre></div>
 <pre><code>[1] 5.5</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># returns a vector</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># returns a vector</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>) </span></code></pre></div>
 <pre><code>[1] 2 4 6</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># returns a vector</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># returns a vector</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">2</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>) </span></code></pre></div>
 <pre><code>[1]  2  4  6  8 10</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># returns a data frame (which we saved to a new object tempdata)</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>tempdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv&quot;</span>) </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># does not return any object, but removes the object tempdata</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(tempdata) </span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># returns a data frame (which we saved to a new object tempdata)</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>tempdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv&quot;</span>) </span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># does not return any object, but removes the object tempdata</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="fu">rm</span>(tempdata) </span></code></pre></div>
 </div>
 </details>
 </div>
@@ -560,7 +562,7 @@ returned?</p>
 <p>The help page of a function tells us what type of object a function
 should return and the names of the arguments it accepts. Let’s read the
 help file for <code>read.csv()</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>?read.csv</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>?read.csv</span></code></pre></div>
 <p>The Description field tells us that we should expect this function to
 create a data frame. In the Usage section we see several related
 functions for reading tabular data files. The most general version of
@@ -625,11 +627,11 @@ this infromation to answer the following:</p>
 <li>What arguments does this function take?</li>
 <li>What will be the output of each of the following:</li>
 </ol>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">2</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">2</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="at">length.out =</span> <span class="dv">4</span>, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">2</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="fu">rep</span>(<span class="at">length.out =</span> <span class="dv">4</span>, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
@@ -646,11 +648,11 @@ times to repeat each element of <code>x</code><br />
 elements in the vector to be returned.<br />
       <code>each</code> = an integer specifying the number of times to
 repeat each element of <code>x</code></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>[1] 1 2 3 1 2 3</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>[1] 1 1 2 2 3 3</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="at">length.out =</span> <span class="dv">4</span>, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">rep</span>(<span class="at">length.out =</span> <span class="dv">4</span>, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>[1] 1 2 3 1</code></pre>
 </div>
 </details>
@@ -664,35 +666,35 @@ operate on element of a vector (and return a vector of the same length).
 This makes writing code more concise, easy to read, and less error
 prone.</p>
 <p>You are actually already familiar with this behavior:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>[1] 2 4 6 8</code></pre>
 <p>The multiplication happened to each element of the vector.</p>
 <p>We can also add two vectors together:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">9</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> y</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">9</span></span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>x <span class="sc">+</span> y</span></code></pre></div>
 <pre><code>[1]  7  9 11 13</code></pre>
 <p>Each element of <code>x</code> was added to its corresponding element
 of <code>y</code>:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">:</span>  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>y<span class="sc">:</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="sc">---------------</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">7</span>  <span class="dv">9</span> <span class="dv">11</span> <span class="dv">13</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>x<span class="sc">:</span>  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>    <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>y<span class="sc">:</span>  <span class="dv">6</span>  <span class="dv">7</span>  <span class="dv">8</span>  <span class="dv">9</span></span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a><span class="sc">---------------</span></span>
+<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>    <span class="dv">7</span>  <span class="dv">9</span> <span class="dv">11</span> <span class="dv">13</span></span></code></pre></div>
 <p>Logical comparisons and many functions are also vectorized:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>[1] FALSE FALSE  TRUE  TRUE</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">==</span> <span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>x <span class="sc">==</span> <span class="dv">4</span></span></code></pre></div>
 <pre><code>[1] FALSE FALSE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>x <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div>
 <pre><code>[1] TRUE TRUE TRUE TRUE</code></pre>
 <p>Most base functions also operate element-wise on vectors:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span></span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="fu">log</span>(x)</span></code></pre></div>
 <pre><code>[1] 0.0000000 0.6931472 1.0986123 1.3862944</code></pre>
 <p>Vectorized operations work element-wise on matrices:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">4</span>)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>m <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>m <span class="sc">*</span> <span class="sc">-</span><span class="dv">1</span></span></code></pre></div>
 <pre><code>     [,1] [,2] [,3] [,4]
 [1,]   -1   -4   -7  -10
 [2,]   -2   -5   -8  -11
@@ -702,52 +704,52 @@ of <code>y</code>:</p>
 <p>The operator <code>*</code> gives you element-wise multiplication! To
 do real matrix multiplication, we need to use the <code>%*%</code>
 operator:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">%*%</span> <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a>m <span class="sc">%*%</span> <span class="fu">matrix</span>(<span class="dv">1</span>, <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>     [,1]
 [1,]   22
 [2,]   26
 [3,]   30</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">nrow=</span><span class="dv">1</span>) <span class="sc">%*%</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">nrow=</span><span class="dv">1</span>) <span class="sc">%*%</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>     [,1]
 [1,]   30</code></pre>
 </div>
 <div class="challenge">
 <p>Given the following matrix:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">4</span>)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow=</span><span class="dv">3</span>, <span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a>m</span></code></pre></div>
 <pre><code>     [,1] [,2] [,3] [,4]
 [1,]    1    4    7   10
 [2,]    2    5    8   11
 [3,]    3    6    9   12</code></pre>
 <p>Write down what you think will happen when you run:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">^</span> <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>m <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>m <span class="sc">&gt;</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>m <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a>m <span class="sc">^</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a>m <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" tabindex="-1"></a>m <span class="sc">&gt;</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" tabindex="-1"></a>m <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">^</span> <span class="sc">-</span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a>m <span class="sc">^</span> <span class="sc">-</span><span class="dv">1</span></span></code></pre></div>
 <pre><code>          [,1]      [,2]      [,3]       [,4]
 [1,] 1.0000000 0.2500000 0.1428571 0.10000000
 [2,] 0.5000000 0.2000000 0.1250000 0.09090909
 [3,] 0.3333333 0.1666667 0.1111111 0.08333333</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>m <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>     [,1] [,2] [,3] [,4]
 [1,]    1    4    7   10
 [2,]    0    0    0    0
 [3,]   -3   -6   -9  -12</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">&gt;</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a>m <span class="sc">&gt;</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>      [,1]  [,2]  [,3]  [,4]
 [1,]  TRUE FALSE  TRUE FALSE
 [2,] FALSE  TRUE FALSE  TRUE
 [3,]  TRUE FALSE  TRUE FALSE</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>m <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a>m <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>     [,1] [,2] [,3] [,4]
 [1,]    1    8   -7    0
 [2,]    0    5   16  -11
@@ -759,7 +761,7 @@ operator:</p>
 <div class="challenge">
 <p>We’re interested in looking at the sum of the following sequence of
 fractions:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">3</span><span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> ... <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>(n<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">3</span><span class="sc">^</span><span class="dv">2</span>) <span class="sc">+</span> ... <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>(n<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <p>This would be tedious to type out, and impossible for high values of
 n. Use vectorization to compute x when n=100.</p>
 <details>
@@ -767,13 +769,13 @@ n. Use vectorization to compute x when n=100.</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sum of the inverse squares of the numbers from 1 to 100</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="co"># Sum of the inverse squares of the numbers from 1 to 100</span></span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>[1] 1.634984</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, for any n:</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Sum of the inverse squares of the numbers from 1 to n</span></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">:</span>n)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="co"># Alternatively, for any n:</span></span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a><span class="co"># Sum of the inverse squares of the numbers from 1 to n</span></span>
+<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb54-4"><a href="#cb54-4" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span><span class="sc">:</span>n)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>[1] 1.644834</code></pre>
 </div>
 </details>
@@ -786,19 +788,19 @@ through a process known as <strong>recycling</strong>. This process
 automatically repeats the smaller vector until it matches the length of
 the larger vector. R will provide a warning if the larger vector is not
 a multiple of the smaller vector.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> y</span></code></pre></div>
-<pre><code>Warning in x + y: longer object length is not a multiple of shorter object
-length</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb56-3"><a href="#cb56-3" tabindex="-1"></a>x <span class="sc">+</span> y</span></code></pre></div>
+<pre><code>Warning in x + y: longer object length is not a multiple of
+shorter object length</code></pre>
 <pre><code>[1] 2 4 6 5 7 9 8</code></pre>
 <p>Vector <code>x</code> was recycled to match the length of vector
 <code>y</code></p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a> x<span class="sc">:</span>  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">1</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>     <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span></span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a> y<span class="sc">:</span>  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span></span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a> <span class="sc">-----------------------</span></span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>     <span class="dv">2</span>  <span class="dv">4</span>  <span class="dv">6</span>  <span class="dv">5</span>  <span class="dv">7</span>  <span class="dv">9</span>  <span class="dv">8</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a> x<span class="sc">:</span>  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">1</span></span>
+<span id="cb59-2"><a href="#cb59-2" tabindex="-1"></a>     <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span>  <span class="sc">+</span></span>
+<span id="cb59-3"><a href="#cb59-3" tabindex="-1"></a> y<span class="sc">:</span>  <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span></span>
+<span id="cb59-4"><a href="#cb59-4" tabindex="-1"></a> <span class="sc">-----------------------</span></span>
+<span id="cb59-5"><a href="#cb59-5" tabindex="-1"></a>     <span class="dv">2</span>  <span class="dv">4</span>  <span class="dv">6</span>  <span class="dv">5</span>  <span class="dv">7</span>  <span class="dv">9</span>  <span class="dv">8</span></span></code></pre></div>
 </div>
 </div>
 <div id="writing-your-own-functions" class="section level3">
@@ -813,20 +815,20 @@ typically used to save code scripts for analyses (if you don’t have thie
 directory, create it). We will use this script to save functions that
 could be useful across several analyses.</p>
 <p>The general structure of a function is:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>my_function <span class="ot">&lt;-</span> <span class="cf">function</span>(arguments) {</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># perform action</span></span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return value</span></span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a>my_function <span class="ot">&lt;-</span> <span class="cf">function</span>(arguments) {</span>
+<span id="cb60-2"><a href="#cb60-2" tabindex="-1"></a>  <span class="co"># perform action</span></span>
+<span id="cb60-3"><a href="#cb60-3" tabindex="-1"></a>  <span class="co"># return value</span></span>
+<span id="cb60-4"><a href="#cb60-4" tabindex="-1"></a>}</span></code></pre></div>
 <p>Let’s define a function <code>fahr_to_kelvin()</code> that converts
 temperatures from Fahrenheit to Kelvin. Write this function in your
 <code>functions.R</code> script.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>fahr_to_kelvin <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate temp in kelvin</span></span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  kelvin <span class="ot">&lt;-</span> ((temp <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="dv">9</span>)) <span class="sc">+</span> <span class="fl">273.15</span></span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the value of kelvin</span></span>
-<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(kelvin)</span>
-<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a>fahr_to_kelvin <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
+<span id="cb61-2"><a href="#cb61-2" tabindex="-1"></a>  <span class="co"># Calculate temp in kelvin</span></span>
+<span id="cb61-3"><a href="#cb61-3" tabindex="-1"></a>  kelvin <span class="ot">&lt;-</span> ((temp <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="dv">9</span>)) <span class="sc">+</span> <span class="fl">273.15</span></span>
+<span id="cb61-4"><a href="#cb61-4" tabindex="-1"></a>  </span>
+<span id="cb61-5"><a href="#cb61-5" tabindex="-1"></a>  <span class="co"># Return the value of kelvin</span></span>
+<span id="cb61-6"><a href="#cb61-6" tabindex="-1"></a>  <span class="fu">return</span>(kelvin)</span>
+<span id="cb61-7"><a href="#cb61-7" tabindex="-1"></a>}</span></code></pre></div>
 <p>We define <code>fahr_to_kelvin()</code> by assigning it to the output
 of <code>function</code>. The list of argument names are contained
 within parentheses. Next, the body of the function–the statements that
@@ -860,22 +862,22 @@ the <strong>function name</strong>, <strong>arguments</strong>, and
 <p>The function name is <code>fahr_to_kelvin</code>.</p>
 <p>The single argument is <code>temp</code>.</p>
 <p>The body is the code:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate temp in kelvin</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  kelvin <span class="ot">&lt;-</span> ((temp <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="dv">9</span>)) <span class="sc">+</span> <span class="fl">273.15</span></span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the value of kelvin</span></span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(kelvin)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a>  <span class="co"># Calculate temp in kelvin</span></span>
+<span id="cb62-2"><a href="#cb62-2" tabindex="-1"></a>  kelvin <span class="ot">&lt;-</span> ((temp <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="dv">9</span>)) <span class="sc">+</span> <span class="fl">273.15</span></span>
+<span id="cb62-3"><a href="#cb62-3" tabindex="-1"></a>  </span>
+<span id="cb62-4"><a href="#cb62-4" tabindex="-1"></a>  <span class="co"># Return the value of kelvin</span></span>
+<span id="cb62-5"><a href="#cb62-5" tabindex="-1"></a>  <span class="fu">return</span>(kelvin)</span></code></pre></div>
 </div>
 </details>
 </div>
 <p><br></p>
 <p>Let’s try running our function. Calling our own function is no
 different from calling any other function:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the freezing point of water in kelvin</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fahr_to_kelvin</span>(<span class="dv">32</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a><span class="co"># Calculate the freezing point of water in kelvin</span></span>
+<span id="cb63-2"><a href="#cb63-2" tabindex="-1"></a><span class="fu">fahr_to_kelvin</span>(<span class="dv">32</span>)</span></code></pre></div>
 <pre><code>[1] 273.15</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the boiling point of water in kelvin</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fahr_to_kelvin</span>(<span class="dv">212</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a><span class="co"># Calculate the boiling point of water in kelvin</span></span>
+<span id="cb65-2"><a href="#cb65-2" tabindex="-1"></a><span class="fu">fahr_to_kelvin</span>(<span class="dv">212</span>)</span></code></pre></div>
 <pre><code>[1] 373.15</code></pre>
 <div class="challenge">
 <p>Write a function called <code>kelvin_to_celsius()</code> that takes a
@@ -886,10 +888,10 @@ temperature in Kelvin and returns that temperature in Celsius.</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>kelvin_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  celsius <span class="ot">&lt;-</span> temp <span class="sc">-</span> <span class="fl">273.15</span></span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(celsius)</span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a>kelvin_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
+<span id="cb67-2"><a href="#cb67-2" tabindex="-1"></a>  celsius <span class="ot">&lt;-</span> temp <span class="sc">-</span> <span class="fl">273.15</span></span>
+<span id="cb67-3"><a href="#cb67-3" tabindex="-1"></a>  <span class="fu">return</span>(celsius)</span>
+<span id="cb67-4"><a href="#cb67-4" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </details>
 </div>
@@ -897,31 +899,31 @@ temperature in Kelvin and returns that temperature in Celsius.</p>
 <p>We can also define functions that perform operations on multiple
 arguments (separated by commas). Let’s write a function that returns the
 upper and lower bounds of uncertainty around a given value.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A function that returns the lower and upper uncertainty bounds</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co"># around a given values as a 2-column matrix</span></span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments:</span></span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   mu = a vector of values around which bounds should be calculated</span></span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   sigma = a vector containing the amount of uncertainty (in the same units as mu)</span></span>
-<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>calc_uncertainty <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, sigma) {</span>
-<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
-<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
-<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
-<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
-<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
-<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, upper)</span>
-<span id="cb68-17"><a href="#cb68-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb68-18"><a href="#cb68-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
-<span id="cb68-19"><a href="#cb68-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
-<span id="cb68-20"><a href="#cb68-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="co"># A function that returns the lower and upper uncertainty bounds</span></span>
+<span id="cb68-2"><a href="#cb68-2" tabindex="-1"></a><span class="co"># around a given values as a 2-column matrix</span></span>
+<span id="cb68-3"><a href="#cb68-3" tabindex="-1"></a><span class="co"># Arguments:</span></span>
+<span id="cb68-4"><a href="#cb68-4" tabindex="-1"></a><span class="co">#   mu = a vector of values around which bounds should be calculated</span></span>
+<span id="cb68-5"><a href="#cb68-5" tabindex="-1"></a><span class="co">#   sigma = a vector containing the amount of uncertainty (in the same units as mu)</span></span>
+<span id="cb68-6"><a href="#cb68-6" tabindex="-1"></a></span>
+<span id="cb68-7"><a href="#cb68-7" tabindex="-1"></a>calc_uncertainty <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, sigma) {</span>
+<span id="cb68-8"><a href="#cb68-8" tabindex="-1"></a>  </span>
+<span id="cb68-9"><a href="#cb68-9" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
+<span id="cb68-10"><a href="#cb68-10" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
+<span id="cb68-11"><a href="#cb68-11" tabindex="-1"></a></span>
+<span id="cb68-12"><a href="#cb68-12" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
+<span id="cb68-13"><a href="#cb68-13" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
+<span id="cb68-14"><a href="#cb68-14" tabindex="-1"></a>  </span>
+<span id="cb68-15"><a href="#cb68-15" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
+<span id="cb68-16"><a href="#cb68-16" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, upper)</span>
+<span id="cb68-17"><a href="#cb68-17" tabindex="-1"></a>  </span>
+<span id="cb68-18"><a href="#cb68-18" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
+<span id="cb68-19"><a href="#cb68-19" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
+<span id="cb68-20"><a href="#cb68-20" tabindex="-1"></a>}</span></code></pre></div>
 <p>Let’s try out our function:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calc_uncertainty</span>(<span class="dv">0</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" tabindex="-1"></a><span class="fu">calc_uncertainty</span>(<span class="dv">0</span>, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>     lower upper
 [1,]    -2     2</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calc_uncertainty</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" tabindex="-1"></a><span class="fu">calc_uncertainty</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>      lower upper
  [1,]   0.5   1.5
  [2,]   1.5   2.5
@@ -933,7 +935,7 @@ upper and lower bounds of uncertainty around a given value.</p>
  [8,]   7.5   8.5
  [9,]   8.5   9.5
 [10,]   9.5  10.5</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calc_uncertainty</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" tabindex="-1"></a><span class="fu">calc_uncertainty</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>      lower upper
  [1,]     0     2
  [2,]     0     4
@@ -956,26 +958,26 @@ returns a three-column matrix that includes the central value
 <div class="solution">
 <p>We added <code>mu</code> to the line where we define the
 <code>bounds</code> object which is returned:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A function that returns the lower and upper uncertainty bounds</span></span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co"># around a given values as a 3-column matrix</span></span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments:</span></span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   mu = a vector of values around which bounds should be calculated</span></span>
-<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   sigma = a vector containing the amount of uncertainty (in the same units as mu)</span></span>
-<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>calc_uncertainty <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, sigma) {</span>
-<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
-<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
-<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
-<span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
-<span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb75-15"><a href="#cb75-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
-<span id="cb75-16"><a href="#cb75-16" aria-hidden="true" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, mu, upper)</span>
-<span id="cb75-17"><a href="#cb75-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb75-18"><a href="#cb75-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
-<span id="cb75-19"><a href="#cb75-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
-<span id="cb75-20"><a href="#cb75-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" tabindex="-1"></a><span class="co"># A function that returns the lower and upper uncertainty bounds</span></span>
+<span id="cb75-2"><a href="#cb75-2" tabindex="-1"></a><span class="co"># around a given values as a 3-column matrix</span></span>
+<span id="cb75-3"><a href="#cb75-3" tabindex="-1"></a><span class="co"># Arguments:</span></span>
+<span id="cb75-4"><a href="#cb75-4" tabindex="-1"></a><span class="co">#   mu = a vector of values around which bounds should be calculated</span></span>
+<span id="cb75-5"><a href="#cb75-5" tabindex="-1"></a><span class="co">#   sigma = a vector containing the amount of uncertainty (in the same units as mu)</span></span>
+<span id="cb75-6"><a href="#cb75-6" tabindex="-1"></a></span>
+<span id="cb75-7"><a href="#cb75-7" tabindex="-1"></a>calc_uncertainty <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, sigma) {</span>
+<span id="cb75-8"><a href="#cb75-8" tabindex="-1"></a>  </span>
+<span id="cb75-9"><a href="#cb75-9" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
+<span id="cb75-10"><a href="#cb75-10" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
+<span id="cb75-11"><a href="#cb75-11" tabindex="-1"></a></span>
+<span id="cb75-12"><a href="#cb75-12" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
+<span id="cb75-13"><a href="#cb75-13" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
+<span id="cb75-14"><a href="#cb75-14" tabindex="-1"></a>  </span>
+<span id="cb75-15"><a href="#cb75-15" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
+<span id="cb75-16"><a href="#cb75-16" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, mu, upper)</span>
+<span id="cb75-17"><a href="#cb75-17" tabindex="-1"></a>  </span>
+<span id="cb75-18"><a href="#cb75-18" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
+<span id="cb75-19"><a href="#cb75-19" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
+<span id="cb75-20"><a href="#cb75-20" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </details>
 </div>
@@ -989,13 +991,13 @@ them into ever-larger chunks to get the effect we want.</p>
 using the two functions that we already wrote for converting Fahrenheit
 to Kelvin (<code>fahr_to_kelvin</code>) and Kelvin to Celsius
 (<code>kelvin_to_celcius</code>, see challenge above)</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>fahr_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  temp_k <span class="ot">&lt;-</span> <span class="fu">fahr_to_kelvin</span>(temp)</span>
-<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>  temp_c <span class="ot">&lt;-</span> <span class="fu">kelvin_to_celsius</span>(temp_k)</span>
-<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(temp_c)</span>
-<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a>fahr_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
+<span id="cb76-2"><a href="#cb76-2" tabindex="-1"></a>  </span>
+<span id="cb76-3"><a href="#cb76-3" tabindex="-1"></a>  temp_k <span class="ot">&lt;-</span> <span class="fu">fahr_to_kelvin</span>(temp)</span>
+<span id="cb76-4"><a href="#cb76-4" tabindex="-1"></a>  temp_c <span class="ot">&lt;-</span> <span class="fu">kelvin_to_celsius</span>(temp_k)</span>
+<span id="cb76-5"><a href="#cb76-5" tabindex="-1"></a></span>
+<span id="cb76-6"><a href="#cb76-6" tabindex="-1"></a>  <span class="fu">return</span>(temp_c)</span>
+<span id="cb76-7"><a href="#cb76-7" tabindex="-1"></a>}</span></code></pre></div>
 <div class="challenge">
 <p>Verify that our new function works by calculating the freezing and
 boiling points of water in Celcius.</p>
@@ -1004,11 +1006,11 @@ boiling points of water in Celcius.</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Freezing point of water</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fahr_to_celsius</span>(<span class="dv">32</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" tabindex="-1"></a><span class="co"># Freezing point of water</span></span>
+<span id="cb77-2"><a href="#cb77-2" tabindex="-1"></a><span class="fu">fahr_to_celsius</span>(<span class="dv">32</span>)</span></code></pre></div>
 <pre><code>[1] 0</code></pre>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boiling point of water</span></span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fahr_to_celsius</span>(<span class="dv">212</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a><span class="co"># Boiling point of water</span></span>
+<span id="cb79-2"><a href="#cb79-2" tabindex="-1"></a><span class="fu">fahr_to_celsius</span>(<span class="dv">212</span>)</span></code></pre></div>
 <pre><code>[1] 100</code></pre>
 </div>
 </details>
@@ -1023,31 +1025,31 @@ the user does not specify a value for the argument.</p>
 <p>For example, look what happens if we call
 <code>calc_uncertainty()</code> without specifying
 <code>sigma</code>:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calc_uncertainty</span>(<span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" tabindex="-1"></a><span class="fu">calc_uncertainty</span>(<span class="dv">0</span>)</span></code></pre></div>
 <pre><code>Error in calc_uncertainty(0): argument &quot;sigma&quot; is missing, with no default</code></pre>
 <p>Let’s add a default value of <code>0</code> for sigma.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A function that returns the lower and upper uncertainty bounds</span></span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="co"># around a given values as a 2-column matrix</span></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments:</span></span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   mu = a vector of values around which bounds should be calculated</span></span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   sigma = a vector containing the amount of uncertainty (in the same units as mu)</span></span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>calc_uncertainty <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, <span class="at">sigma =</span> <span class="dv">0</span>) {</span>
-<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
-<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
-<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
-<span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
-<span id="cb83-14"><a href="#cb83-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb83-15"><a href="#cb83-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
-<span id="cb83-16"><a href="#cb83-16" aria-hidden="true" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, upper)</span>
-<span id="cb83-17"><a href="#cb83-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb83-18"><a href="#cb83-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
-<span id="cb83-19"><a href="#cb83-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
-<span id="cb83-20"><a href="#cb83-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" tabindex="-1"></a><span class="co"># A function that returns the lower and upper uncertainty bounds</span></span>
+<span id="cb83-2"><a href="#cb83-2" tabindex="-1"></a><span class="co"># around a given values as a 2-column matrix</span></span>
+<span id="cb83-3"><a href="#cb83-3" tabindex="-1"></a><span class="co"># Arguments:</span></span>
+<span id="cb83-4"><a href="#cb83-4" tabindex="-1"></a><span class="co">#   mu = a vector of values around which bounds should be calculated</span></span>
+<span id="cb83-5"><a href="#cb83-5" tabindex="-1"></a><span class="co">#   sigma = a vector containing the amount of uncertainty (in the same units as mu)</span></span>
+<span id="cb83-6"><a href="#cb83-6" tabindex="-1"></a></span>
+<span id="cb83-7"><a href="#cb83-7" tabindex="-1"></a>calc_uncertainty <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, <span class="at">sigma =</span> <span class="dv">0</span>) {</span>
+<span id="cb83-8"><a href="#cb83-8" tabindex="-1"></a>  </span>
+<span id="cb83-9"><a href="#cb83-9" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
+<span id="cb83-10"><a href="#cb83-10" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
+<span id="cb83-11"><a href="#cb83-11" tabindex="-1"></a></span>
+<span id="cb83-12"><a href="#cb83-12" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
+<span id="cb83-13"><a href="#cb83-13" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
+<span id="cb83-14"><a href="#cb83-14" tabindex="-1"></a>  </span>
+<span id="cb83-15"><a href="#cb83-15" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
+<span id="cb83-16"><a href="#cb83-16" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, upper)</span>
+<span id="cb83-17"><a href="#cb83-17" tabindex="-1"></a>  </span>
+<span id="cb83-18"><a href="#cb83-18" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
+<span id="cb83-19"><a href="#cb83-19" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
+<span id="cb83-20"><a href="#cb83-20" tabindex="-1"></a>}</span></code></pre></div>
 <p>Now let’s test it:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calc_uncertainty</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" tabindex="-1"></a><span class="fu">calc_uncertainty</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
 <pre><code>     lower upper
 [1,]     1     1
 [2,]     2     2
@@ -1063,36 +1065,36 @@ a default value?</p>
 </summary>
 <div class="solution">
 <p>Let’s try it with the <code>calc_uncertainty()</code> function:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>calc_uncertainty_NULL <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, <span class="at">sigma =</span> <span class="cn">NULL</span>) {</span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
-<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
-<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
-<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
-<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
-<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, upper)</span>
-<span id="cb86-11"><a href="#cb86-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb86-12"><a href="#cb86-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
-<span id="cb86-13"><a href="#cb86-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
-<span id="cb86-14"><a href="#cb86-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb86-15"><a href="#cb86-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-16"><a href="#cb86-16" aria-hidden="true" tabindex="-1"></a>calc_uncertainty_NA <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, <span class="at">sigma =</span> <span class="cn">NA</span>) {</span>
-<span id="cb86-17"><a href="#cb86-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb86-18"><a href="#cb86-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
-<span id="cb86-19"><a href="#cb86-19" aria-hidden="true" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
-<span id="cb86-20"><a href="#cb86-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-21"><a href="#cb86-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
-<span id="cb86-22"><a href="#cb86-22" aria-hidden="true" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
-<span id="cb86-23"><a href="#cb86-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb86-24"><a href="#cb86-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
-<span id="cb86-25"><a href="#cb86-25" aria-hidden="true" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, upper)</span>
-<span id="cb86-26"><a href="#cb86-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb86-27"><a href="#cb86-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
-<span id="cb86-28"><a href="#cb86-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
-<span id="cb86-29"><a href="#cb86-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calc_uncertainty_NA</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" tabindex="-1"></a>calc_uncertainty_NULL <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, <span class="at">sigma =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb86-2"><a href="#cb86-2" tabindex="-1"></a>  </span>
+<span id="cb86-3"><a href="#cb86-3" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
+<span id="cb86-4"><a href="#cb86-4" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
+<span id="cb86-5"><a href="#cb86-5" tabindex="-1"></a></span>
+<span id="cb86-6"><a href="#cb86-6" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
+<span id="cb86-7"><a href="#cb86-7" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
+<span id="cb86-8"><a href="#cb86-8" tabindex="-1"></a>  </span>
+<span id="cb86-9"><a href="#cb86-9" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
+<span id="cb86-10"><a href="#cb86-10" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, upper)</span>
+<span id="cb86-11"><a href="#cb86-11" tabindex="-1"></a>  </span>
+<span id="cb86-12"><a href="#cb86-12" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
+<span id="cb86-13"><a href="#cb86-13" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
+<span id="cb86-14"><a href="#cb86-14" tabindex="-1"></a>}</span>
+<span id="cb86-15"><a href="#cb86-15" tabindex="-1"></a></span>
+<span id="cb86-16"><a href="#cb86-16" tabindex="-1"></a>calc_uncertainty_NA <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, <span class="at">sigma =</span> <span class="cn">NA</span>) {</span>
+<span id="cb86-17"><a href="#cb86-17" tabindex="-1"></a>  </span>
+<span id="cb86-18"><a href="#cb86-18" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
+<span id="cb86-19"><a href="#cb86-19" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
+<span id="cb86-20"><a href="#cb86-20" tabindex="-1"></a></span>
+<span id="cb86-21"><a href="#cb86-21" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
+<span id="cb86-22"><a href="#cb86-22" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
+<span id="cb86-23"><a href="#cb86-23" tabindex="-1"></a>  </span>
+<span id="cb86-24"><a href="#cb86-24" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
+<span id="cb86-25"><a href="#cb86-25" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, upper)</span>
+<span id="cb86-26"><a href="#cb86-26" tabindex="-1"></a>  </span>
+<span id="cb86-27"><a href="#cb86-27" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
+<span id="cb86-28"><a href="#cb86-28" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
+<span id="cb86-29"><a href="#cb86-29" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" tabindex="-1"></a><span class="fu">calc_uncertainty_NA</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
 <pre><code>     lower upper
 [1,]    NA    NA
 [2,]    NA    NA
@@ -1102,7 +1104,7 @@ a default value?</p>
 <p>Recall that <code>NA</code> is a special placeholder value that means
 that data is missing. Thus, arithmetic with <code>NA</code> will by
 default give a <code>NA</code> result.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">calc_uncertainty_NULL</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" tabindex="-1"></a><span class="fu">calc_uncertainty_NULL</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
 <pre><code>     lower upper</code></pre>
 <p><code>NULL</code> is a special value that means something does not
 exist. When we try to add <code>NULL</code> to <code>mu</code>, we get
@@ -1112,24 +1114,29 @@ an empty matrix.</p>
 </div>
 <p><br></p>
 </div>
+</div>
+<div id="synthesis" class="section level2">
+<h2>Synthesis</h2>
 <div id="putting-it-all-together" class="section level3">
 <h3>Putting it all together</h3>
 <p>Let’s install the <code>neonUtilities</code> package and learn about
 some of its functions. We will be using this package to acquire data
 directly from NEON. Type the following in the Console:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;neonUtilities&quot;</span>)</span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(neonUtilities)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;neonUtilities&quot;</span>)</span>
+<span id="cb91-2"><a href="#cb91-2" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="#cb91-3" tabindex="-1"></a><span class="fu">library</span>(neonUtilities)</span></code></pre></div>
 <p>Note that you only need to install the package once, but you will
 need to use <code>library()</code> to load the package every time you
 want to use it in a new R session.</p>
 <p>We’re going to download the recent temperature data from the
 Teakettle Creek site in the Sierra Nevada mountains and the Sycamore
 Creek site in Arizona. The function <code>loadByProduct()</code> from
-the <code>neonUtilities</code> package is the main function for
-accessing NEON data in R. Let’s take a look at the documentation for
-this function before using it:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>?loadByProduct</span></code></pre></div>
+the <a
+href="https://www.neonscience.org/resources/learning-hub/tutorials/neondatastackr"><code>neonUtilities</code></a>{target
+= “_blank”} package is the main function for accessing NEON data in R.
+Let’s take a look at the documentation for this function before using
+it:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" tabindex="-1"></a>?loadByProduct</span></code></pre></div>
 <p>At a minimum we must specify a data product ID (<code>dpID</code>
 argument), which we can get by browsing the <a
 href="https://data.neonscience.org/data-products/explore">NEON Data
@@ -1138,22 +1145,22 @@ specify start and end dates. If we only want certain sites, we need to
 specify the four-letter codes that identify each site. Since we are
 requesting new data that is “provisional” we also need to include the
 argument <code>include.provisional = TRUE</code>.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define dates for download</span></span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>startdate <span class="ot">&lt;-</span> <span class="st">&quot;2022-09-01&quot;</span></span>
-<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>enddate <span class="ot">&lt;-</span> <span class="st">&quot;2023-08-31&quot;</span></span>
-<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the sites to download </span></span>
-<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;SYCA&quot;</span>) <span class="co"># Teakettle Creek and Sycamore Creek</span></span>
-<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the data product</span></span>
-<span id="cb93-9"><a href="#cb93-9" aria-hidden="true" tabindex="-1"></a>dpID <span class="ot">&lt;-</span> <span class="st">&quot;DP1.20053.001&quot;</span>  <span class="co"># Surface water temperature</span></span>
-<span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperature in surface water</span></span>
-<span id="cb93-12"><a href="#cb93-12" aria-hidden="true" tabindex="-1"></a>watertemp <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> dpID,</span>
-<span id="cb93-13"><a href="#cb93-13" aria-hidden="true" tabindex="-1"></a>                           <span class="at">site =</span> sites,</span>
-<span id="cb93-14"><a href="#cb93-14" aria-hidden="true" tabindex="-1"></a>                           <span class="at">startdate =</span> startdate,</span>
-<span id="cb93-15"><a href="#cb93-15" aria-hidden="true" tabindex="-1"></a>                           <span class="at">enddate =</span> enddate,</span>
-<span id="cb93-16"><a href="#cb93-16" aria-hidden="true" tabindex="-1"></a>                           <span class="at">include.provisional =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" tabindex="-1"></a><span class="co"># Define dates for download</span></span>
+<span id="cb93-2"><a href="#cb93-2" tabindex="-1"></a>startdate <span class="ot">&lt;-</span> <span class="st">&quot;2022-09-01&quot;</span></span>
+<span id="cb93-3"><a href="#cb93-3" tabindex="-1"></a>enddate <span class="ot">&lt;-</span> <span class="st">&quot;2023-08-31&quot;</span></span>
+<span id="cb93-4"><a href="#cb93-4" tabindex="-1"></a></span>
+<span id="cb93-5"><a href="#cb93-5" tabindex="-1"></a><span class="co"># Define the sites to download </span></span>
+<span id="cb93-6"><a href="#cb93-6" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;SYCA&quot;</span>) <span class="co"># Teakettle Creek and Sycamore Creek</span></span>
+<span id="cb93-7"><a href="#cb93-7" tabindex="-1"></a></span>
+<span id="cb93-8"><a href="#cb93-8" tabindex="-1"></a><span class="co"># Define the data product</span></span>
+<span id="cb93-9"><a href="#cb93-9" tabindex="-1"></a>dpID <span class="ot">&lt;-</span> <span class="st">&quot;DP1.20053.001&quot;</span>  <span class="co"># Surface water temperature</span></span>
+<span id="cb93-10"><a href="#cb93-10" tabindex="-1"></a></span>
+<span id="cb93-11"><a href="#cb93-11" tabindex="-1"></a><span class="co"># Temperature in surface water</span></span>
+<span id="cb93-12"><a href="#cb93-12" tabindex="-1"></a>watertemp <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> dpID,</span>
+<span id="cb93-13"><a href="#cb93-13" tabindex="-1"></a>                           <span class="at">site =</span> sites,</span>
+<span id="cb93-14"><a href="#cb93-14" tabindex="-1"></a>                           <span class="at">startdate =</span> startdate,</span>
+<span id="cb93-15"><a href="#cb93-15" tabindex="-1"></a>                           <span class="at">enddate =</span> enddate,</span>
+<span id="cb93-16"><a href="#cb93-16" tabindex="-1"></a>                           <span class="at">include.provisional =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>You will need to allow the data to download by typing <code>y</code>
 in the Console when prompted.</p>
 <p>You should now have a new object named <code>watertemp</code> in the
@@ -1163,7 +1170,7 @@ to <code>watertemp</code> to see what is contained in each of the nine
 elements.</p>
 <p>Alternatively you can see the names of each of these elements
 using:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(watertemp)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" tabindex="-1"></a><span class="fu">names</span>(watertemp)</span></code></pre></div>
 <pre><code>[1] &quot;categoricalCodes_20053&quot;     &quot;citation_20053_PROVISIONAL&quot;
 [3] &quot;issueLog_20053&quot;             &quot;readme_20053&quot;              
 [5] &quot;science_review_flags_20053&quot; &quot;sensor_positions_20053&quot;    
@@ -1184,46 +1191,46 @@ webpage</a>.</p>
 30-minute average temperature readings. Let’s save this as a separate
 dataframe to make it easier to work with. Remember that we use
 <code>$</code> to access a named element of a list.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the temperature data from watertemp list</span></span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> watertemp<span class="sc">$</span>TSW_30min</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a><span class="co"># Extract the temperature data from watertemp list</span></span>
+<span id="cb96-2"><a href="#cb96-2" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> watertemp<span class="sc">$</span>TSW_30min</span></code></pre></div>
 <p>Let’s take a look at these data:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the first few rows</span></span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TSW_30min)</span></code></pre></div>
-<pre><code>  domainID siteID horizontalPosition verticalPosition       startDateTime
-1      D14   SYCA                101              100 2022-10-01 00:00:00
-2      D14   SYCA                101              100 2022-10-01 00:30:00
-3      D14   SYCA                101              100 2022-10-01 01:00:00
-4      D14   SYCA                101              100 2022-10-01 01:30:00
-5      D14   SYCA                101              100 2022-10-01 02:00:00
-6      D14   SYCA                101              100 2022-10-01 02:30:00
-          endDateTime surfWaterTempMean surfWaterTempMinimum
-1 2022-10-01 00:30:00            29.840               29.517
-2 2022-10-01 01:00:00            28.769               28.086
-3 2022-10-01 01:30:00            27.132               26.000
-4 2022-10-01 02:00:00            24.960               24.151
-5 2022-10-01 02:30:00            23.525               22.815
-6 2022-10-01 03:00:00            22.110               21.420
-  surfWaterTempMaximum surfWaterTempVariance surfWaterTempNumPts
-1               30.183                 0.027                1800
-2               29.547                 0.103                1800
-3               28.118                 0.448                1800
-4               25.997                 0.354                1800
-5               24.307                 0.188                1800
-6               22.826                 0.115                1800
-  surfWaterTempExpUncert surfWaterTempStdErMean finalQF  publicationDate
-1                  0.150                  0.004       1 20221219T225423Z
-2                  0.150                  0.008       1 20221219T225423Z
-3                  0.152                  0.016       1 20221219T225423Z
-4                  0.150                  0.014       1 20221219T225423Z
-5                  0.149                  0.010       1 20221219T225423Z
-6                  0.147                  0.008       1 20221219T225423Z
-      release
-1 PROVISIONAL
-2 PROVISIONAL
-3 PROVISIONAL
-4 PROVISIONAL
-5 PROVISIONAL
-6 PROVISIONAL</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" tabindex="-1"></a><span class="co"># Show the first few rows</span></span>
+<span id="cb97-2"><a href="#cb97-2" tabindex="-1"></a><span class="fu">head</span>(TSW_30min)</span></code></pre></div>
+<pre><code>  domainID siteID horizontalPosition verticalPosition
+1      D14   SYCA                101              100
+2      D14   SYCA                101              100
+3      D14   SYCA                101              100
+4      D14   SYCA                101              100
+5      D14   SYCA                101              100
+6      D14   SYCA                101              100
+        startDateTime         endDateTime surfWaterTempMean
+1 2022-10-01 00:00:00 2022-10-01 00:30:00            29.840
+2 2022-10-01 00:30:00 2022-10-01 01:00:00            28.769
+3 2022-10-01 01:00:00 2022-10-01 01:30:00            27.132
+4 2022-10-01 01:30:00 2022-10-01 02:00:00            24.960
+5 2022-10-01 02:00:00 2022-10-01 02:30:00            23.525
+6 2022-10-01 02:30:00 2022-10-01 03:00:00            22.110
+  surfWaterTempMinimum surfWaterTempMaximum surfWaterTempVariance
+1               29.517               30.183                 0.027
+2               28.086               29.547                 0.103
+3               26.000               28.118                 0.448
+4               24.151               25.997                 0.354
+5               22.815               24.307                 0.188
+6               21.420               22.826                 0.115
+  surfWaterTempNumPts surfWaterTempExpUncert
+1                1800                  0.150
+2                1800                  0.150
+3                1800                  0.152
+4                1800                  0.150
+5                1800                  0.149
+6                1800                  0.147
+  surfWaterTempStdErMean finalQF  publicationDate     release
+1                  0.004       1 20221219T225423Z PROVISIONAL
+2                  0.008       1 20221219T225423Z PROVISIONAL
+3                  0.016       1 20221219T225423Z PROVISIONAL
+4                  0.014       1 20221219T225423Z PROVISIONAL
+5                  0.010       1 20221219T225423Z PROVISIONAL
+6                  0.008       1 20221219T225423Z PROVISIONAL</code></pre>
 <p>It appears that each row corresponds to a temperature average between
 two time points (<code>startDateTime</code> and
 <code>endDateTime</code>) taken by a sensor at a particular location
@@ -1233,13 +1240,13 @@ sensor locations- one upstream (<code>horizontalPosition</code> = 101 or
 111) and one downstream (<code>horizontalPosition</code> = 102 or 112).
 There should not be any variation in the vertical position for surface
 water measurements. We can verify this by tabulating the data:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many unique values of horizontal and vertical position are there?</span></span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(TSW_30min<span class="sc">$</span>horizontalPosition)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" tabindex="-1"></a><span class="co"># How many unique values of horizontal and vertical position are there?</span></span>
+<span id="cb99-2"><a href="#cb99-2" tabindex="-1"></a><span class="fu">table</span>(TSW_30min<span class="sc">$</span>horizontalPosition)</span></code></pre></div>
 <pre><code>
   101   102 
 32160 25440 </code></pre>
 <div class="sourceCode" id="cb101"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(TSW_30min<span class="sc">$</span>verticalPosition)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a><span class="fu">table</span>(TSW_30min<span class="sc">$</span>verticalPosition)</span></code></pre></div>
 <pre><code>
   100 
 57600 </code></pre>
@@ -1252,7 +1259,7 @@ measurements there are in these data from each NEON site.</p>
 </summary>
 <div class="solution">
 <div class="sourceCode" id="cb103"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(TSW_30min<span class="sc">$</span>siteID)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" tabindex="-1"></a><span class="fu">table</span>(TSW_30min<span class="sc">$</span>siteID)</span></code></pre></div>
 <pre><code>
  SYCA  TECR 
 32160 25440 </code></pre>
@@ -1277,34 +1284,34 @@ we work, but it can help to get a “road map” in a script first. Since we
 are writing a function, know that it will need a name, body and
 arguments, which we can put into this initial outline.</p>
 <div class="sourceCode" id="cb105"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A function that calculates average monthly surface water temperature</span></span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="co"># across both sensors at a NEON site from a dataframe of temperature</span></span>
-<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a><span class="co"># measurements.</span></span>
-<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments:</span></span>
-<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   dat = a dataframe containing the columns we need (</span><span class="al">TBD</span><span class="co">)</span></span>
-<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   site = the NEON site code for the site of interest</span></span>
-<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   month = the month to calculate average temperature over</span></span>
-<span id="cb105-8"><a href="#cb105-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   na.rm = indicates whether NA values should be removed prior to calculation</span></span>
-<span id="cb105-9"><a href="#cb105-9" aria-hidden="true" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, na.rm) {</span>
-<span id="cb105-10"><a href="#cb105-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb105-11"><a href="#cb105-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
-<span id="cb105-12"><a href="#cb105-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
-<span id="cb105-13"><a href="#cb105-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-14"><a href="#cb105-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb105-15"><a href="#cb105-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
-<span id="cb105-16"><a href="#cb105-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-17"><a href="#cb105-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb105-18"><a href="#cb105-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb105-19"><a href="#cb105-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
-<span id="cb105-20"><a href="#cb105-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb105-21"><a href="#cb105-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb105-22"><a href="#cb105-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
-<span id="cb105-23"><a href="#cb105-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb105-24"><a href="#cb105-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb105-25"><a href="#cb105-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb105-26"><a href="#cb105-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
-<span id="cb105-27"><a href="#cb105-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb105-28"><a href="#cb105-28" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" tabindex="-1"></a><span class="co"># A function that calculates average monthly surface water temperature</span></span>
+<span id="cb105-2"><a href="#cb105-2" tabindex="-1"></a><span class="co"># across both sensors at a NEON site from a dataframe of temperature</span></span>
+<span id="cb105-3"><a href="#cb105-3" tabindex="-1"></a><span class="co"># measurements.</span></span>
+<span id="cb105-4"><a href="#cb105-4" tabindex="-1"></a><span class="co"># Arguments:</span></span>
+<span id="cb105-5"><a href="#cb105-5" tabindex="-1"></a><span class="co">#   dat = a dataframe containing the columns we need (</span><span class="al">TBD</span><span class="co">)</span></span>
+<span id="cb105-6"><a href="#cb105-6" tabindex="-1"></a><span class="co">#   site = the NEON site code for the site of interest</span></span>
+<span id="cb105-7"><a href="#cb105-7" tabindex="-1"></a><span class="co">#   month = the month to calculate average temperature over</span></span>
+<span id="cb105-8"><a href="#cb105-8" tabindex="-1"></a><span class="co">#   na.rm = indicates whether NA values should be removed prior to calculation</span></span>
+<span id="cb105-9"><a href="#cb105-9" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, na.rm) {</span>
+<span id="cb105-10"><a href="#cb105-10" tabindex="-1"></a>  </span>
+<span id="cb105-11"><a href="#cb105-11" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
+<span id="cb105-12"><a href="#cb105-12" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
+<span id="cb105-13"><a href="#cb105-13" tabindex="-1"></a></span>
+<span id="cb105-14"><a href="#cb105-14" tabindex="-1"></a>  </span>
+<span id="cb105-15"><a href="#cb105-15" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
+<span id="cb105-16"><a href="#cb105-16" tabindex="-1"></a></span>
+<span id="cb105-17"><a href="#cb105-17" tabindex="-1"></a>  </span>
+<span id="cb105-18"><a href="#cb105-18" tabindex="-1"></a>  </span>
+<span id="cb105-19"><a href="#cb105-19" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
+<span id="cb105-20"><a href="#cb105-20" tabindex="-1"></a>  </span>
+<span id="cb105-21"><a href="#cb105-21" tabindex="-1"></a>  </span>
+<span id="cb105-22"><a href="#cb105-22" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
+<span id="cb105-23"><a href="#cb105-23" tabindex="-1"></a>  </span>
+<span id="cb105-24"><a href="#cb105-24" tabindex="-1"></a>  </span>
+<span id="cb105-25"><a href="#cb105-25" tabindex="-1"></a>  </span>
+<span id="cb105-26"><a href="#cb105-26" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
+<span id="cb105-27"><a href="#cb105-27" tabindex="-1"></a>  </span>
+<span id="cb105-28"><a href="#cb105-28" tabindex="-1"></a>}</span></code></pre></div>
 <p>Now let’s start filling in the outline. You may want to revisit the
 <a href="chp-data-structures.html">Data structures and operations</a>
 lesson to recall how to subset rows of a data frame based on values in
@@ -1313,25 +1320,25 @@ rows where the <code>finalQF</code> value is <code>0</code> and where
 the <code>siteID</code> column matches the value in the
 <code>site</code> argument.</p>
 <div class="sourceCode" id="cb106"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, na.rm) {</span>
-<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
-<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
-<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
-<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
-<span id="cb106-9"><a href="#cb106-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb106-10"><a href="#cb106-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
-<span id="cb106-11"><a href="#cb106-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb106-12"><a href="#cb106-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-13"><a href="#cb106-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
-<span id="cb106-14"><a href="#cb106-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb106-15"><a href="#cb106-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb106-16"><a href="#cb106-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb106-17"><a href="#cb106-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
-<span id="cb106-18"><a href="#cb106-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb106-19"><a href="#cb106-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, na.rm) {</span>
+<span id="cb106-2"><a href="#cb106-2" tabindex="-1"></a>  </span>
+<span id="cb106-3"><a href="#cb106-3" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
+<span id="cb106-4"><a href="#cb106-4" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
+<span id="cb106-5"><a href="#cb106-5" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb106-6"><a href="#cb106-6" tabindex="-1"></a>  </span>
+<span id="cb106-7"><a href="#cb106-7" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
+<span id="cb106-8"><a href="#cb106-8" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
+<span id="cb106-9"><a href="#cb106-9" tabindex="-1"></a>  </span>
+<span id="cb106-10"><a href="#cb106-10" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
+<span id="cb106-11"><a href="#cb106-11" tabindex="-1"></a>  </span>
+<span id="cb106-12"><a href="#cb106-12" tabindex="-1"></a></span>
+<span id="cb106-13"><a href="#cb106-13" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
+<span id="cb106-14"><a href="#cb106-14" tabindex="-1"></a>  </span>
+<span id="cb106-15"><a href="#cb106-15" tabindex="-1"></a>  </span>
+<span id="cb106-16"><a href="#cb106-16" tabindex="-1"></a>  </span>
+<span id="cb106-17"><a href="#cb106-17" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
+<span id="cb106-18"><a href="#cb106-18" tabindex="-1"></a>  </span>
+<span id="cb106-19"><a href="#cb106-19" tabindex="-1"></a>}</span></code></pre></div>
 <p>Note that as we progress through the function, the number of rows in
 <code>keep_dat</code> will keep decreasing because we are reassigning
 <code>keep_dat</code> back to itself after each subseting operation.</p>
@@ -1370,67 +1377,67 @@ package before the name of the function as follows:
 <code>lubridate</code> package installed, they can use our function.</p>
 <p>Here’s our function so far:</p>
 <div class="sourceCode" id="cb107"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, na.rm) {</span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
-<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
-<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
-<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
-<span id="cb107-9"><a href="#cb107-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb107-10"><a href="#cb107-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
-<span id="cb107-11"><a href="#cb107-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert character to date</span></span>
-<span id="cb107-12"><a href="#cb107-12" aria-hidden="true" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(keep_dat<span class="sc">$</span>startDateTime) </span>
-<span id="cb107-13"><a href="#cb107-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb107-14"><a href="#cb107-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># extract month as a numeric value</span></span>
-<span id="cb107-15"><a href="#cb107-15" aria-hidden="true" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startMonth <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">month</span>(keep_dat<span class="sc">$</span>startDateTime)</span>
-<span id="cb107-16"><a href="#cb107-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb107-17"><a href="#cb107-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># subset based on month</span></span>
-<span id="cb107-18"><a href="#cb107-18" aria-hidden="true" tabindex="-1"></a>    keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, startMonth <span class="sc">==</span> month)</span>
-<span id="cb107-19"><a href="#cb107-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-20"><a href="#cb107-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
-<span id="cb107-21"><a href="#cb107-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb107-22"><a href="#cb107-22" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb107-23"><a href="#cb107-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
-<span id="cb107-24"><a href="#cb107-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb107-25"><a href="#cb107-25" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, na.rm) {</span>
+<span id="cb107-2"><a href="#cb107-2" tabindex="-1"></a>  </span>
+<span id="cb107-3"><a href="#cb107-3" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
+<span id="cb107-4"><a href="#cb107-4" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
+<span id="cb107-5"><a href="#cb107-5" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb107-6"><a href="#cb107-6" tabindex="-1"></a>  </span>
+<span id="cb107-7"><a href="#cb107-7" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
+<span id="cb107-8"><a href="#cb107-8" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
+<span id="cb107-9"><a href="#cb107-9" tabindex="-1"></a>  </span>
+<span id="cb107-10"><a href="#cb107-10" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
+<span id="cb107-11"><a href="#cb107-11" tabindex="-1"></a>    <span class="co"># convert character to date</span></span>
+<span id="cb107-12"><a href="#cb107-12" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(keep_dat<span class="sc">$</span>startDateTime) </span>
+<span id="cb107-13"><a href="#cb107-13" tabindex="-1"></a>  </span>
+<span id="cb107-14"><a href="#cb107-14" tabindex="-1"></a>    <span class="co"># extract month as a numeric value</span></span>
+<span id="cb107-15"><a href="#cb107-15" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startMonth <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">month</span>(keep_dat<span class="sc">$</span>startDateTime)</span>
+<span id="cb107-16"><a href="#cb107-16" tabindex="-1"></a>    </span>
+<span id="cb107-17"><a href="#cb107-17" tabindex="-1"></a>    <span class="co"># subset based on month</span></span>
+<span id="cb107-18"><a href="#cb107-18" tabindex="-1"></a>    keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, startMonth <span class="sc">==</span> month)</span>
+<span id="cb107-19"><a href="#cb107-19" tabindex="-1"></a></span>
+<span id="cb107-20"><a href="#cb107-20" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
+<span id="cb107-21"><a href="#cb107-21" tabindex="-1"></a>  </span>
+<span id="cb107-22"><a href="#cb107-22" tabindex="-1"></a> </span>
+<span id="cb107-23"><a href="#cb107-23" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
+<span id="cb107-24"><a href="#cb107-24" tabindex="-1"></a>  </span>
+<span id="cb107-25"><a href="#cb107-25" tabindex="-1"></a>}</span></code></pre></div>
 <p>The last step is to calculate the average of the column in
 <code>keep_dat</code> that contains the mean surface water temperature
 measurements. We will do this using the <code>mean()</code> function and
 specify that the <code>na.rm</code> argument should take on the value
 specified in <code>na.rm</code>.</p>
 <div class="sourceCode" id="cb108"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, na.rm) {</span>
-<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
-<span id="cb108-4"><a href="#cb108-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
-<span id="cb108-5"><a href="#cb108-5" aria-hidden="true" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb108-6"><a href="#cb108-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb108-7"><a href="#cb108-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
-<span id="cb108-8"><a href="#cb108-8" aria-hidden="true" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
-<span id="cb108-9"><a href="#cb108-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb108-10"><a href="#cb108-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
-<span id="cb108-11"><a href="#cb108-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert character to date</span></span>
-<span id="cb108-12"><a href="#cb108-12" aria-hidden="true" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(keep_dat<span class="sc">$</span>startDateTime) </span>
-<span id="cb108-13"><a href="#cb108-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb108-14"><a href="#cb108-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># extract month as a numeric value</span></span>
-<span id="cb108-15"><a href="#cb108-15" aria-hidden="true" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startMonth <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">month</span>(keep_dat<span class="sc">$</span>startDateTime)</span>
-<span id="cb108-16"><a href="#cb108-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb108-17"><a href="#cb108-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># subset based on month</span></span>
-<span id="cb108-18"><a href="#cb108-18" aria-hidden="true" tabindex="-1"></a>    keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, startMonth <span class="sc">==</span> month)</span>
-<span id="cb108-19"><a href="#cb108-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb108-20"><a href="#cb108-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
-<span id="cb108-21"><a href="#cb108-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># use the na.rm value provided by the user of the function</span></span>
-<span id="cb108-22"><a href="#cb108-22" aria-hidden="true" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> <span class="fu">mean</span>(keep_dat<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> na.rm)</span>
-<span id="cb108-23"><a href="#cb108-23" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb108-24"><a href="#cb108-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
-<span id="cb108-25"><a href="#cb108-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(vals)</span>
-<span id="cb108-26"><a href="#cb108-26" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, na.rm) {</span>
+<span id="cb108-2"><a href="#cb108-2" tabindex="-1"></a>  </span>
+<span id="cb108-3"><a href="#cb108-3" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
+<span id="cb108-4"><a href="#cb108-4" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
+<span id="cb108-5"><a href="#cb108-5" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb108-6"><a href="#cb108-6" tabindex="-1"></a>  </span>
+<span id="cb108-7"><a href="#cb108-7" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
+<span id="cb108-8"><a href="#cb108-8" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
+<span id="cb108-9"><a href="#cb108-9" tabindex="-1"></a>  </span>
+<span id="cb108-10"><a href="#cb108-10" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
+<span id="cb108-11"><a href="#cb108-11" tabindex="-1"></a>    <span class="co"># convert character to date</span></span>
+<span id="cb108-12"><a href="#cb108-12" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(keep_dat<span class="sc">$</span>startDateTime) </span>
+<span id="cb108-13"><a href="#cb108-13" tabindex="-1"></a>  </span>
+<span id="cb108-14"><a href="#cb108-14" tabindex="-1"></a>    <span class="co"># extract month as a numeric value</span></span>
+<span id="cb108-15"><a href="#cb108-15" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startMonth <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">month</span>(keep_dat<span class="sc">$</span>startDateTime)</span>
+<span id="cb108-16"><a href="#cb108-16" tabindex="-1"></a>    </span>
+<span id="cb108-17"><a href="#cb108-17" tabindex="-1"></a>    <span class="co"># subset based on month</span></span>
+<span id="cb108-18"><a href="#cb108-18" tabindex="-1"></a>    keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, startMonth <span class="sc">==</span> month)</span>
+<span id="cb108-19"><a href="#cb108-19" tabindex="-1"></a></span>
+<span id="cb108-20"><a href="#cb108-20" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
+<span id="cb108-21"><a href="#cb108-21" tabindex="-1"></a>    <span class="co"># use the na.rm value provided by the user of the function</span></span>
+<span id="cb108-22"><a href="#cb108-22" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> <span class="fu">mean</span>(keep_dat<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> na.rm)</span>
+<span id="cb108-23"><a href="#cb108-23" tabindex="-1"></a> </span>
+<span id="cb108-24"><a href="#cb108-24" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
+<span id="cb108-25"><a href="#cb108-25" tabindex="-1"></a>  <span class="fu">return</span>(vals)</span>
+<span id="cb108-26"><a href="#cb108-26" tabindex="-1"></a>}</span></code></pre></div>
 <p>Let’s try out the function:</p>
 <div class="sourceCode" id="cb109"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate monthly mean water temperature at Sycamore Creek in August</span></span>
-<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="fu">calc_monthly_avg</span>(TSW_30min, <span class="at">site =</span> <span class="st">&quot;SYCA&quot;</span>, <span class="at">month =</span> <span class="dv">8</span>)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" tabindex="-1"></a><span class="co"># Calculate monthly mean water temperature at Sycamore Creek in August</span></span>
+<span id="cb109-2"><a href="#cb109-2" tabindex="-1"></a><span class="fu">calc_monthly_avg</span>(TSW_30min, <span class="at">site =</span> <span class="st">&quot;SYCA&quot;</span>, <span class="at">month =</span> <span class="dv">8</span>)</span></code></pre></div>
 <pre><code>Warning: 412 failed to parse.</code></pre>
 <pre><code>Error in calc_monthly_avg(TSW_30min, site = &quot;SYCA&quot;, month = 8): argument &quot;na.rm&quot; is missing, with no default</code></pre>
 <p>Oops! Why are we getting this error message? If we read carefully we
@@ -1449,32 +1456,32 @@ value of <code>na.rm</code> is <code>TRUE</code>.</p>
 <p>We only need to change the first line where the arguments are
 defined.</p>
 <div class="sourceCode" id="cb112"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
-<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
-<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb112-7"><a href="#cb112-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
-<span id="cb112-8"><a href="#cb112-8" aria-hidden="true" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
-<span id="cb112-9"><a href="#cb112-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb112-10"><a href="#cb112-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
-<span id="cb112-11"><a href="#cb112-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert character to date</span></span>
-<span id="cb112-12"><a href="#cb112-12" aria-hidden="true" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(keep_dat<span class="sc">$</span>startDateTime) </span>
-<span id="cb112-13"><a href="#cb112-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb112-14"><a href="#cb112-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># extract month as a numeric value</span></span>
-<span id="cb112-15"><a href="#cb112-15" aria-hidden="true" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startMonth <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">month</span>(keep_dat<span class="sc">$</span>startDateTime)</span>
-<span id="cb112-16"><a href="#cb112-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb112-17"><a href="#cb112-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># subset based on month</span></span>
-<span id="cb112-18"><a href="#cb112-18" aria-hidden="true" tabindex="-1"></a>    keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, startMonth <span class="sc">==</span> month)</span>
-<span id="cb112-19"><a href="#cb112-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb112-20"><a href="#cb112-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
-<span id="cb112-21"><a href="#cb112-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># use the na.rm value provided by the user of the function</span></span>
-<span id="cb112-22"><a href="#cb112-22" aria-hidden="true" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> <span class="fu">mean</span>(keep_dat<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> na.rm)</span>
-<span id="cb112-23"><a href="#cb112-23" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb112-24"><a href="#cb112-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
-<span id="cb112-25"><a href="#cb112-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(vals)</span>
-<span id="cb112-26"><a href="#cb112-26" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb112-2"><a href="#cb112-2" tabindex="-1"></a>  </span>
+<span id="cb112-3"><a href="#cb112-3" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
+<span id="cb112-4"><a href="#cb112-4" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
+<span id="cb112-5"><a href="#cb112-5" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb112-6"><a href="#cb112-6" tabindex="-1"></a>  </span>
+<span id="cb112-7"><a href="#cb112-7" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
+<span id="cb112-8"><a href="#cb112-8" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
+<span id="cb112-9"><a href="#cb112-9" tabindex="-1"></a>  </span>
+<span id="cb112-10"><a href="#cb112-10" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
+<span id="cb112-11"><a href="#cb112-11" tabindex="-1"></a>    <span class="co"># convert character to date</span></span>
+<span id="cb112-12"><a href="#cb112-12" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(keep_dat<span class="sc">$</span>startDateTime) </span>
+<span id="cb112-13"><a href="#cb112-13" tabindex="-1"></a>  </span>
+<span id="cb112-14"><a href="#cb112-14" tabindex="-1"></a>    <span class="co"># extract month as a numeric value</span></span>
+<span id="cb112-15"><a href="#cb112-15" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startMonth <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">month</span>(keep_dat<span class="sc">$</span>startDateTime)</span>
+<span id="cb112-16"><a href="#cb112-16" tabindex="-1"></a>    </span>
+<span id="cb112-17"><a href="#cb112-17" tabindex="-1"></a>    <span class="co"># subset based on month</span></span>
+<span id="cb112-18"><a href="#cb112-18" tabindex="-1"></a>    keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, startMonth <span class="sc">==</span> month)</span>
+<span id="cb112-19"><a href="#cb112-19" tabindex="-1"></a></span>
+<span id="cb112-20"><a href="#cb112-20" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
+<span id="cb112-21"><a href="#cb112-21" tabindex="-1"></a>  <span class="co"># use the na.rm value provided by the user of the function</span></span>
+<span id="cb112-22"><a href="#cb112-22" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> <span class="fu">mean</span>(keep_dat<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> na.rm)</span>
+<span id="cb112-23"><a href="#cb112-23" tabindex="-1"></a> </span>
+<span id="cb112-24"><a href="#cb112-24" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
+<span id="cb112-25"><a href="#cb112-25" tabindex="-1"></a>  <span class="fu">return</span>(vals)</span>
+<span id="cb112-26"><a href="#cb112-26" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 </details>
 </div>
@@ -1498,15 +1505,15 @@ names required by this function in the documentation of the
 <code>surfWaterTempMean</code>.</p>
 <p>In informative comment for this function could look like:</p>
 <div class="sourceCode" id="cb113"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A function that calculates average monthly surface water temperature</span></span>
-<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="co"># across both sensors at a NEON site from a dataframe of temperature</span></span>
-<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="co"># measurements.</span></span>
-<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments:</span></span>
-<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   dat = a dataframe containing the columns: </span></span>
-<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a><span class="co">#         surfWaterTempMean, startDateTime, siteID, finalQF</span></span>
-<span id="cb113-7"><a href="#cb113-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   site = the NEON site code for the site of interest</span></span>
-<span id="cb113-8"><a href="#cb113-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   month = the month to calculate average temperature over</span></span>
-<span id="cb113-9"><a href="#cb113-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   na.rm = indicates whether NA values should be removed prior to calculation</span></span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" tabindex="-1"></a><span class="co"># A function that calculates average monthly surface water temperature</span></span>
+<span id="cb113-2"><a href="#cb113-2" tabindex="-1"></a><span class="co"># across both sensors at a NEON site from a dataframe of temperature</span></span>
+<span id="cb113-3"><a href="#cb113-3" tabindex="-1"></a><span class="co"># measurements.</span></span>
+<span id="cb113-4"><a href="#cb113-4" tabindex="-1"></a><span class="co"># Arguments:</span></span>
+<span id="cb113-5"><a href="#cb113-5" tabindex="-1"></a><span class="co">#   dat = a dataframe containing the columns: </span></span>
+<span id="cb113-6"><a href="#cb113-6" tabindex="-1"></a><span class="co">#         surfWaterTempMean, startDateTime, siteID, finalQF</span></span>
+<span id="cb113-7"><a href="#cb113-7" tabindex="-1"></a><span class="co">#   site = the NEON site code for the site of interest</span></span>
+<span id="cb113-8"><a href="#cb113-8" tabindex="-1"></a><span class="co">#   month = the month to calculate average temperature over</span></span>
+<span id="cb113-9"><a href="#cb113-9" tabindex="-1"></a><span class="co">#   na.rm = indicates whether NA values should be removed prior to calculation</span></span></code></pre></div>
 </div>
 </details>
 </div>
@@ -1545,89 +1552,89 @@ comment that describes what it does and what its arguments are.</p>
 <strong>Click here to see what your script should contain</strong>
 </summary>
 <div class="sourceCode" id="cb114"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A function that converts a vector of temperatures from</span></span>
-<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="co"># fahrenheit to kelvin</span></span>
-<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>fahr_to_kelvin <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
-<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate temp in kelvin</span></span>
-<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>  kelvin <span class="ot">&lt;-</span> ((temp <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="dv">9</span>)) <span class="sc">+</span> <span class="fl">273.15</span></span>
-<span id="cb114-6"><a href="#cb114-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb114-7"><a href="#cb114-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the value of kelvin</span></span>
-<span id="cb114-8"><a href="#cb114-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(kelvin)</span>
-<span id="cb114-9"><a href="#cb114-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb114-10"><a href="#cb114-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-11"><a href="#cb114-11" aria-hidden="true" tabindex="-1"></a><span class="co"># A function that converts a vector of temperatures from</span></span>
-<span id="cb114-12"><a href="#cb114-12" aria-hidden="true" tabindex="-1"></a><span class="co"># kelvin to celsius</span></span>
-<span id="cb114-13"><a href="#cb114-13" aria-hidden="true" tabindex="-1"></a>kelvin_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
-<span id="cb114-14"><a href="#cb114-14" aria-hidden="true" tabindex="-1"></a>  celsius <span class="ot">&lt;-</span> temp <span class="sc">-</span> <span class="fl">273.15</span></span>
-<span id="cb114-15"><a href="#cb114-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(celsius)</span>
-<span id="cb114-16"><a href="#cb114-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb114-17"><a href="#cb114-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-18"><a href="#cb114-18" aria-hidden="true" tabindex="-1"></a><span class="co"># A function that converts a vector of temperatures from</span></span>
-<span id="cb114-19"><a href="#cb114-19" aria-hidden="true" tabindex="-1"></a><span class="co"># fahrenheit to celsius</span></span>
-<span id="cb114-20"><a href="#cb114-20" aria-hidden="true" tabindex="-1"></a>fahr_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
-<span id="cb114-21"><a href="#cb114-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb114-22"><a href="#cb114-22" aria-hidden="true" tabindex="-1"></a>  temp_k <span class="ot">&lt;-</span> <span class="fu">fahr_to_kelvin</span>(temp)</span>
-<span id="cb114-23"><a href="#cb114-23" aria-hidden="true" tabindex="-1"></a>  temp_c <span class="ot">&lt;-</span> <span class="fu">kelvin_to_celsius</span>(temp_k)</span>
-<span id="cb114-24"><a href="#cb114-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-25"><a href="#cb114-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(temp_c)</span>
-<span id="cb114-26"><a href="#cb114-26" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb114-27"><a href="#cb114-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-28"><a href="#cb114-28" aria-hidden="true" tabindex="-1"></a><span class="co"># A function that returns the lower and upper uncertainty bounds</span></span>
-<span id="cb114-29"><a href="#cb114-29" aria-hidden="true" tabindex="-1"></a><span class="co"># around a given values as a 2-column matrix</span></span>
-<span id="cb114-30"><a href="#cb114-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments:</span></span>
-<span id="cb114-31"><a href="#cb114-31" aria-hidden="true" tabindex="-1"></a><span class="co">#   mu = a vector of values around which bounds should be calculated</span></span>
-<span id="cb114-32"><a href="#cb114-32" aria-hidden="true" tabindex="-1"></a><span class="co">#   sigma = a vector containing the amount of uncertainty (in the same units as mu)</span></span>
-<span id="cb114-33"><a href="#cb114-33" aria-hidden="true" tabindex="-1"></a>calc_uncertainty <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, <span class="at">sigma =</span> <span class="dv">0</span>) {</span>
-<span id="cb114-34"><a href="#cb114-34" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb114-35"><a href="#cb114-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
-<span id="cb114-36"><a href="#cb114-36" aria-hidden="true" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
-<span id="cb114-37"><a href="#cb114-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-38"><a href="#cb114-38" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
-<span id="cb114-39"><a href="#cb114-39" aria-hidden="true" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
-<span id="cb114-40"><a href="#cb114-40" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb114-41"><a href="#cb114-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
-<span id="cb114-42"><a href="#cb114-42" aria-hidden="true" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, upper)</span>
-<span id="cb114-43"><a href="#cb114-43" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb114-44"><a href="#cb114-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
-<span id="cb114-45"><a href="#cb114-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
-<span id="cb114-46"><a href="#cb114-46" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb114-47"><a href="#cb114-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-48"><a href="#cb114-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-49"><a href="#cb114-49" aria-hidden="true" tabindex="-1"></a><span class="co"># A function that calculates average monthly surface water temperature</span></span>
-<span id="cb114-50"><a href="#cb114-50" aria-hidden="true" tabindex="-1"></a><span class="co"># across both sensors at a NEON site from a dataframe of temperature</span></span>
-<span id="cb114-51"><a href="#cb114-51" aria-hidden="true" tabindex="-1"></a><span class="co"># measurements.</span></span>
-<span id="cb114-52"><a href="#cb114-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments:</span></span>
-<span id="cb114-53"><a href="#cb114-53" aria-hidden="true" tabindex="-1"></a><span class="co">#   dat = a dataframe containing the columns: </span></span>
-<span id="cb114-54"><a href="#cb114-54" aria-hidden="true" tabindex="-1"></a><span class="co">#         surfWaterTempMean, startDateTime, siteID, finalQF</span></span>
-<span id="cb114-55"><a href="#cb114-55" aria-hidden="true" tabindex="-1"></a><span class="co">#   site = the NEON site code for the site of interest</span></span>
-<span id="cb114-56"><a href="#cb114-56" aria-hidden="true" tabindex="-1"></a><span class="co">#   month = the month to calculate average temperature over</span></span>
-<span id="cb114-57"><a href="#cb114-57" aria-hidden="true" tabindex="-1"></a><span class="co">#   na.rm = indicates whether NA values should be removed prior to calculation</span></span>
-<span id="cb114-58"><a href="#cb114-58" aria-hidden="true" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) {</span>
-<span id="cb114-59"><a href="#cb114-59" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb114-60"><a href="#cb114-60" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
-<span id="cb114-61"><a href="#cb114-61" aria-hidden="true" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
-<span id="cb114-62"><a href="#cb114-62" aria-hidden="true" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
-<span id="cb114-63"><a href="#cb114-63" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb114-64"><a href="#cb114-64" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
-<span id="cb114-65"><a href="#cb114-65" aria-hidden="true" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
-<span id="cb114-66"><a href="#cb114-66" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb114-67"><a href="#cb114-67" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
-<span id="cb114-68"><a href="#cb114-68" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert character to date</span></span>
-<span id="cb114-69"><a href="#cb114-69" aria-hidden="true" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(keep_dat<span class="sc">$</span>startDateTime) </span>
-<span id="cb114-70"><a href="#cb114-70" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb114-71"><a href="#cb114-71" aria-hidden="true" tabindex="-1"></a>    <span class="co"># extract month as a numeric value</span></span>
-<span id="cb114-72"><a href="#cb114-72" aria-hidden="true" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startMonth <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">month</span>(keep_dat<span class="sc">$</span>startDateTime)</span>
-<span id="cb114-73"><a href="#cb114-73" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb114-74"><a href="#cb114-74" aria-hidden="true" tabindex="-1"></a>    <span class="co"># subset based on month</span></span>
-<span id="cb114-75"><a href="#cb114-75" aria-hidden="true" tabindex="-1"></a>    keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, startMonth <span class="sc">==</span> month)</span>
-<span id="cb114-76"><a href="#cb114-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-77"><a href="#cb114-77" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
-<span id="cb114-78"><a href="#cb114-78" aria-hidden="true" tabindex="-1"></a>  <span class="co"># use the na.rm value provided by the user of the function</span></span>
-<span id="cb114-79"><a href="#cb114-79" aria-hidden="true" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> <span class="fu">mean</span>(keep_dat<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> na.rm)</span>
-<span id="cb114-80"><a href="#cb114-80" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb114-81"><a href="#cb114-81" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
-<span id="cb114-82"><a href="#cb114-82" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(vals)</span>
-<span id="cb114-83"><a href="#cb114-83" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" tabindex="-1"></a><span class="co"># A function that converts a vector of temperatures from</span></span>
+<span id="cb114-2"><a href="#cb114-2" tabindex="-1"></a><span class="co"># fahrenheit to kelvin</span></span>
+<span id="cb114-3"><a href="#cb114-3" tabindex="-1"></a>fahr_to_kelvin <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
+<span id="cb114-4"><a href="#cb114-4" tabindex="-1"></a>  <span class="co"># Calculate temp in kelvin</span></span>
+<span id="cb114-5"><a href="#cb114-5" tabindex="-1"></a>  kelvin <span class="ot">&lt;-</span> ((temp <span class="sc">-</span> <span class="dv">32</span>) <span class="sc">*</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="dv">9</span>)) <span class="sc">+</span> <span class="fl">273.15</span></span>
+<span id="cb114-6"><a href="#cb114-6" tabindex="-1"></a>  </span>
+<span id="cb114-7"><a href="#cb114-7" tabindex="-1"></a>  <span class="co"># Return the value of kelvin</span></span>
+<span id="cb114-8"><a href="#cb114-8" tabindex="-1"></a>  <span class="fu">return</span>(kelvin)</span>
+<span id="cb114-9"><a href="#cb114-9" tabindex="-1"></a>}</span>
+<span id="cb114-10"><a href="#cb114-10" tabindex="-1"></a></span>
+<span id="cb114-11"><a href="#cb114-11" tabindex="-1"></a><span class="co"># A function that converts a vector of temperatures from</span></span>
+<span id="cb114-12"><a href="#cb114-12" tabindex="-1"></a><span class="co"># kelvin to celsius</span></span>
+<span id="cb114-13"><a href="#cb114-13" tabindex="-1"></a>kelvin_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
+<span id="cb114-14"><a href="#cb114-14" tabindex="-1"></a>  celsius <span class="ot">&lt;-</span> temp <span class="sc">-</span> <span class="fl">273.15</span></span>
+<span id="cb114-15"><a href="#cb114-15" tabindex="-1"></a>  <span class="fu">return</span>(celsius)</span>
+<span id="cb114-16"><a href="#cb114-16" tabindex="-1"></a>}</span>
+<span id="cb114-17"><a href="#cb114-17" tabindex="-1"></a></span>
+<span id="cb114-18"><a href="#cb114-18" tabindex="-1"></a><span class="co"># A function that converts a vector of temperatures from</span></span>
+<span id="cb114-19"><a href="#cb114-19" tabindex="-1"></a><span class="co"># fahrenheit to celsius</span></span>
+<span id="cb114-20"><a href="#cb114-20" tabindex="-1"></a>fahr_to_celsius <span class="ot">&lt;-</span> <span class="cf">function</span>(temp) {</span>
+<span id="cb114-21"><a href="#cb114-21" tabindex="-1"></a>  </span>
+<span id="cb114-22"><a href="#cb114-22" tabindex="-1"></a>  temp_k <span class="ot">&lt;-</span> <span class="fu">fahr_to_kelvin</span>(temp)</span>
+<span id="cb114-23"><a href="#cb114-23" tabindex="-1"></a>  temp_c <span class="ot">&lt;-</span> <span class="fu">kelvin_to_celsius</span>(temp_k)</span>
+<span id="cb114-24"><a href="#cb114-24" tabindex="-1"></a></span>
+<span id="cb114-25"><a href="#cb114-25" tabindex="-1"></a>  <span class="fu">return</span>(temp_c)</span>
+<span id="cb114-26"><a href="#cb114-26" tabindex="-1"></a>}</span>
+<span id="cb114-27"><a href="#cb114-27" tabindex="-1"></a></span>
+<span id="cb114-28"><a href="#cb114-28" tabindex="-1"></a><span class="co"># A function that returns the lower and upper uncertainty bounds</span></span>
+<span id="cb114-29"><a href="#cb114-29" tabindex="-1"></a><span class="co"># around a given values as a 2-column matrix</span></span>
+<span id="cb114-30"><a href="#cb114-30" tabindex="-1"></a><span class="co"># Arguments:</span></span>
+<span id="cb114-31"><a href="#cb114-31" tabindex="-1"></a><span class="co">#   mu = a vector of values around which bounds should be calculated</span></span>
+<span id="cb114-32"><a href="#cb114-32" tabindex="-1"></a><span class="co">#   sigma = a vector containing the amount of uncertainty (in the same units as mu)</span></span>
+<span id="cb114-33"><a href="#cb114-33" tabindex="-1"></a>calc_uncertainty <span class="ot">&lt;-</span> <span class="cf">function</span>(mu, <span class="at">sigma =</span> <span class="dv">0</span>) {</span>
+<span id="cb114-34"><a href="#cb114-34" tabindex="-1"></a>  </span>
+<span id="cb114-35"><a href="#cb114-35" tabindex="-1"></a>  <span class="co"># Calculate the upper bound</span></span>
+<span id="cb114-36"><a href="#cb114-36" tabindex="-1"></a>  upper <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma</span>
+<span id="cb114-37"><a href="#cb114-37" tabindex="-1"></a></span>
+<span id="cb114-38"><a href="#cb114-38" tabindex="-1"></a>  <span class="co"># Calculate the lower bound</span></span>
+<span id="cb114-39"><a href="#cb114-39" tabindex="-1"></a>  lower <span class="ot">&lt;-</span> mu <span class="sc">-</span> sigma</span>
+<span id="cb114-40"><a href="#cb114-40" tabindex="-1"></a>  </span>
+<span id="cb114-41"><a href="#cb114-41" tabindex="-1"></a>  <span class="co"># Combine the bounds into a matrix</span></span>
+<span id="cb114-42"><a href="#cb114-42" tabindex="-1"></a>  bounds <span class="ot">&lt;-</span> <span class="fu">cbind</span>(lower, upper)</span>
+<span id="cb114-43"><a href="#cb114-43" tabindex="-1"></a>  </span>
+<span id="cb114-44"><a href="#cb114-44" tabindex="-1"></a>  <span class="co"># Return the matrix</span></span>
+<span id="cb114-45"><a href="#cb114-45" tabindex="-1"></a>  <span class="fu">return</span>(bounds)</span>
+<span id="cb114-46"><a href="#cb114-46" tabindex="-1"></a>}</span>
+<span id="cb114-47"><a href="#cb114-47" tabindex="-1"></a></span>
+<span id="cb114-48"><a href="#cb114-48" tabindex="-1"></a></span>
+<span id="cb114-49"><a href="#cb114-49" tabindex="-1"></a><span class="co"># A function that calculates average monthly surface water temperature</span></span>
+<span id="cb114-50"><a href="#cb114-50" tabindex="-1"></a><span class="co"># across both sensors at a NEON site from a dataframe of temperature</span></span>
+<span id="cb114-51"><a href="#cb114-51" tabindex="-1"></a><span class="co"># measurements.</span></span>
+<span id="cb114-52"><a href="#cb114-52" tabindex="-1"></a><span class="co"># Arguments:</span></span>
+<span id="cb114-53"><a href="#cb114-53" tabindex="-1"></a><span class="co">#   dat = a dataframe containing the columns: </span></span>
+<span id="cb114-54"><a href="#cb114-54" tabindex="-1"></a><span class="co">#         surfWaterTempMean, startDateTime, siteID, finalQF</span></span>
+<span id="cb114-55"><a href="#cb114-55" tabindex="-1"></a><span class="co">#   site = the NEON site code for the site of interest</span></span>
+<span id="cb114-56"><a href="#cb114-56" tabindex="-1"></a><span class="co">#   month = the month to calculate average temperature over</span></span>
+<span id="cb114-57"><a href="#cb114-57" tabindex="-1"></a><span class="co">#   na.rm = indicates whether NA values should be removed prior to calculation</span></span>
+<span id="cb114-58"><a href="#cb114-58" tabindex="-1"></a>calc_monthly_avg <span class="ot">&lt;-</span> <span class="cf">function</span>(dat, site, month, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb114-59"><a href="#cb114-59" tabindex="-1"></a>  </span>
+<span id="cb114-60"><a href="#cb114-60" tabindex="-1"></a>  <span class="co"># Remove data that did not pass quality control</span></span>
+<span id="cb114-61"><a href="#cb114-61" tabindex="-1"></a>  <span class="co"># keep finalQF == 0</span></span>
+<span id="cb114-62"><a href="#cb114-62" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(dat, finalQF <span class="sc">==</span> <span class="dv">0</span>)</span>
+<span id="cb114-63"><a href="#cb114-63" tabindex="-1"></a>  </span>
+<span id="cb114-64"><a href="#cb114-64" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from site</span></span>
+<span id="cb114-65"><a href="#cb114-65" tabindex="-1"></a>  keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, siteID <span class="sc">==</span> site)</span>
+<span id="cb114-66"><a href="#cb114-66" tabindex="-1"></a>  </span>
+<span id="cb114-67"><a href="#cb114-67" tabindex="-1"></a>  <span class="co"># Subset the data frame to only contain observations from month</span></span>
+<span id="cb114-68"><a href="#cb114-68" tabindex="-1"></a>    <span class="co"># convert character to date</span></span>
+<span id="cb114-69"><a href="#cb114-69" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">ymd_hms</span>(keep_dat<span class="sc">$</span>startDateTime) </span>
+<span id="cb114-70"><a href="#cb114-70" tabindex="-1"></a>  </span>
+<span id="cb114-71"><a href="#cb114-71" tabindex="-1"></a>    <span class="co"># extract month as a numeric value</span></span>
+<span id="cb114-72"><a href="#cb114-72" tabindex="-1"></a>    keep_dat<span class="sc">$</span>startMonth <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">month</span>(keep_dat<span class="sc">$</span>startDateTime)</span>
+<span id="cb114-73"><a href="#cb114-73" tabindex="-1"></a>    </span>
+<span id="cb114-74"><a href="#cb114-74" tabindex="-1"></a>    <span class="co"># subset based on month</span></span>
+<span id="cb114-75"><a href="#cb114-75" tabindex="-1"></a>    keep_dat <span class="ot">&lt;-</span> <span class="fu">subset</span>(keep_dat, startMonth <span class="sc">==</span> month)</span>
+<span id="cb114-76"><a href="#cb114-76" tabindex="-1"></a></span>
+<span id="cb114-77"><a href="#cb114-77" tabindex="-1"></a>  <span class="co"># Calculate the average of the surfWaterTempMean column</span></span>
+<span id="cb114-78"><a href="#cb114-78" tabindex="-1"></a>  <span class="co"># use the na.rm value provided by the user of the function</span></span>
+<span id="cb114-79"><a href="#cb114-79" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> <span class="fu">mean</span>(keep_dat<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> na.rm)</span>
+<span id="cb114-80"><a href="#cb114-80" tabindex="-1"></a> </span>
+<span id="cb114-81"><a href="#cb114-81" tabindex="-1"></a>  <span class="co"># Return the calculated value</span></span>
+<span id="cb114-82"><a href="#cb114-82" tabindex="-1"></a>  <span class="fu">return</span>(vals)</span>
+<span id="cb114-83"><a href="#cb114-83" tabindex="-1"></a>}</span></code></pre></div>
 </details>
 <p><br></p>
 <p>There shouldn’t be anything else in this script. Save it (and any
@@ -1638,7 +1645,7 @@ session there shouldn’t be anything in the Environment panel.</p>
 <p>Let’s load the functions that we just created. To run an R script
 without opening it, use the <code>source()</code> command:</p>
 <div class="sourceCode" id="cb115"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;src/functions.R&quot;</span>)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;src/functions.R&quot;</span>)</span></code></pre></div>
 <p>Now look in the Environment panel. What do you see?</p>
 <p>Each of the functions that were in the <code>functions.R</code>
 script we wrote should be available for use!</p>
@@ -1714,10 +1721,10 @@ of unique elements shared between them. For example if
 <code>myfunc()</code> is the name of your function, the following should
 work like this:</p>
 <div class="sourceCode" id="cb116"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)</span>
-<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
-<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a><span class="fu">myfunc</span>(x, y)</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>)</span>
+<span id="cb116-2"><a href="#cb116-2" tabindex="-1"></a>y <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb116-3"><a href="#cb116-3" tabindex="-1"></a></span>
+<span id="cb116-4"><a href="#cb116-4" tabindex="-1"></a><span class="fu">myfunc</span>(x, y)</span></code></pre></div>
 <pre><code>[1] 1</code></pre>
 <p>because <code>"A"</code> is the only element shared by both
 vectors.</p>
@@ -1733,7 +1740,8 @@ class="citation">Zimmerman et al. (2019)</span></a> episodes 2, 9 and 10
 by Jes Coyle.</p>
 <div id="cited-references" class="section level3">
 <h3>Cited References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 <div id="ref-NEON-surfwatertemp" class="csl-entry">
 National Ecological Observatory Network (NEON). 2023. <span>“Temperature
 (PRT) in Surface Water (DP1.20053.001).”</span> National Ecological

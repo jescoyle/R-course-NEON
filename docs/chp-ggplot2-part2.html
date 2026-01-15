@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>chp-ggplot2-part2.knit</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; } /* Alert */
+code span.an { color: #008000; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #0000ff; } /* ControlFlow */
+code span.ch { color: #008080; } /* Char */
+code span.cn { } /* Constant */
+code span.co { color: #008000; } /* Comment */
+code span.cv { color: #008000; } /* CommentVar */
+code span.do { color: #008000; } /* Documentation */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.im { } /* Import */
+code span.in { color: #008000; } /* Information */
+code span.kw { color: #0000ff; } /* Keyword */
+code span.op { } /* Operator */
+code span.ot { color: #ff4000; } /* Other */
+code span.pp { color: #ff4000; } /* Preprocessor */
+code span.sc { color: #008080; } /* SpecialChar */
+code span.ss { color: #008080; } /* SpecialString */
+code span.st { color: #008080; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #008080; } /* VerbatimString */
+code span.wa { color: #008000; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="computer-setup.html">Computer Setup</a>
+</li>
+<li>
+  <a href="NEON-data-intro.html">NEON Data</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Chapters
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="00-module-contents.html">Chapter overview</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Core lessons</li>
+    <li>
+      <a href="chp-computer-navigation.html">1. Computer navigation</a>
+    </li>
+    <li>
+      <a href="chp-intro-to-R.html">2. Intro to R</a>
+    </li>
+    <li>
+      <a href="chp-spreadsheets.html">3. Spreadsheets</a>
+    </li>
+    <li>
+      <a href="chp-data-structures.html">4. Data structures</a>
+    </li>
+    <li>
+      <a href="chp-functions.html">5. Functions</a>
+    </li>
+    <li>
+      <a href="chp-ggplot2-part1.html">6. Intro to ggplot2</a>
+    </li>
+    <li>
+      <a href="chp-program-flow.html">7. Program flow</a>
+    </li>
+    <li>
+      <a href="chp-tidyverse-basics.html">8. Tidy data</a>
+    </li>
+    <li>
+      <a href="chp-ggplot2-part2.html">9. More ggplot2</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="download-student-RStudio-project.html">RStudio Workbook &amp; Exercises</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<div id="chapter-na.-na" class="section level1 tabset">
+<h1 class="tabset">Chapter NA. NA</h1>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<blockquote>
+<p>MOTIVATOR</p>
+</blockquote>
+<p>Brief description of the contents of this lesson.</p>
+<div id="what-we-will-learn" class="section level3">
+<h3>What we will learn</h3>
+<p>In this lesson learners will:</p>
+<ul>
+<li>create multi-panel graphics with multiple data layers using
+ggplot2</li>
+<li>describe how position scales control the way axes are displayed in
+ggplot2</li>
+<li>describe how themes control the way plots are displayed in
+ggplot2</li>
+<li>select inclusive color palettes that are visible to people with
+impaired color vision</li>
+<li>change the default labels in a legend in ggplot2</li>
+<li>add reference lines to a plot in ggplot2</li>
+</ul>
+<div id="key-terms-commands" class="section level4">
+<h4>Key Terms &amp; Commands</h4>
+<ul>
+<li><code>round()</code></li>
+<li><code>format()</code></li>
+</ul>
+</div>
+</div>
+<div id="prerequisites" class="section level3">
+<h3>Prerequisites</h3>
+<p>Before beginning this lesson you should have completed the lesson <a
+href="chp-ggplot2-part1.html">Simple graphs with ggplot2</a> and any
+prerequisites therein.</p>
+<p>Before you begin:</p>
+<ol style="list-style-type: decimal">
+<li>Open the R-course-NEON-workbook RStudio project.</li>
+<li>Create a new R script named lesson_NA_code.R in the lesson-code
+folder of the student workbook.</li>
+<li>Whenever you see R code like this:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">Type</span> (or copy) this into your R script. Then run it <span class="cf">in</span> the Console.</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Whenever you see a challenge like this:</li>
+</ol>
+<div class="challenge">
+<p>Try to solve the problem by writing R code into your script. Check
+your answer by clicking:</p>
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>The code that solves the challenge will appear here.</span></code></pre></div>
+<p>Along with an explanation.</p>
+</div>
+</details>
+</div>
+<p><br></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Be sure to click <strong>Save</strong> often to save your work.</li>
+</ol>
+</div>
+</div>
+<div id="lesson" class="section level2">
+<h2>Lesson</h2>
+<p>As in lesson <a href="chp-program-flow.html">Controlling program
+flow</a>, we are going to download and work with surface data from four
+NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha Creek,
+Washington (MART), Teakettle Creek, California (TECR) and Sycamore
+Creek, Arizona (SYCA). You can see a map of these sites on the <a
+href="https://www.neonscience.org/field-sites/explore-field-sites">NEON
+website</a>. However in this lesson we will be working with chemical
+properties of plankton (<a
+href="https://data.neonscience.org/data-products/DP1.20053.001">[DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001)</a>).</p>
+<p>We will download data from NEON using the
+<code>loadByProduct()</code> function in the <code>neonUtilities</code>
+package. We need to specify the product ID number, sites and dates for
+which we want data and then type <code>y</code> when prompted to
+download the data at the command line.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(neonUtilities)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># Define dates for download: June 1 - Oct 31, 2021</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># but we need to start before June 1 to get the entire month of June</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>startdate <span class="ot">&lt;-</span> <span class="st">&quot;2021-05-31&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>enddate <span class="ot">&lt;-</span> <span class="st">&quot;2021-10-31&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co"># Define the sites to download </span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co"># TECR = Teakettle Creek, SYCA = Sycamore Creek</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co"># MART = Martha Creek, CARI = Caribou Creek</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;SYCA&quot;</span>, <span class="st">&quot;MART&quot;</span>, <span class="st">&quot;CARI&quot;</span>) </span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co"># Define the data product</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>dpID <span class="ot">&lt;-</span> <span class="st">&quot;DP1.20053.001&quot;</span>  <span class="co"># Surface water temperature</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co"># Temperature in surface water</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>watertemp <span class="ot">&lt;-</span> <span class="fu">loadByProduct</span>(<span class="at">dpID =</span> dpID,</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>                           <span class="at">site =</span> sites,</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>                           <span class="at">startdate =</span> startdate,</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>                           <span class="at">enddate =</span> enddate)</span></code></pre></div>
+<p>You should now have a new object named <code>watertemp</code> in the
+Environment panel. It should be a list with nine elements. Let’s extract
+the list element of <code>watertemp</code> that contains the data and
+save it as a separate data frame.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Extract 30 min temperature averages from watertemp</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># and save as a separate data frame</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> watertemp<span class="sc">$</span>TSW_30min</span></code></pre></div>
+<p>Now we have a data frame where each row summarizes temperature
+measurements over a 30 minute period from May - October, 2021 for the
+four sites from which we requested data (TECR, SYCA, MART, CARI).</p>
+<p>The last thing we will do to get these data ready to work with is to
+convert the <code>startDateTime</code> column to a date-time class so
+that we can use it as an actual date. We will use the
+<code>ymd_hms()</code> function from the <code>lubridate()</code>
+package for this.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Load the lubridate package</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># Convert startDateTime to a date-time class</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>TSW_30min<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(TSW_30min<span class="sc">$</span>startDateTime)</span></code></pre></div>
+<pre><code>Warning: 1286 failed to parse.</code></pre>
+<div id="adding-layers" class="section level3">
+<h3>Adding layers</h3>
+<p>add horizontal and vertical reference lines to a plot</p>
+<p>add multiple data layers to a plot and change the order in which they
+are layered</p>
+<div id="statistical-summaries" class="section level4">
+<h4>Statistical summaries</h4>
+<p>add a trendline to a scatterplot using statistics</p>
+<p>add error bars to a bar graph</p>
+</div>
+</div>
+<div id="manipulating-the-axes" class="section level3">
+<h3>Manipulating the axes</h3>
+<div id="position-scales" class="section level4">
+<h4>Position scales</h4>
+<p>describe how position scales control the way axes are displayed in
+ggplot2 “change the scale, limits and breaks on an axis”</p>
+</div>
+<div id="axis-labels" class="section level4">
+<h4>Axis labels</h4>
+</div>
+</div>
+<div id="manipulating-the-legend" class="section level3">
+<h3>Manipulating the legend</h3>
+<div id="text-labels" class="section level4">
+<h4>Text labels</h4>
+<p>change the default labels in a legend (using factor levels or other
+method)</p>
+</div>
+<div id="color-palettes-for-data" class="section level4">
+<h4>Color palettes for data</h4>
+<p>select inclusive color palettes that are visible to people with
+impaired color vision change a discrete and continuous color scale</p>
+</div>
+</div>
+<div id="multi-panel-plots" class="section level3">
+<h3>Multi-panel plots</h3>
+<p>display data in separate panels of a graph using facets</p>
+</div>
+<div id="themes" class="section level3">
+<h3>Themes</h3>
+<p>describe how themes control the way plots are displayed in ggplot2
+“change the default fonts, colors, and sizes using a theme</p>
+<div class="challenge">
+<details>
+<summary>
+<strong>Solution:</strong>
+</summary>
+<div class="solution">
+
+</div>
+</details>
+</div>
+<p><br></p>
+</div>
+<div id="section-2" class="section level3">
+<h3>Section 2</h3>
+<p>Callouts are formatted in the style.css file.</p>
+<div class="callout-trick">
+
+</div>
+<div class="callout-tip">
+
+</div>
+<div class="callout-important">
+
+</div>
+</div>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<p>After completing these exercises, learners will be able to use the
+ggplot2 package in R to:</p>
+<ol style="list-style-type: decimal">
+<li>display data in separate panels of a graph using facets</li>
+<li>add multiple data layers to a plot and change the order in which
+they are layered</li>
+<li>add a trendline to a scatterplot using statistics</li>
+<li>add error bars to a bar graph</li>
+<li>change the scale, limits and breaks on an axis</li>
+<li>change the default fonts, colors, and sizes using a theme</li>
+<li>change a discrete and continuous color scale</li>
+<li>change the text labels in a legend</li>
+<li>add horizontal and vertical reference lines to a plot</li>
+</ol>
+<p>ggplot2-part2 1 display data in separate panels of a graph using
+facets use the ggplot2 package in R to ggplot2-part2 2 add multiple data
+layers to a plot and change the order in which they are layered use the
+ggplot2 package in R to ggplot2-part2 3 add a trendline to a scatterplot
+using statistics use the ggplot2 package in R to ggplot2-part2 4 add
+error bars to a bar graph use the ggplot2 package in R to ggplot2-part2
+5 “change the scale, limits and breaks on an axis” use the ggplot2
+package in R to ggplot2-part2 6 “change the default fonts, colors, and
+sizes using a theme” use the ggplot2 package in R to ggplot2-part2 7
+change a discrete and continuous color scale use the ggplot2 package in
+R to ggplot2-part2 8 change the text labels in a legend use the ggplot2
+package in R to ggplot2-part2 9 add horizontal and vertical reference
+lines to a plot use the ggplot2 package in R to</p>
+<p><strong>NA.1</strong></p>
+<p><strong>NA.2</strong></p>
+</div>
+<div id="sources-and-resources" class="section level2">
+<h2>Sources and Resources</h2>
+<p>This lesson was written by Jes Coyle and adapted from <a
+href="https://swcarpentry.github.io/r-novice-gapminder/"><span
+class="citation">Zimmerman et al. (2019)</span></a> episode 8.</p>
+<div id="additional-resources" class="section level3">
+<h3>Additional Resources</h3>
+</div>
+<div id="cited-references" class="section level3">
+<h3>Cited References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
+<div id="ref-swc-reproducible-lesson" class="csl-entry">
+Zimmerman, Naupaka, Greg Wilson, Raniere Silva, Scott Ritchie, François
+Michonneau, Jeffrey Oliver, Harriet Dashnow, et al. 2019. <span>“<span
+class="nocase">swcarpentry/r-novice-gapminder: Software Carpentry: R for
+Reproducible Scientific Analysis, June 2019</span>.”</span> Zenodo. <a
+href="https://doi.org/10.5281/zenodo.3265164">https://doi.org/10.5281/zenodo.3265164</a>.
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<hr>
+<p>Introduction to Computing in R with NEON</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

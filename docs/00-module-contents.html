@@ -13,7 +13,7 @@
 
 <title>Lesson Contents</title>
 
-<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -274,18 +274,15 @@ $(document).ready(function () {
       <a href="chp-program-flow.html">7. Program flow</a>
     </li>
     <li>
-      <a href="chp-ggplot2-part2.html">8. More ggplot2</a>
+      <a href="chp-tidyverse-basics.html">8. Tidy data</a>
     </li>
     <li>
-      <a href="chp-tidyverse-basics.html">9. Tidy data</a>
+      <a href="chp-ggplot2-part2.html">9. More ggplot2</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="exercises-guide.html">Exercises</a>
-</li>
-<li>
-  <a href="download-student-RStudio-project.html">RStudio Workbook</a>
+  <a href="download-student-RStudio-project.html">RStudio Workbook &amp; Exercises</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -396,6 +393,7 @@ operations</a></h4>
 <ul>
 <li>differentiate between the main data structures and types in R</li>
 <li>manipulate and extract values from data structures using base R</li>
+<li>write expressions containing multiple logical statements</li>
 </ul>
 <p><strong>Computational Skills</strong></p>
 <dl>
@@ -407,12 +405,17 @@ operations</a></h4>
 <ol style="list-style-type: decimal">
 <li>create and extract or set values in vectors, matrices and arrays in
 R</li>
+<li>create and extract or set values in lists in R</li>
+<li>create and manipulate the columns of data frames in R</li>
+<li>subset the rows a of data frame in R</li>
 <li>differentiate between numeric, character, factor and logical data
 types in R</li>
 <li>view the structure and class of an object in R</li>
 <li>write logical test expressions using
 <code>==</code>,<code>!=</code>, <code>&gt;</code>, <code>&lt;</code>,
 and <code>%in%</code></li>
+<li>combine expressions using <code>&amp;</code> (‘and’) and
+<code>|</code> (‘or’)</li>
 </ol>
 </div>
 <div id="chapter-5.-vectorization-and-functions" class="section level4">
@@ -437,9 +440,6 @@ functions</li>
 <ol style="list-style-type: decimal">
 <li>define and use a function with multiple arguments in R</li>
 <li>define default values for function arguments in R</li>
-<li>write checks on argument conditions within a function in R</li>
-<li>differentiate between missing values (<code>NA</code>) and empty
-values (<code>NULL</code>) in R</li>
 <li>use R to source code from a script</li>
 </ol>
 </div>
@@ -461,70 +461,20 @@ ggplot</li>
 <p>After completing this lesson, learners will be able to use the
 ggplot2 package in R to:</p>
 <ol style="list-style-type: decimal">
-<li>create a scatter plot with a linear regression line</li>
+<li>create a scatter plot</li>
 <li>create a line graph</li>
-<li>create a bar chart with error bars</li>
-<li>create a stacked bar chart</li>
+<li>create a bar chart showing a statistical summary within
+categories</li>
+<li>create a stacked bar chart showing counts within categories</li>
+<li>create a boxplot</li>
 <li>map aesthetics to data values</li>
 <li>write axis labels with mathematical notation</li>
 <li>export graphs to a vector-format image with specific dimensions</li>
 </ol>
 </div>
-<div id="chapter-7.-controlling-program-flow" class="section level4">
-<h4><a href="chp-program-flow.html">Chapter 7. Controlling program
-flow</a></h4>
-<p><strong>Learning Objectives</strong></p>
-<p>In this lesson learners will:</p>
-<ul>
-<li>use conditional statements to make data-dependent decisions in
-R</li>
-<li>use loops to repeat things in R</li>
-<li>write expressions containing multiple logical statements in R</li>
-</ul>
-<p><strong>Computational Skills</strong></p>
-<p>After completing this lesson, learners will be able to use R to:</p>
-<ol style="list-style-type: decimal">
-<li>execute if-else statements</li>
-<li>repeat steps using <code>for</code> and <code>while</code>
-loops</li>
-<li>evaluate expressions using <code>&amp;</code> (‘and’) and
-<code>|</code> (‘or’)</li>
-</ol>
-</div>
-<div id="chapter-8.-complex-graphs-with-ggplot2" class="section level4">
-<h4><a href="chp-ggplot2-part2.html">Chapter 8. Complex graphs with
-ggplot2</a></h4>
-<p><strong>Learning Objectives</strong></p>
-<p>In this lesson learners will:</p>
-<ul>
-<li>create multi-panel graphics with multiple data layers using
-ggplot2</li>
-<li>describe how position scales control the way axes are displayed in
-ggplot2</li>
-<li>describe how themes control the way plots are displayed in
-ggplot2</li>
-<li>select inclusive color palettes that are visible to people with
-impaired color vision</li>
-<li>change the default labels in a legend in ggplot2</li>
-<li>add reference lines to a plot in ggplot2</li>
-</ul>
-<p><strong>Computational Skills</strong></p>
-<p>After completing this lesson, learners will be able to use the
-ggplot2 package in R to:</p>
-<ol style="list-style-type: decimal">
-<li>display data in separate panels of a graph using facets</li>
-<li>add multiple data layers to a plot and change the order in which
-they are layered</li>
-<li>change the scale, limits and breaks on an axis</li>
-<li>change the default fonts, colors, and sizes using a theme</li>
-<li>change a discrete and continuous color scale</li>
-<li>change the text labels in a legend</li>
-<li>add horizontal and vertical reference lines to a plot</li>
-</ol>
-</div>
-<div id="chapter-9.-data-manipulation-in-the-tidyverse"
+<div id="chapter-7.-data-manipulation-in-the-tidyverse"
 class="section level4">
-<h4><a href="chp-tidyverse-basics.html">Chapter 9. Data manipulation in
+<h4><a href="chp-tidyverse-basics.html">Chapter 7. Data manipulation in
 the tidyverse</a></h4>
 <p><strong>Learning Objectives</strong></p>
 <p>In this lesson learners will:</p>
@@ -558,6 +508,49 @@ with <code>group_by</code> and <code>summarize</code></li>
 <li>use the tidyr package to compose functions with pipes
 (<code>%&gt;%</code>)</li>
 </ol>
+</div>
+<div id="chapter-8.-controlling-program-flow" class="section level4">
+<h4><a href="chp-program-flow.html">Chapter 8. Controlling program
+flow</a></h4>
+<p><strong>Learning Objectives</strong></p>
+<p>In this lesson learners will:</p>
+<ul>
+<li>use conditional statements to make data-dependent decisions in
+R</li>
+<li>use loops to repeat things in R</li>
+</ul>
+<p><strong>Computational Skills</strong></p>
+<p>After completing this lesson, learners will be able to use R to:</p>
+<ol style="list-style-type: decimal">
+<li>execute if-else statements</li>
+<li>repeat steps using <code>for</code> and <code>while</code>
+loops</li>
+</ol>
+</div>
+<div id="chapter-9.-example-analysis-of-neon-data"
+class="section level4">
+<h4><a href="chp-example-analysis.html">Chapter 9. Example analysis of
+NEON data</a></h4>
+<p><strong>Learning Objectives</strong></p>
+<dl>
+<dt>In this lesson</dt>
+<dd>
+
+</dd>
+</dl>
+<ul>
+<li></li>
+</ul>
+<!-- NOT USING AT THE MOMENT
+
+**Computational Skills**
+
+After completing this lesson, learners will be able to 
+: 
+
+1. 
+
+-->
 <!-- NOT USING AT THE MOMENT
 
 ## Supplemental Chapters

@@ -847,15 +847,24 @@ taxon <em>Afghanurus sp.</em> found at the Martha Creek site:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>inverts <span class="sc">%&gt;%</span> </span>
 <span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="fu">filter</span>(siteID <span class="sc">==</span> <span class="st">&quot;MART&quot;</span>, scientificName <span class="sc">==</span> <span class="st">&quot;Afghanurus sp.&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="fu">select</span>(sampleID, scientificName, sizeClass, estimatedTotalCount)</span></code></pre></div>
-<pre><code>                sampleID scientificName sizeClass estimatedTotalCount
-1   MART.20210728.HESS.6 Afghanurus sp.         4                   1
-2   MART.20210728.HESS.6 Afghanurus sp.         5                   1
-3   MART.20210728.HESS.8 Afghanurus sp.         4                   1
-4 MART.20210728.SURBER.3 Afghanurus sp.         2                   4
-5 MART.20210728.SURBER.5 Afghanurus sp.         3                   1
-6 MART.20210728.SURBER.3 Afghanurus sp.         5                   2
-7 MART.20210728.SURBER.4 Afghanurus sp.         2                   9
-8 MART.20210728.SURBER.2 Afghanurus sp.         3                   1</code></pre>
+<pre><code>                sampleID scientificName sizeClass
+1   MART.20210728.HESS.6 Afghanurus sp.         4
+2   MART.20210728.HESS.6 Afghanurus sp.         5
+3   MART.20210728.HESS.8 Afghanurus sp.         4
+4 MART.20210728.SURBER.3 Afghanurus sp.         2
+5 MART.20210728.SURBER.5 Afghanurus sp.         3
+6 MART.20210728.SURBER.3 Afghanurus sp.         5
+7 MART.20210728.SURBER.4 Afghanurus sp.         2
+8 MART.20210728.SURBER.2 Afghanurus sp.         3
+  estimatedTotalCount
+1                   1
+2                   1
+3                   1
+4                   4
+5                   1
+6                   2
+7                   9
+8                   1</code></pre>
 <p>We can see that two size classes were recorded during the
 <code>MART.20210728.HESS.6</code> sampling event- one individual in the
 4 mm size class and one individual in the 5 mm size class. If we want a
@@ -994,15 +1003,24 @@ sample using a weighted average where we multiple the size class by the
 number of individuals in each size class, then divide by the total
 number of individuals.</p>
 <p>For example, what if we want</p>
-<pre><code>                sampleID scientificName sizeClass estimatedTotalCount
-1   MART.20210728.HESS.6 Afghanurus sp.         4                   1
-2   MART.20210728.HESS.6 Afghanurus sp.         5                   1
-3   MART.20210728.HESS.8 Afghanurus sp.         4                   1
-4 MART.20210728.SURBER.2 Afghanurus sp.         3                   1
-5 MART.20210728.SURBER.3 Afghanurus sp.         2                   4
-6 MART.20210728.SURBER.3 Afghanurus sp.         5                   2
-7 MART.20210728.SURBER.4 Afghanurus sp.         2                   9
-8 MART.20210728.SURBER.5 Afghanurus sp.         3                   1</code></pre>
+<pre><code>                sampleID scientificName sizeClass
+1   MART.20210728.HESS.6 Afghanurus sp.         4
+2   MART.20210728.HESS.6 Afghanurus sp.         5
+3   MART.20210728.HESS.8 Afghanurus sp.         4
+4 MART.20210728.SURBER.2 Afghanurus sp.         3
+5 MART.20210728.SURBER.3 Afghanurus sp.         2
+6 MART.20210728.SURBER.3 Afghanurus sp.         5
+7 MART.20210728.SURBER.4 Afghanurus sp.         2
+8 MART.20210728.SURBER.5 Afghanurus sp.         3
+  estimatedTotalCount
+1                   1
+2                   1
+3                   1
+4                   1
+5                   4
+6                   2
+7                   9
+8                   1</code></pre>
 <p>to show the following:</p>
 <pre><code># A tibble: 6 × 4
 # Groups:   scientificName [1]
@@ -1027,18 +1045,18 @@ number of individuals.</p>
 <span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a>inverts_bytaxa[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span></code></pre></div>
 <pre><code># A tibble: 10 × 5
 # Groups:   siteID, sampleID [1]
-   siteID sampleID                scientificName                 total size_mean
-   &lt;chr&gt;  &lt;chr&gt;                   &lt;chr&gt;                          &lt;dbl&gt;     &lt;dbl&gt;
- 1 CARI   CARI.20210701.KICKNET.1 Ameletus sp.                       3      3   
- 2 CARI   CARI.20210701.KICKNET.1 Baetis foemina                     4      3   
- 3 CARI   CARI.20210701.KICKNET.1 Cinygmula sp.                      1      3   
- 4 CARI   CARI.20210701.KICKNET.1 Corynoneura sp.                    1      2   
- 5 CARI   CARI.20210701.KICKNET.1 Cricotopus sp.                     1      4   
- 6 CARI   CARI.20210701.KICKNET.1 Cricotopus/Orthocladius sp.        6      2.67
- 7 CARI   CARI.20210701.KICKNET.1 Diamesa sp.                       63      2.67
- 8 CARI   CARI.20210701.KICKNET.1 Enchytraeidae sp.                  1      3   
- 9 CARI   CARI.20210701.KICKNET.1 Eukiefferiella claripennis gr.     3      2   
-10 CARI   CARI.20210701.KICKNET.1 Eukiefferiella devonica gr.        3      2   </code></pre>
+   siteID sampleID                scientificName   total size_mean
+   &lt;chr&gt;  &lt;chr&gt;                   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;
+ 1 CARI   CARI.20210701.KICKNET.1 Ameletus sp.         3      3   
+ 2 CARI   CARI.20210701.KICKNET.1 Baetis foemina       4      3   
+ 3 CARI   CARI.20210701.KICKNET.1 Cinygmula sp.        1      3   
+ 4 CARI   CARI.20210701.KICKNET.1 Corynoneura sp.      1      2   
+ 5 CARI   CARI.20210701.KICKNET.1 Cricotopus sp.       1      4   
+ 6 CARI   CARI.20210701.KICKNET.1 Cricotopus/Orth…     6      2.67
+ 7 CARI   CARI.20210701.KICKNET.1 Diamesa sp.         63      2.67
+ 8 CARI   CARI.20210701.KICKNET.1 Enchytraeidae s…     1      3   
+ 9 CARI   CARI.20210701.KICKNET.1 Eukiefferiella …     3      2   
+10 CARI   CARI.20210701.KICKNET.1 Eukiefferiella …     3      2   </code></pre>
 <p>Notice that when calculating <code>mean_size</code> we were able to
 refer to the <code>total</code> column that was already calculated for
 each group, rather than needing to repeat the
@@ -1370,20 +1388,27 @@ column.</p>
 <span id="cb53-4"><a href="#cb53-4" tabindex="-1"></a></span>
 <span id="cb53-5"><a href="#cb53-5" tabindex="-1"></a><span class="co"># View the first few rows</span></span>
 <span id="cb53-6"><a href="#cb53-6" tabindex="-1"></a><span class="fu">head</span>(samples)</span></code></pre></div>
-<pre><code>  siteID               sampleID         collectDate boutNumber habitatType
-1   MART   MART.20210728.HESS.8 2021-07-28 17:33:00          2        pool
-2   MART MART.20210728.SURBER.5 2021-07-28 17:33:00          2      riffle
-3   MART MART.20210728.SURBER.4 2021-07-28 17:33:00          2      riffle
-4   MART   MART.20210728.HESS.6 2021-07-28 17:33:00          2        pool
-5   MART MART.20210728.SURBER.2 2021-07-28 17:33:00          2      riffle
-6   MART   MART.20210728.HESS.7 2021-07-28 17:33:00          2        pool
-  samplerType substratumSizeClass benthicArea collect_ymd num_taxa abundance
-1        hess             boulder       0.086  2021-07-28       45       218
-2      surber              cobble       0.093  2021-07-28       29        86
-3      surber              cobble       0.093  2021-07-28       44      1366
-4        hess              cobble       0.086  2021-07-28       57       257
-5      surber              cobble       0.093  2021-07-28       27       347
-6        hess              cobble       0.086  2021-07-28       54       538</code></pre>
+<pre><code>  siteID               sampleID         collectDate boutNumber
+1   MART   MART.20210728.HESS.8 2021-07-28 17:33:00          2
+2   MART MART.20210728.SURBER.5 2021-07-28 17:33:00          2
+3   MART MART.20210728.SURBER.4 2021-07-28 17:33:00          2
+4   MART   MART.20210728.HESS.6 2021-07-28 17:33:00          2
+5   MART MART.20210728.SURBER.2 2021-07-28 17:33:00          2
+6   MART   MART.20210728.HESS.7 2021-07-28 17:33:00          2
+  habitatType samplerType substratumSizeClass benthicArea
+1        pool        hess             boulder       0.086
+2      riffle      surber              cobble       0.093
+3      riffle      surber              cobble       0.093
+4        pool        hess              cobble       0.086
+5      riffle      surber              cobble       0.093
+6        pool        hess              cobble       0.086
+  collect_ymd num_taxa abundance
+1  2021-07-28       45       218
+2  2021-07-28       29        86
+3  2021-07-28       44      1366
+4  2021-07-28       57       257
+5  2021-07-28       27       347
+6  2021-07-28       54       538</code></pre>
 <p>Now we know the date when each sample was collected along with
 information on diversity and abundance of macroinvertebrates in each
 sample.</p>
@@ -1868,19 +1893,20 @@ phylum in each size class for each sample.</p>
 <p>Your results should look like this:</p>
 <pre><code># A tibble: 537 × 7
 # Groups:   siteID, sampleID, phylum [144]
-   siteID sampleID             phylum sizeClass total benthicArea density_per_m2
-   &lt;chr&gt;  &lt;chr&gt;                &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
- 1 CARI   CARI.20210701.KICKN… Annel…         3     3        0.25             12
- 2 CARI   CARI.20210701.KICKN… Annel…         5     3        0.25             12
- 3 CARI   CARI.20210701.KICKN… Annel…         6     1        0.25              4
- 4 CARI   CARI.20210701.KICKN… Arthr…         1    15        0.25             60
- 5 CARI   CARI.20210701.KICKN… Arthr…         2    54        0.25            216
- 6 CARI   CARI.20210701.KICKN… Arthr…         3    66        0.25            264
- 7 CARI   CARI.20210701.KICKN… Arthr…         4    17        0.25             68
- 8 CARI   CARI.20210701.KICKN… Arthr…         5     7        0.25             28
- 9 CARI   CARI.20210701.KICKN… Arthr…         6     8        0.25             32
-10 CARI   CARI.20210701.KICKN… Arthr…         7     5        0.25             20
-# ℹ 527 more rows</code></pre>
+   siteID sampleID              phylum sizeClass total benthicArea
+   &lt;chr&gt;  &lt;chr&gt;                 &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;
+ 1 CARI   CARI.20210701.KICKNE… Annel…         3     3        0.25
+ 2 CARI   CARI.20210701.KICKNE… Annel…         5     3        0.25
+ 3 CARI   CARI.20210701.KICKNE… Annel…         6     1        0.25
+ 4 CARI   CARI.20210701.KICKNE… Arthr…         1    15        0.25
+ 5 CARI   CARI.20210701.KICKNE… Arthr…         2    54        0.25
+ 6 CARI   CARI.20210701.KICKNE… Arthr…         3    66        0.25
+ 7 CARI   CARI.20210701.KICKNE… Arthr…         4    17        0.25
+ 8 CARI   CARI.20210701.KICKNE… Arthr…         5     7        0.25
+ 9 CARI   CARI.20210701.KICKNE… Arthr…         6     8        0.25
+10 CARI   CARI.20210701.KICKNE… Arthr…         7     5        0.25
+# ℹ 527 more rows
+# ℹ 1 more variable: density_per_m2 &lt;dbl&gt;</code></pre>
 </div>
 <div id="sources-and-resources" class="section level2">
 <h2>Sources and Resources</h2>
