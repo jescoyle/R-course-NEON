@@ -49,4 +49,4 @@ tidyverse-basics	3	`filter` rows from a table	use the dplyr package to
 tidyverse-basics	4	create new columns with `mutate`	use the dplyr package to
 tidyverse-basics	5	calculate summary statistics across factors with `group_by` and `summarize`	use the dplyr package to
 tidyverse-basics	6	change the format of a table from long to wide or wide to long with `pivot` functions from the tidyr package	
-tidyverse-basics	7	compose functions with pipes (`%>%`)	use the tidyr package to
+tidyverse-basics	7	compose functions with pipes (`|>`)	use the tidyr package to

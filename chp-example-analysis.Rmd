@@ -30,6 +30,8 @@ set.seed(10)
 
 ## Overview 
 
+**THIS CHAPTER IS NOT READY FOR LEARNERS**
+
 ### What we will learn
 
 In this lesson we will practice skills from all core lessons to conduct an analysis on NEON data.

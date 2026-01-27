@@ -28,12 +28,10 @@ navbar:
           href: chp-functions.html
         - text: 6. Intro to ggplot2
           href: chp-ggplot2-part1.html
-        - text: 7. Program flow
+        - text: 7. Tidy data
+          href: chp-tidyverse-basics.html          
+        - text: 8. Program flow
           href: chp-program-flow.html
-        - text: 8. Tidy data
-          href: chp-tidyverse-basics.html
-        - text: 9. More ggplot2
-          href: chp-ggplot2-part2.html
     - text: "RStudio Workbook & Exercises"
       href: download-student-RStudio-project.html
 output:
