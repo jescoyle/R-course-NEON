@@ -119,8 +119,8 @@ We are also nearly done with the second goal as well. Let's see how far we can g
 
 ## Use inverts_taxa to calculate the total abundance of
 ## macroinvertebrates in each sample from each site 
-inverts_bysample <- inv_taxa %>%
-    group_by(siteID, sampleID) %>%
+inverts_bysample <- inv_taxa |>
+    group_by(siteID, sampleID) |>
     summarize(total = sum(estimatedTotalCount))
 
 ## Join inverts_bysample with inv_fieldData to determine the 
@@ -128,7 +128,7 @@ inverts_bysample <- inv_taxa %>%
 
  # Since we don't need all the columns, we can just select the columns
  # of interest before joining.
- field_cols <- inv_fieldData %>% 
+ field_cols <- inv_fieldData |> 
    select(sampleID, collectDate, benthicArea)
 
  # Join the invertebrate abundance with field data columns
@@ -139,7 +139,7 @@ inverts_bysample <- inv_taxa %>%
 ## Control for variability in abundance based on the amount 
 ## of area sampled by calculating density = abundance / area`
 
-  inverts_bysample <- inverts_bysample %>%
+  inverts_bysample <- inverts_bysample |>
     mutate(density_per_m2 = total / benthicArea)
  
  
@@ -148,7 +148,7 @@ inverts_bysample <- inv_taxa %>%
   
   
   # Make a column that extracts the date from collectDate
-  inverts_bysample <- inverts_bysample %>%
+  inverts_bysample <- inverts_bysample |>
     mutate(collect_day = date(collectDate))
   # Note: we could have combined this step with the last
   # step and created  two columns with one `mutate()`.
@@ -156,8 +156,8 @@ inverts_bysample <- inv_taxa %>%
   # Summarize the samples by date and site
   # calculate average macroinvertebrate density
   # calculate number of samples averaged 
-  inverts_bysite <- inverts_bysample %>%
-    group_by(siteID, collect_day) %>%
+  inverts_bysite <- inverts_bysample |>
+    group_by(siteID, collect_day) |>
     summarize(density_per_m2 = mean(density_per_m2),
               n_samples = n()) 
     
@@ -165,8 +165,8 @@ inverts_bysample <- inv_taxa %>%
 ## Calculate average temperature across both sensors for 
 ## each time point at each site and save this in a new table
   
-  TSW_avg <- TSW_30min_good %>%
-    group_by(siteID, startDateTime) %>%
+  TSW_avg <- TSW_30min_good |>
+    group_by(siteID, startDateTime) |>
     summarize(temp_avg_C = mean(surfWaterTempMean),
               n_obs = n()) # keep track of the number of measurements averaged
   
@@ -175,7 +175,7 @@ inverts_bysample <- inv_taxa %>%
 ## for the four sites.
   
   # Temperature vs. time colored by site
-  TSW_avg %>% 
+  TSW_avg |> 
     ggplot(aes(x = startDateTime, y = temp_avg_C, color = siteID)) +
     geom_line() +
     labs(x = "Date",
@@ -183,7 +183,7 @@ inverts_bysample <- inv_taxa %>%
          color = "NEON Site")
   
   # Macroinvertebrate density vs. time
-  inverts_bysite %>% 
+  inverts_bysite |> 
     ggplot(aes(x = collect_day, y = density_per_m2, color = siteID)) +
     geom_point() +
     geom_line() +
@@ -254,7 +254,7 @@ Now that we have macroinvertebrate abundance and temperature in the same data fr
 ## Connect points from the same site with arrows pointing from the 
 ## first to the second sample.
 
-inverts_bysite %>%
+inverts_bysite |>
   ggplot(aes(x = temp_avg_3day, y = density_per_m2)) + 
     geom_point(aes(color = siteID)) + 
     labs(x = expression("Surface water temperature"~(degree*C)),

@@ -57,7 +57,7 @@ In this lesson
 #### Key Terms & Commands
 
 * split-apply-combine operations
-* pipes (`%>%`)
+* pipes (`|>`)
 * outer vs. inner joins
 * `select()`
 * `filter()`
@@ -212,7 +212,7 @@ Now we have a three data frames. Click on each one in the Environment panel to s
 
 The [`dplyr`](https://dplyr.tidyverse.org/) package provides a number of very useful functions for manipulating data frames in a way that will reduce repetition, reduce the probability of making errors, and probably even save you some typing. As an added bonus, you might even find the `dplyr` grammar easier to read.
 
-Here we're going to cover 5 of the most commonly used functions and demonstrate how to use pipes (`%>%`) to combine them.
+Here we're going to cover 5 of the most commonly used functions and demonstrate how to use pipes (`|>`) to combine them.
 
 1. `select()`
 2. `filter()`
@@ -265,12 +265,12 @@ Above we used 'normal' grammar, but the strengths of `dplyr` lie in combining se
 Since the pipes grammar is unlike anything we've seen in R before, let's repeat what we've done above using pipes.
 
 ```{r}
-inverts <- inv_taxa %>% select(siteID, sampleID, scientificName, 
+inverts <- inv_taxa |> select(siteID, sampleID, scientificName, 
                                taxonRank, phylum, class, order, family, genus,
                                sizeClass, estimatedTotalCount)
 ```
 
-To help you understand why we wrote that in that way, let's walk through it step by step. First we summon the `inv_taxa` data frame and pass it on, using the pipe symbol `%>%`, to the next function, `select()`. If you open the help file for `select()` (type `?select` into the Console), you will see that the first argument in `select()` is `.data` which takes a data frame. Therefore, we don't need to specify a data object inside the `select()` function because it received that from the previous pipe. 
+To help you understand why we wrote that in that way, let's walk through it step by step. First we summon the `inv_taxa` data frame and pass it on, using the pipe symbol `|>`, to the next function, `select()`. If you open the help file for `select()` (type `?select` into the Console), you will see that the first argument in `select()` is `.data` which takes a data frame. Therefore, we don't need to specify a data object inside the `select()` function because it received that from the previous pipe. 
 
 
 #### Use **`filter()`** to subset rows
@@ -284,24 +284,24 @@ insects <- subset(inverts, class == "Insecta")
 Here's how to do the same operation using `filter()` from the `dplyr` package.
 
 ```{r}
-insects <- inverts %>% filter(class == "Insecta")
+insects <- inverts |> filter(class == "Insecta")
 ```
 
 Or, if we don't need the intermediate `inverts` data frame, we could have performed both operations at once using a pipe:
 
 ```{r}
-insects <- inv_taxa %>%
+insects <- inv_taxa |>
   select(siteID, sampleID, scientificName, 
          taxonRank, phylum, class, order, family, genus,
-         sizeClass, estimatedTotalCount) %>%
+         sizeClass, estimatedTotalCount) |>
     filter(class == "Insecta")
 ```
 
 Notice that for these two functions, the order in which we do them doesn't matter. We could have written:
 
 ```{r}
-insects <- inv_taxa %>%
-  filter(class == "Insecta") %>%
+insects <- inv_taxa |>
+  filter(class == "Insecta") |>
   select(siteID, sampleID, scientificName, 
          taxonRank, order, family, genus,
          sizeClass, estimatedTotalCount)
@@ -313,8 +313,8 @@ Actually- writing the operations in this order means that we no longer need the 
 The `filter()` function can be used with multiple filters, each provided as an argument and separated by commas:
 
 ```{r}
-insects_big_MART <- inverts %>%
-  filter(class == "Insecta", sizeClass >= 4, siteID == "MART") %>%
+insects_big_MART <- inverts |>
+  filter(class == "Insecta", sizeClass >= 4, siteID == "MART") |>
   select(-siteID, -phylum, -class)
 ```
 
@@ -337,7 +337,7 @@ What do you think the code above did? Check your guess by clicking on the `insec
 <br>
 
 :::{.callout-important}
-The first argument in any `dplyr` function that can manipulate data is a `.data` argument that takes a data frame. This is why the pipe (`%>%`) works to compose `dplyr` functions together- it is passing the output of one function (a data frame) to the first argument of the next function, which is always `.data`.
+The first argument in any `dplyr` function that can manipulate data is a `.data` argument that takes a data frame. This is why the pipe (`|>`) works to compose `dplyr` functions together- it is passing the output of one function (a data frame) to the first argument of the next function, which is always `.data`.
 
 Thus, a pipe will work with any function whose first argument takes a data frame. This includes `ggplot()` and functions in the `tidyr` package, which we will learn about later in this lesson.
 
@@ -354,8 +354,8 @@ Write a single command (which can span multiple lines and includes pipes) that t
 ::: {.solution}
 
 ```{r}
-arachnids_CARI <- inv_taxa %>%
-  filter(class == "Arachnida", siteID == "CARI") %>%
+arachnids_CARI <- inv_taxa |>
+  filter(class == "Arachnida", siteID == "CARI") |>
   select(sampleID, scientificName, sizeClass, estimatedTotalCount)
 ```
 
@@ -375,7 +375,7 @@ When working in a script in RStudio, you can use tab-completion inside the `sele
 
 For example, if you have typed the following
 ```{r eval = FALSE}
-inv_taxa %>%
+inv_taxa |>
   filter(
 
 
@@ -391,8 +391,8 @@ pressing <kbd>tab</kbd> when your cursor is inside the open parentheses will bri
 Suppose we want to count the number of individuals of each invertebrate taxon found in each sample. We know that some taxa can occur in multiple size classes- for example, let's look at the mayfly taxon *Afghanurus sp.* found at the Martha Creek site:
 
 ```{r}
-inverts %>% 
-  filter(siteID == "MART", scientificName == "Afghanurus sp.") %>%
+inverts |> 
+  filter(siteID == "MART", scientificName == "Afghanurus sp.") |>
   select(sampleID, scientificName, sizeClass, estimatedTotalCount)
 
 ```
@@ -411,7 +411,7 @@ str(inverts)
 
 Here is the structure of a grouped data frame:
 ```{r}
-str(inverts %>% group_by(siteID))
+str(inverts |> group_by(siteID))
 ```
 You will notice that the structure of the data frame where we used `group_by()` is called a `grouped_df` and is not quite the same as the original `inverts` (a `data.frame`). A `grouped_df` can be thought of as a `list` where each item in the `list`is a `data.frame` which contains only the rows that correspond to a particular
 value in the `siteID` column (at least in the example above). You can see this at the bottom of the output above showing the groups attribute (`-attr(*, "groups")`) is based on the `siteID` column which is divided into three groups of `.rows`.
@@ -422,8 +422,8 @@ Combining `group_by()` with `summarize()` will allow us split the `inverts` data
 
 ```{r}
 # Calculate the total abundance of all inverts sampled at each site
-inverts_bysite <- inverts %>%
-    group_by(siteID) %>%
+inverts_bysite <- inverts |>
+    group_by(siteID) |>
     summarize(total = sum(estimatedTotalCount))
 
 inverts_bysite
@@ -437,8 +437,8 @@ The function `group_by()` allows us to group by multiple variables. Let's group 
 
 
 ```{r message = FALSE}
-inverts_bysample <- inverts %>%
-    group_by(siteID, sampleID) %>%
+inverts_bysample <- inverts |>
+    group_by(siteID, sampleID) |>
     summarize(total = sum(estimatedTotalCount))
 
 inverts_bysample
@@ -455,8 +455,8 @@ Use `group_by()` and `summarize()` to calculate the total number of individuals 
 ::: {.solution}
 
 ```{r message = FALSE}
-inverts_bytaxa <- inverts %>%
-    group_by(siteID, sampleID, scientificName) %>%
+inverts_bytaxa <- inverts |>
+    group_by(siteID, sampleID, scientificName) |>
     summarize(total = sum(estimatedTotalCount))
 
 ```
@@ -480,9 +480,9 @@ Let's calculate a the mean length of individuals in each taxon and sample using 
 For example, what if we want 
 
 ```{r echo = FALSE, message = FALSE}
-inverts %>% 
-  filter(siteID == "MART", scientificName == "Afghanurus sp.") %>%
-  select(sampleID, scientificName, sizeClass, estimatedTotalCount) %>%
+inverts |> 
+  filter(siteID == "MART", scientificName == "Afghanurus sp.") |>
+  select(sampleID, scientificName, sizeClass, estimatedTotalCount) |>
   arrange(sampleID, sizeClass)
 
 ```
@@ -490,11 +490,11 @@ inverts %>%
 to show the following:
 
 ```{r echo = FALSE, message = FALSE}
-inverts %>% 
-  filter(siteID == "MART", scientificName == "Afghanurus sp.") %>%
-  select(sampleID, scientificName, sizeClass, estimatedTotalCount) %>%
-  arrange(sampleID, sizeClass) %>%
-  group_by(scientificName, sampleID) %>%
+inverts |> 
+  filter(siteID == "MART", scientificName == "Afghanurus sp.") |>
+  select(sampleID, scientificName, sizeClass, estimatedTotalCount) |>
+  arrange(sampleID, sizeClass) |>
+  group_by(scientificName, sampleID) |>
   summarize(total = sum(estimatedTotalCount),
             size_mean = sum(sizeClass*estimatedTotalCount)/total)
 ```
@@ -502,8 +502,8 @@ inverts %>%
 To calculate this weighted average, we should take the sum of the product of the `sizeClass` and `estimatedTotalCount` columns, then divide by the total number of individuals.
 
 ```{r message = FALSE}
-inverts_bytaxa <- inverts %>%
-    group_by(siteID, sampleID, scientificName) %>%
+inverts_bytaxa <- inverts |>
+    group_by(siteID, sampleID, scientificName) |>
     summarize(total = sum(estimatedTotalCount),
             size_mean = sum(sizeClass*estimatedTotalCount)/total)
 
@@ -536,7 +536,7 @@ TSW_30min_good <- filter(TSW_30min, finalQF == 0)
 
 # Group the good data by site then summarize by calculating 
 # mean, minimum and maximum of the temperature variables
-TSW_bysite <- group_by(TSW_30min_good, siteID) %>%
+TSW_bysite <- group_by(TSW_30min_good, siteID) |>
   summarize(temp_mean = mean(surfWaterTempMean),
             temp_min = min(surfWaterTempMinimum),
             temp_max = max(surfWaterTempMaximum)
@@ -548,9 +548,9 @@ Here's how to solve this problem without creating an intermediate data frame:
 
 ```{r}
 # Filter the temperature data to good observations
-TSW_bysite <- TSW_30min %>%
-  filter(finalQF == 0) %>%
-  group_by(siteID) %>%
+TSW_bysite <- TSW_30min |>
+  filter(finalQF == 0) |>
+  group_by(siteID) |>
   summarize(temp_mean = mean(surfWaterTempMean),
             temp_min = min(surfWaterTempMinimum),
             temp_max = max(surfWaterTempMaximum)
@@ -575,8 +575,8 @@ Let's use what we have learned to investigate where this large value might be co
 ```{r}
 # Filter TSW_30min to rows where max temp seems too high
 # Only print useful columns
-TSW_30min %>% 
-  filter(surfWaterTempMaximum > 30) %>%
+TSW_30min |> 
+  filter(surfWaterTempMaximum > 30) |>
   select(siteID, horizontalPosition, startDateTime, 
          starts_with("surfWaterTempM"), 
          finalQF)
@@ -587,8 +587,8 @@ Let's go back to the list of surface water temperature data (`watertemp_list`) a
 
 ```{r}
 
-watertemp_list$TSW_5min %>%
-  filter(siteID == "CARI", horizontalPosition == 101, surfWaterTempMaximum > 30) %>%
+watertemp_list$TSW_5min |>
+  filter(siteID == "CARI", horizontalPosition == 101, surfWaterTempMaximum > 30) |>
   select(siteID, horizontalPosition, startDateTime, 
          starts_with("surfWaterTempM"), 
          finalQF)
@@ -670,9 +670,9 @@ Create a table named `invert_samples` based on `inv_fieldData` that contains inf
 
 ```{r}
 # Create a table that contains relevant info about each invert sample
-invert_samples <- inv_fieldData %>%
+invert_samples <- inv_fieldData |>
   select(siteID, sampleID, collectDate, boutNumber, 
-         habitatType, samplerType, substratumSizeClass, benthicArea) %>%
+         habitatType, samplerType, substratumSizeClass, benthicArea) |>
   mutate(collect_ymd = date(collectDate))
 ```
 
@@ -694,8 +694,8 @@ The `n()` function will return the number of observations (rows) in each group. 
 # Group the samples by collection date and site
 # Tally the number of samples and count the number
 # of distinct types of habitat
-invert_samples %>%
-  group_by(siteID, collect_ymd) %>%
+invert_samples |>
+  group_by(siteID, collect_ymd) |>
   summarize(num_samples = n(),
             num_habitats = length(unique(habitatType)))
 ```
@@ -714,8 +714,8 @@ Use `group_by()` and `summarize()` on the `inverts` data frame to create a new d
 Your code should generate this table and it will have 48 rows:
 
 ```{r echo = FALSE}
-inverts_bysample <- inverts %>% 
-  group_by(sampleID) %>%
+inverts_bysample <- inverts |> 
+  group_by(sampleID) |>
   summarize(num_taxa = length(unique(scientificName)),
             abundance = sum(estimatedTotalCount)
   )
@@ -732,8 +732,8 @@ head(inverts_bysample, n = 8)
 ```{r }
 # Create a table that summarizes the abundance and diversity
 # of macroinvertebrates in each sample
-inverts_bysample <- inverts %>% 
-  group_by(sampleID) %>%
+inverts_bysample <- inverts |> 
+  group_by(sampleID) |>
   summarize(num_taxa = length(unique(scientificName)),
             abundance = sum(estimatedTotalCount))
 
@@ -815,8 +815,8 @@ Suppose we want to compare which taxa are found at each of the three sites acros
 ```{r message = FALSE}
 # Calculate the total number of individuals sampled 
 # from each taxon at each site
-inverts_bytaxa_bysite <- inverts %>%
-    group_by(siteID, scientificName) %>%
+inverts_bytaxa_bysite <- inverts |>
+    group_by(siteID, scientificName) |>
     summarize(total = sum(estimatedTotalCount))
 
 # view the data frame
@@ -847,7 +847,7 @@ Here's how this works in our example:
 ```{r}
 # Create a site x taxon table that gives
 # abundance of each taxon at each site
-siteBytaxa_abun <- inverts_bytaxa_bysite %>% 
+siteBytaxa_abun <- inverts_bytaxa_bysite |> 
   pivot_wider(names_from = siteID,
               values_from = total)
 
@@ -861,7 +861,7 @@ By default, if a taxon was missing at a site, the function filled in `NA`. Since
 ```{r}
 # Create a site x taxon table that gives
 # abundance of each taxon at each site
-siteBytaxa_abun <- inverts_bytaxa_bysite %>% 
+siteBytaxa_abun <- inverts_bytaxa_bysite |> 
   pivot_wider(names_from = siteID,
               values_from = total,
               values_fill = 0)
@@ -876,7 +876,7 @@ This table makes it easy to quickly view which taxa are more abundant at differe
 ```{r}
 # Which taxa are present at all three sites
 # and most abundant at Caribou Creek?
-siteBytaxa_abun %>% filter(CARI > 0, MART > 0, TECR > 0,
+siteBytaxa_abun |> filter(CARI > 0, MART > 0, TECR > 0,
                            CARI > MART, CARI > TECR)
 
 ```
@@ -971,8 +971,8 @@ We've nearly finished Goal 1. Here's all of the code together that accomplishes 
 ## each site (which were collected at different locations and on two 
 ## separate sampling dates).
 
- inverts_bysite <- inv_taxa %>% 
-   group_by(siteID) %>%
+ inverts_bysite <- inv_taxa |> 
+   group_by(siteID) |>
    summarize(num_taxa = length(unique(scientificName)))
 
  # Output a table comparing these values.
@@ -990,7 +990,7 @@ A bar graph is a good choice for displaying these data:
 library(ggplot2)
 
 # Make a bar graph 
-inverts_bysite %>%
+inverts_bysite |>
   ggplot(aes(x = siteID, y = num_taxa)) +
     geom_col() +
     labs(x = "NEON site code", 
@@ -1013,21 +1013,21 @@ Here's some additional functions you might be interested to learn about:
 The `rename()` function can be used to rename columns in a dataframe.
 
 ```{r}
-inverts_bysite %>% rename(site = siteID)
+inverts_bysite |> rename(site = siteID)
 
 ```
 
 The `arrange()` function will reorder the rows of a data frame according to the values in one or more columns.
 
 ```{r}
-inverts_bysite %>% arrange(density_per_m2)
+inverts_bysite |> arrange(density_per_m2)
 
 ```
 
 You can use the `desc()` function inside `arrange()` to put value in descending order.
 
 ```{r}
-inverts_bysite %>% arrange(desc(collect_day))
+inverts_bysite |> arrange(desc(collect_day))
 
 ```
 
@@ -1035,19 +1035,19 @@ You can also arrange rows by multiple columns.
 
 
 ```{r}
-inverts_bysite %>% arrange(siteID, desc(collect_day))
+inverts_bysite |> arrange(siteID, desc(collect_day))
 
 ```
 
 Instead of the `table()` function, you can used the `count()` function to tabulate the number of observations in groups within one or more columns.
 
 ```{r}
-inverts_bysample %>%
+inverts_bysample |>
   count(siteID, collectDate)
 
 ```
 ```{r}
-inv_taxa %>%
+inv_taxa |>
   count(siteID, phylum)
 
 ```
@@ -1077,8 +1077,8 @@ Create a new table from `inv_taxa` that contains all of the same rows, but only 
 The first few rows should look like this:
 
 ```{r echo = FALSE}
-inv_taxa %>%
-  select(siteID, sampleID, genus, specificEpithet) %>%
+inv_taxa |>
+  select(siteID, sampleID, genus, specificEpithet) |>
   head()
 
 ```
@@ -1088,7 +1088,7 @@ inv_taxa %>%
 Create a new table from `TSW_30min` that only contains observations from the Caribou Creek site (CARI) where the minimum surface water temperature was greater than 10 degrees Celsius.
 
 ```{r include = FALSE}
-solution.2 <- TSW_30min %>%
+solution.2 <- TSW_30min |>
   filter(siteID == "CARI", surfWaterTempMinimum > 10)
 
 ```
@@ -1100,9 +1100,9 @@ The resulting data frame should have `r nrow(solution.2)` rows.
 Use the `TSW_30min` data to calculate average monthly mean surface water temperature at each of the three sites. Your solution should use pipes to compose functions and result in exactly this table:
 
 ```{r echo = FALSE, message=FALSE}
-solution.3 <- TSW_30min %>%  
-  mutate(month = month(startDateTime)) %>%
-  group_by(siteID, month) %>%
+solution.3 <- TSW_30min |>  
+  mutate(month = month(startDateTime)) |>
+  group_by(siteID, month) |>
   summarize(temp_avg_C = mean(surfWaterTempMean, na.rm = TRUE))
 
 solution.3
@@ -1114,7 +1114,7 @@ solution.3
 Convert the data frame in exercise `r .chp_num`.3 to wide format where values for each site are in separate columns, like this:
 
 ```{r echo = FALSE}
-solution.3 %>%
+solution.3 |>
   pivot_wider(names_from = siteID, values_from = temp_avg_C)
 
 ```
@@ -1124,10 +1124,10 @@ solution.3 %>%
 Use the `TSW_30min` data to calculate average, minimum and maximum monthly surface water temperature at the Caribou Creek site (CARI). Your solution should use pipes to compose functions and result in exactly this table:
 
 ```{r echo = FALSE}
-TSW_30min %>%
-  filter(siteID == "CARI") %>%
-  mutate(month = month(startDateTime)) %>%
-  group_by(month) %>%
+TSW_30min |>
+  filter(siteID == "CARI") |>
+  mutate(month = month(startDateTime)) |>
+  group_by(month) |>
   summarize(temp_avg_C = mean(surfWaterTempMean, na.rm = TRUE),
             temp_min_C = min(surfWaterTempMinimum, na.rm = TRUE),
             temp_max_C = max(surfWaterTempMaximum, na.rm = TRUE))
@@ -1143,9 +1143,9 @@ The `week()` function can extract the week of the year from a date-time object.
 Your solution should use pipes to compose functions and result in exactly this table:
 
 ```{r echo = FALSE, message = FALSE, warning  = FALSE}
-solution.6 <- TSW_30min %>%
-  mutate(week = week(startDateTime)) %>%
-  group_by(siteID, week) %>%
+solution.6 <- TSW_30min |>
+  mutate(week = week(startDateTime)) |>
+  group_by(siteID, week) |>
   summarize(temp_avg_C = mean(surfWaterTempMean, na.rm = TRUE),
             temp_min_C = min(surfWaterTempMinimum, na.rm = TRUE),
             temp_max_C = max(surfWaterTempMaximum, na.rm = TRUE))
@@ -1165,9 +1165,9 @@ Hint: Use the month for each `collect_day` as one of the keys to join the two ta
 Your final table should look exactly like this:
 
 ```{r echo = FALSE, message = FALSE}
-inverts_bysite %>%
-  mutate(month = month(collect_day)) %>%
-  left_join(solution.3) %>%
+inverts_bysite |>
+  mutate(month = month(collect_day)) |>
+  left_join(solution.3) |>
   select(siteID, month, collect_day, density_per_m2, temp_avg_C)
 
 ```
@@ -1179,8 +1179,8 @@ Use `inv_taxa` to make a table that compares the total abundance of different ma
 Your results should look like this:
 
 ```{r echo = FALSE, message = FALSE}
-solution.8 <- inv_taxa %>%
-  group_by(siteID, sampleID, phylum, sizeClass) %>%
+solution.8 <- inv_taxa |>
+  group_by(siteID, sampleID, phylum, sizeClass) |>
   summarize(total = sum(estimatedTotalCount))
 
 solution.8
@@ -1194,11 +1194,11 @@ Join the table you created in exercise `r .chp_num`.8 with the `benthicArea` col
 Your results should look like this:
 
 ```{r echo = FALSE, message = FALSE}
-field_cols.9 <- inv_fieldData %>%
+field_cols.9 <- inv_fieldData |>
   select(sampleID, benthicArea) 
 
-solution.8 %>%
-  left_join(field_cols.9) %>%
+solution.8 |>
+  left_join(field_cols.9) |>
   mutate(density_per_m2 = total/benthicArea)
 ```
 

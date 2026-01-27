@@ -923,6 +923,8 @@ table(missing_dates)
 
 ```
 
+## Synthesis
+
 ### Putting it all together
 
 In addition to nearly continuous measurements of water quality, NEON collects water samples several times per year and measures microbial abundance and diversity. How might water quality impact (or be affected by) the concentration of microbial cells in the water?

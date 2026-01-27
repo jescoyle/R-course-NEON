@@ -184,9 +184,9 @@ nitrate_15min <- read.csv(file.path("data/NEON_water", paste0(paste("nitrate_15m
 ### Create an aggregated data frame from the downstream sensor HOR.VER = 102.1
 ### with water temperature, nitrate, water quality averaged every 30 mins
 
-temp <- watertemp_30min %>% 
-  filter(horizontalPosition == 102, finalQF == 0) %>%
-  select(siteID, startDateTime, endDateTime, surfWaterTempMean) %>%
+temp <- watertemp_30min |> 
+  filter(horizontalPosition == 102, finalQF == 0) |>
+  select(siteID, startDateTime, endDateTime, surfWaterTempMean) |>
   mutate(startDateTime = ymd_hms(startDateTime),
          endDateTime = ymd_hms(endDateTime),
          sampleInterval = interval(startDateTime, endDateTime))
@@ -205,8 +205,8 @@ temp$whichInt <- sapply(temp$sampleInterval, function(x){
 any(is.na(temp$whichInt))
 
 # Subset the nitrate data to only the samples at the sensor 2
-nitrate <- nitrate_15min %>%
-  filter(horizontalPosition == 102, finalQF == 0) %>%
+nitrate <- nitrate_15min |>
+  filter(horizontalPosition == 102, finalQF == 0) |>
   mutate(startDateTime = ymd_hms(startDateTime),
          endDateTime = ymd_hms(endDateTime),
          sampleInterval = interval(startDateTime, endDateTime))
@@ -220,13 +220,13 @@ nitrate$whichInt <- sapply(nitrate$sampleInterval, function(x){
 any(is.na(nitrate$whichInt))
 
 # Calculate average within each 30 time interval
-nitrate_mean <- nitrate %>%
-  group_by(whichInt) %>%
+nitrate_mean <- nitrate |>
+  group_by(whichInt) |>
   summarize(surfWaterNitrate.mean = mean(surfWaterNitrateMean, na.rm = TRUE))
 
 # Subset the water quality data to only samples at sensor 2
-waterqual <- waterqual_inst %>%
-  filter(horizontalPosition == 102) %>%
+waterqual <- waterqual_inst |>
+  filter(horizontalPosition == 102) |>
   mutate(startDateTime = ymd_hms(startDateTime),
          endDateTime = ymd_hms(endDateTime),
          sampleInterval = interval(startDateTime, endDateTime))
@@ -239,8 +239,8 @@ waterqual$whichInt <- sapply(waterqual$sampleInterval, function(x){
 any(is.na(waterqual$whichInt))
 
 # Calculate average within each 30 time interval
-waterqual_mean <- waterqual %>%
-  group_by(whichInt) %>%
+waterqual_mean <- waterqual |>
+  group_by(whichInt) |>
   summarize(specificConductance.mean = mean(specificConductance, na.rm = TRUE),
             dissolvedOxygen.mean = mean(dissolvedOxygen, na.rm = TRUE),
             pH.mean = mean(pH, na.rm = TRUE),
@@ -253,23 +253,23 @@ waterqual_mean <- waterqual %>%
 surfwater_30min <- data.frame(whichInt = 1:length(ints_30min), sampleInterval = ints_30min, siteID = "TECR")
 
 # Add on temperature data with only the necessary columns. Standardize variables names to match other data
-surfwater_30min <- temp %>%
+surfwater_30min <- temp |>
   transmute(whichInt,
-            surfWaterTemp.mean = surfWaterTempMean) %>%
+            surfWaterTemp.mean = surfWaterTempMean) |>
   right_join(surfwater_30min)
 
 # Add on nitrate and water quality data
-surfwater_30min <- surfwater_30min %>%
-  left_join(nitrate_mean) %>%
+surfwater_30min <- surfwater_30min |>
+  left_join(nitrate_mean) |>
   left_join(waterqual_mean)
 
 # Order by date
-surfwater_30min <- surfwater_30min %>% arrange(whichInt)
+surfwater_30min <- surfwater_30min |> arrange(whichInt)
 
 # Reorder columns and convert time interval to start and end time points
-surfwater_30min <- surfwater_30min %>%
+surfwater_30min <- surfwater_30min |>
   mutate(startDateTime = as.character(int_start(sampleInterval)),
-         endDateTime = as.character(int_end(sampleInterval))) %>%
+         endDateTime = as.character(int_end(sampleInterval))) |>
   select(siteID, startDateTime, endDateTime, contains(".mean"))
 
 
@@ -351,17 +351,17 @@ intro_to_R.dat <- merge(soilCO2_30min[, !(colnames(soilCO2_30min) %in% drop_vars
 library(ggplot2)
 library(dplyr)
 
-intro_to_R.dat %>%
+intro_to_R.dat |>
   ggplot(aes(y = soilTempMean, x = startDateTime, color = verticalPosition)) +
   geom_line() +
   facet_wrap(~ horizontalPosition)
 
-intro_to_R.dat %>%
+intro_to_R.dat |>
   ggplot(aes(y = soilCO2concentrationMean, x = startDateTime, color = verticalPosition)) +
   geom_line() +
   facet_wrap(~ horizontalPosition)
 
-intro_to_R.dat %>%
+intro_to_R.dat |>
   ggplot(aes(y = soilCO2concentrationMean, x = soilTempMean, color = verticalPosition)) +
   geom_point() +
   facet_wrap(~ horizontalPosition)
