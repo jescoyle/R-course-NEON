@@ -205,7 +205,7 @@ grViz('digraph html {
 
       labelloc="t";
       fontname="Courier";
-      label="inverts %>%\\l\tgroup_by(a)";
+      label="inverts |>\\l\tgroup_by(a)";
       }
       ')
 
@@ -378,6 +378,6 @@ grViz('digraph html {
       
       labelloc="t";
       fontname="Courier";
-      label="inverts %>%\\l\tgroup_by(a) %>%\\l\tsummarize(sum_b=sum(b))\\l";
+      label="inverts |>\\l\tgroup_by(a) |>\\l\tsummarize(sum_b=sum(b))\\l";
       }
       ')

@@ -1,6 +1,9 @@
+# This script concatenates code from all chapters into a single handout.
+# It is not currently in use.
+
 library(knitr)
 
-rmd_files <- list.files(pattern = "^[0-9]{2}.+Rmd$")
+rmd_files <- list.files(pattern = "^chp.+Rmd$")
 if (length(rmd_files) < 1) stop("Rmd files are missing")
 
 out_files <- gsub("\\.Rmd$", ".R", rmd_files)

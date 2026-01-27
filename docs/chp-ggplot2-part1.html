@@ -392,13 +392,13 @@ $(document).ready(function () {
       <a href="chp-ggplot2-part1.html">6. Intro to ggplot2</a>
     </li>
     <li>
-      <a href="chp-program-flow.html">7. Program flow</a>
+      <a href="chp-tidyverse-basics.html">7. Tidy data</a>
     </li>
     <li>
-      <a href="chp-tidyverse-basics.html">8. Tidy data</a>
+      <a href="chp-program-flow.html">8. Program flow</a>
     </li>
     <li>
-      <a href="chp-ggplot2-part2.html">9. More ggplot2</a>
+      <a href="chp-example-analysis.html">9. Example analysis</a>
     </li>
   </ul>
 </li>
@@ -430,6 +430,7 @@ $(document).ready(function () {
 <div id="chapter-6.-simple-graphs-with-ggplot2"
 class="section level1 tabset">
 <h1 class="tabset">Chapter 6. Simple graphs with ggplot2</h1>
+<p><strong>THIS CHAPTER IS NOT READY FOR LEARNERS</strong></p>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <blockquote>
@@ -550,30 +551,22 @@ will open a new tabe in the Source panel so that you can see what these
 data look like.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Print a statistical summary of the variables in msleep</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">summary</span>(msleep)</span></code></pre></div>
-<pre><code>     name              genus               vore          
- Length:83          Length:83          Length:83         
- Class :character   Class :character   Class :character  
- Mode  :character   Mode  :character   Mode  :character  
-                                                         
-                                                         
-                                                         
-                                                         
-    order           conservation        sleep_total   
- Length:83          Length:83          Min.   : 1.90  
- Class :character   Class :character   1st Qu.: 7.85  
- Mode  :character   Mode  :character   Median :10.10  
-                                       Mean   :10.43  
-                                       3rd Qu.:13.75  
-                                       Max.   :19.90  
-                                                      
-   sleep_rem      sleep_cycle         awake      
- Min.   :0.100   Min.   :0.1167   Min.   : 4.10  
- 1st Qu.:0.900   1st Qu.:0.1833   1st Qu.:10.25  
- Median :1.500   Median :0.3333   Median :13.90  
- Mean   :1.875   Mean   :0.4396   Mean   :13.57  
- 3rd Qu.:2.400   3rd Qu.:0.5792   3rd Qu.:16.15  
- Max.   :6.600   Max.   :1.5000   Max.   :22.10  
- NA&#39;s   :22      NA&#39;s   :51                      
+<pre><code>     name              genus               vore              order          
+ Length:83          Length:83          Length:83          Length:83         
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+ conservation        sleep_total      sleep_rem      sleep_cycle         awake      
+ Length:83          Min.   : 1.90   Min.   :0.100   Min.   :0.1167   Min.   : 4.10  
+ Class :character   1st Qu.: 7.85   1st Qu.:0.900   1st Qu.:0.1833   1st Qu.:10.25  
+ Mode  :character   Median :10.10   Median :1.500   Median :0.3333   Median :13.90  
+                    Mean   :10.43   Mean   :1.875   Mean   :0.4396   Mean   :13.57  
+                    3rd Qu.:13.75   3rd Qu.:2.400   3rd Qu.:0.5792   3rd Qu.:16.15  
+                    Max.   :19.90   Max.   :6.600   Max.   :1.5000   Max.   :22.10  
+                                    NA&#39;s   :22      NA&#39;s   :51                      
     brainwt            bodywt        
  Min.   :0.00014   Min.   :   0.005  
  1st Qu.:0.00290   1st Qu.:   0.174  
@@ -646,8 +639,8 @@ you need.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Scatterplot of REM sleep time vs total sleep time</span></span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> msleep, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sleep_total, <span class="at">y =</span> sleep_rem)) <span class="sc">+</span></span>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<pre><code>Warning: Removed 22 rows containing missing values or values outside the
-scale range (`geom_point()`).</code></pre>
+<pre><code>Warning: Removed 22 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
 <p><img src="images/rmd-06-unnamed-chunk-10-1.png" width="50%" style="display: block; margin: auto;" />
 Notice that we receive a warning about missing values. This is telling
 us that 22 rows of data were not plotted because one of the variables we
@@ -728,12 +721,10 @@ data on sleep and so are not included in the plot:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Print the data for species with brain mass over 3 kg</span></span>
 <span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">subset</span>(msleep, brainwt <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code># A tibble: 2 × 11
-  name        genus vore  order conservation sleep_total sleep_rem
-  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;
-1 Asian elep… Elep… herbi Prob… en                   3.9        NA
-2 African el… Loxo… herbi Prob… vu                   3.3        NA
-# ℹ 4 more variables: sleep_cycle &lt;dbl&gt;, awake &lt;dbl&gt;,
-#   brainwt &lt;dbl&gt;, bodywt &lt;dbl&gt;</code></pre>
+  name    genus vore  order conservation sleep_total sleep_rem sleep_cycle awake brainwt bodywt
+  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1 Asian … Elep… herbi Prob… en                   3.9        NA          NA  20.1    4.60   2547
+2 Africa… Loxo… herbi Prob… vu                   3.3        NA          NA  20.7    5.71   6654</code></pre>
 <p>If we remake the graph using a data set that omits any species with
 missing sleep data, then the legend values for point size will rescale
 appropriately:</p>
@@ -860,8 +851,7 @@ levels are just the values present in the vector.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>conservation_fact <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>conservation)</span>
 <span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a><span class="fu">levels</span>(conservation_fact)</span></code></pre></div>
-<pre><code>[1] &quot;domesticated&quot; &quot;en&quot;           &quot;lc&quot;           &quot;nt&quot;          
-[5] &quot;vu&quot;          </code></pre>
+<pre><code>[1] &quot;domesticated&quot; &quot;en&quot;           &quot;lc&quot;           &quot;nt&quot;           &quot;vu&quot;          </code></pre>
 <p>If we make the <code>conservation</code> column into a factor and
 define our own more informative levels, then the <code>aes()</code>
 function will use our more informative level names to label the
@@ -882,10 +872,9 @@ backtick (```) around list element names that had spaces in them.</p>
 <span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a></span>
 <span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a><span class="co"># View the first 10 elements </span></span>
 <span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>dat<span class="sc">$</span>conservation[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
-<pre><code> [1] &lt;NA&gt;          least concern domesticated  domesticated 
- [5] least concern least concern domesticated  domesticated 
- [9] least concern &lt;NA&gt;         
-5 Levels: domesticated least concern ... endangered</code></pre>
+<pre><code> [1] &lt;NA&gt;          least concern domesticated  domesticated  least concern least concern
+ [7] domesticated  domesticated  least concern &lt;NA&gt;         
+Levels: domesticated least concern vulnerable near threatened endangered</code></pre>
 <p>Now when we create the graph, the new factor levels are used in the
 legend.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, </span>
@@ -900,8 +889,7 @@ legend.</p>
 The order in which we specified the levels determined the order in which
 colors were assigned.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="fu">levels</span>(dat<span class="sc">$</span>conservation)</span></code></pre></div>
-<pre><code>[1] &quot;domesticated&quot;    &quot;least concern&quot;   &quot;vulnerable&quot;     
-[4] &quot;near threatened&quot; &quot;endangered&quot;     </code></pre>
+<pre><code>[1] &quot;domesticated&quot;    &quot;least concern&quot;   &quot;vulnerable&quot;      &quot;near threatened&quot; &quot;endangered&quot;     </code></pre>
 </div>
 </div>
 <div id="geometries" class="section level3">

@@ -392,13 +392,13 @@ $(document).ready(function () {
       <a href="chp-ggplot2-part1.html">6. Intro to ggplot2</a>
     </li>
     <li>
-      <a href="chp-program-flow.html">7. Program flow</a>
+      <a href="chp-tidyverse-basics.html">7. Tidy data</a>
     </li>
     <li>
-      <a href="chp-tidyverse-basics.html">8. Tidy data</a>
+      <a href="chp-program-flow.html">8. Program flow</a>
     </li>
     <li>
-      <a href="chp-ggplot2-part2.html">9. More ggplot2</a>
+      <a href="chp-example-analysis.html">9. Example analysis</a>
     </li>
   </ul>
 </li>
@@ -931,13 +931,11 @@ vector of integers in order:</p>
 function:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="co"># What is the difference in the output of these two commands?</span></span>
 <span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a><span class="fu">rep</span>(firstNames, <span class="dv">4</span>)</span>
-<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span></span>
-<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a> [<span class="dv">7</span>] <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span> </span>
-<span id="cb48-5"><a href="#cb48-5" tabindex="-1"></a>[<span class="dv">13</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span> </span>
-<span id="cb48-6"><a href="#cb48-6" tabindex="-1"></a><span class="fu">rep</span>(firstNames, <span class="at">each =</span> <span class="dv">4</span>)</span>
-<span id="cb48-7"><a href="#cb48-7" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span></span>
-<span id="cb48-8"><a href="#cb48-8" tabindex="-1"></a> [<span class="dv">7</span>] <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>   </span>
-<span id="cb48-9"><a href="#cb48-9" tabindex="-1"></a>[<span class="dv">13</span>] <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span> </span></code></pre></div>
+<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>  </span>
+<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a>[<span class="dv">10</span>] <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span> </span>
+<span id="cb48-5"><a href="#cb48-5" tabindex="-1"></a><span class="fu">rep</span>(firstNames, <span class="at">each =</span> <span class="dv">4</span>)</span>
+<span id="cb48-6"><a href="#cb48-6" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>   </span>
+<span id="cb48-7"><a href="#cb48-7" tabindex="-1"></a>[<span class="dv">10</span>] <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span> </span></code></pre></div>
 <div class="challenge">
 <p>Can you predict what each of the following lines of code will
 return?</p>
@@ -969,16 +967,15 @@ from <code>ages</code> we need to first create a vector containing the
 integers 1 and 3: <code>c(1, 3)</code> and then place this inside the
 brackets: <code>ages[c(1, 3)]</code>.</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="fu">c</span>(firstNames, ages)</span>
-<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;18&quot;</span>      <span class="st">&quot;19&quot;</span>     </span>
-<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a>[<span class="dv">7</span>] <span class="st">&quot;21&quot;</span>      <span class="st">&quot;17&quot;</span>     </span></code></pre></div>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;18&quot;</span>      <span class="st">&quot;19&quot;</span>      <span class="st">&quot;21&quot;</span>      <span class="st">&quot;17&quot;</span>     </span></code></pre></div>
 <p>Notice that when we concatenated <code>firstNames</code> and
 <code>ages</code> all of the ages turned into text with each number
 surrounded by quotes. This is because all elements in a vector must have
 the same data type, either numbers or text, but not both. R tried to fix
 this by using the data type of the first vector we supplied.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="fu">rep</span>(firstNames, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
-<span id="cb53-2"><a href="#cb53-2" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>   </span>
-<span id="cb53-3"><a href="#cb53-3" tabindex="-1"></a> [<span class="dv">7</span>] <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span> </span>
+<span id="cb53-2"><a href="#cb53-2" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span> </span>
+<span id="cb53-3"><a href="#cb53-3" tabindex="-1"></a>[<span class="dv">10</span>] <span class="st">&quot;Arturo&quot;</span> </span>
 <span id="cb53-4"><a href="#cb53-4" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, firstNames)</span>
 <span id="cb53-5"><a href="#cb53-5" tabindex="-1"></a>Warning<span class="sc">:</span> NAs introduced by coercion</span>
 <span id="cb53-6"><a href="#cb53-6" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, firstNames)<span class="sc">:</span> invalid <span class="st">&#39;times&#39;</span> argument</span></code></pre></div>
@@ -1044,32 +1041,30 @@ session.</p>
 <p><code>ls</code> will list all of the variables and functions stored
 in the global environment (your working R session):</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code> [1] &quot;A&quot;                     &quot;ages&quot;                 
- [3] &quot;avg_temp&quot;              &quot;B&quot;                    
- [5] &quot;C&quot;                     &quot;calc_monthly_avg&quot;     
- [7] &quot;calc_uncertainty&quot;      &quot;calc_uncertainty_NA&quot;  
- [9] &quot;calc_uncertainty_NULL&quot; &quot;conservation_fact&quot;    
-[11] &quot;dat&quot;                   &quot;dat1&quot;                 
-[13] &quot;dat2&quot;                  &quot;DOvals_bad&quot;           
-[15] &quot;DOvals_good&quot;           &quot;evens&quot;                
-[17] &quot;fahr_to_celsius&quot;       &quot;fahr_to_kelvin&quot;       
-[19] &quot;firstNames&quot;            &quot;i&quot;                    
-[21] &quot;kelvin_to_celsius&quot;     &quot;m&quot;                    
-[23] &quot;microbe_wq_data&quot;       &quot;microbes&quot;             
-[25] &quot;missing_dates&quot;         &quot;missing_temp&quot;         
-[27] &quot;my_function&quot;           &quot;myfunc&quot;               
-[29] &quot;n&quot;                     &quot;N&quot;                    
-[31] &quot;odds&quot;                  &quot;pH_top10&quot;             
-[33] &quot;sitelist&quot;              &quot;sites&quot;                
-[35] &quot;sites2&quot;                &quot;surfwater&quot;            
-[37] &quot;surfwater_Aug&quot;         &quot;temp_vals&quot;            
-[39] &quot;these_dates&quot;           &quot;this_time&quot;            
-[41] &quot;TSW_30min&quot;             &quot;use_dat&quot;              
-[43] &quot;watertemp&quot;             &quot;watertemp_upstream&quot;   
-[45] &quot;wq&quot;                    &quot;x&quot;                    
-[47] &quot;X&quot;                     &quot;y&quot;                    
-[49] &quot;Y&quot;                     &quot;z&quot;                    
-[51] &quot;Z&quot;                    </code></pre>
+<pre><code> [1] &quot;A&quot;                     &quot;add_indent&quot;            &quot;ages&quot;                 
+ [4] &quot;avg_temp&quot;              &quot;B&quot;                     &quot;C&quot;                    
+ [7] &quot;calc_monthly_avg&quot;      &quot;calc_uncertainty&quot;      &quot;calc_uncertainty_NA&quot;  
+[10] &quot;calc_uncertainty_NULL&quot; &quot;chptable&quot;              &quot;conservation_fact&quot;    
+[13] &quot;corechps&quot;              &quot;dat&quot;                   &quot;dat1&quot;                 
+[16] &quot;dat2&quot;                  &quot;DOvals_bad&quot;            &quot;DOvals_good&quot;          
+[19] &quot;evens&quot;                 &quot;fahr_to_celsius&quot;       &quot;fahr_to_kelvin&quot;       
+[22] &quot;filelines&quot;             &quot;firstNames&quot;            &quot;i&quot;                    
+[25] &quot;indent_len&quot;            &quot;insert_line&quot;           &quot;kelvin_to_celsius&quot;    
+[28] &quot;m&quot;                     &quot;make_menu_item&quot;        &quot;menu_labels&quot;          
+[31] &quot;menu_links&quot;            &quot;menu_text_core&quot;        &quot;menu_text_supp&quot;       
+[34] &quot;microbe_wq_data&quot;       &quot;microbes&quot;              &quot;missing_dates&quot;        
+[37] &quot;missing_temp&quot;          &quot;my_function&quot;           &quot;myfunc&quot;               
+[40] &quot;n&quot;                     &quot;N&quot;                     &quot;newfilelines&quot;         
+[43] &quot;odds&quot;                  &quot;out_files&quot;             &quot;pH_top10&quot;             
+[46] &quot;project_filename&quot;      &quot;project_name&quot;          &quot;r_file_content&quot;       
+[49] &quot;r_files&quot;               &quot;rmd_files&quot;             &quot;sitelist&quot;             
+[52] &quot;sites&quot;                 &quot;sites2&quot;                &quot;suppchps&quot;             
+[55] &quot;surfwater&quot;             &quot;surfwater_Aug&quot;         &quot;temp_vals&quot;            
+[58] &quot;these_dates&quot;           &quot;this_time&quot;             &quot;TSW_30min&quot;            
+[61] &quot;use_dat&quot;               &quot;watertemp&quot;             &quot;watertemp_upstream&quot;   
+[64] &quot;wq&quot;                    &quot;x&quot;                     &quot;X&quot;                    
+[67] &quot;y&quot;                     &quot;Y&quot;                     &quot;z&quot;                    
+[70] &quot;Z&quot;                    </code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but
 we still needed to give the parentheses to tell R to call the
 function.</p>
@@ -1107,7 +1102,7 @@ instead of a listing of objects.</p>
     }
     else all.names
 }
-&lt;bytecode: 0x000001fd73caf398&gt;
+&lt;bytecode: 0x000001cbe2017378&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 <p>What’s going on here?</p>
 <p>Like everything in R, <code>ls</code> is the name of an object, and
@@ -1276,9 +1271,8 @@ window in RStudio.</p>
 <summary>
 <strong>Solution:</strong>
 </summary>
-<pre><code>Warning in file(file, &quot;rt&quot;): cannot open file
-&#39;watertemp_30min_TECR_2021-04_2021-10.csv&#39;: No such file or
-directory</code></pre>
+<pre><code>Warning in file(file, &quot;rt&quot;): cannot open file &#39;watertemp_30min_TECR_2021-04_2021-10.csv&#39;: No
+such file or directory</code></pre>
 <pre><code>Error in file(file, &quot;rt&quot;): cannot open the connection</code></pre>
 </details>
 <p>What does this text mean? It is a warning that the function did not
@@ -1545,18 +1539,17 @@ have numerical values.</p>
 them:</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a><span class="co"># View the date component of each value (but only from rows 1 - 10)</span></span>
 <span id="cb96-2"><a href="#cb96-2" tabindex="-1"></a><span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb96-3"><a href="#cb96-3" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span></span>
-<span id="cb96-4"><a href="#cb96-4" tabindex="-1"></a> [<span class="dv">5</span>] <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span></span>
-<span id="cb96-5"><a href="#cb96-5" tabindex="-1"></a> [<span class="dv">9</span>] <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span></span>
-<span id="cb96-6"><a href="#cb96-6" tabindex="-1"></a></span>
-<span id="cb96-7"><a href="#cb96-7" tabindex="-1"></a><span class="co"># What was the most recent date that data were recorded in this data set?</span></span>
-<span id="cb96-8"><a href="#cb96-8" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime))</span>
-<span id="cb96-9"><a href="#cb96-9" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;2021-10-31&quot;</span></span>
+<span id="cb96-3"><a href="#cb96-3" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span></span>
+<span id="cb96-4"><a href="#cb96-4" tabindex="-1"></a> [<span class="dv">8</span>] <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span></span>
+<span id="cb96-5"><a href="#cb96-5" tabindex="-1"></a></span>
+<span id="cb96-6"><a href="#cb96-6" tabindex="-1"></a><span class="co"># What was the most recent date that data were recorded in this data set?</span></span>
+<span id="cb96-7"><a href="#cb96-7" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime))</span>
+<span id="cb96-8"><a href="#cb96-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;2021-10-31&quot;</span></span>
+<span id="cb96-9"><a href="#cb96-9" tabindex="-1"></a></span>
 <span id="cb96-10"><a href="#cb96-10" tabindex="-1"></a></span>
-<span id="cb96-11"><a href="#cb96-11" tabindex="-1"></a></span>
-<span id="cb96-12"><a href="#cb96-12" tabindex="-1"></a><span class="co"># What was the earliest date that data were recorded in this data set?</span></span>
-<span id="cb96-13"><a href="#cb96-13" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime))</span>
-<span id="cb96-14"><a href="#cb96-14" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;2021-04-01&quot;</span></span></code></pre></div>
+<span id="cb96-11"><a href="#cb96-11" tabindex="-1"></a><span class="co"># What was the earliest date that data were recorded in this data set?</span></span>
+<span id="cb96-12"><a href="#cb96-12" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime))</span>
+<span id="cb96-13"><a href="#cb96-13" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;2021-04-01&quot;</span></span></code></pre></div>
 <p>We can also use the <code>plot()</code> function to make a
 scatterplot if we specify which values should be the <code>x</code>
 coordinate and which should be the <code>y</code> coordinate:</p>

@@ -392,13 +392,13 @@ $(document).ready(function () {
       <a href="chp-ggplot2-part1.html">6. Intro to ggplot2</a>
     </li>
     <li>
-      <a href="chp-program-flow.html">7. Program flow</a>
+      <a href="chp-tidyverse-basics.html">7. Tidy data</a>
     </li>
     <li>
-      <a href="chp-tidyverse-basics.html">8. Tidy data</a>
+      <a href="chp-program-flow.html">8. Program flow</a>
     </li>
     <li>
-      <a href="chp-ggplot2-part2.html">9. More ggplot2</a>
+      <a href="chp-example-analysis.html">9. Example analysis</a>
     </li>
   </ul>
 </li>
@@ -582,8 +582,7 @@ think this will change the type of data in the vector?</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>pH_top10[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>pH_top10</span></code></pre></div>
-<pre><code> [1]       NA 7.248333 7.240000 7.232333 7.230333 7.229333
- [7] 7.229333 7.229667 7.227667 7.223667</code></pre>
+<pre><code> [1]       NA 7.248333 7.240000 7.232333 7.230333 7.229333 7.229333 7.229667 7.227667 7.223667</code></pre>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">typeof</span>(pH_top10)</span></code></pre></div>
 <pre><code>[1] &quot;double&quot;</code></pre>
 <p>The data type stays the same. Now what do you think will happen if we
@@ -597,10 +596,9 @@ replace the first value with something more ambiguous:</p>
 <summary>
 Answer:
 </summary>
-<pre><code> [1] &quot;7.2 or 7.3&quot;       &quot;7.24833333333333&quot; &quot;7.24&quot;            
- [4] &quot;7.23233333333333&quot; &quot;7.23033333333333&quot; &quot;7.22933333333333&quot;
- [7] &quot;7.22933333333333&quot; &quot;7.22966666666667&quot; &quot;7.22766666666667&quot;
-[10] &quot;7.22366666666667&quot;</code></pre>
+<pre><code> [1] &quot;7.2 or 7.3&quot;       &quot;7.24833333333333&quot; &quot;7.24&quot;             &quot;7.23233333333333&quot;
+ [5] &quot;7.23033333333333&quot; &quot;7.22933333333333&quot; &quot;7.22933333333333&quot; &quot;7.22966666666667&quot;
+ [9] &quot;7.22766666666667&quot; &quot;7.22366666666667&quot;</code></pre>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <p>The vector now has type character because all elements in the vector
 must have the same data type and “7.2 or 7.3” is not a number.</p>
@@ -615,8 +613,7 @@ to interpret the text as a number and if it can’t it will produce
 typos.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">as.numeric</span>(pH_top10)</span></code></pre></div>
 <pre><code>Warning: NAs introduced by coercion</code></pre>
-<pre><code> [1]       NA 7.248333 7.240000 7.232333 7.230333 7.229333
- [7] 7.229333 7.229667 7.227667 7.223667</code></pre>
+<pre><code> [1]       NA 7.248333 7.240000 7.232333 7.230333 7.229333 7.229333 7.229667 7.227667 7.223667</code></pre>
 <p>The output warns us that coercing to a numeric vector created missing
 values. The new numeric vector shows us that the first element was not a
 number, but the rest of the data were.</p>
@@ -679,8 +676,7 @@ sites that data could come from.</p>
 <span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a></span>
 <span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a><span class="co"># View the contents of the vector and its class</span></span>
 <span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a>sites</span></code></pre></div>
-<pre><code> [1] &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot;
- [9] &quot;TECR&quot; &quot;TECR&quot;</code></pre>
+<pre><code> [1] &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot;</code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="fu">class</span>(sites)</span></code></pre></div>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a><span class="co"># Convert to a factor</span></span>
@@ -702,8 +698,7 @@ onto this factor?</p>
 <span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a>sites2 <span class="ot">&lt;-</span> <span class="fu">c</span>(sites, <span class="st">&quot;ABCD&quot;</span>)</span>
 <span id="cb46-3"><a href="#cb46-3" tabindex="-1"></a></span>
 <span id="cb46-4"><a href="#cb46-4" tabindex="-1"></a>sites2</span></code></pre></div>
-<pre><code> [1] &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;   
- [9] &quot;1&quot;    &quot;1&quot;    &quot;ABCD&quot;</code></pre>
+<pre><code> [1] &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;1&quot;    &quot;ABCD&quot;</code></pre>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="fu">class</span>(sites2)</span></code></pre></div>
 <pre><code>[1] &quot;character&quot;</code></pre>
 <p>The factor was converted back to a character vector to match the type
@@ -927,12 +922,10 @@ main difference is that each element in this list has a
 <div class="sourceCode" id="cb104"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a><span class="co"># What are the names of the elements in surfwater?</span></span>
 <span id="cb104-2"><a href="#cb104-2" tabindex="-1"></a><span class="fu">names</span>(surfwater)</span></code></pre></div>
-<pre><code> [1] &quot;siteID&quot;                   &quot;startDateTime&quot;           
- [3] &quot;endDateTime&quot;              &quot;surfWaterTemp.mean&quot;      
- [5] &quot;surfWaterNitrate.mean&quot;    &quot;specificConductance.mean&quot;
- [7] &quot;dissolvedOxygen.mean&quot;     &quot;pH.mean&quot;                 
- [9] &quot;chlorophyll.mean&quot;         &quot;turbidity.mean&quot;          
-[11] &quot;fDOM.mean&quot;               </code></pre>
+<pre><code> [1] &quot;siteID&quot;                   &quot;startDateTime&quot;            &quot;endDateTime&quot;             
+ [4] &quot;surfWaterTemp.mean&quot;       &quot;surfWaterNitrate.mean&quot;    &quot;specificConductance.mean&quot;
+ [7] &quot;dissolvedOxygen.mean&quot;     &quot;pH.mean&quot;                  &quot;chlorophyll.mean&quot;        
+[10] &quot;turbidity.mean&quot;           &quot;fDOM.mean&quot;               </code></pre>
 <div class="sourceCode" id="cb106"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a><span class="co"># What are the names of the elements in sitelist?</span></span>
 <span id="cb106-2"><a href="#cb106-2" tabindex="-1"></a><span class="fu">names</span>(sitelist)</span></code></pre></div>
@@ -964,10 +957,8 @@ though this is not commonly done.</p>
 <div class="sourceCode" id="cb112"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" tabindex="-1"></a><span class="co"># Print the first 10 elements in the 3rd column of the surfwater data frame</span></span>
 <span id="cb112-2"><a href="#cb112-2" tabindex="-1"></a>surfwater[[<span class="dv">3</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
-<pre><code> [1] &quot;2021-04-01 00:30:00&quot; &quot;2021-04-01 01:00:00&quot;
- [3] &quot;2021-04-01 01:30:00&quot; &quot;2021-04-01 02:00:00&quot;
- [5] &quot;2021-04-01 02:30:00&quot; &quot;2021-04-01 03:00:00&quot;
- [7] &quot;2021-04-01 03:30:00&quot; &quot;2021-04-01 04:00:00&quot;
+<pre><code> [1] &quot;2021-04-01 00:30:00&quot; &quot;2021-04-01 01:00:00&quot; &quot;2021-04-01 01:30:00&quot; &quot;2021-04-01 02:00:00&quot;
+ [5] &quot;2021-04-01 02:30:00&quot; &quot;2021-04-01 03:00:00&quot; &quot;2021-04-01 03:30:00&quot; &quot;2021-04-01 04:00:00&quot;
  [9] &quot;2021-04-01 04:30:00&quot; &quot;2021-04-01 05:00:00&quot;</code></pre>
 <p>In contrast, a <strong>matrix</strong> is like a 2-dimensional
 vector- all of the elements must have the same data type. One way to
@@ -1006,14 +997,12 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="#cb1
 <pre><code> [1] 2.05 2.10 2.15 2.20 2.25 2.30 2.30 2.30 2.30 2.30</code></pre>
 <div class="sourceCode" id="cb130"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" tabindex="-1"></a>surfwater[<span class="dv">3</span>, ] <span class="co"># the third row</span></span></code></pre></div>
-<pre><code>  siteID       startDateTime         endDateTime
-3   TECR 2021-04-01 01:00:00 2021-04-01 01:30:00
-  surfWaterTemp.mean surfWaterNitrate.mean
-3              3.582                  2.15
-  specificConductance.mean dissolvedOxygen.mean pH.mean
-3                 27.34967               10.419    7.24
-  chlorophyll.mean turbidity.mean fDOM.mean
-3        0.7696667          1.542    36.229</code></pre>
+<pre><code>  siteID       startDateTime         endDateTime surfWaterTemp.mean surfWaterNitrate.mean
+3   TECR 2021-04-01 01:00:00 2021-04-01 01:30:00              3.582                  2.15
+  specificConductance.mean dissolvedOxygen.mean pH.mean chlorophyll.mean turbidity.mean
+3                 27.34967               10.419    7.24        0.7696667          1.542
+  fDOM.mean
+3    36.229</code></pre>
 <div class="challenge">
 <p>What class of object is returned by each of the commands above?</p>
 <details>
@@ -1062,12 +1051,10 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="#cb1
 <div class="sourceCode" id="cb142"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" tabindex="-1"></a><span class="co"># View the column names of surfwater</span></span>
 <span id="cb142-2"><a href="#cb142-2" tabindex="-1"></a><span class="fu">colnames</span>(surfwater)</span></code></pre></div>
-<pre><code> [1] &quot;siteID&quot;                   &quot;startDateTime&quot;           
- [3] &quot;endDateTime&quot;              &quot;surfWaterTemp.mean&quot;      
- [5] &quot;surfWaterNitrate.mean&quot;    &quot;specificConductance.mean&quot;
- [7] &quot;dissolvedOxygen.mean&quot;     &quot;pH.mean&quot;                 
- [9] &quot;chlorophyll.mean&quot;         &quot;turbidity.mean&quot;          
-[11] &quot;fDOM.mean&quot;               </code></pre>
+<pre><code> [1] &quot;siteID&quot;                   &quot;startDateTime&quot;            &quot;endDateTime&quot;             
+ [4] &quot;surfWaterTemp.mean&quot;       &quot;surfWaterNitrate.mean&quot;    &quot;specificConductance.mean&quot;
+ [7] &quot;dissolvedOxygen.mean&quot;     &quot;pH.mean&quot;                  &quot;chlorophyll.mean&quot;        
+[10] &quot;turbidity.mean&quot;           &quot;fDOM.mean&quot;               </code></pre>
 <p>Column and row names make it easier to extract data from matrices and
 dataframes because you don’t need to remember which row or column the
 data you need are in. Instead of using an integer index to access a
@@ -1140,50 +1127,39 @@ frames.</p>
 <div class="sourceCode" id="cb156"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" tabindex="-1"></a><span class="co"># Make a new data frame that contains the first 5 rows of surfwater duplicated</span></span>
 <span id="cb156-2"><a href="#cb156-2" tabindex="-1"></a><span class="fu">rbind</span>(surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,], surfwater[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span></code></pre></div>
-<pre><code>   siteID       startDateTime         endDateTime
-1    TECR 2021-04-01 00:00:00 2021-04-01 00:30:00
-2    TECR 2021-04-01 00:30:00 2021-04-01 01:00:00
-3    TECR 2021-04-01 01:00:00 2021-04-01 01:30:00
-4    TECR 2021-04-01 01:30:00 2021-04-01 02:00:00
-5    TECR 2021-04-01 02:00:00 2021-04-01 02:30:00
-6    TECR 2021-04-01 00:00:00 2021-04-01 00:30:00
-7    TECR 2021-04-01 00:30:00 2021-04-01 01:00:00
-8    TECR 2021-04-01 01:00:00 2021-04-01 01:30:00
-9    TECR 2021-04-01 01:30:00 2021-04-01 02:00:00
-10   TECR 2021-04-01 02:00:00 2021-04-01 02:30:00
-   surfWaterTemp.mean surfWaterNitrate.mean
-1               3.792                  2.05
-2               3.712                  2.10
-3               3.582                  2.15
-4               3.423                  2.20
-5               3.258                  2.25
-6               3.792                  2.05
-7               3.712                  2.10
-8               3.582                  2.15
-9               3.423                  2.20
-10              3.258                  2.25
-   specificConductance.mean dissolvedOxygen.mean  pH.mean
-1                  27.39500             10.36000 7.252000
-2                  27.35267             10.38167 7.248333
-3                  27.34967             10.41900 7.240000
-4                  27.36433             10.46733 7.232333
-5                  27.38633             10.51767 7.230333
-6                  27.39500             10.36000 7.252000
-7                  27.35267             10.38167 7.248333
-8                  27.34967             10.41900 7.240000
-9                  27.36433             10.46733 7.232333
-10                 27.38633             10.51767 7.230333
-   chlorophyll.mean turbidity.mean fDOM.mean
-1         0.6916667      0.9673333  35.25833
-2         0.7323333      1.2106667  35.74600
-3         0.7696667      1.5420000  36.22900
-4         0.8136667      1.6146667  36.68633
-5         0.8063333      1.5096667  36.87733
-6         0.6916667      0.9673333  35.25833
-7         0.7323333      1.2106667  35.74600
-8         0.7696667      1.5420000  36.22900
-9         0.8136667      1.6146667  36.68633
-10        0.8063333      1.5096667  36.87733</code></pre>
+<pre><code>   siteID       startDateTime         endDateTime surfWaterTemp.mean surfWaterNitrate.mean
+1    TECR 2021-04-01 00:00:00 2021-04-01 00:30:00              3.792                  2.05
+2    TECR 2021-04-01 00:30:00 2021-04-01 01:00:00              3.712                  2.10
+3    TECR 2021-04-01 01:00:00 2021-04-01 01:30:00              3.582                  2.15
+4    TECR 2021-04-01 01:30:00 2021-04-01 02:00:00              3.423                  2.20
+5    TECR 2021-04-01 02:00:00 2021-04-01 02:30:00              3.258                  2.25
+6    TECR 2021-04-01 00:00:00 2021-04-01 00:30:00              3.792                  2.05
+7    TECR 2021-04-01 00:30:00 2021-04-01 01:00:00              3.712                  2.10
+8    TECR 2021-04-01 01:00:00 2021-04-01 01:30:00              3.582                  2.15
+9    TECR 2021-04-01 01:30:00 2021-04-01 02:00:00              3.423                  2.20
+10   TECR 2021-04-01 02:00:00 2021-04-01 02:30:00              3.258                  2.25
+   specificConductance.mean dissolvedOxygen.mean  pH.mean chlorophyll.mean turbidity.mean
+1                  27.39500             10.36000 7.252000        0.6916667      0.9673333
+2                  27.35267             10.38167 7.248333        0.7323333      1.2106667
+3                  27.34967             10.41900 7.240000        0.7696667      1.5420000
+4                  27.36433             10.46733 7.232333        0.8136667      1.6146667
+5                  27.38633             10.51767 7.230333        0.8063333      1.5096667
+6                  27.39500             10.36000 7.252000        0.6916667      0.9673333
+7                  27.35267             10.38167 7.248333        0.7323333      1.2106667
+8                  27.34967             10.41900 7.240000        0.7696667      1.5420000
+9                  27.36433             10.46733 7.232333        0.8136667      1.6146667
+10                 27.38633             10.51767 7.230333        0.8063333      1.5096667
+   fDOM.mean
+1   35.25833
+2   35.74600
+3   36.22900
+4   36.68633
+5   36.87733
+6   35.25833
+7   35.74600
+8   36.22900
+9   36.68633
+10  36.87733</code></pre>
 <div class="callout-trick">
 <p>Matrices are two dimensional objects where every element has the same
 data type. Matrices are a special case of an <strong>array</strong>,
@@ -1249,30 +1225,24 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="#cb1
 <div class="sourceCode" id="cb164"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" tabindex="-1"></a><span class="co"># Extract the last 5 rows of surfwater.</span></span>
 <span id="cb164-2"><a href="#cb164-2" tabindex="-1"></a>surfwater[(N<span class="dv">-4</span>)<span class="sc">:</span>N, ]</span></code></pre></div>
-<pre><code>      siteID       startDateTime         endDateTime
-10268   TECR 2021-10-31 21:30:00 2021-10-31 22:00:00
-10269   TECR 2021-10-31 22:00:00 2021-10-31 22:30:00
-10270   TECR 2021-10-31 22:30:00 2021-10-31 23:00:00
-10271   TECR 2021-10-31 23:00:00 2021-10-31 23:30:00
-10272   TECR 2021-10-31 23:30:00 2021-11-01 00:00:00
-      surfWaterTemp.mean surfWaterNitrate.mean
-10268              4.615                  2.90
-10269              4.650                  2.90
-10270              4.629                  2.85
-10271              4.629                  2.85
-10272              4.641                  2.90
-      specificConductance.mean dissolvedOxygen.mean pH.mean
-10268                       NA                   NA      NA
-10269                       NA                   NA      NA
-10270                       NA                   NA      NA
-10271                       NA                   NA      NA
-10272                       NA                   NA      NA
-      chlorophyll.mean turbidity.mean fDOM.mean
-10268               NA             NA        NA
-10269               NA             NA        NA
-10270               NA             NA        NA
-10271               NA             NA        NA
-10272               NA             NA        NA</code></pre>
+<pre><code>      siteID       startDateTime         endDateTime surfWaterTemp.mean surfWaterNitrate.mean
+10268   TECR 2021-10-31 21:30:00 2021-10-31 22:00:00              4.615                  2.90
+10269   TECR 2021-10-31 22:00:00 2021-10-31 22:30:00              4.650                  2.90
+10270   TECR 2021-10-31 22:30:00 2021-10-31 23:00:00              4.629                  2.85
+10271   TECR 2021-10-31 23:00:00 2021-10-31 23:30:00              4.629                  2.85
+10272   TECR 2021-10-31 23:30:00 2021-11-01 00:00:00              4.641                  2.90
+      specificConductance.mean dissolvedOxygen.mean pH.mean chlorophyll.mean turbidity.mean
+10268                       NA                   NA      NA               NA             NA
+10269                       NA                   NA      NA               NA             NA
+10270                       NA                   NA      NA               NA             NA
+10271                       NA                   NA      NA               NA             NA
+10272                       NA                   NA      NA               NA             NA
+      fDOM.mean
+10268        NA
+10269        NA
+10270        NA
+10271        NA
+10272        NA</code></pre>
 </div>
 </div>
 <div id="logical-comparisons" class="section level3">
@@ -1379,42 +1349,47 @@ functions from the lubridate package (introduced in lesson <a
 href="chp-intro-to-R.html">Intro to R and RStudio</a>).</p>
 <div class="sourceCode" id="cb194"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="#cb194-1" tabindex="-1"></a><span class="co"># Load the lubridate package</span></span>
-<span id="cb194-2"><a href="#cb194-2" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb194-3"><a href="#cb194-3" tabindex="-1"></a></span>
-<span id="cb194-4"><a href="#cb194-4" tabindex="-1"></a><span class="co"># ymd_hms() comes from the lubridate package</span></span>
-<span id="cb194-5"><a href="#cb194-5" tabindex="-1"></a><span class="co"># and converts the character vector in the startDateTime column</span></span>
-<span id="cb194-6"><a href="#cb194-6" tabindex="-1"></a><span class="co"># into a date-time class </span></span>
-<span id="cb194-7"><a href="#cb194-7" tabindex="-1"></a>surfwater<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(surfwater<span class="sc">$</span>startDateTime)</span>
-<span id="cb194-8"><a href="#cb194-8" tabindex="-1"></a></span>
-<span id="cb194-9"><a href="#cb194-9" tabindex="-1"></a><span class="fu">class</span>(surfwater<span class="sc">$</span>startDateTime) </span></code></pre></div>
+<span id="cb194-2"><a href="#cb194-2" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
+<pre><code>
+Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    date, intersect, setdiff, union</code></pre>
+<div class="sourceCode" id="cb197"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" tabindex="-1"></a><span class="co"># ymd_hms() comes from the lubridate package</span></span>
+<span id="cb197-2"><a href="#cb197-2" tabindex="-1"></a><span class="co"># and converts the character vector in the startDateTime column</span></span>
+<span id="cb197-3"><a href="#cb197-3" tabindex="-1"></a><span class="co"># into a date-time class </span></span>
+<span id="cb197-4"><a href="#cb197-4" tabindex="-1"></a>surfwater<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(surfwater<span class="sc">$</span>startDateTime)</span>
+<span id="cb197-5"><a href="#cb197-5" tabindex="-1"></a></span>
+<span id="cb197-6"><a href="#cb197-6" tabindex="-1"></a><span class="fu">class</span>(surfwater<span class="sc">$</span>startDateTime) </span></code></pre></div>
 <pre><code>[1] &quot;POSIXct&quot; &quot;POSIXt&quot; </code></pre>
-<div class="sourceCode" id="cb196"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="#cb196-1" tabindex="-1"></a><span class="co"># POSIXct and POSIXt are the names of classes that R uses to</span></span>
-<span id="cb196-2"><a href="#cb196-2" tabindex="-1"></a><span class="co"># store dates and times</span></span>
-<span id="cb196-3"><a href="#cb196-3" tabindex="-1"></a></span>
-<span id="cb196-4"><a href="#cb196-4" tabindex="-1"></a><span class="co"># Create a new column that identifies the month for each observation</span></span>
-<span id="cb196-5"><a href="#cb196-5" tabindex="-1"></a>surfwater<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(surfwater<span class="sc">$</span>startDateTime)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="#cb199-1" tabindex="-1"></a><span class="co"># POSIXct and POSIXt are the names of classes that R uses to</span></span>
+<span id="cb199-2"><a href="#cb199-2" tabindex="-1"></a><span class="co"># store dates and times</span></span>
+<span id="cb199-3"><a href="#cb199-3" tabindex="-1"></a></span>
+<span id="cb199-4"><a href="#cb199-4" tabindex="-1"></a><span class="co"># Create a new column that identifies the month for each observation</span></span>
+<span id="cb199-5"><a href="#cb199-5" tabindex="-1"></a>surfwater<span class="sc">$</span>month <span class="ot">&lt;-</span> <span class="fu">month</span>(surfwater<span class="sc">$</span>startDateTime)</span></code></pre></div>
 <p>Click on the <code>surfwater</code> object in the Environment tab to
 verify that there is a new column at the end named
 <code>month</code>.</p>
 <p>Next we subset the data to only rows where <code>month == 8</code>
 since August is the 8th month.</p>
-<div class="sourceCode" id="cb197"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="#cb197-1" tabindex="-1"></a>surfwater_Aug <span class="ot">&lt;-</span> surfwater[surfwater<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">8</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="#cb200-1" tabindex="-1"></a>surfwater_Aug <span class="ot">&lt;-</span> surfwater[surfwater<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">8</span>, ]</span></code></pre></div>
 <p>Finally we calculate the average of the values in the
 <code>surfWaterTemp.mean</code> column.</p>
-<div class="sourceCode" id="cb198"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="#cb198-1" tabindex="-1"></a><span class="fu">mean</span>(surfwater_Aug<span class="sc">$</span>surfWaterTemp.mean)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="#cb201-1" tabindex="-1"></a><span class="fu">mean</span>(surfwater_Aug<span class="sc">$</span>surfWaterTemp.mean)</span></code></pre></div>
 <pre><code>[1] NA</code></pre>
 <p>Ooops! There must be missing values. Use the <code>na.rm</code>
 argument to discard these before calculating the average.</p>
-<div class="sourceCode" id="cb200"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="#cb200-1" tabindex="-1"></a><span class="fu">mean</span>(surfwater_Aug<span class="sc">$</span>surfWaterTemp.mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="#cb203-1" tabindex="-1"></a><span class="fu">mean</span>(surfwater_Aug<span class="sc">$</span>surfWaterTemp.mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>[1] 13.14276</code></pre>
 <p>Note that we can do both steps at once if we index the column by name
 at the same time that we subset the rows:</p>
-<div class="sourceCode" id="cb202"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="#cb202-1" tabindex="-1"></a><span class="fu">mean</span>(surfwater[surfwater<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">8</span>, <span class="st">&quot;surfWaterTemp.mean&quot;</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="#cb205-1" tabindex="-1"></a><span class="fu">mean</span>(surfwater[surfwater<span class="sc">$</span>month <span class="sc">==</span> <span class="dv">8</span>, <span class="st">&quot;surfWaterTemp.mean&quot;</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>[1] 13.14276</code></pre>
 <div class="{callout-tip}">
 <p>Be careful using logical comparisons to select data when the data
@@ -1422,13 +1397,13 @@ contain missing values <code>NA</code>. A logical comparison will be
 <code>NA</code> whenever data are missing and using <code>NA</code> to
 index a vector will return an <code>NA</code> value, which might not be
 what you had intended.</p>
-<div class="sourceCode" id="cb204"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="#cb204-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="cn">NA</span>)</span>
-<span id="cb204-2"><a href="#cb204-2" tabindex="-1"></a></span>
-<span id="cb204-3"><a href="#cb204-3" tabindex="-1"></a>y <span class="sc">==</span> <span class="st">&quot;A&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="#cb207-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="cn">NA</span>)</span>
+<span id="cb207-2"><a href="#cb207-2" tabindex="-1"></a></span>
+<span id="cb207-3"><a href="#cb207-3" tabindex="-1"></a>y <span class="sc">==</span> <span class="st">&quot;A&quot;</span></span></code></pre></div>
 <pre><code>[1]  TRUE FALSE  TRUE    NA</code></pre>
-<div class="sourceCode" id="cb206"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="#cb206-1" tabindex="-1"></a>y[y <span class="sc">==</span> <span class="st">&quot;A&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="#cb209-1" tabindex="-1"></a>y[y <span class="sc">==</span> <span class="st">&quot;A&quot;</span>]</span></code></pre></div>
 <pre><code>[1] &quot;A&quot; &quot;A&quot; NA </code></pre>
 </div>
 <p>While you can use a logical expression to directly index the rows of
@@ -1439,25 +1414,25 @@ data.</p>
 <p>Here’s an example to calculate the mean dissolved oxygen content from
 all measurements where the surface water temperature is less than
 5C.</p>
-<div class="sourceCode" id="cb208"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="#cb208-1" tabindex="-1"></a><span class="co"># Here&#39;s two ways to obtain dissolved oxygen values from measurements where</span></span>
-<span id="cb208-2"><a href="#cb208-2" tabindex="-1"></a><span class="co"># the water temperature was less than 5 C</span></span>
-<span id="cb208-3"><a href="#cb208-3" tabindex="-1"></a></span>
-<span id="cb208-4"><a href="#cb208-4" tabindex="-1"></a><span class="co"># Bad way to do this because there are missing data in surfWaterTemp.mean</span></span>
-<span id="cb208-5"><a href="#cb208-5" tabindex="-1"></a>DOvals_bad <span class="ot">&lt;-</span> surfwater[surfwater<span class="sc">$</span>surfWaterTemp.mean <span class="sc">&lt;</span> <span class="dv">5</span>, <span class="st">&#39;dissolvedOxygen.mean&#39;</span>]</span>
-<span id="cb208-6"><a href="#cb208-6" tabindex="-1"></a></span>
-<span id="cb208-7"><a href="#cb208-7" tabindex="-1"></a><span class="co"># Good way using subset because it drops the rows with missing  surfWaterTemp.mean first</span></span>
-<span id="cb208-8"><a href="#cb208-8" tabindex="-1"></a>DOvals_good <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, surfWaterTemp.mean <span class="sc">&lt;</span> <span class="dv">5</span>)<span class="sc">$</span>dissolvedOxygen.mean</span>
-<span id="cb208-9"><a href="#cb208-9" tabindex="-1"></a></span>
-<span id="cb208-10"><a href="#cb208-10" tabindex="-1"></a><span class="co"># Compare the number of elements in the two vectors of dissolved oxygen values</span></span>
-<span id="cb208-11"><a href="#cb208-11" tabindex="-1"></a><span class="fu">length</span>(DOvals_bad)</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="#cb211-1" tabindex="-1"></a><span class="co"># Here&#39;s two ways to obtain dissolved oxygen values from measurements where</span></span>
+<span id="cb211-2"><a href="#cb211-2" tabindex="-1"></a><span class="co"># the water temperature was less than 5 C</span></span>
+<span id="cb211-3"><a href="#cb211-3" tabindex="-1"></a></span>
+<span id="cb211-4"><a href="#cb211-4" tabindex="-1"></a><span class="co"># Bad way to do this because there are missing data in surfWaterTemp.mean</span></span>
+<span id="cb211-5"><a href="#cb211-5" tabindex="-1"></a>DOvals_bad <span class="ot">&lt;-</span> surfwater[surfwater<span class="sc">$</span>surfWaterTemp.mean <span class="sc">&lt;</span> <span class="dv">5</span>, <span class="st">&#39;dissolvedOxygen.mean&#39;</span>]</span>
+<span id="cb211-6"><a href="#cb211-6" tabindex="-1"></a></span>
+<span id="cb211-7"><a href="#cb211-7" tabindex="-1"></a><span class="co"># Good way using subset because it drops the rows with missing  surfWaterTemp.mean first</span></span>
+<span id="cb211-8"><a href="#cb211-8" tabindex="-1"></a>DOvals_good <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, surfWaterTemp.mean <span class="sc">&lt;</span> <span class="dv">5</span>)<span class="sc">$</span>dissolvedOxygen.mean</span>
+<span id="cb211-9"><a href="#cb211-9" tabindex="-1"></a></span>
+<span id="cb211-10"><a href="#cb211-10" tabindex="-1"></a><span class="co"># Compare the number of elements in the two vectors of dissolved oxygen values</span></span>
+<span id="cb211-11"><a href="#cb211-11" tabindex="-1"></a><span class="fu">length</span>(DOvals_bad)</span></code></pre></div>
 <pre><code>[1] 2112</code></pre>
-<div class="sourceCode" id="cb210"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="#cb210-1" tabindex="-1"></a><span class="fu">length</span>(DOvals_good)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="#cb213-1" tabindex="-1"></a><span class="fu">length</span>(DOvals_good)</span></code></pre></div>
 <pre><code>[1] 1670</code></pre>
-<div class="sourceCode" id="cb212"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="#cb212-1" tabindex="-1"></a><span class="co"># Calculate the mean of the values</span></span>
-<span id="cb212-2"><a href="#cb212-2" tabindex="-1"></a><span class="fu">mean</span>(DOvals_good, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="#cb215-1" tabindex="-1"></a><span class="co"># Calculate the mean of the values</span></span>
+<span id="cb215-2"><a href="#cb215-2" tabindex="-1"></a><span class="fu">mean</span>(DOvals_good, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>[1] 10.37565</code></pre>
 <p>Using subset allows us to know that the missing values in a
 calculation come from missing dissolved oxygen values and not from
@@ -1472,10 +1447,10 @@ measurements when the chlorophyll content
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb214"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="#cb214-1" tabindex="-1"></a>temp_vals <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, (month <span class="sc">==</span> <span class="dv">4</span>)<span class="sc">&amp;</span>(chlorophyll.mean <span class="sc">&gt;</span> .<span class="dv">8</span>))<span class="sc">$</span>surfWaterTemp</span>
-<span id="cb214-2"><a href="#cb214-2" tabindex="-1"></a></span>
-<span id="cb214-3"><a href="#cb214-3" tabindex="-1"></a><span class="fu">mean</span>(temp_vals)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="#cb217-1" tabindex="-1"></a>temp_vals <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, (month <span class="sc">==</span> <span class="dv">4</span>)<span class="sc">&amp;</span>(chlorophyll.mean <span class="sc">&gt;</span> .<span class="dv">8</span>))<span class="sc">$</span>surfWaterTemp</span>
+<span id="cb217-2"><a href="#cb217-2" tabindex="-1"></a></span>
+<span id="cb217-3"><a href="#cb217-3" tabindex="-1"></a><span class="fu">mean</span>(temp_vals)</span></code></pre></div>
 <pre><code>[1] 3.711597</code></pre>
 </div>
 </details>
@@ -1494,51 +1469,52 @@ missing.</p>
 tests whether each element of a vector is equal to a missing value
 (<code>NA</code>). The output of <code>is.na()</code> is a logical
 vector with the same length as the input vector:</p>
-<div class="sourceCode" id="cb216"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="#cb216-1" tabindex="-1"></a><span class="co"># Replace the 4th element of x as missing</span></span>
-<span id="cb216-2"><a href="#cb216-2" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="#cb219-1" tabindex="-1"></a><span class="co"># Replace the 4th element of x as missing</span></span>
+<span id="cb219-2"><a href="#cb219-2" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>[1] -3 -2 -1  0  1  2  3</code></pre>
-<div class="sourceCode" id="cb218"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="#cb218-1" tabindex="-1"></a>x[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb218-2"><a href="#cb218-2" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="#cb221-1" tabindex="-1"></a>x[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb221-2"><a href="#cb221-2" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>[1] -3 -2 -1 NA  1  2  3</code></pre>
-<div class="sourceCode" id="cb220"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="#cb220-1" tabindex="-1"></a><span class="co"># Find the missing values in x</span></span>
-<span id="cb220-2"><a href="#cb220-2" tabindex="-1"></a><span class="fu">is.na</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="#cb223-1" tabindex="-1"></a><span class="co"># Find the missing values in x</span></span>
+<span id="cb223-2"><a href="#cb223-2" tabindex="-1"></a><span class="fu">is.na</span>(x)</span></code></pre></div>
 <pre><code>[1] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE</code></pre>
 <p>Since <code>is.na()</code> returns a logical vector, we can use it to
 subset the rows of a data frame to only data that are missing (or not
 missing is we use <code>!is.na()</code>).</p>
 <p>Let’s find the rows of <code>surfwater</code> with missing surface
 water temperature values.</p>
-<div class="sourceCode" id="cb222"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="#cb222-1" tabindex="-1"></a><span class="co"># Extract all rows with missing value in the surfWaterTemp.mean column</span></span>
-<span id="cb222-2"><a href="#cb222-2" tabindex="-1"></a>missing_temp <span class="ot">&lt;-</span> surfwater[<span class="fu">is.na</span>(surfwater<span class="sc">$</span>surfWaterTemp.mean), ]</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="#cb225-1" tabindex="-1"></a><span class="co"># Extract all rows with missing value in the surfWaterTemp.mean column</span></span>
+<span id="cb225-2"><a href="#cb225-2" tabindex="-1"></a>missing_temp <span class="ot">&lt;-</span> surfwater[<span class="fu">is.na</span>(surfwater<span class="sc">$</span>surfWaterTemp.mean), ]</span></code></pre></div>
 <p>Click on the new object named missing_temp in the Environment panel.
 Scrolling through the data shows that most of the missing values appear
 to occur on one of a handful of days, presumably when the sensor was
 malfunctioning. We can verify this by tabulating the dates when these
 data were missing:</p>
-<div class="sourceCode" id="cb223"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="#cb223-1" tabindex="-1"></a><span class="co"># Extract the date from the startDateTime column</span></span>
-<span id="cb223-2"><a href="#cb223-2" tabindex="-1"></a>missing_dates <span class="ot">&lt;-</span> <span class="fu">date</span>(missing_temp<span class="sc">$</span>startDateTime)</span>
-<span id="cb223-3"><a href="#cb223-3" tabindex="-1"></a></span>
-<span id="cb223-4"><a href="#cb223-4" tabindex="-1"></a><span class="co"># Count the number occurrences of each date</span></span>
-<span id="cb223-5"><a href="#cb223-5" tabindex="-1"></a><span class="co"># This gives a table of the number of missing temperature measurements for each date.</span></span>
-<span id="cb223-6"><a href="#cb223-6" tabindex="-1"></a><span class="fu">table</span>(missing_dates)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="#cb226-1" tabindex="-1"></a><span class="co"># Extract the date from the startDateTime column</span></span>
+<span id="cb226-2"><a href="#cb226-2" tabindex="-1"></a>missing_dates <span class="ot">&lt;-</span> <span class="fu">date</span>(missing_temp<span class="sc">$</span>startDateTime)</span>
+<span id="cb226-3"><a href="#cb226-3" tabindex="-1"></a></span>
+<span id="cb226-4"><a href="#cb226-4" tabindex="-1"></a><span class="co"># Count the number occurrences of each date</span></span>
+<span id="cb226-5"><a href="#cb226-5" tabindex="-1"></a><span class="co"># This gives a table of the number of missing temperature measurements for each date.</span></span>
+<span id="cb226-6"><a href="#cb226-6" tabindex="-1"></a><span class="fu">table</span>(missing_dates)</span></code></pre></div>
 <pre><code>missing_dates
-2021-04-20 2021-04-26 2021-04-28 2021-04-29 2021-05-04 2021-05-13 
-         1          1          8          2          4          1 
-2021-05-18 2021-06-02 2021-06-19 2021-06-20 2021-06-21 2021-07-01 
-         5          5         42         47         46          6 
-2021-07-20 2021-07-21 2021-07-26 2021-08-04 2021-08-17 2021-08-18 
-         6         44          2          3          2          4 
-2021-08-24 2021-08-31 2021-09-01 2021-09-07 2021-09-08 2021-09-09 
-         1          3          2         13         32          3 
+2021-04-20 2021-04-26 2021-04-28 2021-04-29 2021-05-04 2021-05-13 2021-05-18 2021-06-02 
+         1          1          8          2          4          1          5          5 
+2021-06-19 2021-06-20 2021-06-21 2021-07-01 2021-07-20 2021-07-21 2021-07-26 2021-08-04 
+        42         47         46          6          6         44          2          3 
+2021-08-17 2021-08-18 2021-08-24 2021-08-31 2021-09-01 2021-09-07 2021-09-08 2021-09-09 
+         2          4          1          3          2         13         32          3 
 2021-09-14 2021-10-25 2021-10-26 2021-10-27 2021-10-28 2021-10-29 
          5          1          9         48         48         48 </code></pre>
 </div>
 </div>
+</div>
+<div id="synthesis" class="section level2">
+<h2>Synthesis</h2>
 <div id="putting-it-all-together" class="section level3">
 <h3>Putting it all together</h3>
 <p>In addition to nearly continuous measurements of water quality, NEON
@@ -1549,12 +1525,12 @@ by) the concentration of microbial cells in the water?</p>
 water quality data from time points when surface waters were sampled for
 microbes. Microbial cell count data come from <a
 href="https://data.neonscience.org/data-products/DP1.20138.001">DP1.20138.001</a>.</p>
-<div class="sourceCode" id="cb225"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="#cb225-1" tabindex="-1"></a><span class="co"># Load the microbial cell count data from Teakettle Creek in 2021</span></span>
-<span id="cb225-2"><a href="#cb225-2" tabindex="-1"></a>microbes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_Water/microbe_abun_TECR_2021-04_2021-10.csv&quot;</span>)</span>
-<span id="cb225-3"><a href="#cb225-3" tabindex="-1"></a></span>
-<span id="cb225-4"><a href="#cb225-4" tabindex="-1"></a><span class="co"># View the structure of these data</span></span>
-<span id="cb225-5"><a href="#cb225-5" tabindex="-1"></a><span class="fu">str</span>(microbes)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="#cb228-1" tabindex="-1"></a><span class="co"># Load the microbial cell count data from Teakettle Creek in 2021</span></span>
+<span id="cb228-2"><a href="#cb228-2" tabindex="-1"></a>microbes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_Water/microbe_abun_TECR_2021-04_2021-10.csv&quot;</span>)</span>
+<span id="cb228-3"><a href="#cb228-3" tabindex="-1"></a></span>
+<span id="cb228-4"><a href="#cb228-4" tabindex="-1"></a><span class="co"># View the structure of these data</span></span>
+<span id="cb228-5"><a href="#cb228-5" tabindex="-1"></a><span class="fu">str</span>(microbes)</span></code></pre></div>
 <pre><code>&#39;data.frame&#39;:   5 obs. of  8 variables:
  $ cellCountSampleID: chr  &quot;TECR.SS.20210505.CC&quot; &quot;TECR.SS.20210601.CC&quot; &quot;TECR.SS.20210714.CC&quot; &quot;TECR.SS.20210803.CC&quot; ...
  $ siteID           : chr  &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; &quot;TECR&quot; ...
@@ -1572,10 +1548,9 @@ will need are <code>collectDate</code> to match with the measurements in
 <code>surfwater</code> and the <code>cells_ml</code> column which gives
 the number of microbial cells per ml.</p>
 <p>Which time points were water samples collected?</p>
-<div class="sourceCode" id="cb227"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="#cb227-1" tabindex="-1"></a>microbes<span class="sc">$</span>collectDate</span></code></pre></div>
-<pre><code>[1] &quot;2021-05-05 16:40:00&quot; &quot;2021-06-01 18:46:00&quot;
-[3] &quot;2021-07-14 16:20:00&quot; &quot;2021-08-03 17:09:00&quot;
+<div class="sourceCode" id="cb230"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="#cb230-1" tabindex="-1"></a>microbes<span class="sc">$</span>collectDate</span></code></pre></div>
+<pre><code>[1] &quot;2021-05-05 16:40:00&quot; &quot;2021-06-01 18:46:00&quot; &quot;2021-07-14 16:20:00&quot; &quot;2021-08-03 17:09:00&quot;
 [5] &quot;2021-09-01 17:09:00&quot;</code></pre>
 <p>But wait, each row in <code>surfwater</code> represents a 30-minute
 average beginning at the time in the column <code>startDateTime</code>
@@ -1586,81 +1561,75 @@ defining a set of values to match with the <code>startDateTime</code>
 column which would ensure that the collection dates fall within the
 30-minute time interval. We can do this because we know that each time
 interval begins on the hour or half hour:</p>
-<div class="sourceCode" id="cb229"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="#cb229-1" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain hour</span></span>
-<span id="cb229-2"><a href="#cb229-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">hour</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="#cb232-1" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain hour</span></span>
+<span id="cb232-2"><a href="#cb232-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">hour</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
 <pre><code>
-  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15 
-428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 
- 16  17  18  19  20  21  22  23 
-428 428 428 428 428 428 428 428 </code></pre>
-<div class="sourceCode" id="cb231"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="#cb231-1" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain minute of the hour</span></span>
-<span id="cb231-2"><a href="#cb231-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">minute</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
+  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22 
+428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 428 
+ 23 
+428 </code></pre>
+<div class="sourceCode" id="cb234"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="#cb234-1" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain minute of the hour</span></span>
+<span id="cb234-2"><a href="#cb234-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">minute</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
 <pre><code>
    0   30 
 5136 5136 </code></pre>
-<div class="sourceCode" id="cb233"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="#cb233-1" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain second of the hour</span></span>
-<span id="cb233-2"><a href="#cb233-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">second</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="#cb236-1" tabindex="-1"></a><span class="co"># Tabulate the number of rows that begin on a certain second of the hour</span></span>
+<span id="cb236-2"><a href="#cb236-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">second</span>(surfwater<span class="sc">$</span>startDateTime))</span></code></pre></div>
 <pre><code>
     0 
 10272 </code></pre>
 <p>Thus, each start date should have the form:
 <code>YYYY-MM-DD HH:00:00</code> or
 <code>YYYY-MM-DD HH:30:00</code>.</p>
-<div class="sourceCode" id="cb235"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="#cb235-1" tabindex="-1"></a><span class="co"># Define a set of startDateTimes that match the five collection</span></span>
-<span id="cb235-2"><a href="#cb235-2" tabindex="-1"></a><span class="co"># dates in microbes</span></span>
-<span id="cb235-3"><a href="#cb235-3" tabindex="-1"></a>these_dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;2021-05-05 16:30:00&quot;</span>,</span>
-<span id="cb235-4"><a href="#cb235-4" tabindex="-1"></a>                 <span class="st">&quot;2021-06-01 18:30:00&quot;</span>,</span>
-<span id="cb235-5"><a href="#cb235-5" tabindex="-1"></a>                 <span class="st">&quot;2021-07-14 16:00:00&quot;</span>,</span>
-<span id="cb235-6"><a href="#cb235-6" tabindex="-1"></a>                 <span class="st">&quot;2021-08-03 17:00:00&quot;</span>,</span>
-<span id="cb235-7"><a href="#cb235-7" tabindex="-1"></a>                 <span class="st">&quot;2021-09-01 17:00:00&quot;</span>)</span>
-<span id="cb235-8"><a href="#cb235-8" tabindex="-1"></a></span>
-<span id="cb235-9"><a href="#cb235-9" tabindex="-1"></a><span class="co"># Convert to a date-time class</span></span>
-<span id="cb235-10"><a href="#cb235-10" tabindex="-1"></a>these_dates <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(these_dates)</span>
-<span id="cb235-11"><a href="#cb235-11" tabindex="-1"></a></span>
-<span id="cb235-12"><a href="#cb235-12" tabindex="-1"></a></span>
-<span id="cb235-13"><a href="#cb235-13" tabindex="-1"></a><span class="co"># Subset surfwater to only rows whose startDateTime column</span></span>
-<span id="cb235-14"><a href="#cb235-14" tabindex="-1"></a><span class="co"># matches one of the dates in these_dates</span></span>
-<span id="cb235-15"><a href="#cb235-15" tabindex="-1"></a><span class="fu">subset</span>(surfwater, startDateTime <span class="sc">%in%</span> these_dates)</span></code></pre></div>
-<pre><code>     siteID       startDateTime         endDateTime
-1666   TECR 2021-05-05 16:30:00 2021-05-05 17:00:00
-2966   TECR 2021-06-01 18:30:00 2021-06-01 19:00:00
-5025   TECR 2021-07-14 16:00:00 2021-07-14 16:30:00
-5987   TECR 2021-08-03 17:00:00 2021-08-03 17:30:00
-7379   TECR 2021-09-01 17:00:00 2021-09-01 17:30:00
-     surfWaterTemp.mean surfWaterNitrate.mean
-1666              7.302                   1.5
-2966             11.505                   1.0
-5025             13.994                   2.7
-5987             13.062                   2.8
-7379             10.850                   0.8
-     specificConductance.mean dissolvedOxygen.mean  pH.mean
-1666                 33.16967                 9.44 7.400667
-2966                       NA                   NA       NA
-5025                       NA                   NA       NA
-5987                       NA                   NA       NA
-7379                       NA                   NA       NA
-     chlorophyll.mean turbidity.mean fDOM.mean month
-1666            0.513       1.008667  25.43667     5
-2966               NA             NA        NA     6
-5025               NA             NA        NA     7
-5987               NA             NA        NA     8
-7379               NA             NA        NA     9</code></pre>
+<div class="sourceCode" id="cb238"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="#cb238-1" tabindex="-1"></a><span class="co"># Define a set of startDateTimes that match the five collection</span></span>
+<span id="cb238-2"><a href="#cb238-2" tabindex="-1"></a><span class="co"># dates in microbes</span></span>
+<span id="cb238-3"><a href="#cb238-3" tabindex="-1"></a>these_dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;2021-05-05 16:30:00&quot;</span>,</span>
+<span id="cb238-4"><a href="#cb238-4" tabindex="-1"></a>                 <span class="st">&quot;2021-06-01 18:30:00&quot;</span>,</span>
+<span id="cb238-5"><a href="#cb238-5" tabindex="-1"></a>                 <span class="st">&quot;2021-07-14 16:00:00&quot;</span>,</span>
+<span id="cb238-6"><a href="#cb238-6" tabindex="-1"></a>                 <span class="st">&quot;2021-08-03 17:00:00&quot;</span>,</span>
+<span id="cb238-7"><a href="#cb238-7" tabindex="-1"></a>                 <span class="st">&quot;2021-09-01 17:00:00&quot;</span>)</span>
+<span id="cb238-8"><a href="#cb238-8" tabindex="-1"></a></span>
+<span id="cb238-9"><a href="#cb238-9" tabindex="-1"></a><span class="co"># Convert to a date-time class</span></span>
+<span id="cb238-10"><a href="#cb238-10" tabindex="-1"></a>these_dates <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(these_dates)</span>
+<span id="cb238-11"><a href="#cb238-11" tabindex="-1"></a></span>
+<span id="cb238-12"><a href="#cb238-12" tabindex="-1"></a></span>
+<span id="cb238-13"><a href="#cb238-13" tabindex="-1"></a><span class="co"># Subset surfwater to only rows whose startDateTime column</span></span>
+<span id="cb238-14"><a href="#cb238-14" tabindex="-1"></a><span class="co"># matches one of the dates in these_dates</span></span>
+<span id="cb238-15"><a href="#cb238-15" tabindex="-1"></a><span class="fu">subset</span>(surfwater, startDateTime <span class="sc">%in%</span> these_dates)</span></code></pre></div>
+<pre><code>     siteID       startDateTime         endDateTime surfWaterTemp.mean surfWaterNitrate.mean
+1666   TECR 2021-05-05 16:30:00 2021-05-05 17:00:00              7.302                   1.5
+2966   TECR 2021-06-01 18:30:00 2021-06-01 19:00:00             11.505                   1.0
+5025   TECR 2021-07-14 16:00:00 2021-07-14 16:30:00             13.994                   2.7
+5987   TECR 2021-08-03 17:00:00 2021-08-03 17:30:00             13.062                   2.8
+7379   TECR 2021-09-01 17:00:00 2021-09-01 17:30:00             10.850                   0.8
+     specificConductance.mean dissolvedOxygen.mean  pH.mean chlorophyll.mean turbidity.mean
+1666                 33.16967                 9.44 7.400667            0.513       1.008667
+2966                       NA                   NA       NA               NA             NA
+5025                       NA                   NA       NA               NA             NA
+5987                       NA                   NA       NA               NA             NA
+7379                       NA                   NA       NA               NA             NA
+     fDOM.mean month
+1666  25.43667     5
+2966        NA     6
+5025        NA     7
+5987        NA     8
+7379        NA     9</code></pre>
 <p>Once we have these data we can make a quick plot to compare microbial
 abundance to water quality. Let’s look at nitrate:</p>
-<div class="sourceCode" id="cb237"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="#cb237-1" tabindex="-1"></a><span class="co"># Save the subsetted data to a new data frame</span></span>
-<span id="cb237-2"><a href="#cb237-2" tabindex="-1"></a>microbe_wq_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, startDateTime <span class="sc">%in%</span> these_dates)</span>
-<span id="cb237-3"><a href="#cb237-3" tabindex="-1"></a></span>
-<span id="cb237-4"><a href="#cb237-4" tabindex="-1"></a><span class="co"># Graph microbial cell counts (y axis) vs. nitrate concentration (x axis)</span></span>
-<span id="cb237-5"><a href="#cb237-5" tabindex="-1"></a><span class="co"># Specify axis labels with xlab and ylab arguments</span></span>
-<span id="cb237-6"><a href="#cb237-6" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> microbe_wq_data<span class="sc">$</span>surfWaterNitrate.mean,</span>
-<span id="cb237-7"><a href="#cb237-7" tabindex="-1"></a>     <span class="at">y =</span> microbes<span class="sc">$</span>cells_ml,</span>
-<span id="cb237-8"><a href="#cb237-8" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Nitrate (umol per L)&quot;</span>,</span>
-<span id="cb237-9"><a href="#cb237-9" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Microbial cell density (num. per ml)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="#cb240-1" tabindex="-1"></a><span class="co"># Save the subsetted data to a new data frame</span></span>
+<span id="cb240-2"><a href="#cb240-2" tabindex="-1"></a>microbe_wq_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(surfwater, startDateTime <span class="sc">%in%</span> these_dates)</span>
+<span id="cb240-3"><a href="#cb240-3" tabindex="-1"></a></span>
+<span id="cb240-4"><a href="#cb240-4" tabindex="-1"></a><span class="co"># Graph microbial cell counts (y axis) vs. nitrate concentration (x axis)</span></span>
+<span id="cb240-5"><a href="#cb240-5" tabindex="-1"></a><span class="co"># Specify axis labels with xlab and ylab arguments</span></span>
+<span id="cb240-6"><a href="#cb240-6" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> microbe_wq_data<span class="sc">$</span>surfWaterNitrate.mean,</span>
+<span id="cb240-7"><a href="#cb240-7" tabindex="-1"></a>     <span class="at">y =</span> microbes<span class="sc">$</span>cells_ml,</span>
+<span id="cb240-8"><a href="#cb240-8" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Nitrate (umol per L)&quot;</span>,</span>
+<span id="cb240-9"><a href="#cb240-9" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Microbial cell density (num. per ml)&quot;</span>)</span></code></pre></div>
 <p><img src="images/rmd-04-unnamed-chunk-66-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p>Congrats! You’ve learned a lot this lesson. Now its time to move on
 and practice with the Exercises.</p>
@@ -1672,40 +1641,36 @@ the <code>lubridate</code> packages that defines a time interval class
 that occurs between two points in time. This time interval class will
 allow us to check whether each microbial sampling time point falls
 within each interval.</p>
-<div class="sourceCode" id="cb238"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="#cb238-1" tabindex="-1"></a><span class="co"># Convert collectDate to a date-time</span></span>
-<span id="cb238-2"><a href="#cb238-2" tabindex="-1"></a>microbes<span class="sc">$</span>collectDate <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(microbes<span class="sc">$</span>collectDate)</span>
-<span id="cb238-3"><a href="#cb238-3" tabindex="-1"></a></span>
-<span id="cb238-4"><a href="#cb238-4" tabindex="-1"></a><span class="co"># Convert endDateTime to a date-time class</span></span>
-<span id="cb238-5"><a href="#cb238-5" tabindex="-1"></a>surfwater<span class="sc">$</span>endDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(surfwater<span class="sc">$</span>endDateTime)</span>
-<span id="cb238-6"><a href="#cb238-6" tabindex="-1"></a></span>
-<span id="cb238-7"><a href="#cb238-7" tabindex="-1"></a><span class="co"># Define a new column in surfwater that records the time interval </span></span>
-<span id="cb238-8"><a href="#cb238-8" tabindex="-1"></a><span class="co"># for each measurement</span></span>
-<span id="cb238-9"><a href="#cb238-9" tabindex="-1"></a>surfwater<span class="sc">$</span>timeInterval <span class="ot">&lt;-</span> <span class="fu">interval</span>(<span class="at">start =</span> surfwater<span class="sc">$</span>startDateTime,</span>
-<span id="cb238-10"><a href="#cb238-10" tabindex="-1"></a>                                   <span class="at">end =</span> surfwater<span class="sc">$</span>endDateTime)</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="#cb241-1" tabindex="-1"></a><span class="co"># Convert collectDate to a date-time</span></span>
+<span id="cb241-2"><a href="#cb241-2" tabindex="-1"></a>microbes<span class="sc">$</span>collectDate <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(microbes<span class="sc">$</span>collectDate)</span>
+<span id="cb241-3"><a href="#cb241-3" tabindex="-1"></a></span>
+<span id="cb241-4"><a href="#cb241-4" tabindex="-1"></a><span class="co"># Convert endDateTime to a date-time class</span></span>
+<span id="cb241-5"><a href="#cb241-5" tabindex="-1"></a>surfwater<span class="sc">$</span>endDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(surfwater<span class="sc">$</span>endDateTime)</span>
+<span id="cb241-6"><a href="#cb241-6" tabindex="-1"></a></span>
+<span id="cb241-7"><a href="#cb241-7" tabindex="-1"></a><span class="co"># Define a new column in surfwater that records the time interval </span></span>
+<span id="cb241-8"><a href="#cb241-8" tabindex="-1"></a><span class="co"># for each measurement</span></span>
+<span id="cb241-9"><a href="#cb241-9" tabindex="-1"></a>surfwater<span class="sc">$</span>timeInterval <span class="ot">&lt;-</span> <span class="fu">interval</span>(<span class="at">start =</span> surfwater<span class="sc">$</span>startDateTime,</span>
+<span id="cb241-10"><a href="#cb241-10" tabindex="-1"></a>                                   <span class="at">end =</span> surfwater<span class="sc">$</span>endDateTime)</span></code></pre></div>
 <p>If you click on surfwater in the Environment panel, you should see a
 new column named timeInterval of class ‘Interval’.</p>
 <p>Now we can subset the row of <code>surfwater</code> whose
 <code>timeInterval</code> include the first microbial water sample
 time.</p>
-<div class="sourceCode" id="cb239"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="#cb239-1" tabindex="-1"></a><span class="co"># Define the time point that we are interested in</span></span>
-<span id="cb239-2"><a href="#cb239-2" tabindex="-1"></a><span class="co"># and print the value of this_time</span></span>
-<span id="cb239-3"><a href="#cb239-3" tabindex="-1"></a>(this_time <span class="ot">&lt;-</span> microbes[<span class="dv">1</span>, <span class="st">&quot;collectDate&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="#cb242-1" tabindex="-1"></a><span class="co"># Define the time point that we are interested in</span></span>
+<span id="cb242-2"><a href="#cb242-2" tabindex="-1"></a><span class="co"># and print the value of this_time</span></span>
+<span id="cb242-3"><a href="#cb242-3" tabindex="-1"></a>(this_time <span class="ot">&lt;-</span> microbes[<span class="dv">1</span>, <span class="st">&quot;collectDate&quot;</span>])</span></code></pre></div>
 <pre><code>[1] &quot;2021-05-05 16:40:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb241"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="#cb241-1" tabindex="-1"></a><span class="co"># Subset to rows whose time interval contains this_time</span></span>
-<span id="cb241-2"><a href="#cb241-2" tabindex="-1"></a><span class="fu">subset</span>(surfwater, this_time <span class="sc">%within%</span> timeInterval)</span></code></pre></div>
-<pre><code>     siteID       startDateTime         endDateTime
-1666   TECR 2021-05-05 16:30:00 2021-05-05 17:00:00
-     surfWaterTemp.mean surfWaterNitrate.mean
-1666              7.302                   1.5
-     specificConductance.mean dissolvedOxygen.mean  pH.mean
-1666                 33.16967                 9.44 7.400667
-     chlorophyll.mean turbidity.mean fDOM.mean month
-1666            0.513       1.008667  25.43667     5
-                                         timeInterval
-1666 2021-05-05 16:30:00 UTC--2021-05-05 17:00:00 UTC</code></pre>
+<div class="sourceCode" id="cb244"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="#cb244-1" tabindex="-1"></a><span class="co"># Subset to rows whose time interval contains this_time</span></span>
+<span id="cb244-2"><a href="#cb244-2" tabindex="-1"></a><span class="fu">subset</span>(surfwater, this_time <span class="sc">%within%</span> timeInterval)</span></code></pre></div>
+<pre><code>     siteID       startDateTime         endDateTime surfWaterTemp.mean surfWaterNitrate.mean
+1666   TECR 2021-05-05 16:30:00 2021-05-05 17:00:00              7.302                   1.5
+     specificConductance.mean dissolvedOxygen.mean  pH.mean chlorophyll.mean turbidity.mean
+1666                 33.16967                 9.44 7.400667            0.513       1.008667
+     fDOM.mean month                                     timeInterval
+1666  25.43667     5 2021-05-05 16:30:00 UTC--2021-05-05 17:00:00 UTC</code></pre>
 </div>
 </div>
 <div id="exercises" class="section level2">
@@ -1734,16 +1699,16 @@ and <code>%in%</code></li>
 <p><strong>4.1</strong></p>
 <p>Determine the class and structure of each of the following
 objects:</p>
-<div class="sourceCode" id="cb243"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="#cb243-1" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&quot;4&quot;</span>)</span>
-<span id="cb243-2"><a href="#cb243-2" tabindex="-1"></a></span>
-<span id="cb243-3"><a href="#cb243-3" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">NA</span>)</span>
-<span id="cb243-4"><a href="#cb243-4" tabindex="-1"></a></span>
-<span id="cb243-5"><a href="#cb243-5" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">factor</span>(A)</span>
-<span id="cb243-6"><a href="#cb243-6" tabindex="-1"></a></span>
-<span id="cb243-7"><a href="#cb243-7" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">A =</span> A, <span class="at">B =</span> B, <span class="at">C =</span> C)</span>
-<span id="cb243-8"><a href="#cb243-8" tabindex="-1"></a></span>
-<span id="cb243-9"><a href="#cb243-9" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(A, B, C)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="#cb246-1" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&quot;4&quot;</span>)</span>
+<span id="cb246-2"><a href="#cb246-2" tabindex="-1"></a></span>
+<span id="cb246-3"><a href="#cb246-3" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">NA</span>)</span>
+<span id="cb246-4"><a href="#cb246-4" tabindex="-1"></a></span>
+<span id="cb246-5"><a href="#cb246-5" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">factor</span>(A)</span>
+<span id="cb246-6"><a href="#cb246-6" tabindex="-1"></a></span>
+<span id="cb246-7"><a href="#cb246-7" tabindex="-1"></a>dat1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">A =</span> A, <span class="at">B =</span> B, <span class="at">C =</span> C)</span>
+<span id="cb246-8"><a href="#cb246-8" tabindex="-1"></a></span>
+<span id="cb246-9"><a href="#cb246-9" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(A, B, C)</span></code></pre></div>
 <p><strong>4.2</strong></p>
 <ol style="list-style-type: decimal">
 <li>What is the data type of object <code>A</code> in the code above?
@@ -1772,12 +1737,12 @@ of the levels so that the the levels are in descending numeric order
 <p><strong>4.8</strong></p>
 <p>What class are each of the following objects? How are these classes
 similar? How are they different?</p>
-<div class="sourceCode" id="cb244"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="#cb244-1" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">2.8</span>, <span class="dv">5</span>)</span>
-<span id="cb244-2"><a href="#cb244-2" tabindex="-1"></a></span>
-<span id="cb244-3"><a href="#cb244-3" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(X, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb244-4"><a href="#cb244-4" tabindex="-1"></a></span>
-<span id="cb244-5"><a href="#cb244-5" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">array</span>(X, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="#cb247-1" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">2.8</span>, <span class="dv">5</span>)</span>
+<span id="cb247-2"><a href="#cb247-2" tabindex="-1"></a></span>
+<span id="cb247-3"><a href="#cb247-3" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(X, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb247-4"><a href="#cb247-4" tabindex="-1"></a></span>
+<span id="cb247-5"><a href="#cb247-5" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">array</span>(X, <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>))</span></code></pre></div>
 <p><strong>4.9</strong></p>
 <ol style="list-style-type: decimal">
 <li>Using the objects above, write one line of code that calculates the

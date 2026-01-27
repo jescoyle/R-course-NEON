@@ -56,6 +56,7 @@ If you have never used R or RStudio on your computer, then you probably don't ha
 
 ## Course Workbook
 
+**The course workbook is not yet ready for download. Check back soon!**
 
 1. Download the Student Workbook from [here](workbook/R-course-NEON-workbook.zip). Save this zipped file in the folder where you are saving work for this course.
 2. Unzip the folder you downloaded. The name of the folder that you unzip should be R-course-NEON-workbook. Instructions for how to unzip folders are located [here for Mac](https://support.apple.com/guide/mac-help/zip-and-unzip-files-and-folders-on-mac-mchlp2528/){target="_blank"} and [here for Windows](https://support.microsoft.com/en-us/windows/zip-and-unzip-files-f6dde0a7-0fec-8294-e1d3-703ed85e7ebc){target="_blank"}.
