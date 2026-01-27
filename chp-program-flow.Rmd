@@ -28,6 +28,8 @@ set.seed(10)
 
 # Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
+**THIS CHAPTER IS NOT READY FOR LEARNERS**
+
 ## Overview 
 
 > Suppose you have temperature measurements collected over the course of a year from 100 different sensors, each saved in its own data file, and you want to summarize the daily temperature minima and maxima for each sensor, but only if the sensor did not malfunction. Wouldn't it be great if you had one code script that looks in a folder for the temperature sensor data files, detects whether the data are valid and if so, summarizes the data and saves this to an output file? 

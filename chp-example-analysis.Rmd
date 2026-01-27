@@ -34,49 +34,21 @@ set.seed(10)
 
 ### What we will learn
 
-In this lesson we will practice skills from all core lessons to conduct an analysis on NEON data.
+In this lesson we will practice skills from all core lessons to conduct an analysis on NEON data. We will use a reproducible workflow and save our analysis as an RStudio project.
 
 ### Prerequisites
 
-Before beginning this lesson you should have completed the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) and any prerequisites therein.
+Before beginning this lesson you should have completed all prior lessons and any prerequisites therein.
 
-Before you begin:
+Before you begin, set up an RStudio project for an organized and reproducible analysis:
 
-1. Open the R-course-NEON-workbook RStudio project.
-2. Create a new R script named `r paste0("lesson_", .chp_str, "_code.R")` in the lesson-code folder of the student workbook.
-3. Whenever you see R code like this:
+1. Open Rstudio and create a new project named NEON_project.
+2. Inside the NEON_project folder, create a folder named `code`. During this lesson you will create two new code scripts inside this folder.
+3. Inside the NEON_project folder, create a folder named `data`. During this lesson you will create several derived data sets for your analysis. These derived data tables will be saved in this `data` folder.
+4. Insider the derived data folder, create a folder named `output`. The code from this lesson will generate figures that will save into this folder.
+5. Be sure to click **Save** often to save your work.
 
-```{r eval = FALSE}
-Type (or copy) this into your R script. Then run it in the Console.
-
-```
-
-4. Whenever you see a challenge like this:
-
-:::{.challenge}
-
-Try to solve the problem by writing R code into your script. Check your answer by clicking:
-
-<details><summary>**Solution:**</summary>
-
-::: {.solution}
-
-```{r eval = FALSE}
-The code that solves the challenge will appear here.
-```
-
-Along with an explanation.
-
-:::
-
-</details>
-
-:::
-
-<br>
-
-
-4. Be sure to click **Save** often to save your work.
+The final output of this lesson is available in the chapter `r .chp_num` exercises folder of the workbook.
 
 
 ## Lesson

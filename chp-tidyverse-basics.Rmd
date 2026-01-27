@@ -40,6 +40,8 @@ update_geom_defaults("point", aes(size = 3))
 
 # Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
+**THIS CHAPTER IS NOT READY FOR LEARNERS**
+
 ## Overview 
 
 > How are organisms affected by their environment? Answering this question requires connecting data of different types from different sources and measured at different spatial and temporal scales. Before any statistical analysis can begin, scientists need the ability to manipulate data tables in a reproducible way.
