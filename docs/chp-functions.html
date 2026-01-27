@@ -1170,9 +1170,9 @@ elements.</p>
 <p>Alternatively you can see the names of each of these elements
 using:</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" tabindex="-1"></a><span class="fu">names</span>(watertemp)</span></code></pre></div>
-<pre><code>[1] &quot;categoricalCodes_20053&quot;     &quot;citation_20053_PROVISIONAL&quot; &quot;issueLog_20053&quot;            
-[4] &quot;readme_20053&quot;               &quot;science_review_flags_20053&quot; &quot;sensor_positions_20053&quot;    
-[7] &quot;TSW_30min&quot;                  &quot;TSW_5min&quot;                   &quot;variables_20053&quot;           </code></pre>
+<pre><code>[1] &quot;categoricalCodes_20053&quot;     &quot;citation_20053_PROVISIONAL&quot; &quot;issueLog_20053&quot;             &quot;readme_20053&quot;              
+[5] &quot;science_review_flags_20053&quot; &quot;sensor_positions_20053&quot;     &quot;TSW_30min&quot;                  &quot;TSW_5min&quot;                  
+[9] &quot;variables_20053&quot;           </code></pre>
 <p>Most of these objects are data frames. Some contain metadata that
 describe variables and collection methods
 (<code>categoricalCodes_200531</code>, <code>issueLog_20053</code>,
@@ -1193,34 +1193,27 @@ dataframe to make it easier to work with. Remember that we use
 <p>Let’s take a look at these data:</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" tabindex="-1"></a><span class="co"># Show the first few rows</span></span>
 <span id="cb97-2"><a href="#cb97-2" tabindex="-1"></a><span class="fu">head</span>(TSW_30min)</span></code></pre></div>
-<pre><code>  domainID siteID horizontalPosition verticalPosition       startDateTime         endDateTime
-1      D14   SYCA                101              100 2022-10-01 00:00:00 2022-10-01 00:30:00
-2      D14   SYCA                101              100 2022-10-01 00:30:00 2022-10-01 01:00:00
-3      D14   SYCA                101              100 2022-10-01 01:00:00 2022-10-01 01:30:00
-4      D14   SYCA                101              100 2022-10-01 01:30:00 2022-10-01 02:00:00
-5      D14   SYCA                101              100 2022-10-01 02:00:00 2022-10-01 02:30:00
-6      D14   SYCA                101              100 2022-10-01 02:30:00 2022-10-01 03:00:00
-  surfWaterTempMean surfWaterTempMinimum surfWaterTempMaximum surfWaterTempVariance
-1            29.840               29.517               30.183                 0.027
-2            28.769               28.086               29.547                 0.103
-3            27.132               26.000               28.118                 0.448
-4            24.960               24.151               25.997                 0.354
-5            23.525               22.815               24.307                 0.188
-6            22.110               21.420               22.826                 0.115
-  surfWaterTempNumPts surfWaterTempExpUncert surfWaterTempStdErMean finalQF  publicationDate
-1                1800                  0.150                  0.004       1 20221219T225423Z
-2                1800                  0.150                  0.008       1 20221219T225423Z
-3                1800                  0.152                  0.016       1 20221219T225423Z
-4                1800                  0.150                  0.014       1 20221219T225423Z
-5                1800                  0.149                  0.010       1 20221219T225423Z
-6                1800                  0.147                  0.008       1 20221219T225423Z
-      release
-1 PROVISIONAL
-2 PROVISIONAL
-3 PROVISIONAL
-4 PROVISIONAL
-5 PROVISIONAL
-6 PROVISIONAL</code></pre>
+<pre><code>  domainID siteID horizontalPosition verticalPosition       startDateTime         endDateTime surfWaterTempMean
+1      D14   SYCA                101              100 2022-10-01 00:00:00 2022-10-01 00:30:00            29.840
+2      D14   SYCA                101              100 2022-10-01 00:30:00 2022-10-01 01:00:00            28.769
+3      D14   SYCA                101              100 2022-10-01 01:00:00 2022-10-01 01:30:00            27.132
+4      D14   SYCA                101              100 2022-10-01 01:30:00 2022-10-01 02:00:00            24.960
+5      D14   SYCA                101              100 2022-10-01 02:00:00 2022-10-01 02:30:00            23.525
+6      D14   SYCA                101              100 2022-10-01 02:30:00 2022-10-01 03:00:00            22.110
+  surfWaterTempMinimum surfWaterTempMaximum surfWaterTempVariance surfWaterTempNumPts surfWaterTempExpUncert
+1               29.517               30.183                 0.027                1800                  0.150
+2               28.086               29.547                 0.103                1800                  0.150
+3               26.000               28.118                 0.448                1800                  0.152
+4               24.151               25.997                 0.354                1800                  0.150
+5               22.815               24.307                 0.188                1800                  0.149
+6               21.420               22.826                 0.115                1800                  0.147
+  surfWaterTempStdErMean finalQF  publicationDate     release
+1                  0.004       1 20221219T225423Z PROVISIONAL
+2                  0.008       1 20221219T225423Z PROVISIONAL
+3                  0.016       1 20221219T225423Z PROVISIONAL
+4                  0.014       1 20221219T225423Z PROVISIONAL
+5                  0.010       1 20221219T225423Z PROVISIONAL
+6                  0.008       1 20221219T225423Z PROVISIONAL</code></pre>
 <p>It appears that each row corresponds to a temperature average between
 two time points (<code>startDateTime</code> and
 <code>endDateTime</code>) taken by a sensor at a particular location
