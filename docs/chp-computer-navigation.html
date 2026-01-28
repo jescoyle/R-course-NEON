@@ -504,7 +504,7 @@ self-contained, reproducible project that we will use for the rest of
 this book.</p>
 <p>Before beginning this lesson, make sure that your have the latest
 version of R and RStudio (see <a href="computer-setup.html">Computer
-Setup</a>) and that you know how to open your computers default file
+Setup</a>) and that you know how to open your computer’s default file
 browser.</p>
 </div>
 </div>
@@ -526,9 +526,10 @@ computer and open it as you would any other application.</p>
 <p><img src="images/01-rstudio.png" alt="image of RStudio layout" /> If
 you’re having trouble seeing the different windows, RStudio has several
 <a
-href="https://support.posit.co/hc/en-us/articles/360044226673-RStudio-Accessibility-Features">accessibility
-features</a> that allow you to change the size of text and simplify the
-layout. You may want to customize your setup now.</p>
+href="https://support.posit.co/hc/en-us/articles/360044226673-RStudio-Accessibility-Features"
+target="_blank">accessibility features</a> that allow you to change the
+size of text and simplify the layout. You may want to customize your
+setup now.</p>
 <p>We will go over each of these panels as we need to use them. For this
 lesson, we will be using the <code>Files</code> and
 <code>Terminal</code> panels to learn how to navigate your computer. We
@@ -800,9 +801,9 @@ class="section level4">
 general principles to adhere to that will make project management
 easier:</p>
 <p><a
-href="https://github.com/swcarpentry/good-enough-practices-in-scientific-computing/blob/gh-pages/good-enough-practices-for-scientific-computing.pdf">Good
-Enough Practices for Scientific Computing</a> gives the following
-recommendations for project organization:</p>
+href="https://github.com/swcarpentry/good-enough-practices-in-scientific-computing/blob/gh-pages/good-enough-practices-for-scientific-computing.pdf"
+target="_blank">Good Enough Practices for Scientific Computing</a> gives
+the following recommendations for project organization:</p>
 <ol style="list-style-type: decimal">
 <li>Put each project in its own directory, which is named after the
 project.</li>
@@ -818,12 +819,12 @@ compiled locally in the <code>bin</code> directory.</li>
 </ol>
 <p>The workbook for this course is an RStudio project that follows these
 guidelines. If you haven’t already done so, <a
-href="computer-setup.html##Course-Workbook">set up the workbook for this
-course</a>.</p>
+href="computer-setup.html##Course-Workbook" target="_blank">set up the
+workbook for this course</a>.</p>
 <p>Close RStudio and use your computer’s file browser to navigate to the
 directory where you saved the R-course-NEON-workbook project. Open the
 project by clicking on the .Rproj file.</p>
-<p>The Files panel in RStudio should now look like this: &gt; <img
+<p>The Files panel in RStudio should now look like this: <img
 src="images/RStudio_project_subfolders.jpg"
 alt="image of contents of R-course-NEON project folder" /></p>
 <p>The exercises folder contains files that you will use to complete the
@@ -1019,7 +1020,6 @@ move a set of files that match a particular naming pattern. We can also
 use a wildcard to specify all files in a folder:</p>
 <div class="sourceCode" id="cb17"><pre
 class="sourceCode sh"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="fu">ls</span> 01/<span class="pp">*</span></span></code></pre></div>
-<pre><code>ls: cannot access &#39;01/*&#39;: No such file or directory</code></pre>
 <div class="challenge">
 <ol style="list-style-type: decimal">
 <li>Use the terminal to check your current working directory and
@@ -1038,20 +1038,20 @@ from chapter 1 (these begin with 1.)</li>
 </summary>
 <div class="solution">
 <p>Commands are shown below without their output.</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode sh"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="bu">pwd</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="bu">cd</span> exercises</span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a><span class="fu">ls</span> 01/1.<span class="pp">*</span></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a><span class="fu">cp</span> 01/<span class="pp">*</span> working/ </span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="fu">cp</span> 02/<span class="pp">*</span> working/</span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a><span class="fu">ls</span> working</span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="fu">ls</span> working/1.<span class="pp">*</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="bu">cd</span> exercises</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="fu">ls</span> 01/1.<span class="pp">*</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="fu">cp</span> 01/<span class="pp">*</span> working/ </span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="fu">cp</span> 02/<span class="pp">*</span> working/</span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a><span class="fu">ls</span> working</span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="fu">ls</span> working/1.<span class="pp">*</span></span></code></pre></div>
 </div>
 </details>
 </div>
@@ -1072,10 +1072,10 @@ different name, but then we would need to delete the old version. The
 SOURCE location to the DEST location without keeping the old version.
 This allows us to change the name of a file. For example, if my initials
 are XXX:</p>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode sh"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">mv</span> exercises/working/1.1.txt exercises/working/1.1_XXX.txt</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="fu">ls</span> exercises/working</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode sh"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">mv</span> exercises/working/1.1.txt exercises/working/1.1_XXX.txt</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a><span class="fu">ls</span> exercises/working</span></code></pre></div>
 <pre><code>1.1_XXX.txt
 1.2.txt
 1.3.txt
@@ -1164,8 +1164,8 @@ directory to your Desktop directory?</li>
 <p><strong>1.3</strong> From the initial working directory of the
 Student Workbook RStudio project…</p>
 <ol style="list-style-type: decimal">
-<li>What would you type into the Terminal to show all files in the data
-directory?</li>
+<li>What would you type into the <strong>Terminal</strong> to show all
+files in the data directory?</li>
 <li>Suppose you wanted to also show the size of each file and when it
 was modified last. What would you type to list all of the options for
 this command to find one that gives you more information about each
@@ -1194,21 +1194,22 @@ prior steps. Write one command line for each of the four steps.</li>
 <div id="sources-and-resources" class="section level2">
 <h2>Sources and Resources</h2>
 <p>This lesson was adapted from <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">Zimmerman et al. (2019)</span></a> episodes 1 &amp; 2
-by Jes Coyle.</p>
+href="https://swcarpentry.github.io/r-novice-gapminder/"
+target="_blank"><span class="citation">Zimmerman et al.
+(2019)</span></a> episodes 1 &amp; 2 by Jes Coyle.</p>
 <div id="additional-resources" class="section level3">
 <h3>Additional Resources</h3>
 <ul>
 <li><a
-href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects">Using
-RStudio Projects by Posit</a></li>
+href="https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects"
+target="_blank">Using RStudio Projects by Posit</a></li>
 <li>Read more about using the Terminal in RStudio <a
-href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal-in-the-RStudio-IDE">here</a>.</li>
+href="https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal-in-the-RStudio-IDE"
+target="_blank">here</a>.</li>
 <li>For more a more in-depth introduction to using a Unix shell see the
 Software Carpentry lesson on <a
-href="https://swcarpentry.github.io/shell-novice/">The Unix
-Shell</a>.</li>
+href="https://swcarpentry.github.io/shell-novice/" target="_blank">The
+Unix Shell</a>.</li>
 </ul>
 </div>
 <div id="cited-references" class="section level3">

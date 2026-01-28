@@ -80,7 +80,7 @@ This lesson introduces the following unix-style shell commands:
 
 We could learn about your computer's **file system** using applications that are already installed on your computer; e.g. the File Explorer on Windows or the Finder on Mac. However, we'll be using RStudio to explore files on your computer because it has a built-in command-line environment and file viewing window that we can use from the same application. We'll also be using RStudio to create a self-contained, reproducible project that we will use for the rest of this book. 
 
-Before beginning this lesson, make sure that your have the latest version of R and RStudio (see [Computer Setup](computer-setup.html)) and that you know how to open your computers default file browser.
+Before beginning this lesson, make sure that your have the latest version of R and RStudio (see [Computer Setup](computer-setup.html)) and that you know how to open your computer's default file browser.
 
 
 ## Lesson
@@ -100,7 +100,7 @@ When you first open RStudio, you will be greeted by three panels:
 Your RStudio session should look similar to this:
 
 ![image of RStudio layout](images/01-rstudio.png)
-If you're having trouble seeing the different windows, RStudio has several [accessibility features](https://support.posit.co/hc/en-us/articles/360044226673-RStudio-Accessibility-Features) that allow you to change the size of text and simplify the layout. You may want to customize your setup now.
+If you're having trouble seeing the different windows, RStudio has several [accessibility features](https://support.posit.co/hc/en-us/articles/360044226673-RStudio-Accessibility-Features){target="_blank"} that allow you to change the size of text and simplify the layout. You may want to customize your setup now.
 
 
 We will go over each of these panels as we need to use them. For this lesson, we will be using the `Files` and `Terminal` panels to learn how to navigate your computer. We will learn more about the `Console` and `Environment` panels in the [`r .get_chpName("chp-intro-to-R", type.to = "nameShort", type.from = "fileName")`](chp-chp-intro-to-R.html)) lesson.
@@ -269,7 +269,7 @@ Opening an RStudio project through the file system
 Although there is no "best" way to lay out a project, there are some general
 principles to adhere to that will make project management easier:
 
-[Good Enough Practices for Scientific Computing](https://github.com/swcarpentry/good-enough-practices-in-scientific-computing/blob/gh-pages/good-enough-practices-for-scientific-computing.pdf) gives the following recommendations for project organization:
+[Good Enough Practices for Scientific Computing](https://github.com/swcarpentry/good-enough-practices-in-scientific-computing/blob/gh-pages/good-enough-practices-for-scientific-computing.pdf){target="_blank"} gives the following recommendations for project organization:
 
 1. Put each project in its own directory, which is named after the project.
 2. Put text documents associated with the project in the `doc` directory.
@@ -277,12 +277,12 @@ principles to adhere to that will make project management easier:
 4. Put source for the project's scripts and programs in the `src` directory, and programs brought in from elsewhere or compiled locally in the `bin` directory.
 5. Name all files to reflect their content or function.
 
-The workbook for this course is an RStudio project that follows these guidelines. If you haven't already done so, [set up the workbook for this course](computer-setup.html##Course-Workbook).
+The workbook for this course is an RStudio project that follows these guidelines. If you haven't already done so, [set up the workbook for this course](computer-setup.html##Course-Workbook){target="_blank"}.
 
 Close RStudio and use your computer's file browser to navigate to the directory where you saved the R-course-NEON-workbook project. Open the project by clicking on the .Rproj file.
 
 The Files panel in RStudio should now look like this:
-> ![image of contents of R-course-NEON project folder](images/RStudio_project_subfolders.jpg)
+ ![image of contents of R-course-NEON project folder](images/RStudio_project_subfolders.jpg)
 
 The exercises folder contains files that you will use to complete the exercises at the end of each lesson. These are text files that you can edit to solve the problems described in the Exercises section. Let's make a copy of each of these files so that if you make changes to them, you still have the original version. Although you could do this with your file browser, we will learn how to do this using the terminal in order to introduce some useful new commands.
 
@@ -415,8 +415,13 @@ ls 01/1.*
 ```
 
 Wildcards can be used with other commands and allow us to copy and move a set of files that match a particular naming pattern. We can also use a wildcard to specify all files in a folder:
+```{sh include = FALSE}
+cd exercises
 
-```{sh}
+ls 01/*
+```
+
+```{sh eval = FALSE}
 ls 01/*
 
 ```
@@ -535,7 +540,7 @@ After completing these exercises, learners will be able to
 
 **`r .chp_num`.3** From the initial working directory of the Student Workbook RStudio project...
 
-1. What would you type into the Terminal to show all files in the data directory?
+1. What would you type into the **Terminal** to show all files in the data directory?
 2. Suppose you wanted to also show the size of each file and when it was modified last. What would you type to list all of the options for this command to find one that gives you more information about each file?
 3. Read the help file displayed in step 2. What command would you type to use a long listing format (this includes the file size and time modified)?
 
@@ -551,13 +556,13 @@ After completing these exercises, learners will be able to
 
 ## Sources and Resources
 
-This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 1 & 2 by Jes Coyle.
+This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/){target="_blank"} episodes 1 & 2 by Jes Coyle.
 
 ### Additional Resources
 
-* [Using RStudio Projects by Posit](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects)
-* Read more about using the Terminal in RStudio [here](https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal-in-the-RStudio-IDE).
-* For more a more in-depth introduction to using a Unix shell see the Software Carpentry lesson on [The Unix Shell](https://swcarpentry.github.io/shell-novice/).
+* [Using RStudio Projects by Posit](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects){target="_blank"}
+* Read more about using the Terminal in RStudio [here](https://support.posit.co/hc/en-us/articles/115010737148-Using-the-RStudio-Terminal-in-the-RStudio-IDE){target="_blank"}.
+* For more a more in-depth introduction to using a Unix shell see the Software Carpentry lesson on [The Unix Shell](https://swcarpentry.github.io/shell-novice/){target="_blank"}.
 
 
 

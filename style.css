@@ -100,7 +100,7 @@ a:hover {
   color: var(--bright-blue);
 }
 
-.challenge::after {
+.challenge, .callout-tip, .callout-trick, .callout-important::after {
   content: "  ";
 }
 

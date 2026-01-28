@@ -46,7 +46,7 @@ set.seed(10)
   
 R is widely used in the scientific community and will always be free to use. R is also *open source*- this means that anyone can see, modify and distribute the code for the program. The fact that R is open source means that thousands of users have contributed add-on packages that increase the functionality of the base R program. If there's an analysis you want to do or a graph you want to make, someone has probably made a package for it. All you have to do is find it and use it.
 
-R also makes it easier to practice [open science](https://www.unesco.org/en/open-science) by making your scientific analyses transparent and reusable. This is because analyses are saved as code rather than a series of clicks through a user interface (like spreadsheet software). If you share this code and your data with someone, they will be able to reproduce your analyses with a single click.
+R also makes it easier to practice [open science](https://www.unesco.org/en/open-science){target="_blank"} by making your scientific analyses transparent and reusable. This is because analyses are saved as code rather than a series of clicks through a user interface (like spreadsheet software). If you share this code and your data with someone, they will be able to reproduce your analyses with a single click.
 
 We're going to learn some of the fundamentals of the R programming language and writing our first code script. We'll be using RStudio: a free, open-source R Integrated Development Environment (IDE). It provides a built-in editor, works on all platforms (including on servers) and provides many advantages such as integration with version control and project management. We'll learn some of the basics for working with R code in RStudio.
 
@@ -114,7 +114,7 @@ If you opened the R-course-NEON-workbook project then your RStudio session shoul
 
 ![RStudio layout](images/01-rstudio.png)
 
-If you're having trouble seeing the different windows, RStudio has several [accessibility features](https://support.posit.co/hc/en-us/articles/360044226673-RStudio-Accessibility-Features) that allow you to change the size of text and simplify the layout. You may want to customize your setup now.
+If you're having trouble seeing the different windows, RStudio has several [accessibility features](https://support.posit.co/hc/en-us/articles/360044226673-RStudio-Accessibility-Features){target="_blank"} that allow you to change the size of text and simplify the layout. You may want to customize your setup now.
 
 In [`r .get_chpName("computer-navigation", type.to = "nameShort", type.from = "chp")`](chp-computer-navigation.html) we learned about the Terminal and File panels. In this lesson we're going to start working in the R console to learn about some of the basic functionality of R. Notice that the Console and Terminal tabs share the same panel. R console and Console are used interchangeably to refer to the same panel. 
 Once we start learning more complex code, we will open the Source panel and create an R script for saving the code that we write.
@@ -392,7 +392,7 @@ y <- 2*X
 ```
 <details><summary>**Solution:**</summary>
 ::: {.solution}
-```{r echo = FALSE, error = TRUE}
+```{r error = TRUE}
 y <- 2*X
 ```
 
@@ -422,10 +422,12 @@ You should also avoid using variable names that are the same as values or functi
 ```{r eval = FALSE}
 ?mean
 ```
-```{r}
+
+If a name already exists for a function, it will open up a Help window. If the name is available for you to use, then the console will report that it could not find any documentation.
+
+```{r eval = FALSE}
 ?average
 ```
-If a name already exists for a function, it will open up a Help window. If the name is available for you to use, then the console will report that it could not find any documentation.
 
 
 It is also possible to use the `=` operator for assignment:
@@ -570,6 +572,20 @@ The first example repeats each element of firstNames the number of times given i
 </details>
 :::
 
+
+::: {.callout-tip}
+**Warnings vs. Errors**
+
+Pay attention when R does something unexpected! Errors, like above,
+occur when R cannot proceed with a calculation. Warnings on the
+other hand usually mean that the function has run, but it probably
+hasn't worked as expected.
+
+In both cases, the message that R prints out usually give you clues
+how to fix a problem.
+:::
+
+
 <br>
 
 Vectors are useful because we can use them to do multiple calculations at once. Adding or multiplying a vector by a scalar applies the operation to each element of the vector.
@@ -651,37 +667,6 @@ You can use `rm` to delete objects you no longer need:
 rm(x)
 ```
 
-If you have lots of things in your environment and want to delete all of them,
-you can pass the results of `ls` to the `rm` function:
-
-```{r, eval=FALSE}
-rm(list = ls())
-```
-
-In this case we've composed the two function (just like in math!). Like the order of operations, anything inside the innermost parentheses is evaluated first, and so on.
-
-In this case we've specified that the results of `ls` should be used for the
-`list` argument in `rm`. When assigning values to arguments by name, you *must*
-use the `=` operator and not the `<-` operator.
-
-If instead we use `<-`, there will be unintended side effects, or you may get an error message:
-
-```{r, error=TRUE}
-rm(list <- ls())
-```
-
-
-::: {.callout-tip}
-**Warnings vs. Errors**
-
-Pay attention when R does something unexpected! Errors, like above,
-occur when R cannot proceed with a calculation. Warnings on the
-other hand usually mean that the function has run, but it probably
-hasn't worked as expected.
-
-In both cases, the message that R prints out usually give you clues
-how to fix a problem.
-:::
 
 
 Notice that although `rm()` and `ls()` are similar to the shell commands `rm` and `ls`, they operate in different spaces. The Terminal window in RStudio accesses the file system on your computer. The R Console accesses objects that you create during a specific R session. Once your close R, these objects disappear forever; they are not saved on your file system.
@@ -715,7 +700,7 @@ We're going to write an R script that loads a data table from NEON and do some c
 
 ### Reading data from files
 
-R has functions to read any text-based file. One of the most widely used formats for text-based data table is the **comma separated values** (CSV) format, where each row of the table corresponds to a row of text and values in different columns are separated by commas. We'll learn more about best practices for data organization in [`r .get_chpName("spreadsheets")`]("chp-spreadsheets.html"). For now, we will use the `read.csv()` function to read a CSV file into a data table in R. The object that is created by this function is called a **data frame** and we will learn more about this type of object in [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html). 
+R has functions to read any text-based file. One of the most widely used formats for text-based data table is the **comma separated values** (CSV) format, where each row of the table corresponds to a row of text and values in different columns are separated by commas. We'll learn more about best practices for data organization in [`r .get_chpName("spreadsheets", type.from = "chp")`]("chp-spreadsheets.html"). For now, we will use the `read.csv()` function to read a CSV file into a data table in R. The object that is created by this function is called a **data frame** and we will learn more about this type of object in [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html). 
 
 Type the following into your new R script:
 
@@ -746,7 +731,7 @@ Typing text in a R script does not cause the code to run in the R Console. There
     * type <kbd>Ctrl</kbd>+<kbd>Return</kbd> in Windows or Linux
 or <kbd>&#8984;</kbd>+<kbd>Return</kbd> on OS X.
 
-NOTE: To "run" code measn the same thing as to "execute" code. We can use the word "run" in informal contexts and "execute" in formal contexts.
+NOTE: To "run" code means the same thing as to "execute" code. We can use the word "run" in informal contexts and "execute" in formal contexts.
 
 Run each line of code above from your R script.
 
@@ -786,6 +771,7 @@ watertemp <- read.csv("watertemp_30min_TECR_2021-04_2021-10.csv")
 
 What does this text mean? It is a warning that the function did not execute properly. "cannot open the connection" means that R could not find this file. Why couldn't R file the file? We didn't specify the location of the file relative to the current working directory.
 
+::: {.callout-important}
 #### Working directory
 
 Knowing R's current working directory is important because when you need to access other files (for example, to import a data file), R will look for them relative to the current working directory.
@@ -793,6 +779,7 @@ Knowing R's current working directory is important because when you need to acce
 Each time you create a new RStudio Project, it will create a new directory for that project. When you open an existing `.Rproj` file, it will open that project and set R's working directory to the folder that file is in.
 
 You can check the current working directory with the `getwd()` command, or by using the menus in RStudio.
+:::
 
 ::: {.challenge}
 Get and set the working directory in R.
@@ -817,7 +804,7 @@ You need to either provide an absolute path to the file, or you need to make sur
 
 ### Introduction to data frames
 
-Data frames are a very common way to work with data tables in R. Each row of a data frame represents one observation and each column contains a vector of data about a particular variable. In the `watertemp` data frame, each observation is a mean surface water temperature measurement from [Teakettle Creek](https://www.neonscience.org/field-sites/tecr) near Fresno, CA. Measurements come from several sensor locations on the creek and are averaged over the time period defined by the `startDateTime` and `endDateTime` columns.
+Data frames are a very common way to work with data tables in R. Each row of a data frame represents one observation and each column contains a vector of data about a particular variable. In the `watertemp` data frame, each observation is a mean surface water temperature measurement from [Teakettle Creek](https://www.neonscience.org/field-sites/tecr){target="_blank"} near Fresno, CA. Measurements come from several sensor locations on the creek and are averaged over the time period defined by the `startDateTime` and `endDateTime` columns.
 
 Let's explore these data in more detail.
 
@@ -867,7 +854,7 @@ min(watertemp$surfWaterTempMean, na.rm = TRUE)
 </details>
 :::
 
-We can also tabulate values in a column data using the `table()` function. This function finds all of the unique values and counts the number of times each value appears. The `HOR.VER` column is a identifier of the location of a tempereature sensor, so we can use it to determine how many different sensors are in these data.
+We can also tabulate values in a column data using the `table()` function. This function finds all of the unique values and counts the number of times each value appears. The `HOR.VER` column is a identifier of the location of a temperature sensor, so we can use it to determine how many different sensors are in these data.
 
 ```{r}
 # How many observations are from each sensor location?
@@ -881,7 +868,7 @@ There are two sensors (101.1 and 101.2) and each has 10272 observations in this 
 The `finalQF` column is a quality-control variable that indicates whether data are acceptable for use. Let's determine whether all observations in these data are acceptable and have a value of 0 in the `finalQF` column.
 
 ::: {.challenge}
-Use the `table()` function to determine how many observations in this data table should not be used for analysis.
+Use the `table()` function to determine how many observations in this data table should not be used for analysis (i.e. the `finalQF` column equals `1`).
 
 <details><summary>**Solution:**</summary>
 ::: {.solution}
@@ -921,13 +908,78 @@ temp_lowerbound <- watertemp$surfWaterTempMean - watertemp$surfWaterTempExpUncer
 </details>
 :::
 
-The data in the `watertemp` data frame provide a time series of surface water temperature in Teakettle Creek that likely fluctuates throughout the year. If we want to analyze or visualize this time series, we need a way to work with the dates as actual numeric values, rather than as text.
+### Saving code
 
-Base R has functions for working with dates and times, but they are tricky to learn. We're going to install a widely used package called `lubridate` to work with the dates and times saved in the `startDateTime` and `endDateTime` columns.
+Let's save our work. Click on the save icon at the top of the Source panel.
+
+::: {.callout-important}
+**R does not auto-save.** Be sure to save your work often when you are working. Consider setting a timer to remind yourself to do this.
+
+:::
+
+### Getting help
+
+One of the most daunting aspects of R is the large number of functions
+available. It would be prohibitive, if not impossible to remember the
+correct usage for every function you use. Luckily, using the help files
+means you don't have to remember that!
+
+R, and every package, provide help files for functions. The general syntax to search for help on any function, "function_name", from a specific function that is in a package loaded into the R session is:
+
+```{r, eval=FALSE}
+?function_name
+help(function_name)
+```
+
+For example take a look at the help file for `read.csv()` which we used previously to read data into R. 
+
+```{r, eval=FALSE}
+?read.csv()
+```
+
+This will load up a help page in RStudio. Each help page is broken down into sections:
+
+ - Description: An extended description of what the function does.
+ - Usage: The arguments of the function and their default values (which can be changed).
+ - Arguments: An explanation of the data each argument is expecting.
+ - Details: Any important details to be aware of.
+ - Value: The data the function returns.
+ - See Also: Any related functions you might find useful.
+ - Examples: Some examples for how to use the function.
+
+Different functions might have different sections, but these are the main ones you should be aware of. 
+
+Notice how related functions might call for the same help file. This is because these functions have very similar applicability and often share the same arguments as inputs to the function, so package authors often choose to document them together in a single help file. From the help file for `read.csv` we can see that this function is actually a specific version of `read.table` where a few default arguments are set to match the format of a csv file (`header = TRUE` and `sep = ","`). 
+
+```{r, eval=FALSE}
+?write.table()
+?write.csv()
+```
+
+::: {.callout-tip}
+Running Examples
+
+From within the function help page, you can highlight code in the 
+Examples and type <kbd>Ctrl</kbd>+<kbd>Return</kbd> to run it in 
+RStudio console. This gives you a quick way to get a feel for
+how a function works.
+:::
+
+Don't worry about trying to remember the name of every function in R. You can look them up on Google, or if you can remember the start of the function's name, use the tab completion in RStudio. This is one advantage that RStudio has over R on its own, it has auto-completion abilities that allow you to more easily look up functions, their arguments, and the values that they take.
+
+Congrats! You've reached the end of the main lesson. Click on the [Synthesis](#synthesis) tab at the top to move on to the next stage of this lesson where we will learn about installing packages and put what we have learned together into an analysis.
+
+<br>
+
+## Synthesis
+
+The data in the `watertemp` data frame provide a time series of surface water temperature in Teakettle Creek that likely fluctuates throughout the year. Let's use what we have learned to make a graph showing how surface water temperature changes over time in Teakettle Creek. If we want to analyze or visualize this time series, we need a way to work with the dates saved in the `startDateTime` and `endDateTime` as actual numeric values, rather than as text.
+
+Base R has functions for working with dates and times, but they are tricky to learn. We're going to install a widely used package called `lubridate` to work with the dates and times.
 
 ### Installing and loading packages
 
-"base" R is the functionality that comes installed with R, but the powerful thing about R is its user community who have created thousands of **packages** that increase its functionality. As of this writing, there are nearly 20,000 packages available on [CRAN](https://cran.r-project.org/) (the comprehensive R archive network). 
+"base" R is the functionality that comes installed with R, but the powerful thing about R is its user community who have created thousands of **packages** that increase its functionality. As of this writing, there are nearly 20,000 packages available on [CRAN](https://cran.r-project.org/){target="_blank"} (the comprehensive R archive network). 
 
 Packages can be viewed, loaded, and detached in the Packages tab of the lower right panel in RStudio. Clicking on this tab will display all of the installed packages with a checkbox next to them.
 If there is nothing listed then you do not have any packages installed. Packages can be installed and updated from the Package tab with the Install and Update buttons at the top of the tab.
@@ -981,15 +1033,24 @@ If a package doesn't have any vignettes, you can usually find help by typing
 `help("package-name")`.
 
 RStudio also has a set of excellent
-[cheatsheets](https://rstudio.com/resources/cheatsheets/) for many packages.
+[cheatsheets](https://rstudio.com/resources/cheatsheets/){target="_blank"} for many packages.
 :::
 
-## Synthesis
+
 
 ### Putting it all together
-Let's use what we have learned to make a graph showing how surface water temperature changes over time in Teakettle Creek.
 
-To do this we first need to convert the text in the `startDateTime` column to a format that R can interpret as have numerical values.
+Now let's make a graph of water temperature over time. To do this we first need to convert the text in the `startDateTime` column to a format that R can interpret as have numerical values. Let's see what these dates look like.
+
+```{r}
+# Display the first 10 elements in the startDateTime column
+watertemp$startDateTime[1:10]
+
+```
+
+
+We will use the `ymd_hms()` function from the `lubridate` package to convert this text to dates. The name of the function stands for **y**ear **m**onth **d**ay **h**our **m**inute **s**econd, which is the format of the dates in the `startDateTime` column.
+
 ```{r}
 # Convert the text to a date and time
 # This replaces the existing startDateTime column
@@ -1002,13 +1063,14 @@ Now that R knows these values are times, we can do much more with them:
 # View the date component of each value (but only from rows 1 - 10)
 date(watertemp$startDateTime)[1:10]
 
-# What was the most recent date that data were recorded in this data set?
+# What was the most recent (i.e. highest) date that data were recorded in this data set?
 max(date(watertemp$startDateTime))
 
 
-# What was the earliest date that data were recorded in this data set?
+# What was the earliest (i.e. lowest) date that data were recorded in this data set?
 min(date(watertemp$startDateTime))
 ```
+
 We can also use the `plot()` function to make a scatterplot if we specify which values should be the `x` coordinate and which should be the `y` coordinate:
 
 ```{r collapse = TRUE}
@@ -1045,62 +1107,10 @@ temp_lowerbound[1:10]
 
 Now that you have written your first R script it is time to save your work! Click on the save icon at the top of the Source panel.
 
-::: {.callout-important}
-**R does not auto-save.** Be sure to save your work often when you are working. Consider setting a timer to remind yourself to do this.
-
-:::
 
 Close your R script by clicking on the small x on the tab next to the name of the script at the top of the Source panel. You can reopen the script using the File > Open File menus option at the top of the RStudio window or by clicking on the name of the script file in the Files panel.
 
-### Getting help
 
-One of the most daunting aspects of R is the large number of functions
-available. It would be prohibitive, if not impossible to remember the
-correct usage for every function you use. Luckily, using the help files
-means you don't have to remember that!
-
-R, and every package, provide help files for functions. The general syntax to search for help on any function, "function_name", from a specific function that is in a package loaded into the R session is:
-
-```{r, eval=FALSE}
-?function_name
-help(function_name)
-```
-
-For example take a look at the help file for `read.csv()` which we used previously to read data into R. 
-
-```{r, eval=FALSE}
-?read.csv()
-```
-
-This will load up a help page in RStudio. Each help page is broken down into sections:
-
- - Description: An extended description of what the function does.
- - Usage: The arguments of the function and their default values (which can be changed).
- - Arguments: An explanation of the data each argument is expecting.
- - Details: Any important details to be aware of.
- - Value: The data the function returns.
- - See Also: Any related functions you might find useful.
- - Examples: Some examples for how to use the function.
-
-Different functions might have different sections, but these are the main ones you should be aware of. 
-
-Notice how related functions might call for the same help file. This is because these functions have very similar applicability and often share the same arguments as inputs to the function, so package authors often choose to document them together in a single help file. From the help file for `read.csv` we can see that this function is actually a specific version of `read.table` where a few default arguments are set to match the format of a csv file (`header = TRUE` and `sep = ","`). 
-
-```{r, eval=FALSE}
-?write.table()
-?write.csv()
-```
-
-::: {.callout-tip}
-Running Examples
-
-From within the function help page, you can highlight code in the 
-Examples and type <kbd>Ctrl</kbd>+<kbd>Return</kbd> to run it in 
-RStudio console. This gives you a quick way to get a feel for
-how a function works.
-:::
-
-Don't worry about trying to remember the name of every function in R. You can look them up on Google, or if you can remember the start of the function's name, use the tab completion in RStudio. This is one advantage that RStudio has over R on its own, it has auto-completion abilities that allow you to more easily look up functions, their arguments, and the values that they take.
 
 ## Exercises
 
@@ -1141,7 +1151,7 @@ HINT: You will need to calculate the difference in time between the start and en
 
 **`r .chp_num`.4** 
 
-Run these two commmands and then look at the help for the `paste` function.
+Run these two commands and then look at the help for the `paste` function.
 
 `paste(1:5, 6:10, sep = "-")`
 
@@ -1154,9 +1164,11 @@ Run these two commmands and then look at the help for the `paste` function.
 
 Write code that accomplishes the following:
 
-1. Calculate the average of all even numbers from 1 to 100 and assign this value to a variable.
-2. Calculate the average of all odd numbers from 1 to 100 and assign this value to a different variable.
-3. Calculate the difference between the two variables you created (i.e. subtract them).
+1. Calculate the average of all even numbers from 1 to 100 and assign this value to the variable `evens`.
+2. Calculate the average of all odd numbers from 1 to 100 and assign this value to the variable `odds`.
+3. Calculate the difference between `evens` and `odds` you created (i.e. subtract them).
+
+If you did the exercise correctly, the output of step 3 will be either `1` or `-1`.
 
 **`r .chp_num`.6**
 
@@ -1186,25 +1198,25 @@ cats <- c("Donut", "Edgar", "Felix")
 
 Write one line of code for each of the following:
 
-1. Select the second name in `dogs`.
-2. Replace the first and third names in `cats` with a value that indicates the data are missing.
+1. Select the second element of `dogs`.
+2. Replace the first and third elements in `cats` with a value that indicates the data are missing.
 
 
 
 ## Sources and Resources
 
-This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/) episodes 1 and 3 by Jes Coyle.
+This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/){target="_blank"} episodes 1 and 3 by Jes Coyle.
 
 This lesson utilizes data from @NEON-soilCO2 and @NEON-soiltemp.
 
 ### Additional Resources
 
-* [Learn R by Posit](https://support.posit.co/hc/en-us/categories/200098757-Learn-R)
-* [#RYouWithMe: Basic Basics Lesson 1: An Opinionated Tour of RStudio](https://www.youtube.com/watch?v=kfcX5DEMAp4)
-* [Quick R](http://www.statmethods.net/)
-* [RStudio cheat sheets](http://www.rstudio.com/resources/cheatsheets/)
-* [Cookbook for R](http://www.cookbook-r.com/)
-* Read more about using the Source window to edit and execute code [here](https://support.posit.co/hc/en-us/articles/200484448-Editing-and-Executing-Code-in-the-RStudio-IDE).
+* [Learn R by Posit](https://support.posit.co/hc/en-us/categories/200098757-Learn-R){target="_blank"}
+* [#RYouWithMe: Basic Basics Lesson 1: An Opinionated Tour of RStudio](https://www.youtube.com/watch?v=kfcX5DEMAp4){target="_blank"}
+* [Quick R](http://www.statmethods.net/){target="_blank"}
+* [RStudio cheat sheets](http://www.rstudio.com/resources/cheatsheets/){target="_blank"}
+* [Cookbook for R](http://www.cookbook-r.com/){target="_blank"}
+* Read more about using the Source window to edit and execute code [here](https://support.posit.co/hc/en-us/articles/200484448-Editing-and-Executing-Code-in-the-RStudio-IDE){target="_blank"}.
 
 ### Cited References
 

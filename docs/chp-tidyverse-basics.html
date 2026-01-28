@@ -874,7 +874,7 @@ into subsets based on a set of criteria.</p>
  $ estimatedTotalCount: num  2 1 3 1 2 2 1 72 1 2 ...</code></pre>
 <p>Here is the structure of a grouped data frame:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">str</span>(inverts <span class="sc">|&gt;</span> <span class="fu">group_by</span>(siteID))</span></code></pre></div>
-<pre><code>gropd_df [3,045 × 11] (S3: grouped_df/tbl_df/tbl/data.frame)
+<pre><code>gropd_df [3,045 x 11] (S3: grouped_df/tbl_df/tbl/data.frame)
  $ siteID             : chr [1:3045] &quot;MART&quot; &quot;MART&quot; &quot;MART&quot; &quot;MART&quot; ...
  $ sampleID           : chr [1:3045] &quot;MART.20210728.HESS.7&quot; &quot;MART.20210728.SURBER.2&quot; &quot;MART.20210728.HESS.6&quot; &quot;MART.20210728.HESS.6&quot; ...
  $ scientificName     : chr [1:3045] &quot;Orthocladius sp.&quot; &quot;Parorthocladius sp.&quot; &quot;Sialis sp.&quot; &quot;Afghanurus sp.&quot; ...
@@ -886,7 +886,7 @@ into subsets based on a set of criteria.</p>
  $ genus              : chr [1:3045] &quot;Orthocladius&quot; &quot;Parorthocladius&quot; &quot;Sialis&quot; &quot;Afghanurus&quot; ...
  $ sizeClass          : num [1:3045] 3 2 3 4 5 9 1 1 1 3 ...
  $ estimatedTotalCount: num [1:3045] 2 1 3 1 2 2 1 72 1 2 ...
- - attr(*, &quot;groups&quot;)= tibble [3 × 2] (S3: tbl_df/tbl/data.frame)
+ - attr(*, &quot;groups&quot;)= tibble [3 x 2] (S3: tbl_df/tbl/data.frame)
   ..$ siteID: chr [1:3] &quot;CARI&quot; &quot;MART&quot; &quot;TECR&quot;
   ..$ .rows : list&lt;int&gt; [1:3] 
   .. ..$ : int [1:694] 2352 2353 2354 2355 2356 2357 2358 2359 2360 2361 ...
@@ -917,7 +917,7 @@ into a single data frame.</p>
 <span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount))</span>
 <span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a></span>
 <span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>inverts_bysite</span></code></pre></div>
-<pre><code># A tibble: 3 × 2
+<pre><code># A tibble: 3 x 2
   siteID total
   &lt;chr&gt;  &lt;dbl&gt;
 1 CARI    3780
@@ -935,7 +935,7 @@ variables. Let’s group by <code>siteID</code> and
 <span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">total =</span> <span class="fu">sum</span>(estimatedTotalCount))</span>
 <span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a></span>
 <span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>inverts_bysample</span></code></pre></div>
-<pre><code># A tibble: 48 × 3
+<pre><code># A tibble: 48 x 3
 # Groups:   siteID [3]
    siteID sampleID                total
    &lt;chr&gt;  &lt;chr&gt;                   &lt;dbl&gt;
@@ -949,7 +949,7 @@ variables. Let’s group by <code>siteID</code> and
  8 CARI   CARI.20210701.SURBER.3    355
  9 CARI   CARI.20210826.KICKNET.1    50
 10 CARI   CARI.20210826.KICKNET.2    44
-# ℹ 38 more rows</code></pre>
+# i 38 more rows</code></pre>
 <p>Now we have the total abundance across all taxa within each sample,
 but by keeping <code>siteID</code> in the <code>group_by()</code>
 function, it is also returned in the output.</p>
@@ -997,7 +997,7 @@ number of individuals.</p>
 7 MART.20210728.SURBER.4 Afghanurus sp.         2                   9
 8 MART.20210728.SURBER.5 Afghanurus sp.         3                   1</code></pre>
 <p>to show the following:</p>
-<pre><code># A tibble: 6 × 4
+<pre><code># A tibble: 6 x 4
 # Groups:   scientificName [1]
   scientificName sampleID               total size_mean
   &lt;chr&gt;          &lt;chr&gt;                  &lt;dbl&gt;     &lt;dbl&gt;
@@ -1018,7 +1018,7 @@ number of individuals.</p>
 <span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a></span>
 <span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a><span class="co"># view the first 10 rows</span></span>
 <span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a>inverts_bytaxa[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ]</span></code></pre></div>
-<pre><code># A tibble: 10 × 5
+<pre><code># A tibble: 10 x 5
 # Groups:   siteID, sampleID [1]
    siteID sampleID                scientificName                 total size_mean
    &lt;chr&gt;  &lt;chr&gt;                   &lt;chr&gt;                          &lt;dbl&gt;     &lt;dbl&gt;
@@ -1081,7 +1081,7 @@ data frame:</p>
 <span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a>  )</span>
 <span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a></span>
 <span id="cb34-10"><a href="#cb34-10" tabindex="-1"></a>TSW_bysite</span></code></pre></div>
-<pre><code># A tibble: 3 × 4
+<pre><code># A tibble: 3 x 4
   siteID temp_mean temp_min temp_max
   &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
 1 CARI        3.97   -0.313    163. 
@@ -1228,7 +1228,7 @@ gives the number of distinct habitat types sampled.</p>
 <span id="cb46-5"><a href="#cb46-5" tabindex="-1"></a>  <span class="fu">group_by</span>(siteID, collect_ymd) <span class="sc">|&gt;</span></span>
 <span id="cb46-6"><a href="#cb46-6" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_samples =</span> <span class="fu">n</span>(),</span>
 <span id="cb46-7"><a href="#cb46-7" tabindex="-1"></a>            <span class="at">num_habitats =</span> <span class="fu">length</span>(<span class="fu">unique</span>(habitatType)))</span></code></pre></div>
-<pre><code># A tibble: 6 × 4
+<pre><code># A tibble: 6 x 4
 # Groups:   siteID [3]
   siteID collect_ymd num_samples num_habitats
   &lt;chr&gt;  &lt;date&gt;            &lt;int&gt;        &lt;int&gt;
@@ -1253,7 +1253,7 @@ summarizes across all taxa collected. It should have columns:</p>
 <code>estimatedTotalCount</code> column</li>
 </ul>
 <p>Your code should generate this table and it will have 48 rows:</p>
-<pre><code># A tibble: 8 × 3
+<pre><code># A tibble: 8 x 3
   sampleID                num_taxa abundance
   &lt;chr&gt;                      &lt;int&gt;     &lt;dbl&gt;
 1 CARI.20210701.KICKNET.1       31       184
@@ -1390,7 +1390,7 @@ number of individuals counted from each taxon at each site.</p>
 <span id="cb52-6"><a href="#cb52-6" tabindex="-1"></a></span>
 <span id="cb52-7"><a href="#cb52-7" tabindex="-1"></a><span class="co"># view the data frame</span></span>
 <span id="cb52-8"><a href="#cb52-8" tabindex="-1"></a>inverts_bytaxa_bysite</span></code></pre></div>
-<pre><code># A tibble: 434 × 3
+<pre><code># A tibble: 434 x 3
 # Groups:   siteID [3]
    siteID scientificName     total
    &lt;chr&gt;  &lt;chr&gt;              &lt;dbl&gt;
@@ -1404,7 +1404,7 @@ number of individuals counted from each taxon at each site.</p>
  8 CARI   Boreochlus sp.         1
  9 CARI   Brillia sp.            7
 10 CARI   Capniidae sp.         96
-# ℹ 424 more rows</code></pre>
+# i 424 more rows</code></pre>
 <p>This data table is organized in <strong>long format</strong> because
 each column represents a distinct variable. However, if we want to
 compare which taxa are at each site, it would be more convenient see the
@@ -1435,7 +1435,7 @@ arguments:</p>
 <span id="cb56-6"><a href="#cb56-6" tabindex="-1"></a></span>
 <span id="cb56-7"><a href="#cb56-7" tabindex="-1"></a><span class="co"># View the data frame</span></span>
 <span id="cb56-8"><a href="#cb56-8" tabindex="-1"></a>siteBytaxa_abun</span></code></pre></div>
-<pre><code># A tibble: 265 × 4
+<pre><code># A tibble: 265 x 4
    scientificName      CARI  MART  TECR
    &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
  1 Aeolosoma sp.          4    NA    37
@@ -1448,7 +1448,7 @@ arguments:</p>
  8 Boreochlus sp.         1    NA    16
  9 Brillia sp.            7    52   177
 10 Capniidae sp.         96   149    NA
-# ℹ 255 more rows</code></pre>
+# i 255 more rows</code></pre>
 <p>By default, if a taxon was missing at a site, the function filled in
 <code>NA</code>. Since this is a table of abundances, we could change
 this behavior and specify that missing values be set to zero using the
@@ -1462,7 +1462,7 @@ this behavior and specify that missing values be set to zero using the
 <span id="cb58-7"><a href="#cb58-7" tabindex="-1"></a></span>
 <span id="cb58-8"><a href="#cb58-8" tabindex="-1"></a><span class="co"># View the dataframe</span></span>
 <span id="cb58-9"><a href="#cb58-9" tabindex="-1"></a>siteBytaxa_abun</span></code></pre></div>
-<pre><code># A tibble: 265 × 4
+<pre><code># A tibble: 265 x 4
    scientificName      CARI  MART  TECR
    &lt;chr&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
  1 Aeolosoma sp.          4     0    37
@@ -1475,14 +1475,14 @@ this behavior and specify that missing values be set to zero using the
  8 Boreochlus sp.         1     0    16
  9 Brillia sp.            7    52   177
 10 Capniidae sp.         96   149     0
-# ℹ 255 more rows</code></pre>
+# i 255 more rows</code></pre>
 <p>This table makes it easy to quickly view which taxa are more abundant
 at different sites:</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="co"># Which taxa are present at all three sites</span></span>
 <span id="cb60-2"><a href="#cb60-2" tabindex="-1"></a><span class="co"># and most abundant at Caribou Creek?</span></span>
 <span id="cb60-3"><a href="#cb60-3" tabindex="-1"></a>siteBytaxa_abun <span class="sc">|&gt;</span> <span class="fu">filter</span>(CARI <span class="sc">&gt;</span> <span class="dv">0</span>, MART <span class="sc">&gt;</span> <span class="dv">0</span>, TECR <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
 <span id="cb60-4"><a href="#cb60-4" tabindex="-1"></a>                           CARI <span class="sc">&gt;</span> MART, CARI <span class="sc">&gt;</span> TECR)</span></code></pre></div>
-<pre><code># A tibble: 5 × 4
+<pre><code># A tibble: 5 x 4
   scientificName                  CARI  MART  TECR
   &lt;chr&gt;                          &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1 Cricotopus/Orthocladius sp.       40    31    10
@@ -1607,7 +1607,7 @@ parts of this lesson:</p>
 <span id="cb63-9"><a href="#cb63-9" tabindex="-1"></a></span>
 <span id="cb63-10"><a href="#cb63-10" tabindex="-1"></a> <span class="co"># Output a table comparing these values.</span></span>
 <span id="cb63-11"><a href="#cb63-11" tabindex="-1"></a> inverts_bysite</span></code></pre></div>
-<pre><code># A tibble: 3 × 2
+<pre><code># A tibble: 3 x 2
   siteID num_taxa
   &lt;chr&gt;     &lt;int&gt;
 1 CARI         92
@@ -1636,7 +1636,7 @@ about:</p>
 <p>The <code>rename()</code> function can be used to rename columns in a
 dataframe.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" tabindex="-1"></a>inverts_bysite <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">site =</span> siteID)</span></code></pre></div>
-<pre><code># A tibble: 3 × 2
+<pre><code># A tibble: 3 x 2
   site  num_taxa
   &lt;chr&gt;    &lt;int&gt;
 1 CARI        92
@@ -1646,20 +1646,20 @@ dataframe.</p>
 frame according to the values in one or more columns.</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a>inverts_bysite <span class="sc">|&gt;</span> <span class="fu">arrange</span>(density_per_m2)</span></code></pre></div>
 <pre><code>Error in `arrange()`:
-ℹ In argument: `..1 = density_per_m2`.
+i In argument: `..1 = density_per_m2`.
 Caused by error:
 ! object &#39;density_per_m2&#39; not found</code></pre>
 <p>You can use the <code>desc()</code> function inside
 <code>arrange()</code> to put value in descending order.</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a>inverts_bysite <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(collect_day))</span></code></pre></div>
 <pre><code>Error in `arrange()`:
-ℹ In argument: `..1 = collect_day`.
+i In argument: `..1 = collect_day`.
 Caused by error:
 ! object &#39;collect_day&#39; not found</code></pre>
 <p>You can also arrange rows by multiple columns.</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a>inverts_bysite <span class="sc">|&gt;</span> <span class="fu">arrange</span>(siteID, <span class="fu">desc</span>(collect_day))</span></code></pre></div>
 <pre><code>Error in `arrange()`:
-ℹ In argument: `..2 = collect_day`.
+i In argument: `..2 = collect_day`.
 Caused by error:
 ! object &#39;collect_day&#39; not found</code></pre>
 <p>Instead of the <code>table()</code> function, you can used the
@@ -1748,7 +1748,7 @@ surface water temperature was greater than 10 degrees Celsius.</p>
 surface water temperature at each of the three sites. Your solution
 should use pipes to compose functions and result in exactly this
 table:</p>
-<pre><code># A tibble: 15 × 3
+<pre><code># A tibble: 15 x 3
 # Groups:   siteID [3]
    siteID month temp_avg_C
    &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;
@@ -1770,7 +1770,7 @@ table:</p>
 <p><strong>7.4</strong></p>
 <p>Convert the data frame in exercise 7.3 to wide format where values
 for each site are in separate columns, like this:</p>
-<pre><code># A tibble: 5 × 4
+<pre><code># A tibble: 5 x 4
   month  CARI  MART  TECR
   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1     6 5.27  12.2  12.3 
@@ -1783,7 +1783,7 @@ for each site are in separate columns, like this:</p>
 maximum monthly surface water temperature at the Caribou Creek site
 (CARI). Your solution should use pipes to compose functions and result
 in exactly this table:</p>
-<pre><code># A tibble: 5 × 4
+<pre><code># A tibble: 5 x 4
   month temp_avg_C temp_min_C temp_max_C
   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
 1     6      5.27       0.75      163.  
@@ -1798,7 +1798,7 @@ site.</p>
 from a date-time object.</p>
 <p>Your solution should use pipes to compose functions and result in
 exactly this table:</p>
-<pre><code># A tibble: 69 × 5
+<pre><code># A tibble: 69 x 5
 # Groups:   siteID [3]
    siteID  week temp_avg_C temp_min_C temp_max_C
    &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
@@ -1812,7 +1812,7 @@ exactly this table:</p>
  8 CARI      29       6.36       3.51       9.18
  9 CARI      30       5.95       3.85       9.18
 10 CARI      31       6.09       3.74       9.06
-# ℹ 59 more rows</code></pre>
+# i 59 more rows</code></pre>
 <p><strong>7.7</strong></p>
 <p><code>inverts_bysite</code> summarizes macroinvertebrate abundance at
 each site for each of the collection events. The table you created in
@@ -1826,7 +1826,7 @@ keys to join the two tables. You can extract the month from the
 from the <code>lubridate</code> package.</p>
 <p>Your final table should look exactly like this:</p>
 <pre><code>Error in `mutate()`:
-ℹ In argument: `month = month(collect_day)`.
+i In argument: `month = month(collect_day)`.
 Caused by error:
 ! object &#39;collect_day&#39; not found</code></pre>
 <p><strong>7.8</strong></p>
@@ -1834,7 +1834,7 @@ Caused by error:
 abundance of different macroinvertebrate phyla in each size class from
 each sample across all sites.</p>
 <p>Your results should look like this:</p>
-<pre><code># A tibble: 537 × 5
+<pre><code># A tibble: 537 x 5
 # Groups:   siteID, sampleID, phylum [144]
    siteID sampleID                phylum     sizeClass total
    &lt;chr&gt;  &lt;chr&gt;                   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;
@@ -1848,14 +1848,14 @@ each sample across all sites.</p>
  8 CARI   CARI.20210701.KICKNET.1 Arthropoda         5     7
  9 CARI   CARI.20210701.KICKNET.1 Arthropoda         6     8
 10 CARI   CARI.20210701.KICKNET.1 Arthropoda         7     5
-# ℹ 527 more rows</code></pre>
+# i 527 more rows</code></pre>
 <p><strong>7.9</strong></p>
 <p>Join the table you created in exercise 7.8 with the
 <code>benthicArea</code> column from <code>inv_fieldData</code>. Then
 calculate the density (<code>= total / benthicArea</code>) of each
 phylum in each size class for each sample.</p>
 <p>Your results should look like this:</p>
-<pre><code># A tibble: 537 × 7
+<pre><code># A tibble: 537 x 7
 # Groups:   siteID, sampleID, phylum [144]
    siteID sampleID                phylum     sizeClass total benthicArea density_per_m2
    &lt;chr&gt;  &lt;chr&gt;                   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
@@ -1869,7 +1869,7 @@ phylum in each size class for each sample.</p>
  8 CARI   CARI.20210701.KICKNET.1 Arthropoda         5     7        0.25             28
  9 CARI   CARI.20210701.KICKNET.1 Arthropoda         6     8        0.25             32
 10 CARI   CARI.20210701.KICKNET.1 Arthropoda         7     5        0.25             20
-# ℹ 527 more rows</code></pre>
+# i 527 more rows</code></pre>
 </div>
 <div id="sources-and-resources" class="section level2">
 <h2>Sources and Resources</h2>

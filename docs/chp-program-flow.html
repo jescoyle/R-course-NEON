@@ -871,8 +871,8 @@ an output object, in this case a matrix.</p>
 <span id="cb47-12"><a href="#cb47-12" tabindex="-1"></a>}</span>
 <span id="cb47-13"><a href="#cb47-13" tabindex="-1"></a></span>
 <span id="cb47-14"><a href="#cb47-14" tabindex="-1"></a>output_vector</span></code></pre></div>
-<pre><code> [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot; &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot;
-[20] &quot;4 e&quot; &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot; &quot;5 e&quot;</code></pre>
+<pre><code> [1] &quot;1 a&quot; &quot;1 b&quot; &quot;1 c&quot; &quot;1 d&quot; &quot;1 e&quot; &quot;2 a&quot; &quot;2 b&quot; &quot;2 c&quot; &quot;2 d&quot; &quot;2 e&quot; &quot;3 a&quot; &quot;3 b&quot; &quot;3 c&quot; &quot;3 d&quot; &quot;3 e&quot; &quot;4 a&quot; &quot;4 b&quot; &quot;4 c&quot; &quot;4 d&quot; &quot;4 e&quot;
+[21] &quot;5 a&quot; &quot;5 b&quot; &quot;5 c&quot; &quot;5 d&quot; &quot;5 e&quot;</code></pre>
 <p>This approach can be useful, but ‘growing your results’ (building the
 result object incrementally) is computationally inefficient, so avoid it
 when you are iterating through a lot of values.</p>
@@ -1191,8 +1191,8 @@ temperature difference from all rows less than this index.</p>
 <span id="cb70-9"><a href="#cb70-9" tabindex="-1"></a></span>
 <span id="cb70-10"><a href="#cb70-10" tabindex="-1"></a><span class="co"># Return the temperature difference for all rows preceding first_gt5</span></span>
 <span id="cb70-11"><a href="#cb70-11" tabindex="-1"></a>tempdiff[<span class="dv">1</span><span class="sc">:</span>(first_gt5<span class="dv">-1</span>)]</span></code></pre></div>
-<pre><code> [1] 1.104 1.332 1.458 1.716 1.734 1.210 1.664 1.544 1.164 0.635 0.079 0.277 0.783 0.946 0.914 0.772 0.605 0.561 0.600
-[20] 0.400 0.521 0.396 0.482 0.473 0.420 0.156 1.584 2.424 4.248 2.697 3.350</code></pre>
+<pre><code> [1] 1.104 1.332 1.458 1.716 1.734 1.210 1.664 1.544 1.164 0.635 0.079 0.277 0.783 0.946 0.914 0.772 0.605 0.561 0.600 0.400
+[21] 0.521 0.396 0.482 0.473 0.420 0.156 1.584 2.424 4.248 2.697 3.350</code></pre>
 <p>You could even return this result as a dataframe:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">row =</span> <span class="dv">1</span><span class="sc">:</span>(first_gt5<span class="dv">-1</span>), </span>
 <span id="cb72-2"><a href="#cb72-2" tabindex="-1"></a>           <span class="at">temp_difference =</span> tempdiff[<span class="dv">1</span><span class="sc">:</span>(first_gt5<span class="dv">-1</span>)])</span></code></pre></div>

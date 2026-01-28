@@ -450,12 +450,12 @@ analysis you want to do or a graph you want to make, someone has
 probably made a package for it. All you have to do is find it and use
 it.</p>
 <p>R also makes it easier to practice <a
-href="https://www.unesco.org/en/open-science">open science</a> by making
-your scientific analyses transparent and reusable. This is because
-analyses are saved as code rather than a series of clicks through a user
-interface (like spreadsheet software). If you share this code and your
-data with someone, they will be able to reproduce your analyses with a
-single click.</p>
+href="https://www.unesco.org/en/open-science" target="_blank">open
+science</a> by making your scientific analyses transparent and reusable.
+This is because analyses are saved as code rather than a series of
+clicks through a user interface (like spreadsheet software). If you
+share this code and your data with someone, they will be able to
+reproduce your analyses with a single click.</p>
 <p>We’re going to learn some of the fundamentals of the R programming
 language and writing our first code script. We’ll be using RStudio: a
 free, open-source R Integrated Development Environment (IDE). It
@@ -558,9 +558,10 @@ session should look like this:</p>
 </div>
 <p>If you’re having trouble seeing the different windows, RStudio has
 several <a
-href="https://support.posit.co/hc/en-us/articles/360044226673-RStudio-Accessibility-Features">accessibility
-features</a> that allow you to change the size of text and simplify the
-layout. You may want to customize your setup now.</p>
+href="https://support.posit.co/hc/en-us/articles/360044226673-RStudio-Accessibility-Features"
+target="_blank">accessibility features</a> that allow you to change the
+size of text and simplify the layout. You may want to customize your
+setup now.</p>
 <p>In <a href="chp-computer-navigation.html">Computer navigation</a> we
 learned about the Terminal and File panels. In this lesson we’re going
 to start working in the R console to learn about some of the basic
@@ -809,6 +810,7 @@ again.</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>X</span></code></pre></div>
 <p>We’ve discovered a very important point about variable names- they
 are case sensitive! <code>x</code> is a different variable than
 <code>X</code>. Thus, if you try to use a variable that you have not
@@ -838,13 +840,11 @@ values or functions in R (e.g., <code>pi</code>, <code>sum</code>,
 to use a name that is specific to what the variable represents. If
 you’re not sure whether a name is used in R, you can use the
 <code>?</code> to look it up (more on this later):</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>?mean</span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>?average</span></code></pre></div>
-<pre><code>No documentation for &#39;average&#39; in specified packages and libraries:
-you could try &#39;??average&#39;</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>?mean</span></code></pre></div>
 <p>If a name already exists for a function, it will open up a Help
 window. If the name is available for you to use, then the console will
 report that it could not find any documentation.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>?average</span></code></pre></div>
 <p>It is also possible to use the <code>=</code> operator for
 assignment:</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">40</span></span></code></pre></div>
@@ -931,11 +931,11 @@ vector of integers in order:</p>
 function:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="co"># What is the difference in the output of these two commands?</span></span>
 <span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a><span class="fu">rep</span>(firstNames, <span class="dv">4</span>)</span>
-<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>   </span>
-<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a>[<span class="dv">12</span>] <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span> </span>
+<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span> </span>
+<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a>[<span class="dv">13</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span> </span>
 <span id="cb48-5"><a href="#cb48-5" tabindex="-1"></a><span class="fu">rep</span>(firstNames, <span class="at">each =</span> <span class="dv">4</span>)</span>
-<span id="cb48-6"><a href="#cb48-6" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>   </span>
-<span id="cb48-7"><a href="#cb48-7" tabindex="-1"></a>[<span class="dv">12</span>] <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span> </span></code></pre></div>
+<span id="cb48-6"><a href="#cb48-6" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Sasha&quot;</span>   <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Everett&quot;</span> <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>    <span class="st">&quot;Hope&quot;</span>   </span>
+<span id="cb48-7"><a href="#cb48-7" tabindex="-1"></a>[<span class="dv">13</span>] <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span>  <span class="st">&quot;Arturo&quot;</span> </span></code></pre></div>
 <div class="challenge">
 <p>Can you predict what each of the following lines of code will
 return?</p>
@@ -987,6 +987,15 @@ contain integers defining the number of times to repeat each value. Use
 <code>?rep</code> in the Console to learn more.</p>
 </div>
 </details>
+</div>
+<div class="callout-tip">
+<p><strong>Warnings vs. Errors</strong></p>
+<p>Pay attention when R does something unexpected! Errors, like above,
+occur when R cannot proceed with a calculation. Warnings on the other
+hand usually mean that the function has run, but it probably hasn’t
+worked as expected.</p>
+<p>In both cases, the message that R prints out usually give you clues
+how to fix a problem.</p>
 </div>
 <p><br></p>
 <p>Vectors are useful because we can use them to do multiple
@@ -1040,37 +1049,27 @@ session.</p>
 <p><code>ls</code> will list all of the variables and functions stored
 in the global environment (your working R session):</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a><span class="fu">ls</span>()</span></code></pre></div>
-<pre><code>  [1] &quot;A&quot;                     &quot;add_indent&quot;            &quot;ages&quot;                  &quot;all_F&quot;                
-  [5] &quot;all_T&quot;                 &quot;animal&quot;                &quot;arachnids_CARI&quot;        &quot;avg_temp&quot;             
-  [9] &quot;B&quot;                     &quot;C&quot;                     &quot;calc_monthly_avg&quot;      &quot;calc_monthly_summary&quot; 
- [13] &quot;calc_uncertainty&quot;      &quot;calc_uncertainty_NA&quot;   &quot;calc_uncertainty_NULL&quot; &quot;chptable&quot;             
- [17] &quot;conservation_fact&quot;     &quot;corechps&quot;              &quot;dat&quot;                   &quot;dat1&quot;                 
- [21] &quot;dat2&quot;                  &quot;DOvals_bad&quot;            &quot;DOvals_good&quot;           &quot;evens&quot;                
- [25] &quot;fahr_to_celsius&quot;       &quot;fahr_to_kelvin&quot;        &quot;field_cols&quot;            &quot;field_cols.9&quot;         
- [29] &quot;filelines&quot;             &quot;first_gt5&quot;             &quot;firstNames&quot;            &quot;gt5&quot;                  
- [33] &quot;i&quot;                     &quot;indent_len&quot;            &quot;insects&quot;               &quot;insects_big_MART&quot;     
- [37] &quot;insert_line&quot;           &quot;inv_fieldData&quot;         &quot;inv_taxa&quot;              &quot;invert_samples&quot;       
- [41] &quot;inverts&quot;               &quot;inverts_bysample&quot;      &quot;inverts_bysite&quot;        &quot;inverts_bytaxa&quot;       
- [45] &quot;inverts_bytaxa_bysite&quot; &quot;inverts_list&quot;          &quot;inverts_notaxa&quot;        &quot;j&quot;                    
- [49] &quot;j_vector&quot;              &quot;kelvin_to_celsius&quot;     &quot;m&quot;                     &quot;make_menu_item&quot;       
- [53] &quot;mean_temp&quot;             &quot;menu_labels&quot;           &quot;menu_links&quot;            &quot;menu_text_core&quot;       
- [57] &quot;menu_text_supp&quot;        &quot;microbe_wq_data&quot;       &quot;microbes&quot;              &quot;missing_dates&quot;        
- [61] &quot;missing_temp&quot;          &quot;my_function&quot;           &quot;myfunc&quot;                &quot;mypets&quot;               
- [65] &quot;n&quot;                     &quot;N&quot;                     &quot;N_months&quot;              &quot;N_sites&quot;              
- [69] &quot;newfilelines&quot;          &quot;odds&quot;                  &quot;out_files&quot;             &quot;output_matrix&quot;        
- [73] &quot;output_vector&quot;         &quot;pH_top10&quot;              &quot;project_filename&quot;      &quot;project_name&quot;         
- [77] &quot;QF_frac&quot;               &quot;QF_tab&quot;                &quot;r_file_content&quot;        &quot;r_files&quot;              
- [81] &quot;rmd_files&quot;             &quot;samples&quot;               &quot;siteBytaxa_abun&quot;       &quot;sitelist&quot;             
- [85] &quot;sites&quot;                 &quot;sites2&quot;                &quot;solution.2&quot;            &quot;solution.3&quot;           
- [89] &quot;solution.6&quot;            &quot;solution.8&quot;            &quot;some_T&quot;                &quot;suppchps&quot;             
- [93] &quot;surfwater&quot;             &quot;surfwater_Aug&quot;         &quot;temp_j_value&quot;          &quot;temp_lowerbound&quot;      
- [97] &quot;temp_output&quot;           &quot;temp_upperbound&quot;       &quot;temp_vals&quot;             &quot;tempdiff&quot;             
-[101] &quot;these_dates&quot;           &quot;this_interval&quot;         &quot;this_month&quot;            &quot;this_site&quot;            
-[105] &quot;this_time&quot;             &quot;total&quot;                 &quot;TSW_30min&quot;             &quot;TSW_30min_good&quot;       
-[109] &quot;TSW_avg&quot;               &quot;TSW_bysite&quot;            &quot;use_dat&quot;               &quot;use_months&quot;           
-[113] &quot;use_sites&quot;             &quot;use_temps&quot;             &quot;watertemp&quot;             &quot;watertemp_list&quot;       
-[117] &quot;watertemp_upstream&quot;    &quot;wq&quot;                    &quot;x&quot;                     &quot;X&quot;                    
-[121] &quot;y&quot;                     &quot;Y&quot;                     &quot;z&quot;                     &quot;Z&quot;                    </code></pre>
+<pre><code>  [1] &quot;A&quot;                     &quot;ages&quot;                  &quot;all_F&quot;                 &quot;all_T&quot;                 &quot;animal&quot;               
+  [6] &quot;arachnids_CARI&quot;        &quot;avg_temp&quot;              &quot;B&quot;                     &quot;C&quot;                     &quot;calc_monthly_avg&quot;     
+ [11] &quot;calc_monthly_summary&quot;  &quot;calc_uncertainty&quot;      &quot;calc_uncertainty_NA&quot;   &quot;calc_uncertainty_NULL&quot; &quot;conservation_fact&quot;    
+ [16] &quot;dat&quot;                   &quot;dat1&quot;                  &quot;dat2&quot;                  &quot;DOvals_bad&quot;            &quot;DOvals_good&quot;          
+ [21] &quot;evens&quot;                 &quot;fahr_to_celsius&quot;       &quot;fahr_to_kelvin&quot;        &quot;field_cols&quot;            &quot;field_cols.9&quot;         
+ [26] &quot;first_gt5&quot;             &quot;firstNames&quot;            &quot;gt5&quot;                   &quot;i&quot;                     &quot;insects&quot;              
+ [31] &quot;insects_big_MART&quot;      &quot;inv_fieldData&quot;         &quot;inv_taxa&quot;              &quot;invert_samples&quot;        &quot;inverts&quot;              
+ [36] &quot;inverts_bysample&quot;      &quot;inverts_bysite&quot;        &quot;inverts_bytaxa&quot;        &quot;inverts_bytaxa_bysite&quot; &quot;inverts_list&quot;         
+ [41] &quot;inverts_notaxa&quot;        &quot;j&quot;                     &quot;j_vector&quot;              &quot;kelvin_to_celsius&quot;     &quot;m&quot;                    
+ [46] &quot;mean_temp&quot;             &quot;microbe_wq_data&quot;       &quot;microbes&quot;              &quot;missing_dates&quot;         &quot;missing_temp&quot;         
+ [51] &quot;my_function&quot;           &quot;myfunc&quot;                &quot;mypets&quot;                &quot;n&quot;                     &quot;N&quot;                    
+ [56] &quot;N_months&quot;              &quot;N_sites&quot;               &quot;odds&quot;                  &quot;output_matrix&quot;         &quot;output_vector&quot;        
+ [61] &quot;pH_top10&quot;              &quot;QF_frac&quot;               &quot;QF_tab&quot;                &quot;samples&quot;               &quot;siteBytaxa_abun&quot;      
+ [66] &quot;sitelist&quot;              &quot;sites&quot;                 &quot;sites2&quot;                &quot;solution.2&quot;            &quot;solution.3&quot;           
+ [71] &quot;solution.6&quot;            &quot;solution.8&quot;            &quot;some_T&quot;                &quot;surfwater&quot;             &quot;surfwater_Aug&quot;        
+ [76] &quot;temp_j_value&quot;          &quot;temp_lowerbound&quot;       &quot;temp_output&quot;           &quot;temp_upperbound&quot;       &quot;temp_vals&quot;            
+ [81] &quot;tempdiff&quot;              &quot;these_dates&quot;           &quot;this_interval&quot;         &quot;this_month&quot;            &quot;this_site&quot;            
+ [86] &quot;this_time&quot;             &quot;total&quot;                 &quot;TSW_30min&quot;             &quot;TSW_30min_good&quot;        &quot;TSW_avg&quot;              
+ [91] &quot;TSW_bysite&quot;            &quot;use_dat&quot;               &quot;use_months&quot;            &quot;use_sites&quot;             &quot;use_temps&quot;            
+ [96] &quot;watertemp&quot;             &quot;watertemp_list&quot;        &quot;watertemp_upstream&quot;    &quot;wq&quot;                    &quot;x&quot;                    
+[101] &quot;X&quot;                     &quot;y&quot;                     &quot;Y&quot;                     &quot;z&quot;                     &quot;Z&quot;                    </code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but
 we still needed to give the parentheses to tell R to call the
 function.</p>
@@ -1108,7 +1107,7 @@ instead of a listing of objects.</p>
     }
     else all.names
 }
-&lt;bytecode: 0x000001cbe2017378&gt;
+&lt;bytecode: 0x00000211fdb453c8&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 <p>What’s going on here?</p>
 <p>Like everything in R, <code>ls</code> is the name of an object, and
@@ -1122,30 +1121,6 @@ object. The object <code>x</code> that we created earlier contains
 and start writing our own later.</p>
 <p>You can use <code>rm</code> to delete objects you no longer need:</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" tabindex="-1"></a><span class="fu">rm</span>(x)</span></code></pre></div>
-<p>If you have lots of things in your environment and want to delete all
-of them, you can pass the results of <code>ls</code> to the
-<code>rm</code> function:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code></pre></div>
-<p>In this case we’ve composed the two function (just like in math!).
-Like the order of operations, anything inside the innermost parentheses
-is evaluated first, and so on.</p>
-<p>In this case we’ve specified that the results of <code>ls</code>
-should be used for the <code>list</code> argument in <code>rm</code>.
-When assigning values to arguments by name, you <em>must</em> use the
-<code>=</code> operator and not the <code>&lt;-</code> operator.</p>
-<p>If instead we use <code>&lt;-</code>, there will be unintended side
-effects, or you may get an error message:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" tabindex="-1"></a><span class="fu">rm</span>(list <span class="ot">&lt;-</span> <span class="fu">ls</span>())</span></code></pre></div>
-<pre><code>Error in rm(list &lt;- ls()): ... must contain names or character strings</code></pre>
-<div class="callout-tip">
-<p><strong>Warnings vs. Errors</strong></p>
-<p>Pay attention when R does something unexpected! Errors, like above,
-occur when R cannot proceed with a calculation. Warnings on the other
-hand usually mean that the function has run, but it probably hasn’t
-worked as expected.</p>
-<p>In both cases, the message that R prints out usually give you clues
-how to fix a problem.</p>
-</div>
 <p>Notice that although <code>rm()</code> and <code>ls()</code> are
 similar to the shell commands <code>rm</code> and <code>ls</code>, they
 operate in different spaces. The Terminal window in RStudio accesses the
@@ -1199,25 +1174,26 @@ used formats for text-based data table is the <strong>comma separated
 values</strong> (CSV) format, where each row of the table corresponds to
 a row of text and values in different columns are separated by commas.
 We’ll learn more about best practices for data organization in <a
-href="%22chp-spreadsheets.html%22">NA</a>. For now, we will use the
-<code>read.csv()</code> function to read a CSV file into a data table in
-R. The object that is created by this function is called a <strong>data
-frame</strong> and we will learn more about this type of object in <a
+href="%22chp-spreadsheets.html%22">Data organization in
+spreadsheets</a>. For now, we will use the <code>read.csv()</code>
+function to read a CSV file into a data table in R. The object that is
+created by this function is called a <strong>data frame</strong> and we
+will learn more about this type of object in <a
 href="chp-data-structures.html">Data structures and operations</a>.</p>
 <p>Type the following into your new R script:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" tabindex="-1"></a><span class="co"># Read in a data table with water temperature</span></span>
-<span id="cb77-2"><a href="#cb77-2" tabindex="-1"></a>watertemp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv&quot;</span>)</span>
-<span id="cb77-3"><a href="#cb77-3" tabindex="-1"></a></span>
-<span id="cb77-4"><a href="#cb77-4" tabindex="-1"></a><span class="co"># View the first few rows</span></span>
-<span id="cb77-5"><a href="#cb77-5" tabindex="-1"></a><span class="fu">head</span>(watertemp)</span>
-<span id="cb77-6"><a href="#cb77-6" tabindex="-1"></a></span>
-<span id="cb77-7"><a href="#cb77-7" tabindex="-1"></a></span>
-<span id="cb77-8"><a href="#cb77-8" tabindex="-1"></a><span class="co"># How many rows and columns are there in these data?</span></span>
-<span id="cb77-9"><a href="#cb77-9" tabindex="-1"></a><span class="fu">nrow</span>(watertemp)</span>
-<span id="cb77-10"><a href="#cb77-10" tabindex="-1"></a><span class="fu">ncol</span>(watertemp)</span>
-<span id="cb77-11"><a href="#cb77-11" tabindex="-1"></a></span>
-<span id="cb77-12"><a href="#cb77-12" tabindex="-1"></a><span class="co"># What are the names of the columns in this data table</span></span>
-<span id="cb77-13"><a href="#cb77-13" tabindex="-1"></a><span class="fu">names</span>(watertemp)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="co"># Read in a data table with water temperature</span></span>
+<span id="cb74-2"><a href="#cb74-2" tabindex="-1"></a>watertemp <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv&quot;</span>)</span>
+<span id="cb74-3"><a href="#cb74-3" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="#cb74-4" tabindex="-1"></a><span class="co"># View the first few rows</span></span>
+<span id="cb74-5"><a href="#cb74-5" tabindex="-1"></a><span class="fu">head</span>(watertemp)</span>
+<span id="cb74-6"><a href="#cb74-6" tabindex="-1"></a></span>
+<span id="cb74-7"><a href="#cb74-7" tabindex="-1"></a></span>
+<span id="cb74-8"><a href="#cb74-8" tabindex="-1"></a><span class="co"># How many rows and columns are there in these data?</span></span>
+<span id="cb74-9"><a href="#cb74-9" tabindex="-1"></a><span class="fu">nrow</span>(watertemp)</span>
+<span id="cb74-10"><a href="#cb74-10" tabindex="-1"></a><span class="fu">ncol</span>(watertemp)</span>
+<span id="cb74-11"><a href="#cb74-11" tabindex="-1"></a></span>
+<span id="cb74-12"><a href="#cb74-12" tabindex="-1"></a><span class="co"># What are the names of the columns in this data table</span></span>
+<span id="cb74-13"><a href="#cb74-13" tabindex="-1"></a><span class="fu">names</span>(watertemp)</span></code></pre></div>
 <p>Typing text in a R script does not cause the code to run in the R
 Console. There are several options for executing code in an R
 script:</p>
@@ -1235,7 +1211,7 @@ window.</li>
 <kbd>⌘</kbd>+<kbd>Return</kbd> on OS X.</li>
 </ul></li>
 </ol>
-<p>NOTE: To “run” code measn the same thing as to “execute” code. We can
+<p>NOTE: To “run” code means the same thing as to “execute” code. We can
 use the word “run” in informal contexts and “execute” in formal
 contexts.</p>
 <p>Run each line of code above from your R script.</p>
@@ -1263,16 +1239,16 @@ It can be useful to include not just details of what the code does, but
 also include a header with your name and what the overall goal of the
 code is.</p>
 <p>For example, add the following to the top of your script:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" tabindex="-1"></a><span class="do">## Code from the Introduction to R and RStudio lesson</span></span>
-<span id="cb78-2"><a href="#cb78-2" tabindex="-1"></a><span class="do">## Author: YOUR NAME HERE</span></span>
-<span id="cb78-3"><a href="#cb78-3" tabindex="-1"></a><span class="do">## Date: TODAYS DATE</span></span>
-<span id="cb78-4"><a href="#cb78-4" tabindex="-1"></a><span class="do">## Description: This code loads and explores water temperature data from the Teakettle Lake NEON site</span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" tabindex="-1"></a><span class="do">## Code from the Introduction to R and RStudio lesson</span></span>
+<span id="cb75-2"><a href="#cb75-2" tabindex="-1"></a><span class="do">## Author: YOUR NAME HERE</span></span>
+<span id="cb75-3"><a href="#cb75-3" tabindex="-1"></a><span class="do">## Date: TODAYS DATE</span></span>
+<span id="cb75-4"><a href="#cb75-4" tabindex="-1"></a><span class="do">## Description: This code loads and explores water temperature data from the Teakettle Lake NEON site</span></span></code></pre></div>
 <p>Let’s examine the <code>read.csv()</code> function more carefully. In
 the code above we provided the function with a single text argument
 containing the path to the data file. Locate this file using the Files
 window in RStudio.</p>
 <p>What do you think would happen if we changed the code to read:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&quot;watertemp_30min_TECR_2021-04_2021-10.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&quot;watertemp_30min_TECR_2021-04_2021-10.csv&quot;</span>)</span></code></pre></div>
 <details>
 <summary>
 <strong>Solution:</strong>
@@ -1284,7 +1260,7 @@ window in RStudio.</p>
 execute properly. “cannot open the connection” means that R could not
 find this file. Why couldn’t R file the file? We didn’t specify the
 location of the file relative to the current working directory.</p>
-<div id="working-directory" class="section level4">
+<div id="working-directory" class="section level4 callout-important">
 <h4>Working directory</h4>
 <p>Knowing R’s current working directory is important because when you
 need to access other files (for example, to import a data file), R will
@@ -1295,6 +1271,7 @@ directory for that project. When you open an existing
 directory to the folder that file is in.</p>
 <p>You can check the current working directory with the
 <code>getwd()</code> command, or by using the menus in RStudio.</p>
+</div>
 <div class="challenge">
 <p>Get and set the working directory in R.</p>
 <ol style="list-style-type: decimal">
@@ -1329,7 +1306,6 @@ you need to make sure the file is saved in the working directory (or a
 subfolder of the working directory) and provide a relative path.</p>
 </div>
 </div>
-</div>
 <div id="introduction-to-data-frames" class="section level3">
 <h3>Introduction to data frames</h3>
 <p>Data frames are a very common way to work with data tables in R. Each
@@ -1337,27 +1313,28 @@ row of a data frame represents one observation and each column contains
 a vector of data about a particular variable. In the
 <code>watertemp</code> data frame, each observation is a mean surface
 water temperature measurement from <a
-href="https://www.neonscience.org/field-sites/tecr">Teakettle Creek</a>
-near Fresno, CA. Measurements come from several sensor locations on the
-creek and are averaged over the time period defined by the
-<code>startDateTime</code> and <code>endDateTime</code> columns.</p>
+href="https://www.neonscience.org/field-sites/tecr"
+target="_blank">Teakettle Creek</a> near Fresno, CA. Measurements come
+from several sensor locations on the creek and are averaged over the
+time period defined by the <code>startDateTime</code> and
+<code>endDateTime</code> columns.</p>
 <p>Let’s explore these data in more detail.</p>
 <p>To view the contents of a column, use the <code>$</code> operator to
 extract a vector of values:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a><span class="co"># View a column</span></span>
-<span id="cb82-2"><a href="#cb82-2" tabindex="-1"></a>watertemp<span class="sc">$</span>surfWaterTempMean</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" tabindex="-1"></a><span class="co"># View a column</span></span>
+<span id="cb79-2"><a href="#cb79-2" tabindex="-1"></a>watertemp<span class="sc">$</span>surfWaterTempMean</span></code></pre></div>
 <p>You can do calculations on the values in a column using R’s built-in
 functions:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" tabindex="-1"></a><span class="co"># Calculate the range of values</span></span>
-<span id="cb83-2"><a href="#cb83-2" tabindex="-1"></a><span class="fu">range</span>(watertemp<span class="sc">$</span>surfWaterTempMean)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="co"># Calculate the range of values</span></span>
+<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a><span class="fu">range</span>(watertemp<span class="sc">$</span>surfWaterTempMean)</span></code></pre></div>
 <pre><code>[1] NA NA</code></pre>
 <p>Oops! There must be missing data in this column. Missing values are
 denoted by <code>NA</code> and if there are any missing values, R will
 not exclude them from its calculations.</p>
 <p>To omit missing values before completing a calculation, use the
 <code>na.rm = TRUE</code> argument:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" tabindex="-1"></a><span class="co"># Calculate the range of values excluding missing values</span></span>
-<span id="cb85-2"><a href="#cb85-2" tabindex="-1"></a><span class="fu">range</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" tabindex="-1"></a><span class="co"># Calculate the range of values excluding missing values</span></span>
+<span id="cb82-2"><a href="#cb82-2" tabindex="-1"></a><span class="fu">range</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>[1] -2.328 18.645</code></pre>
 <div class="challenge">
 <ol style="list-style-type: decimal">
@@ -1371,15 +1348,15 @@ calculate the maximum and minimum surface water temperatures.</li>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" tabindex="-1"></a><span class="co"># Calculate the mean surface water temperature</span></span>
-<span id="cb87-2"><a href="#cb87-2" tabindex="-1"></a><span class="fu">mean</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb87-3"><a href="#cb87-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">9.949536</span></span>
-<span id="cb87-4"><a href="#cb87-4" tabindex="-1"></a></span>
-<span id="cb87-5"><a href="#cb87-5" tabindex="-1"></a><span class="co"># Calculate the max and min surface water temperatures</span></span>
-<span id="cb87-6"><a href="#cb87-6" tabindex="-1"></a><span class="fu">max</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb87-7"><a href="#cb87-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">18.645</span></span>
-<span id="cb87-8"><a href="#cb87-8" tabindex="-1"></a><span class="fu">min</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb87-9"><a href="#cb87-9" tabindex="-1"></a>[<span class="dv">1</span>] <span class="sc">-</span><span class="fl">2.328</span></span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" tabindex="-1"></a><span class="co"># Calculate the mean surface water temperature</span></span>
+<span id="cb84-2"><a href="#cb84-2" tabindex="-1"></a><span class="fu">mean</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb84-3"><a href="#cb84-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">9.949536</span></span>
+<span id="cb84-4"><a href="#cb84-4" tabindex="-1"></a></span>
+<span id="cb84-5"><a href="#cb84-5" tabindex="-1"></a><span class="co"># Calculate the max and min surface water temperatures</span></span>
+<span id="cb84-6"><a href="#cb84-6" tabindex="-1"></a><span class="fu">max</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb84-7"><a href="#cb84-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">18.645</span></span>
+<span id="cb84-8"><a href="#cb84-8" tabindex="-1"></a><span class="fu">min</span>(watertemp<span class="sc">$</span>surfWaterTempMean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb84-9"><a href="#cb84-9" tabindex="-1"></a>[<span class="dv">1</span>] <span class="sc">-</span><span class="fl">2.328</span></span></code></pre></div>
 </div>
 </details>
 </div>
@@ -1387,10 +1364,10 @@ calculate the maximum and minimum surface water temperatures.</li>
 <code>table()</code> function. This function finds all of the unique
 values and counts the number of times each value appears. The
 <code>HOR.VER</code> column is a identifier of the location of a
-tempereature sensor, so we can use it to determine how many different
+temperature sensor, so we can use it to determine how many different
 sensors are in these data.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" tabindex="-1"></a><span class="co"># How many observations are from each sensor location?</span></span>
-<span id="cb88-2"><a href="#cb88-2" tabindex="-1"></a><span class="fu">table</span>(watertemp<span class="sc">$</span>HOR.VER)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" tabindex="-1"></a><span class="co"># How many observations are from each sensor location?</span></span>
+<span id="cb85-2"><a href="#cb85-2" tabindex="-1"></a><span class="fu">table</span>(watertemp<span class="sc">$</span>HOR.VER)</span></code></pre></div>
 <pre><code>
 101.1 102.1 
 10272 10272 </code></pre>
@@ -1402,14 +1379,15 @@ all observations in these data are acceptable and have a value of 0 in
 the <code>finalQF</code> column.</p>
 <div class="challenge">
 <p>Use the <code>table()</code> function to determine how many
-observations in this data table should not be used for analysis.</p>
+observations in this data table should not be used for analysis
+(i.e. the <code>finalQF</code> column equals <code>1</code>).</p>
 <details>
 <summary>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" tabindex="-1"></a><span class="co"># Tabulate the quality-control flag column</span></span>
-<span id="cb90-2"><a href="#cb90-2" tabindex="-1"></a><span class="fu">table</span>(watertemp<span class="sc">$</span>finalQF)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" tabindex="-1"></a><span class="co"># Tabulate the quality-control flag column</span></span>
+<span id="cb87-2"><a href="#cb87-2" tabindex="-1"></a><span class="fu">table</span>(watertemp<span class="sc">$</span>finalQF)</span></code></pre></div>
 <pre><code>
     0     1 
 19919   625 </code></pre>
@@ -1421,13 +1399,13 @@ means and if these data should be omitted from the analysis.</p>
 </div>
 <p>Columns in a dataframe are vectors and we can do math with them in
 the same way that we would do math with other numeric vectors:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" tabindex="-1"></a><span class="co"># Add the expected uncertainty to the mean water temperature</span></span>
-<span id="cb92-2"><a href="#cb92-2" tabindex="-1"></a><span class="co"># and save it to a variable called temp_upperbound</span></span>
-<span id="cb92-3"><a href="#cb92-3" tabindex="-1"></a>temp_upperbound <span class="ot">&lt;-</span> watertemp<span class="sc">$</span>surfWaterTempMean <span class="sc">+</span> watertemp<span class="sc">$</span>surfWaterTempExpUncert</span>
-<span id="cb92-4"><a href="#cb92-4" tabindex="-1"></a></span>
-<span id="cb92-5"><a href="#cb92-5" tabindex="-1"></a><span class="co"># View the first 5 values in temp_upperbound</span></span>
-<span id="cb92-6"><a href="#cb92-6" tabindex="-1"></a>temp_upperbound[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
-<span id="cb92-7"><a href="#cb92-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">4.308</span> <span class="fl">4.184</span> <span class="fl">3.992</span> <span class="fl">3.785</span> <span class="fl">3.606</span></span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" tabindex="-1"></a><span class="co"># Add the expected uncertainty to the mean water temperature</span></span>
+<span id="cb89-2"><a href="#cb89-2" tabindex="-1"></a><span class="co"># and save it to a variable called temp_upperbound</span></span>
+<span id="cb89-3"><a href="#cb89-3" tabindex="-1"></a>temp_upperbound <span class="ot">&lt;-</span> watertemp<span class="sc">$</span>surfWaterTempMean <span class="sc">+</span> watertemp<span class="sc">$</span>surfWaterTempExpUncert</span>
+<span id="cb89-4"><a href="#cb89-4" tabindex="-1"></a></span>
+<span id="cb89-5"><a href="#cb89-5" tabindex="-1"></a><span class="co"># View the first 5 values in temp_upperbound</span></span>
+<span id="cb89-6"><a href="#cb89-6" tabindex="-1"></a>temp_upperbound[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb89-7"><a href="#cb89-7" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">4.308</span> <span class="fl">4.184</span> <span class="fl">3.992</span> <span class="fl">3.785</span> <span class="fl">3.606</span></span></code></pre></div>
 <div class="challenge">
 <p>Calculate a lower temperature bound for each observation by
 subtracting the expected uncertainty from the mean temperature.</p>
@@ -1436,29 +1414,102 @@ subtracting the expected uncertainty from the mean temperature.</p>
 <strong>Solution:</strong>
 </summary>
 <div class="solution">
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" tabindex="-1"></a><span class="co"># Calculate a lower bound</span></span>
-<span id="cb93-2"><a href="#cb93-2" tabindex="-1"></a>temp_lowerbound <span class="ot">&lt;-</span> watertemp<span class="sc">$</span>surfWaterTempMean <span class="sc">-</span> watertemp<span class="sc">$</span>surfWaterTempExpUncert</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" tabindex="-1"></a><span class="co"># Calculate a lower bound</span></span>
+<span id="cb90-2"><a href="#cb90-2" tabindex="-1"></a>temp_lowerbound <span class="ot">&lt;-</span> watertemp<span class="sc">$</span>surfWaterTempMean <span class="sc">-</span> watertemp<span class="sc">$</span>surfWaterTempExpUncert</span></code></pre></div>
 </div>
 </details>
 </div>
+</div>
+<div id="saving-code" class="section level3">
+<h3>Saving code</h3>
+<p>Let’s save our work. Click on the save icon at the top of the Source
+panel.</p>
+<div class="callout-important">
+<p><strong>R does not auto-save.</strong> Be sure to save your work
+often when you are working. Consider setting a timer to remind yourself
+to do this.</p>
+</div>
+</div>
+<div id="getting-help" class="section level3">
+<h3>Getting help</h3>
+<p>One of the most daunting aspects of R is the large number of
+functions available. It would be prohibitive, if not impossible to
+remember the correct usage for every function you use. Luckily, using
+the help files means you don’t have to remember that!</p>
+<p>R, and every package, provide help files for functions. The general
+syntax to search for help on any function, “function_name”, from a
+specific function that is in a package loaded into the R session is:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" tabindex="-1"></a>?function_name</span>
+<span id="cb91-2"><a href="#cb91-2" tabindex="-1"></a><span class="fu">help</span>(function_name)</span></code></pre></div>
+<p>For example take a look at the help file for <code>read.csv()</code>
+which we used previously to read data into R.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" tabindex="-1"></a>?<span class="fu">read.csv</span>()</span></code></pre></div>
+<p>This will load up a help page in RStudio. Each help page is broken
+down into sections:</p>
+<ul>
+<li>Description: An extended description of what the function does.</li>
+<li>Usage: The arguments of the function and their default values (which
+can be changed).</li>
+<li>Arguments: An explanation of the data each argument is
+expecting.</li>
+<li>Details: Any important details to be aware of.</li>
+<li>Value: The data the function returns.</li>
+<li>See Also: Any related functions you might find useful.</li>
+<li>Examples: Some examples for how to use the function.</li>
+</ul>
+<p>Different functions might have different sections, but these are the
+main ones you should be aware of.</p>
+<p>Notice how related functions might call for the same help file. This
+is because these functions have very similar applicability and often
+share the same arguments as inputs to the function, so package authors
+often choose to document them together in a single help file. From the
+help file for <code>read.csv</code> we can see that this function is
+actually a specific version of <code>read.table</code> where a few
+default arguments are set to match the format of a csv file
+(<code>header = TRUE</code> and <code>sep = ","</code>).</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" tabindex="-1"></a>?<span class="fu">write.table</span>()</span>
+<span id="cb93-2"><a href="#cb93-2" tabindex="-1"></a>?<span class="fu">write.csv</span>()</span></code></pre></div>
+<div class="callout-tip">
+<p>Running Examples</p>
+<p>From within the function help page, you can highlight code in the
+Examples and type <kbd>Ctrl</kbd>+<kbd>Return</kbd> to run it in RStudio
+console. This gives you a quick way to get a feel for how a function
+works.</p>
+</div>
+<p>Don’t worry about trying to remember the name of every function in R.
+You can look them up on Google, or if you can remember the start of the
+function’s name, use the tab completion in RStudio. This is one
+advantage that RStudio has over R on its own, it has auto-completion
+abilities that allow you to more easily look up functions, their
+arguments, and the values that they take.</p>
+<p>Congrats! You’ve reached the end of the main lesson. Click on the <a
+href="#synthesis">Synthesis</a> tab at the top to move on to the next
+stage of this lesson where we will learn about installing packages and
+put what we have learned together into an analysis.</p>
+<p><br></p>
+</div>
+</div>
+<div id="synthesis" class="section level2">
+<h2>Synthesis</h2>
 <p>The data in the <code>watertemp</code> data frame provide a time
 series of surface water temperature in Teakettle Creek that likely
-fluctuates throughout the year. If we want to analyze or visualize this
-time series, we need a way to work with the dates as actual numeric
-values, rather than as text.</p>
+fluctuates throughout the year. Let’s use what we have learned to make a
+graph showing how surface water temperature changes over time in
+Teakettle Creek. If we want to analyze or visualize this time series, we
+need a way to work with the dates saved in the
+<code>startDateTime</code> and <code>endDateTime</code> as actual
+numeric values, rather than as text.</p>
 <p>Base R has functions for working with dates and times, but they are
 tricky to learn. We’re going to install a widely used package called
-<code>lubridate</code> to work with the dates and times saved in the
-<code>startDateTime</code> and <code>endDateTime</code> columns.</p>
-</div>
+<code>lubridate</code> to work with the dates and times.</p>
 <div id="installing-and-loading-packages" class="section level3">
 <h3>Installing and loading packages</h3>
 <p>“base” R is the functionality that comes installed with R, but the
 powerful thing about R is its user community who have created thousands
 of <strong>packages</strong> that increase its functionality. As of this
 writing, there are nearly 20,000 packages available on <a
-href="https://cran.r-project.org/">CRAN</a> (the comprehensive R archive
-network).</p>
+href="https://cran.r-project.org/" target="_blank">CRAN</a> (the
+comprehensive R archive network).</p>
 <p>Packages can be viewed, loaded, and detached in the Packages tab of
 the lower right panel in RStudio. Clicking on this tab will display all
 of the installed packages with a checkbox next to them. If there is
@@ -1522,50 +1573,57 @@ vignette.</p>
 <p>If a package doesn’t have any vignettes, you can usually find help by
 typing <code>help("package-name")</code>.</p>
 <p>RStudio also has a set of excellent <a
-href="https://rstudio.com/resources/cheatsheets/">cheatsheets</a> for
-many packages.</p>
+href="https://rstudio.com/resources/cheatsheets/"
+target="_blank">cheatsheets</a> for many packages.</p>
 </div>
 </div>
-</div>
-<div id="synthesis" class="section level2">
-<h2>Synthesis</h2>
 <div id="putting-it-all-together" class="section level3">
 <h3>Putting it all together</h3>
-<p>Let’s use what we have learned to make a graph showing how surface
-water temperature changes over time in Teakettle Creek.</p>
-<p>To do this we first need to convert the text in the
-<code>startDateTime</code> column to a format that R can interpret as
-have numerical values.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" tabindex="-1"></a><span class="co"># Convert the text to a date and time</span></span>
-<span id="cb95-2"><a href="#cb95-2" tabindex="-1"></a><span class="co"># This replaces the existing startDateTime column</span></span>
-<span id="cb95-3"><a href="#cb95-3" tabindex="-1"></a><span class="co"># ymd_hms() comes from the lubridate package</span></span>
-<span id="cb95-4"><a href="#cb95-4" tabindex="-1"></a>watertemp<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(watertemp<span class="sc">$</span>startDateTime)</span></code></pre></div>
+<p>Now let’s make a graph of water temperature over time. To do this we
+first need to convert the text in the <code>startDateTime</code> column
+to a format that R can interpret as have numerical values. Let’s see
+what these dates look like.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" tabindex="-1"></a><span class="co"># Display the first 10 elements in the startDateTime column</span></span>
+<span id="cb95-2"><a href="#cb95-2" tabindex="-1"></a>watertemp<span class="sc">$</span>startDateTime[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code> [1] &quot;2021-04-01 00:00:00&quot; &quot;2021-04-01 00:30:00&quot; &quot;2021-04-01 01:00:00&quot; &quot;2021-04-01 01:30:00&quot; &quot;2021-04-01 02:00:00&quot;
+ [6] &quot;2021-04-01 02:30:00&quot; &quot;2021-04-01 03:00:00&quot; &quot;2021-04-01 03:30:00&quot; &quot;2021-04-01 04:00:00&quot; &quot;2021-04-01 04:30:00&quot;</code></pre>
+<p>We will use the <code>ymd_hms()</code> function from the
+<code>lubridate</code> package to convert this text to dates. The name
+of the function stands for <strong>y</strong>ear <strong>m</strong>onth
+<strong>d</strong>ay <strong>h</strong>our <strong>m</strong>inute
+<strong>s</strong>econd, which is the format of the dates in the
+<code>startDateTime</code> column.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" tabindex="-1"></a><span class="co"># Convert the text to a date and time</span></span>
+<span id="cb97-2"><a href="#cb97-2" tabindex="-1"></a><span class="co"># This replaces the existing startDateTime column</span></span>
+<span id="cb97-3"><a href="#cb97-3" tabindex="-1"></a><span class="co"># ymd_hms() comes from the lubridate package</span></span>
+<span id="cb97-4"><a href="#cb97-4" tabindex="-1"></a>watertemp<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(watertemp<span class="sc">$</span>startDateTime)</span></code></pre></div>
 <p>Now that R knows these values are times, we can do much more with
 them:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" tabindex="-1"></a><span class="co"># View the date component of each value (but only from rows 1 - 10)</span></span>
-<span id="cb96-2"><a href="#cb96-2" tabindex="-1"></a><span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb96-3"><a href="#cb96-3" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span></span>
-<span id="cb96-4"><a href="#cb96-4" tabindex="-1"></a>[<span class="dv">10</span>] <span class="st">&quot;2021-04-01&quot;</span></span>
-<span id="cb96-5"><a href="#cb96-5" tabindex="-1"></a></span>
-<span id="cb96-6"><a href="#cb96-6" tabindex="-1"></a><span class="co"># What was the most recent date that data were recorded in this data set?</span></span>
-<span id="cb96-7"><a href="#cb96-7" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime))</span>
-<span id="cb96-8"><a href="#cb96-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;2021-10-31&quot;</span></span>
-<span id="cb96-9"><a href="#cb96-9" tabindex="-1"></a></span>
-<span id="cb96-10"><a href="#cb96-10" tabindex="-1"></a></span>
-<span id="cb96-11"><a href="#cb96-11" tabindex="-1"></a><span class="co"># What was the earliest date that data were recorded in this data set?</span></span>
-<span id="cb96-12"><a href="#cb96-12" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime))</span>
-<span id="cb96-13"><a href="#cb96-13" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;2021-04-01&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" tabindex="-1"></a><span class="co"># View the date component of each value (but only from rows 1 - 10)</span></span>
+<span id="cb98-2"><a href="#cb98-2" tabindex="-1"></a><span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb98-3"><a href="#cb98-3" tabindex="-1"></a> [<span class="dv">1</span>] <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span> <span class="st">&quot;2021-04-01&quot;</span></span>
+<span id="cb98-4"><a href="#cb98-4" tabindex="-1"></a>[<span class="dv">10</span>] <span class="st">&quot;2021-04-01&quot;</span></span>
+<span id="cb98-5"><a href="#cb98-5" tabindex="-1"></a></span>
+<span id="cb98-6"><a href="#cb98-6" tabindex="-1"></a><span class="co"># What was the most recent (i.e. highest) date that data were recorded in this data set?</span></span>
+<span id="cb98-7"><a href="#cb98-7" tabindex="-1"></a><span class="fu">max</span>(<span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime))</span>
+<span id="cb98-8"><a href="#cb98-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;2021-10-31&quot;</span></span>
+<span id="cb98-9"><a href="#cb98-9" tabindex="-1"></a></span>
+<span id="cb98-10"><a href="#cb98-10" tabindex="-1"></a></span>
+<span id="cb98-11"><a href="#cb98-11" tabindex="-1"></a><span class="co"># What was the earliest (i.e. lowest) date that data were recorded in this data set?</span></span>
+<span id="cb98-12"><a href="#cb98-12" tabindex="-1"></a><span class="fu">min</span>(<span class="fu">date</span>(watertemp<span class="sc">$</span>startDateTime))</span>
+<span id="cb98-13"><a href="#cb98-13" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;2021-04-01&quot;</span></span></code></pre></div>
 <p>We can also use the <code>plot()</code> function to make a
 scatterplot if we specify which values should be the <code>x</code>
 coordinate and which should be the <code>y</code> coordinate:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" tabindex="-1"></a><span class="co"># Plot the mean temperature over time</span></span>
-<span id="cb97-2"><a href="#cb97-2" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> watertemp<span class="sc">$</span>startDateTime, <span class="at">y =</span> watertemp<span class="sc">$</span>surfWaterTempMean)</span></code></pre></div>
-<p><img src="images/rmd-02-unnamed-chunk-71-1.png" width="816" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" tabindex="-1"></a><span class="co"># Plot the mean temperature over time</span></span>
+<span id="cb99-2"><a href="#cb99-2" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> watertemp<span class="sc">$</span>startDateTime, <span class="at">y =</span> watertemp<span class="sc">$</span>surfWaterTempMean)</span></code></pre></div>
+<p><img src="images/rmd-02-unnamed-chunk-73-1.png" width="816" style="display: block; margin: auto;" /></p>
 <div class="callout-tip">
 <p>Here’s another way to make this same graph, which follows the format:
 <code>plot(y ~ x, data = dataframename)</code>:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" tabindex="-1"></a><span class="fu">plot</span>(surfWaterTempMean <span class="sc">~</span> startDateTime, <span class="at">data =</span> watertemp)</span></code></pre></div>
-<p><img src="images/rmd-02-unnamed-chunk-72-1.png" width="816" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb100"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" tabindex="-1"></a><span class="fu">plot</span>(surfWaterTempMean <span class="sc">~</span> startDateTime, <span class="at">data =</span> watertemp)</span></code></pre></div>
+<p><img src="images/rmd-02-unnamed-chunk-74-1.png" width="816" style="display: block; margin: auto;" /></p>
 </div>
 <p>In R there are usually many ways to write code that does the same
 thing. In general, the best choice is usually the one that is easiest to
@@ -1574,85 +1632,25 @@ is better here?</p>
 <p>Similarly, if we are working with several columns in the same data
 frame, the <code>with()</code> function can make code much more
 efficient and readable:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" tabindex="-1"></a><span class="co"># Calculate the upper and lower bounds on temperature using the</span></span>
-<span id="cb99-2"><a href="#cb99-2" tabindex="-1"></a><span class="co"># mean and expected uncertainty columns in the watertemp data frame</span></span>
-<span id="cb99-3"><a href="#cb99-3" tabindex="-1"></a>temp_upperbound <span class="ot">&lt;-</span> <span class="fu">with</span>(watertemp, surfWaterTempMean <span class="sc">+</span> surfWaterTempExpUncert)</span>
-<span id="cb99-4"><a href="#cb99-4" tabindex="-1"></a>temp_lowerbound <span class="ot">&lt;-</span> <span class="fu">with</span>(watertemp, surfWaterTempMean <span class="sc">-</span> surfWaterTempExpUncert)</span>
-<span id="cb99-5"><a href="#cb99-5" tabindex="-1"></a></span>
-<span id="cb99-6"><a href="#cb99-6" tabindex="-1"></a><span class="co"># Print the first 10 values of each of these vectors</span></span>
-<span id="cb99-7"><a href="#cb99-7" tabindex="-1"></a>temp_upperbound[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
-<pre><code> [1] 4.308 4.184 3.992 3.785 3.606 3.447 3.311 3.210 3.122 3.045</code></pre>
 <div class="sourceCode" id="cb101"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a>temp_lowerbound[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a><span class="co"># Calculate the upper and lower bounds on temperature using the</span></span>
+<span id="cb101-2"><a href="#cb101-2" tabindex="-1"></a><span class="co"># mean and expected uncertainty columns in the watertemp data frame</span></span>
+<span id="cb101-3"><a href="#cb101-3" tabindex="-1"></a>temp_upperbound <span class="ot">&lt;-</span> <span class="fu">with</span>(watertemp, surfWaterTempMean <span class="sc">+</span> surfWaterTempExpUncert)</span>
+<span id="cb101-4"><a href="#cb101-4" tabindex="-1"></a>temp_lowerbound <span class="ot">&lt;-</span> <span class="fu">with</span>(watertemp, surfWaterTempMean <span class="sc">-</span> surfWaterTempExpUncert)</span>
+<span id="cb101-5"><a href="#cb101-5" tabindex="-1"></a></span>
+<span id="cb101-6"><a href="#cb101-6" tabindex="-1"></a><span class="co"># Print the first 10 values of each of these vectors</span></span>
+<span id="cb101-7"><a href="#cb101-7" tabindex="-1"></a>temp_upperbound[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code> [1] 4.308 4.184 3.992 3.785 3.606 3.447 3.311 3.210 3.122 3.045</code></pre>
+<div class="sourceCode" id="cb103"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" tabindex="-1"></a>temp_lowerbound[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code> [1] 4.032 3.908 3.716 3.509 3.330 3.171 3.035 2.934 2.846 2.769</code></pre>
 <p>Now that you have written your first R script it is time to save your
 work! Click on the save icon at the top of the Source panel.</p>
-<div class="callout-important">
-<p><strong>R does not auto-save.</strong> Be sure to save your work
-often when you are working. Consider setting a timer to remind yourself
-to do this.</p>
-</div>
 <p>Close your R script by clicking on the small x on the tab next to the
 name of the script at the top of the Source panel. You can reopen the
 script using the File &gt; Open File menus option at the top of the
 RStudio window or by clicking on the name of the script file in the
 Files panel.</p>
-</div>
-<div id="getting-help" class="section level3">
-<h3>Getting help</h3>
-<p>One of the most daunting aspects of R is the large number of
-functions available. It would be prohibitive, if not impossible to
-remember the correct usage for every function you use. Luckily, using
-the help files means you don’t have to remember that!</p>
-<p>R, and every package, provide help files for functions. The general
-syntax to search for help on any function, “function_name”, from a
-specific function that is in a package loaded into the R session is:</p>
-<div class="sourceCode" id="cb103"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" tabindex="-1"></a>?function_name</span>
-<span id="cb103-2"><a href="#cb103-2" tabindex="-1"></a><span class="fu">help</span>(function_name)</span></code></pre></div>
-<p>For example take a look at the help file for <code>read.csv()</code>
-which we used previously to read data into R.</p>
-<div class="sourceCode" id="cb104"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a>?<span class="fu">read.csv</span>()</span></code></pre></div>
-<p>This will load up a help page in RStudio. Each help page is broken
-down into sections:</p>
-<ul>
-<li>Description: An extended description of what the function does.</li>
-<li>Usage: The arguments of the function and their default values (which
-can be changed).</li>
-<li>Arguments: An explanation of the data each argument is
-expecting.</li>
-<li>Details: Any important details to be aware of.</li>
-<li>Value: The data the function returns.</li>
-<li>See Also: Any related functions you might find useful.</li>
-<li>Examples: Some examples for how to use the function.</li>
-</ul>
-<p>Different functions might have different sections, but these are the
-main ones you should be aware of.</p>
-<p>Notice how related functions might call for the same help file. This
-is because these functions have very similar applicability and often
-share the same arguments as inputs to the function, so package authors
-often choose to document them together in a single help file. From the
-help file for <code>read.csv</code> we can see that this function is
-actually a specific version of <code>read.table</code> where a few
-default arguments are set to match the format of a csv file
-(<code>header = TRUE</code> and <code>sep = ","</code>).</p>
-<div class="sourceCode" id="cb105"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" tabindex="-1"></a>?<span class="fu">write.table</span>()</span>
-<span id="cb105-2"><a href="#cb105-2" tabindex="-1"></a>?<span class="fu">write.csv</span>()</span></code></pre></div>
-<div class="callout-tip">
-<p>Running Examples</p>
-<p>From within the function help page, you can highlight code in the
-Examples and type <kbd>Ctrl</kbd>+<kbd>Return</kbd> to run it in RStudio
-console. This gives you a quick way to get a feel for how a function
-works.</p>
-</div>
-<p>Don’t worry about trying to remember the name of every function in R.
-You can look them up on Google, or if you can remember the start of the
-function’s name, use the tab completion in RStudio. This is one
-advantage that RStudio has over R on its own, it has auto-completion
-abilities that allow you to more easily look up functions, their
-arguments, and the values that they take.</p>
 </div>
 </div>
 <div id="exercises" class="section level2">
@@ -1686,17 +1684,17 @@ comments that describe what each line of code below does (be specific).
 Write a header comment at the top of your script that includes a title,
 author, date and brief description of what the script does. Save your
 script as 2.2.R in the completed exercises folder.</p>
-<div class="sourceCode" id="cb106"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb106-2"><a href="#cb106-2" tabindex="-1"></a></span>
-<span id="cb106-3"><a href="#cb106-3" tabindex="-1"></a>nitrate <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/nitrate_15min_TECR_2021-04_2021-10.csv&quot;</span>)</span>
-<span id="cb106-4"><a href="#cb106-4" tabindex="-1"></a></span>
-<span id="cb106-5"><a href="#cb106-5" tabindex="-1"></a>nitrate<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(nitrate<span class="sc">$</span>startDateTime)</span>
-<span id="cb106-6"><a href="#cb106-6" tabindex="-1"></a>nitrate<span class="sc">$</span>endDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(nitrate<span class="sc">$</span>endDateTime)</span>
-<span id="cb106-7"><a href="#cb106-7" tabindex="-1"></a></span>
-<span id="cb106-8"><a href="#cb106-8" tabindex="-1"></a>nitrate<span class="sc">$</span>day <span class="ot">&lt;-</span> <span class="fu">with</span>(nitrate, <span class="fu">date</span>(startDateTime))</span>
-<span id="cb106-9"><a href="#cb106-9" tabindex="-1"></a></span>
-<span id="cb106-10"><a href="#cb106-10" tabindex="-1"></a><span class="fu">table</span>(nitrate<span class="sc">$</span>day)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb105-2"><a href="#cb105-2" tabindex="-1"></a></span>
+<span id="cb105-3"><a href="#cb105-3" tabindex="-1"></a>nitrate <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/nitrate_15min_TECR_2021-04_2021-10.csv&quot;</span>)</span>
+<span id="cb105-4"><a href="#cb105-4" tabindex="-1"></a></span>
+<span id="cb105-5"><a href="#cb105-5" tabindex="-1"></a>nitrate<span class="sc">$</span>startDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(nitrate<span class="sc">$</span>startDateTime)</span>
+<span id="cb105-6"><a href="#cb105-6" tabindex="-1"></a>nitrate<span class="sc">$</span>endDateTime <span class="ot">&lt;-</span> <span class="fu">ymd_hms</span>(nitrate<span class="sc">$</span>endDateTime)</span>
+<span id="cb105-7"><a href="#cb105-7" tabindex="-1"></a></span>
+<span id="cb105-8"><a href="#cb105-8" tabindex="-1"></a>nitrate<span class="sc">$</span>day <span class="ot">&lt;-</span> <span class="fu">with</span>(nitrate, <span class="fu">date</span>(startDateTime))</span>
+<span id="cb105-9"><a href="#cb105-9" tabindex="-1"></a></span>
+<span id="cb105-10"><a href="#cb105-10" tabindex="-1"></a><span class="fu">table</span>(nitrate<span class="sc">$</span>day)</span></code></pre></div>
 <p><strong>2.3</strong></p>
 <p>Adapt the code in exercise 2 so that you can determine whether every
 observation in the <code>nitrate</code> data frame is based on a
@@ -1704,7 +1702,7 @@ observation in the <code>nitrate</code> data frame is based on a
 <p>HINT: You will need to calculate the difference in time between the
 start and end dates.</p>
 <p><strong>2.4</strong></p>
-<p>Run these two commmands and then look at the help for the
+<p>Run these two commands and then look at the help for the
 <code>paste</code> function.</p>
 <p><code>paste(1:5, 6:10, sep = "-")</code></p>
 <p><code>paste(1:10, collapse = "-")</code></p>
@@ -1718,12 +1716,14 @@ yield different results.</li>
 <p>Write code that accomplishes the following:</p>
 <ol style="list-style-type: decimal">
 <li>Calculate the average of all even numbers from 1 to 100 and assign
-this value to a variable.</li>
+this value to the variable <code>evens</code>.</li>
 <li>Calculate the average of all odd numbers from 1 to 100 and assign
-this value to a different variable.</li>
-<li>Calculate the difference between the two variables you created
-(i.e. subtract them).</li>
+this value to the variable <code>odds</code>.</li>
+<li>Calculate the difference between <code>evens</code> and
+<code>odds</code> you created (i.e. subtract them).</li>
 </ol>
+<p>If you did the exercise correctly, the output of step 3 will be
+either <code>1</code> or <code>-1</code>.</p>
 <p><strong>2.6</strong></p>
 <p>Modify the script you created in this lesson so that is does the
 following:</p>
@@ -1747,23 +1747,23 @@ step 2 (e.g. elements 2, 4, 6, etc.).</li>
 </ol>
 <p><strong>2.8</strong></p>
 <p>Use the following code to answer the questions:</p>
-<div class="sourceCode" id="cb107"><pre
-class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" tabindex="-1"></a>dogs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Alphie&quot;</span>, <span class="st">&quot;Boo&quot;</span>, <span class="st">&quot;Carter&quot;</span>)</span>
-<span id="cb107-2"><a href="#cb107-2" tabindex="-1"></a></span>
-<span id="cb107-3"><a href="#cb107-3" tabindex="-1"></a>cats <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Donut&quot;</span>, <span class="st">&quot;Edgar&quot;</span>, <span class="st">&quot;Felix&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" tabindex="-1"></a>dogs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Alphie&quot;</span>, <span class="st">&quot;Boo&quot;</span>, <span class="st">&quot;Carter&quot;</span>)</span>
+<span id="cb106-2"><a href="#cb106-2" tabindex="-1"></a></span>
+<span id="cb106-3"><a href="#cb106-3" tabindex="-1"></a>cats <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Donut&quot;</span>, <span class="st">&quot;Edgar&quot;</span>, <span class="st">&quot;Felix&quot;</span>)</span></code></pre></div>
 <p>Write one line of code for each of the following:</p>
 <ol style="list-style-type: decimal">
-<li>Select the second name in <code>dogs</code>.</li>
-<li>Replace the first and third names in <code>cats</code> with a value
-that indicates the data are missing.</li>
+<li>Select the second element of <code>dogs</code>.</li>
+<li>Replace the first and third elements in <code>cats</code> with a
+value that indicates the data are missing.</li>
 </ol>
 </div>
 <div id="sources-and-resources" class="section level2">
 <h2>Sources and Resources</h2>
 <p>This lesson was adapted from <a
-href="https://swcarpentry.github.io/r-novice-gapminder/"><span
-class="citation">Zimmerman et al. (2019)</span></a> episodes 1 and 3 by
-Jes Coyle.</p>
+href="https://swcarpentry.github.io/r-novice-gapminder/"
+target="_blank"><span class="citation">Zimmerman et al.
+(2019)</span></a> episodes 1 and 3 by Jes Coyle.</p>
 <p>This lesson utilizes data from <span class="citation">National
 Ecological Observatory Network (NEON) (2023a)</span> and <span
 class="citation">National Ecological Observatory Network (NEON)
@@ -1772,16 +1772,20 @@ class="citation">National Ecological Observatory Network (NEON)
 <h3>Additional Resources</h3>
 <ul>
 <li><a
-href="https://support.posit.co/hc/en-us/categories/200098757-Learn-R">Learn
-R by Posit</a></li>
-<li><a href="https://www.youtube.com/watch?v=kfcX5DEMAp4">#RYouWithMe:
-Basic Basics Lesson 1: An Opinionated Tour of RStudio</a></li>
-<li><a href="http://www.statmethods.net/">Quick R</a></li>
-<li><a href="http://www.rstudio.com/resources/cheatsheets/">RStudio
-cheat sheets</a></li>
-<li><a href="http://www.cookbook-r.com/">Cookbook for R</a></li>
+href="https://support.posit.co/hc/en-us/categories/200098757-Learn-R"
+target="_blank">Learn R by Posit</a></li>
+<li><a href="https://www.youtube.com/watch?v=kfcX5DEMAp4"
+target="_blank">#RYouWithMe: Basic Basics Lesson 1: An Opinionated Tour
+of RStudio</a></li>
+<li><a href="http://www.statmethods.net/" target="_blank">Quick
+R</a></li>
+<li><a href="http://www.rstudio.com/resources/cheatsheets/"
+target="_blank">RStudio cheat sheets</a></li>
+<li><a href="http://www.cookbook-r.com/" target="_blank">Cookbook for
+R</a></li>
 <li>Read more about using the Source window to edit and execute code <a
-href="https://support.posit.co/hc/en-us/articles/200484448-Editing-and-Executing-Code-in-the-RStudio-IDE">here</a>.</li>
+href="https://support.posit.co/hc/en-us/articles/200484448-Editing-and-Executing-Code-in-the-RStudio-IDE"
+target="_blank">here</a>.</li>
 </ul>
 </div>
 <div id="cited-references" class="section level3">

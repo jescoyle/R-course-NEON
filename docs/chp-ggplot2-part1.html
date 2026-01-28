@@ -711,7 +711,7 @@ because brain mass ranges from 0.0014 - 5.71 kg in the
 data on sleep and so are not included in the plot:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Print the data for species with brain mass over 3 kg</span></span>
 <span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">subset</span>(msleep, brainwt <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code></pre></div>
-<pre><code># A tibble: 2 × 11
+<pre><code># A tibble: 2 x 11
   name             genus     vore  order       conservation sleep_total sleep_rem sleep_cycle awake brainwt bodywt
   &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
 1 Asian elephant   Elephas   herbi Proboscidea en                   3.9        NA          NA  20.1    4.60   2547
