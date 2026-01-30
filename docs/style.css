@@ -20,6 +20,10 @@ pre {
     background-color: var(--light-grey);
 }
 
+h2, h3, h4, h5, h6 {
+  padding-top: 12pt;
+}
+
 code {
   font-size: 1em;
   color: #000;

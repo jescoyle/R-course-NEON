@@ -13,12 +13,15 @@ unlink(project_filename, recursive = TRUE, force = TRUE)
 create_project(path = project_filename, open = FALSE, rstudio = TRUE)
 
 
-# Make directory structure and copy data and exercises
+# Make directory structure and copy data, exercises and synthesis scripts
 dir.create(file.path(project_filename, "exercises"))
 file.copy(from = "exercises", to = file.path(project_filename),
           recursive = TRUE)
 
 file.copy(from = "data", to = file.path(project_filename),
+          recursive = TRUE)
+
+file.copy(from = "synthesis_scripts", to = file.path(project_filename),
           recursive = TRUE)
 
 # Remove RStudio project files that are not needed

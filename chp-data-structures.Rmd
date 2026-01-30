@@ -78,7 +78,7 @@ Type this code into your R script.
 
 ## Lesson
 
-In this lesson we will be using R to work with data from NEON's Teakettle Creek aquatic site. Data come from the downstream sensor location and include information on surface water temperature ([DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001)), nitrate [DP1.20033.001](https://data.neonscience.org/data-products/DP1.20033.001) and water quality ([DP1.20288.001](https://data.neonscience.org/data-products/DP1.20288.001)). Data were downloaded and summarized into a table which is located in the student workbook project: `data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv`.
+In this lesson we will be using R to work with data from NEON's Teakettle Creek aquatic site. Data come from the downstream sensor location and include information on surface water temperature ([DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001){target="_blank"}), nitrate ([DP1.20033.001](https://data.neonscience.org/data-products/DP1.20033.001){target="_blank"}) and water quality ([DP1.20288.001](https://data.neonscience.org/data-products/DP1.20288.001){target="_blank"}). Data were downloaded and summarized into a table which is located in the student workbook project: `data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv`.
 
 Let's begin by reading these data into R.
 
@@ -749,7 +749,7 @@ We can also make more complex logical statements by combining comparisons with t
 
 ```
 
-Since each of these comparisons operates **elementwise** and returns a logical vector that is the same length as `x`, we can use the output of a comparison to select elements of the vector x. Only the elements where the comparison was `TRUE` will be returned.
+Since each of these comparisons operates **element-wise** and returns a logical vector that is the same length as `x`, we can use the output of a comparison to select elements of the vector x. Only the elements where the comparison was `TRUE` will be returned.
 
 
 
@@ -826,7 +826,7 @@ mean(surfwater[surfwater$month == 8, "surfWaterTemp.mean"], na.rm = TRUE)
 
 ```
 
-::: {callout-tip}
+:::{.callout-tip}
 Be careful using logical comparisons to select data when the data contain missing values `NA`. A logical comparison will be `NA` whenever data are missing and using `NA` to index a vector will return an `NA` value, which might not be what you had intended.
 
 ```{r}
@@ -841,11 +841,11 @@ y[y == "A"]
 
 While you can use a logical expression to directly index the rows of a dataframe (like we just did), if you have missing data in the column that you are subsetting on, it is better to use the `subset()` function, which will not return rows of missing data.
 
-Here's an example to calculate the mean dissolved oxygen content from all measurements where the surface water temperature is less than 5\deg C.
+Here's an example to calculate the mean dissolved oxygen content from all measurements where the surface water temperature is less than 5° C.
 
 ```{r}
 # Here's two ways to obtain dissolved oxygen values from measurements where
-# the water temperature was less than 5 C
+# the water temperature was less than 5°C
 
 # Bad way to do this because there are missing data in surfWaterTemp.mean
 DOvals_bad <- surfwater[surfwater$surfWaterTemp.mean < 5, 'dissolvedOxygen.mean']
@@ -858,10 +858,11 @@ length(DOvals_bad)
 length(DOvals_good)
 
 # Calculate the mean of the values
+mean(DOvals_bad, na.rm = TRUE)
 mean(DOvals_good, na.rm = TRUE)
 
 ```
-Using subset allows us to know that the missing values in a calculation come from missing dissolved oxygen values and not from missing temperature values. Another benefit of using `subset()` is that it is less text and easier to read.
+Even though both methods return the same output, using `subset()` means that the missing values in a calculation come from missing dissolved oxygen values and *not* from missing temperature values. Another benefit of using `subset()` is that it is less text and easier to read.
 
 ::: {.challenge}
 
@@ -923,13 +924,17 @@ table(missing_dates)
 
 ```
 
+Congrats! You've reached the end of the main lesson. Click on the [Synthesis](#synthesis) tab at the top to move on to the next stage of this lesson where we will put what we have learned together into an analysis.
+
 ## Synthesis
 
 ### Putting it all together
 
 In addition to nearly continuous measurements of water quality, NEON collects water samples several times per year and measures microbial abundance and diversity. How might water quality impact (or be affected by) the concentration of microbial cells in the water?
 
-We will use the data subsetting skills we ljst learned to examine water quality data from time points when surface waters were sampled for microbes. Microbial cell count data come from [DP1.20138.001](https://data.neonscience.org/data-products/DP1.20138.001).
+We will use the data subsetting skills we just learned to examine water quality data from time points when surface waters were sampled for microbes. Microbial cell count data come from [DP1.20138.001](https://data.neonscience.org/data-products/DP1.20138.001).
+
+Before we start, you can find a complete R script of this analysis in the `synthesis_scripts` folder of the R-course-NEON student workbook.
 
 ```{r}
 # Load the microbial cell count data from Teakettle Creek in 2021
@@ -955,13 +960,13 @@ But wait, each row in `surfwater` represents a 30-minute average beginning at th
 For now we can do it manually by examining the 5 collection dates and defining a set of values to match with the `startDateTime` column which would ensure that the collection dates fall within the 30-minute time interval. We can do this because we know that each time interval begins on the hour or half hour:
 
 ```{r}
-# Tabulate the number of rows that begin on a certain hour
+# Count the number of rows that begin on a certain hour
 table(hour(surfwater$startDateTime))
 
-# Tabulate the number of rows that begin on a certain minute of the hour
+# Count the number of rows that begin on a certain minute of the hour
 table(minute(surfwater$startDateTime))
 
-# Tabulate the number of rows that begin on a certain second of the hour
+# Count the number of rows that begin on a certain second of the hour
 table(second(surfwater$startDateTime))
 ```
 Thus, each start date should have the form: `YYYY-MM-DD HH:00:00` or `YYYY-MM-DD HH:30:00`.
@@ -979,30 +984,53 @@ these_dates <- c("2021-05-05 16:30:00",
 these_dates <- ymd_hms(these_dates)
 
 
+# Find the measurements in surf water that correspond 
+# to these five time points:
 # Subset surfwater to only rows whose startDateTime column
 # matches one of the dates in these_dates
-subset(surfwater, startDateTime %in% these_dates)
+microbe_wq_data <- subset(surfwater, startDateTime %in% these_dates)
 ```
 
-Once we have these data we can make a quick plot to compare microbial abundance to water quality. Let's look at nitrate:
+Now we have two comparable data sets. `microbe_wq_data` contains five rows, each of which corresponds to a time point when microbes were collected.
 
 ```{r}
-# Save the subsetted data to a new data frame
-microbe_wq_data <- subset(surfwater, startDateTime %in% these_dates)
+# View the start and end time points of each row in the 
+# water quality data set
+microbe_wq_data[, c("startDateTime", "endDateTime")]
 
+# View the collection time and cell density of the microbial data
+microbes[, c("collectDate", "cells_ml")]
+
+```
+
+Since these two data tables have the same number of rows that are in the same order, we can combine them into a single data frame.
+
+```{r}
+# Combine microbes with water quality data from the
+# same time points
+microbes_wq <- cbind(microbes, microbe_wq_data)
+
+
+```
+
+Now that the data are in the same data frame, we can make a quick plot to compare microbial abundance to water quality. Let's look at nitrate:
+
+```{r}
 # Graph microbial cell counts (y axis) vs. nitrate concentration (x axis)
 # Specify axis labels with xlab and ylab arguments
-plot(x = microbe_wq_data$surfWaterNitrate.mean,
-     y = microbes$cells_ml,
-     xlab = "Nitrate (umol per L)",
-     ylab = "Microbial cell density (num. per ml)")
+with(microbes_wq,
+     plot(x = surfWaterNitrate.mean,
+          y = cells_ml,
+          xlab = "Nitrate (umol per L)",
+          ylab = "Microbial cell density (num. per ml)")
+)
 
 ```
 
 
-Congrats! You've learned a lot this lesson. Now its time to move on and practice with the Exercises.
+Notice that in order to make the data frame for this graph, the rows had to be in the same order. We also had to manually define the water quality sampling time points that we needed. This worked fine for five time points, but is not scalable to a larger data set.
 
-Or, if you're interested, read on for a better way to solve the date matching problem above using functions within the lubridate package.
+Here's a better way to solve the date matching problem above using functions within the `lubridate` package.
 
 What we need to do is figure out which time interval each microbial sampling time point falls within. To do this we will use a function in the `lubridate` packages that defines a time interval class that occurs between two points in time. This time interval class will allow us to check whether each microbial sampling time point falls within each interval.
 
@@ -1027,13 +1055,17 @@ Now we can subset the row of `surfwater` whose `timeInterval` include the first 
 ```{r}
 # Define the time point that we are interested in
 # and print the value of this_time
-(this_time <- microbes[1, "collectDate"])
+this_time <- microbes[1, "collectDate"]
+this_time
 
 # Subset to rows whose time interval contains this_time
 subset(surfwater, this_time %within% timeInterval)
 
 ```
 
+Only one row matched- which makes sense since each row should correspond to a unique 30 minute time period. Now, if only we had a way to go through each row of `microbes` and match it up with the correct time interval in `surfwater`... We don't yet- that's what we will do in the chapter [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html).
+
+Now it is time to get some practice with the exercises.
 
 ## Exercises
 
