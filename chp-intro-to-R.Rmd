@@ -971,7 +971,7 @@ Congrats! You've reached the end of the main lesson. Click on the [Synthesis](#s
 
 <br>
 
-## Synthesis
+## Synthesis {#synthesis}
 
 The data in the `watertemp` data frame provide a time series of surface water temperature in Teakettle Creek that likely fluctuates throughout the year. Let's use what we have learned to make a graph showing how surface water temperature changes over time in Teakettle Creek. If we want to analyze or visualize this time series, we need a way to work with the dates saved in the `startDateTime` and `endDateTime` as actual numeric values, rather than as text.
 
