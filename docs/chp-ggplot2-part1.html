@@ -421,16 +421,9 @@ $(document).ready(function () {
 </div>
 
 
-<!-- TO DO: 
-1. Make key terms.
-2. Make exercises.
-3. Fix figures so that they are not so huge. Specify size in code chunk.
-4. Check output for types 
--->
 <div id="chapter-6.-simple-graphs-with-ggplot2"
 class="section level1 tabset">
 <h1 class="tabset">Chapter 6. Simple graphs with ggplot2</h1>
-<p><strong>THIS CHAPTER IS NOT READY FOR LEARNERS</strong></p>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <blockquote>
@@ -452,10 +445,7 @@ most effective for creating publication-quality graphics. It is also
 built from a consistent grammar that aligns with data science
 principles.</p>
 <p>We will be working with surface water temperature and quality data
-from NEON’s Teakettle Creek site (<span class="citation">National
-Ecological Observatory Network (NEON) (2023a)</span>, <span
-class="citation">National Ecological Observatory Network (NEON)
-(2023b)</span>).</p>
+from NEON’s Teakettle Creek site.</p>
 <div id="what-we-will-learn" class="section level3">
 <h3>What we will learn</h3>
 <p>In this lesson learners will:</p>
@@ -547,26 +537,34 @@ use without needing to read in additional data. One of these is called
 <code>msleep</code> and contains information about sleep cycles in
 mammals. Let’s take a look at these data to see what is included. In the
 Environment panel, click on the object named <code>msleep</code>. This
-will open a new tabe in the Source panel so that you can see what these
+will open a new tab in the Source panel so that you can see what these
 data look like.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Print a statistical summary of the variables in msleep</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">summary</span>(msleep)</span></code></pre></div>
-<pre><code>     name              genus               vore              order           conservation      
- Length:83          Length:83          Length:83          Length:83          Length:83         
- Class :character   Class :character   Class :character   Class :character   Class :character  
- Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
-                                                                                               
-                                                                                               
-                                                                                               
-                                                                                               
-  sleep_total      sleep_rem      sleep_cycle         awake          brainwt            bodywt        
- Min.   : 1.90   Min.   :0.100   Min.   :0.1167   Min.   : 4.10   Min.   :0.00014   Min.   :   0.005  
- 1st Qu.: 7.85   1st Qu.:0.900   1st Qu.:0.1833   1st Qu.:10.25   1st Qu.:0.00290   1st Qu.:   0.174  
- Median :10.10   Median :1.500   Median :0.3333   Median :13.90   Median :0.01240   Median :   1.670  
- Mean   :10.43   Mean   :1.875   Mean   :0.4396   Mean   :13.57   Mean   :0.28158   Mean   : 166.136  
- 3rd Qu.:13.75   3rd Qu.:2.400   3rd Qu.:0.5792   3rd Qu.:16.15   3rd Qu.:0.12550   3rd Qu.:  41.750  
- Max.   :19.90   Max.   :6.600   Max.   :1.5000   Max.   :22.10   Max.   :5.71200   Max.   :6654.000  
-                 NA&#39;s   :22      NA&#39;s   :51                       NA&#39;s   :27                          </code></pre>
+<pre><code>     name              genus               vore              order          
+ Length:83          Length:83          Length:83          Length:83         
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+ conservation        sleep_total      sleep_rem      sleep_cycle    
+ Length:83          Min.   : 1.90   Min.   :0.100   Min.   :0.1167  
+ Class :character   1st Qu.: 7.85   1st Qu.:0.900   1st Qu.:0.1833  
+ Mode  :character   Median :10.10   Median :1.500   Median :0.3333  
+                    Mean   :10.43   Mean   :1.875   Mean   :0.4396  
+                    3rd Qu.:13.75   3rd Qu.:2.400   3rd Qu.:0.5792  
+                    Max.   :19.90   Max.   :6.600   Max.   :1.5000  
+                                    NA&#39;s   :22      NA&#39;s   :51      
+     awake          brainwt            bodywt        
+ Min.   : 4.10   Min.   :0.00014   Min.   :   0.005  
+ 1st Qu.:10.25   1st Qu.:0.00290   1st Qu.:   0.174  
+ Median :13.90   Median :0.01240   Median :   1.670  
+ Mean   :13.57   Mean   :0.28158   Mean   : 166.136  
+ 3rd Qu.:16.15   3rd Qu.:0.12550   3rd Qu.:  41.750  
+ Max.   :22.10   Max.   :5.71200   Max.   :6654.000  
+                 NA&#39;s   :27                          </code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Print the dimensions of msleep</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">dim</span>(msleep)</span></code></pre></div>
 <pre><code>[1] 83 11</code></pre>
@@ -579,14 +577,15 @@ physiological characteristics. If we want to learn more about these data
 we could open the help file.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>?msleep</span></code></pre></div>
 <p>We will demonstrate how to make graphs with the <code>ggplot()</code>
-function using these data.</p>
+function using these data. Let’s create a smaller data frame with just a
+few columns to work with:</p>
 <p>First, let’s make a scatterplot to examine the relationship between
 brain mass (column <code>brainwt</code>) and body mass (column
 <code>bodywt</code>).</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Scatterplot of brain mass vs. body mass</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> msleep, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bodywt, <span class="at">y =</span> brainwt)) <span class="sc">+</span></span>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-8-1.png" width="50%" style="display: block; margin: auto;" />
+<p><img src="images/rmd-06-unnamed-chunk-9-1.png" width="50%" style="display: block; margin: auto;" />
 Let’s figure out how that code produced the graph above. The
 <code>ggplot()</code> function lets R know that we’re creating a new
 plot, and any of the arguments we give the <code>ggplot</code> function
@@ -605,12 +604,12 @@ column of the <code>msleep</code> data frame on the x-axis, and the
 set up the <strong>coordinate system</strong> for the plot. Notice that
 we didn’t need to give <code>aes()</code> the actual vector of data in
 the column (e.g. <code>x = msleep$bodywt</code>), this is because
-<code>ggplot</code> knows to look in the obhect we passed to the
+<code>ggplot</code> knows to look in the object we passed to the
 <code>data</code> argument for that column.</p>
 <p>By itself, the call to <code>ggplot()</code> isn’t enough to draw a
 figure.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> msleep, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> bodywt, <span class="at">y =</span> brainwt))</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-9-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-10-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>This line of code sets up the coordinate system of the graph, but it
 doesn’t add any visual layers to it. We need to tell
 <code>ggplot()</code> how we want to visually represent the data, which
@@ -631,8 +630,9 @@ you need.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Scatterplot of REM sleep time vs total sleep time</span></span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> msleep, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sleep_total, <span class="at">y =</span> sleep_rem)) <span class="sc">+</span></span>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<pre><code>Warning: Removed 22 rows containing missing values or values outside the scale range (`geom_point()`).</code></pre>
-<p><img src="images/rmd-06-unnamed-chunk-10-1.png" width="50%" style="display: block; margin: auto;" />
+<pre><code>Warning: Removed 22 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+<p><img src="images/rmd-06-unnamed-chunk-11-1.png" width="50%" style="display: block; margin: auto;" />
 Notice that we receive a warning about missing values. This is telling
 us that 22 rows of data were not plotted because one of the variables we
 supplied contained a missing value (<code>NA</code>).</p>
@@ -677,10 +677,13 @@ the values found in the <code>vore</code> column of
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Make the color correspond to the diet type</span></span>
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> msleep, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sleep_total, <span class="at">y =</span> sleep_rem)) <span class="sc">+</span></span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> vore))</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" />
+<p><img src="images/rmd-06-unnamed-chunk-14-1.png" width="50%" style="display: block; margin: auto;" />
 The <code>ggplot()</code> function automatically chooses the colors to
-use and produces a lengend. In <a href="chp-ggplot2-part2.html">NA</a>
-we will learn how to modify the colors used and text in the legend.</p>
+use and produces a legend.</p>
+<!--
+In [NA](chp-ggplot2-part2.html) we will learn how to modify the colors used and text in the legend.
+
+-->
 <div class="challenge">
 <p>Create a scatterplot of hours in REM sleep versus total sleep hours
 in which the size of the point is proportional to the species brain
@@ -699,23 +702,23 @@ mass. Hint: use the <code>size</code> argument.</p>
 <p><br></p>
 <p>If you completed the challenge above, you should have gotten a plot
 that looks like this:</p>
-<p><img src="images/rmd-06-unnamed-chunk-15-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-16-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>Notice that the scale seems a bit off. There are a lot of small
 points, but the legend seems to show that brain mass goes up to 5, even
 though there there aren’t any large size points on the graph. This is
 because brain mass ranges from 0.0014 - 5.71 kg in the
 <code>msleep</code> data frame:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">range</span>(msleep<span class="sc">$</span>brainwt)</span></code></pre></div>
-<pre><code>[1] NA NA</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">range</span>(msleep<span class="sc">$</span>brainwt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>[1] 0.00014 5.71200</code></pre>
 <p>However, the species that have this large of a brain mass are missing
 data on sleep and so are not included in the plot:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Print the data for species with brain mass over 3 kg</span></span>
 <span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">subset</span>(msleep, brainwt <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code></pre></div>
-<pre><code># A tibble: 2 x 11
-  name             genus    vore  order conservation sleep_total sleep_rem sleep_cycle awake brainwt bodywt
-  &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-1 Asian elephant   Elephas  herbi Prob~ en                   3.9        NA          NA  20.1    4.60   2547
-2 African elephant Loxodon~ herbi Prob~ vu                   3.3        NA          NA  20.7    5.71   6654</code></pre>
+<pre><code># A tibble: 2 × 8
+  name             genus vore  brainwt bodywt sleep_total sleep_rem conservation
+  &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       
+1 Asian elephant   Elep… herbi    4.60   2547         3.9        NA en          
+2 African elephant Loxo… herbi    5.71   6654         3.3        NA vu          </code></pre>
 <p>If we remake the graph using a data set that omits any species with
 missing sleep data, then the legend values for point size will rescale
 appropriately:</p>
@@ -726,7 +729,7 @@ appropriately:</p>
 <span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co"># Replot the data</span></span>
 <span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sleep_total, <span class="at">y =</span> sleep_rem)) <span class="sc">+</span></span>
 <span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">size =</span> brainwt))</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-18-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <div class="challenge">
 <p>Create a scatterplot of brain mass versus body mass where all of the
 points are squares and in which the color of the points corresponds to
@@ -753,7 +756,7 @@ y variables used are shown (e.g. <code>bodywt</code>,
 <p><br></p>
 <p>If you solved the challenge above, your graph should look like
 this:</p>
-<p><img src="images/rmd-06-unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>This graph is hard to see because the x and y variables are very
 skewed, with many species of smaller mass and few species with larger
 mass. Let’s graph the log_10(mass) instead of mass to make the patterns
@@ -765,7 +768,7 @@ clearer.</p>
 <span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co"># the point shape corresponding to the taxonomic order of each species</span></span>
 <span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(bodywt), <span class="at">y =</span> <span class="fu">log10</span>(brainwt))) <span class="sc">+</span></span>
 <span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">color =</span> conservation), <span class="at">shape =</span> <span class="dv">15</span>)</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="changing-axis-labels" class="section level3">
 <h3>Changing axis labels</h3>
@@ -782,7 +785,7 @@ and <code>color</code>) and these arguments are separated by commas.</p>
 <span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;log10 body mass (kg)&quot;</span>,</span>
 <span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;log10 brain mass (kg)&quot;</span>,</span>
 <span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;conservation status&quot;</span>)</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Notice that we put each argument in <code>labs()</code> on a separate
 line. This was just to make the code easier to read. We could have
 written:</p>
@@ -819,7 +822,7 @@ add space between characters.</p>
 <span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(log[<span class="dv">10</span>]<span class="sc">~</span><span class="st">&quot;body mass (kg)&quot;</span>),</span>
 <span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">expression</span>(log[<span class="dv">10</span>]<span class="sc">~</span><span class="st">&quot;brain mass (kg)&quot;</span>),</span>
 <span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;conservation status&quot;</span>)</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-26-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>If you want to learn more about using mathematical annotation in R,
 run <code>demo(plotmath)</code> in the console. Press Enter when
 prompted and you will see examples of mathematical expressions appear in
@@ -829,13 +832,13 @@ the Plots panel.</p>
 <h4>Factor levels</h4>
 <p>The last set of labels we should fix are the labels for the levels of
 conservation status. The codes in this data are from the <a
-href="https://www.iucnredlist.org/">IUCN Red List of Threatened
-Species</a>. As currently shown, it is hard to know what the two letter
-codes mean. The <code>ggplot()</code> function is labeling the colors
-using the factor levels in the <code>conservation</code> column of
-<code>dat</code>. Recall from <a href="chp-data-structures.html">Data
-structures and operations</a> that a factor is a categorical variable
-with pre-defined levels.</p>
+href="https://www.iucnredlist.org/" target="_blank">IUCN Red List of
+Threatened Species</a>. As currently shown, it is hard to know what the
+two letter codes mean. The <code>ggplot()</code> function is labeling
+the colors using the factor levels in the <code>conservation</code>
+column of <code>dat</code>. Recall from <a
+href="chp-data-structures.html">Data structures and operations</a> that
+a factor is a categorical variable with pre-defined levels.</p>
 <p>When we pass <code>conservation</code> to the <code>color</code>
 aesthetic, the function automatically converts it to a factor and the
 levels are just the values present in the vector.</p>
@@ -852,20 +855,25 @@ legend.</p>
 the levels in the factor and the names of the list elements correspond
 to the new factor levels we want to use. Notice that we needed to use a
 backtick (```) around list element names that had spaces in them.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># Convert conservation to a factor with informative level names</span></span>
-<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>dat<span class="sc">$</span>conservation <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>conservation)</span>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># Replace NA values in conservation with &quot;unknown&quot;</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>dat<span class="sc">$</span>conservation[<span class="fu">is.na</span>(dat<span class="sc">$</span>conservation)] <span class="ot">&lt;-</span> <span class="st">&quot;unknown&quot;</span></span>
 <span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="fu">levels</span>(dat<span class="sc">$</span>conservation ) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">domesticated =</span> <span class="st">&quot;domesticated&quot;</span>,</span>
-<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>                                  <span class="st">`</span><span class="at">least concern</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;lc&quot;</span>,</span>
-<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a>                                  <span class="at">vulnerable =</span> <span class="st">&quot;vu&quot;</span>,</span>
-<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a>                                  <span class="st">`</span><span class="at">near threatened</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;nt&quot;</span>,</span>
-<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a>                                  <span class="at">endangered =</span> <span class="st">&quot;en&quot;</span>)</span>
-<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a></span>
-<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a><span class="co"># View the first 10 elements </span></span>
-<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>dat<span class="sc">$</span>conservation[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
-<pre><code> [1] &lt;NA&gt;          least concern domesticated  domesticated  least concern least concern domesticated 
- [8] domesticated  least concern &lt;NA&gt;         
-Levels: domesticated least concern vulnerable near threatened endangered</code></pre>
+<span id="cb29-4"><a href="#cb29-4" tabindex="-1"></a><span class="co"># Convert conservation to a factor with informative level names</span></span>
+<span id="cb29-5"><a href="#cb29-5" tabindex="-1"></a>dat<span class="sc">$</span>conservation <span class="ot">&lt;-</span> <span class="fu">factor</span>(dat<span class="sc">$</span>conservation)</span>
+<span id="cb29-6"><a href="#cb29-6" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" tabindex="-1"></a><span class="fu">levels</span>(dat<span class="sc">$</span>conservation ) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">domesticated =</span> <span class="st">&quot;domesticated&quot;</span>,</span>
+<span id="cb29-9"><a href="#cb29-9" tabindex="-1"></a>                                  <span class="st">`</span><span class="at">least concern</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;lc&quot;</span>,</span>
+<span id="cb29-10"><a href="#cb29-10" tabindex="-1"></a>                                  <span class="at">vulnerable =</span> <span class="st">&quot;vu&quot;</span>,</span>
+<span id="cb29-11"><a href="#cb29-11" tabindex="-1"></a>                                  <span class="st">`</span><span class="at">near threatened</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;nt&quot;</span>,</span>
+<span id="cb29-12"><a href="#cb29-12" tabindex="-1"></a>                                  <span class="at">endangered =</span> <span class="st">&quot;en&quot;</span>,</span>
+<span id="cb29-13"><a href="#cb29-13" tabindex="-1"></a>                                  <span class="at">unknown =</span> <span class="st">&quot;unknown&quot;</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" tabindex="-1"></a><span class="co"># View the first 10 elements </span></span>
+<span id="cb29-16"><a href="#cb29-16" tabindex="-1"></a>dat<span class="sc">$</span>conservation[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<pre><code> [1] unknown       least concern domesticated  domesticated  least concern
+ [6] least concern domesticated  domesticated  least concern unknown      
+6 Levels: domesticated least concern vulnerable near threatened ... unknown</code></pre>
 <p>Now when we create the graph, the new factor levels are used in the
 legend.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, </span>
@@ -876,11 +884,12 @@ legend.</p>
 <span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(log[<span class="dv">10</span>]<span class="sc">~</span><span class="st">&quot;body mass (kg)&quot;</span>),</span>
 <span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">expression</span>(log[<span class="dv">10</span>]<span class="sc">~</span><span class="st">&quot;brain mass (kg)&quot;</span>),</span>
 <span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;conservation status&quot;</span>)</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-28-1.png" width="70%" style="display: block; margin: auto;" />
+<p><img src="images/rmd-06-unnamed-chunk-29-1.png" width="70%" style="display: block; margin: auto;" />
 The order in which we specified the levels determined the order in which
 colors were assigned.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="fu">levels</span>(dat<span class="sc">$</span>conservation)</span></code></pre></div>
-<pre><code>[1] &quot;domesticated&quot;    &quot;least concern&quot;   &quot;vulnerable&quot;      &quot;near threatened&quot; &quot;endangered&quot;     </code></pre>
+<pre><code>[1] &quot;domesticated&quot;    &quot;least concern&quot;   &quot;vulnerable&quot;      &quot;near threatened&quot;
+[5] &quot;endangered&quot;      &quot;unknown&quot;        </code></pre>
 </div>
 </div>
 <div id="geometries" class="section level3">
@@ -889,9 +898,9 @@ colors were assigned.</p>
 create a variety of graphics for displaying different types of data.
 Temporal data are often displayed as a line graph to show changes in a
 variable over time. Let’s use the NEON surface water temperature from
-Teakettle Creek to demonstrate (see (<a
-href="https://data.neonscience.org/data-products/DP1.20053.001">NEON
-data product DP1.20053.001</a>) for more info).</p>
+Teakettle Creek to demonstrate (see <a
+href="https://data.neonscience.org/data-products/DP1.20053.001"
+target="_blank">NEON data product DP1.20053.001</a> for more info).</p>
 <p>After loading the data below, you may want to click on
 <code>watertemp</code> in the Environment panel to remind yourself what
 these data look like.</p>
@@ -912,7 +921,7 @@ these data look like.</p>
 <span id="cb34-15"><a href="#cb34-15" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> startDateTime, </span>
 <span id="cb34-16"><a href="#cb34-16" tabindex="-1"></a>                     <span class="at">y =</span> surfWaterTempMean)) <span class="sc">+</span></span>
 <span id="cb34-17"><a href="#cb34-17" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-30-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <div class="challenge">
 <p>Modify the code for the graph above to give more informative x and y
 axis labels. The temperature is in degrees Celsius.</p>
@@ -930,7 +939,7 @@ class="math inline">\(^{\circ}\)</span>C.</p>
 <span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Time&quot;</span>,</span>
 <span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">&quot;Temperature&quot;</span><span class="sc">~</span>(degree<span class="sc">*</span>C) ))</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-31-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-32-1.png" width="50%" style="display: block; margin: auto;" /></p>
 </div>
 </details>
 </div>
@@ -967,7 +976,7 @@ height of the bar and that the specific statistic we want to use is the
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> watertemp_upstream, </span>
 <span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(month), <span class="at">y =</span> surfWaterTempMean)) <span class="sc">+</span></span>
 <span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="at">fun =</span> mean)</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-33-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>A more informative graph to show similar information is a violin
 plot, which shows the median value together with information about the
 distribution of a variable within each category. This allows the reader
@@ -976,7 +985,7 @@ data.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> watertemp_upstream, </span>
 <span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(month), <span class="at">y =</span> surfWaterTempMean)) <span class="sc">+</span></span>
 <span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a>  <span class="fu">geom_violin</span>()</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;" />
+<p><img src="images/rmd-06-unnamed-chunk-35-1.png" width="50%" style="display: block; margin: auto;" />
 Notice that we use <code>x = factor(month)</code> and not
 <code>x = month</code>. This is to tell <code>aes()</code> that we want
 it to treat the numeric months as a category and not as a continuous
@@ -985,7 +994,7 @@ numeric variable.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> watertemp_upstream, </span>
 <span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(month), <span class="at">y =</span> surfWaterTempMean)) <span class="sc">+</span></span>
 <span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-35-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-36-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>Bar plots can also be used to display the number of observations in
 different categories of data. For example, what if we were interested in
 the viewing the number of erroneous measurements each month? The
@@ -995,13 +1004,13 @@ to 1 when a value has a data quality issue.</p>
 <code>finalQF == 1</code> rows in each month. To do this we will map the
 fill color aesthetic to the <code>finalQF</code> variable. But, we must
 tell the <code>aes()</code> function to treat <code>finalQF</code> as a
-categorical factor and not as a numerica variable.</p>
+categorical factor and not as a numerical variable.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> watertemp_upstream, </span>
 <span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(month))) <span class="sc">+</span></span>
 <span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">factor</span>(finalQF)))</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-36-1.png" width="50%" style="display: block; margin: auto;" />
+<p><img src="images/rmd-06-unnamed-chunk-37-1.png" width="50%" style="display: block; margin: auto;" />
 We can see that most erroneous measurements for this upstream sensor
-occured in July (month 7) and September (month 9).</p>
+occurred in July (month 7) and September (month 9).</p>
 <div class="challenge">
 <p>Modify the stacked bar graph above to have more informative axis and
 legend labels.</p>
@@ -1024,7 +1033,7 @@ legend labels.</p>
 <span id="cb42-11"><a href="#cb42-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Month&quot;</span>,</span>
 <span id="cb42-12"><a href="#cb42-12" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Num. observations&quot;</span>,</span>
 <span id="cb42-13"><a href="#cb42-13" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<p><img src="images/rmd-06-unnamed-chunk-37-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-38-1.png" width="50%" style="display: block; margin: auto;" /></p>
 </div>
 </details>
 </div>
@@ -1048,7 +1057,7 @@ lines so that when you zoom in they do not become grainy. In contrast,
 best used for photographs or maps because these use pixels of different
 colors to represent an image. Because of this, raster images are saved
 at a particular <strong>resolution</strong>, measured in pixels per unit
-length (e.g. inch). Since the graphs we have made thus are are just
+length (e.g. inch). Since the graphs we have made thus far are just
 points and lines, a vector format is most appropriate, but we will try a
 raster format for comparison as well. Let’s try a couple formats to see
 the difference between them: pdf, svg and png.</p>
@@ -1078,14 +1087,17 @@ arguments specified.</p>
 <span id="cb43-20"><a href="#cb43-20" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">units =</span> <span class="st">&quot;in&quot;</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div>
 <p>The <code>path = "results"</code> argument tells
 <code>ggsave()</code> to save the file in a folder in the current
-working directory named “results”. The file extension (.pdf, .svg, .png)
-tells <code>ggsave()</code> which graphics device to use. Notice that we
-specified the resolution of the png file using the argument
-<code>dpi = 300</code>, which stands fo “dots per inch”. 300 DPI is a
-typical resolution for most printed applications.</p>
-<p>Navigate there should be three new files in the results folder in the
-R-course-NEON-workbook folder. Use your computers file browser to find
-and open these.</p>
+working directory named “results”. If the code gave an error that it
+could not find the directory “results”, then you probably need to create
+a folder named “results” inside the R-course-NEON-workbook folder.</p>
+<p>The file extension (.pdf, .svg, .png) tells <code>ggsave()</code>
+which graphics device to use. Notice that we specified the resolution of
+the png file using the argument <code>dpi = 300</code>, which stands for
+“dots per inch”. 300 DPI is a typical resolution for most printed
+applications.</p>
+<p>If the code worked correctly, there should be three new files in the
+results folder in the R-course-NEON-workbook folder. Use your computer’s
+file browser to find and open these.</p>
 <div class="challenge">
 <p>Export the figure above as a pdf, but double the dimensions so that
 the file is 12 x 8 inches.</p>
@@ -1162,7 +1174,7 @@ measurements)</p>
 <code>ggplot</code>.</p>
 <p><strong>6.1</strong></p>
 <p>Create a scatter plot showing the relationship between chlorophyll
-and dissolved oxygen. Make the color of the point correspond to the
+and dissolved oxygen. Make the color of the points correspond to the
 location of the sensor (upstream or downstream).</p>
 <p>Your plot should have informative axis labels with units; chlorophyll
 is measured in micrograms per liter and dissolved oxygen is in
@@ -1173,22 +1185,38 @@ as a continuous number.</p>
 erroneous measurements of chlorophyll or dissolved oxygen. The
 <code>FinalQF</code> columns for these variables indicate whether data
 are good; <code>dissolvedOxygenFinalQF == 0</code> corresponds to good
-dissolved oxygen data and `</p>
+dissolved oxygen data. <code>chlorophyllFinalQF == 0</code> corresponds
+to good chlorophyll data.</p>
+<p>You final graph should look similar to this:</p>
+<p><img src="images/rmd-06-unnamed-chunk-43-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p><strong>6.2</strong></p>
 <p>Create a scatter plot showing the change in pH over time. There
-should be two lines, one fore each sensor location, and the color of the
+should be two lines, one for each sensor location, and the color of the
 line should correspond to the sensor location.</p>
 <p>Your plot should have informative axis labels. The color legend
 should have an informative title and display the location of the sensor
 as a categorical variable and not as a continuous number.</p>
+<p>NOTE: You should filter the data before plotting it to remove
+erroneous measurements of pH. The <code>FinalQF</code> columns for this
+variables indicate whether data are good; <code>pHFinalQF == 0</code>
+corresponds to good pH data.</p>
+<p>You final graph should look similar to this:</p>
+<p><img src="images/rmd-06-unnamed-chunk-44-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p><strong>6.3</strong></p>
 <p>Create a bar chart that compares the average chlorophyll content
 measured at each sensor location.</p>
 <p>Your plot should have informative axis labels with units; chlorophyll
 is measured in micrograms per liter.</p>
+<p>NOTE: You should filter the data before plotting it to remove
+erroneous measurements of chlorophyll. The <code>FinalQF</code> columns
+for these variables indicate whether data are good;
+<code>chlorophyllFinalQF == 0</code> corresponds to good dissolved
+oxygen data.</p>
+<p>You final graph should look similar to this:</p>
+<p><img src="images/rmd-06-unnamed-chunk-45-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p><strong>6.4</strong></p>
 <p>Fill in the blanks in the code below to produce this graph:</p>
-<p><img src="images/rmd-06-unnamed-chunk-45-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-06-unnamed-chunk-46-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="co"># Load Teakettle Creek water quality data</span></span>
 <span id="cb47-2"><a href="#cb47-2" tabindex="-1"></a>wq <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/NEON_water/waterqual_inst_TECR_2021-04_2021-10.csv&quot;</span>)</span>
 <span id="cb47-3"><a href="#cb47-3" tabindex="-1"></a></span>
@@ -1213,6 +1241,13 @@ measurements across months (e.g. a boxplot or violin plot). Measurements
 from the two sensors should be combined for each month.</p>
 <p>Your plot should have informative axis labels with units; dissolved
 oxygen is measured in milligrams per liter.</p>
+<p>NOTE: You should filter the data before plotting it to remove
+erroneous measurements of dissolved oxygen. The <code>FinalQF</code>
+columns for this variables indicate whether data are good;
+<code>dissolvedOxygenFinalQF == 0</code> corresponds to good dissolved
+oxygen data.</p>
+<p>You final graph should look similar to this:</p>
+<p><img src="images/rmd-06-unnamed-chunk-48-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p><strong>6.6</strong></p>
 <p>Update your code for exercise 1, 3, or 5 so that the units in the
 axis labels are displayed using mathematical notation: <span

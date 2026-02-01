@@ -4,13 +4,10 @@ output:
   html_document:
     toc: false
 bibliography: references.bib
+nocite: |
+  @NEON-surfwatertemp, @NEON-surfwaterquality
 ---
-<!-- TO DO: 
-1. Make key terms.
-2. Make exercises.
-3. Fix figures so that they are not so huge. Specify size in code chunk.
-4. Check output for types 
--->
+
 
 ```{r, include = FALSE, purl = FALSE}
 # Functions and data
@@ -33,7 +30,6 @@ set.seed(10)
 
 # Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
-**THIS CHAPTER IS NOT READY FOR LEARNERS**
 
 ## Overview 
 
@@ -49,7 +45,7 @@ There are three main plotting systems in R, the [base plotting system][base], th
 
 Today we'll be learning about the ggplot2 package, because it is the most effective for creating publication-quality graphics. It is also built from a consistent grammar that aligns with data science principles.
 
-We will be working with surface water temperature and quality data from NEON's Teakettle Creek site (@NEON-surfwatertemp, @NEON-surfwaterquality).
+We will be working with surface water temperature and quality data from NEON's Teakettle Creek site.
 
 ### What we will learn
 
@@ -149,7 +145,7 @@ install.packages("ggplot2")
 library(ggplot2)
 ```
 
-The `ggplot2` package includes a few datasets that we can use without needing to read in additional data. One of these is called `msleep` and contains information about sleep cycles in mammals. Let's take a look at these data to see what is included. In the Environment panel, click on the object named `msleep`. This will open a new tabe in the Source panel so that you can see what these data look like.
+The `ggplot2` package includes a few datasets that we can use without needing to read in additional data. One of these is called `msleep` and contains information about sleep cycles in mammals. Let's take a look at these data to see what is included. In the Environment panel, click on the object named `msleep`. This will open a new tab in the Source panel so that you can see what these data look like.
 
 ```{r}
 # Print a statistical summary of the variables in msleep
@@ -167,7 +163,14 @@ This table has 83 rows, each corresponding to a different mammal species. It has
 
 ```
 
-We will demonstrate how to make graphs with the `ggplot()` function using these data.
+We will demonstrate how to make graphs with the `ggplot()` function using these data. Let's create a smaller data frame with just a few columns to work with:
+
+```{r include = FALSE}
+# Define columns to keep in our analysis
+keep_cols <- c("name", "genus", "vore", "brainwt", "bodywt", "sleep_total", "sleep_rem", "conservation")
+
+msleep <- msleep[,keep_cols]
+```
 
 First, let's make a scatterplot to examine the relationship between brain mass (column `brainwt`) and body mass (column `bodywt`). 
 
@@ -181,7 +184,7 @@ know that we're creating a new plot, and any of the arguments we give the
 `ggplot` function are the **global options** for the plot: they apply to all
 layers on the plot.
 
-We've passed in two arguments to `ggplot`. First, we tell `ggplot` what **data** we want to show on our figure, in this example the `msleep` data. For the second argument (`mapping`), we used the `aes()` function, which tells `ggplot` how variables in the data correspond to **aesthetic properties** of the figure, in this case the **x** and **y** locations. Here we told `ggplot` we want to plot the `bodywt` column of the `msleep` data frame on the x-axis, and the `brainwt` column on the y-axis. By providing x  and y, we have set up the **coordinate system** for the plot. Notice that we didn't need to give `aes()` the actual vector of data in the column (e.g. `x = msleep$bodywt`), this is because `ggplot` knows to look in the obhect we passed to the `data` argument for that column.
+We've passed in two arguments to `ggplot`. First, we tell `ggplot` what **data** we want to show on our figure, in this example the `msleep` data. For the second argument (`mapping`), we used the `aes()` function, which tells `ggplot` how variables in the data correspond to **aesthetic properties** of the figure, in this case the **x** and **y** locations. Here we told `ggplot` we want to plot the `bodywt` column of the `msleep` data frame on the x-axis, and the `brainwt` column on the y-axis. By providing x  and y, we have set up the **coordinate system** for the plot. Notice that we didn't need to give `aes()` the actual vector of data in the column (e.g. `x = msleep$bodywt`), this is because `ggplot` knows to look in the object we passed to the `data` argument for that column.
 
 By itself, the call to `ggplot()` isn't enough to draw a figure. 
 
@@ -250,8 +253,12 @@ ggplot(data = msleep, mapping = aes(x = sleep_total, y = sleep_rem)) +
   geom_point(mapping = aes(color = vore))
 
 ```
-The `ggplot()` function automatically chooses the colors to use and produces a lengend. In [`r .get_chpName("ggplot2-part2", type.from = "chp")`](chp-ggplot2-part2.html) we will learn how to modify the colors used and text in the legend.
+The `ggplot()` function automatically chooses the colors to use and produces a legend. 
 
+<!--
+In [`r .get_chpName("ggplot2-part2", type.from = "chp")`](chp-ggplot2-part2.html) we will learn how to modify the colors used and text in the legend.
+
+-->
 
 ::: {.challenge}
 
@@ -290,7 +297,7 @@ ggplot(data = msleep, mapping = aes(x = sleep_total, y = sleep_rem)) +
 Notice that the scale seems a bit off. There are a lot of small points, but the legend seems to show that brain mass goes up to 5, even though there there aren't any large size points on the graph. This is because brain mass ranges from 0.0014 - 5.71 kg in the `msleep` data frame:
 
 ```{r}
-range(msleep$brainwt)
+range(msleep$brainwt, na.rm = TRUE)
 
 ```
 
@@ -424,7 +431,7 @@ If you want to learn more about using mathematical annotation in R, run `demo(pl
 
 #### Factor levels
 
-The last set of labels we should fix are the labels for the levels of conservation status. The codes in this data are from the [IUCN Red List of Threatened Species](https://www.iucnredlist.org/). As currently shown, it is hard to know what the two letter codes mean. The `ggplot()` function is labeling the colors using the factor levels in the `conservation` column of `dat`. Recall from [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) that a factor is a categorical variable with pre-defined levels. 
+The last set of labels we should fix are the labels for the levels of conservation status. The codes in this data are from the [IUCN Red List of Threatened Species](https://www.iucnredlist.org/){target="_blank"}. As currently shown, it is hard to know what the two letter codes mean. The `ggplot()` function is labeling the colors using the factor levels in the `conservation` column of `dat`. Recall from [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) that a factor is a categorical variable with pre-defined levels. 
 
 When we pass `conservation` to the `color` aesthetic, the function automatically converts it to a factor and the levels are just the values present in the vector.
 
@@ -439,14 +446,19 @@ If we make the `conservation` column into a factor and define our own more infor
 We can rename the levels of a factor by supplying a list to the `levels()` function. Each element of this list matches one of the levels in the factor and the names of the list elements correspond to the new factor levels we want to use. Notice that we needed to use a backtick (```) around list element names that had spaces in them.
 
 ```{r}
+# Replace NA values in conservation with "unknown"
+dat$conservation[is.na(dat$conservation)] <- "unknown"
+
 # Convert conservation to a factor with informative level names
 dat$conservation <- factor(dat$conservation)
+
 
 levels(dat$conservation ) <- list(domesticated = "domesticated",
                                   `least concern` = "lc",
                                   vulnerable = "vu",
                                   `near threatened` = "nt",
-                                  endangered = "en")
+                                  endangered = "en",
+                                  unknown = "unknown")
 
 # View the first 10 elements 
 dat$conservation[1:10]
@@ -475,7 +487,7 @@ levels(dat$conservation)
 
 ### Geometries
 
-So far we have only made a scatterplot, but `ggplot2` can create a variety of graphics for displaying different types of data. Temporal data are often displayed as a line graph to show changes in a variable over time. Let's use the NEON surface water temperature from Teakettle Creek to demonstrate (see ([NEON data product DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001)) for more info).
+So far we have only made a scatterplot, but `ggplot2` can create a variety of graphics for displaying different types of data. Temporal data are often displayed as a line graph to show changes in a variable over time. Let's use the NEON surface water temperature from Teakettle Creek to demonstrate (see [NEON data product DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001){target="_blank"} for more info).
 
 After loading the data below, you may want to click on `watertemp` in the Environment panel to remind yourself what these data look like.
 
@@ -578,7 +590,7 @@ ggplot(data = watertemp_upstream,
 
 Bar plots can also be used to display the number of observations in different categories of data. For example, what if we were interested in the viewing the number of erroneous measurements each month? The `finalQF` column is a quality control variable that is equal to 1 when a value has a data quality issue.
 
-Let's make a bar plot that counts the number of `finalQF == 1` rows in each month. To do this we will map the fill color aesthetic to the `finalQF` variable. But, we must tell the `aes()` function to treat `finalQF` as a categorical factor and not as a numerica variable.
+Let's make a bar plot that counts the number of `finalQF == 1` rows in each month. To do this we will map the fill color aesthetic to the `finalQF` variable. But, we must tell the `aes()` function to treat `finalQF` as a categorical factor and not as a numerical variable.
 
 ```{r, fig.width = 10, out.width = "50%"}
 ggplot(data = watertemp_upstream, 
@@ -586,7 +598,7 @@ ggplot(data = watertemp_upstream,
   geom_bar(aes(fill = factor(finalQF)))
 
 ```
-We can see that most erroneous measurements for this upstream sensor occured in July (month 7) and September (month 9).
+We can see that most erroneous measurements for this upstream sensor occurred in July (month 7) and September (month 9).
 
 
 ::: {.challenge}
@@ -633,7 +645,7 @@ We've learned how to make a lot of graphs in a (relatively) short period of time
 
 There are several strategies to export graphics from R. In the Plots panel, you can click Export and a window will open walking you through how to save a file. However, I recommend specifying the file export in your code itself so that you can easily go back and change the size and format of file you want.
 
-R has several graphics devices that you can use to save any kind of plot (not just ggplots) to file.  **Vector formats** are pdf and svg. These image types save points and lines as actual points and lines so that when you zoom in they do not become grainy. In contrast, **raster formats** include png, jpg and tiff. These are best used for photographs or maps because these use pixels of different colors to represent an image. Because of this, raster images are saved at a particular **resolution**, measured in pixels per unit length (e.g. inch). Since the graphs we have made thus are are just points and lines, a vector format is most appropriate, but we will try a raster format for comparison as well. Let's try a couple formats to see the difference between them: pdf, svg and png.
+R has several graphics devices that you can use to save any kind of plot (not just ggplots) to file.  **Vector formats** are pdf and svg. These image types save points and lines as actual points and lines so that when you zoom in they do not become grainy. In contrast, **raster formats** include png, jpg and tiff. These are best used for photographs or maps because these use pixels of different colors to represent an image. Because of this, raster images are saved at a particular **resolution**, measured in pixels per unit length (e.g. inch). Since the graphs we have made thus far are just points and lines, a vector format is most appropriate, but we will try a raster format for comparison as well. Let's try a couple formats to see the difference between them: pdf, svg and png.
 
 The easiest way to save a `ggplot` is to call the function `ggsave()` immediately after creating the graph. This function will export the most recently created graph to a file using the arguments specified.
 
@@ -661,9 +673,11 @@ ggsave(filename = "TECR mean water temp.png",
 
 ```
 
-The `path = "results"` argument tells `ggsave()` to save the file in a folder in the current working directory named "results". The file extension (.pdf, .svg, .png) tells `ggsave()` which graphics device to use. Notice that we specified the resolution of the png file using the argument `dpi = 300`, which stands fo "dots per inch". 300 DPI is a typical resolution for most printed applications.
+The `path = "results"` argument tells `ggsave()` to save the file in a folder in the current working directory named "results". If the code gave an error that it could not find the directory "results", then you probably need to create a folder named "results" inside the R-course-NEON-workbook folder.
 
-Navigate there should be three new files in the results folder in the R-course-NEON-workbook folder. Use your computers file browser to find and open these. 
+The file extension (.pdf, .svg, .png) tells `ggsave()` which graphics device to use. Notice that we specified the resolution of the png file using the argument `dpi = 300`, which stands for "dots per inch". 300 DPI is a typical resolution for most printed applications.
+
+If the code worked correctly, there should be three new files in the results folder in the R-course-NEON-workbook folder. Use your computer's file browser to find and open these. 
 
 
 ::: {.challenge}
@@ -741,13 +755,15 @@ You could then use `use_dat` as the data for the `ggplot`.
 
 **`r .chp_num`.1** 
 
-Create a scatter plot showing the relationship between chlorophyll and dissolved oxygen. Make the color of the point correspond to the location of the sensor (upstream or downstream).
+Create a scatter plot showing the relationship between chlorophyll and dissolved oxygen. Make the color of the points correspond to the location of the sensor (upstream or downstream).
 
 Your plot should have informative axis labels with units; chlorophyll is measured in micrograms per liter and dissolved oxygen is in milligrams per liter. The color legend should have an informative title and display the location of the sensor as a categorical variable and not as a continuous number.
 
-NOTE: You should filter the data before plotting it to remove erroneous measurements of chlorophyll or dissolved oxygen. The `FinalQF` columns for these variables indicate whether data are good; `dissolvedOxygenFinalQF == 0` corresponds to good dissolved oxygen data and `
+NOTE: You should filter the data before plotting it to remove erroneous measurements of chlorophyll or dissolved oxygen. The `FinalQF` columns for these variables indicate whether data are good; `dissolvedOxygenFinalQF == 0` corresponds to good dissolved oxygen data. `chlorophyllFinalQF == 0` corresponds to good chlorophyll data.
 
-```{r include = FALSE}
+You final graph should look similar to this:
+
+```{r echo = FALSE, fig.width = 10, out.width = "50%"}
 wq$horizontalPosition <- factor(wq$horizontalPosition)
 levels(wq$horizontalPosition) <- list(upstream = 101, downstream = 102)
 
@@ -765,11 +781,15 @@ ggplot(data = use_dat,
 
 **`r .chp_num`.2** 
 
-Create a scatter plot showing the change in pH over time. There should be two lines, one fore each sensor location, and the color of the line should correspond to the sensor location.
+Create a scatter plot showing the change in pH over time. There should be two lines, one for each sensor location, and the color of the line should correspond to the sensor location.
 
 Your plot should have informative axis labels. The color legend should have an informative title and display the location of the sensor as a categorical variable and not as a continuous number.
 
-```{r include = FALSE}
+NOTE: You should filter the data before plotting it to remove erroneous measurements of pH. The `FinalQF` columns for this variables indicate whether data are good; `pHFinalQF == 0` corresponds to good pH data.
+
+You final graph should look similar to this:
+
+```{r echo = FALSE, fig.width = 10, out.width = "50%"}
 wq$startDateTime <- ymd_hms(wq$startDateTime)
 
 use_dat <- subset(wq, pHFinalQF == 0)
@@ -789,8 +809,11 @@ Create a bar chart that compares the average chlorophyll content measured at eac
 
 Your plot should have informative axis labels with units; chlorophyll is measured in micrograms per liter.
 
+NOTE: You should filter the data before plotting it to remove erroneous measurements of chlorophyll. The `FinalQF` columns for these variables indicate whether data are good; `chlorophyllFinalQF == 0` corresponds to good dissolved oxygen data.
 
-```{r include = FALSE}
+You final graph should look similar to this:
+
+```{r echo = FALSE, fig.width = 10, out.width = "50%"}
 use_dat <- subset(wq, chlorophyllFinalQF == 0)
 
 ggplot(data = use_dat,
@@ -850,7 +873,17 @@ Create a chart that compares the distribution of dissolved oxygen measurements a
 
 Your plot should have informative axis labels with units; dissolved oxygen is measured in milligrams per liter.
 
-```{r include = FALSE}
+NOTE: You should filter the data before plotting it to remove erroneous measurements of dissolved oxygen. The `FinalQF` columns for this variables indicate whether data are good; `dissolvedOxygenFinalQF == 0` corresponds to good dissolved oxygen data.
+
+You final graph should look similar to this:
+
+```{r echo = FALSE, fig.width = 10, out.width="50%"}
+# Load Teakettle Creek water quality data
+wq <- read.csv("data/NEON_water/waterqual_inst_TECR_2021-04_2021-10.csv")
+
+# Convert to date time
+wq$startDateTime <- ymd_hms(wq$startDateTime)
+
 use_dat <- subset(wq, dissolvedOxygenFinalQF == 0)
 
 ggplot(data = use_dat,
