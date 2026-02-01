@@ -40,7 +40,6 @@ update_geom_defaults("point", aes(size = 3))
 
 # Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
-**THIS CHAPTER IS NOT READY FOR LEARNERS**
 
 ## Overview 
 
