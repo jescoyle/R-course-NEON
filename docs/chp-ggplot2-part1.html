@@ -541,30 +541,22 @@ will open a new tab in the Source panel so that you can see what these
 data look like.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Print a statistical summary of the variables in msleep</span></span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">summary</span>(msleep)</span></code></pre></div>
-<pre><code>     name              genus               vore              order          
- Length:83          Length:83          Length:83          Length:83         
- Class :character   Class :character   Class :character   Class :character  
- Mode  :character   Mode  :character   Mode  :character   Mode  :character  
-                                                                            
-                                                                            
-                                                                            
-                                                                            
- conservation        sleep_total      sleep_rem      sleep_cycle    
- Length:83          Min.   : 1.90   Min.   :0.100   Min.   :0.1167  
- Class :character   1st Qu.: 7.85   1st Qu.:0.900   1st Qu.:0.1833  
- Mode  :character   Median :10.10   Median :1.500   Median :0.3333  
-                    Mean   :10.43   Mean   :1.875   Mean   :0.4396  
-                    3rd Qu.:13.75   3rd Qu.:2.400   3rd Qu.:0.5792  
-                    Max.   :19.90   Max.   :6.600   Max.   :1.5000  
-                                    NA&#39;s   :22      NA&#39;s   :51      
-     awake          brainwt            bodywt        
- Min.   : 4.10   Min.   :0.00014   Min.   :   0.005  
- 1st Qu.:10.25   1st Qu.:0.00290   1st Qu.:   0.174  
- Median :13.90   Median :0.01240   Median :   1.670  
- Mean   :13.57   Mean   :0.28158   Mean   : 166.136  
- 3rd Qu.:16.15   3rd Qu.:0.12550   3rd Qu.:  41.750  
- Max.   :22.10   Max.   :5.71200   Max.   :6654.000  
-                 NA&#39;s   :27                          </code></pre>
+<pre><code>     name              genus               vore              order           conservation      
+ Length:83          Length:83          Length:83          Length:83          Length:83         
+ Class :character   Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                                               
+                                                                                               
+                                                                                               
+                                                                                               
+  sleep_total      sleep_rem      sleep_cycle         awake          brainwt            bodywt        
+ Min.   : 1.90   Min.   :0.100   Min.   :0.1167   Min.   : 4.10   Min.   :0.00014   Min.   :   0.005  
+ 1st Qu.: 7.85   1st Qu.:0.900   1st Qu.:0.1833   1st Qu.:10.25   1st Qu.:0.00290   1st Qu.:   0.174  
+ Median :10.10   Median :1.500   Median :0.3333   Median :13.90   Median :0.01240   Median :   1.670  
+ Mean   :10.43   Mean   :1.875   Mean   :0.4396   Mean   :13.57   Mean   :0.28158   Mean   : 166.136  
+ 3rd Qu.:13.75   3rd Qu.:2.400   3rd Qu.:0.5792   3rd Qu.:16.15   3rd Qu.:0.12550   3rd Qu.:  41.750  
+ Max.   :19.90   Max.   :6.600   Max.   :1.5000   Max.   :22.10   Max.   :5.71200   Max.   :6654.000  
+                 NA&#39;s   :22      NA&#39;s   :51                       NA&#39;s   :27                          </code></pre>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Print the dimensions of msleep</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">dim</span>(msleep)</span></code></pre></div>
 <pre><code>[1] 83 11</code></pre>
@@ -630,8 +622,7 @@ you need.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Scatterplot of REM sleep time vs total sleep time</span></span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> msleep, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sleep_total, <span class="at">y =</span> sleep_rem)) <span class="sc">+</span></span>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<pre><code>Warning: Removed 22 rows containing missing values or values outside the scale range
-(`geom_point()`).</code></pre>
+<pre><code>Warning: Removed 22 rows containing missing values or values outside the scale range (`geom_point()`).</code></pre>
 <p><img src="images/rmd-06-unnamed-chunk-11-1.png" width="50%" style="display: block; margin: auto;" />
 Notice that we receive a warning about missing values. This is telling
 us that 22 rows of data were not plotted because one of the variables we
@@ -715,10 +706,10 @@ data on sleep and so are not included in the plot:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Print the data for species with brain mass over 3 kg</span></span>
 <span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="fu">subset</span>(msleep, brainwt <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code># A tibble: 2 × 8
-  name             genus vore  brainwt bodywt sleep_total sleep_rem conservation
-  &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       
-1 Asian elephant   Elep… herbi    4.60   2547         3.9        NA en          
-2 African elephant Loxo… herbi    5.71   6654         3.3        NA vu          </code></pre>
+  name             genus     vore  brainwt bodywt sleep_total sleep_rem conservation
+  &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       
+1 Asian elephant   Elephas   herbi    4.60   2547         3.9        NA en          
+2 African elephant Loxodonta herbi    5.71   6654         3.3        NA vu          </code></pre>
 <p>If we remake the graph using a data set that omits any species with
 missing sleep data, then the legend values for point size will rescale
 appropriately:</p>
@@ -871,9 +862,9 @@ backtick (```) around list element names that had spaces in them.</p>
 <span id="cb29-14"><a href="#cb29-14" tabindex="-1"></a></span>
 <span id="cb29-15"><a href="#cb29-15" tabindex="-1"></a><span class="co"># View the first 10 elements </span></span>
 <span id="cb29-16"><a href="#cb29-16" tabindex="-1"></a>dat<span class="sc">$</span>conservation[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
-<pre><code> [1] unknown       least concern domesticated  domesticated  least concern
- [6] least concern domesticated  domesticated  least concern unknown      
-6 Levels: domesticated least concern vulnerable near threatened ... unknown</code></pre>
+<pre><code> [1] unknown       least concern domesticated  domesticated  least concern least concern domesticated 
+ [8] domesticated  least concern unknown      
+Levels: domesticated least concern vulnerable near threatened endangered unknown</code></pre>
 <p>Now when we create the graph, the new factor levels are used in the
 legend.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, </span>
@@ -888,8 +879,8 @@ legend.</p>
 The order in which we specified the levels determined the order in which
 colors were assigned.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="fu">levels</span>(dat<span class="sc">$</span>conservation)</span></code></pre></div>
-<pre><code>[1] &quot;domesticated&quot;    &quot;least concern&quot;   &quot;vulnerable&quot;      &quot;near threatened&quot;
-[5] &quot;endangered&quot;      &quot;unknown&quot;        </code></pre>
+<pre><code>[1] &quot;domesticated&quot;    &quot;least concern&quot;   &quot;vulnerable&quot;      &quot;near threatened&quot; &quot;endangered&quot;     
+[6] &quot;unknown&quot;        </code></pre>
 </div>
 </div>
 <div id="geometries" class="section level3">

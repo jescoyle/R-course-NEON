@@ -387,6 +387,7 @@ write.csv(soiltemp_30min,
 ### This section creates RData files that 
 ### are pre-loaded into chapters
 
+library(neonUtilities)
 
 ## Vectorization and functions
 
@@ -438,4 +439,78 @@ var_filepath <- file.path(savepath, "filesToStack20053", "stackedFiles", var_fil
 TSW_30min <- readTableNEON(dataFile = data_filepath,
                            varFile = var_filepath)
 save(TSW_30min, file = "src/chp-functions_watertemp.RData")
+
+
+
+## Tidyverse basics
+
+# Define dates for download: June 1 - Oct 31, 2021
+# but we need to start before June 1 to get the entire month of June
+startdate <- "2021-05-31"
+enddate <- "2021-10-31"
+
+# Define the sites to download 
+# TECR = Teakettle Creek,  MART = Martha Creek, CARI = Caribou Creek
+sites <- c("TECR", "MART", "CARI") 
+
+
+# Define the directory in which to save the data
+# the file path is relative to the working directory
+savepath <- "data"
+
+# Download macroinvertebrate data
+zipsByProduct(dpID = "DP1.20120.001",
+              site = sites,
+              startdate = startdate,
+              enddate = enddate,
+              savepath = savepath,
+              include.provisional = TRUE)
+
+# Download surface water temperature data
+zipsByProduct(dpID = "DP1.20053.001",
+              site = sites,
+              startdate = startdate,
+              enddate = enddate,
+              savepath = savepath,
+              include.provisional = TRUE)
+
+
+# Unzips data and stacks data tables by site
+# Saves resulting tables into the savepath directory
+stackByTable(filepath = file.path(savepath, "filesToStack20053"))
+stackByTable(filepath = file.path(savepath, "filesToStack20120"))
+
+
+# 
+# # Unzips urface water temperature data and stacks data tables
+# # from a particular date range
+# stackFromStore(filepaths = file.path(savepath, "filesToStack20053"),
+#                dpID = "DP1.20053.001",
+#                site = sites,
+#                startdate = substr(startdate, 1, 7),
+#                enddate = substr(enddate, 1, 7))
+               
+
+
+# Read in surface water temperature averaged over 30 min periods
+TSW_30min <- readTableNEON(
+  dataFile = file.path(savepath, "filesToStack20053", "stackedFiles", "TSW_30min.csv"),
+  varFile = file.path(savepath, "filesToStack20053", "stackedFiles", "variables_20053.csv")
+)
+
+# Read in macroinvertebrate abundance data from data product 20120
+inv_fieldData <- readTableNEON(
+  dataFile = file.path(savepath, "filesToStack20210", "stackedFiles", "inv_fieldData.csv"),
+  varFile = file.path(savepath, "filesToStack20210", "stackedFiles", "variables_20120.csv")
+)
+
+# Read in  macroinvertebrate taxonomy data from data product 20120
+inv_fieldData <- readTableNEON(
+  dataFile = file.path(savepath, "filesToStack20210", "stackedFiles", "inv_taxonomyProcessed.csv"),
+  varFile = file.path(savepath, "filesToStack20210", "stackedFiles", "variables_20120.csv")
+)
+
+
+save(TSW_30min, inv_fieldData, inv_taxa, file = "src/chp-tidyverse_datasets.RData")
+
 

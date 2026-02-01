@@ -28,6 +28,8 @@ set.seed(10)
 
 # Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
+**THIS LESSON IS NOT READY FOR LEARNERS**
+
 ## Overview 
 
 **THIS CHAPTER IS NOT READY FOR LEARNERS**
@@ -73,6 +75,19 @@ Let's list our goals for analyzing macroinvertebrate diversity and what we need 
 _**Goal 2: Macroinvertebrate abundance vs. temperature**_
 
 We are also nearly done with the second goal as well. Let's see how far we can get using functions that we have already learned.
+
+**Goal 2:** Relate the abundance and diversity of macroinvertebrates to water temperature at each site on the dates when samples were collected.
+
+1. Start with the same two macroinvertebrate data tables from above: `inv_fieldData` and `inv_taxonomyProcessed` and surface water temperature data as well. 
+2. Use the `inv_taxonomyProcessed` to calculate the total abundance of macroinvertebrates in each sample from each site and save this in a new table: `inverts_bysample`.
+3. Join `inverts_bysample` with `inv_fieldData` to determine the dates which each sample was collected and the amount of area sampled.
+4. Control for variability in abundance based on the amount of area sampled by calculating `density = abundance / area`.
+5. Calculate average macroinvertebrate density across all samples collected on the same date at the same site. Save this as a new table: `inverts_bysite`
+6. Calculate the average temperature across both sensors for each time point at each site and save this in a new table: `TSW_avg`.
+7. Graph macroinvertebrate density and temperature over time for the three sites.
+8. Join `inverts_bysite` (which contains macroinvertebrate density) with temperature data that corresponds to the date when samples were collected.
+9. Graph macroinvertebrate density versus water temperature as a scatterplot.  
+
 
 
 ```{r message = FALSE, collapse = TRUE, fig.width = 10, out.width = "50%"} 

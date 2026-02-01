@@ -125,7 +125,9 @@ In this lesson we will be working on an analysis of macroinvertebrate diversity 
 
 We are going to download and work with data from NEON aquatic sites. In this lesson we will be working with macroinvertebrate collections ([DP1.20120.001](https://data.neonscience.org/data-products/DP1.20120.001){target="_blank"}) in addition to surface water temperature data ([DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001){target="_blank"}). 
 
-Recall from the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) that we can download data from NEON using the `loadByProduct()` function in the [`neonUtilities`](https://www.neonscience.org/resources/learning-hub/tutorials/neondatastackr){target="_blank"} package. We need to specify the product ID number, sites and dates for which we want data and then type `y` when prompted to download the data at the command line.
+Recall from the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) that we can download data from NEON using the `zipsByProduct()` followed by `stacksByProduct()` and `readTableNEON()` functions in the [`neonUtilities`](https://www.neonscience.org/resources/learning-hub/tutorials/neondatastackr){target="_blank"} package. We need to specify the product ID number, sites and dates for which we want data and then type `y` when prompted to download the data at the command line.
+
+`zipsByProduct()` and `stacksByProduct()` only need to be run once, since they will save data to a folder on your computer.
 
 ```{r eval = FALSE}
 library(neonUtilities)
@@ -139,20 +141,43 @@ enddate <- "2021-10-31"
 # TECR = Teakettle Creek,  MART = Martha Creek, CARI = Caribou Creek
 sites <- c("TECR", "MART", "CARI") 
 
-# Macroinvertebrate observations
-inverts_list <- loadByProduct(dpID = "DP1.20120.001",
-                               site = sites,
-                               startdate = startdate,
-                               enddate = enddate)
 
-# Temperature in surface water
-watertemp_list <- loadByProduct(dpID = "DP1.20053.001",
-                               site = sites,
-                               startdate = startdate,
-                               enddate = enddate)
+# Define the directory in which to save the data
+# the file path is relative to the working directory
+savepath <- "data"
 
+# Download macroinvertebrate data
+zipsByProduct(dpID = "DP1.20120.001",
+              site = sites,
+              startdate = startdate,
+              enddate = enddate,
+              savepath = savepath,
+              include.provisional = TRUE)
+
+# Download surface water temperature data
+zipsByProduct(dpID = "DP1.20053.001",
+              site = sites,
+              startdate = startdate,
+              enddate = enddate,
+              savepath = savepath,
+              include.provisional = TRUE)
+
+# Unzips data and stacks data tables by site
+# This will stack all data within each data product folder
+# Saves resulting tables into the savepath directory
+stackByTable(filepath = file.path(savepath, "filesToStack20053"))
+stackByTable(filepath = file.path(savepath, "filesToStack20120"))
+
+
+# Read in surface water temperature averaged over 30 min periods
+TSW_30min <- readTableNEON(
+  dataFile = file.path(savepath, "filesToStack20053", "stackedFiles", "TSW_30min.csv"),
+  varFile = file.path(savepath, "filesToStack20053", "stackedFiles", "variables_20053.csv")
+)
 
 ```
+
+
 ```{r include = FALSE, message = FALSE}
 # Load neonUtilities package
 library(neonUtilities)
@@ -162,44 +187,71 @@ library(neonUtilities)
 load("src/chp-tidyverse_datasets.RData")
 ```
 
-You should now have a two new objects named `inverts_list` and `watertemp_list` in the Environment panel. `watertemp_list` is the same object we downloaded in lesson [`r .get_chpName("program-flow", type.from = "chp")`](chp-program-flow.html). Let's extract the data frame that contains 30-minute temperature averages from it.
+`TSW_30min` is the same data we worked with in the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html). It contains contains 30-minute water surface temperature averages. However the `stacksByTable()` function will stack all data within the given data folder. If you previously downloaded data product 20053 to the data folder, the stacked data will now contain both the new data we downloaded this lesson and the prior data.
+
+To see this we can use the `year()` function from the `lubridate` package to extract the year and then tabulate the number of rows in `TSW_30min` by site and year:
+
+```{r message = FALSE}
+# Load the lubridate package for functions to work with dates and times
+library(lubridate)
+
+# Count the number of rows in TSW_30min from each site and year
+with(TSW_30min,
+     table(siteID, year(startDateTime))
+)
+
+```
+We see that even though we only downloaded data from 2021, the prior data we downloaded from 2022 and 2023 also appear in this data set.
+
+Let's subset `TWS_30min` to just the 2021 data for this lesson.
 
 ```{r}
-# Extract 30 min temperature averages 
-# and save as a separate data frame
-TSW_30min <- watertemp_list$TSW_30min
+TSW_30min <- subset(TSW_30min, year(startDateTime) == 2021)
 
 ```
 
-`inverts_list` should be a list with nine elements. To learn what these objects contain we should read the NEON User Guide to Aquatic Macroinvertebrate Collection on the [NEON Documentation page](https://data.neonscience.org/data-products/DP1.20120.001) for these data. From this guide we can learn some key information about the way these data are collected and reported. The three sites we are using are considered "wadeable streams". According to the documentation, macroinvertebrate samples at these sites represent a patch of stream bottom near the midpoint of the stream reach (between the two upstream and downstream automated water samplers). However there may be up to two different habitats sampled if the stream is not homogenous. There are three sampling bouts each season: 
+Now let's examine the data tables in the macroinvertebrates data (dpID = 20120). If you navigate to the folder `data/filesToStack20120/stackedFiles` you will see several data and metadata tables.
 
-|  "Sample bout 1 is an early‐season date, representing a period of rapid biomass accumulation after winter, typically prior to leaf out or ice‐off where applicable. Sample bout 2 targets mid‐summer baseflow conditions and sample bout 3 represents the late growing season (typically autumn) during leaf‐fall where applicable." 
+To learn what these objects contain we should read the NEON User Guide to Aquatic Macroinvertebrate Collection on the [NEON Documentation page](https://data.neonscience.org/data-products/DP1.20120.001){target="_blank"} for these data. From this guide we can learn some key information about the way these data are collected and reported. The three sites we are using are considered "wadeable streams". According to the documentation, macroinvertebrate samples at these sites represent a patch of stream bottom near the midpoint of the stream reach (between the two upstream and downstream automated water samplers). However there may be up to two different habitats sampled if the stream is not homogenous. There are three sampling bouts each season: 
+
+
+"Sample bout 1 is an early‐season date, representing a period of rapid biomass accumulation after winter, typically prior to leaf out or ice‐off where applicable. Sample bout 2 targets mid‐summer baseflow conditions and sample bout 3 represents the late growing season (typically autumn) during leaf‐fall where applicable." 
+
 
 Each sample is sent to an expert taxonomy lab, where the samples are sorted into 1 mm size classes and then and identified to the lowest taxonomic rank possible (usually Genus or species). These identifications are standardized by NEON and then reported in the `inv_taxonomyProcessed`, which contains counts of each taxon in each size class. The documentation notes that...
-|  "In some cases, the taxonomy lab reported counts from the same size class twice, and numbers should be summed. This is indicated in the field `sizeCategory`, where the `sizeClass` is appended with a, b, c, etc. Depending on the use case, data users may want to sum all `sizeClass` and `sizeCategory` per `sampleID` + `scientificName` prior to data analysis."
+
+
+"In some cases, the taxonomy lab reported counts from the same size class twice, and numbers should be summed. This is indicated in the field `sizeCategory`, where the `sizeClass` is appended with a, b, c, etc. Depending on the use case, data users may want to sum all `sizeClass` and `sizeCategory` per `sampleID` + `scientificName` prior to data analysis."
+
 
 Therefore, each `sampleID` record in the `inv_fieldData` table can correspond to multiple records in `inv_taxonomyProcessed` table, which contains one record for each `scientificName` and size‐class combination.
 
 Since we are interested in estimating abundance, we should also be aware that, according to the documentation, "Count data can be found in the field `estimatedTotalCount`, which is corrected for subsampling at the external lab, but is NOT corrected for benthic area. Data users will need to refer to the `benthicArea` presented in the `inv_fieldData` table and apply this correction to get the number of organisms per square meter of stream, lake, or river bottom. All taxon records from a sample should be summed and divided by the `benthicArea` prior to reporting the total abundance per m^2.
 
-From this information we learn that we will need two of the objects in the `inverts_list` to complete our analysis:
+From this information we learn that we will need two data tables to complete our analysis:
 
 * `inv_fieldData` contains data on when and where the invertebrate samples were collected
 * `inv_taxonomyProcessed` contains taxonomic information about which taxa were collected in each sample
 
-Quality control information is included in the `inv_persample` data frame, but we won't be using this in this lesson.
+Quality control information is included in the `inv_persample` data table, but we won't be using this in this lesson.
 
-Let's extract each of these data frames from the downloaded list objects into separate data frame objects.
+Let's read in each of these data tables:
 
-```{r}
-# Extract invertebrate collections
-inv_fieldData <- inverts_list$inv_fieldData
+```{r eval = FALSE}
 
-# Extract taxonomic information
-inv_taxa <- inverts_list$inv_taxonomyProcessed
+# Read in macroinvertebrate abundance data from data product 20120
+inv_fieldData <- readTableNEON(
+  dataFile = file.path(savepath, "filesToStack20120", "stackedFiles", "inv_fieldData.csv"),
+  varFile = file.path(savepath, "filesToStack20120", "stackedFiles", "variables_20120.csv")
+)
+
+# Read in macroinvertebrate taxonomy data from data product 20120
+inv_taxa <- readTableNEON(
+  dataFile = file.path(savepath, "filesToStack20120", "stackedFiles", "inv_taxonomyProcessed.csv"),
+  varFile = file.path(savepath, "filesToStack20120", "stackedFiles", "variables_20120.csv")
+)
 
 ```
-
 
 Now we have a three data frames. Click on each one in the Environment panel to see what they contain:
 
@@ -224,7 +276,7 @@ Here we're going to cover 5 of the most commonly used functions and demonstrate 
 
 We're going to demonstrate how to use these functions with the `inv_taxa` data frame. 
 
-If you have have not installed this package earlier, please do so:
+If you have have not installed this package earlier, do so now:
 
 ```{r, eval=FALSE}
 install.packages('dplyr')
@@ -267,9 +319,10 @@ Above we used 'normal' grammar, but the strengths of `dplyr` lie in combining se
 Since the pipes grammar is unlike anything we've seen in R before, let's repeat what we've done above using pipes.
 
 ```{r}
-inverts <- inv_taxa |> select(siteID, sampleID, scientificName, 
-                               taxonRank, phylum, class, order, family, genus,
-                               sizeClass, estimatedTotalCount)
+inverts <- inv_taxa |> 
+  select(siteID, sampleID, scientificName, 
+         taxonRank, phylum, class, order, family, genus,
+         sizeClass, estimatedTotalCount)
 ```
 
 To help you understand why we wrote that in that way, let's walk through it step by step. First we summon the `inv_taxa` data frame and pass it on, using the pipe symbol `|>`, to the next function, `select()`. If you open the help file for `select()` (type `?select` into the Console), you will see that the first argument in `select()` is `.data` which takes a data frame. Therefore, we don't need to specify a data object inside the `select()` function because it received that from the previous pipe. 
@@ -286,7 +339,8 @@ insects <- subset(inverts, class == "Insecta")
 Here's how to do the same operation using `filter()` from the `dplyr` package.
 
 ```{r}
-insects <- inverts |> filter(class == "Insecta")
+insects <- inverts |> 
+  filter(class == "Insecta")
 ```
 
 Or, if we don't need the intermediate `inverts` data frame, we could have performed both operations at once using a pipe:
@@ -405,24 +459,15 @@ We can do this using  `group_by()` and `summarize()`.
 
 The `group_by()` function is used to divide a data frame into subsets based on a set of criteria.
 
-Here is the structure of a regular data frame:
-```{r}
-str(inverts)
-
-```
-
-Here is the structure of a grouped data frame:
-```{r}
-str(inverts |> group_by(siteID))
-```
-You will notice that the structure of the data frame where we used `group_by()` is called a `grouped_df` and is not quite the same as the original `inverts` (a `data.frame`). A `grouped_df` can be thought of as a `list` where each item in the `list`is a `data.frame` which contains only the rows that correspond to a particular
-value in the `siteID` column (at least in the example above). You can see this at the bottom of the output above showing the groups attribute (`-attr(*, "groups")`) is based on the `siteID` column which is divided into three groups of `.rows`.
 
 ![](./images/13-dplyr-fig2.png){width=50%}
 
 Combining `group_by()` with `summarize()` will allow us split the `inverts` data frame into multiple pieces, then run functions on each piece separately (e.g. `mean()` or `sum()`). The output will bring the summaries back together into a single data frame. 
 
-```{r}
+![](./images/13-dplyr-fig3.png){width=50%}
+
+
+```{r message = FALSE}
 # Calculate the total abundance of all inverts sampled at each site
 inverts_bysite <- inverts |>
     group_by(siteID) |>
@@ -430,8 +475,6 @@ inverts_bysite <- inverts |>
 
 inverts_bysite
 ```
-
-![](./images/13-dplyr-fig3.png){width=50%}
 
 That allowed us to calculate the total number of individuals from samples at each site, but what if we want the total calculated for each taxon in each sample?
 
@@ -477,37 +520,21 @@ NOTE: You don't need to include `siteID` in the `group_by()` function because th
 
 That is already quite powerful, but it gets even better! You're not limited to defining 1 new variable in `summarize()`. You can include as many summary statistics as you wish. Remember that each calculation is performed within the subsets defined by `group_by()`.
 
-Let's calculate a the mean length of individuals in each taxon and sample using a weighted average where we multiple the size class by the number of individuals in each size class, then divide by the total number of individuals. 
+Let's calculate a the mean length of individuals in each taxon and sample. We will use a weighted average: multiple the size class by the number of individuals in each size class, then divide by the total number of individuals. 
 
-For example, what if we want 
 
-```{r echo = FALSE, message = FALSE}
-inverts |> 
-  filter(siteID == "MART", scientificName == "Afghanurus sp.") |>
-  select(sampleID, scientificName, sizeClass, estimatedTotalCount) |>
-  arrange(sampleID, sizeClass)
-
-```
-
-to show the following:
-
-```{r echo = FALSE, message = FALSE}
-inverts |> 
-  filter(siteID == "MART", scientificName == "Afghanurus sp.") |>
-  select(sampleID, scientificName, sizeClass, estimatedTotalCount) |>
-  arrange(sampleID, sizeClass) |>
-  group_by(scientificName, sampleID) |>
-  summarize(total = sum(estimatedTotalCount),
-            size_mean = sum(sizeClass*estimatedTotalCount)/total)
-```
-
-To calculate this weighted average, we should take the sum of the product of the `sizeClass` and `estimatedTotalCount` columns, then divide by the total number of individuals.
+To calculate this weighted average, we should group the rows of `inverts` by sample and taxon, then calculate the total number of invertebrates. Then we can multiply the values in the `sizeClass` column (which are the lengths of the invertebrates) by the values in the `estimatedTotalCount` column (which are the number of individuals counted in each size class. Dividing by the total number of invertebrates will give the weighted average size. 
 
 ```{r message = FALSE}
+# Create a summary data frame of each invertebrate taxon in each sample
 inverts_bytaxa <- inverts |>
+  
+    # Summarize by siteID, sampleID and scientificName (i.e. taxon)
     group_by(siteID, sampleID, scientificName) |>
+  
+    # Calculate total num. individuals and weighted average of sizeClass
     summarize(total = sum(estimatedTotalCount),
-            size_mean = sum(sizeClass*estimatedTotalCount)/total)
+              size_mean = sum(sizeClass*estimatedTotalCount)/total)
 
 # view the first 10 rows
 inverts_bytaxa[1:10, ]
@@ -585,19 +612,7 @@ TSW_30min |>
          
 ```
 
-Let's go back to the list of surface water temperature data (`watertemp_list`) and see if this error occurs in the data summarized every 5 minutes. These data are in the `TSW_5min` element of this list. So, instead of pulling this data frame out and saving it as a new object, we could use a pipe to extract and manipulate it:
-
-```{r}
-
-watertemp_list$TSW_5min |>
-  filter(siteID == "CARI", horizontalPosition == 101, surfWaterTempMaximum > 30) |>
-  select(siteID, horizontalPosition, startDateTime, 
-         starts_with("surfWaterTempM"), 
-         finalQF)
-
-
-```
-From this we see that there must have been an erroneous measurement taken sometime between 2:25 and 2:30am on June 8, 2021. This highlights the importance of summarizing any data you are working with and looking for suspicious values. Even highly quality-controlled data, like those provided by NEON, are subject to errors. You can use `filter()` to screen for observations that fall above or below expected values without having to scroll through all the data yourself.
+we see that there must have been an erroneous measurement taken sometime on June 8, 2021. This highlights the importance of summarizing any data you are working with and looking for suspicious values. Even highly quality-controlled data, like those provided by NEON, are subject to errors. You can use `filter()` to screen for observations that fall above or below expected values without having to scroll through all the data yourself.
 
 
 Let's continue working with the surface water temperature data to create a summary data frame that will be useful when analyzing how macroinvertebrate abundance varies with temperature. Since the macroinvertebrate data are collected only up to three times per year, we could either try to match up the temperature data collected around the same time that each macroinvertebrate sample was collected, or we could summarize the temperature records in a way that align with these data collection points, for example, by creating a monthly or weekly temperature summary immediately prior to each collection date.
@@ -606,11 +621,7 @@ In either case we need columns in the temperature data that will allow us to wor
 
 #### Use **`mutate()`** to calculate new columns 
 
-Recall from prior lessons that we can use  functions in the `lubridate` package to work with dates and times. Load the `lubridate()` package so that we have access to these functions:
-
-```{r message = FALSE}
-library(lubridate)
-```
+Recall from prior lessons that we can use  functions in the `lubridate` package to work with dates and times. We can use the `month()` and `year()` functions to extract the month and year from a date.
 
 In base R we used `$` to create a new column in a data frame:
 
@@ -620,20 +631,28 @@ TSW_30min$month <- month(TSW_30min$startDateTime)
 
 ```
 
-This same operations can be accomplished using the `mutate()` function, but they can be done in one operation:
+This same operation can be accomplished using the `mutate()` function.
 
 ```{r eval = FALSE}
 TSW_30min <- mutate(TSW_30min, 
-                    month = month(TSW_30min$startDateTime) )
+                    month = month(TSW_30min$startDateTime))
 ```
 
 We reassigned the output of `mutate()` back to the same data object `TSW_30min` so that the changes we made would be saved.
 
+Since the first argument `mutate()` is a data frame, here's another way to do the same thing using pipes:
+
+```{r eval = FALSE}
+TSW_30min <- TSW_30min |>
+  mutate(month = month(TSW_30min$startDateTime))
+```
+
+
 We can add as many new columns as we'd like inside the `mutate()` function. Here's an example that uses `ifelse()` to identify summer months.
 ```{r warning = FALSE}
-TSW_30min <- mutate(TSW_30min, 
-                    month = month(TSW_30min$startDateTime),
-                    season = ifelse(month>5 & month<9, "summer", "not summer") )
+TSW_30min <- TSW_30min |>
+  mutate(month = month(TSW_30min$startDateTime),
+         season = ifelse(month>5 & month<9, "summer", "not summer") )
 ```
 
 ::: {.challenge}
@@ -647,8 +666,8 @@ HINT: Use the `date()` function on `startDateTime`.
 ::: {.solution}
 
 ```{r}
-TSW_30min <- mutate(TSW_30min, 
-                    date = date(startDateTime))
+TSW_30min <- TSW_30min |>
+  mutate(date = date(startDateTime))
 ```
 
 
@@ -663,7 +682,19 @@ TSW_30min <- mutate(TSW_30min,
 
 ::: {.challenge}
 
-Create a table named `invert_samples` based on `inv_fieldData` that contains information about the  macroinvertebrate samples in the `inverts` data table. This table should contain only the following columns: `siteID`, `sampleID`, `collectDate`, `collect_ymd`, `boutNumber`, `habitatType`, `samplerType`, `substratumSizeClass`, `benthicArea`. The `collectDate` column should be a date-time class that include both the collection data and time (as found in the original `inv_fieldData$collectDate`) whereas the `collect_ymd` column should be newly created using `date()` and should only contain the year-month-day.
+Create a table named `invert_samples` based on `inv_fieldData` that contains information about the  macroinvertebrate samples in the `inverts` data table. This table should contain only the following columns: `siteID`, `sampleID`, `collectDate`, `collect_ymd`, `boutNumber`, `habitatType`, `substratumSizeClass`, `benthicArea`. The `collectDate` column should be a date-time class that include both the collection data and time (as found in the original `inv_fieldData$collectDate`) whereas the `collect_ymd` column should be newly created using `date()` and should only contain the year-month-day.
+
+Here's what the first few rows of the new `invert_samples` data frame should look like:
+
+```{r echo = FALSE}
+inv_fieldData |>
+  select(siteID, sampleID, collectDate, boutNumber, 
+         habitatType, substratumSizeClass, benthicArea) |>
+  mutate(collect_ymd = date(collectDate)) |>
+  head()
+  
+```
+
 
 <details><summary>**Solution:**</summary>
 
@@ -674,7 +705,7 @@ Create a table named `invert_samples` based on `inv_fieldData` that contains inf
 # Create a table that contains relevant info about each invert sample
 invert_samples <- inv_fieldData |>
   select(siteID, sampleID, collectDate, boutNumber, 
-         habitatType, samplerType, substratumSizeClass, benthicArea) |>
+         habitatType, substratumSizeClass, benthicArea) |>
   mutate(collect_ymd = date(collectDate))
 ```
 
@@ -688,18 +719,44 @@ invert_samples <- inv_fieldData |>
 <br>
 
 
-Let's examine the dates when macroinvertebrates were sampled at each site using the data table you created in the last challenge. The code below shows two ways to tally observations:
+Let's examine the dates when macroinvertebrates were sampled at each site using the data table you created in the last challenge. 
 
-The `n()` function will return the number of observations (rows) in each group. `unique()` returns a vector of distinct values found in the `habitatType` columns within each group. Applying the `length()` function to the output of `unique()` counts how many distinct values there are, which gives the number of distinct habitat types sampled.
+First let's examine the types of habitats that were sampled. The `unique()` function returns a vector of distinct values found in the `habitatType` columns within each group.
+
+```{r}
+unique(invert_samples$habitatType)
+```
+Previously, we have used `table()` to tabulate values within a particular column:
+
+```{r}
+table(invert_samples$habitatType)
+
+```
+But, we can also accomplish the same thing with `group_by()` and `summarize()`. The `n()` function will return the number of observations (rows) in each group.
+
+```{r}
+# Count the number of samples from each site and habitat type
+invert_samples |>
+  group_by(siteID, habitatType) |>
+  summarize(num_samples = n())
+```
+
+It would be useful know how many times each site was sampled during the year and which habitats were sampled on each date.
+
+In the code below, `unique()` returns a vector of distinct values found in the `habitatType` columns within each group. Applying the `length()` function to the output of `unique()` counts how many distinct values there are, which gives the number of distinct habitat types sampled.
 
 ```{r message = FALSE}
-# Group the samples by collection date and site
-# Tally the number of samples and count the number
-# of distinct types of habitat
 invert_samples |>
+  
+  # Group the samples by collection date and site
   group_by(siteID, collect_ymd) |>
+  
+  # Tally the number of samples 
   summarize(num_samples = n(),
-            num_habitats = length(unique(habitatType)))
+            
+            # Count the distinct types of habitat
+            num_habitats = length(unique(habitatType))
+            )
 ```
 
 From this table we can see that each site was sampled twice during the year and each sampling event contains eight separate samples collected, presumably from different locations within the creek.
@@ -752,7 +809,7 @@ inverts_bysample <- inverts |>
 
 If we want to relate differences in macroinvertebrate abundance and diversity to water temperature we need a way to match records in the `inverts_bysample` to temperature measurements in the `TSW_30min` table. But, `inverts_bysample` doesn't have any information about the dates or times when these samples were collected, which we will need to get the appropriate temperature measurements from `TSW_30min`.
 
-Where can we get information about the times when invertebrates were sampled? From the `invert_samples` table. We just need a way to join the information in these two tables together...
+Where can we get information about the times when invertebrates were sampled? From the `invert_samples` table! We just need a way to join the information in these two tables together...
 
 
 
@@ -812,7 +869,7 @@ Now we know the date when each sample was collected along with information on di
 
 ### Wide versus long-format data
 
-Suppose we want to compare which taxa are found at each of the three sites across all samples collected at each. Let's summarize the total number of individuals counted from each taxon at each site.
+Suppose we want to compare which taxa are found at each of the three sites by combining all samples collected at a site. Let's summarize the total number of individuals counted from each taxon at each site.
 
 ```{r message = FALSE}
 # Calculate the total number of individuals sampled 
@@ -843,6 +900,8 @@ The function to convert from long format to wide format is `pivot_wider()`. In a
 
 * `names_from = ` which column contains the **names** of the output columns
 * `values_from = ` which column contains the **values** that we want to show up in these columns
+
+In our example, the new column names should be the sites. Each row will be a taxon and the value for particular cell will be the total abundance of that taxon at that site.
 
 Here's how this works in our example:
 
@@ -876,10 +935,12 @@ siteBytaxa_abun
 This table makes it easy to quickly view which taxa are more abundant at different sites:
 
 ```{r}
-# Which taxa are present at all three sites
-# and most abundant at Caribou Creek?
-siteBytaxa_abun |> filter(CARI > 0, MART > 0, TECR > 0,
-                           CARI > MART, CARI > TECR)
+# Filter the site x taxon table to show taxa that are... 
+siteBytaxa_abun |> 
+         # present at all three sites
+  filter(CARI > 0, MART > 0, TECR > 0,
+         # and most abundant at Caribou Creek?
+         CARI > MART, CARI > TECR)
 
 ```
 
@@ -892,144 +953,33 @@ While long format data are generally easier to work with computationally, someti
 
 :::
 
-
-## Synthesis
-
-### Putting it all together
-
-*!UPDATE THIS TO NOT USE A LOOP!*
-
-Before beginning an analysis, it can be extremely useful to map out the steps ahead of time. This will make it easier to translate the analysis to code.
-
-Let's list our goals for analyzing macroinvertebrate diversity and what we need to do to accomplish each:
-
-**Goal 1:** Compare the total number of macroinvertebrate taxa at found at each site.
-
-1. Start with the macroinvertebrates data downloaded from NEON.
-2. Extract two tables from this download:
-    * `inv_fieldData` contains data on when and where the invertebrate samples were collected
-    * `inv_taxonomyProcessed` contains taxonomic information about which taxa were collected in each sample
-3. Use the `inv_taxonomyProcessed` table to count the number of unique taxa found at each site, combining across all of the samples from each site (which were collected at different locations and on two separate sampling dates).
-4. Output a table comparing these values.
-
-
-
-**Goal 2:** Relate the abundance of macroinvertebrates to water temperature at each site over the course of the summer.
-
-1. Start with the same two macroinvertebrate data tables from above: `inv_fieldData` and `inv_taxonomyProcessed` and surface water temperature data as well. 
-2. Use the `inv_taxonomyProcessed` to calculate the total abundance of macroinvertebrates in each sample from each site and save this in a new table: `inverts_bysample`.
-3. Join `inverts_bysample` with `inv_fieldData` to determine the dates which each sample was collected and the amount of area sampled.
-4. Control for variability in abundance based on the amount of area sampled by calculating `density = abundance / area`.
-5. Calculate average macroinvertebrate density across all samples collected on the same date at the same site. Save this as a new table: `inverts_bysite`
-6. Calculate the average temperature across both sensors for each time point at each site and save this in a new table: `TSW_avg`.
-7. Graph macroinvertebrate density and temperature over time for the three sites.
-8. Join `inverts_bysite` (which contains macroinvertebrate density) with temperature data that corresponds to the date when samples were collected.
-9. Graph macroinvertebrate density versus water temperature as a scatterplot.  
-
-
-Whew! That's a lot, but we've actually already done most of this already.
-
-_**Goal 1: Macroinvertebrate diversity**_
-
-We've nearly finished Goal 1. Here's all of the code together that accomplishes this analysis, copy-pasted and slightly modified from early parts of this lesson:
-
-```{r eval = FALSE}
-### Goal 1: Compare the total number of macroinvertebrate taxa at found at each site.
-
-## Start with the macroinvertebrates data downloaded from NEON.
- startdate <- "2021-05-31"
- enddate <- "2021-10-31"
-
- # Define the sites to download 
- # TECR = Teakettle Creek,  MART = Martha Creek, CARI = Caribou Creek
- sites <- c("TECR", "MART", "CARI") 
-
- # Macroinvertebrate observations
- inverts_list <- loadByProduct(dpID = "DP1.20120.001",
-                               site = sites,
-                               startdate = startdate,
-                               enddate = enddate)
-
- # Temperature in surface water
- watertemp_list <- loadByProduct(dpID = "DP1.20053.001",
-                               site = sites,
-                               startdate = startdate,
-                               enddate = enddate)
-
-## Extract three tables from this download:
-
- # Extract invertebrate collections
- # inv_fieldData = when and where the invertebrate samples were collected
- inv_fieldData <- inverts_list$inv_fieldData
-
- # Extract taxonomic information
- # inv_taxonomyProcessed = which taxa were collected in each sample
- inv_taxa <- inverts_list$inv_taxonomyProcessed
- 
-```
-```{r}
-## Use the `inv_taxonomyProcessed` table to count the number of unique
-## taxa found at each site, combining across all of the samples from 
-## each site (which were collected at different locations and on two 
-## separate sampling dates).
-
- inverts_bysite <- inv_taxa |> 
-   group_by(siteID) |>
-   summarize(num_taxa = length(unique(scientificName)))
-
- # Output a table comparing these values.
- inverts_bysite
-
-```
-
-
-Notice that to calculate the number of taxa across sites (instead of samples, as we did before) we put `group_by(siteID)` instead of `group_by(sampleID)`.
-
-A bar graph is a good choice for displaying these data:
-
-```{r warning = FALSE, fig.width = 10, out.width = "50%"}
-# Load the ggplot2 package (if not already loaded)
-library(ggplot2)
-
-# Make a bar graph 
-inverts_bysite |>
-  ggplot(aes(x = siteID, y = num_taxa)) +
-    geom_col() +
-    labs(x = "NEON site code", 
-         y = "Num. macroinvertebrate taxa")
-
-
-```
-
-
-
-Success! Now go apply what you learned in the exercises.
-
-
-
-
 ### Other useful functions
 
 Here's some additional functions you might be interested to learn about:
 
-The `rename()` function can be used to rename columns in a dataframe.
+The `rename()` function can be used to rename columns in a data  frame.
 
 ```{r}
-inverts_bysite |> rename(site = siteID)
+siteBytaxa_abun |> 
+  rename(Alaska = CARI,
+         California = TECR,
+         Washington = MART)
 
 ```
 
 The `arrange()` function will reorder the rows of a data frame according to the values in one or more columns.
 
 ```{r}
-inverts_bysite |> arrange(density_per_m2)
+siteBytaxa_abun |> 
+  arrange(CARI)
 
 ```
 
 You can use the `desc()` function inside `arrange()` to put value in descending order.
 
 ```{r}
-inverts_bysite |> arrange(desc(collect_day))
+siteBytaxa_abun |> 
+  arrange(desc(CARI))
 
 ```
 
@@ -1037,25 +987,211 @@ You can also arrange rows by multiple columns.
 
 
 ```{r}
-inverts_bysite |> arrange(siteID, desc(collect_day))
+siteBytaxa_abun |> 
+  arrange(CARI, MART, TECR)
 
 ```
 
 Instead of the `table()` function, you can used the `count()` function to tabulate the number of observations in groups within one or more columns.
 
 ```{r}
-inverts_bysample |>
+# How many samples were collected at each site on each sampling date?
+invert_samples |>
   count(siteID, collectDate)
 
 ```
+
+
+Congrats! You've reached the end of the main lesson. Click on the [Synthesis](#synthesis) tab at the top to move on to the next stage of this lesson where we will explore how macroinvertebrate abundance relates to water temperature over the course of the summer.
+
+
+
+## Synthesis
+
+### Putting it all together
+
+We are going to write an R script that calculates diversity and abundance of macroinvertebrates at each site and sampling date so that we can compare sites throughout the summer.
+
+Before beginning an analysis, it can be extremely useful to map out the steps ahead of time. This will make it easier to translate the analysis to code.
+
+Let's list  what we need to do:
+
+**Goal:** Calculate total number of macroinvertebrate taxa and total number of individuals counted at each site for each sampling date.
+
+1. Start with the macroinvertebrates data downloaded from NEON.
+    * `inv_fieldData` contains data on when and where the invertebrate samples were collected
+    * `inv_taxonomyProcessed` contains taxonomic information about which taxa were collected in each sample
+2. Use the `inv_taxonomyProcessed` table to count the number of unique taxa found at each site and sampling date, combining across all of the samples collected on the same date.
+3. Use the `inv_taxonomyProcessed` table to estimate macroinvertebrate abundance at each site and sampling date, combining across all of the samples collected on the same date. Since each sample is based on a different amount of stream benthic area sampled, we will need to control for differences in area sampled before calculating and averaging abundance.
+4. Create a new table, `site_summary`, with columns for site, sampling date, diversity and abundance
+
+
+Whew! That's a lot. Let's start a new R script for this analysis that can be run from a new R session.
+Restart your R session to remove all objects from the environment. This will ensure that the code you write is not based on any prior work that you did during the lesson.
+
+Step 1 is to load the data into R. The code below assumes that you have already downloaded and stacked the data from NEON. If not, run the `07-tidyverse-basics_download-data.R` script located in the `lesson-code/` folder. It is always a good idea to separate scripts that download data from scripts that analyze data.
+
+```{r eval = FALSE}
+## Load packages for the analysis
+library(neonUtilities)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+## Read in previously stacked data tables
+# Define location of data
+savepath <- "data"
+
+# Read in macroinvertebrate abundance data from data product 20120
+inv_fieldData <- readTableNEON(
+  dataFile = file.path(savepath, "filesToStack20120", "stackedFiles", "inv_fieldData.csv"),
+  varFile = file.path(savepath, "filesToStack20120", "stackedFiles", "variables_20120.csv")
+)
+
+# Read in macroinvertebrate taxonomy data from data product 20120
+inv_taxa <- readTableNEON(
+  dataFile = file.path(savepath, "filesToStack20120", "stackedFiles", "inv_taxonomyProcessed.csv"),
+  varFile = file.path(savepath, "filesToStack20120", "stackedFiles", "variables_20120.csv")
+)
+ 
+```
+
+Recall that each row of `inv_taxa` counts the number of individuals (`estimatedTotalCount`) in a particular sample (`sampleID`) within a particular size class (`sizeClass`) of a particular taxon (`scientificName`). 
+
 ```{r}
-inv_taxa |>
-  count(siteID, phylum)
+names(inv_taxa)
+```
+Each row of `inv_fieldData` describes information about a particular sample that was collected:
+
+```{r}
+names(inv_fieldData)
+```
+Previously we saw that each site had two collection dates during 2021 and that on each collection date 8 different samples were collected.
+
+```{r}
+inv_fieldData |>
+  count(siteID, collectDate)
+```
+
+Now we can calculate macroinvertebrate diversity for each sampling date at each site. We will save this in a new summary table.
+
+```{r message = FALSE}
+## Count the number of unique taxa found at each site and sampling date, combining across all of the samples collected on the same date)
+site_summary <- inv_taxa |>
+  group_by(siteID, collectDate) |>
+  summarize(num_taxa = length(unique(scientificName)))
+
+
+site_summary
+
+```
+
+Our next step is to estimate abundance at each site and sampling date, combining across all of the samples collected on the same date. First we will calculate the total number of individuals in each sample.
+
+```{r message = FALSE}
+# Calculate total macroinvertebrate abundance in each sample
+inv_bysample <- inv_taxa |>
+  group_by(siteID, collectDate, sampleID) |>
+  summarize(tot_abun = sum(estimatedTotalCount))
+
+head(inv_bysample)
+
+```
+
+However these samples were collected from different amounts of stream area. We need to control for area sampled before calculated average abundance across samples.
+
+This means that we need to join the `benthicArea` column to the `inv_bysample` data. Then we can calculate abundance as the number of individuals per unit area (` = tot_abun / benthicArea`).
+
+```{r}
+# Join the inv_bysample table with the benthicArea column in inv_fieldData. 
+
+# Select sample info columns from inv_fieldData
+keep_cols <- inv_fieldData |>
+  select(sampleID, benthicArea) 
+
+# Join with counts of taxa in inv_taxa
+inv_bysample <- right_join(keep_cols, inv_bysample, by = "sampleID")
+
+```
+We could have accomplished the same task with one command, eliminating the need for the intermediate `keep_cols`:
+
+
+```{r eval = FALSE}
+# Join the inv_taxa table with the collection date column in inv_fieldData. 
+
+inv_bysample <- inv_fieldData |>
+  
+  # Select sample info columns from inv_fieldData
+  select(sampleID, benthicArea) |>
+
+  # Join with counts of taxa in inv_taxa
+  right_join(inv_bysample, by = "sampleID")
+
+```
+
+```{r}
+# Check that the new column has been added
+head(inv_bysample)
+```
+
+Now we calculate macroinvertebrate abundance by dividing total individuals counted by the area sampled.
+
+```{r}
+# Calculate abundance standardized by sampling area
+inv_bysample <- inv_bysample |>
+  mutate(abun_per_m2 = tot_abun / benthicArea)
+
+```
+
+Then, calculate average abundance across all samples from the same collection date.
+
+```{r message = FALSE}
+# Calculate average abundance for each collection date and site.
+inv_bysample |>
+  group_by(siteID, collectDate) |>
+  summarize(abun_per_m2 = mean(abun_per_m2))
+
+
+```
+
+But, we want these data to be joined with the diversity data we already calculated in `site_summary`. So, we can join the output of this code to `site_summary`.
+
+```{r message = FALSE}
+# Calculate average abundance for each collection date and site.
+site_summary <- inv_bysample |>
+  group_by(siteID, collectDate) |>
+  summarize(abun_per_m2 = mean(abun_per_m2)) |>
+  
+  # Join with site summary 
+  right_join(site_summary)
 
 ```
 
 
-*!UPDATE THIS TO ADD THE stackByTable() functions*
+If we want to save these data to a file to open later we can used the function `write.csv()`.
+
+```{r eval = FALSE}
+# Save the summary data to a file.
+write.csv(site_summary,
+          file = "results/lesson-07-synthesis.csv")
+
+```
+
+
+Finally, we can plot the data to see whether there is a relationship between macroinvertebrate diversity and abundance.
+
+```{r fig.width = 10, out.width = "50%"}
+ggplot(site_summary, aes(x = abun_per_m2, y = num_taxa)) +
+  geom_point(aes(color = siteID)) +
+  labs(x = expression("Num. individuals per"~m^2),
+       y = "Num. taxa",
+       color = "Site")
+
+```
+
+
+Success! You can find the code from this synthesis in the script `lesson-code/07-tidyverse-basics_synthesis-code.R`. Now go apply what you learned in the exercises.
+
 
 
 ## Exercises
@@ -1125,7 +1261,7 @@ solution.3 |>
 
 Use the `TSW_30min` data to calculate average, minimum and maximum monthly surface water temperature at the Caribou Creek site (CARI). Your solution should use pipes to compose functions and result in exactly this table:
 
-```{r echo = FALSE}
+```{r echo = FALSE, message = FALSE}
 TSW_30min |>
   filter(siteID == "CARI") |>
   mutate(month = month(startDateTime)) |>
@@ -1158,19 +1294,19 @@ solution.6
 
 **`r .chp_num`.7** 
 
-`inverts_bysite` summarizes macroinvertebrate abundance at each site for each of the collection events. 
-The table you created in exercise `r .chp_num`.3 summarizes monthly mean surface water temperature at each site.
+The synthesis section generates a table `site_summary` with abundance and diversity data for each collection date at each site. The table you created in exercise `r .chp_num`.3 summarizes monthly mean surface water temperature at each site.
+
 Create a table that joins these two data frames and shows macroinvertebrate abundance and average monthly temperature at each of the collection dates for each site.
 
-Hint: Use the month for each `collect_day` as one of the keys to join the two tables. You can extract the month from the `collect_day` column using the function `month()` from the `lubridate` package.
+Hint: Use the month for each `collectDate` as one of the keys to join the two tables. You can extract the month from the `collectDate` column using the function `month()` from the `lubridate` package.
 
-Your final table should look exactly like this:
+Your final table should look like this:
 
 ```{r echo = FALSE, message = FALSE}
-inverts_bysite |>
-  mutate(month = month(collect_day)) |>
+site_summary |>
+  mutate(month = month(collectDate)) |>
   left_join(solution.3) |>
-  select(siteID, month, collect_day, density_per_m2, temp_avg_C)
+  select(siteID, month, collectDate, abun_per_m2, temp_avg_C)
 
 ```
 
@@ -1201,7 +1337,7 @@ field_cols.9 <- inv_fieldData |>
 
 solution.8 |>
   left_join(field_cols.9) |>
-  mutate(density_per_m2 = total/benthicArea)
+  mutate(abun_per_m2 = total/benthicArea)
 ```
 
 

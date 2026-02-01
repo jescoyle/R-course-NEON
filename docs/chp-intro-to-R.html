@@ -1053,25 +1053,27 @@ in the global environment (your working R session):</p>
  [4] &quot;B&quot;                        &quot;C&quot;                        &quot;calc_monthly_avg&quot;        
  [7] &quot;calc_monthly_avg_byMonth&quot; &quot;calc_uncertainty&quot;         &quot;conservation_fact&quot;       
 [10] &quot;dat&quot;                      &quot;dat_TECR&quot;                 &quot;dat1&quot;                    
-[13] &quot;dat2&quot;                     &quot;data_filename&quot;            &quot;data_filepath&quot;           
-[16] &quot;DOvals_bad&quot;               &quot;DOvals_good&quot;              &quot;dpID&quot;                    
-[19] &quot;enddate&quot;                  &quot;evens&quot;                    &quot;fahr_to_celsius&quot;         
-[22] &quot;fahr_to_kelvin&quot;           &quot;firstNames&quot;               &quot;i&quot;                       
-[25] &quot;ints&quot;                     &quot;kelvin_to_celsius&quot;        &quot;m&quot;                       
-[28] &quot;match_timeInterval&quot;       &quot;microbe_wq_data&quot;          &quot;microbes&quot;                
-[31] &quot;microbes_wq&quot;              &quot;missing_dates&quot;            &quot;missing_temp&quot;            
-[34] &quot;my_function&quot;              &quot;myfunc&quot;                   &quot;n&quot;                       
-[37] &quot;N&quot;                        &quot;odds&quot;                     &quot;pH_top10&quot;                
-[40] &quot;project_filename&quot;         &quot;project_name&quot;             &quot;savepath&quot;                
-[43] &quot;sitelist&quot;                 &quot;sites&quot;                    &quot;sites2&quot;                  
-[46] &quot;startdate&quot;                &quot;surfwater&quot;                &quot;surfwater_Aug&quot;           
-[49] &quot;temp_vals&quot;                &quot;test&quot;                     &quot;these_dates&quot;             
-[52] &quot;this_time&quot;                &quot;TSW_30min&quot;                &quot;use_dat&quot;                 
-[55] &quot;use_rows&quot;                 &quot;var_filename&quot;             &quot;var_filepath&quot;            
-[58] &quot;Vcalc_uncertainty&quot;        &quot;Vmatch_timeInterval&quot;      &quot;watertemp&quot;               
-[61] &quot;watertemp_upstream&quot;       &quot;wq&quot;                       &quot;x&quot;                       
-[64] &quot;X&quot;                        &quot;y&quot;                        &quot;Y&quot;                       
-[67] &quot;z&quot;                        &quot;Z&quot;                       </code></pre>
+[13] &quot;dat2&quot;                     &quot;DOvals_bad&quot;               &quot;DOvals_good&quot;             
+[16] &quot;evens&quot;                    &quot;fahr_to_celsius&quot;          &quot;fahr_to_kelvin&quot;          
+[19] &quot;field_cols&quot;               &quot;field_cols.9&quot;             &quot;firstNames&quot;              
+[22] &quot;i&quot;                        &quot;inv_bysample&quot;             &quot;inv_dat&quot;                 
+[25] &quot;inv_fieldData&quot;            &quot;inv_taxa&quot;                 &quot;inverts_bysample&quot;        
+[28] &quot;inverts_bysite&quot;           &quot;keep_cols&quot;                &quot;kelvin_to_celsius&quot;       
+[31] &quot;m&quot;                        &quot;microbe_wq_data&quot;          &quot;microbes&quot;                
+[34] &quot;microbes_wq&quot;              &quot;missing_dates&quot;            &quot;missing_temp&quot;            
+[37] &quot;msleep&quot;                   &quot;my_function&quot;              &quot;myfunc&quot;                  
+[40] &quot;n&quot;                        &quot;N&quot;                        &quot;odds&quot;                    
+[43] &quot;pH_top10&quot;                 &quot;savepath&quot;                 &quot;site_summary&quot;            
+[46] &quot;sitelist&quot;                 &quot;sites&quot;                    &quot;sites2&quot;                  
+[49] &quot;solution.2&quot;               &quot;solution.3&quot;               &quot;solution.8&quot;              
+[52] &quot;surfwater&quot;                &quot;surfwater_Aug&quot;            &quot;temp_vals&quot;               
+[55] &quot;test&quot;                     &quot;these_dates&quot;              &quot;this_interval&quot;           
+[58] &quot;this_site&quot;                &quot;this_time&quot;                &quot;TSW_30min&quot;               
+[61] &quot;TSW_30min_good&quot;           &quot;TSW_avg&quot;                  &quot;use_dat&quot;                 
+[64] &quot;use_temps&quot;                &quot;Vcalc_uncertainty&quot;        &quot;watertemp&quot;               
+[67] &quot;watertemp_upstream&quot;       &quot;wq&quot;                       &quot;x&quot;                       
+[70] &quot;X&quot;                        &quot;y&quot;                        &quot;Y&quot;                       
+[73] &quot;z&quot;                        &quot;Z&quot;                       </code></pre>
 <p>Note here that we didn’t give any arguments to <code>ls</code>, but
 we still needed to give the parentheses to tell R to call the
 function.</p>
@@ -1109,7 +1111,7 @@ instead of a listing of objects.</p>
     }
     else all.names
 }
-&lt;bytecode: 0x0000017a3d676388&gt;
+&lt;bytecode: 0x0000020b6a9dd398&gt;
 &lt;environment: namespace:base&gt;</code></pre>
 <p>What’s going on here?</p>
 <p>Like everything in R, <code>ls</code> is the name of an object, and
