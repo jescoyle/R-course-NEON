@@ -243,7 +243,7 @@ rep(length.out = 4, x = 1:3)
 
 ### Vectorization
 
-Most of R's functions are vectorized, meaning that the function will operate on element of a vector (and return a vector of the same length). This makes writing code more concise, easy to read, and less error prone.
+Most of R's functions are vectorized, meaning that the function will operate on each element of a vector and return a new vector of the same length. This makes writing code more concise, easy to read, and less error prone.
 
 You are actually already familiar with this behavior:
 
@@ -329,7 +329,6 @@ m * c(1, 0, -1)
 
 m > c(0, 20)
 
-m * c(1, 0, -1, 2)
 ```
 
 <details><summary>**Solution:**</summary>
@@ -343,7 +342,6 @@ m * c(1, 0, -1)
 
 m > c(0, 20)
 
-m * c(1, 0, -1, 2)
 ```
 
 :::
@@ -419,7 +417,9 @@ Vector `x` was recycled to match the length of vector `y`
 
 Functions and objects are the the basic building block of most programming languages, Therefore, if you have written a function, you are a computer programmer. Let's become programmers!
 
-Open a new R script file in the `src` directory of your `R-course-NEON-workbook` folder and call it `functions.R`. Recall that the `src` directory is typically used to save code scripts for analyses (if you don't have thie directory, create it). We will use this script to save functions that could be useful across several analyses.
+First, make a new directory in your `R-course-NEON-workbook` folder to contain final code that you plan to reuse. Let's call it `src`, which stands for "source". 
+
+Open a new R script file and call it `functions.R`. Save this file in the `src` folder. We will use this script to save functions that could be useful across several analyses.
 
 The general structure of a function is:
 
@@ -519,8 +519,26 @@ kelvin_to_celsius <- function(temp) {
 
 <br>
 
+::: {.callout-important}
 
-We can also define functions that perform operations on multiple arguments (separated by commas). Let's write a function that returns the upper and lower bounds of uncertainty around a given value.
+**What's going on inside a function?**
+
+Functions in R almost always make copies of the data to operate on inside of a function body. When we modify `dat` inside the function we are modifying the copy of dataset supplies as `dat`, not the original variable we gave as the first argument.
+
+This is called "pass-by-value" and it makes writing code much safer: you can always be sure that whatever changes you make within the body of the function, stay inside the body of the function.
+
+Another important concept is scoping: any variables (or functions!) you create or modify inside the body of a function only exist for the lifetime of the function's execution. When we call `kelvin_to_celsius()`, the variables `temp` and `celsius` only exist inside the body of the function. Even if we have variables of the same name in our interactive R session, they are not modified in any way when executing a function.
+
+You can see this by typing `celsius` into the console:
+```{r}
+celsius
+```
+
+:::
+
+### Functions with multiple arguments
+
+We can also define functions that perform operations on multiple arguments, which are separated by commas. Let's write a function that returns the upper and lower bounds of uncertainty around a given value.
 
 ```{r}
 # A function that returns the lower and upper uncertainty bounds
@@ -551,11 +569,11 @@ calc_uncertainty <- function(mu, sigma) {
 Let's try out our function:
 
 ```{r}
-calc_uncertainty(0, 2)
+calc_uncertainty(mu = 0, sigma = 2)
 
-calc_uncertainty(1:10, 0.5)
+calc_uncertainty(mu = 1:10, sigma = 0.5)
 
-calc_uncertainty(1:10, 1:10)
+calc_uncertainty(mu = 0, sigma = 1:10)
 
 ```
 
@@ -594,6 +612,59 @@ calc_uncertainty <- function(mu, sigma) {
 }
 
 ```
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+### Vectorizing functions
+
+Some functions do not work element-wise on vectors in the way that we need them to. Consider the `calc_uncertainty()` function we wrote. By default it will recycle the `mu` and `sigma` vectors if they are not equal length:
+
+```{r}
+calc_uncertainty(mu = 1:4, sigma = c(0, 10))
+```
+The code above alternates applying `sigma = 0` and `sigma = 10` to the numbers `1`, `2`, `3`, `4`, sequentially. But, what if we actually wanted each value in the `sigma` vector to be applied to each value in the `mu` vector?
+
+One way to do this is to **vectorize** the `calc_uncertainty()` function along the `mu` argument and give it a new function name (`Vcalc_uncertainty()`):
+
+
+```{r}
+Vcalc_uncertainty <- Vectorize(calc_uncertainty, "mu", SIMPLIFY = "array")
+
+Vcalc_uncertainty(mu = 1:4, sigma = c(0, 10))
+
+```
+The result is an array with three dimensions. The third dimension has the same length as the vector we supplied for the argument `mu`.
+
+::: {.challenge}
+
+What would the dimensions of the resulting array be if we vectorized along the `sigma` argument?
+
+```{r eval = FALSE}
+Vcalc_uncertainty <- Vectorize(calc_uncertainty, "sigma", SIMPLIFY = "array")
+
+Vcalc_uncertainty(mu = 1:4, sigma = c(0, 10))
+
+```
+
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+The third dimension of the array will have the same length as the vector we supply for the `sigma` argument.
+
+```{r echo = FALSE}
+Vcalc_uncertainty <- Vectorize(calc_uncertainty, "sigma", SIMPLIFY = "array")
+
+Vcalc_uncertainty(mu = 1:4, sigma = c(0, 10))
+```
+
 
 :::
 
@@ -689,411 +760,11 @@ calc_uncertainty(1:5)
 
 ```
 
-::: {.challenge}
 
-What happens when you specify `NA` or `NULL` as a default value?
 
-<details><summary>**Solution:**</summary>
+### Organizing code and functions
 
-::: {.solution}
-
-Let's try it with the `calc_uncertainty()` function:
-
-```{r}
-calc_uncertainty_NULL <- function(mu, sigma = NULL) {
-  
-  # Calculate the upper bound
-  upper <- mu + sigma
-
-  # Calculate the lower bound
-  lower <- mu - sigma
-  
-  # Combine the bounds into a matrix
-  bounds <- cbind(lower, upper)
-  
-  # Return the matrix
-  return(bounds)
-}
-
-calc_uncertainty_NA <- function(mu, sigma = NA) {
-  
-  # Calculate the upper bound
-  upper <- mu + sigma
-
-  # Calculate the lower bound
-  lower <- mu - sigma
-  
-  # Combine the bounds into a matrix
-  bounds <- cbind(lower, upper)
-  
-  # Return the matrix
-  return(bounds)
-}
-
-```
-
-```{r}
-calc_uncertainty_NA(1:5)
-```
-
-Recall that `NA` is a special placeholder value that means that data is missing. Thus, arithmetic with `NA` will by default give a `NA` result. 
-
-```{r}
-calc_uncertainty_NULL(1:5)
-
-```
-
-`NULL` is a special value that means something does not exist. When we try to add `NULL` to `mu`, we get an empty matrix.
-
-:::
-
-</details>
-
-:::
-
-<br>
-
-
-## Synthesis
-
-### Putting it all together
-
-Let's install the `neonUtilities` package and learn about some of its functions. We will be using this package to acquire data directly from NEON. Type the following in the Console:
-
-```{r eval=FALSE}
-install.packages("neonUtilities")
-
-library(neonUtilities)
-```
-
-Note that you only need to install the package once, but you will need to use `library()` to load the package every time you want to use it in a new R session.
-
-
-We're going to download the recent temperature data from the Teakettle Creek site in the Sierra Nevada mountains and the Sycamore Creek site in Arizona. The function `loadByProduct()` from the [`neonUtilities`](https://www.neonscience.org/resources/learning-hub/tutorials/neondatastackr){target = "_blank"} package is the main function for accessing NEON data in R. Let's take a look at the documentation for this function before using it:
-
-```{r eval = FALSE}
-?loadByProduct
-
-```
-
-At a minimum we must specify a data product ID (`dpID` argument), which we can get by browsing the [NEON Data Portal](https://data.neonscience.org/data-products/explore). Data product id numbers all begin with DP1. We must also specify start and end dates. If we only want certain sites, we need to specify the four-letter codes that identify each site. Since we are requesting new data that is "provisional" we also need to include the argument `include.provisional = TRUE`.
-
-```{r eval = FALSE}
-
-# Define dates for download
-startdate <- "2022-09-01"
-enddate <- "2023-08-31"
-
-# Define the sites to download 
-sites <- c("TECR", "SYCA") # Teakettle Creek and Sycamore Creek
-
-# Define the data product
-dpID <- "DP1.20053.001"  # Surface water temperature
-
-# Temperature in surface water
-watertemp <- loadByProduct(dpID = dpID,
-                           site = sites,
-                           startdate = startdate,
-                           enddate = enddate,
-                           include.provisional = TRUE)
-
-```
-You will need to allow the data to download by typing `y` in the Console when prompted.
-
-```{r include = FALSE}
-# Load previously downloaded object
-load("src/chp-functions_watertemp.RData")
-```
-
-You should now have a new object named `watertemp` in the Environment panel. It should be a list with nine elements. Let's examine its structure using the Environment panel. Click on the blue arrow next to `watertemp` to see what is contained in each of the nine elements.
-
-Alternatively you can see the names of each of these elements using:
-
-```{r}
-names(watertemp)
-```
-Most of these objects are data frames. Some contain metadata that describe variables and collection methods (`categoricalCodes_200531`, `issueLog_20053`, `science_review_flags_20053`, `sensor_positions_20053`, `variables_20053`) and two of the tables contain actual measurements (`TSW_30min` and `TSW_5min`). When working with a new data set, it is always a good idea to read the documentation before you get started. Documentation for these data can be found on [this webpage](https://data.neonscience.org/data-products/DP1.20053.001).
-
-We're going to use the `TSW_30min` table, which contains 30-minute average temperature readings. Let's save this as a separate dataframe to make it easier to work with. Remember that we use `$` to access a named element of a list.
-
-```{r}
-# Extract the temperature data from watertemp list
-TSW_30min <- watertemp$TSW_30min
-
-```
-
-Let's take a look at these data:
-
-```{r}
-# Show the first few rows
-head(TSW_30min)
-
-```
-
-It appears that each row corresponds to a temperature average between two time points (`startDateTime` and `endDateTime`) taken by a sensor at a particular location (given by the horizontal and vertical positions). From the documentation, we can learn that for these stream sites, there are two sensor locations- one upstream (`horizontalPosition` = 101 or 111) and one downstream (`horizontalPosition` = 102 or 112). There should not be any variation in the vertical position for surface water measurements.  We can verify this by tabulating the data:
-
-```{r}
-# How many unique values of horizontal and vertical position are there?
-table(TSW_30min$horizontalPosition)
-table(TSW_30min$verticalPosition)
-```
-
-
-::: {.challenge}
-Use the `table()` function to determine how many measurements there are in these data from each NEON site.
-
-<details><summary>**Solution:**</summary>
-
-::: {.solution}
-
-```{r }
-table(TSW_30min$siteID)
-```
-
-:::
-
-</details>
-
-:::
-
-<br>
-
-The actual temperature values are in the `surfwaterTemp` columns in degrees Celsius. Mean, minimum, and maximum values during each time period are provided. The data also include a `finalQF` column which is a "quality flag" that indicates whether the data should be used. A value of `0` in this column show that the data passed all quality control procedures.
-
-Our goal is to write a function that will calculate the average monthly surface water temperature across both sensors at a particular site in a given month. We also want our function to screen out any erroneous data (indicated by the `finalQF` column) and to be able to handle missing data appropriately.
-
-When starting a programming project, the first step is to use comments to outline what we are trying to accomplish. This may change as we work, but it can help to get a "road map" in a script first. Since we are writing a function, know that it will need a name, body and arguments, which we can put into this initial outline.
-
-```{r}
-# A function that calculates average monthly surface water temperature
-# across both sensors at a NEON site from a dataframe of temperature
-# measurements.
-# Arguments:
-#   dat = a dataframe containing the columns we need (TBD)
-#   site = the NEON site code for the site of interest
-#   month = the month to calculate average temperature over
-#   na.rm = indicates whether NA values should be removed prior to calculation
-calc_monthly_avg <- function(dat, site, month, na.rm) {
-  
-  # Remove data that did not pass quality control
-  # keep finalQF == 0
-
-  
-  # Subset the data frame to only contain observations from site
-
-  
-  
-  # Subset the data frame to only contain observations from month
-  
-  
-  # Calculate the average of the surfWaterTempMean column
-  
-  
-  
-  # Return the calculated value
-  
-}
-```
-
-Now let's start filling in the outline. You may want to revisit the [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) lesson to recall how to subset rows of a data frame based on values in its columns. We will use that to subset `dat` to only contain rows where the `finalQF` value is `0` and where the `siteID` column matches the value in the `site` argument. 
-
-```{r}
-calc_monthly_avg <- function(dat, site, month, na.rm) {
-  
-  # Remove data that did not pass quality control
-  # keep finalQF == 0
-  keep_dat <- subset(dat, finalQF == 0)
-  
-  # Subset the data frame to only contain observations from site
-  keep_dat <- subset(keep_dat, siteID == site)
-  
-  # Subset the data frame to only contain observations from month
-  
-
-  # Calculate the average of the surfWaterTempMean column
-  
-  
-  
-  # Return the calculated value
-  
-}
-```
-
-Note that as we progress through the function, the number of rows in `keep_dat` will keep decreasing because we are reassigning `keep_dat` back to itself after each subseting operation. 
-
-::: {.callout-important}
-
-**What's going on inside a function?**
-
-Functions in R almost always make copies of the data to operate on inside of a function body. When we modify `dat` inside the function we are modifying the copy of dataset supplies as `dat`, not the original variable we gave as the first argument.
-
-This is called "pass-by-value" and it makes writing code much safer: you can always be sure that whatever changes you make within the body of the function, stay inside the body of the function.
-
-Another important concept is scoping: any variables (or functions!) you create or modify inside the body of a function only exist for the lifetime of the function's execution. When we call `calc_monthly_avg()`, the variables `dat`, `site`, `month` and `na.rm` only exist inside the body of the function. Even if we have variables of the same name in our interactive R session, they are not modified in any way when executing a function.
-:::
-
-Let's keep building our function. The next step is to determine the month when each observation was collected. Recall that the `lubridate` package contains useful functions for working with dates and times (see [`r .get_chpName("intro-to-R", type.from = "chp")`](intro-to-R.html)). The `ymd_hms()` function will convert the characters in the `startDateTime` column to dates. We can then use the `months()` function to extract a numeric month. 
-
-However, we want our function to work even if the user hasn't loaded the `lubridate` package. In R, you can use a function from a package without loading the package first if you specify the name of the package before the name of the function as follows: `lubridate::ymd_hms()`. Then, so long as the user has the `lubridate` package installed, they can use our function.
-
-Here's our function so far:
-
-```{r}
-calc_monthly_avg <- function(dat, site, month, na.rm) {
-  
-  # Remove data that did not pass quality control
-  # keep finalQF == 0
-  keep_dat <- subset(dat, finalQF == 0)
-  
-  # Subset the data frame to only contain observations from site
-  keep_dat <- subset(keep_dat, siteID == site)
-  
-  # Subset the data frame to only contain observations from month
-    # convert character to date
-    keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
-  
-    # extract month as a numeric value
-    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
-    
-    # subset based on month
-    keep_dat <- subset(keep_dat, startMonth == month)
-
-  # Calculate the average of the surfWaterTempMean column
-  
- 
-  # Return the calculated value
-  
-}
-```
-
-The last step is to calculate the average of the column in `keep_dat` that contains the mean surface water temperature measurements. We will do this using the `mean()` function and specify that the `na.rm` argument should take on the value specified in `na.rm`.
-
-```{r}
-calc_monthly_avg <- function(dat, site, month, na.rm) {
-  
-  # Remove data that did not pass quality control
-  # keep finalQF == 0
-  keep_dat <- subset(dat, finalQF == 0)
-  
-  # Subset the data frame to only contain observations from site
-  keep_dat <- subset(keep_dat, siteID == site)
-  
-  # Subset the data frame to only contain observations from month
-    # convert character to date
-    keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
-  
-    # extract month as a numeric value
-    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
-    
-    # subset based on month
-    keep_dat <- subset(keep_dat, startMonth == month)
-
-  # Calculate the average of the surfWaterTempMean column
-    # use the na.rm value provided by the user of the function
-  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
- 
-  # Return the calculated value
-  return(vals)
-}
-```
-
-Let's try out the function:
-
-```{r, error = TRUE}
-# Calculate monthly mean water temperature at Sycamore Creek in August
-calc_monthly_avg(TSW_30min, site = "SYCA", month = 8)
-```
-
-Oops! Why are we getting this error message? If we read carefully we can see that we failed to specify a value for the `na.rm` argument. Perhaps it would be a good idea to give the function a default value for this argument so that we can use it without specifying `na.rm` every time.
-
-
-::: {.challenge}
-Modify the `calc_monthly_avg()` function so the default value of `na.rm` is `TRUE`.
-
-<details><summary>**Solution:**</summary>
-
-::: {.solution}
-We only need to change the first line where the arguments are defined.
-
-```{r}
-calc_monthly_avg <- function(dat, site, month, na.rm = TRUE) {
-  
-  # Remove data that did not pass quality control
-  # keep finalQF == 0
-  keep_dat <- subset(dat, finalQF == 0)
-  
-  # Subset the data frame to only contain observations from site
-  keep_dat <- subset(keep_dat, siteID == site)
-  
-  # Subset the data frame to only contain observations from month
-    # convert character to date
-    keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
-  
-    # extract month as a numeric value
-    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
-    
-    # subset based on month
-    keep_dat <- subset(keep_dat, startMonth == month)
-
-  # Calculate the average of the surfWaterTempMean column
-  # use the na.rm value provided by the user of the function
-  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
- 
-  # Return the calculated value
-  return(vals)
-}
-```
-
-:::
-
-</details>
-
-:::
-
-<br>
-
-
-Our final function assumes that `dat` has very specific column names and it would be a good idea to specify the columns we used in the documentation comment at the top of the function. 
-
-::: {.challenge}
-
-Which column names must be present in the dataframe passed to `dat` in order for the function to work correctly? 
-
-Write a comment at the top of the function that describes the columns names required by this function in the documentation of the `dat` argument.
-
-<details><summary>**Solution:**</summary>
-
-::: {.solution}
-
-`dat` must contain columns named: `finalQF`, `siteID`, `startDateTime` and `surfWaterTempMean`.
-
-In informative comment for this function could look like:
-
-```{r}
-# A function that calculates average monthly surface water temperature
-# across both sensors at a NEON site from a dataframe of temperature
-# measurements.
-# Arguments:
-#   dat = a dataframe containing the columns: 
-#         surfWaterTempMean, startDateTime, siteID, finalQF
-#   site = the NEON site code for the site of interest
-#   month = the month to calculate average temperature over
-#   na.rm = indicates whether NA values should be removed prior to calculation
-
-```
-
-:::
-
-</details>
-
-:::
-
-<br>
-
-
-### Organizing your code and functions
-
-Now that we have a final working version of the function, let's get organized:
+Now that we have a final working version of the functions we created, let's get organized:
 
 ::: {.callout-tip}
 **Separate functions from analyses**
@@ -1105,9 +776,9 @@ When your project is in its early stages, the initial .R script file usually con
 :::
 
 
-When we started learning how to write functions in this lesson, you should have opened a new R script file in the `src` directory of your `R-course-NEON-workbook` folder and call it `functions.R`. Do this now, if you haven't already.
+If you haven't already done so, create a new R script file in the `src` directory of your `R-course-NEON-workbook` folder and call it `functions.R`. 
 
-Let's place the code for the working functions that we have created in this lesson into this script. The functions you should have are: `fahr_to_kelvin()`, `kelvin_to_celsius()`, `fahr_to_celsius()`, `calc_uncertainty()` and `calc_monthly_avg()`. Each function should be preceeded by a comment that describes what it does and what its arguments are. 
+Let's place the code for the working functions that we have created in this lesson into this script. The functions you should have are: `fahr_to_kelvin()`, `kelvin_to_celsius()`, `fahr_to_celsius()`, `calc_uncertainty()`. Each function should be preceded by a comment that describes what it does and what its arguments are. 
 
 
 <details><summary>**Click here to see what your script should contain**</summary>
@@ -1162,42 +833,6 @@ calc_uncertainty <- function(mu, sigma = 0) {
 }
 
 
-# A function that calculates average monthly surface water temperature
-# across both sensors at a NEON site from a dataframe of temperature
-# measurements.
-# Arguments:
-#   dat = a dataframe containing the columns: 
-#         surfWaterTempMean, startDateTime, siteID, finalQF
-#   site = the NEON site code for the site of interest
-#   month = the month to calculate average temperature over
-#   na.rm = indicates whether NA values should be removed prior to calculation
-calc_monthly_avg <- function(dat, site, month, na.rm = TRUE) {
-  
-  # Remove data that did not pass quality control
-  # keep finalQF == 0
-  keep_dat <- subset(dat, finalQF == 0)
-  
-  # Subset the data frame to only contain observations from site
-  keep_dat <- subset(keep_dat, siteID == site)
-  
-  # Subset the data frame to only contain observations from month
-    # convert character to date
-    keep_dat$startDateTime <- lubridate::ymd_hms(keep_dat$startDateTime) 
-  
-    # extract month as a numeric value
-    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
-    
-    # subset based on month
-    keep_dat <- subset(keep_dat, startMonth == month)
-
-  # Calculate the average of the surfWaterTempMean column
-  # use the na.rm value provided by the user of the function
-  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
- 
-  # Return the calculated value
-  return(vals)
-}
-
 ```
 
 </details>
@@ -1219,9 +854,536 @@ Now look in the Environment panel. What do you see?
 
 Each of the functions that were in the `functions.R` script we wrote should be available for use!
 
+
+Congrats! You've reached the end of the main lesson. Click on the [Synthesis](#synthesis) tab at the top to move on to the next stage of this lesson where we will explore functions to interact with NEON data while put what we have learned together into an analysis.
+
+
+## Synthesis {#synthesis}
+
+### Putting it all together
+
+Let's install the `neonUtilities` package and learn about some of its functions. We will be using this package to acquire data directly from NEON. Type the following in the Console:
+
+```{r eval=FALSE}
+install.packages("neonUtilities")
+
+library(neonUtilities)
+```
+
+Note that you only need to install the package once, but you will need to use `library()` to load the package every time you want to use it in a new R session.
+
+
+We're going to download the recent temperature data from the Teakettle Creek site in the Sierra Nevada mountains and the Sycamore Creek site in Arizona. 
+
+The function `zipsByProduct()` from the [`neonUtilities`](https://www.neonscience.org/resources/learning-hub/tutorials/neondatastackr){target="_blank"} downloads data from the NEON Data Repository and saves it in a zipped file on your computer.
+
+
+```{r eval = FALSE}
+?zipsByProduct
+
+```
+
+At a minimum we must specify a data product ID (`dpID` argument), which we can get by browsing the [NEON Data Portal](https://data.neonscience.org/data-products/explore). Data product id numbers all begin with DP1. We must also specify start and end dates. If we only want certain sites, we need to specify the four-letter codes that identify each site. If we are requesting new data that is "provisional" we also need to include the argument `include.provisional = TRUE`. Provisional data is data collected within the current year that may change as additional quality controls are implemented. Read more about provisional data [here](https://www.neonscience.org/data-samples/data-management/data-revisions-releases){target="_blank"}.  
+
+```{r eval = FALSE}
+
+# Define dates for download
+startdate <- "2022-09-01"
+enddate <- "2023-08-31"
+
+# Define the sites to download 
+sites <- c("TECR", "SYCA") # Teakettle Creek and Sycamore Creek
+
+# Define the data product
+dpID <- "DP1.20053.001"  # Surface water temperature
+
+# Define the sites to download 
+sites <- c("TECR", "SYCA") # Teakettle Creek and Sycamore Creek
+
+# Define the data product
+dpID <- "DP1.20053.001"  # Surface water temperature
+
+# Define the directory in which to save the data
+# the file path is relative to the working directory
+savepath <- "data"
+
+# Download data specified by the arguments above
+zipsByProduct(dpID = dpID,
+              site = sites,
+              startdate = startdate,
+              enddate = enddate,
+              savepath = savepath,
+              include.provisional = TRUE)
+
+```
+You will need to allow the data to download by typing `y` in the Console when prompted.
+
+Examine the data that were downloaded by navigating to the folder `data/filesToStack20053`. You should see a lot of folders! If you look closely, each folder is named according to the site and month of the data within in. If you open a folder you will find several files, some of which contain data and some of which contain metadata.
+
+Next we need to stack each of these individual files across sites and months. To do this we use the `stackByTable()` function from the `neonUtilities` package.
+
+```{r eval = FALSE}
+# Unzips data and stacks data tables by site
+# Saves resulting tables into the savepath directory
+stackByTable(filepath = file.path(savepath, "filesToStack20053"))
+
+```
+
+Now examine the the folder `data/filesToStack20053`. You should see a new folder named `stackedFiles`. If you open this folder you will see several csv files that contain the stacked data. You would need to read the [documentation for this data product](https://data.neonscience.org/data-products/DP1.20053.001){target="_blank"} to learn what each contains.
+
+::: {.callout-tip}
+Since these stacked data tables exist on you computer, you DO NOT need to run `zipsByProduct()` or `stackByTable()` again if you want to work with the same data in a new R session. To prevent accidentally running these time-intensive functions, you may want to comment them out by inserting a `#` in front of these lines of code.
+:::
+
+
+Let's load the `TSW_30min.csv` file, which contains surface water temperature measurements averaged over 30 minute time periods. We use the function `readTableNEON()` which is a version of `read.csv()` that uses the metadata files to correctly read in dates and other columns using the correct data types.
+
+```{r eval = FALSE}
+# Define the location of the data file
+data_filename <- "TSW_30min.csv"
+data_filepath <- file.path(savepath, "filesToStack20053", "stackedFiles", data_filename)
+
+# Define the location of the metadata file that contains variable names
+var_filename <- "variables_20053.csv"
+var_filepath <- file.path(savepath, "filesToStack20053", "stackedFiles", var_filename)
+
+# Read in surface water temperature averaged over 30 min periods
+TSW_30min <- readTableNEON(dataFile = data_filepath,
+                           varFile = var_filepath)
+
+```
+
+Did you notice that we used another function, `file.path()`? This is a useful function that pastes together folder names to create a filepath character string:
+
+```{r}
+file.path("folder 1", "folder 2", "filename.txt")
+```
+
+```{r include = FALSE}
+# Load previously downloaded object
+load("src/chp-functions_watertemp.RData")
+```
+
+
+You should now have a new object named `TSW_30min` in the Environment panel. It should be a data frame with 16 variables and 64,320 observations.
+
+Let's take a look at these data:
+
+```{r}
+# Show the first few rows
+head(TSW_30min)
+
+```
+
+It appears that each row corresponds to a temperature average between two time points (`startDateTime` and `endDateTime`) taken by a sensor at a particular location (given by the horizontal and vertical positions). From the documentation, we can learn that for these stream sites, there are two sensor locations- one upstream (`horizontalPosition` = 101 or 111) and one downstream (`horizontalPosition` = 102 or 112). There should not be any variation in the vertical position for surface water measurements.  We can verify this by tabulating the data:
+
+```{r}
+# How many unique values of horizontal and vertical position are there?
+table(TSW_30min$horizontalPosition)
+table(TSW_30min$verticalPosition)
+```
+
+
+::: {.challenge}
+Use the `table()` function to determine how many measurements there are in these data from each NEON site.
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+```{r }
+table(TSW_30min$siteID)
+```
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+The actual temperature values are in the `surfwaterTemp` columns in degrees Celsius. Mean, minimum, and maximum values during each time period are provided. The data also include a `finalQF` column which is a "quality flag" that indicates whether the data should be used. A value of `0` in this column show that the data passed all quality control procedures.
+
+Our goal is to write a function that will calculate the average monthly surface water temperature across both sensors at a particular site in a given month. We also want our function to screen out any erroneous data (indicated by the `finalQF` column) and to be able to handle missing data appropriately.
+
+When starting a programming project, the first step is to use comments to outline what we are trying to accomplish. This may change as we work, but it can help to get a "road map" in a script first. Since we are writing a function, know that it will need a name, body and arguments, which we can put into this initial outline.
+
+```{r}
+# A function that calculates average monthly surface water temperature
+# across both sensors at a NEON site from a dataframe of temperature
+# measurements.
+# Arguments:
+#   dat = a dataframe containing the columns we need
+#   site = the NEON site code for the site of interest
+#   month = the month to calculate average temperature over
+#   na.rm = indicates whether NA values should be removed prior to calculation
+calc_monthly_avg <- function(dat, site, month, na.rm) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+
+  
+  # Subset the data frame to only contain observations from site
+
+  
+  
+  # Subset the data frame to only contain observations from month
+  
+  
+  # Calculate the average of the surfWaterTempMean column
+  
+  
+  
+  # Return the calculated value
+  
+}
+```
+
+Now let's start filling in the outline. You may want to revisit the [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) lesson to recall how to subset rows of a data frame based on values in its columns. We will use that to subset `dat` to only contain rows where the `finalQF` value is `0` and where the `siteID` column matches the value in the `site` argument. 
+
+```{r}
+calc_monthly_avg <- function(dat, site, month, na.rm) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+  
+
+  # Calculate the average of the surfWaterTempMean column
+  
+  
+  
+  # Return the calculated value
+  
+}
+```
+
+Note that as we progress through the function, the number of rows in `keep_dat` will keep decreasing because we are reassigning `keep_dat` back to itself after each subseting operation. 
+
+How can we check whether the function is working so far? What happens if try running it now?
+Run the code above so that `calc_monthly_avg` appears in the Environment tab. Then try running the following:
+
+```{r results = 'hide'}
+test <- calc_monthly_avg(dat = TSW_30min, 
+                 site = "TECR", 
+                 month = 8, 
+                 na.rm = TRUE
+)
+
+View(test)
+
+```
+
+It looks like so far the function is subsetting `TSW_30min` so that it only contains data from site `TECR` and where the `finalQF` flag is `0`. We can verify this by tabulating the data:
+
+```{r}
+table(test$siteID)
+table(test$finalQF)
+
+```
+
+::: {.callout-important}
+
+Great, but how can we keep making sure that our function is doing what it is supposed to do as we build it? 
+The process of checking our work is called **debugging**. In the code above, we did this by running the code for the incomplete function and then trying it out by defining specific arguments. 
+
+:::
+
+
+Let's keep building our function. The next step is to determine the month when each observation was collected. The columns that report the time period over which data were averaged are `startDateTime` and `endDateTime`. Click on the blue triangle next to `TSW_30min` in the Environment tab. You should see this:
+
+![](images/functions-TSW_30min_str.png)
+
+Notice that the type of data stored in the `startDateTime` and `endDateTime` columns is already in a date-time format. This is because we used `readTableNEON()` to load the data with a file that told R the types of variables in each column.
+
+Recall that the `lubridate` package contains useful functions for working with dates and times (see [`r .get_chpName("intro-to-R", type.from = "chp")`](intro-to-R.html)). Since the columns are already in the correct format, we can use the `month()` function to extract a numeric month. 
+
+However, we want our function to work even if the user hasn't loaded the `lubridate` package. In R, you can use a function from a package without loading the package first if you specify the name of the package before the name of the function as follows: `lubridate::month()`. Then, so long as the user has the `lubridate` package installed, they can use our function.
+
+Here's our function so far:
+
+```{r}
+calc_monthly_avg <- function(dat, site, month, na.rm) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+    # extract month as a numeric value
+    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+    
+    # subset based on month
+    keep_dat <- subset(keep_dat, startMonth == month)
+
+  # Calculate the average of the surfWaterTempMean column
+  
+ 
+  # Return the calculated value
+  
+}
+```
+
+::: {.challenge}
+Debug our function and make sure it is running correctly so far.
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+```{r }
+test <- calc_monthly_avg(dat = TSW_30min, 
+                 site = "TECR", 
+                 month = 8, 
+                 na.rm = TRUE
+)
+
+# Count how many observations in the resulting test data
+# come from each site
+table(test$siteID)
+
+# Count how many observations in the resulting test data
+# have each quality flag value
+table(test$finalQF)
+
+# Count how many observations in the resulting test data
+# come from each month
+table(lubridate::month(test$startDateTime))
+
+
+```
+:::
+
+</details>
+
+:::
+
+<br>
+
+
+The last step is to calculate the average of the column in `keep_dat` that contains the mean surface water temperature measurements. We will do this using the `mean()` function and specify that the `na.rm` argument should take on the value specified in `na.rm`.
+
+```{r}
+calc_monthly_avg <- function(dat, site, month, na.rm) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+    # extract month as a numeric value
+    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+    
+    # subset based on month
+    keep_dat <- subset(keep_dat, startMonth == month)
+
+  # Calculate the average of the surfWaterTempMean column
+  # use the na.rm value provided by the user of the function
+  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
+ 
+  # Return the calculated value
+  return(vals)
+}
+```
+
+Let's try out the function:
+
+```{r, error = TRUE}
+# Calculate monthly mean water temperature at Sycamore Creek in August
+calc_monthly_avg(TSW_30min, site = "SYCA", month = 8)
+```
+
+Oops! Why are we getting this error message? If we read carefully we can see that we failed to specify a value for the `na.rm` argument. Perhaps it would be a good idea to give the function a default value for this argument so that we can use it without specifying `na.rm` every time.
+
+
+::: {.challenge}
+Modify the `calc_monthly_avg()` function so the default value of `na.rm` is `TRUE`.
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+We only need to change the first line where the arguments are defined.
+
+```{r}
+calc_monthly_avg <- function(dat, site, month, na.rm = TRUE) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+    # extract month as a numeric value
+    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+    
+    # subset based on month
+    keep_dat <- subset(keep_dat, startMonth == month)
+
+  # Calculate the average of the surfWaterTempMean column
+  # use the na.rm value provided by the user of the function
+  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
+ 
+  # Return the calculated value
+  return(vals)
+}
+```
+
+:::
+
+</details>
+
+:::
+
+<br>
+
+
+Our final function assumes that `dat` has very specific column names and it would be a good idea to specify the columns we used in the documentation comment at the top of the function. 
+
+::: {.challenge}
+
+Which column names must be present in the dataframe passed to `dat` in order for the function to work correctly? 
+
+Write a comment at the top of the function that describes the columns names required by this function in the documentation of the `dat` argument.
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+`dat` must contain columns named: `finalQF`, `siteID`, `startDateTime` and `surfWaterTempMean`.
+
+In informative comment for this function could look like:
+
+```{r}
+# A function that calculates average monthly surface water temperature
+# across both sensors at a NEON site from a dataframe of temperature
+# measurements.
+# Arguments:
+#   dat = a dataframe containing the columns: 
+#         surfWaterTempMean, startDateTime, siteID, finalQF
+#   site = the NEON site code for the site of interest
+#   month = the month to calculate average temperature over
+#   na.rm = indicates whether NA values should be removed prior to calculation
+
+```
+
+Copy this comment into your own code, if you have not already written your own version.
+:::
+
+</details>
+
+:::
+
+<br>
+
+Copy the complete `calc_monthly_avg()` function code into the `functions.R` file.
+
+<details><summary>**Click here to see what the final function should look like.**</summary>
+
+```{r eval = FALSE}
+# A function that calculates average monthly surface water temperature
+# across both sensors at a NEON site from a dataframe of temperature
+# measurements.
+# Arguments:
+#   dat = a dataframe containing the columns: 
+#         surfWaterTempMean, startDateTime, siteID, finalQF
+#   site = the NEON site code for the site of interest
+#   month = the month to calculate average temperature over
+#   na.rm = indicates whether NA values should be removed prior to calculation
+calc_monthly_avg <- function(dat, site, month, na.rm = TRUE) {
+  
+  # Remove data that did not pass quality control
+  # keep finalQF == 0
+  keep_dat <- subset(dat, finalQF == 0)
+  
+  # Subset the data frame to only contain observations from site
+  keep_dat <- subset(keep_dat, siteID == site)
+  
+  # Subset the data frame to only contain observations from month
+    # extract month as a numeric value
+    keep_dat$startMonth <- lubridate::month(keep_dat$startDateTime)
+    
+    # subset based on month
+    keep_dat <- subset(keep_dat, startMonth == month)
+
+  # Calculate the average of the surfWaterTempMean column
+  # use the na.rm value provided by the user of the function
+  vals <- mean(keep_dat$surfWaterTempMean, na.rm = na.rm)
+ 
+  # Return the calculated value
+  return(vals)
+}
+```
+
+</details>
+
+<br>
+
+Time to try it out!
+
+```{r}
+calc_monthly_avg(dat = TSW_30min, 
+                 site = "TECR", 
+                 month = 8, 
+                 na.rm = TRUE)
+
+```
+What if we wanted to calculate the monthly temperature for each month at `TECR`?
+
+```{r}
+calc_monthly_avg(dat = TSW_30min, 
+                 site = "TECR", 
+                 month = 1:12, 
+                 na.rm = TRUE)
+
+```
+Hmm... that didn't work! We wanted 12 separate values and only got one. In fact we got a warning that two vectors are not matching up in length.
+
+The problem is that our function is not **vectorized** and doesn't know how to handle multiple months.
+
+Let's try vectorizing the function across the `month` argument.
+
+```{r}
+# Define a new version of the function vectorized along month
+calc_monthly_avg_byMonth <- Vectorize(calc_monthly_avg, "month")
+
+calc_monthly_avg_byMonth(dat = TSW_30min, 
+                 site = "TECR", 
+                 month = 1:12, 
+                 na.rm = TRUE)
+
+```
+Looks like it worked and that we got missing values for months 4, 5, 6, 7 and 9. Perhaps this is because there were no data these months? Let's check:
+
+```{r}
+# Define a new data frame with just the data from TECR
+dat_TECR <- subset(TSW_30min, siteID == "TECR")
+
+# Add a column that identifies the month
+dat_TECR$month <- lubridate::month(dat_TECR$startDateTime)
+
+# For each month, count the number of values of surfWaterTempMean
+# that were missing or not (is.na == TRUE means missing)
+table(dat_TECR$month, is.na(dat_TECR$surfWaterTempMean))
+
+```
+
+
+
 Now that you're officially a programmer, its time to practice your new skills. Click on the Exercises tab at the top to finish this lesson.
-
-
 
 
 
@@ -1255,24 +1417,19 @@ Use code from this lesson to write an R script that reads in the data file "data
 
 **`r .chp_num`.6** 
 
-Modify the `calc_monthly_avg()` function so that the user can specify a vector of months and the function will calculate the average temperature across all of those months combined.
+Use code from this lesson to write an R script that reads in the data file "data/NEON_water/watertemp_30min_TECR_2021-04_2021-10.csv", then uses the `calc_monthly_mean()` function to calculate the mean monthly temperature for each month in this data.
 
-Hint: Use the `%in%` operator from the [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) lesson.
-
+The output of your code must be a data frame with twelve rows and two columns: `month` (containing the months 1 - 12) and `surfWaterTemp.mean` (containing the monthly mean dissolved oxygen values). The mean temperature values should only report a missing value (`NA`) if there are no data for a given month.
 
 **`r .chp_num`.7** 
 
-Modify the `calc_monthly_avg()` function so that the user can specify a vector of sites and the function will calculate the average temperature across all of those sites combined.
+Modify the `calc_monthly_avg()` function so that the user can specify a vector of sites and the function will calculate the average temperature for each site.
 
-Hint: Use the `%in%` operator from the [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) lesson.
+Hint: You can either use `Vectorize()` on the `calc_monthly_avg()` function OR modify the code inside the function using the `%in%` operator from the [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) lesson.
 
-**`r .chp_num`.8** 
+Test your function using the `TSW_30min` data we downloaded in the Synthesis section.
 
-Modify your answer to exercise `r .chp_num`.6 so that by default the function will return an average from all months combined.
-
-HINT: What vector should be the default value of the `months` argument?
-
-**`r .chp_num`.9**
+**`r .chp_num`.8**
 ```{r include = FALSE}
 myfunc <- function(x, y){
   
@@ -1298,6 +1455,13 @@ because `"A"` is the only element shared by both vectors.
 
 HINT: you will need to use functions from the [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) lesson.
 
+**`r .chp_num`.9**
+
+In the [`r .get_chpName("data-structures", type.from = "chp")`](chp-data-structures.html) lesson we ended the Synthesis section by matching up dates when microbial data were collected with time periods for water quality data. When we finished we were able to match a single row of `microbes` to the correct time interval in `surfwater`. Now we are going to write code that can match up all of the rows at once.
+
+1. Open the file `exercises/5.9.R`
+2. Read the comments describing what the code should do. Fill in the blanks to accomplish each task.
+3. If your code generates the figure at the end then you have succeeded!
 
 
 ## Sources and Resources

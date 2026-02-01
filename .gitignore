@@ -4,3 +4,5 @@
 .Ruserdata
 *_cache*
 docs/workbook/R-course-NEON-workbook/
+docs/data/filesToStack*
+data/filesToStack*

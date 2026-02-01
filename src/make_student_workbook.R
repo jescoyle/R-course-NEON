@@ -18,10 +18,13 @@ dir.create(file.path(project_filename, "exercises"))
 file.copy(from = "exercises", to = file.path(project_filename),
           recursive = TRUE)
 
-file.copy(from = "data", to = file.path(project_filename),
+dir.create(file.path(project_filename, "data"))
+file.copy(from = "data/NEON_water", to = file.path(project_filename, "data"),
+          recursive = TRUE)
+file.copy(from = "data/Spreadsheets", to = file.path(project_filename, "data"),
           recursive = TRUE)
 
-file.copy(from = "synthesis_scripts", to = file.path(project_filename),
+file.copy(from = "lesson-code", to = file.path(project_filename),
           recursive = TRUE)
 
 # Remove RStudio project files that are not needed

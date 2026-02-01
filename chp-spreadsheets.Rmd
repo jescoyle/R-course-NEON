@@ -68,7 +68,7 @@ In this lesson you will also need a plain text editor that can show whitespace c
 This lesson uses the [Portal Project Teaching Dataset](https://figshare.com/articles/dataset/Portal_Project_Teaching_Database/1314459) (@Ernest2020). 
 The data are observations of a small mammal community in southern Arizona. This is a real dataset that has been simplified  a little bit for this lesson. 
 
-Before you begin this lesson, download the data by clicking [here](https://ndownloader.figshare.com/files/2252083). Save this file to the data folder in your R-course-NEON-workbook folder.
+Before you begin this lesson, use spreadsheet software (i.e. Excel) to open the file `survey_data_spreadsheet_messy.xls` from the `data/Spreadsheets` folder of the R-course-NEON workbook. 
 
 We depart from using NEON data for this lesson because the data provided by NEON are already cleaned and follow best practices for data organization. We will revisit NEON data in the exercises that accompany this lesson.
 

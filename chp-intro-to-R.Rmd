@@ -749,7 +749,7 @@ For example, add the following to the top of your script:
 ## Code from the Introduction to R and RStudio lesson
 ## Author: YOUR NAME HERE
 ## Date: TODAYS DATE
-## Description: This code loads and explores water temperature data from the Teakettle Lake NEON site
+## Description: This code loads and explores water temperature data from the Teakettle Creek NEON site
 
 ```
 

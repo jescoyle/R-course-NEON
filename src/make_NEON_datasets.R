@@ -380,3 +380,62 @@ write.csv(soiltemp_30min,
           row.names = FALSE)
 # write.csv(intro_to_R.dat, "data/intro-to-R_dat.csv", 
 #           row.names = FALSE) # decided to use the stream data instead
+
+
+
+##############################################
+### This section creates RData files that 
+### are pre-loaded into chapters
+
+
+## Vectorization and functions
+
+# Define dates for download
+startdate <- "2022-09-01"
+enddate <- "2023-08-31"
+
+# Define the sites to download 
+sites <- c("TECR", "SYCA") # Teakettle Creek and Sycamore Creek
+
+# Define the data product
+dpID <- "DP1.20053.001"  # Surface water temperature
+
+# Define dates for download
+startdate <- "2022-09-01"
+enddate <- "2023-08-31"
+
+# Define the sites to download 
+sites <- c("TECR", "SYCA") # Teakettle Creek and Sycamore Creek
+
+# Define the data product
+dpID <- "DP1.20053.001"  # Surface water temperature
+
+# Define the directory in which to save the data
+# the file path is relative to the working directory
+savepath <- "data"
+
+# Download data specified by the arguments above
+zipsByProduct(dpID = dpID,
+              site = sites,
+              startdate = startdate,
+              enddate = enddate,
+              savepath = savepath,
+              include.provisional = TRUE)
+
+# Unzips data and stacks data tables by site
+# Saves resulting tables into the savepath directory
+stackByTable(filepath = file.path(savepath, "filesToStack20053"))
+
+# Define the location of the data file
+data_filename <- "TSW_30min.csv"
+data_filepath <- file.path(savepath, "filesToStack20053", "stackedFiles", data_filename)
+
+# Define the location of the metadata file that contains variable names
+var_filename <- "variables_20053.csv"
+var_filepath <- file.path(savepath, "filesToStack20053", "stackedFiles", var_filename)
+
+# Read in surface water temperature averaged over 30 min periods
+TSW_30min <- readTableNEON(dataFile = data_filepath,
+                           varFile = var_filepath)
+save(TSW_30min, file = "src/chp-functions_watertemp.RData")
+

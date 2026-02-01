@@ -1,8 +1,8 @@
 ## Code from the Intro to R Synthesis Chapter
 ## Author: YOUR NAME HERE
 ## Date: TODAYS DATE
-## Description: This code loads and explores water temperature data from the Teakettle Lake 
-##              NEON site in April 2021
+## Description: This code loads and explores water temperature data from the  
+##              Teakettle Creek NEON site in April 2021
 
 
 ## The comments in this code match the Synthesis lesson

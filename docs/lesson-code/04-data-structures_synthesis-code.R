@@ -2,8 +2,11 @@
 ## Author: YOUR NAME HERE
 ## Date: TODAYS DATE
 ## Description: This code loads and explores water temperature 
-##              and microbial abundance data from the Teakettle Lake 
+##              and microbial abundance data from the Teakettle Creek 
 ##              NEON site in April 2021
+
+# Load the lubridate package
+library(lubridate)
 
 # Load the NEON surface water data from TEAK site
 surfwater <- read.csv("data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv")
@@ -16,6 +19,9 @@ str(microbes)
 
 # View the time points when data were collected
 microbes$collectDate
+
+# Convert startDateTime to a date-time class
+surfwater$startDateTime <- ymd_hms(surfwater$startDateTime)
 
 # Count the number of rows that begin on a certain hour
 table(hour(surfwater$startDateTime))

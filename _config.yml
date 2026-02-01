@@ -1,1 +1,4 @@
-exclude: ["*.Rmd"]
+exclude: 
+  - "*.Rmd"
+  - "data"
+  - "exercises"

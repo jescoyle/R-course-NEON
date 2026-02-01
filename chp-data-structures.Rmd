@@ -1138,28 +1138,21 @@ Z <- array(X, dim = c(2, 4, 3))
 
 **`r .chp_num`.10**
 
-Write an R script that calculates the monthly mean dissolved oxygen content of surface waters at the NEON Teakettle lake site. Use the data in the file `data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv`. 
+Write an R script that calculates the mean dissolved oxygen content of surface waters at the NEON Teakettle Creek site. Use the data in the file `data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv`. 
 
-The output of your code must be a data frame with twelve rows and two columns: `month` (containing the months 1 - 12 or Jan - Dec) and `dissolvedOxygen.mean` (containing the monthly mean dissolved oxygen values). The dissolved oxygen values should only report a missing value (`NA`) if there are no dissolved oxygen data for a given month.
 
 **`r .chp_num`.11**
 
-Write an R script that calculates the monthly mean surface water temperature at the NEON Teakettle lake site. Use the data in the file `data/NEON_water/surfwater_30min_avg_TECR_2021-04_2021-10.csv`. 
-
-The output of your code must be a data frame with twelve rows and two columns: `month` (containing the months 1 - 12 or Jan - Dec) and `surfWaterTemp.mean` (containing the monthly mean dissolved oxygen values). The temperature values should only report a missing value (`NA`) if there are no temperature data for a given month.
-
-**`r .chp_num`.12**
-
-Write a script that does the following:
+Write an R script that does the following:
 
 1. Read in the data in the file `data/NEON_water/waterqual_inst_TECR_2021-04_2021-10.csv` to a data frame in R.
 2. Save the column names to a vector named `WQnames`
 3. Print the dimensions of these data (e.g. how many rows and columns).
 4. Print the last 10 rows of these data from the `fDOM` and `chlorophyll` columns.
 
-**`r .chp_num`.13**
+**`r .chp_num`.12**
 
-Write a script that does the following:
+Write an R script that does the following:
 
 1. Read in the data in the file `data/NEON_water/waterqual_inst_TECR_2021-04_2021-10.csv` to a data frame in R.
 2. The `QF` columns are quality flags that indicate issues with the data. A `QF = 0` indicates that the data are good. Extract all `pH` values where the `pHFinalQF` column is not equal to `0`. Save these values to a vector named `bad_pH`.
