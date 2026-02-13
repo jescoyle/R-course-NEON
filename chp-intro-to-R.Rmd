@@ -743,13 +743,16 @@ The `head()`, `nrow()`, `ncol()` and `names()` functions are useful ways to lear
 
 Recall that any line preceded by a `#` symbol is a **comment**. Comments are text found in code that are not executed and do not cause anything to happen. Comments are *extremely* important for anyone who will need to read your code and understand what it is doing (especially your future self!). Get in the habit of commenting every line or every short section of your code. It can be useful to include not just details of what the code does, but also include a header with your name and what the overall goal of the code is.
 
-For example, add the following to the top of your script:
+For example, what exactly are these data that we are working with?
+
+Add the following to the top of your script:
 
 ```{r eval = FALSE}
 ## Code from the Introduction to R and RStudio lesson
 ## Author: YOUR NAME HERE
 ## Date: TODAYS DATE
-## Description: This code loads and explores water temperature data from the Teakettle Creek NEON site
+## Description: This code loads and explores water temperature data from the 
+##              Teakettle Creek NEON site from Apr - Oct 2021.
 
 ```
 
@@ -1207,7 +1210,7 @@ Write one line of code for each of the following:
 
 This lesson was adapted from [@swc-reproducible-lesson](https://swcarpentry.github.io/r-novice-gapminder/){target="_blank"} episodes 1 and 3 by Jes Coyle.
 
-This lesson utilizes data from @NEON-soilCO2 and @NEON-soiltemp.
+This lesson utilizes data from @NEON-surfwatertemp.
 
 ### Additional Resources
 
