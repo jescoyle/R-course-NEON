@@ -214,18 +214,19 @@ Now let's examine the data tables in the macroinvertebrates data (dpID = 20120).
 To learn what these objects contain we should read the NEON User Guide to Aquatic Macroinvertebrate Collection on the [NEON Documentation page](https://data.neonscience.org/data-products/DP1.20120.001){target="_blank"} for these data. From this guide we can learn some key information about the way these data are collected and reported. The three sites we are using are considered "wadeable streams". According to the documentation, macroinvertebrate samples at these sites represent a patch of stream bottom near the midpoint of the stream reach (between the two upstream and downstream automated water samplers). However there may be up to two different habitats sampled if the stream is not homogenous. There are three sampling bouts each season: 
 
 
-"Sample bout 1 is an early‐season date, representing a period of rapid biomass accumulation after winter, typically prior to leaf out or ice‐off where applicable. Sample bout 2 targets mid‐summer baseflow conditions and sample bout 3 represents the late growing season (typically autumn) during leaf‐fall where applicable." 
+"Sample bout 1 is an early‐season date, representing a period of rapid biomass accumulation after winter, typically prior to leaf out or ice‐off where applicable. Sample bout 2 targets mid‐summer baseflow conditions and sample bout 3 represents the late growing season (typically autumn) during leaf‐fall where applicable." (@NEON-macroinvertebrates) 
 
 
 Each sample is sent to an expert taxonomy lab, where the samples are sorted into 1 mm size classes and then and identified to the lowest taxonomic rank possible (usually Genus or species). These identifications are standardized by NEON and then reported in the `inv_taxonomyProcessed`, which contains counts of each taxon in each size class. The documentation notes that...
 
 
-"In some cases, the taxonomy lab reported counts from the same size class twice, and numbers should be summed. This is indicated in the field `sizeCategory`, where the `sizeClass` is appended with a, b, c, etc. Depending on the use case, data users may want to sum all `sizeClass` and `sizeCategory` per `sampleID` + `scientificName` prior to data analysis."
+"In some cases, the taxonomy lab reported counts from the same size class twice, and numbers should be summed. This is indicated in the field `sizeCategory`, where the `sizeClass` is appended with a, b, c, etc. Depending on the use case, data users may want to sum all `sizeClass` and `sizeCategory` per `sampleID` + `scientificName` prior to data analysis." (@NEON-macroinvertebrates)
+
 
 
 Therefore, each `sampleID` record in the `inv_fieldData` table can correspond to multiple records in `inv_taxonomyProcessed` table, which contains one record for each `scientificName` and size‐class combination.
 
-Since we are interested in estimating abundance, we should also be aware that, according to the documentation, "Count data can be found in the field `estimatedTotalCount`, which is corrected for subsampling at the external lab, but is NOT corrected for benthic area. Data users will need to refer to the `benthicArea` presented in the `inv_fieldData` table and apply this correction to get the number of organisms per square meter of stream, lake, or river bottom. All taxon records from a sample should be summed and divided by the `benthicArea` prior to reporting the total abundance per m^2.
+Since we are interested in estimating abundance, we should also be aware that, according to the documentation: "Count data can be found in the field `estimatedTotalCount`, which is corrected for subsampling at the external lab, but is NOT corrected for benthic area. Data users will need to refer to the `benthicArea` presented in the `inv_fieldData` table and apply this correction to get the number of organisms per square meter of stream, lake, or river bottom. All taxon records from a sample should be summed and divided by the `benthicArea` prior to reporting the total abundance per $m^2$.
 
 From this information we learn that we will need two data tables to complete our analysis:
 
@@ -1195,8 +1196,6 @@ Success! You can find the code from this synthesis in the script `lesson-code/07
 
 ## Exercises
 
-*!UPDATE THIS TO USE THE NEW SYNETHSIS & MAKE NEW SCRIPT!*
-
 
 After completing these exercises, learners will be able to 
 `r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
@@ -1214,33 +1213,46 @@ Create a new table from `inv_taxa` that contains all of the same rows, but only 
 The first few rows should look like this:
 
 ```{r echo = FALSE}
-inv_taxa |>
-  select(siteID, sampleID, genus, specificEpithet) |>
-  head()
+solution.1 <- inv_taxa |>
+  select(siteID, sampleID, genus, specificEpithet)
+
+head(solution.1)
 
 ```
 
 **`r .chp_num`.2** 
 
-Create a new table from `TSW_30min` that only contains observations from the Caribou Creek site (CARI) where the minimum surface water temperature was greater than 10 degrees Celsius.
+Part A: Create a new table from `inv_taxa` that only contains observations of adult invertebrates from the Caribou Creek site (CARI).
+
+Hint: Which column shows whether the observation was from an "adult", "pupa" or "larva"?
 
 ```{r include = FALSE}
-solution.2 <- TSW_30min |>
-  filter(siteID == "CARI", surfWaterTempMinimum > 10)
+solution.2A <- inv_taxa |>
+  filter(siteID == "CARI", invertebrateLifeStage == "adult")
 
 ```
 
-The resulting data frame should have `r nrow(solution.2)` rows.
+The resulting data frame should have `r nrow(solution.2A)` rows.
+
+Part B: Make a vector that contains the names of the taxa that had adults captured from the Caribou Creek site. Hint: Use the `unique()` function on a column of the table you generated.
+
+```{r include = FALSE}
+solution.2B <- unique(solution.2A$scientificName)
+
+```
+
+There should be `r length(solution.2B)` taxa in the resulting vector.
 
 **`r .chp_num`.3** 
 
-Use the `TSW_30min` data to calculate average monthly mean surface water temperature at each of the three sites. Your solution should use pipes to compose functions and result in exactly this table:
+Use the `inv_fieldData` data to calculate average elevation, latitude and longitude of each sampling location (`namedLocation`) at each site (`siteID`). Your solution should use pipes to compose functions and result in exactly this table:
 
 ```{r echo = FALSE, message=FALSE}
-solution.3 <- TSW_30min |>  
-  mutate(month = month(startDateTime)) |>
-  group_by(siteID, month) |>
-  summarize(temp_avg_C = mean(surfWaterTempMean, na.rm = TRUE))
+solution.3 <- inv_fieldData |>  
+  group_by(siteID, namedLocation) |>
+  summarize(elevation = mean(elevation, na.rm = TRUE),
+            latitude = mean(decimalLatitude),
+            longitude = mean(decimalLongitude))
 
 solution.3
 
@@ -1248,52 +1260,113 @@ solution.3
 
 **`r .chp_num`.4** 
 
-Convert the data frame in exercise `r .chp_num`.3 to wide format where values for each site are in separate columns, like this:
+**Part A:** Make a table that summarizes the total the number of individuals in different life stages (e.g. adults, pupa and larvae) found at each of the three sites in the `inv_taxa` data. 
+
+Hint: The total number of individuals is found in the `estimatedTotalCount` column.
+
+Your solution should look like this:
 
 ```{r echo = FALSE}
-solution.3 |>
-  pivot_wider(names_from = siteID, values_from = temp_avg_C)
+solution.4A <- inv_taxa |>
+  group_by(siteID, invertebrateLifeStage) |>
+  summarize(Count = sum(estimatedTotalCount))
+
+solution.4A
+```
+
+
+**Part B:** Convert the table from part A to wide format where values for each life stage are in separate columns. Your answer should look like this:
+
+```{r echo = FALSE}
+solution.4B <- solution.4A |>
+  pivot_wider(names_from = invertebrateLifeStage, values_from = Count)
+
+solution.4B
 
 ```
 
+**Part C:** Make a bar graph that compares the number of adults across the three sites. 
+
+Fill in the code below to generate the
+
+```{r eval = FALSE}
+____________ |>
+  ggplot(aes(x = _______, y = _______)) +
+    geom_col() +
+    labs(x = "Site",
+         y = "Num. adult individuals")
+
+
+```
+
+```{r echo = FALSE, out.width = "50%"}
+solution.4B |>
+  ggplot(aes(x = siteID, y = adult)) +
+    geom_col() +
+    labs(x = "Site",
+         y = "Num. adult individuals")
+
+
+```
+
+**CHALLENGE:** Can you figure out how to make this plot? Hint: Modify the code above and use the dataframe you made in part A.
+
+```{r echo = FALSE, out.width = "50%"}
+
+solution.4A |>
+  ggplot(aes(x = siteID, y = Count, fill = invertebrateLifeStage)) +
+    geom_col() +
+  labs(x = "Site",
+       y = "Num. individuals",
+       fill = "Life stage")
+
+
+```
+
+
 **`r .chp_num`.5** 
 
-Use the `TSW_30min` data to calculate average, minimum and maximum monthly surface water temperature at the Caribou Creek site (CARI). Your solution should use pipes to compose functions and result in exactly this table:
+Load the surface water temperature data:
+
+```{r eval = FALSE}
+# Read in surface water temperature averaged over 30 min periods
+TSW_30min <- readTableNEON(
+  dataFile = file.path(savepath, "filesToStack20053", "stackedFiles", "TSW_30min.csv"),
+  varFile = file.path(savepath, "filesToStack20053", "stackedFiles", "variables_20053.csv")
+)
+
+```
+
+**Part A:** Use the `TSW_30min` data to calculate average, minimum and maximum monthly surface water temperature at the Caribou Creek site (CARI) in 2021. Your solution should use pipes to compose functions and result in exactly this table:
+
+Hint: Don't forget to load the `lubridate` package!
 
 ```{r echo = FALSE, message = FALSE}
-TSW_30min |>
-  filter(siteID == "CARI") |>
+solution.5A <- TSW_30min |>
+  filter(siteID == "CARI",  year(startDateTime) == 2021) |>
   mutate(month = month(startDateTime)) |>
   group_by(month) |>
   summarize(temp_avg_C = mean(surfWaterTempMean, na.rm = TRUE),
             temp_min_C = min(surfWaterTempMinimum, na.rm = TRUE),
             temp_max_C = max(surfWaterTempMaximum, na.rm = TRUE))
 
+solution.5A
 ```
 
+**Part B:** Convert the table to long format:
+
+```{r echo = FALSE}
+
+solution.5A |>
+  pivot_longer(starts_with("temp"), names_to = "variable", values_to = "value") |>
+  head()
+
+
+```
 
 **`r .chp_num`.6** 
-Use the `TSW_30min` data to calculate average, minimum and maximum weekly surface water temperature at each site. 
 
-The `week()` function can extract the week of the year from a date-time object.
-
-Your solution should use pipes to compose functions and result in exactly this table:
-
-```{r echo = FALSE, message = FALSE, warning  = FALSE}
-solution.6 <- TSW_30min |>
-  mutate(week = week(startDateTime)) |>
-  group_by(siteID, week) |>
-  summarize(temp_avg_C = mean(surfWaterTempMean, na.rm = TRUE),
-            temp_min_C = min(surfWaterTempMinimum, na.rm = TRUE),
-            temp_max_C = max(surfWaterTempMaximum, na.rm = TRUE))
-
-solution.6
-```
-
-
-**`r .chp_num`.7** 
-
-The synthesis section generates a table `site_summary` with abundance and diversity data for each collection date at each site. The table you created in exercise `r .chp_num`.3 summarizes monthly mean surface water temperature at each site.
+The synthesis section generates a table `site_summary` with abundance and diversity data for each collection date at each site. The table you created in exercise `r .chp_num`.5 summarizes monthly mean surface water temperature at each site.
 
 Create a table that joins these two data frames and shows macroinvertebrate abundance and average monthly temperature at each of the collection dates for each site.
 
@@ -1304,45 +1377,77 @@ Your final table should look like this:
 ```{r echo = FALSE, message = FALSE}
 site_summary |>
   mutate(month = month(collectDate)) |>
-  left_join(solution.3) |>
+  left_join(solution.5) |>
   select(siteID, month, collectDate, abun_per_m2, temp_avg_C)
 
 ```
 
-**`r .chp_num`.8** 
 
-Use `inv_taxa` to make a table that compares the total abundance of different macroinvertebrate phyla in each size class from each sample across all sites.
+
+
+**Use the Chapter `r .chp_num` Synthesis Code as a guide for exercises 7 and 8.**
+
+**`r .chp_num`.7** 
+
+Use `inv_taxa` to make a table that compares the total abundance of different macroinvertebrate phyla from each sample across all sites. 
+
+Hint: You will need to `group_by()` three different columns before summing across the `estimatedTotalCount` column. 
 
 Your results should look like this:
 
 ```{r echo = FALSE, message = FALSE}
-solution.8 <- inv_taxa |>
-  group_by(siteID, sampleID, phylum, sizeClass) |>
+solution.7 <- inv_taxa |>
+  group_by(siteID, sampleID, phylum) |>
   summarize(total = sum(estimatedTotalCount))
 
-solution.8
+head(solution.7)
 ```
 
+It should have `r nrow(solution.7)` rows.
 
-**`r .chp_num`.9** 
+**`r .chp_num`.8** 
 
-Join the table you created in exercise `r .chp_num`.8 with the `benthicArea` column from `inv_fieldData`. Then calculate the density (`= total / benthicArea`) of each phylum in each size class for each sample.
+**Part A:** Join the table you created in exercise `r .chp_num`.7 with the `benthicArea` column from `inv_fieldData`. Then calculate the density (`= total / benthicArea`) of each phylum in each size class for each sample.
 
 Your results should look like this:
 
 ```{r echo = FALSE, message = FALSE}
-field_cols.9 <- inv_fieldData |>
+field_cols.8 <- inv_fieldData |>
   select(sampleID, benthicArea) 
 
-solution.8 |>
-  left_join(field_cols.9) |>
+solution.8 <- solution.7 |>
+  left_join(field_cols.8) |>
   mutate(abun_per_m2 = total/benthicArea)
+
+solution.8[1:10,]
+```
+
+**Part B:** Use the  `filter()` and `arrange()` functions to determine which sample had the greatest abundance of arthropods (Phylum Arthropoda).
+
+```{r echo = FALSE}
+solution.8 |>
+  filter(phylum == "Arthropoda") |>
+  arrange(desc(abun_per_m2))
+
+
 ```
 
 
 
 
- 
+**`r .chp_num`.9 (CHALLENGE)**
+
+At the beginning of the lesson we tabulated the number of observations in `TSW_30min` from each site and year using the `table()` function. Create the same table using `count()` and `pivot_wider()`. You will need to read the documentation on `pivot_wider()` to learn to use the `values_fill` argument.
+
+```{r echo = FALSE}
+
+TSW_30min |>
+  count(siteID, 
+        Year = year(startDateTime)) |>
+  pivot_wider(names_from = Year, values_from = n, values_fill = 0)
+
+
+```
 
 
 ## Sources and Resources

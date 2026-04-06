@@ -641,7 +641,9 @@ sampling bouts each season:</p>
 rapid biomass accumulation after winter, typically prior to leaf out or
 ice‐off where applicable. Sample bout 2 targets mid‐summer baseflow
 conditions and sample bout 3 represents the late growing season
-(typically autumn) during leaf‐fall where applicable.”</p>
+(typically autumn) during leaf‐fall where applicable.” (<span
+class="citation">National Ecological Observatory Network (NEON)
+(2023a)</span>)</p>
 <p>Each sample is sent to an expert taxonomy lab, where the samples are
 sorted into 1 mm size classes and then and identified to the lowest
 taxonomic rank possible (usually Genus or species). These
@@ -654,13 +656,14 @@ field <code>sizeCategory</code>, where the <code>sizeClass</code> is
 appended with a, b, c, etc. Depending on the use case, data users may
 want to sum all <code>sizeClass</code> and <code>sizeCategory</code> per
 <code>sampleID</code> + <code>scientificName</code> prior to data
-analysis.”</p>
+analysis.” (<span class="citation">National Ecological Observatory
+Network (NEON) (2023a)</span>)</p>
 <p>Therefore, each <code>sampleID</code> record in the
 <code>inv_fieldData</code> table can correspond to multiple records in
 <code>inv_taxonomyProcessed</code> table, which contains one record for
 each <code>scientificName</code> and size‐class combination.</p>
 <p>Since we are interested in estimating abundance, we should also be
-aware that, according to the documentation, “Count data can be found in
+aware that, according to the documentation: “Count data can be found in
 the field <code>estimatedTotalCount</code>, which is corrected for
 subsampling at the external lab, but is NOT corrected for benthic area.
 Data users will need to refer to the <code>benthicArea</code> presented
@@ -668,7 +671,7 @@ in the <code>inv_fieldData</code> table and apply this correction to get
 the number of organisms per square meter of stream, lake, or river
 bottom. All taxon records from a sample should be summed and divided by
 the <code>benthicArea</code> prior to reporting the total abundance per
-m^2.</p>
+<span class="math inline">\(m^2\)</span>.</p>
 <p>From this information we learn that we will need two data tables to
 complete our analysis:</p>
 <ul>
@@ -1903,8 +1906,6 @@ apply what you learned in the exercises.</p>
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
-<p><em>!UPDATE THIS TO USE THE NEW SYNETHSIS &amp; MAKE NEW
-SCRIPT!</em></p>
 <dl>
 <dt>After completing these exercises, learners will be able to</dt>
 <dd>
@@ -1946,50 +1947,97 @@ the same rows, but only these columns: <code>siteID</code>,
 5   MART MART.20210728.SURBER.4         Protzia              sp.
 6   MART MART.20210728.SURBER.4            &lt;NA&gt;              sp.</code></pre>
 <p><strong>7.2</strong></p>
-<p>Create a new table from <code>TSW_30min</code> that only contains
-observations from the Caribou Creek site (CARI) where the minimum
-surface water temperature was greater than 10 degrees Celsius.</p>
-<p>The resulting data frame should have 148 rows.</p>
+<p>Part A: Create a new table from <code>inv_taxa</code> that only
+contains observations of adult invertebrates from the Caribou Creek site
+(CARI).</p>
+<p>Hint: Which column shows whether the observation was from an “adult”,
+“pupa” or “larva”?</p>
+<p>The resulting data frame should have 10 rows.</p>
+<p>Part B: Make a vector that contains the names of the taxa that had
+adults captured from the Caribou Creek site. Hint: Use the
+<code>unique()</code> function on a column of the table you
+generated.</p>
+<p>There should be 3 taxa in the resulting vector.</p>
 <p><strong>7.3</strong></p>
-<p>Use the <code>TSW_30min</code> data to calculate average monthly mean
-surface water temperature at each of the three sites. Your solution
-should use pipes to compose functions and result in exactly this
-table:</p>
-<pre><code># A tibble: 15 × 3
+<p>Use the <code>inv_fieldData</code> data to calculate average
+elevation, latitude and longitude of each sampling location
+(<code>namedLocation</code>) at each site (<code>siteID</code>). Your
+solution should use pipes to compose functions and result in exactly
+this table:</p>
+<pre><code># A tibble: 3 × 5
 # Groups:   siteID [3]
-   siteID month temp_avg_C
-   &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;
- 1 CARI       6      5.27 
- 2 CARI       7      5.83 
- 3 CARI       8      4.63 
- 4 CARI       9      2.48 
- 5 CARI      10      0.646
- 6 MART       6     12.2  
- 7 MART       7     15.3  
- 8 MART       8     15.1  
- 9 MART       9     12.6  
-10 MART      10      9.07 
-11 TECR       6     12.3  
-12 TECR       7     14.8  
-13 TECR       8     13.5  
-14 TECR       9     11.3  
-15 TECR      10      5.56 </code></pre>
+  siteID namedLocation  elevation latitude longitude
+  &lt;chr&gt;  &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 CARI   CARI.AOS.reach      225.     65.2     -148.
+2 MART   MART.AOS.reach      337      45.8     -122.
+3 TECR   TECR.AOS.reach     2011      37.0     -119.</code></pre>
 <p><strong>7.4</strong></p>
-<p>Convert the data frame in exercise 7.3 to wide format where values
-for each site are in separate columns, like this:</p>
-<pre><code># A tibble: 5 × 4
-  month  CARI  MART  TECR
-  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1     6 5.27  12.2  12.3 
-2     7 5.83  15.3  14.8 
-3     8 4.63  15.1  13.5 
-4     9 2.48  12.6  11.3 
-5    10 0.646  9.07  5.56</code></pre>
+<p><strong>Part A:</strong> Make a table that summarizes the total the
+number of individuals in different life stages (e.g. adults, pupa and
+larvae) found at each of the three sites in the <code>inv_taxa</code>
+data.</p>
+<p>Hint: The total number of individuals is found in the
+<code>estimatedTotalCount</code> column.</p>
+<p>Your solution should look like this:</p>
+<pre><code>`summarise()` has grouped output by &#39;siteID&#39;. You can override using the
+`.groups` argument.</code></pre>
+<pre><code># A tibble: 16 × 3
+# Groups:   siteID [3]
+   siteID invertebrateLifeStage Count
+   &lt;chr&gt;  &lt;chr&gt;                 &lt;dbl&gt;
+ 1 CARI   adult                    22
+ 2 CARI   immature                524
+ 3 CARI   larva                  2989
+ 4 CARI   pupa                     53
+ 5 CARI   unknown                 192
+ 6 MART   adult                   727
+ 7 MART   immature                 63
+ 8 MART   larva                  8900
+ 9 MART   pupa                     26
+10 MART   unknown                  88
+11 TECR   adult                   718
+12 TECR   immature                 54
+13 TECR   larva                 52456
+14 TECR   none                   7186
+15 TECR   pupa                    575
+16 TECR   unknown                 800</code></pre>
+<p><strong>Part B:</strong> Convert the table from part A to wide format
+where values for each life stage are in separate columns. Your answer
+should look like this:</p>
+<pre><code># A tibble: 3 × 7
+# Groups:   siteID [3]
+  siteID adult immature larva  pupa unknown  none
+  &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 CARI      22      524  2989    53     192    NA
+2 MART     727       63  8900    26      88    NA
+3 TECR     718       54 52456   575     800  7186</code></pre>
+<p><strong>Part C:</strong> Make a bar graph that compares the number of
+adults across the three sites.</p>
+<p>Fill in the code below to generate the</p>
+<div class="sourceCode" id="cb103"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" tabindex="-1"></a>____________ <span class="sc">|&gt;</span></span>
+<span id="cb103-2"><a href="#cb103-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> _______, <span class="at">y =</span> _______)) <span class="sc">+</span></span>
+<span id="cb103-3"><a href="#cb103-3" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb103-4"><a href="#cb103-4" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Site&quot;</span>,</span>
+<span id="cb103-5"><a href="#cb103-5" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">&quot;Num. adult individuals&quot;</span>)</span></code></pre></div>
+<p><img src="images/rmd-07-unnamed-chunk-75-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><strong>CHALLENGE:</strong> Can you figure out how to make this plot?
+Hint: Modify the code above and use the dataframe you made in part
+A.</p>
+<p><img src="images/rmd-07-unnamed-chunk-76-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p><strong>7.5</strong></p>
-<p>Use the <code>TSW_30min</code> data to calculate average, minimum and
-maximum monthly surface water temperature at the Caribou Creek site
-(CARI). Your solution should use pipes to compose functions and result
-in exactly this table:</p>
+<p>Load the surface water temperature data:</p>
+<div class="sourceCode" id="cb104"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" tabindex="-1"></a><span class="co"># Read in surface water temperature averaged over 30 min periods</span></span>
+<span id="cb104-2"><a href="#cb104-2" tabindex="-1"></a>TSW_30min <span class="ot">&lt;-</span> <span class="fu">readTableNEON</span>(</span>
+<span id="cb104-3"><a href="#cb104-3" tabindex="-1"></a>  <span class="at">dataFile =</span> <span class="fu">file.path</span>(savepath, <span class="st">&quot;filesToStack20053&quot;</span>, <span class="st">&quot;stackedFiles&quot;</span>, <span class="st">&quot;TSW_30min.csv&quot;</span>),</span>
+<span id="cb104-4"><a href="#cb104-4" tabindex="-1"></a>  <span class="at">varFile =</span> <span class="fu">file.path</span>(savepath, <span class="st">&quot;filesToStack20053&quot;</span>, <span class="st">&quot;stackedFiles&quot;</span>, <span class="st">&quot;variables_20053.csv&quot;</span>)</span>
+<span id="cb104-5"><a href="#cb104-5" tabindex="-1"></a>)</span></code></pre></div>
+<p><strong>Part A:</strong> Use the <code>TSW_30min</code> data to
+calculate average, minimum and maximum monthly surface water temperature
+at the Caribou Creek site (CARI) in 2021. Your solution should use pipes
+to compose functions and result in exactly this table:</p>
+<p>Hint: Don’t forget to load the <code>lubridate</code> package!</p>
 <pre><code># A tibble: 5 × 4
   month temp_avg_C temp_min_C temp_max_C
   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
@@ -1998,32 +2046,20 @@ in exactly this table:</p>
 3     8      4.63       1.76        9.06
 4     9      2.48      -0.292       5.88
 5    10      0.646     -0.313       2.05</code></pre>
-<p><strong>7.6</strong> Use the <code>TSW_30min</code> data to calculate
-average, minimum and maximum weekly surface water temperature at each
-site.</p>
-<p>The <code>week()</code> function can extract the week of the year
-from a date-time object.</p>
-<p>Your solution should use pipes to compose functions and result in
-exactly this table:</p>
-<pre><code># A tibble: 69 × 5
-# Groups:   siteID [3]
-   siteID  week temp_avg_C temp_min_C temp_max_C
-   &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
- 1 CARI      22       3.69       1.34       5.99
- 2 CARI      23       3.87       0.75     163.  
- 3 CARI      24       6.12       1.58      19.3 
- 4 CARI      25       6.29       1.72      18.1 
- 5 CARI      26       5.58       2.84      17.0 
- 6 CARI      27       5.68       3.53       8.91
- 7 CARI      28       5.52       2.8        8.45
- 8 CARI      29       6.36       3.51       9.18
- 9 CARI      30       5.95       3.85       9.18
-10 CARI      31       6.09       3.74       9.06
-# ℹ 59 more rows</code></pre>
-<p><strong>7.7</strong></p>
+<p><strong>Part B:</strong> Convert the table to long format:</p>
+<pre><code># A tibble: 6 × 3
+  month variable    value
+  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+1     6 temp_avg_C   5.27
+2     6 temp_min_C   0.75
+3     6 temp_max_C 163.  
+4     7 temp_avg_C   5.83
+5     7 temp_min_C   2.8 
+6     7 temp_max_C   9.18</code></pre>
+<p><strong>7.6</strong></p>
 <p>The synthesis section generates a table <code>site_summary</code>
 with abundance and diversity data for each collection date at each site.
-The table you created in exercise 7.3 summarizes monthly mean surface
+The table you created in exercise 7.5 summarizes monthly mean surface
 water temperature at each site.</p>
 <p>Create a table that joins these two data frames and shows
 macroinvertebrate abundance and average monthly temperature at each of
@@ -2033,57 +2069,80 @@ keys to join the two tables. You can extract the month from the
 <code>collectDate</code> column using the function <code>month()</code>
 from the <code>lubridate</code> package.</p>
 <p>Your final table should look like this:</p>
-<pre><code># A tibble: 6 × 5
-# Groups:   siteID [3]
-  siteID month collectDate         abun_per_m2 temp_avg_C
-  &lt;chr&gt;  &lt;dbl&gt; &lt;dttm&gt;                    &lt;dbl&gt;      &lt;dbl&gt;
-1 CARI       7 2021-07-01 00:00:00       2925.       5.83
-2 CARI       8 2021-08-26 00:00:00        701.       4.63
-3 MART       7 2021-07-28 00:00:00       8635.      15.3 
-4 MART       9 2021-09-27 00:00:00       4698.      12.6 
-5 TECR       7 2021-07-27 00:00:00      63478.      14.8 
-6 TECR       9 2021-09-15 00:00:00      19571.      11.3 </code></pre>
-<p><strong>7.8</strong></p>
+<pre><code>Error: object &#39;solution.5&#39; not found</code></pre>
+<p><strong>Use the Chapter 7 Synthesis Code as a guide for exercises 7
+and 8.</strong></p>
+<p><strong>7.7</strong></p>
 <p>Use <code>inv_taxa</code> to make a table that compares the total
-abundance of different macroinvertebrate phyla in each size class from
-each sample across all sites.</p>
+abundance of different macroinvertebrate phyla from each sample across
+all sites.</p>
+<p>Hint: You will need to <code>group_by()</code> three different
+columns before summing across the <code>estimatedTotalCount</code>
+column.</p>
 <p>Your results should look like this:</p>
-<pre><code># A tibble: 537 × 5
-# Groups:   siteID, sampleID, phylum [144]
-   siteID sampleID                phylum     sizeClass total
-   &lt;chr&gt;  &lt;chr&gt;                   &lt;chr&gt;          &lt;dbl&gt; &lt;dbl&gt;
- 1 CARI   CARI.20210701.KICKNET.1 Annelida           3     3
- 2 CARI   CARI.20210701.KICKNET.1 Annelida           5     3
- 3 CARI   CARI.20210701.KICKNET.1 Annelida           6     1
- 4 CARI   CARI.20210701.KICKNET.1 Arthropoda         1    15
- 5 CARI   CARI.20210701.KICKNET.1 Arthropoda         2    54
- 6 CARI   CARI.20210701.KICKNET.1 Arthropoda         3    66
- 7 CARI   CARI.20210701.KICKNET.1 Arthropoda         4    17
- 8 CARI   CARI.20210701.KICKNET.1 Arthropoda         5     7
- 9 CARI   CARI.20210701.KICKNET.1 Arthropoda         6     8
-10 CARI   CARI.20210701.KICKNET.1 Arthropoda         7     5
-# ℹ 527 more rows</code></pre>
-<p><strong>7.9</strong></p>
-<p>Join the table you created in exercise 7.8 with the
-<code>benthicArea</code> column from <code>inv_fieldData</code>. Then
-calculate the density (<code>= total / benthicArea</code>) of each
-phylum in each size class for each sample.</p>
+<pre><code># A tibble: 6 × 4
+# Groups:   siteID, sampleID [3]
+  siteID sampleID                phylum     total
+  &lt;chr&gt;  &lt;chr&gt;                   &lt;chr&gt;      &lt;dbl&gt;
+1 CARI   CARI.20210701.KICKNET.1 Annelida       7
+2 CARI   CARI.20210701.KICKNET.1 Arthropoda   174
+3 CARI   CARI.20210701.KICKNET.1 Nematoda       3
+4 CARI   CARI.20210701.KICKNET.2 Arthropoda     2
+5 CARI   CARI.20210701.KICKNET.3 Annelida      41
+6 CARI   CARI.20210701.KICKNET.3 Arthropoda   188</code></pre>
+<p>It should have 144 rows.</p>
+<p><strong>7.8</strong></p>
+<p><strong>Part A:</strong> Join the table you created in exercise 7.7
+with the <code>benthicArea</code> column from
+<code>inv_fieldData</code>. Then calculate the density
+(<code>= total / benthicArea</code>) of each phylum in each size class
+for each sample.</p>
 <p>Your results should look like this:</p>
-<pre><code># A tibble: 537 × 7
-# Groups:   siteID, sampleID, phylum [144]
-   siteID sampleID                phylum sizeClass total benthicArea abun_per_m2
-   &lt;chr&gt;  &lt;chr&gt;                   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
- 1 CARI   CARI.20210701.KICKNET.1 Annel…         3     3        0.25          12
- 2 CARI   CARI.20210701.KICKNET.1 Annel…         5     3        0.25          12
- 3 CARI   CARI.20210701.KICKNET.1 Annel…         6     1        0.25           4
- 4 CARI   CARI.20210701.KICKNET.1 Arthr…         1    15        0.25          60
- 5 CARI   CARI.20210701.KICKNET.1 Arthr…         2    54        0.25         216
- 6 CARI   CARI.20210701.KICKNET.1 Arthr…         3    66        0.25         264
- 7 CARI   CARI.20210701.KICKNET.1 Arthr…         4    17        0.25          68
- 8 CARI   CARI.20210701.KICKNET.1 Arthr…         5     7        0.25          28
- 9 CARI   CARI.20210701.KICKNET.1 Arthr…         6     8        0.25          32
-10 CARI   CARI.20210701.KICKNET.1 Arthr…         7     5        0.25          20
-# ℹ 527 more rows</code></pre>
+<pre><code># A tibble: 10 × 6
+# Groups:   siteID, sampleID [5]
+   siteID sampleID                phylum          total benthicArea abun_per_m2
+   &lt;chr&gt;  &lt;chr&gt;                   &lt;chr&gt;           &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+ 1 CARI   CARI.20210701.KICKNET.1 Annelida            7        0.25          28
+ 2 CARI   CARI.20210701.KICKNET.1 Arthropoda        174        0.25         696
+ 3 CARI   CARI.20210701.KICKNET.1 Nematoda            3        0.25          12
+ 4 CARI   CARI.20210701.KICKNET.2 Arthropoda          2        0.25           8
+ 5 CARI   CARI.20210701.KICKNET.3 Annelida           41        0.25         164
+ 6 CARI   CARI.20210701.KICKNET.3 Arthropoda        188        0.25         752
+ 7 CARI   CARI.20210701.KICKNET.4 Annelida           34        0.25         136
+ 8 CARI   CARI.20210701.KICKNET.4 Arthropoda        278        0.25        1112
+ 9 CARI   CARI.20210701.KICKNET.4 Platyhelminthes     1        0.25           4
+10 CARI   CARI.20210701.KICKNET.5 Annelida          101        0.25         404</code></pre>
+<p><strong>Part B:</strong> Use the <code>filter()</code> and
+<code>arrange()</code> functions to determine which sample had the
+greatest abundance of arthropods (Phylum Arthropoda).</p>
+<pre><code># A tibble: 48 × 6
+# Groups:   siteID, sampleID [48]
+   siteID sampleID               phylum     total benthicArea abun_per_m2
+   &lt;chr&gt;  &lt;chr&gt;                  &lt;chr&gt;      &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+ 1 TECR   TECR.20210727.SURBER.4 Arthropoda  7464       0.093      80258.
+ 2 TECR   TECR.20210727.SURBER.8 Arthropoda  7152       0.093      76903.
+ 3 TECR   TECR.20210727.SURBER.3 Arthropoda  7141       0.093      76785.
+ 4 TECR   TECR.20210727.SURBER.5 Arthropoda  7067       0.093      75989.
+ 5 TECR   TECR.20210727.SURBER.6 Arthropoda  6923       0.093      74441.
+ 6 TECR   TECR.20210727.SURBER.7 Arthropoda  3542       0.093      38086.
+ 7 TECR   TECR.20210915.SURBER.2 Arthropoda  2997       0.093      32226.
+ 8 MART   MART.20210728.SURBER.1 Arthropoda  2852       0.093      30667.
+ 9 TECR   TECR.20210915.SURBER.1 Arthropoda  2712       0.093      29161.
+10 TECR   TECR.20210915.SURBER.6 Arthropoda  2317       0.093      24914.
+# ℹ 38 more rows</code></pre>
+<p><strong>7.9 (CHALLENGE)</strong></p>
+<p>At the beginning of the lesson we tabulated the number of
+observations in <code>TSW_30min</code> from each site and year using the
+<code>table()</code> function. Create the same table using
+<code>count()</code> and <code>pivot_wider()</code>. You will need to
+read the documentation on <code>pivot_wider()</code> to learn to use the
+<code>values_fill</code> argument.</p>
+<pre><code># A tibble: 3 × 2
+  siteID `2021`
+  &lt;chr&gt;   &lt;int&gt;
+1 CARI    14688
+2 MART    14688
+3 TECR    14688</code></pre>
 </div>
 <div id="sources-and-resources" class="section level2">
 <h2>Sources and Resources</h2>
