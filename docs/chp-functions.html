@@ -784,7 +784,8 @@ a multiple of the smaller vector.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
 <span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a>x <span class="sc">+</span> y</span></code></pre></div>
-<pre><code>Warning in x + y: longer object length is not a multiple of shorter object length</code></pre>
+<pre><code>Warning in x + y: longer object length is not a multiple of shorter object
+length</code></pre>
 <pre><code>[1] 2 4 6 5 7 9 8</code></pre>
 <p>Vector <code>x</code> was recycled to match the length of vector
 <code>y</code></p>
@@ -1297,23 +1298,18 @@ target="_blank">here</a>.</p>
 <span id="cb96-8"><a href="#cb96-8" tabindex="-1"></a><span class="co"># Define the data product</span></span>
 <span id="cb96-9"><a href="#cb96-9" tabindex="-1"></a>dpID <span class="ot">&lt;-</span> <span class="st">&quot;DP1.20053.001&quot;</span>  <span class="co"># Surface water temperature</span></span>
 <span id="cb96-10"><a href="#cb96-10" tabindex="-1"></a></span>
-<span id="cb96-11"><a href="#cb96-11" tabindex="-1"></a><span class="co"># Define the sites to download </span></span>
-<span id="cb96-12"><a href="#cb96-12" tabindex="-1"></a>sites <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;TECR&quot;</span>, <span class="st">&quot;SYCA&quot;</span>) <span class="co"># Teakettle Creek and Sycamore Creek</span></span>
-<span id="cb96-13"><a href="#cb96-13" tabindex="-1"></a></span>
-<span id="cb96-14"><a href="#cb96-14" tabindex="-1"></a><span class="co"># Define the data product</span></span>
-<span id="cb96-15"><a href="#cb96-15" tabindex="-1"></a>dpID <span class="ot">&lt;-</span> <span class="st">&quot;DP1.20053.001&quot;</span>  <span class="co"># Surface water temperature</span></span>
-<span id="cb96-16"><a href="#cb96-16" tabindex="-1"></a></span>
-<span id="cb96-17"><a href="#cb96-17" tabindex="-1"></a><span class="co"># Define the directory in which to save the data</span></span>
-<span id="cb96-18"><a href="#cb96-18" tabindex="-1"></a><span class="co"># the file path is relative to the working directory</span></span>
-<span id="cb96-19"><a href="#cb96-19" tabindex="-1"></a>savepath <span class="ot">&lt;-</span> <span class="st">&quot;data&quot;</span></span>
-<span id="cb96-20"><a href="#cb96-20" tabindex="-1"></a></span>
-<span id="cb96-21"><a href="#cb96-21" tabindex="-1"></a><span class="co"># Download data specified by the arguments above</span></span>
-<span id="cb96-22"><a href="#cb96-22" tabindex="-1"></a><span class="fu">zipsByProduct</span>(<span class="at">dpID =</span> dpID,</span>
-<span id="cb96-23"><a href="#cb96-23" tabindex="-1"></a>              <span class="at">site =</span> sites,</span>
-<span id="cb96-24"><a href="#cb96-24" tabindex="-1"></a>              <span class="at">startdate =</span> startdate,</span>
-<span id="cb96-25"><a href="#cb96-25" tabindex="-1"></a>              <span class="at">enddate =</span> enddate,</span>
-<span id="cb96-26"><a href="#cb96-26" tabindex="-1"></a>              <span class="at">savepath =</span> savepath,</span>
-<span id="cb96-27"><a href="#cb96-27" tabindex="-1"></a>              <span class="at">include.provisional =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<span id="cb96-11"><a href="#cb96-11" tabindex="-1"></a></span>
+<span id="cb96-12"><a href="#cb96-12" tabindex="-1"></a><span class="co"># Define the directory in which to save the data</span></span>
+<span id="cb96-13"><a href="#cb96-13" tabindex="-1"></a><span class="co"># the file path is relative to the working directory</span></span>
+<span id="cb96-14"><a href="#cb96-14" tabindex="-1"></a>savepath <span class="ot">&lt;-</span> <span class="st">&quot;data&quot;</span></span>
+<span id="cb96-15"><a href="#cb96-15" tabindex="-1"></a></span>
+<span id="cb96-16"><a href="#cb96-16" tabindex="-1"></a><span class="co"># Download data specified by the arguments above</span></span>
+<span id="cb96-17"><a href="#cb96-17" tabindex="-1"></a><span class="fu">zipsByProduct</span>(<span class="at">dpID =</span> dpID,</span>
+<span id="cb96-18"><a href="#cb96-18" tabindex="-1"></a>              <span class="at">site =</span> sites,</span>
+<span id="cb96-19"><a href="#cb96-19" tabindex="-1"></a>              <span class="at">startdate =</span> startdate,</span>
+<span id="cb96-20"><a href="#cb96-20" tabindex="-1"></a>              <span class="at">enddate =</span> enddate,</span>
+<span id="cb96-21"><a href="#cb96-21" tabindex="-1"></a>              <span class="at">savepath =</span> savepath,</span>
+<span id="cb96-22"><a href="#cb96-22" tabindex="-1"></a>              <span class="at">include.provisional =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>You will need to allow the data to download by typing <code>y</code>
 in the Console when prompted.</p>
 <p>Examine the data that were downloaded by navigating to the folder
@@ -1371,27 +1367,34 @@ Environment panel. It should be a data frame with 16 variables and
 <div class="sourceCode" id="cb101"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" tabindex="-1"></a><span class="co"># Show the first few rows</span></span>
 <span id="cb101-2"><a href="#cb101-2" tabindex="-1"></a><span class="fu">head</span>(TSW_30min)</span></code></pre></div>
-<pre><code>  domainID siteID horizontalPosition verticalPosition startDateTime endDateTime surfWaterTempMean
-1      D14   SYCA                101              100    2022-10-01  2022-10-01            29.840
-2      D14   SYCA                101              100    2022-10-01  2022-10-01            28.769
-3      D14   SYCA                101              100    2022-10-01  2022-10-01            27.132
-4      D14   SYCA                101              100    2022-10-01  2022-10-01            24.960
-5      D14   SYCA                101              100    2022-10-01  2022-10-01            23.525
-6      D14   SYCA                101              100    2022-10-01  2022-10-01            22.110
-  surfWaterTempMinimum surfWaterTempMaximum surfWaterTempVariance surfWaterTempNumPts
-1               29.517               30.183                 0.027                1800
-2               28.086               29.547                 0.103                1800
-3               26.000               28.118                 0.448                1800
-4               24.151               25.997                 0.354                1800
-5               22.815               24.307                 0.188                1800
-6               21.420               22.826                 0.115                1800
-  surfWaterTempExpUncert surfWaterTempStdErMean finalQF  publicationDate      release
-1                  0.150                  0.004       1 20251209T011704Z RELEASE-2026
-2                  0.150                  0.008       1 20251209T011704Z RELEASE-2026
-3                  0.152                  0.016       1 20251209T011704Z RELEASE-2026
-4                  0.150                  0.014       1 20251209T011704Z RELEASE-2026
-5                  0.149                  0.010       1 20251209T011704Z RELEASE-2026
-6                  0.147                  0.008       1 20251209T011704Z RELEASE-2026</code></pre>
+<pre><code>  domainID siteID horizontalPosition verticalPosition startDateTime endDateTime
+1      D14   SYCA                101              100    2022-10-01  2022-10-01
+2      D14   SYCA                101              100    2022-10-01  2022-10-01
+3      D14   SYCA                101              100    2022-10-01  2022-10-01
+4      D14   SYCA                101              100    2022-10-01  2022-10-01
+5      D14   SYCA                101              100    2022-10-01  2022-10-01
+6      D14   SYCA                101              100    2022-10-01  2022-10-01
+  surfWaterTempMean surfWaterTempMinimum surfWaterTempMaximum
+1            29.840               29.517               30.183
+2            28.769               28.086               29.547
+3            27.132               26.000               28.118
+4            24.960               24.151               25.997
+5            23.525               22.815               24.307
+6            22.110               21.420               22.826
+  surfWaterTempVariance surfWaterTempNumPts surfWaterTempExpUncert
+1                 0.027                1800                  0.150
+2                 0.103                1800                  0.150
+3                 0.448                1800                  0.152
+4                 0.354                1800                  0.150
+5                 0.188                1800                  0.149
+6                 0.115                1800                  0.147
+  surfWaterTempStdErMean finalQF  publicationDate      release
+1                  0.004       1 20251209T011704Z RELEASE-2026
+2                  0.008       1 20251209T011704Z RELEASE-2026
+3                  0.016       1 20251209T011704Z RELEASE-2026
+4                  0.014       1 20251209T011704Z RELEASE-2026
+5                  0.010       1 20251209T011704Z RELEASE-2026
+6                  0.008       1 20251209T011704Z RELEASE-2026</code></pre>
 <p>It appears that each row corresponds to a temperature average between
 two time points (<code>startDateTime</code> and
 <code>endDateTime</code>) taken by a sensor at a particular location
@@ -1787,7 +1790,8 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="#cb1
 <span id="cb131-2"><a href="#cb131-2" tabindex="-1"></a>                 <span class="at">site =</span> <span class="st">&quot;TECR&quot;</span>, </span>
 <span id="cb131-3"><a href="#cb131-3" tabindex="-1"></a>                 <span class="at">month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, </span>
 <span id="cb131-4"><a href="#cb131-4" tabindex="-1"></a>                 <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>Warning in startMonth == month: longer object length is not a multiple of shorter object length</code></pre>
+<pre><code>Warning in startMonth == month: longer object length is not a multiple of
+shorter object length</code></pre>
 <pre><code>[1] 2.955063</code></pre>
 <p>Hmm… that didn’t work! We wanted 12 separate values and only got one.
 In fact we got a warning that two vectors are not matching up in
@@ -1804,8 +1808,8 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="#cb1
 <span id="cb134-5"><a href="#cb134-5" tabindex="-1"></a>                 <span class="at">site =</span> <span class="st">&quot;TECR&quot;</span>, </span>
 <span id="cb134-6"><a href="#cb134-6" tabindex="-1"></a>                 <span class="at">month =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, </span>
 <span id="cb134-7"><a href="#cb134-7" tabindex="-1"></a>                 <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code> [1]  1.293758  1.014416  1.306604       NaN       NaN       NaN       NaN 10.781563       NaN  7.956879
-[11]  1.659248  1.124242</code></pre>
+<pre><code> [1]  1.293758  1.014416  1.306604       NaN       NaN       NaN       NaN
+ [8] 10.781563       NaN  7.956879  1.659248  1.124242</code></pre>
 <p>Looks like it worked and that we got missing values for months 4, 5,
 6, 7 and 9. Perhaps this is because there were no data these months?
 Let’s check:</p>

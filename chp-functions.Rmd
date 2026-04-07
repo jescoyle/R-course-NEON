@@ -897,11 +897,6 @@ sites <- c("TECR", "SYCA") # Teakettle Creek and Sycamore Creek
 # Define the data product
 dpID <- "DP1.20053.001"  # Surface water temperature
 
-# Define the sites to download 
-sites <- c("TECR", "SYCA") # Teakettle Creek and Sycamore Creek
-
-# Define the data product
-dpID <- "DP1.20053.001"  # Surface water temperature
 
 # Define the directory in which to save the data
 # the file path is relative to the working directory
