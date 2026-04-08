@@ -104,10 +104,10 @@ Along with an explanation.
 
 ## Lesson
 
-In this lesson we are going to download and work with surface water temperature data  [DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001) from four NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha Creek, Washington (MART), Teakettle Creek, California (TECR) and Sycamore Creek, Arizona (SYCA). You can see a map of these sites on the [NEON website](https://www.neonscience.org/field-sites/explore-field-sites).
+In this lesson we are going to download and work with surface water temperature data  [DP1.20053.001](https://data.neonscience.org/data-products/DP1.20053.001) from four NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha Creek, Washington (MART), and Teakettle Creek, California (TECR). You can see a map of these sites on the [NEON website](https://www.neonscience.org/field-sites/explore-field-sites).
 
 
-Recall from the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) that we can download data from NEON using the `loadByProduct()` function in the `neonUtilities` package. We need to specify the product ID number, sites and dates for which we want data and then type `y` when prompted to download the data at the command line.
+Recall from the lesson [`r .get_chpName("functions", type.from = "chp")`](chp-functions.html) that we can download data from NEON using the `zipsByProduct()` and `stackByTable()` functions in the `neonUtilities` package. We need to specify the product ID number, sites and dates for which we want data and then type `y` when prompted to download the data at the command line.
 
 ```{r eval = FALSE}
 library(neonUtilities)
@@ -120,56 +120,117 @@ enddate <- "2021-10-31"
 # Define the sites to download 
 # TECR = Teakettle Creek, SYCA = Sycamore Creek
 # MART = Martha Creek, CARI = Caribou Creek
-sites <- c("TECR", "SYCA", "MART", "CARI") 
+sites <- c("TECR", "MART", "CARI") 
 
 # Define the data product
 dpID <- "DP1.20053.001"  # Surface water temperature
 
-# Temperature in surface water
-watertemp <- loadByProduct(dpID = dpID,
-                           site = sites,
-                           startdate = startdate,
-                           enddate = enddate)
+# Define the directory in which to save the data
+# the file path is relative to the working directory
+savepath <- "data"
+
+# Download data specified by the arguments above
+zipsByProduct(dpID = dpID,
+              site = sites,
+              startdate = startdate,
+              enddate = enddate,
+              savepath = savepath,
+              include.provisional = TRUE)
+
+# Unzips data and stacks data tables by site
+# Saves resulting tables into the savepath directory
+stackByTable(filepath = file.path(savepath, "filesToStack20053"))
+
 
 ```
+
+We then use `readTablNEON()` to read data into R. This will automatically convert columns to the correct data type.
+
+```{r eval = FALSE}
+# Define the location of the data file
+data_filename <- "TSW_30min.csv"
+data_filepath <- file.path(savepath, "filesToStack20053", "stackedFiles", data_filename)
+
+# Define the location of the metadata file that contains variable names
+var_filename <- "variables_20053.csv"
+var_filepath <- file.path(savepath, "filesToStack20053", "stackedFiles", var_filename)
+
+# Read in surface water temperature averaged over 30 min periods
+TSW_30min <- readTableNEON(dataFile = data_filepath,
+                           varFile = var_filepath)
+
+```
+
 ```{r include = FALSE, message = FALSE}
 # Load neonUtilities package
 library(neonUtilities)
 
 # Load previously downloaded object
-#save(watertemp, file = "src/chp-program-flow_watertemp.RData")
+#save(TSW_30min, file = "src/chp-program-flow_watertemp.RData")
 load("src/chp-program-flow_watertemp.RData")
 ```
 
-You should now have a new object named `watertemp` in the Environment panel. It should be a list with nine elements. Let's extract the list element of `watertemp` that contains the data and save it as a separate data frame.
+You should now have a new object named `TSW_30min` in the Environment panel. This is a data frame with `r nrow(TSW_30min)` rows. Each row summarizes temperature measurements over a 30 minute period from May - October, 2021 for the four sites from which we requested data (TECR, MART, CARI).
+
+To get a quick summary of the data available, we can use the `table()` function to count the number of observations (e.g. rows) from each year, month and site. The code below uses the `with()` function to specify the dataframe that `table()` should use to find columns named `startDateTime` and `siteID`. The `year()` and `month()` functions are from the `lubridate` package.
 
 ```{r}
-# Extract 30 min temperature averages from watertemp
-# and save as a separate data frame
-TSW_30min <- watertemp$TSW_30min
-
-```
-
-Now we have a data frame where each row summarizes temperature measurements over a 30 minute period from May - October, 2021 for the four sites from which we requested data (TECR, SYCA, MART, CARI).
-
-The last thing we will do to get these data ready to work with is to convert the `startDateTime` column to a date-time class so that we can use it as an actual date. We will use the `ymd_hms()` function from the `lubridate()` package for this.
-
-```{r message = FALSE}
 # Load the lubridate package
 library(lubridate)
 
-# Convert startDateTime to a date-time class
-TSW_30min$startDateTime <- ymd_hms(TSW_30min$startDateTime)
+# Count the number of observations in each year, month and site
+with(TSW_30min, 
+     table(siteID, month(startDateTime), year(startDateTime)))
+)
 
 ```
-To get a quick summary of the data available, we can use the `table()` function to count the number of observations (e.g. rows) from each month and site. The code below uses the `with()` function to specify the dataframe that `table()` should use to find columns named `startDateTime` and `siteID`. 
+
+Notice that because we stacked all of the data that was previously downloaded in the lesson `r .get_chpName("functions", type.from = "chp")`, we also have data from all twelve months of 2022 and 2023, including data from the Sycamore Creek site (SYCA) In this lesson we only want to focus on data from CARI, MART and TECR from June - October 2021.
+
+::: {.challenge}
+
+Subset the `TSW_30min` data frame to only contain observations from June  - October 2021 at the CAR, MART and TECR sites.  
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+If you have completed the lesson `r .get_chpName("tidyverse-basics", type.from = "chp")`, then you should know two different ways to subset this data frame:
 
 ```{r}
-# Count the number of observations in each month and site
-with(TSW_30min, table(months(startDateTime), siteID))
+
+# Subset using base R 
+TSW_30min <- subset(TSW_30min,
+                    siteID %in% c("MART", "CARI", "TECR") &
+                    year(startDateTime) == 2021 &
+                    month(startDateTime) > 5 & 
+                    month(startDateTime) < 11)
+
+# Load the dplyr package
+library(dplyr)
+
+# Subset using tidyverse functions
+TSW_30min <- TSW_30min |>
+  filter(siteID %in% c("MART", "CARI", "TECR"),
+         year(startDateTime) == 2021,
+         month(startDateTime) > 5,
+         month(startDateTime) < 11)
+
+# Count the number of observations in each year, month and site
+with(TSW_30min, 
+     table(siteID, month(startDateTime), year(startDateTime)))
+)
 
 ```
-The `months()` function extracts the month from the `startDateTime` column as text. (`month()` would give the numeric month).
+
+:::
+
+</details>
+
+:::
+
+<br>
+
 
 
 ### Conditionals
@@ -345,11 +406,11 @@ ifelse(y < 0, "y is a negative number", "y is not a negative number")
 ```
 The `ifelse()` function is particularly useful for creating a factor from numeric data or combining levels of a factor.
 
-For example, we could create a factor in the `TSW_30min` data that identifies whether a site is in Alaska or the contiguous US (the "lower 48"):
+For example, we could create a factor in the `TSW_30min` data that identifies whether a site is in Alaska or the contiguous US (the "lower 48").
 
 ```{r}
 # Create a factor that identifies whether a site is in Alaska
-# e.g. the CARI site
+# e.g. the Caribou Creek (CARI) site
 TSW_30min$siteLocation <- factor(ifelse(TSW_30min$siteID == "CARI", "AK", "lower48"))
 
 ```
@@ -383,9 +444,43 @@ table(TSW_30min$frozen)
 
 <br>
 
+:::
+
+::: {.challenge}
+
+Use the new `frozen` variable to make stacked bar graph comparing the number of measurements above vs below 0 at each of the four sites.
+
+You will need to load the `ggplot2` package first.
+
+<details><summary>**Solution:**</summary>
+
+::: {.solution}
+
+You will need 
+
+```{r}
+# Load the ggplot2 package
+library(ggplot2)
+
+TSW_30min |>
+  ggplot(aes(x = siteID)) +
+    geom_bar(aes(fill = frozen))
 
 
+```
 
+:::
+
+</details>
+
+:::
+
+<br>
+
+:::
+
+
+#### WORKING HERE #####
 
 ### Loops
 

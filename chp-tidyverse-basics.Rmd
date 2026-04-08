@@ -27,8 +27,10 @@ source("src/knit-options.R")
 # Silently set seed for random number generation, so we don't have to explain it
 set.seed(10)
 
-# Load ggplot2
+# Load ggplot2 and kableExtra
 library("ggplot2")
+library("kableExtra")
+
 
 # Set theme options
 # ggplot theme options
@@ -181,7 +183,7 @@ TSW_30min <- readTableNEON(
 # Load neonUtilities package
 library(neonUtilities)
 
-# Load previously downloaded object
+# Load previously saved data sets for this chapter
 #save(watertemp_list, inverts_list, file = "src/chp-tidyverse_datasets.RData")
 load("src/chp-tidyverse_datasets.RData")
 ```
@@ -1197,6 +1199,11 @@ Success! You can find the code from this synthesis in the script `lesson-code/07
 ## Exercises
 
 
+```{r include = FALSE, message = FALSE}
+# Load previously saved data sets for this chapter
+load("src/chp-tidyverse_datasets.RData")
+```
+
 After completing these exercises, learners will be able to 
 `r .get_LO(.chp, .CStable, prefix = TRUE, bullet = "1.")`
 
@@ -1254,7 +1261,7 @@ solution.3 <- inv_fieldData |>
             latitude = mean(decimalLatitude),
             longitude = mean(decimalLongitude))
 
-solution.3
+kable(solution.3, row.names = FALSE)
 
 ```
 
@@ -1266,14 +1273,17 @@ Hint: The total number of individuals is found in the `estimatedTotalCount` colu
 
 Your solution should look like this:
 
-```{r echo = FALSE}
+```{r echo = FALSE, message = FALSE}
 solution.4A <- inv_taxa |>
   group_by(siteID, invertebrateLifeStage) |>
   summarize(Count = sum(estimatedTotalCount))
 
-solution.4A
+kable(solution.4A, row.names = FALSE) |>
+  kable_styling() |>
+  scroll_box(width = "100%", height = "300px")
 ```
 
+<br>
 
 **Part B:** Convert the table from part A to wide format where values for each life stage are in separate columns. Your answer should look like this:
 
@@ -1281,13 +1291,13 @@ solution.4A
 solution.4B <- solution.4A |>
   pivot_wider(names_from = invertebrateLifeStage, values_from = Count)
 
-solution.4B
+kable(solution.4B, row.names = FALSE)
 
 ```
 
 **Part C:** Make a bar graph that compares the number of adults across the three sites. 
 
-Fill in the code below to generate the
+Fill in the code below:
 
 ```{r eval = FALSE}
 ____________ |>
@@ -1350,23 +1360,25 @@ solution.5A <- TSW_30min |>
             temp_min_C = min(surfWaterTempMinimum, na.rm = TRUE),
             temp_max_C = max(surfWaterTempMaximum, na.rm = TRUE))
 
-solution.5A
+kable(solution.5A, row.names = FALSE)
 ```
 
 **Part B:** Convert the table to long format:
 
 ```{r echo = FALSE}
 
-solution.5A |>
-  pivot_longer(starts_with("temp"), names_to = "variable", values_to = "value") |>
-  head()
+solution.5B <- solution.5A |>
+  pivot_longer(starts_with("temp"), names_to = "variable",
+               values_to = "value")
+
+kable(solution.5B, row.names = FALSE)
 
 
 ```
 
 **`r .chp_num`.6** 
 
-The synthesis section generates a table `site_summary` with abundance and diversity data for each collection date at each site. The table you created in exercise `r .chp_num`.5 summarizes monthly mean surface water temperature at each site.
+The synthesis section generates a table `site_summary` with abundance and diversity data for each collection date at each site. The table you created in exercise `r .chp_num`.5 Part A summarizes monthly mean surface water temperature at each site.
 
 Create a table that joins these two data frames and shows macroinvertebrate abundance and average monthly temperature at each of the collection dates for each site.
 
@@ -1375,10 +1387,12 @@ Hint: Use the month for each `collectDate` as one of the keys to join the two ta
 Your final table should look like this:
 
 ```{r echo = FALSE, message = FALSE}
-site_summary |>
+solution.6 <- site_summary |>
   mutate(month = month(collectDate)) |>
-  left_join(solution.5) |>
+  left_join(solution.5A) |>
   select(siteID, month, collectDate, abun_per_m2, temp_avg_C)
+
+kable(solution.6, row.names = FALSE)
 
 ```
 
@@ -1400,8 +1414,12 @@ solution.7 <- inv_taxa |>
   group_by(siteID, sampleID, phylum) |>
   summarize(total = sum(estimatedTotalCount))
 
-head(solution.7)
+kable(solution.7, row.names = FALSE)  |>
+  kable_styling() |>
+  scroll_box(width = "100%", height = "300px")
 ```
+
+<br>
 
 It should have `r nrow(solution.7)` rows.
 
@@ -1415,29 +1433,50 @@ Your results should look like this:
 field_cols.8 <- inv_fieldData |>
   select(sampleID, benthicArea) 
 
-solution.8 <- solution.7 |>
+solution.8A <- solution.7 |>
   left_join(field_cols.8) |>
   mutate(abun_per_m2 = total/benthicArea)
 
-solution.8[1:10,]
+kable(solution.8A, row.names = FALSE)  |>
+  kable_styling() |>
+  scroll_box(width = "100%", height = "300px")
 ```
+
+<br>
 
 **Part B:** Use the  `filter()` and `arrange()` functions to determine which sample had the greatest abundance of arthropods (Phylum Arthropoda).
 
 ```{r echo = FALSE}
-solution.8 |>
+solution.8B <- solution.8A |>
   filter(phylum == "Arthropoda") |>
   arrange(desc(abun_per_m2))
 
+kable(solution.8B, row.names = FALSE)  |>
+  kable_styling() |>
+  scroll_box(width = "100%", height = "300px")
 
 ```
 
-
+<br>
 
 
 **`r .chp_num`.9 (CHALLENGE)**
 
+Load the surface water temperature data:
+
+```{r eval = FALSE}
+# Read in surface water temperature averaged over 30 min periods
+TSW_30min <- readTableNEON(
+  dataFile = file.path(savepath, "filesToStack20053", "stackedFiles", "TSW_30min.csv"),
+  varFile = file.path(savepath, "filesToStack20053", "stackedFiles", "variables_20053.csv")
+)
+
+```
+
 At the beginning of the lesson we tabulated the number of observations in `TSW_30min` from each site and year using the `table()` function. Create the same table using `count()` and `pivot_wider()`. You will need to read the documentation on `pivot_wider()` to learn to use the `values_fill` argument.
+
+
+The resulting table should look like this:
 
 ```{r echo = FALSE}
 
