@@ -423,9 +423,9 @@ $(document).ready(function () {
 </div>
 
 
-<div id="chapter-8.-controlling-program-flow"
+<div id="chapter-9.-example-analysis-of-neon-data"
 class="section level1 tabset">
-<h1 class="tabset">Chapter 8. Controlling program flow</h1>
+<h1 class="tabset">Chapter 9. Example analysis of NEON data</h1>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <div id="what-we-will-learn" class="section level3">
@@ -466,7 +466,7 @@ this <code>data</code> folder.</li>
 that will save into this folder.</li>
 <li>Be sure to click <strong>Save</strong> often to save your work.</li>
 </ol>
-<p>The final output of this lesson is available in the chapter 8
+<p>The final output of this lesson is available in the chapter 9
 exercises folder of the workbook.</p>
 </div>
 </div>
@@ -2018,7 +2018,7 @@ reasonable.</p>
 <span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">data =</span> site_summary, </span>
 <span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">xintercept =</span> collectDate,</span>
 <span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>                             <span class="at">color =</span> siteID))</span></code></pre></div>
-<p><img src="images/rmd-08-unnamed-chunk-17-1.png" width="816" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-09-unnamed-chunk-17-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p>We can see that the Caribou Creek site (CARI) in Alaska is much
 cooler with a shorter summer than the Martha Creek, Washington (MART)
 and Teakettle Creek, California (TECR) sites. The vertical lines show
@@ -2161,14 +2161,11 @@ use the combined data to make a graph.</p>
 <span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>         <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">&quot;Macroinvertebrate density (num. per&quot;</span><span class="sc">~</span>m<span class="sc">^</span><span class="dv">2</span>),</span>
 <span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">&quot;NEON Site&quot;</span>) <span class="sc">+</span></span>
 <span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="co"># makes black and white color scheme</span></span></code></pre></div>
-<p><img src="images/rmd-08-unnamed-chunk-22-1.png" width="816" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-09-unnamed-chunk-22-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p>Use <code>ggsave()</code> to save this figure to the
 <code>output</code> folder.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Save as png</span></span>
 <span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;output/abun_vs_Tmean.png&quot;</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">width =</span> <span class="dv">5</span>)</span></code></pre></div>
-<pre><code>Error in `ggsave()`:
-! Cannot find directory &#39;output&#39;.
-ℹ Please supply an existing directory or use `create.dir = TRUE`.</code></pre>
 <p>We could make individual graphs one by one. Or, <code>ggplot()</code>
 can make a multipanel graph that shows different sites or variables if
 we add the <code>facet_grid()</code> function. So, if we want to have
@@ -2179,17 +2176,17 @@ identify which variable the value came from. This means we need to
 convert the data to long format. A similar argument applies to the
 macroinvertebrate variables. We will use <code>pivot_longer()</code>
 twice to convert both sets of variables to long format.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># Pivot to long format to make multipanel graphs</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="co"># Each row is a combination of a temperature an macroinvertebrate variable</span></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>  <span class="co"># Put all temperature variables in the T_var column</span></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">starts_with</span>(<span class="st">&quot;T&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;T_var&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Temperature&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>  <span class="co"># Put all macroinvertebrate variables in the M_var column</span></span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">&quot;abun_per_m2&quot;</span>, <span class="st">&quot;n_genus&quot;</span>,<span class="st">&quot;n_family&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;M_var&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a><span class="co"># View long format data</span></span>
-<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="fu">head</span>(df_long)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Pivot to long format to make multipanel graphs</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co"># Each row is a combination of a temperature an macroinvertebrate variable</span></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>  <span class="co"># Put all temperature variables in the T_var column</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">starts_with</span>(<span class="st">&quot;T&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;T_var&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Temperature&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>  <span class="co"># Put all macroinvertebrate variables in the M_var column</span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">&quot;abun_per_m2&quot;</span>, <span class="st">&quot;n_genus&quot;</span>,<span class="st">&quot;n_family&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;M_var&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a><span class="co"># View long format data</span></span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a><span class="fu">head</span>(df_long)</span></code></pre></div>
 <pre><code># A tibble: 6 × 8
 # Groups:   siteID [1]
   siteID collectDate         n_samples past_date           T_var Temperature
@@ -2205,36 +2202,36 @@ twice to convert both sets of variables to long format.</p>
 Notice that we use the <code>mutate()</code> function first to change
 the levels of the <code>M_var</code> and <code>T_var</code> columns to
 be text that is easier to understand on the graph.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Use the long format data to make a graph</span></span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>df_long <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>  </span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>  <span class="co"># use informative names for variables</span></span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">M_var =</span> <span class="fu">factor</span>(M_var, </span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Density (num. per m2)&quot;</span>, <span class="st">&quot;Num. families&quot;</span>, <span class="st">&quot;Num genera&quot;</span>)),</span>
-<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a>         <span class="at">T_var =</span> <span class="fu">factor</span>(T_var, </span>
-<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Maximum&quot;</span>, <span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;Minimum&quot;</span>))</span>
-<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a>           </span>
-<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a>  <span class="co"># set up graph axes</span></span>
-<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Temperature, <span class="at">y =</span> value, <span class="at">color =</span> siteID)) <span class="sc">+</span></span>
-<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a>    </span>
-<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a>  <span class="co"># make separate plots for each macroinvertebrate variable and temp variable</span></span>
-<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a>  <span class="fu">facet_grid</span>(M_var <span class="sc">~</span> T_var, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
-<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a>    </span>
-<span id="cb25-17"><a href="#cb25-17" tabindex="-1"></a>  <span class="co"># add points</span></span>
-<span id="cb25-18"><a href="#cb25-18" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb25-19"><a href="#cb25-19" tabindex="-1"></a>  </span>
-<span id="cb25-20"><a href="#cb25-20" tabindex="-1"></a>  <span class="co"># add axis labels</span></span>
-<span id="cb25-21"><a href="#cb25-21" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="st">&quot;14-day surface water temperature&quot;</span><span class="sc">~</span>(degree<span class="sc">*</span>C)),</span>
-<span id="cb25-22"><a href="#cb25-22" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb25-23"><a href="#cb25-23" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;NEON Site&quot;</span>) <span class="sc">+</span></span>
-<span id="cb25-24"><a href="#cb25-24" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="co"># makes black and white color scheme</span></span></code></pre></div>
-<p><img src="images/rmd-08-unnamed-chunk-25-1.png" width="816" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># Use the long format data to make a graph</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>df_long <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>  </span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>  <span class="co"># use informative names for variables</span></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">M_var =</span> <span class="fu">factor</span>(M_var, </span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Density (num. per m2)&quot;</span>, <span class="st">&quot;Num. families&quot;</span>, <span class="st">&quot;Num genera&quot;</span>)),</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>         <span class="at">T_var =</span> <span class="fu">factor</span>(T_var, </span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Maximum&quot;</span>, <span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;Minimum&quot;</span>))</span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>           </span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>  <span class="co"># set up graph axes</span></span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Temperature, <span class="at">y =</span> value, <span class="at">color =</span> siteID)) <span class="sc">+</span></span>
+<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>    </span>
+<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a>  <span class="co"># make separate plots for each macroinvertebrate variable and temp variable</span></span>
+<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a>  <span class="fu">facet_grid</span>(M_var <span class="sc">~</span> T_var, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a>    </span>
+<span id="cb24-17"><a href="#cb24-17" tabindex="-1"></a>  <span class="co"># add points</span></span>
+<span id="cb24-18"><a href="#cb24-18" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb24-19"><a href="#cb24-19" tabindex="-1"></a>  </span>
+<span id="cb24-20"><a href="#cb24-20" tabindex="-1"></a>  <span class="co"># add axis labels</span></span>
+<span id="cb24-21"><a href="#cb24-21" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="st">&quot;14-day surface water temperature&quot;</span><span class="sc">~</span>(degree<span class="sc">*</span>C)),</span>
+<span id="cb24-22"><a href="#cb24-22" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb24-23"><a href="#cb24-23" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;NEON Site&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-24"><a href="#cb24-24" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="co"># makes black and white color scheme</span></span></code></pre></div>
+<p><img src="images/rmd-09-unnamed-chunk-25-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p>Finally save the graph as an svg file. This is a vector format file
 that can be easily edited by programs such as Inkscape, Adobe
 Illustrator or Vectr.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="co"># Save as svg - editable in Inkscape</span></span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;output/macroinvert_vs_temperature.svg&quot;</span>, <span class="at">height =</span> <span class="dv">7</span>, <span class="at">width =</span> <span class="dv">8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Save as svg - editable in Inkscape</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;output/macroinvert_vs_temperature.svg&quot;</span>, <span class="at">height =</span> <span class="dv">7</span>, <span class="at">width =</span> <span class="dv">8</span>)</span></code></pre></div>
 <p>And now the analysis is complete- time to be a scientists an
 interpret the patterns!</p>
 <div id="refs" class="references csl-bib-body hanging-indent"

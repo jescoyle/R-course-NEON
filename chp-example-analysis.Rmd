@@ -14,8 +14,8 @@ getwd()
 source("src/setup.R")
 
 # get chapter number based on name
-.chp <- "program-flow"
-.chp_num <- .get_chpNum("chp-program-flow", type = "fileName")
+.chp <- "example-analysis"
+.chp_num <- .get_chpNum("chp-example-analysis", type = "fileName")
 .chp_str <- ifelse(nchar(.chp_num) > 1, .chp_num, paste0("0", .chp_num))
 
 # knitr options
