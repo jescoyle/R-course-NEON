@@ -1,4 +1,4 @@
 exclude: 
   - "*.Rmd"
-  - "data"
-  - "exercises"
+  - "data/"
+  - "exercises/"

@@ -28,8 +28,8 @@ source("src/knit-options.R")
 set.seed(10)
 
 # Load ggplot2 and kableExtra
-library("ggplot2")
-library("kableExtra")
+library(ggplot2)
+library(kableExtra)
 
 
 # Set theme options

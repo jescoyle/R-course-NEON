@@ -486,7 +486,7 @@ df |>
 
 Use `ggsave()` to save this figure to the `output` folder.
 
-```{r}
+```{r eval = FALSE}
 # Save as png
 ggsave("output/abun_vs_Tmean.png", height = 4, width = 5)
 ```

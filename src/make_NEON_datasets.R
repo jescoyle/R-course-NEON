@@ -284,110 +284,12 @@ write.csv(surfwater_30min,
 
 
 
-
-####### Soil temp and CO2 data #########
-## NOT USING RIGHT NOW
-
-# Define dates for download
-startdate <- "2022-01"
-enddate <- "2022-06" 
-terrsite <- "TEAK"
-
-## Soil CO2 exchange and temperature: unccoment to redownload
-#soilCO2 <- loadByProduct(dpID = "DP1.00095.001",
-#                         site = terrsite,
-#                         startdate = startdate,
-#                         enddate = enddate)
-
-soilCO2_30min <- soilCO2$SCO2C_30_minute
-
-View(soilCO2$variables_00095)
-View(soilCO2$sensor_positions_00095)
-
-# Define variables to keep in the final data table
-keep_vars <- c("siteID", "horizontalPosition", "verticalPosition", 
-               "startDateTime", "endDateTime", "soilCO2concentrationMean", 
-               "soilCO2concentrationExpUncert", "finalQF")
-soilCO2_30min <- soilCO2_30min[, keep_vars]
-
-# Set measurements to NA if quality flag is 1
-soilCO2_30min[soilCO2_30min$finalQF == 1, c("soilCO2concentrationMean", "soilCO2concentrationExpUncert")] <- NA
-
-# Merge with sensor location
-soilCO2_30min$HOR.VER <- with(soilCO2_30min, paste(horizontalPosition, verticalPosition, sep = "."))
-soilCO2_30min <- merge(soilCO2_30min, soilCO2$sensor_positions_00095[, c("HOR.VER", "xOffset", "yOffset", "zOffset")])
-
-# Download soil temperature: uncomment to redownload
-#soiltemp <- loadByProduct(dpID = "DP1.00041.001",
-#                          site = terrsite,
-#                          startdate = startdate,
-#                          enddate = enddate)
-#
-soiltemp_30min <- soiltemp$ST_30_minute
-View(soiltemp$variables_00041)
-
-# Define variables to keep in the final data table
-keep_vars <- c("siteID", "horizontalPosition", "verticalPosition", 
-               "startDateTime", "endDateTime", "soilTempMean", 
-               "soilTempExpUncert", "finalQF")
-soiltemp_30min <- soiltemp_30min[, keep_vars]
-
-# Set measurements to NA if quality flag is 1
-soiltemp_30min[soiltemp_30min$finalQF == 1, c("soilTempMean", "soilTempExpUncert")] <- NA
-
-# Merge with sensor location
-soiltemp_30min$HOR.VER <- with(soiltemp_30min, paste(horizontalPosition, verticalPosition, sep = "."))
-soiltemp_30min <- merge(soiltemp_30min, soiltemp$sensor_positions_00041[, c("HOR.VER", "xOffset", "yOffset", "zOffset")])
-
-
-# Make data set for Intro to R lesson
-soilCO2_30min$finalQF.CO2 <- soilCO2_30min$finalQF
-soiltemp_30min$finalQF.temp <- soiltemp_30min$finalQF
-drop_vars <- c("xOffset", "yOffset", "zOffset", "finalQF") # position variables and quality flag differ by sensor type so remove before merge
-intro_to_R.dat <- merge(soilCO2_30min[, !(colnames(soilCO2_30min) %in% drop_vars)],
-                        soiltemp_30min[, !(colnames(soilCO2_30min) %in% drop_vars)])
-
-# Quick plot to decide which plot to focus on
-library(ggplot2)
-library(dplyr)
-
-intro_to_R.dat |>
-  ggplot(aes(y = soilTempMean, x = startDateTime, color = verticalPosition)) +
-  geom_line() +
-  facet_wrap(~ horizontalPosition)
-
-intro_to_R.dat |>
-  ggplot(aes(y = soilCO2concentrationMean, x = startDateTime, color = verticalPosition)) +
-  geom_line() +
-  facet_wrap(~ horizontalPosition)
-
-intro_to_R.dat |>
-  ggplot(aes(y = soilCO2concentrationMean, x = soilTempMean, color = verticalPosition)) +
-  geom_point() +
-  facet_wrap(~ horizontalPosition)
-
-# Decided to focus on plot 003
-intro_to_R.dat <- intro_to_R.dat[intro_to_R.dat$horizontalPosition == "003", ]
-
-View(intro_to_R.dat)
-
-# Save data sets
-write.csv(soilCO2_30min, 
-          file.path("data/NEON_soils", paste0(paste("soilCO2_30min", terrsite, startdate, enddate, sep = "_"), ".csv")), 
-          row.names = FALSE)
-write.csv(soiltemp_30min, 
-          file.path("data/NEON_soils", paste0(paste("soiltemp_30min", terrsite, startdate, enddate, sep = "_"), ".csv")), 
-          row.names = FALSE)
-# write.csv(intro_to_R.dat, "data/intro-to-R_dat.csv", 
-#           row.names = FALSE) # decided to use the stream data instead
-
-
-
 ##############################################
 ### This section creates RData files that 
 ### are pre-loaded into chapters
 
 library(neonUtilities)
+
 
 ## Vectorization and functions
 
@@ -441,7 +343,6 @@ TSW_30min <- readTableNEON(dataFile = data_filepath,
 save(TSW_30min, file = "src/chp-functions_watertemp.RData")
 
 
-
 ## Tidyverse basics
 
 # Define dates for download: June 1 - Oct 31, 2021
@@ -482,7 +383,7 @@ stackByTable(filepath = file.path(savepath, "filesToStack20120"))
 
 
 # 
-# # Unzips urface water temperature data and stacks data tables
+# # Unzips surface water temperature data and stacks data tables
 # # from a particular date range
 # stackFromStore(filepaths = file.path(savepath, "filesToStack20053"),
 #                dpID = "DP1.20053.001",
@@ -512,5 +413,63 @@ inv_fieldData <- readTableNEON(
 
 
 save(TSW_30min, inv_fieldData, inv_taxa, file = "src/chp-tidyverse_datasets.RData")
+
+
+## Example analysis
+
+# Define dates for download: Jan 1 - Dec 31, 2024
+# but we need to start before Jan 1 to get the entire month of January
+startdate <- "2023-12-31"
+enddate <- "2024-12-31"
+
+# Define the sites to download 
+# TECR = Teakettle Creek,  MART = Martha Creek, CARI = Caribou Creek
+sites <- c("TECR", "CARI", "MART") 
+
+
+# Define the directory in which to save the data
+# the file path is relative to the working directory
+savepath <- "data"
+
+# Download macroinvertebrate data
+zipsByProduct(dpID = "DP1.20120.001",
+              site = sites,
+              startdate = startdate,
+              enddate = enddate,
+              savepath = savepath,
+              include.provisional = TRUE)
+
+# Download surface water temperature data
+zipsByProduct(dpID = "DP1.20053.001",
+              site = sites,
+              startdate = startdate,
+              enddate = enddate,
+              savepath = savepath,
+              include.provisional = TRUE)
+
+# Unzips data and stacks data tables by site
+# This will stack all data within each data product folder.
+stackByTable(filepath = file.path(savepath, "filesToStack20120"))
+stackByTable(filepath = file.path(savepath, "filesToStack20053"))
+
+# Read in macroinvertebrate abundance data from data product 20120
+inv_fieldData <- readTableNEON(
+  dataFile = "data/filesToStack20120/stackedFiles/inv_fieldData.csv",
+  varFile = "data/filesToStack20120/stackedFiles/variables_20120.csv"
+)
+
+# Read in macroinvertebrate taxonomy data from data product 20120
+inv_taxa <- readTableNEON(
+  dataFile = "data/filesToStack20120/stackedFiles/inv_taxonomyProcessed.csv",
+  varFile = "data/filesToStack20120/stackedFiles/variables_20120.csv"
+)
+
+# Read in 30-min avg surface water temperature data from data product 20053
+TSW_30min <- readTableNEON(
+  dataFile = "data/filesToStack20053/stackedFiles/TSW_30min.csv",
+  varFile = "data/filesToStack20053/stackedFiles/variables_20053.csv"
+)
+
+save(inv_fieldData, inv_taxa, TSW_30min, file = "src/chp-example_analysis.RData")
 
 
