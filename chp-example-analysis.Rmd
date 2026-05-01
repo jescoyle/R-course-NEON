@@ -28,11 +28,8 @@ set.seed(10)
 
 # Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
 
-**THIS LESSON IS NOT READY FOR LEARNERS**
 
-## Overview 
-
-**THIS CHAPTER IS NOT READY FOR LEARNERS**
+## Overview
 
 ### What we will learn
 
@@ -42,16 +39,25 @@ In this lesson we will practice skills from all core lessons to conduct an analy
 
 Before beginning this lesson you should have completed all prior lessons and any prerequisites therein.
 
+You have two options for completing this lesson:
+
+**Option 1:** Follow along with a project folder and code that you can [download here](workbook/NEON_project.zip).
+
+1.  Download and unzip the folder.
+2.  Open the NEON_project.Rproj file to launch the RStudio project.
+3.  Open and run the scripts in the code file as you follow along with the lesson.
+
+**Option 2:** Create the analysis project yourself as you follow along with the lesson.
+
 Before you begin, set up an RStudio project for an organized and reproducible analysis:
 
-1. Open Rstudio and create a new project named NEON_project.
-2. Inside the NEON_project folder, create a folder named `code`. During this lesson you will create two new code scripts inside this folder.
-3. Inside the NEON_project folder, create a folder named `data`. During this lesson you will create several derived data sets for your analysis. These derived data tables will be saved in this `data` folder.
-4. Insider the derived data folder, create a folder named `output`. The code from this lesson will generate figures that will save into this folder.
-5. Be sure to click **Save** often to save your work.
+1.  Open Rstudio and create a new project named NEON_project.
+2.  Inside the NEON_project folder, create a folder named `code`. During this lesson you will create two new code scripts inside this folder.
+3.  Inside the NEON_project folder, create a folder named `data`. During this lesson you will create several derived data sets for your analysis. These derived data tables will be saved in this `data` folder.
+4.  Inside the NEON_project folder, create a folder named `output`. The code from this lesson will generate figures that will save into this folder.
+5.  Be sure to click **Save** often to save your work.
 
 The final output of this lesson is available in the chapter `r .chp_num` exercises folder of the workbook.
-
 
 ## Lesson
 
@@ -61,191 +67,477 @@ Before beginning an analysis, it can be extremely useful to map out the steps ah
 
 Let's list our goals for analyzing macroinvertebrate diversity and what we need to do to accomplish each:
 
-**Goal 1:** Compare the total number of macroinvertebrate taxa at found at each site.
+**Goal 1:** Calculate the total number of macroinvertebrate taxa and total abundance of all macroinvertebrates at each site on each sampling date.
 
-1. Start with the macroinvertebrates data downloaded from NEON.
-2. Extract two tables from this download:
-    * `inv_fieldData` contains data on when and where the invertebrate samples were collected
-    * `inv_taxonomyProcessed` contains taxonomic information about which taxa were collected in each sample
-3. Use the `inv_taxonomyProcessed` table to count the number of unique taxa found at each site, combining across all of the samples from each site (which were collected at different locations and on two separate sampling dates).
-4. Output a table comparing these values.
+1.  Start with the macroinvertebrates data downloaded from NEON.
+2.  Extract two tables from this download:
+    -   `inv_fieldData` contains data on when and where the invertebrate samples were collected
+    -   `inv_taxonomyProcessed` contains taxonomic information about which taxa were collected in each sample
+3.  Use the `inv_taxonomyProcessed` table to calculate the total abundance and total number of unique taxa in each sample at each site.
+    -   First we need to remove any erroneous samples before calculating this.
+    -   We will calculate total number of genera and families, since species-level identification may not be very accurate.
+4.  Join this macroinvertebrate community summary table with `inv_fieldData` to identify the date and benthic area sampled.
+5.  Calculate abundance as total individuals divided by area sampled.
+6.  Save this community summary table as a csv file so that it can be analyzed later.
 
+**Goal 2:** Calculate water temperature for each macroinvertebrate sample.
 
+1.  Determine the dates when macroinvertebrates were sampled from the community summary table.
+2.  Download water temperature data that includes these dates.
+3.  Remove any erroneous data.
+4.  Calculate mean, minimum and maximum water temperature during the 14 days prior to macroinvertebrate sampling.
+5.  Save this summary environmental table as a csv file so it can be analyzed later.
 
-_**Goal 2: Macroinvertebrate abundance vs. temperature**_
+**Goal 3:** Relate macroinvertebrate diversity and abundance to water temperature.
 
-We are also nearly done with the second goal as well. Let's see how far we can get using functions that we have already learned.
+1.  Join the community summary and environmental summary tables by site and sampling date.
+2.  Create several scatter plots comparing taxonomic diversity or total abundance (y-axis) to each water temperature variable (x-axis)
+3.  Save each graph as an svg file (which can be easily edited) or png file (which can be easily imported into a document).
 
-**Goal 2:** Relate the abundance and diversity of macroinvertebrates to water temperature at each site on the dates when samples were collected.
+### Data download
 
-1. Start with the same two macroinvertebrate data tables from above: `inv_fieldData` and `inv_taxonomyProcessed` and surface water temperature data as well. 
-2. Use the `inv_taxonomyProcessed` to calculate the total abundance of macroinvertebrates in each sample from each site and save this in a new table: `inverts_bysample`.
-3. Join `inverts_bysample` with `inv_fieldData` to determine the dates which each sample was collected and the amount of area sampled.
-4. Control for variability in abundance based on the amount of area sampled by calculating `density = abundance / area`.
-5. Calculate average macroinvertebrate density across all samples collected on the same date at the same site. Save this as a new table: `inverts_bysite`
-6. Calculate the average temperature across both sensors for each time point at each site and save this in a new table: `TSW_avg`.
-7. Graph macroinvertebrate density and temperature over time for the three sites.
-8. Join `inverts_bysite` (which contains macroinvertebrate density) with temperature data that corresponds to the date when samples were collected.
-9. Graph macroinvertebrate density versus water temperature as a scatterplot.  
+Before we can begin the analysis we need to download the data. To stay organized we will keep the code used to download NEON data separate from the code used to analyze the data.
 
+Create a new R script in the `code` folder named `01-download_data.R`. Putting `01` at the beginning of the name tells anyone reusing your code that this is the first step of the analysis. It also will cause your file browser to put this code file first.
 
+Write an informative header at the top of the script using comments.
 
-```{r message = FALSE, collapse = TRUE, fig.width = 10, out.width = "50%"} 
-### Goal 2: Plot macroinvertebrate abundance and temperature over time
+To download and combine downloaded data into a single table, we use the `neonUtilities` package functions `zipsByTable()` followed by `stackByTable()`.
 
-## Start with macroinvertebrate data tables
-## inv_fieldData and inv_taxonomyProcessed (saved as inv_taxa)
-## Use surface water temperature data from TSW_30min
- 
- # Extract surface water temperature measurements
- # averaged over 30 min periods
- TSW_30min <- watertemp_list$TSW_30min
+```{r eval = FALSE}
 
- # Filter the temperature data to good observations
- TSW_30min_good <- filter(TSW_30min, finalQF == 0)
+## Example analysis of NEON Data
+## Step 1: download data
+## Author: YOUR NAME HERE
+## Date: TODAYS DATE
+## Description: This code downloads and stacks NEON data used 
+##              this analysis. It should only be run once.
 
-## Use inverts_taxa to calculate the total abundance of
-## macroinvertebrates in each sample from each site 
-inverts_bysample <- inv_taxa |>
-    group_by(siteID, sampleID) |>
-    summarize(total = sum(estimatedTotalCount))
+# Define dates for download: Jan 1 - Dec 31, 2024
+# but we need to start before Jan 1 to get the entire month of January
+startdate <- "2023-12-31"
+enddate <- "2024-12-31"
 
-## Join inverts_bysample with inv_fieldData to determine the 
-## dates which each sample was collected and the amount of area sampled.
-
- # Since we don't need all the columns, we can just select the columns
- # of interest before joining.
- field_cols <- inv_fieldData |> 
-   select(sampleID, collectDate, benthicArea)
-
- # Join the invertebrate abundance with field data columns
- # left_join keeps all rows in inverts_bysample
- inverts_bysample <- left_join(inverts_bysample, field_cols, by = "sampleID")
+# Define the sites to download 
+# TECR = Teakettle Creek,  MART = Martha Creek, CARI = Caribou Creek
+sites <- c("TECR", "CARI", "MART") 
 
 
-## Control for variability in abundance based on the amount 
-## of area sampled by calculating density = abundance / area`
+# Define the directory in which to save the data
+# the file path is relative to the working directory
+savepath <- "data"
 
-  inverts_bysample <- inverts_bysample |>
-    mutate(density_per_m2 = total / benthicArea)
- 
- 
-## Calculate average macroinvertebrate density across all samples 
-## collected on the same date at the same site. 
-  
-  
-  # Make a column that extracts the date from collectDate
-  inverts_bysample <- inverts_bysample |>
-    mutate(collect_day = date(collectDate))
-  # Note: we could have combined this step with the last
-  # step and created  two columns with one `mutate()`.
-  
-  # Summarize the samples by date and site
-  # calculate average macroinvertebrate density
-  # calculate number of samples averaged 
-  inverts_bysite <- inverts_bysample |>
-    group_by(siteID, collect_day) |>
-    summarize(density_per_m2 = mean(density_per_m2),
-              n_samples = n()) 
-    
-  
-## Calculate average temperature across both sensors for 
-## each time point at each site and save this in a new table
-  
-  TSW_avg <- TSW_30min_good |>
-    group_by(siteID, startDateTime) |>
-    summarize(temp_avg_C = mean(surfWaterTempMean),
-              n_obs = n()) # keep track of the number of measurements averaged
-  
-  
-## Graph macroinvertebrate density and temperature over time 
-## for the four sites.
-  
-  # Temperature vs. time colored by site
-  TSW_avg |> 
-    ggplot(aes(x = startDateTime, y = temp_avg_C, color = siteID)) +
-    geom_line() +
-    labs(x = "Date",
-         y = expression("Surface water temperature"~(degree*C)),
-         color = "NEON Site")
-  
-  # Macroinvertebrate density vs. time
-  inverts_bysite |> 
-    ggplot(aes(x = collect_day, y = density_per_m2, color = siteID)) +
+# Download macroinvertebrate data
+zipsByProduct(dpID = "DP1.20120.001",
+              site = sites,
+              startdate = startdate,
+              enddate = enddate,
+              savepath = savepath,
+              include.provisional = TRUE)
+
+# select y after verifying the data is not too large
+
+# Download surface water temperature data
+zipsByProduct(dpID = "DP1.20053.001",
+              site = sites,
+              startdate = startdate,
+              enddate = enddate,
+              savepath = savepath,
+              include.provisional = TRUE)
+
+# select y after verifying the data is not too large
+
+# Unzips data and stacks data tables by site
+# This will stack all data within each data product folder.
+stackByTable(filepath = file.path(savepath, "filesToStack20120"))
+stackByTable(filepath = file.path(savepath, "filesToStack20053"))
+
+```
+
+Since we only need the stacked data tables we can remove all of the other files we downloaded. This will save space on the computer and the code will allow us to easily download the data again if needed.
+
+Let's move and rename the stacked data files with a name that indicates which dates and sites are in the file. Then delete all of the other folders.
+
+You could do this manually using the file browser, or practice your coding skills and use the Terminal. Here are the commands to type into the terminal to accomplish this:
+
+For future reference, we save these commands into a script named `02-move_data.sh` in the `code` folder.
+
+```{sh eval = FALSE}
+# Move stacked macroinvertebrates data
+# into new directory with informative name
+mkdir data/stacked20120_2024_TECR-CARI-MART
+
+mv data/filesToStack20120/stackedFiles/* data/stacked20120_2024_TECR-CARI-MART
+
+# Move stacked temperature data
+# into new directory with informative name
+mkdir data/stacked20053_2024_TECR-CARI-MART
+
+mv data/filesToStack20053/stackedFiles/* data/stacked20053_2024_TECR-CARI-MART
+
+# Remove original downloaded data
+rm -r data/filesToStack*
+
+
+```
+
+Once data are downloaded and tables stacked together, we do not need to run these code again unless we are updating the data from NEON.
+
+### GOAL 1: Generate macroinvertebrate community summary
+
+Let's create a new R script for this analysis of macroinvertebrates and temperature. It is a good idea to keep separate code scripts for analyses that are distinct from one another. Create a new R script in the `code` folder named `03-invert_temperature_analysis.R`. Write an informative header and read in the data tables we will need using the `readTableNEON()` function.
+
+```{r eval = FALSE}
+## Example analysis of NEON Data
+## Step 3: analyze relationship between macroinvertebrates and temperature
+## Author: YOUR NAME HERE
+## Date: TODAYS DATE
+## Description: This code calculates diversity and abundance of 
+##              macroinvertebrates at three NEON sites in 2024. It
+##              related diversity and abundance to several water 
+##              temperature variables.
+
+## Load packages for the analysis
+library(neonUtilities)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+
+# Read in macroinvertebrate abundance data from data product 20120
+inv_fieldData <- readTableNEON(
+  dataFile = "data/stacked20120_2024_TECR-CARI-MART/inv_fieldData.csv",
+  varFile = "data/stacked20120_2024_TECR-CARI-MART/variables_20120.csv"
+)
+
+# Read in macroinvertebrate taxonomy data from data product 20120
+inv_taxa <- readTableNEON(
+  dataFile = "data/stacked20120_2024_TECR-CARI-MART/inv_taxonomyProcessed.csv",
+  varFile = "data/stacked20120_2024_TECR-CARI-MART/variables_20120.csv"
+)
+
+# Read in 30-min avg surface water temperature data from data product 20053
+TSW_30min <- readTableNEON(
+  dataFile = "data/stacked20053_2024_TECR-CARI-MART/TSW_30min.csv",
+  varFile = "data/stacked20053_2024_TECR-CARI-MART/variables_20053.csv"
+)
+
+```
+
+```{r include = FALSE}
+## Load packages for the analysis
+library(neonUtilities)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# Load previously downloaded data
+load("src/chp-example_analysis.RData")
+
+```
+
+Now we have three data tables:
+
+-   `TWS_30min` = average temperature measurements every 30 minutes
+
+-   `inv_fieldData` = data on how each macroinvertebrate sample was collected
+
+-   `inv_taxa` = data on how many individuals belonging to each taxon and each size class were collected in each sample.
+
+Our next step is to generate a summary table that looks like this:
+
+| SampleID | SiteID | Date | Num. individuals | Num. genera | Num. families |
+|----------|--------|------|------------------|-------------|---------------|
+|          |        |      |                  |             |               |
+|          |        |      |                  |             |               |
+
+We will first need to decide whether to omit any data. Then we can group the rows of `inv_taxa` by the `sampleID` column and use `summarize()` to calculate the total number of individuals and total number of unique names that appear in the `family` and `genus` columns.
+
+Because it can be challenging to taxonomically identify macroinvertebrate larvae, we will limit this analysis to adults. Adult and larval macroinvertebrate have different ecological roles, therefore focusing on the total abundance of adults separate from larvae also allows us to examine hypotheses more carefully.
+
+```{r}
+
+# Filter data to only adults 
+inv_taxa_adult <- filter(inv_taxa, invertebrateLifeStage == "adult")
+
+```
+
+First we will calculate the total number of macroinvertebrates collected in each sample.
+
+```{r warning = FALSE}
+# Calculate total num. individuals in each sample
+abundance <- inv_taxa_adult |>
+  group_by(sampleID, siteID, collectDate) |>
+  summarize(tot_abun = sum(estimatedTotalCount))
+
+```
+
+Samples were collected from different areas of the stream, so in order to combine abundance data from different samples collected on the same date, we first need to calculate macroinvertebrate density (individuals per m^2^).
+
+```{r warning = FALSE}
+
+# Join abundance in each sample with 
+# benthicArea column from inv_fieldData
+# Then calculate density as total abundance / area
+abundance <- inv_fieldData |>
+  select(sampleID, benthicArea) |>
+  right_join(abundance) |>
+  mutate(abun_per_m2 = tot_abun / benthicArea)
+
+# Then summarize abundance at each site and sampling date:
+# n_samples = number of samples
+# abun_per_m2 = average density across all samples 
+site_summary <- abundance |>
+  group_by(siteID, collectDate) |>
+  summarize(n_samples = n(),
+            abun_per_m2 = mean(abun_per_m2))
+```
+
+Here is what we have summarized so far:
+
+```{r include = FALSE}
+kable(site_summary, row.names = FALSE)
+```
+
+Next we will calculate taxonomic richness as the number of unique genera and families found on each collection date.
+
+We first need to remove any specimens that could not be accurately identified. The metadata tells us that the `immatureSpecimens` column is `Y` when the "sample contains immature specimen(s) for which target level of identification cannot be achieved". The `distinctTaxon` column is `Y` when a specimen represents a unique taxon in the sample. We will use these to filter the data before combining all samples from the same collection date.
+
+```{r warning = FALSE}
+# Remove uncertain taxonomic IDs and non-distinct taxa
+# then calculate number of unique genera and families 
+# for each collection date at each site
+diversity <- inv_taxa_adult |>
+  filter(immatureSpecimen == "N",
+         distinctTaxon == "Y") |>
+  group_by(siteID, collectDate) |>
+  summarize(n_genus = length(unique(genus)),
+            n_family = length(unique(family)))
+
+# Join diversity and abundance tables, keeping all rows
+# in each table
+site_summary <- full_join(site_summary, diversity)
+
+```
+
+Here is the final summary table for macroinvertebrate diversity:
+
+```{r}
+kable(site_summary, row.names = FALSE)
+```
+
+The last step is to save this table as a csv file so that we can easily convert it to a table in a document or utilize it in a future analysis.
+
+
+```{r eval = FALSE}
+
+# Write table as csv to output folder
+write.csv(site_summary, file = "data/macroinvertebrates_site_summary.csv", row.names = FALSE)
+
+```
+
+### GOAL 2: Generate environmental data summary
+
+We now want to calculate several temperature variables from the 30 minute temperature data downloaded from NEON. 
+
+Here is what these data look like:
+
+```{r}
+kable(TSW_30min[1:10,], row.names = FALSE)
+```
+
+The first step is to remove data that has been flagged as potentially incorrect, which is indicated by a value in the `finalQF` column that is different from 0.
+
+
+```{r warning = FALSE}
+# Remove erroneous temperature data flagged by finalQF
+temp_dat <- TSW_30min |>
+  filter(finalQF == 0)
+
+```
+
+Recall that there are two sensors recording data, indicated by the `horizontalPosition` column:
+
+```{r warning = FALSE}
+# How many measurements from each site and horizontal sensor position?
+with(TSW_30min,
+     table(siteID, horizontalPosition)
+)
+# How many measurements from each site and vertical sensor position?
+with(TSW_30min,
+     table(siteID, verticalPosition)
+)
+
+```
+
+Therefore, we should summarize temperature values using both sensors at each site. We will group the rows of `TSW_30min` by site and sensor position, then calculate mean value across the two sensors. These mean values will be what we use to calculate different temperature variables.
+
+
+```{r warning = FALSE}
+# Calculate average temperature measurements between
+# upstream and downstream sensors
+temp_avg <- temp_dat |>
+  group_by(siteID, startDateTime) |>
+  summarize(Tmean = mean(surfWaterTempMean, na.rm = TRUE),
+            Tmax = max(surfWaterTempMaximum, na.rm = TRUE),
+            Tmin = min(surfWaterTempMinimum, na.rm = TRUE)) |>
+```
+
+Let's visualize the data to makes sure everything looks reasonable.
+
+
+```{r warning = FALSE}
+# Make a quick line graph to visualize the time series of
+# temperature data availability at each site (line color)
+temp_avg |>
+  ggplot(aes(x = startDateTime, y = Tmean)) +
+    geom_line(aes(color = siteID)) +
+
+    # Add vertical line for each collection date
+    geom_vline(data = site_summary, 
+               mapping = aes(xintercept = collectDate,
+                             color = siteID))
+
+```
+
+We can see that the Caribou Creek site (CARI) in Alaska is much cooler with a shorter summer than the Martha Creek, Washington (MART) and Teakettle Creek, California (TECR) sites. The vertical lines show when macroinvertebrate data were collected. We will calculate the mean, minimum and maximum water temperatures during the 2 weeks prior to each of these macroinvertebrate sampling events for each site.
+
+First we need to determine the dates when macroinvertebrates were sampled and calculate the date that is 2 weeks (14 days) prior to each of these dates.
+
+```{r warning = FALSE}
+# Extract dates when macroinvertebrates were sampled
+# and define dates two weeks prior
+sample_dates <- site_summary |>
+  select(siteID, collectDate) |>
+  mutate(past_date = collectDate - ddays(14)) 
+
+# View dates
+sample_dates
+
+```
+
+
+
+Working one row at a time, we need to subset the `TWS_30min` data to measurements that occurred at the site and between the `past_date` and `collectDate`, then calculate the mean, minimum and maximum of the `Tmean` column. We can do these calculations and append them as new columns using the `mutate()` function.
+
+```{r warning = FALSE}
+
+# Calculate water temperature statistics from mean temperature
+# measurements collected between past_date and collectDate
+env_14days <- sample_dates |>
+  rowwise() |> # applies the functions in mutate() one row at at time
+  mutate(Tmean = mean(subset(temp_avg, siteID == siteID &
+                             startDateTime >= past_date & 
+                             startDateTime < collectDate)$Tmean, na.rm = TRUE),
+         Tmin = min(subset(temp_avg,siteID == siteID & 
+                            startDateTime >= past_date & 
+                            startDateTime < collectDate)$Tmean, na.rm = TRUE),
+         Tmax = max(subset(temp_avg, siteID == siteID & 
+                     startDateTime >= past_date & 
+                     startDateTime < collectDate)$Tmean, na.rm = TRUE)
+  )
+
+```
+
+Here's what the environmental data summary table looks like:
+
+```{r}
+kable(env_14days, row.names = FALSE)
+```
+
+Finally, we save the data to a csv file for later use.
+
+```{r eval = FALSE}
+
+# Save data
+write.csv(env_14days, file = "data/temperature_summary_14days.csv", row.names = FALSE)
+
+```
+
+### GOAL 3: Join and graph community and environmental data
+
+Now that we have macroinvertebrate community data and environmental data from the same sampling days, we can join the tables together and use the combined data to make a graph.
+
+
+```{r warning = FALSE}
+# Join temperature and macroinvertebrate data
+# keeping all rows in site_summary
+df <- left_join(site_summary, env_14days)
+
+# Make a scatter plot showing relationship between temperature
+# and total abundance
+
+df |>
+  ggplot(aes(x = Tmean, y = abun_per_m2, color = siteID)) +
     geom_point() +
-    geom_line() +
-    labs(x = "Date",
+    labs(x = expression("Mean 14-day surface water temperature"~(degree*C)),
          y = expression("Macroinvertebrate density (num. per"~m^2),
-         color = "NEON Site")
-  
+         color = "NEON Site") +
+    theme_bw() # makes black and white color scheme
+
 ```
 
-The graph in the last step gave us a warning that rows of data were omitted due to missing values. That's what we wanted to have happen, so we don't need to try to address this warning.
 
-We are almost done with the analysis- the last two steps require that we match up temperature measurements with the dates when macroinvertebrates were sampled.
-
-Let's match macroinvertebrate samples in the `inverts_bysite` table to an average of temperatures measured for a three day period before each sample was collected.
-
-First we need to calculate average temperatures over the three-day periods of time before each `collect_day` in `inverts_bysite`. To do this we will use functions from the `lubridate` package to define a set of time intervals that correspond to each of the collection dates.
+Use `ggsave()` to save this figure to the `output` folder.
 
 ```{r}
-# Define 3 day time intervals before each collection date
-inverts_bysite$temp_interval <- interval(end = inverts_bysite$collect_day,
-                                         start = inverts_bysite$collect_day - ddays(3))
-
-# Examine inverts_bysite
-inverts_bysite
+# Save as png
+ggsave("output/abun_vs_Tmean.png", height = 4, width = 5)
 ```
 
-Next we need to calculate the average temperature at each site within the three-day time intervals that we defined. This sounds like a good use for a `for` loop! We learned about `for` loops in [`r .get_chpName("program-flow", type.from = "chp")`](chp-program-flow.html). Although there are vectorized ways to accomplish this (see the `purrr` package), a `for` loop will work fine here.
+We could make individual graphs one by one. Or, `ggplot()` can make a multipanel graph that shows different sites or variables if we add the `facet_grid()` function. So, if we want to have each panel of the graph show a different temperature variable, we need all of the temperature variables (`Tmean`, `Tmin`, `Tmax`) to show up in a single column, with another column to identify which variable the value came from. This means we need to convert the data to long format. A similar argument applies to the macroinvertebrate variables. We will use `pivot_longer()` twice to convert both sets of variables to long format. 
 
-```{r}
-## Join inverts_bysite with temperature data that corresponds to the
-## date when samples were collected.
 
- # Define a vector to hold the average temperatures
- # There will be one for each row in inverts_bysite
- N <- nrow(inverts_bysite)
- avg_temp <- rep(NA, N) 
+```{r warning = FALSE}
+# Pivot to long format to make multipanel graphs
+# Each row is a combination of a temperature an macroinvertebrate variable
+df_long <- df |>
+  # Put all temperature variables in the T_var column
+  pivot_longer(starts_with("T"), names_to = "T_var", values_to = "Temperature") |>
 
- # Loop through each row in inverts_bysite
- for(i in 1:N){
-  
-   # Define the time interval and site for this row
-   this_interval <- inverts_bysite$temp_interval[i]
-   this_site <- inverts_bysite$siteID[i]
-  
-   # Get all rows from TWS_avg within the time interval for this row
-   use_temps <- filter(TSW_avg, 
-                       startDateTime %within% this_interval,
-                       siteID == this_site)
-  
-   # Calculate the average temperature and save it in avg_temp
-   # remove any missing values
-   avg_temp[i] <- mean(use_temps$temp_avg_C, na.rm = TRUE)
- }
+  # Put all macroinvertebrate variables in the M_var column
+  pivot_longer(c("abun_per_m2", "n_genus","n_family"), names_to = "M_var", values_to = "value")
 
- # Add avg_temp as a new column in inverts_bysite
- inverts_bysite$temp_avg_3day <- avg_temp
- 
- # View the data
- inverts_bysite
+# View long format data
+head(df_long)
 
 ```
 
-Now that we have macroinvertebrate abundance and temperature in the same data frame, we're ready to move on to the last step.
+Finally, we can use this long format data to make a multipanel graph. Notice that we use the `mutate()` function first to change the levels of the `M_var` and `T_var` columns to be text that is easier to understand on the graph.
+
+```{r warning = FALSE}
+
+# Use the long format data to make a graph
+df_long |>
+  
+  # use informative names for variables
+  mutate(M_var = factor(M_var, 
+                        labels = c("Density (num. per m2)", "Num. families", "Num genera")),
+         T_var = factor(T_var, 
+                        labels = c("Maximum", "Mean", "Minimum"))
+  ) |> 
+           
+  # set up graph axes
+  ggplot(aes(x = Temperature, y = value, color = siteID)) +
+    
+  # make separate plots for each macroinvertebrate variable and temp variable
+  facet_grid(M_var ~ T_var, scales = "free") +
+    
+  # add points
+  geom_point() +
+  
+  # add axis labels
+  labs(x = expression("14-day surface water temperature"~(degree*C)),
+       y = "",
+       color = "NEON Site") +
+  theme_bw() # makes black and white color scheme
 
 
-```{r fig.width = 10, out.width = "50%"}
-## Graph macroinvertebrate density versus water temperature as a scatterplot.
-## Connect points from the same site with arrows pointing from the 
-## first to the second sample.
+# Save as svg - editable in Inkscape
+ggsave("output/macroinvert_vs_temperature.svg", height = 7, width = 8)
 
-inverts_bysite |>
-  ggplot(aes(x = temp_avg_3day, y = density_per_m2)) + 
-    geom_point(aes(color = siteID)) + 
-    labs(x = expression("Surface water temperature"~(degree*C)),
-         y = expression("Macroinvertebrate density (num. per"~m^2),
-         color = "NEON Site")
 ```
+
+
+And now the analysis is complete- time to be a scientists an interpret the patterns!
 
