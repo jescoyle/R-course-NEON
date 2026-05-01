@@ -24,6 +24,16 @@ source("src/knit-options.R")
 
 # Silently set seed for random number generation, so we don't have to explain it
 set.seed(10)
+
+# Load necessary packages
+library(kableExtra)
+library(neonUtilities)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(lubridate)
+
+
 ```
 
 # Chapter `r .chp_num`. `r .get_chpName(.chp_num, type.to = "nameLong")` {.tabset}
@@ -225,12 +235,6 @@ TSW_30min <- readTableNEON(
 ```
 
 ```{r include = FALSE}
-## Load packages for the analysis
-library(neonUtilities)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-
 # Load previously downloaded data
 load("src/chp-example_analysis.RData")
 
@@ -264,7 +268,7 @@ inv_taxa_adult <- filter(inv_taxa, invertebrateLifeStage == "adult")
 
 First we will calculate the total number of macroinvertebrates collected in each sample.
 
-```{r warning = FALSE}
+```{r warning = FALSE,  message = FALSE}
 # Calculate total num. individuals in each sample
 abundance <- inv_taxa_adult |>
   group_by(sampleID, siteID, collectDate) |>
@@ -274,7 +278,7 @@ abundance <- inv_taxa_adult |>
 
 Samples were collected from different areas of the stream, so in order to combine abundance data from different samples collected on the same date, we first need to calculate macroinvertebrate density (individuals per m^2^).
 
-```{r warning = FALSE}
+```{r warning = FALSE,  message = FALSE}
 
 # Join abundance in each sample with 
 # benthicArea column from inv_fieldData
@@ -295,7 +299,7 @@ site_summary <- abundance |>
 
 Here is what we have summarized so far:
 
-```{r include = FALSE}
+```{r echo = FALSE}
 kable(site_summary, row.names = FALSE)
 ```
 
@@ -303,7 +307,7 @@ Next we will calculate taxonomic richness as the number of unique genera and fam
 
 We first need to remove any specimens that could not be accurately identified. The metadata tells us that the `immatureSpecimens` column is `Y` when the "sample contains immature specimen(s) for which target level of identification cannot be achieved". The `distinctTaxon` column is `Y` when a specimen represents a unique taxon in the sample. We will use these to filter the data before combining all samples from the same collection date.
 
-```{r warning = FALSE}
+```{r warning = FALSE,  message = FALSE}
 # Remove uncertain taxonomic IDs and non-distinct taxa
 # then calculate number of unique genera and families 
 # for each collection date at each site
@@ -322,7 +326,7 @@ site_summary <- full_join(site_summary, diversity)
 
 Here is the final summary table for macroinvertebrate diversity:
 
-```{r}
+```{r echo = FALSE}
 kable(site_summary, row.names = FALSE)
 ```
 
@@ -340,16 +344,18 @@ write.csv(site_summary, file = "data/macroinvertebrates_site_summary.csv", row.n
 
 We now want to calculate several temperature variables from the 30 minute temperature data downloaded from NEON. 
 
-Here is what these data look like:
+Here is what the first 20 rows of these data look like:
 
-```{r}
-kable(TSW_30min[1:10,], row.names = FALSE)
+```{r echo = FALSE}
+kable(TSW_30min[1:20,], row.names = FALSE)|>
+  kable_styling() |>
+  scroll_box(width = "100%", height = "300px")
 ```
 
 The first step is to remove data that has been flagged as potentially incorrect, which is indicated by a value in the `finalQF` column that is different from 0.
 
 
-```{r warning = FALSE}
+```{r warning = FALSE,  message = FALSE}
 # Remove erroneous temperature data flagged by finalQF
 temp_dat <- TSW_30min |>
   filter(finalQF == 0)
@@ -358,7 +364,7 @@ temp_dat <- TSW_30min |>
 
 Recall that there are two sensors recording data, indicated by the `horizontalPosition` column:
 
-```{r warning = FALSE}
+```{r warning = FALSE,  message = FALSE}
 # How many measurements from each site and horizontal sensor position?
 with(TSW_30min,
      table(siteID, horizontalPosition)
@@ -373,20 +379,20 @@ with(TSW_30min,
 Therefore, we should summarize temperature values using both sensors at each site. We will group the rows of `TSW_30min` by site and sensor position, then calculate mean value across the two sensors. These mean values will be what we use to calculate different temperature variables.
 
 
-```{r warning = FALSE}
+```{r warning = FALSE,  message = FALSE}
 # Calculate average temperature measurements between
 # upstream and downstream sensors
 temp_avg <- temp_dat |>
   group_by(siteID, startDateTime) |>
   summarize(Tmean = mean(surfWaterTempMean, na.rm = TRUE),
             Tmax = max(surfWaterTempMaximum, na.rm = TRUE),
-            Tmin = min(surfWaterTempMinimum, na.rm = TRUE)) |>
+            Tmin = min(surfWaterTempMinimum, na.rm = TRUE)) 
 ```
 
 Let's visualize the data to makes sure everything looks reasonable.
 
 
-```{r warning = FALSE}
+```{r warning = FALSE,  message = FALSE}
 # Make a quick line graph to visualize the time series of
 # temperature data availability at each site (line color)
 temp_avg |>
@@ -404,7 +410,7 @@ We can see that the Caribou Creek site (CARI) in Alaska is much cooler with a sh
 
 First we need to determine the dates when macroinvertebrates were sampled and calculate the date that is 2 weeks (14 days) prior to each of these dates.
 
-```{r warning = FALSE}
+```{r warning = FALSE,  message = FALSE}
 # Extract dates when macroinvertebrates were sampled
 # and define dates two weeks prior
 sample_dates <- site_summary |>
@@ -420,7 +426,7 @@ sample_dates
 
 Working one row at a time, we need to subset the `TWS_30min` data to measurements that occurred at the site and between the `past_date` and `collectDate`, then calculate the mean, minimum and maximum of the `Tmean` column. We can do these calculations and append them as new columns using the `mutate()` function.
 
-```{r warning = FALSE}
+```{r warning = FALSE,  message = FALSE}
 
 # Calculate water temperature statistics from mean temperature
 # measurements collected between past_date and collectDate
@@ -441,7 +447,7 @@ env_14days <- sample_dates |>
 
 Here's what the environmental data summary table looks like:
 
-```{r}
+```{r echo = FALSE}
 kable(env_14days, row.names = FALSE)
 ```
 
@@ -459,7 +465,7 @@ write.csv(env_14days, file = "data/temperature_summary_14days.csv", row.names = 
 Now that we have macroinvertebrate community data and environmental data from the same sampling days, we can join the tables together and use the combined data to make a graph.
 
 
-```{r warning = FALSE}
+```{r warning = FALSE,  message = FALSE}
 # Join temperature and macroinvertebrate data
 # keeping all rows in site_summary
 df <- left_join(site_summary, env_14days)
@@ -488,7 +494,7 @@ ggsave("output/abun_vs_Tmean.png", height = 4, width = 5)
 We could make individual graphs one by one. Or, `ggplot()` can make a multipanel graph that shows different sites or variables if we add the `facet_grid()` function. So, if we want to have each panel of the graph show a different temperature variable, we need all of the temperature variables (`Tmean`, `Tmin`, `Tmax`) to show up in a single column, with another column to identify which variable the value came from. This means we need to convert the data to long format. A similar argument applies to the macroinvertebrate variables. We will use `pivot_longer()` twice to convert both sets of variables to long format. 
 
 
-```{r warning = FALSE}
+```{r warning = FALSE,  message = FALSE}
 # Pivot to long format to make multipanel graphs
 # Each row is a combination of a temperature an macroinvertebrate variable
 df_long <- df |>
@@ -505,7 +511,7 @@ head(df_long)
 
 Finally, we can use this long format data to make a multipanel graph. Notice that we use the `mutate()` function first to change the levels of the `M_var` and `T_var` columns to be text that is easier to understand on the graph.
 
-```{r warning = FALSE}
+```{r warning = FALSE, message = FALSE}
 
 # Use the long format data to make a graph
 df_long |>
@@ -532,7 +538,11 @@ df_long |>
        color = "NEON Site") +
   theme_bw() # makes black and white color scheme
 
+```
 
+Finally save the graph as an svg file. This is a vector format file that can be easily edited by programs such as Inkscape, Adobe Illustrator or Vectr.
+
+```{r eval = FALSE}
 # Save as svg - editable in Inkscape
 ggsave("output/macroinvert_vs_temperature.svg", height = 7, width = 8)
 
