@@ -47,7 +47,7 @@ In this lesson we will practice skills from all core lessons to conduct an analy
 
 ### Prerequisites
 
-Before beginning this lesson you should have completed all prior lessons and any prerequisites therein.
+Before beginning this lesson you should have completed all prior lessons and any prerequisites therein. 
 
 You have two options for completing this lesson:
 
@@ -71,7 +71,21 @@ The final output of this lesson is available in the chapter `r .chp_num` exercis
 
 ## Lesson
 
+
 In this lesson we will be working on an analysis of macroinvertebrate diversity at three NEON aquatic sites: Caribou Creek, Alaska (CARI), Martha Creek, Washington (MART), and Teakettle Creek, California (TECR). You can see a map of these sites on the [NEON website](https://www.neonscience.org/field-sites/explore-field-sites). Our goal is to evaluate which site has the highest summer macroinvertebrate diversity and determine whether macroinvertebrate abundance is related to water temperature over the course of the summer.
+
+::: {.callout-tip}
+#### NEON API tokens
+
+Since we will be requesting a lot of data from the NEON data server, we will use an API token to identify ourselves to the server, which allows us to download data at a faster rate. 
+
+[Read more about NEON API tokens here.](https://data.neonscience.org/data-api/rate-limiting/#api-tokens)
+
+You will need to create an account with NEON, then go to My Account and click the GET API TOKEN button. The token is a long string of text. You will paste this in for the `token` argument (in place of `""`) when downloading data with `zipsByProduct()`.  
+
+:::
+
+### Planning the analysis
 
 Before beginning an analysis, it can be extremely useful to map out the steps ahead of time. This will make it easier to translate the analysis to code.
 
@@ -143,7 +157,8 @@ zipsByProduct(dpID = "DP1.20120.001",
               startdate = startdate,
               enddate = enddate,
               savepath = savepath,
-              include.provisional = TRUE)
+              include.provisional = TRUE,
+              token = "")
 
 # select y after verifying the data is not too large
 
@@ -153,7 +168,8 @@ zipsByProduct(dpID = "DP1.20053.001",
               startdate = startdate,
               enddate = enddate,
               savepath = savepath,
-              include.provisional = TRUE)
+              include.provisional = TRUE,
+              token = "")
 
 # select y after verifying the data is not too large
 

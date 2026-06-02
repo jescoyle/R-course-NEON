@@ -41,3 +41,9 @@ zip("exercises.zip", files = file.path(project_name, "exercises"),
     root = "workbook",
     mode = "mirror")
 
+# Zip the contents of the NEON_project folder
+# This is the contents of the example-analysis lesson
+zip("NEON_project.zip", files = "NEON_project",
+    root = "workbook",
+    mode = "mirror")
+

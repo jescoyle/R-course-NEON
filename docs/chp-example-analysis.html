@@ -481,6 +481,22 @@ website</a>. Our goal is to evaluate which site has the highest summer
 macroinvertebrate diversity and determine whether macroinvertebrate
 abundance is related to water temperature over the course of the
 summer.</p>
+<div id="neon-api-tokens" class="section level4 callout-tip">
+<h4>NEON API tokens</h4>
+<p>Since we will be requesting a lot of data from the NEON data server,
+we will use an API token to identify ourselves to the server, which
+allows us to download data at a faster rate.</p>
+<p><a
+href="https://data.neonscience.org/data-api/rate-limiting/#api-tokens">Read
+more about NEON API tokens here.</a></p>
+<p>You will need to create an account with NEON, then go to My Account
+and click the GET API TOKEN button. The token is a long string of text.
+You will paste this in for the <code>token</code> argument (in place of
+<code>""</code>) when downloading data with
+<code>zipsByProduct()</code>.</p>
+</div>
+<div id="planning-the-analysis" class="section level3">
+<h3>Planning the analysis</h3>
 <p>Before beginning an analysis, it can be extremely useful to map out
 the steps ahead of time. This will make it easier to translate the
 analysis to code.</p>
@@ -537,6 +553,7 @@ abundance (y-axis) to each water temperature variable (x-axis)</li>
 <li>Save each graph as an svg file (which can be easily edited) or png
 file (which can be easily imported into a document).</li>
 </ol>
+</div>
 <div id="data-download" class="section level3">
 <h3>Data download</h3>
 <p>Before we can begin the analysis we need to download the data. To
@@ -579,24 +596,26 @@ the <code>neonUtilities</code> package functions
 <span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>              <span class="at">startdate =</span> startdate,</span>
 <span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>              <span class="at">enddate =</span> enddate,</span>
 <span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>              <span class="at">savepath =</span> savepath,</span>
-<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>              <span class="at">include.provisional =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="co"># select y after verifying the data is not too large</span></span>
-<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="co"># Download surface water temperature data</span></span>
-<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="fu">zipsByProduct</span>(<span class="at">dpID =</span> <span class="st">&quot;DP1.20053.001&quot;</span>,</span>
-<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>              <span class="at">site =</span> sites,</span>
-<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>              <span class="at">startdate =</span> startdate,</span>
-<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a>              <span class="at">enddate =</span> enddate,</span>
-<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>              <span class="at">savepath =</span> savepath,</span>
-<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>              <span class="at">include.provisional =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a><span class="co"># select y after verifying the data is not too large</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>              <span class="at">include.provisional =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>              <span class="at">token =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="co"># select y after verifying the data is not too large</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="co"># Download surface water temperature data</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="fu">zipsByProduct</span>(<span class="at">dpID =</span> <span class="st">&quot;DP1.20053.001&quot;</span>,</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>              <span class="at">site =</span> sites,</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a>              <span class="at">startdate =</span> startdate,</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>              <span class="at">enddate =</span> enddate,</span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a>              <span class="at">savepath =</span> savepath,</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a>              <span class="at">include.provisional =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>              <span class="at">token =</span> <span class="st">&quot;&quot;</span>)</span>
 <span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a><span class="co"># Unzips data and stacks data tables by site</span></span>
-<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a><span class="co"># This will stack all data within each data product folder.</span></span>
-<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="fu">stackByTable</span>(<span class="at">filepath =</span> <span class="fu">file.path</span>(savepath, <span class="st">&quot;filesToStack20120&quot;</span>))</span>
-<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="fu">stackByTable</span>(<span class="at">filepath =</span> <span class="fu">file.path</span>(savepath, <span class="st">&quot;filesToStack20053&quot;</span>))</span></code></pre></div>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a><span class="co"># select y after verifying the data is not too large</span></span>
+<span id="cb1-43"><a href="#cb1-43" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" tabindex="-1"></a><span class="co"># Unzips data and stacks data tables by site</span></span>
+<span id="cb1-45"><a href="#cb1-45" tabindex="-1"></a><span class="co"># This will stack all data within each data product folder.</span></span>
+<span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a><span class="fu">stackByTable</span>(<span class="at">filepath =</span> <span class="fu">file.path</span>(savepath, <span class="st">&quot;filesToStack20120&quot;</span>))</span>
+<span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a><span class="fu">stackByTable</span>(<span class="at">filepath =</span> <span class="fu">file.path</span>(savepath, <span class="st">&quot;filesToStack20053&quot;</span>))</span></code></pre></div>
 <p>Since we only need the stacked data tables we can remove all of the
 other files we downloaded. This will save space on the computer and the
 code will allow us to easily download the data again if needed.</p>

@@ -1,0 +1,3 @@
+srfID,startDateTime,endDateTime,domainID,siteID,dpID,fieldName,horizontalPosition,verticalPosition,srfValue,srfValueJustification,createDateTime,lastUpdateDateTime,publicationDate,release
+95361,2024-01-23T20:00:00Z,2024-03-19T21:00:00Z,"D16","MART","DP1.20053.001","finalQFSciRvw","112","100",1,"Sensor malfunction.",2024-03-21T15:36:40Z,2024-03-21T15:36:40Z,"20251209T021431Z","RELEASE-2026"
+91342,2023-11-16T00:00:00Z,2024-01-17T00:00:00Z,"D17","TECR","DP1.20053.001","finalQFSciRvw","102","100",1,"Sensor drifting.\\n: extended flagging",2024-01-03T16:01:28Z,2024-01-22T20:25:50Z,"20251209T001714Z","RELEASE-2026"

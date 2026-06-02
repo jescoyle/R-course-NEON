@@ -1,0 +1,135 @@
+name,pubCode,description,startDate,endDate
+"ais.biofouling","None","None - no visible biological or mineral build-up when wiped",2012-01-01T00:00:00Z,NA
+"ais.biofouling","Light","Light - visible biological or mineral build-up that can be easily removed with a soft wipe",2012-01-01T00:00:00Z,NA
+"ais.biofouling","Heavy","Heavy - prominent biological or mineral build-up that requires additional cleaning beyond a soft wipe, such as a solvent or scrubbing",2012-01-01T00:00:00Z,NA
+"ais.calSuccess","BDL – Comparison not possible","BDL – Comparison not possible",2012-01-01T00:00:00Z,NA
+"ais.calSuccess","comparison successful","comparison successful",2012-01-01T00:00:00Z,NA
+"ais.calSuccess","comparison unsuccessful","comparison unsuccessful",2012-01-01T00:00:00Z,NA
+"ais.calSuccess","comparison unsuccessful, s2 BDL, s1 above BDL","comparison unsuccessful, s2 BDL, s1 above BDL",2012-01-01T00:00:00Z,NA
+"ais.calSuccess","comparison unsuccessful, s1 BDL, s2 above BDL","comparison unsuccessful, s1 BDL, s2 above BDL",2012-01-01T00:00:00Z,NA
+"ais.clarityLevel","Transparent","Transparent",2012-01-01T00:00:00Z,NA
+"ais.clarityLevel","Some Sediment","Some Sediment",2012-01-01T00:00:00Z,NA
+"ais.clarityLevel","High Sediment","High Sediment",2012-01-01T00:00:00Z,NA
+"ais.clarityLevel","Cloudy/Organics","Cloudy/Organics",2012-01-01T00:00:00Z,NA
+"ais.feature","Benchmark","Benchmark",2012-01-01T00:00:00Z,NA
+"ais.feature","Level Troll","Level Troll",2012-01-01T00:00:00Z,NA
+"ais.feature","Sonde","Sonde",2012-01-01T00:00:00Z,NA
+"ais.feature","SUNA","SUNA",2012-01-01T00:00:00Z,NA
+"ais.feature","PAR","PAR",2012-01-01T00:00:00Z,NA
+"ais.feature","Inlet","Inlet",2012-01-01T00:00:00Z,NA
+"ais.feature","Outlet","Outlet",2012-01-01T00:00:00Z,NA
+"ais.feature","Groundwater Well","Groundwater Well",2012-01-01T00:00:00Z,NA
+"ais.feature","Met Station","Met Station",2012-01-01T00:00:00Z,NA
+"ais.feature","Staff Gauge","Staff Gauge",2012-01-01T00:00:00Z,NA
+"ais.feature","NADP","NADP",2012-01-01T00:00:00Z,NA
+"ais.feature","Primary/Secondary Pricip","Primary/Secondary Pricip",2012-01-01T00:00:00Z,NA
+"ais.feature","Portal","Portal",2012-01-01T00:00:00Z,NA
+"ais.feature","Camera","Camera",2012-01-01T00:00:00Z,NA
+"ais.feature","Surface Water Troll","Surface Water Troll",2012-01-01T00:00:00Z,NA
+"ais.feature","Discharge Transect","Discharge Transect",2012-01-01T00:00:00Z,NA
+"ais.feature","Other","Other",2012-01-01T00:00:00Z,NA
+"ais.groundwaterCapType","regular","regular",2012-01-01T00:00:00Z,NA
+"ais.groundwaterCapType","snorkel","snorkel",2012-01-01T00:00:00Z,NA
+"ais.groundwaterMove","up","up",2012-01-01T00:00:00Z,NA
+"ais.groundwaterMove","down","down",2012-01-01T00:00:00Z,NA
+"ais.gwInspectionImpractical","location frozen","location frozen",2012-01-01T00:00:00Z,NA
+"ais.gwInspectionImpractical","location covered in snow","location covered in snow",2012-01-01T00:00:00Z,NA
+"ais.gwInspectionImpractical","lid or lock damage","lid or lock damage",2012-01-01T00:00:00Z,NA
+"ais.gwInspectionImpractical","location dry","location dry",2012-01-01T00:00:00Z,NA
+"ais.gwInspectionImpractical","clarity checked on separate visit","clarity checked on separate visit",2012-01-01T00:00:00Z,NA
+"ais.infrastructureMove","Flood Damage","Flood Damage",2012-01-01T00:00:00Z,NA
+"ais.infrastructureMove","Ice Damage","Ice Damage",2012-01-01T00:00:00Z,NA
+"ais.infrastructureMove","Hurricane Damage","Hurricane Damage",2012-01-01T00:00:00Z,NA
+"ais.infrastructureMove","Damage from Animals","Damage from Animals",2012-01-01T00:00:00Z,NA
+"ais.infrastructureMove","Planned Move","Planned Move",2012-01-01T00:00:00Z,NA
+"ais.infrastructureMove","Vandalism","Vandalism",2012-01-01T00:00:00Z,NA
+"ais.inspectionImpractical","Not installed","Not installed",2012-01-01T00:00:00Z,NA
+"ais.inspectionImpractical","High flow","High flows",2012-01-01T00:00:00Z,NA
+"ais.inspectionImpractical","Ice safety","Ice safety",2012-01-01T00:00:00Z,NA
+"ais.inspectionImpractical","Ran out of time","Ran out of time",2012-01-01T00:00:00Z,NA
+"ais.inspectionImpractical","Access Issue","Access Issue",2012-01-01T00:00:00Z,NA
+"ais.inspectionImpractical","Location frozen or snow covered","Location frozen or snow covered",2012-01-01T00:00:00Z,NA
+"ais.inspectionImpractical","Staggered inspection schedule","Staggered inspection schedule",2012-01-01T00:00:00Z,NA
+"ais.location","S1 monopod (has troll)","S1 monopod (has troll)",2012-01-01T00:00:00Z,NA
+"ais.location","S1 low-profile (no troll)","S1 low-profile (no troll)",2012-01-01T00:00:00Z,NA
+"ais.location","S1 lonely troll","S1 lonely troll",2012-01-01T00:00:00Z,NA
+"ais.location","S2 monopod (has troll)","S2 monopod (has troll)",2012-01-01T00:00:00Z,NA
+"ais.location","S2 low-profile (no troll)","S2 low-profile (no troll)",2012-01-01T00:00:00Z,NA
+"ais.location","S2 lonely troll","S2 lonely troll",2012-01-01T00:00:00Z,NA
+"ais.location","Staff Gauge with Troll","Staff Gauge with Troll",2012-01-01T00:00:00Z,NA
+"ais.location","Staff Gauge without Troll","Staff Gauge without Troll",2012-01-01T00:00:00Z,NA
+"ais.location","Groundwater Wells","Groundwater Wells",2012-01-01T00:00:00Z,NA
+"ais.location","S1-River","S1-River",2012-01-01T00:00:00Z,NA
+"ais.location","Staff Gauge","Staff Gauge",2012-01-01T00:00:00Z,NA
+"ais.location","Buoy","Buoy",2012-01-01T00:00:00Z,NA
+"ais.location","Inlet","Inlet",2012-01-01T00:00:00Z,NA
+"ais.location","Outlet","Outlet",2012-01-01T00:00:00Z,NA
+"ais.permanentTemporary","Permanent","Permanent",2012-01-01T00:00:00Z,NA
+"ais.permanentTemporary","Temporary","Temporary",2012-01-01T00:00:00Z,NA
+"ais.prismType","regular","regular",2012-01-01T00:00:00Z,NA
+"ais.prismType","sliding mini","sliding mini",2012-01-01T00:00:00Z,NA
+"ais.sensorDirection","raised","raised",2012-01-01T00:00:00Z,NA
+"ais.sensorDirection","lowered","lowered",2012-01-01T00:00:00Z,NA
+"ais.sensorMove","protocol change","protocol change",2012-01-01T00:00:00Z,NA
+"ais.sensorMove","previous position did not meet requirements","previous position did not meet requirements",2012-01-01T00:00:00Z,NA
+"ais.sensorMove","not submerged","not submerged",2012-01-01T00:00:00Z,NA
+"ais.sensorMove","damage requiring infrastructure fix","damage requiring infrastructure fix",2012-01-01T00:00:00Z,NA
+"ais.sensorMove","high flow predicted","high flow predicted",2012-01-01T00:00:00Z,NA
+"ais.sensorMove","low flow predicted","low flow predicted",2012-01-01T00:00:00Z,NA
+"ais.sensorMove","cable slip","cable slip",2012-01-01T00:00:00Z,NA
+"ais.sensorOrientation","horizontal","horizontal",2012-01-01T00:00:00Z,NA
+"ais.sensorOrientation","vertical","vertical",2012-01-01T00:00:00Z,NA
+"ais.sensorSet","S1","Sensor set 1, upstream, no FDOM or nitrate",2012-01-01T00:00:00Z,NA
+"ais.sensorSet","S2","Sensor set 2, downstream, fDOM and nitrate",2012-01-01T00:00:00Z,NA
+"ais.sensorSet","Both S1 and S2","Both S1 and S2",2012-01-01T00:00:00Z,NA
+"ais.surveyType","initial","initial",2012-01-01T00:00:00Z,NA
+"ais.surveyType","resurvey","resurvey",2012-01-01T00:00:00Z,NA
+"ais.turbidityPoints","1-point","1-point, DI only",2012-01-01T00:00:00Z,NA
+"ais.turbidityPoints","2-point","2-point",2012-01-01T00:00:00Z,NA
+"ais.turbidityPoints","3-point","3-point",2012-01-01T00:00:00Z,NA
+"ais.vertical","top","top",2012-01-01T00:00:00Z,NA
+"ais.vertical","bottom","bottom",2012-01-01T00:00:00Z,NA
+"ais.yesNoFailed","Y","Yes",2012-01-01T00:00:00Z,NA
+"ais.yesNoFailed","Failed","No",2012-01-01T00:00:00Z,NA
+"ais.yesNoFailed","N","No",2012-01-01T00:00:00Z,NA
+"fsh.actualOrEstimated","actual","actual",2012-01-01T00:00:00Z,NA
+"fsh.actualOrEstimated","estimated","estimated",2012-01-01T00:00:00Z,NA
+"rip.bankLR","Left","Left",2012-01-01T00:00:00Z,NA
+"rip.bankLR","Right","Right",2012-01-01T00:00:00Z,NA
+"samplingImpractical","location dry","location dry",2012-01-01T00:00:00Z,NA
+"samplingImpractical","location frozen","location frozen",2012-01-01T00:00:00Z,NA
+"samplingImpractical","location snow covered","location snow covered",2012-01-01T00:00:00Z,NA
+"samplingImpractical","other","Sampling location inaccessible due to other ecological reason described in the remarks",2012-01-01T00:00:00Z,NA
+"samplingImpractical","shallow groundwater","shallow groundwater; depth of groundwater column less than 0.5 m",2012-01-01T00:00:00Z,NA
+"samplingImpractical","low yield groundwater","low yield groundwater well",2012-01-01T00:00:00Z,NA
+"samplingImpractical","high water velocity","high water velocity",2012-01-01T00:00:00Z,NA
+"samplingImpractical","staff gauge disturbed","staff gauge disturbed",2012-01-01T00:00:00Z,NA
+"samplingImpractical","staff gauge not installed","staff gauge not installed",2012-01-01T00:00:00Z,NA
+"samplingImpractical","OK","OK",2012-01-01T00:00:00Z,NA
+"samplingImpractical","coordinates not suitable","Maximum number of attempts made to sample within a subplot were unsuccessful",2012-01-01T00:00:00Z,NA
+"samplingImpractical","location flooded","location flooded",2012-01-01T00:00:00Z,NA
+"samplingImpractical","logistical","logistical",2012-01-01T00:00:00Z,NA
+"samplingImpractical","management","management",2012-01-01T00:00:00Z,NA
+"samplingImpractical","extreme weather","extreme weather",2012-01-01T00:00:00Z,NA
+"samplingImpractical","location burned","location burned",2012-01-01T00:00:00Z,NA
+"samplingImpractical","temperature low","temperature low",2012-01-01T00:00:00Z,NA
+"samplingImpractical","temperature high","temperature high",2012-01-01T00:00:00Z,NA
+"samplingImpractical","disturbance","samples not collected due to disturbance",2012-01-01T00:00:00Z,NA
+"samplingImpractical","too windy","too windy",2012-01-01T00:00:00Z,NA
+"samplingImpractical","horizon not present","horizon not present in the incubated soil sample",2012-01-01T00:00:00Z,NA
+"samplingImpractical","location wet","location too wet due to rain or dew",2012-01-01T00:00:00Z,NA
+"samplingImpractical","not all samples collected on this date","not all samples collected on this date",2012-01-01T00:00:00Z,2022-12-31T00:00:00Z
+"samplingImpractical","exclosure cell not clipped, livestock absent","exclosure clip cell not harvested, cattle absent during previous grazing interval",2012-01-01T00:00:00Z,NA
+"samplingImpractical","ambient cell not clipped, livestock absent","ambient clip cell not harvested, cattle absent during previous grazing interval",2012-01-01T00:00:00Z,NA
+"samplingImpractical","wildfire","sampling location inaccessible due to active wildfire or post fire safety hazards",2012-01-01T00:00:00Z,NA
+"samplingImpractical","wildlife hazard","wildlife hazard, specific hazard described in remarks",2012-01-01T00:00:00Z,NA
+"samplingImpractical","safety hazard","unsafe conditions at sampling location or on route to sampling location",2012-01-01T00:00:00Z,NA
+"samplingImpractical","outside target flow range","selected when stream flow already has good coverage and specific flows are being targeted",2022-03-01T00:00:00Z,NA
+"samplingImpractical","onshore protocols only","sampling not required when only onshore protocols are scheduled",2012-01-01T00:00:00Z,NA
+"samplingImpractical","night fishing","sampling not required when night fishing",2012-01-01T00:00:00Z,NA
+"samplingImpractical","obstruction","sample not collected due to an obstruction in sampling area",2012-01-01T00:00:00Z,NA
+"samplingImpractical","location vulnerable to planned sampling","location vulnerable to excessive technician impacts during planned sampling",2012-01-01T00:00:00Z,NA
+"samplingImpractical","exclosure clip cell not harvested, plants senesced for entire sampling interval","plants under the exclosure had senesced for the entirety of the previous sampling interval",2012-01-01T00:00:00Z,NA
+"samplingImpractical","ambient clip cell not harvested, plants senesced for entire sampling interval","plants exposed to grazing had senesced for the entirety of the previous sampling interval",2012-01-01T00:00:00Z,NA
+"Yes or No choice","Y","Yes",2012-01-01T00:00:00Z,NA
+"Yes or No choice","N","No",2012-01-01T00:00:00Z,NA
