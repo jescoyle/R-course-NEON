@@ -1,0 +1,11 @@
+@misc{https://doi.org/10.48443/4xdv-a303,
+  doi = {10.48443/4XDV-A303},
+  url = {https://data.neonscience.org/data-products/DP1.20053.001/RELEASE-2026},
+  author = {{National Ecological Observatory Network (NEON)}},
+  keywords = {aquatic, hydrology, stream, metabolism, water quality, surface water, biogeochemistry, water temperature, ecohydrology},
+  language = {en},
+  title = {Temperature (PRT) in surface water (DP1.20053.001)},
+  publisher = {National Ecological Observatory Network (NEON)},
+  year = {2026}
+}
+

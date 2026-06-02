@@ -397,10 +397,7 @@ $(document).ready(function () {
       <a href="chp-tidyverse-basics.html">7. Tidy data</a>
     </li>
     <li>
-      <a href="chp-program-flow.html">8. Program flow</a>
-    </li>
-    <li>
-      <a href="chp-example-analysis.html">9. Example analysis</a>
+      <a href="chp-example-analysis.html">8. Example analysis</a>
     </li>
   </ul>
 </li>
@@ -423,9 +420,9 @@ $(document).ready(function () {
 </div>
 
 
-<div id="chapter-9.-example-analysis-of-neon-data"
+<div id="chapter-8.-example-analysis-of-neon-data"
 class="section level1 tabset">
-<h1 class="tabset">Chapter 9. Example analysis of NEON data</h1>
+<h1 class="tabset">Chapter 8. Example analysis of NEON data</h1>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <div id="what-we-will-learn" class="section level3">
@@ -466,7 +463,7 @@ this <code>data</code> folder.</li>
 that will save into this folder.</li>
 <li>Be sure to click <strong>Save</strong> often to save your work.</li>
 </ol>
-<p>The final output of this lesson is available in the chapter 9
+<p>The final output of this lesson is available in the chapter 8
 exercises folder of the workbook.</p>
 </div>
 </div>
@@ -2037,7 +2034,7 @@ reasonable.</p>
 <span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">data =</span> site_summary, </span>
 <span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>               <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">xintercept =</span> collectDate,</span>
 <span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>                             <span class="at">color =</span> siteID))</span></code></pre></div>
-<p><img src="images/rmd-09-unnamed-chunk-17-1.png" width="816" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-08-unnamed-chunk-17-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p>We can see that the Caribou Creek site (CARI) in Alaska is much
 cooler with a shorter summer than the Martha Creek, Washington (MART)
 and Teakettle Creek, California (TECR) sites. The vertical lines show
@@ -2180,7 +2177,7 @@ use the combined data to make a graph.</p>
 <span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>         <span class="at">y =</span> <span class="fu">expression</span>(<span class="st">&quot;Macroinvertebrate density (num. per&quot;</span><span class="sc">~</span>m<span class="sc">^</span><span class="dv">2</span>),</span>
 <span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">&quot;NEON Site&quot;</span>) <span class="sc">+</span></span>
 <span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a>    <span class="fu">theme_bw</span>() <span class="co"># makes black and white color scheme</span></span></code></pre></div>
-<p><img src="images/rmd-09-unnamed-chunk-22-1.png" width="816" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-08-unnamed-chunk-22-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p>Use <code>ggsave()</code> to save this figure to the
 <code>output</code> folder.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># Save as png</span></span>
@@ -2245,7 +2242,7 @@ be text that is easier to understand on the graph.</p>
 <span id="cb24-22"><a href="#cb24-22" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
 <span id="cb24-23"><a href="#cb24-23" tabindex="-1"></a>       <span class="at">color =</span> <span class="st">&quot;NEON Site&quot;</span>) <span class="sc">+</span></span>
 <span id="cb24-24"><a href="#cb24-24" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="co"># makes black and white color scheme</span></span></code></pre></div>
-<p><img src="images/rmd-09-unnamed-chunk-25-1.png" width="816" style="display: block; margin: auto;" /></p>
+<p><img src="images/rmd-08-unnamed-chunk-25-1.png" width="816" style="display: block; margin: auto;" /></p>
 <p>Finally save the graph as an svg file. This is a vector format file
 that can be easily edited by programs such as Inkscape, Adobe
 Illustrator or Vectr.</p>
