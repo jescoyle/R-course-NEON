@@ -12,6 +12,12 @@ library(dplyr)
 library(tidyr)
 library(lubridate)
 
+## Define personal NEON API token
+NEON_token <- ""
+
+# If not using a token, leave this as 
+# NEON_token <- ""
+
 ## Surface water and community data from Teakettle Creek, NEON
 
 # Define dates for download: Defined based on when data are collected for the organismal samples
@@ -28,19 +34,22 @@ aquasite <- "TECR" # Teakettle Creek, Sierra Nevada, CA
 microbes <- loadByProduct(dpID = "DP1.20138.001",
                               site = aquasite,
                               startdate = startdate,
-                              enddate = enddate)
+                              enddate = enddate,
+                              token = NEON_token)
 
 # Periphyton, seston and phytoplankton collection # provisional as of 7/2023, May, Aug, Sept 2021
 # plankton <- loadByProduct(dpID = "DP1.20166.001",
 #                           site = aquasite,
 #                           startdate = startdate,
-#                           enddate = enddate)
+#                           enddate = enddate,
+#                           token = NEON_token))
 
 # Macroinvertebrate collection: May, July, Sept 2021
 # inverts <- loadByProduct(dpID = "DP1.20120.001",
 #                          site = aquasite,
 #                          startdate = startdate,
-#                          enddate = enddate)
+#                          enddate = enddate,
+#                          token = NEON_token))
 
 
 
@@ -48,25 +57,29 @@ microbes <- loadByProduct(dpID = "DP1.20138.001",
 nitrate <- loadByProduct(dpID = "DP1.20033.001",
               site = aquasite,
               startdate = startdate,
-              enddate = enddate)
+              enddate = enddate,
+              token = NEON_token)
 
 # Photosynthetically active radiation
 # PAR <- loadByProduct(dpID = "DP1.20042.001",
 #                          site = aquasite,
 #                          startdate = startdate,
-#                          enddate = enddate)
+#                          enddate = enddate,
+#                          token = NEON_token))
 
 # Temperature in surface water
 watertemp <- loadByProduct(dpID = "DP1.20053.001",
                            site = aquasite,
                            startdate = startdate,
-                           enddate = enddate)
+                           enddate = enddate,
+                           token = NEON_token)
 
 # Water quality, including conductivity, chl a, oxygen, dom, pH, turbidity
 waterqual <- loadByProduct(dpID = "DP1.20288.001",
                            site = aquasite,
                            startdate = startdate,
-                           enddate = enddate)
+                           enddate = enddate,
+                           token = NEON_token)
 
 # Water sensor locations
 sensor_locs <- waterqual$sensor_positions_20288
@@ -92,7 +105,6 @@ watertemp_30min$HOR.VER <- with(watertemp_30min, paste(horizontalPosition, verti
 ## Water quality
 waterqual_inst <- waterqual$waq_instantaneous
 
-View(watertemp$variables_20053)
 
 # Define variables to keep in the final data table
 waterqual_vars <- c("specificConductance", "dissolvedOxygen", "pH", "chlorophyll", "turbidity", "fDOM")
@@ -323,7 +335,8 @@ zipsByProduct(dpID = dpID,
               startdate = startdate,
               enddate = enddate,
               savepath = savepath,
-              include.provisional = TRUE)
+              include.provisional = TRUE,
+              token = NEON_token)
 
 # Unzips data and stacks data tables by site
 # Saves resulting tables into the savepath directory
@@ -342,6 +355,8 @@ TSW_30min <- readTableNEON(dataFile = data_filepath,
                            varFile = var_filepath)
 save(TSW_30min, file = "src/chp-functions_watertemp.RData")
 
+# Remove download
+unlink(file.path(savepath, "filesToStack20053"), recursive = TRUE, force = TRUE)
 
 ## Tidyverse basics
 
@@ -365,7 +380,8 @@ zipsByProduct(dpID = "DP1.20120.001",
               startdate = startdate,
               enddate = enddate,
               savepath = savepath,
-              include.provisional = TRUE)
+              include.provisional = TRUE,
+              token = NEON_token)
 
 # Download surface water temperature data
 zipsByProduct(dpID = "DP1.20053.001",
@@ -373,7 +389,8 @@ zipsByProduct(dpID = "DP1.20053.001",
               startdate = startdate,
               enddate = enddate,
               savepath = savepath,
-              include.provisional = TRUE)
+              include.provisional = TRUE,
+              token = NEON_token)
 
 
 # Unzips data and stacks data tables by site
@@ -401,18 +418,23 @@ TSW_30min <- readTableNEON(
 
 # Read in macroinvertebrate abundance data from data product 20120
 inv_fieldData <- readTableNEON(
-  dataFile = file.path(savepath, "filesToStack20210", "stackedFiles", "inv_fieldData.csv"),
-  varFile = file.path(savepath, "filesToStack20210", "stackedFiles", "variables_20120.csv")
+  dataFile = file.path(savepath, "filesToStack20120", "stackedFiles", "inv_fieldData.csv"),
+  varFile = file.path(savepath, "filesToStack20120", "stackedFiles", "variables_20120.csv")
 )
 
 # Read in  macroinvertebrate taxonomy data from data product 20120
 inv_fieldData <- readTableNEON(
-  dataFile = file.path(savepath, "filesToStack20210", "stackedFiles", "inv_taxonomyProcessed.csv"),
-  varFile = file.path(savepath, "filesToStack20210", "stackedFiles", "variables_20120.csv")
+  dataFile = file.path(savepath, "filesToStack20120", "stackedFiles", "inv_taxonomyProcessed.csv"),
+  varFile = file.path(savepath, "filesToStack20120", "stackedFiles", "variables_20120.csv")
 )
 
 
 save(TSW_30min, inv_fieldData, inv_taxa, file = "src/chp-tidyverse_datasets.RData")
+
+# Remove download
+unlink(file.path(savepath, "filesToStack20053"), recursive = TRUE, force = TRUE)
+unlink(file.path(savepath, "filesToStack20120"), recursive = TRUE, force = TRUE)
+
 
 
 ## Example analysis
@@ -437,7 +459,8 @@ zipsByProduct(dpID = "DP1.20120.001",
               startdate = startdate,
               enddate = enddate,
               savepath = savepath,
-              include.provisional = TRUE)
+              include.provisional = TRUE,
+              token = NEON_token)
 
 # Download surface water temperature data
 zipsByProduct(dpID = "DP1.20053.001",
@@ -445,7 +468,8 @@ zipsByProduct(dpID = "DP1.20053.001",
               startdate = startdate,
               enddate = enddate,
               savepath = savepath,
-              include.provisional = TRUE)
+              include.provisional = TRUE,
+              token = NEON_token)
 
 # Unzips data and stacks data tables by site
 # This will stack all data within each data product folder.
@@ -471,5 +495,9 @@ TSW_30min <- readTableNEON(
 )
 
 save(inv_fieldData, inv_taxa, TSW_30min, file = "src/chp-example_analysis.RData")
+
+# Remove download
+unlink(file.path(savepath, "filesToStack20053"), recursive = TRUE, force = TRUE)
+unlink(file.path(savepath, "filesToStack20120"), recursive = TRUE, force = TRUE)
 
 
