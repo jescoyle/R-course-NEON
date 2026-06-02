@@ -355,8 +355,6 @@ TSW_30min <- readTableNEON(dataFile = data_filepath,
                            varFile = var_filepath)
 save(TSW_30min, file = "src/chp-functions_watertemp.RData")
 
-# Remove download
-unlink(file.path(savepath, "filesToStack20053"), recursive = TRUE, force = TRUE)
 
 ## Tidyverse basics
 
