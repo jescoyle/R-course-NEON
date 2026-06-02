@@ -30,9 +30,7 @@ navbar:
           href: chp-ggplot2-part1.html
         - text: 7. Tidy data
           href: chp-tidyverse-basics.html
-        - text: 8. Program flow
-          href: chp-program-flow.html
-        - text: 9. Example analysis
+        - text: 8. Example analysis
           href: chp-example-analysis.html
     - text: "RStudio Workbook & Exercises"
       href: download-student-RStudio-project.html
